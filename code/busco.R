@@ -17,11 +17,10 @@ for (file in files){
                   '--in ', file, ' ',
                   '--out ', outpath, ' ',
                   '--mode genome ',
-                  '--auto-lineage prok ',
-                  '--outpath ', outpath, ' ',
+                  '--auto-lineage-prok ',
                   '--force ',
                   '--offline ',
-                  '--threads ', max.core, ' ',
+                  '--cpu ', max.core, ' ',
                   '--download_path ~/project_data/downy/busco_downloads')
     system(cmd)
 }
