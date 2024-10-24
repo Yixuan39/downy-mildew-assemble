@@ -1,0 +1,55 @@
+/Users/yixuanyang/miniforge3/bin/run_sepp.py:4: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html
+  __import__('pkg_resources').run_script('sepp==4.5.5', 'run_sepp.py')
+[23:27:14] config.py (line 371):     INFO: Seed number: 297834
+[23:27:14] algorithm.py (line 153):     INFO: SEPP version 4.5.5 used with HMMER version 3.1b2
+[23:27:14] algorithm.py (line 155):     INFO: Will user HMMER located at /Users/yixuanyang/Softwares/sepp/.sepp/bundled-v4.5.5/hmmbuild
+[23:27:14] algorithm.py (line 157):     INFO: All options: Namespace(pplacer=Namespace(path='/Users/yixuanyang/Softwares/sepp/.sepp/bundled-v4.5.5/pplacer'), hmmalign=Namespace(path='/Users/yixuanyang/Softwares/sepp/.sepp/bundled-v4.5.5/hmmalign'), hmmsearch=Namespace(path='/Users/yixuanyang/Softwares/sepp/.sepp/bundled-v4.5.5/hmmsearch', piped='False', elim='10000', filters='True'), hmmbuild=Namespace(path='/Users/yixuanyang/Softwares/sepp/.sepp/bundled-v4.5.5/hmmbuild'), jsonmerger=Namespace(path='/Users/yixuanyang/Softwares/sepp/.sepp/bundled-v4.5.5/seppJsonMerger.jar'), exhaustive=Namespace(strategy='centroid', minsubsetsize='2', placementminsubsetsizefacotr='4', placer='pplacer', weight_placement_by_alignment='True'), alignment_size=None, placement_size=None, max_chunk_size=15, distance=1, maxDiam=None, decomp_strategy='normal', tempdir='/Users/yixuanyang/Documents/Projects/Quessda/downy-mildew-assemble/test/sojae3.0/auto_lineage/run_archaea_odb10/sepp_tmp_files', remtemp=False, output='output', outdir='/Users/yixuanyang/Documents/Projects/Quessda/downy-mildew-assemble/test/sojae3.0/auto_lineage/run_archaea_odb10/placement_files', config_file=None, tree_file=<_io.TextIOWrapper name='/Users/yixuanyang/project_data/busco_downloads/placement_files/tree.archaea_odb10.2019-12-16.nwk' mode='r' encoding='UTF-8'>, info_file=<_io.TextIOWrapper name='/Users/yixuanyang/project_data/busco_downloads/placement_files/tree_metadata.archaea_odb10.2019-12-16.txt' mode='r' encoding='UTF-8'>, alignment_file=<_io.TextIOWrapper name='/Users/yixuanyang/project_data/busco_downloads/placement_files/supermatrix.aln.archaea_odb10.2019-12-16.faa' mode='r' encoding='UTF-8'>, fragment_file=<_io.TextIOWrapper name='/Users/yixuanyang/Documents/Projects/Quessda/downy-mildew-assemble/test/sojae3.0/auto_lineage/run_archaea_odb10/placement_files/marker_genes.fasta' mode='r' encoding='UTF-8'>, molecule='amino', ignore_overlap=False, cpu=4, checkpoint=<sepp.checkpointing.CheckPointManager object at 0x1079a13f0>, checkpoint_interval=3600, seed=297834)
+[23:27:14] algorithm.py (line 284):     INFO: Reading input alignment: <_io.TextIOWrapper name='/Users/yixuanyang/project_data/busco_downloads/placement_files/supermatrix.aln.archaea_odb10.2019-12-16.faa' mode='r' encoding='UTF-8'>
+[23:27:15] algorithm.py (line 288):     INFO: Alignment has 399 sequences and 5556 sites
+[23:27:15] algorithm.py (line 293):     INFO: Reading input tree: <_io.TextIOWrapper name='/Users/yixuanyang/project_data/busco_downloads/placement_files/tree.archaea_odb10.2019-12-16.nwk' mode='r' encoding='UTF-8'>
+[23:27:15] algorithm.py (line 298):     INFO: Tree has 399 leaves
+[23:27:15] algorithm.py (line 264):     INFO: Decomposition Sizes are set to alignment: 39 placement: 39
+[23:27:15] exhaustive.py (line 352):     INFO: Breaking into 16 placement subsets.
+[23:27:15] exhaustive.py (line 399):     INFO: Breaking into 16 alignment subsets.
+[23:27:15] filemgr.py (line 129):     INFO: Root temp directory built: /Users/yixuanyang/Documents/Projects/Quessda/downy-mildew-assemble/test/sojae3.0/auto_lineage/run_archaea_odb10/sepp_tmp_files/output.b43g8thi
+[23:27:15] exhaustive.py (line 414):     INFO: Breaking each alignment subset into 1 fragment chunks.
+Traceback (most recent call last):
+  File "/Users/yixuanyang/miniforge3/bin/run_sepp.py", line 4, in <module>
+    __import__('pkg_resources').run_script('sepp==4.5.5', 'run_sepp.py')
+  File "/Users/yixuanyang/miniforge3/lib/python3.10/site-packages/pkg_resources/__init__.py", line 722, in run_script
+    self.require(requires)[0].run_script(script_name, ns)
+  File "/Users/yixuanyang/miniforge3/lib/python3.10/site-packages/pkg_resources/__init__.py", line 1561, in run_script
+    exec(code, namespace, namespace)
+  File "/Users/yixuanyang/miniforge3/lib/python3.10/site-packages/sepp-4.5.5-py3.10.egg/EGG-INFO/scripts/run_sepp.py", line 26, in <module>
+    ExhaustiveAlgorithm().run()
+  File "/Users/yixuanyang/miniforge3/lib/python3.10/site-packages/sepp-4.5.5-py3.10.egg/sepp/algorithm.py", line 180, in run
+    self.connect_jobs()
+  File "/Users/yixuanyang/miniforge3/lib/python3.10/site-packages/sepp-4.5.5-py3.10.egg/sepp/exhaustive.py", line 491, in connect_jobs
+    bj.add_call_Back(
+  File "/Users/yixuanyang/miniforge3/lib/python3.10/site-packages/sepp-4.5.5-py3.10.egg/sepp/scheduler.py", line 100, in add_call_Back
+    JobPool()._add_callback_for_job(self, function)
+  File "/Users/yixuanyang/miniforge3/lib/python3.10/site-packages/sepp-4.5.5-py3.10.egg/sepp/scheduler.py", line 272, in JobPool
+    _jobPool = _JobPool(cpus)
+  File "/Users/yixuanyang/miniforge3/lib/python3.10/site-packages/sepp-4.5.5-py3.10.egg/sepp/scheduler.py", line 300, in __init__
+    self._pool = Pool(self.cpus)
+  File "/Users/yixuanyang/miniforge3/lib/python3.10/multiprocessing/context.py", line 119, in Pool
+    return Pool(processes, initializer, initargs, maxtasksperchild,
+  File "/Users/yixuanyang/miniforge3/lib/python3.10/multiprocessing/pool.py", line 215, in __init__
+    self._repopulate_pool()
+  File "/Users/yixuanyang/miniforge3/lib/python3.10/multiprocessing/pool.py", line 306, in _repopulate_pool
+    return self._repopulate_pool_static(self._ctx, self.Process,
+  File "/Users/yixuanyang/miniforge3/lib/python3.10/multiprocessing/pool.py", line 329, in _repopulate_pool_static
+    w.start()
+  File "/Users/yixuanyang/miniforge3/lib/python3.10/multiprocessing/process.py", line 121, in start
+    self._popen = self._Popen(self)
+  File "/Users/yixuanyang/miniforge3/lib/python3.10/multiprocessing/context.py", line 288, in _Popen
+    return Popen(process_obj)
+  File "/Users/yixuanyang/miniforge3/lib/python3.10/multiprocessing/popen_spawn_posix.py", line 32, in __init__
+    super().__init__(process_obj)
+  File "/Users/yixuanyang/miniforge3/lib/python3.10/multiprocessing/popen_fork.py", line 19, in __init__
+    self._launch(process_obj)
+  File "/Users/yixuanyang/miniforge3/lib/python3.10/multiprocessing/popen_spawn_posix.py", line 42, in _launch
+    prep_data = spawn.get_preparation_data(process_obj._name)
+  File "/Users/yixuanyang/miniforge3/lib/python3.10/multiprocessing/spawn.py", line 183, in get_preparation_data
+    main_mod_name = getattr(main_module.__spec__, "name", None)
+AttributeError: module '__main__' has no attribute '__spec__'

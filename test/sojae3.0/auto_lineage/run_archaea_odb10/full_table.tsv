@@ -1,0 +1,210 @@
+# BUSCO version is: 5.8.0 
+# The lineage dataset is: archaea_odb10 (Creation date: 2024-01-08, number of genomes: 404, number of BUSCOs: 194)
+# Busco id	Status	Sequence	Gene Start	Gene End	Strand	Score	Length	OrthoDB url	Description
+860at2157	Missing
+1642at2157	Complete	NC_090610.1	14865167	14867722	+	514.4	606	https://v10-1.orthodb.org/?query=1642at2157	Elongation factor 2
+3905at2157	Duplicated	NC_090617.1	4003162	4007757	+	640.3	671	https://v10-1.orthodb.org/?query=3905at2157	DNA-directed RNA polymerase subunit
+3905at2157	Duplicated	NC_090618.1	2326090	2330685	+	640.3	671	https://v10-1.orthodb.org/?query=3905at2157	DNA-directed RNA polymerase subunit
+3905at2157	Duplicated	NC_090613.1	1665768	1660528	-	608.1	610	https://v10-1.orthodb.org/?query=3905at2157	DNA-directed RNA polymerase subunit
+6590at2157	Complete	NC_090611.1	2746232	2744049	-	209.3	383	https://v10-1.orthodb.org/?query=6590at2157	Methionine--tRNA ligase
+6736at2157	Missing
+7046at2157	Complete	NC_090610.1	13010845	13008404	-	158.6	388	https://v10-1.orthodb.org/?query=7046at2157	Arginine--tRNA ligase
+7724at2157	Complete	NC_090619.1	4434865	4433534	-	288.3	328	https://v10-1.orthodb.org/?query=7724at2157	Radical SAM
+7896at2157	Complete	NC_090628.1	695724	692692	-	173.0	365	https://v10-1.orthodb.org/?query=7896at2157	Alanine--tRNA ligase
+8899at2157	Missing
+8922at2157	Missing
+10236at2157	Missing
+13010at2157	Complete	NC_090615.1	98809	100689	+	587.8	491	https://v10-1.orthodb.org/?query=13010at2157	4Fe-4S ferredoxin, iron-sulphur binding, conserved site
+13531at2157	Complete	NC_090619.1	3747442	3748866	+	259.7	314	https://v10-1.orthodb.org/?query=13531at2157	Protein translocase subunit SecY
+13565at2157	Missing
+14061at2157	Complete	NC_090615.1	5252877	5254610	+	571.8	449	https://v10-1.orthodb.org/?query=14061at2157	CTP synthase
+14454at2157	Complete	NC_090618.1	456294	458417	+	356.6	319	https://v10-1.orthodb.org/?query=14454at2157	Proline--tRNA ligase
+14889at2157	Fragmented	NC_090621.1	452737	454902	+	123.8	270	https://v10-1.orthodb.org/?query=14889at2157	V-type  ATPase, V0 complex, 116kDa subunit family
+17053at2157	Complete	NC_090619.1	7010575	7013478	+	366.5	461	https://v10-1.orthodb.org/?query=17053at2157	Translation initiation factor IF- 2
+17629at2157	Complete	NC_090627.1	884616	883171	-	283.4	328	https://v10-1.orthodb.org/?query=17629at2157	Adenosylhomocysteinase
+18705at2157	Complete	NC_090610.1	3444185	3442305	-	290.9	361	https://v10-1.orthodb.org/?query=18705at2157	MiaB-like tRNA modifying enzyme
+19750at2157	Missing
+21317at2157	Complete	NC_090621.1	4517303	4516206	-	317.8	313	https://v10-1.orthodb.org/?query=21317at2157	GTP binding domain
+22545at2157	Missing
+22747at2157	Fragmented	NC_090619.1	4834191	4834724	+	212.6	155	https://v10-1.orthodb.org/?query=22747at2157	Phenylalanine--tRNA ligase alpha subunit
+22842at2157	Missing
+23182at2157	Missing
+23221at2157	Duplicated	NW_027152213.1	172387	171023	-	324.4	323	https://v10-1.orthodb.org/?query=23221at2157	Enolase
+23221at2157	Duplicated	NC_090617.1	1354715	1353495	-	306.9	306	https://v10-1.orthodb.org/?query=23221at2157	Enolase
+24257at2157	Missing
+24288at2157	Duplicated	NC_090610.1	667382	665940	-	259.2	304	https://v10-1.orthodb.org/?query=24288at2157	Aminoacyl-tRNA synthetase, class II
+24288at2157	Duplicated	NC_090610.1	681100	679658	-	259.2	304	https://v10-1.orthodb.org/?query=24288at2157	Aminoacyl-tRNA synthetase, class II
+25592at2157	Fragmented	NC_090610.1	15604020	15605012	+	271.2	276	https://v10-1.orthodb.org/?query=25592at2157	Translation initiation factor 2 subunit gamma
+25871at2157	Complete	NC_090613.1	5005014	5006615	+	294.8	345	https://v10-1.orthodb.org/?query=25871at2157	Signal recognition particle, SRP54 subunit, M-domain
+29893at2157	Missing
+30130at2157	Fragmented	NC_090618.1	3301309	3301779	+	139.9	119	https://v10-1.orthodb.org/?query=30130at2157	DNA repair and recombination protein RadA
+31316at2157	Complete	NC_090620.1	2181575	2180388	-	183.6	256	https://v10-1.orthodb.org/?query=31316at2157	Dihydroorotate dehydrogenase
+31722at2157	Complete	NC_090612.1	3762779	3761610	-	178.7	227	https://v10-1.orthodb.org/?query=31722at2157	Ribosomal protein L3
+32079at2157	Missing
+32191at2157	Complete	NC_090614.1	1201591	1202877	+	262.2	335	https://v10-1.orthodb.org/?query=32191at2157	Peptide chain release factor eRF1/aRF1
+32623at2157	Complete	NC_090620.1	2808312	2810342	+	353.1	345	https://v10-1.orthodb.org/?query=32623at2157	Aminoacyl-tRNA synthetase, class II
+35648at2157	Complete	NC_090627.1	262508	288973	+	229.1	225	https://v10-1.orthodb.org/?query=35648at2157	Adenylosuccinate synthetase
+35861at2157	Missing
+36028at2157	Complete	NC_090611.1	4516321	4517745	+	272.1	252	https://v10-1.orthodb.org/?query=36028at2157	Probable tRNA pseudouridine synthase B
+37207at2157	Duplicated	NC_090616.1	344890	343907	-	305.3	320	https://v10-1.orthodb.org/?query=37207at2157	Replication factor C small subunit
+37207at2157	Duplicated	NW_027152213.1	2118002	2117022	-	295.4	302	https://v10-1.orthodb.org/?query=37207at2157	Replication factor C small subunit
+37299at2157	Complete	NW_027152213.1	1344192	1342633	-	373.1	393	https://v10-1.orthodb.org/?query=37299at2157	Amidophosphoribosyltransferase
+39322at2157	Missing
+41214at2157	Complete	NW_027152213.1	536768	537916	+	224.3	273	https://v10-1.orthodb.org/?query=41214at2157	Flap endonuclease 1
+41305at2157	Missing
+43727at2157	Missing
+44076at2157	Duplicated	NW_027152182.1	245027	243597	-	194.5	204	https://v10-1.orthodb.org/?query=44076at2157	RIO kinase
+44076at2157	Duplicated	NC_090610.1	5784818	5786227	+	175.2	197	https://v10-1.orthodb.org/?query=44076at2157	RIO kinase
+46017at2157	Duplicated	NC_090612.1	824542	825771	+	252.2	352	https://v10-1.orthodb.org/?query=46017at2157	Phosphoglycerate kinase
+46017at2157	Duplicated	NC_090617.1	2603199	2604443	+	232.6	351	https://v10-1.orthodb.org/?query=46017at2157	Phosphoglycerate kinase
+47919at2157	Complete	NC_090613.1	2258188	2255537	-	198.1	332	https://v10-1.orthodb.org/?query=47919at2157	Histidine--tRNA ligase
+48934at2157	Missing
+50844at2157	Missing
+51351at2157	Missing
+52427at2157	Duplicated	NC_090618.1	1706709	1707806	+	117.0	129	https://v10-1.orthodb.org/?query=52427at2157	Threonylcarbamoyl-AMP synthase
+52427at2157	Duplicated	NC_090627.1	396978	398075	+	117.0	129	https://v10-1.orthodb.org/?query=52427at2157	Threonylcarbamoyl-AMP synthase
+54988at2157	Complete	NC_090617.1	1267489	1266389	-	149.9	219	https://v10-1.orthodb.org/?query=54988at2157	Methylthioribose-1-phosphate isomerase
+55024at2157	Missing
+56027at2157	Missing
+57545at2157	Missing
+58019at2157	Missing
+58022at2157	Complete	NC_090610.1	108561	105121	-	254.8	350	https://v10-1.orthodb.org/?query=58022at2157	Phosphoribosylamine--glycine ligase
+58340at2157	Complete	NC_090610.1	1885709	1884726	-	168.8	140	https://v10-1.orthodb.org/?query=58340at2157	Fibrillarin
+59062at2157	Complete	NC_090612.1	137492	135144	-	285.5	243	https://v10-1.orthodb.org/?query=59062at2157	Tyrosine--tRNA ligase
+59314at2157	Complete	NC_090619.1	4114202	4113120	-	90.3	167	https://v10-1.orthodb.org/?query=59314at2157	Ribose-phosphate pyrophosphokinase
+59861at2157	Missing
+60366at2157	Complete	NW_027152196.1	53229	52480	-	147.8	176	https://v10-1.orthodb.org/?query=60366at2157	K Homology domain
+60670at2157	Missing
+60954at2157	Complete	NC_090620.1	1177666	1176881	-	209.1	189	https://v10-1.orthodb.org/?query=60954at2157	Ribosomal protein S5
+61613at2157	Missing
+61936at2157	Fragmented	NC_090620.1	72801	73235	+	79.1	91	https://v10-1.orthodb.org/?query=61936at2157	tRNA pseudouridine synthase Pus10
+62508at2157	Missing
+63341at2157	Complete	NC_090620.1	2231630	2232553	+	182.5	163	https://v10-1.orthodb.org/?query=63341at2157	Ribosomal protein S2
+64860at2157	Complete	NC_090612.1	5530149	5530991	+	98.9	168	https://v10-1.orthodb.org/?query=64860at2157	tRNA (1-methyladenosine) methyltransferase catalytic subunit Gcd14
+65833at2157	Complete	NC_090610.1	3747012	3745849	-	176.7	216	https://v10-1.orthodb.org/?query=65833at2157	Ribosomal protein L4
+66209at2157	Complete	NC_090610.1	12557081	12559075	+	240.9	227	https://v10-1.orthodb.org/?query=66209at2157	GTP-binding protein
+66811at2157	Missing
+69351at2157	Complete	NW_027152030.1	592654	595872	+	280.5	457	https://v10-1.orthodb.org/?query=69351at2157	NFACT, RNA-binding domain
+70269at2157	Missing
+70525at2157	Complete	NW_027152062.1	989778	989041	-	149.6	178	https://v10-1.orthodb.org/?query=70525at2157	Translation initiation factor 6
+70865at2157	Complete	NC_090620.1	1231625	1230000	-	100.3	197	https://v10-1.orthodb.org/?query=70865at2157	tRNA (guanine(26)-N(2))-dimethyltransferase
+72726at2157	Fragmented	NC_090619.1	3440153	3440953	+	137.2	149	https://v10-1.orthodb.org/?query=72726at2157	DNA-directed RNA polymerase subunit D
+73593at2157	Complete	NC_090619.1	6149339	6148386	-	144.3	226	https://v10-1.orthodb.org/?query=73593at2157	50S ribosomal protein L10
+74812at2157	Missing
+75288at2157	Missing
+76134at2157	Missing
+76877at2157	Missing
+78046at2157	Complete	NC_090610.1	9129675	9130349	+	149.1	166	https://v10-1.orthodb.org/?query=78046at2157	Pyridoxal 5'-phosphate synthase subunit PdxT
+79065at2157	Missing
+79845at2157	Complete	NC_090619.1	6149575	6151017	+	115.1	139	https://v10-1.orthodb.org/?query=79845at2157	FAD synthase
+80498at2157	Complete	NC_090617.1	2731447	2730977	-	151.5	142	https://v10-1.orthodb.org/?query=80498at2157	Ribosomal protein S7 domain
+80501at2157	Complete	NC_090620.1	3151924	3152625	+	91.0	168	https://v10-1.orthodb.org/?query=80501at2157	K Homology domain, type 1
+80629at2157	Complete	NW_027152212.1	7662	8231	+	123.6	138	https://v10-1.orthodb.org/?query=80629at2157	Ribosomal protein L6, alpha-beta domain
+82104at2157	Complete	NC_090615.1	8133256	8132444	-	107.2	125	https://v10-1.orthodb.org/?query=82104at2157	Ribosomal protein L10e
+82755at2157	Missing
+82853at2157	Missing
+83050at2157	Missing
+84219at2157	Fragmented	NC_090619.1	1517675	1518007	+	70.4	84	https://v10-1.orthodb.org/?query=84219at2157	Ribosomal protein S13
+84684at2157	Missing
+85023at2157	Complete	NC_090615.1	5415684	5415064	-	172.8	168	https://v10-1.orthodb.org/?query=85023at2157	Ribosomal protein L15e
+85279at2157	Missing
+85293at2157	Complete	NC_090628.1	628012	628458	+	161.5	122	https://v10-1.orthodb.org/?query=85293at2157	Ribosomal protein S12/S23
+87367at2157	Missing
+87520at2157	Missing
+88531at2157	Fragmented	NC_090613.1	5581469	5580834	-	50.6	79	https://v10-1.orthodb.org/?query=88531at2157	6,7-dimethyl-8-ribityllumazine synthase
+89321at2157	Duplicated	NW_027152195.1	407480	408979	+	145.9	156	https://v10-1.orthodb.org/?query=89321at2157	Nop domain
+89321at2157	Duplicated	NC_090610.1	10977908	10976382	-	147.7	153	https://v10-1.orthodb.org/?query=89321at2157	Nop domain
+89943at2157	Complete	NC_090623.1	852659	852057	-	134.3	171	https://v10-1.orthodb.org/?query=89943at2157	Ribosomal protein S4e
+90096at2157	Missing
+90641at2157	Missing
+90817at2157	Missing
+90882at2157	Fragmented	NW_027152207.1	13298	12570	-	49.9	118	https://v10-1.orthodb.org/?query=90882at2157	Mevalonate kinase
+91154at2157	Complete	NW_027152182.1	192071	192424	+	135.1	103	https://v10-1.orthodb.org/?query=91154at2157	Ribosomal protein S8
+91297at2157	Missing
+91632at2157	Complete	NC_090620.1	1862361	1862738	+	145.7	118	https://v10-1.orthodb.org/?query=91632at2157	Ribosomal protein L14P
+91936at2157	Missing
+92409at2157	Complete	NW_027152195.1	407002	406448	-	101.2	121	https://v10-1.orthodb.org/?query=92409at2157	Ribosomal protein S19e
+92795at2157	Complete	NC_090619.1	4806897	4804621	-	90.0	171	https://v10-1.orthodb.org/?query=92795at2157	Pseudouridine synthase, TruD
+93236at2157	Missing
+93256at2157	Complete	NC_090627.1	1988579	1988001	-	113.9	129	https://v10-1.orthodb.org/?query=93256at2157	RNA-binding S4 domain
+94875at2157	Missing
+94889at2157	Complete	NW_027152213.1	825874	826467	+	97.6	147	https://v10-1.orthodb.org/?query=94889at2157	non-canonical purine NTP pyrophosphatase
+95578at2157	Fragmented	NC_090620.1	1241660	1242094	+	39.1	83	https://v10-1.orthodb.org/?query=95578at2157	DNA primase, small subunit
+96138at2157	Complete	NC_090610.1	7999693	8000490	+	119.0	180	https://v10-1.orthodb.org/?query=96138at2157	30S ribosomal protein S3Ae
+97230at2157	Fragmented	NC_090616.1	858881	858468	-	103.3	88	https://v10-1.orthodb.org/?query=97230at2157	Ribosomal protein L5
+98179at2157	Missing
+98187at2157	Missing
+98221at2157	Missing
+98657at2157	Duplicated	NW_027152029.1	732717	733403	+	165.2	173	https://v10-1.orthodb.org/?query=98657at2157	Ribose-5-phosphate isomerase A
+98657at2157	Duplicated	NW_027152029.1	685372	684746	-	145.0	151	https://v10-1.orthodb.org/?query=98657at2157	Ribose-5-phosphate isomerase A
+99236at2157	Missing
+99734at2157	Complete	NC_090623.1	987033	986014	-	101.1	165	https://v10-1.orthodb.org/?query=99734at2157	Ribosomal RNA adenine methylase transferase, conserved site
+99842at2157	Missing
+101957at2157	Missing
+102178at2157	Missing
+102360at2157	Complete	NC_090617.1	4900494	4899640	-	197.6	217	https://v10-1.orthodb.org/?query=102360at2157	Diphthine synthase
+102399at2157	Missing
+103467at2157	Complete	NW_027152213.1	2371289	2371936	+	96.4	102	https://v10-1.orthodb.org/?query=103467at2157	Ribosomal protein L22/L17
+104254at2157	Complete	NC_090610.1	15465770	15466366	+	32.0	97	https://v10-1.orthodb.org/?query=104254at2157	Ribosomal protein L18e
+104636at2157	Missing
+104702at2157	Missing
+104786at2157	Missing
+105095at2157	Missing
+105165at2157	Complete	NC_090622.1	1344057	1344647	+	40.8	75	https://v10-1.orthodb.org/?query=105165at2157	Nascent polypeptide-associated complex protein
+105421at2157	Missing
+105604at2157	Missing
+105851at2157	Missing
+106462at2157	Duplicated	NC_090627.1	1321672	1322127	+	143.1	122	https://v10-1.orthodb.org/?query=106462at2157	Nucleoside diphosphate kinase
+106462at2157	Duplicated	NW_027152196.1	1167694	1168368	+	136.9	122	https://v10-1.orthodb.org/?query=106462at2157	Nucleoside diphosphate kinase
+106603at2157	Complete	NC_090623.1	474972	474667	-	45.5	71	https://v10-1.orthodb.org/?query=106603at2157	Ribosomal protein L44e
+107015at2157	Missing
+107212at2157	Complete	NC_090619.1	5256847	5257329	+	55.0	85	https://v10-1.orthodb.org/?query=107212at2157	Ribosomal protein L21e
+107993at2157	Complete	NC_090610.1	109553	109191	-	91.2	92	https://v10-1.orthodb.org/?query=107993at2157	Ribosomal protein S10
+108145at2157	Complete	NC_090615.1	2860806	2860435	-	118.9	96	https://v10-1.orthodb.org/?query=108145at2157	Ribosomal protein S17, archaeal
+108717at2157	Fragmented	NC_090616.1	754312	755217	+	103.8	124	https://v10-1.orthodb.org/?query=108717at2157	Ribosomal protein L5 eukaryotic/L18 archaeal
+109335at2157	Complete	NC_090627.1	1889927	1889409	-	106.3	123	https://v10-1.orthodb.org/?query=109335at2157	Ribosomal protein L19/L19e
+110798at2157	Fragmented	NC_090614.1	1649091	1648666	-	34.2	39	https://v10-1.orthodb.org/?query=110798at2157	adenylate kinase
+111803at2157	Complete	NC_090623.1	1044588	1042330	-	121.7	208	https://v10-1.orthodb.org/?query=111803at2157	Ribonuclease Z
+112466at2157	Missing
+112720at2157	Complete	NC_090612.1	3129078	3129764	+	37.9	75	https://v10-1.orthodb.org/?query=112720at2157	Ribosomal protein S6e
+113971at2157	Fragmented	NC_090615.1	4980875	4980504	-	48.7	50	https://v10-1.orthodb.org/?query=113971at2157	Ribosomal protein L23/L15e core domain superfamily
+114285at2157	Complete	NC_090624.1	998194	997778	-	179.6	126	https://v10-1.orthodb.org/?query=114285at2157	Ribosomal protein S11
+114541at2157	Complete	NC_090619.1	1324440	1324826	+	87.7	72	https://v10-1.orthodb.org/?query=114541at2157	50S ribosomal protein L7Ae
+115384at2157	Fragmented	NC_090613.1	841791	841997	+	30.6	28	https://v10-1.orthodb.org/?query=115384at2157	Ribosomal protein L31e
+115425at2157	Missing
+115808at2157	Missing
+115947at2157	Missing
+116294at2157	Missing
+116732at2157	Missing
+116879at2157	Complete	NC_090614.1	2535963	2534875	-	50.4	114	https://v10-1.orthodb.org/?query=116879at2157	Peptidyl-prolyl cis-trans isomerase
+117225at2157	Missing
+117241at2157	Missing
+119044at2157	Fragmented	NC_090620.1	4002687	4001683	-	32.7	98	https://v10-1.orthodb.org/?query=119044at2157	Methyltransferase
+119723at2157	Missing
+121171at2157	Missing
+121548at2157	Complete	NC_090619.1	4075181	4075363	+	65.8	59	https://v10-1.orthodb.org/?query=121548at2157	Ribosomal protein S28e
+121943at2157	Fragmented	NC_090620.1	2237877	2236978	-	20.2	19	https://v10-1.orthodb.org/?query=121943at2157	Signal recognition particle, SRP19 subunit
+122290at2157	Missing
+123463at2157	Complete	NC_090621.1	3076965	3077585	+	32.5	49	https://v10-1.orthodb.org/?query=123463at2157	DNA-directed RNA polymerase subunit H
+123503at2157	Missing
+123853at2157	Missing
+123859at2157	Complete	NC_090626.1	582042	582422	+	65.1	53	https://v10-1.orthodb.org/?query=123859at2157	DNA-directed RNA polymerase subunit N
+124073at2157	Complete	NC_090620.1	1412364	1411690	-	14.9	41	https://v10-1.orthodb.org/?query=124073at2157	Elongation factor 1-beta
+124429at2157	Missing
+124805at2157	Fragmented	NC_090610.1	5023849	5023580	-	29.6	50	https://v10-1.orthodb.org/?query=124805at2157	Ribosomal protein S24e
+124913at2157	Missing
+124973at2157	Missing
+125162at2157	Complete	NC_090615.1	97853	98365	+	49.1	43	https://v10-1.orthodb.org/?query=125162at2157	Ribosomal protein L24e
+125788at2157	Missing
+126193at2157	Complete	NC_090626.1	245374	245784	+	65.0	46	https://v10-1.orthodb.org/?query=126193at2157	DNA-directed RNA polymerase, 14-18kDa subunit, conserved site
+127293at2157	Missing
+128227at2157	Complete	NC_090626.1	586491	586126	-	59.5	48	https://v10-1.orthodb.org/?query=128227at2157	Ribosomal protein S17e
+128960at2157	Duplicated	NC_090618.1	2910535	2910888	+	18.5	56	https://v10-1.orthodb.org/?query=128960at2157	Ribonuclease P protein component 4
+128960at2157	Duplicated	NC_090618.1	1662088	1662465	+	19.5	48	https://v10-1.orthodb.org/?query=128960at2157	Ribonuclease P protein component 4
+128960at2157	Duplicated	NC_090618.1	1675675	1676337	+	17.5	48	https://v10-1.orthodb.org/?query=128960at2157	Ribonuclease P protein component 4
+129321at2157	Missing
+129447at2157	Missing
+129924at2157	Missing
+130316at2157	Fragmented	NC_090624.1	2081665	2081450	-	31.1	36	https://v10-1.orthodb.org/?query=130316at2157	PDCD5-like
+130364at2157	Complete	NC_090611.1	5735611	5735769	+	35.1	25	https://v10-1.orthodb.org/?query=130364at2157	H/ACA ribonucleoprotein complex, subunit Nop10
+131584at2157	Missing
