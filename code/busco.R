@@ -12,7 +12,7 @@ for (file in files){
                   '--out ', fs::path_ext_remove(basename(file)), ' ',
                   '--out_path ', outpath, ' ',
                   '--mode genome ',
-                  '--auto-lineage ',
+                  '--auto-lineage-prok ',
                   '--force ',
                   '--long ',
                   '--offline ',
