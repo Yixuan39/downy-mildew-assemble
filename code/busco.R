@@ -1,26 +1,24 @@
 #!/usr/bin/env Rscript
 
-files <- list.files('~/project_data/downy/ref-seq/', full.names = TRUE)
-outpath <- '~/project_data/downy/busco_results'
-if (!dir.exists(outpath)) {dir.create(outpath)}
 max.core <- 24
+files <- list.files('~/project_data/downy/ref-seq/', full.names = TRUE)
+outpath <- '~/project_data/downy/busco_results/'
+if (!dir.exists(outpath)) {dir.create(outpath)}
+download_path <- '~/project_data/downy/busco_downloads'
 
 for (file in files){
-    # run_busco(file,
-    #           outlabel = basename(file),
-    #           mode = 'genome', auto_lineage = 'prok',
-    #           outpath = outpath, 
-    #           force = TRUE, 
-    #           threads = max.core,
-    #           download_path = '~/project_data/downy/busco_downloads')
     cmd <- paste0('busco ', 
                   '--in ', file, ' ',
-                  '--out ', outpath, ' ',
+                  '--out ', fs::path_ext_remove(basename(file)), ' ',
+                  '--out_path ', outpath, ' ',
                   '--mode genome ',
-                  '--auto-lineage-prok ',
+                  '--auto-lineage ',
                   '--force ',
+                  '--long ',
                   '--offline ',
                   '--cpu ', max.core, ' ',
-                  '--download_path ~/project_data/downy/busco_downloads')
-    system(cmd)
+                  '--quiet ',
+                  '--tar ',
+                  '--download_path ', download_path)
+    message(cmd);system(cmd)
 }
