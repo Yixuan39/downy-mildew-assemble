@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript
 
-max.core <- 24
+max.core <- parallel::detectCores()
 files <- list.files('~/project_data/downy/ref-seq/', full.names = TRUE)
 outpath <- '~/project_data/downy/busco_results/'
 if (!dir.exists(outpath)) {dir.create(outpath)}
@@ -12,12 +12,10 @@ for (file in files){
                   '--out ', fs::path_ext_remove(basename(file)), ' ',
                   '--out_path ', outpath, ' ',
                   '--mode genome ',
-                  '--auto-lineage-prok ',
+                  '--auto-lineage-euk ',
                   '--force ',
-                  '--long ',
                   '--offline ',
                   '--cpu ', max.core, ' ',
-                  '--quiet ',
                   '--tar ',
                   '--download_path ', download_path)
     message(cmd);system(cmd)
