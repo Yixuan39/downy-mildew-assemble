@@ -122,7 +122,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='tblastx pacbio raw reads to reference genome')
     parser.add_argument('--input', required=True, help='pacbio raw reads file')
     parser.add_argument('--output', required=True, help='pacbio trimmed reads file')
-    parser.add_argument('--asm', default=False, help='run assembly or not')
+    parser.add_argument('--asm', action='store_true', help='run hifiasm assembly')
     parser.add_argument('--ref', required=False, help='reference genome file')
     parser.add_argument('--threads', default=8, help='number of threads')
     parser.add_argument('--method', default='blast', help='blast or kraken2')
