@@ -64,11 +64,11 @@ class pacbio_cleaning:
                    ' ' + self.input_file)
         subprocess.run(command, shell=True)
         assembly_result = asm_out + '.bp.p_ctg.gfa'
-        self.fasta_file = assembly_result.replace('.gfa', '.fasta')
+        # self.fasta_file = assembly_result.replace('.gfa', '.fasta')
         # convert gfa to fasta
         gfa_fasta = ("""awk '/^S/{print ">"$2;print $3}' """ +
                      assembly_result + " > " +
-                     self.fasta_file)
+                     self.result_file)
         subprocess.run(gfa_fasta, shell=True)
 
     def quast(self):
@@ -101,15 +101,18 @@ class pacbio_cleaning:
 
     def run(self, method='blast', asm=True):
         # assemble the pacbio reads first, then clean the assembly
-        self.hifiasm()
-        if method == 'blast':
-            self.blast()
-        elif method == 'kraken2':
-            self.kraken2()
+        if asm:
+
+            self.hifiasm()
         else:
-            assert FALSE, 'No method selected.'
-        self.quast()
-        self.busco()
+            if method == 'blast':
+                self.blast()
+            elif method == 'kraken2':
+                self.kraken2()
+            else:
+                assert FALSE, 'No method selected.'
+            self.quast()
+            self.busco()
 
 
 
@@ -120,7 +123,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='tblastx pacbio raw reads to reference genome')
     parser.add_argument('--input', required=True, help='pacbio raw reads file')
     parser.add_argument('--output', required=True, help='pacbio trimmed reads file')
-    parser.add_argument('--ref', required=True, help='reference genome file')
+    parser.add_argument('--ref', required=False, help='reference genome file')
     parser.add_argument('--threads', default=8, help='number of threads')
     parser.add_argument('--method', default='blast', help='blast or kraken2')
     args = parser.parse_args()
