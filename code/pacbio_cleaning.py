@@ -68,7 +68,7 @@ class pacbio_cleaning:
         # convert gfa to fasta
         gfa_fasta = ("""awk '/^S/{print ">"$2;print $3}' """ +
                      assembly_result + " > " +
-                     self.result_file)
+                     self.output_file)
         subprocess.run(gfa_fasta, shell=True)
 
     def quast(self):
