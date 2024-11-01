@@ -37,6 +37,8 @@ class pacbio_cleaning:
                    ' --out ' + blast_out +
                    ' --outfmt 6' +
                    ' --very-sensitive' +
+                   ' --max-target-seqs 1' +
+                   ' --max-hsps 1' +
                    ' --long-reads' +
                    ' --al ' + self.output_file +
                    ' --alfmt fasta' +

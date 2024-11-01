@@ -4,6 +4,7 @@
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=200G
 
+# this script will run kraken2 on the downy mildew data against the large protein database
 # List of files to process (without the `.fastq.gz` extension)
 FILES=("MSU1" "Phumuli" "SC1982")  # Add your file names here
 
