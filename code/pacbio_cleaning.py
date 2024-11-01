@@ -77,7 +77,7 @@ class pacbio_cleaning:
         subprocess.run(gfa_fasta, shell=True)
 
     def quast(self):
-        sub_folder = 'quast'
+        sub_folder = 'quast_' + os.path.basename(self.output_file)
         output_folder = os.path.join(self.output_dir, sub_folder)
         command = ('quast.py ' +
                    ' -o ' + output_folder +
@@ -88,7 +88,7 @@ class pacbio_cleaning:
         subprocess.run(command, shell=True)
 
     def busco(self):
-        sub_folder = 'busco'
+        sub_folder = 'busco_' + os.path.basename(self.output_file)
         output_folder = os.path.join(self.output_dir, sub_folder)
         command = ('busco -i ' + str(self.output_file) +
                    ' --out_path ' + output_folder +
