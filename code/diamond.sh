@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=pacbio_cleaning
-#SBATCH --output=logs/output_%j.out
-#SBATCH --error=logs/error_%j.err
+#SBATCH --output=logs/output_%A_%a.out
+#SBATCH --error=logs/error_%A_%a.err
 #SBATCH --array=0-53
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
