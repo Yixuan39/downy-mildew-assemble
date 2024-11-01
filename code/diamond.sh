@@ -3,12 +3,21 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
 
+
 FILES=("MSU1" "Phumuli" "SC1982")
-# only use the files that do not have "dmnd" in the name
+# Only use the files that do not have "dmnd" in the name
 refFiles=( $(ls ~/project_data/downy/ref-seq-prot | grep -v "dmnd") )
 
-INPUT_FILE=${FILES[$((SLURM_ARRAY_TASK_ID % ${#FILES[@]}))]}  # Cycle through FILES array
-REF_FILE=${refFiles[$((SLURM_ARRAY_TASK_ID % ${#refFiles[@]}))]}  # Cycle through refFiles array
+# Calculate indices for FILES and refFiles based on the task ID
+FILE_INDEX=$((SLURM_ARRAY_TASK_ID / ${#refFiles[@]}))
+REF_INDEX=$((SLURM_ARRAY_TASK_ID % ${#refFiles[@]}))
+
+# Access specific elements in each array
+INPUT_FILE=${FILES[$FILE_INDEX]}
+REF_FILE=${refFiles[$REF_INDEX]}
+
+# Ensure the output directory exists
+mkdir -p ~/project_data/downy/diamond/${REF_FILE}
 
 # Run the python script with the corresponding file name
 python pacbio_cleaning.py \
