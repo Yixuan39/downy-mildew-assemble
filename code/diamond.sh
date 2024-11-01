@@ -2,6 +2,7 @@
 #SBATCH --array=0-53
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
+#SBATCH --mem=100G
 
 
 FILES=("MSU1" "Phumuli" "SC1982")
@@ -25,4 +26,4 @@ python pacbio_cleaning.py \
   --ref ~/project_data/downy/ref-seq-prot/${REF_FILE} \
   --output ~/project_data/downy/diamond/${REF_FILE}/${INPUT_FILE}.fasta \
   --threads 8 \
-  --busco-downloads-path ~/project_data/downy/busco_downloads
+  --busco_downloads_path ~/project_data/downy/busco_downloads

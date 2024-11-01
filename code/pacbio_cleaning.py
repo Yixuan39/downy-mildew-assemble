@@ -130,6 +130,6 @@ if __name__ == '__main__':
     parser.add_argument('--ref', required=False, help='reference genome file')
     parser.add_argument('--threads', default=8, help='number of threads')
     parser.add_argument('--method', default='blast', help='blast or kraken2')
-    parser.add_argument('--busco-downloads-path', default=None, help='busco downloads path')
+    parser.add_argument('--busco_downloads_path', default=None, help='busco downloads path')
     args = parser.parse_args()
-    pacbio_cleaning(args.input, args.output, args.ref, args.threads).run(args.method, args.asm)
+    pacbio_cleaning(args.input, args.output, args.ref, args.threads, args.busco_downloads_path).run(args.method, args.asm)
