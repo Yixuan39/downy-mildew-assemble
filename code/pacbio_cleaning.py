@@ -39,10 +39,12 @@ class pacbio_cleaning:
                    ' --very-sensitive' +
                    ' --max-target-seqs 1' +
                    ' --max-hsps 1' +
-                   ' --long-reads' +
                    ' --al ' + self.output_file +
                    ' --alfmt fasta' +
                    ' --evalue 1e-10' +
+                   ' --block-size 0.1' +
+                   ' --index-chunks 8' +
+                   ' --bin 64' +
                    ' --threads ' + str(self.threads))
 
         print(tblastx)
