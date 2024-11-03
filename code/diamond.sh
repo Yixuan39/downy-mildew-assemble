@@ -3,8 +3,8 @@
 #SBATCH --output=logs/output_%A_%a.out
 #SBATCH --array=0-53
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=16
-#SBATCH --mem=250G
+#SBATCH --cpus-per-task=8
+#SBATCH --mem-per-cpu=15G
 
 
 FILES=("MSU1" "Phumuli" "SC1982")
