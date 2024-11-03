@@ -14,6 +14,14 @@ FILE=${FILES[$SLURM_ARRAY_TASK_ID]}
 # Run the python script with the corresponding file name
 kraken2 --db ~/project_data/downy/KrakenDB-prot \
 --threads 8 \
---output ~/project_data/downy/Kraken/${FILE}.txt \
---report ~/project_data/downy/Kraken/${FILE}.report \
+--output ~/project_data/downy/Kraken/${FILE}.kraken \
+--report ~/project_data/downy/Kraken/${FILE}.kreport \
 ~/project_data/downy/asm/${FILE}.fasta
+
+bracken -d ~/project_data/downy/KrakenDB-prot \
+-i ~/project_data/downy/Kraken/${FILE}.report \
+-o ~/project_data/downy/Kraken/${FILE}.bracken \
+-w ~/project_data/downy/Kraken/${FILE}.breport \
+-r 2000 \ # shortest read length of our samples is around 2000
+-l S \
+-t 10 # number of reads required PRIOR to abundance estimation to perform reestimation
