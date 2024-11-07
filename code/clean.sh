@@ -22,9 +22,9 @@ REF_FILE=${refFiles[$REF_INDEX]}
 mkdir -p ~/project_data/downy/Kraken/${REF_FILE}
 
 for INPUT_FILE in "${FILES[@]}"; do
-  kraken2-build --download-taxonomy --db ~/project_data/downy/ref-seq-prot/${REF_FILE}_kdb
-  kraken2-build --add-to-library ~/project_data/downy/ref-seq-prot/${REF_FILE} --db ~/project_data/downy/ref-seq-prot/${REF_FILE}_kdb
-  kraken2-build --build --db ~/project_data/downy/ref-seq-prot/${REF_FILE}_kdb
+  kraken2-build --download-taxonomy --db ~/project_data/downy/ref-seq-prot/${REF_FILE}_kdb --protein --use-ftp
+  kraken2-build --add-to-library ~/project_data/downy/ref-seq-prot/${REF_FILE} --db ~/project_data/downy/ref-seq-prot/${REF_FILE}_kdb --protein
+  kraken2-build --build --db ~/project_data/downy/ref-seq-prot/${REF_FILE}_kdb --protein
 
   kraken2 --db ~/project_data/downy/ref-seq-prot/${REF_FILE}_kdb \
     --threads 24 \
