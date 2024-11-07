@@ -11,6 +11,7 @@ FILES=("MSU1" "Phumuli" "SC1982")  # Add your file names here
 # Get the file name based on the task ID
 FILE=${FILES[$SLURM_ARRAY_TASK_ID]}
 
+mkdir ~/project_data/downy/Kraken-raw
 # Run kraken2 on raw reads
 kraken2 --db ~/project_data/downy/KrakenDB-prot \
   --threads 24 \
@@ -33,6 +34,7 @@ bracken -d ~/project_data/downy/KrakenDB-prot \
   -r 50 \
   -l G
 
+mkdir ~/project_data/downy/Kraken-asm
 # Run bracken on the assembly data
 kraken2 --db ~/project_data/downy/KrakenDB-prot \
   --threads 24 \
