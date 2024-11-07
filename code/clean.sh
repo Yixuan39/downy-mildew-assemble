@@ -24,6 +24,7 @@ mkdir -p ~/project_data/downy/Kraken/${REF_FILE}
 kraken2-build --download-taxonomy --db ~/project_data/downy/ref-seq-prot/${REF_FILE}_kdb --protein --use-ftp
 kraken2-build --add-to-library ~/project_data/downy/ref-seq-prot/${REF_FILE} --db ~/project_data/downy/ref-seq-prot/${REF_FILE}_kdb --protein
 kraken2-build --build --db ~/project_data/downy/ref-seq-prot/${REF_FILE}_kdb --protein --threads 24
+kraken2-build --build --db ~/project_data/downy/ref-seq-prot/${REF_FILE}_kdb --clean
 
 for INPUT_FILE in "${FILES[@]}"; do
   kraken2 --db ~/project_data/downy/ref-seq-prot/${REF_FILE}_kdb \
