@@ -1,10 +1,11 @@
 #!/bin/bash
-#SBATCH --cpu=10
+#SBATCH --cpu=32
 #SBATCH --mem=0
 
 # Define the arrays of files and reference files
 FILES=("MSU1" "Phumuli" "SC1982")
 refFiles=( $(ls ~/project_data/downy/ref-seq-prot | grep -v "dmnd") )
+threads=32
 
 # Loop through each combination of FILES and refFiles
 for INPUT_FILE in "${FILES[@]}"; do
@@ -25,8 +26,25 @@ for INPUT_FILE in "${FILES[@]}"; do
             --max-hsps 1 \
             --very-sensitive \
             --outfmt 6 \
-            --threads 8
+            --threads ${threads}
 
-        echo "Completed DIAMOND for ${INPUT_FILE} against ${REF_FILE}"
+        # run busco
+        busco -i ~/project_data/downy/diamond/${REF_FILE}/${INPUT_FILE}.fasta \
+            --out_path ~/project_data/downy/diamond/${REF_FILE}/${INPUT_FILE}_busco \
+            --mode genome \
+            --auto-lineage-euk \
+            --download_path ~/project_data/downy/busco_downloads \
+            --cpu ${threads} \
+            --offline \
+            --force \
+            --tar
+
+        # run quast
+        quast.py --output-dir ~/project_data/downy/diamond/${REF_FILE}/${INPUT_FILE}_quast \
+            --threads ${threads} \
+            --eukaryote \
+            ~/project_data/downy/diamond/${REF_FILE}/${INPUT_FILE}.fasta
+
+
     done
 done
