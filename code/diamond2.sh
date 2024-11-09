@@ -29,10 +29,11 @@ for INPUT_FILE in "${FILES[@]}"; do
             --threads ${threads}
 
         # run busco
+        # here we are not using auto-lineage, it will make the process fast and use less memory
         busco -i ~/project_data/downy/diamond/${REF_FILE}/${INPUT_FILE}.fasta \
+            -l stramenopiles_odb10 \
             --out_path ~/project_data/downy/diamond/${REF_FILE}/${INPUT_FILE}_busco \
             --mode genome \
-            --auto-lineage-euk \
             --download_path ~/project_data/downy/busco_downloads \
             --cpu ${threads} \
             --offline \
