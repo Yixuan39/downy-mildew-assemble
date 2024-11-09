@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --cpu=32
+#SBATCH -c 32
 #SBATCH --mem=0
 
 # Define the arrays of files and reference files
