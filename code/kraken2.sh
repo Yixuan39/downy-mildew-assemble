@@ -22,8 +22,8 @@ kraken2 --db ~/project_data/downy/KrakenDB-prot \
 
 bracken -d ~/project_data/downy/KrakenDB-prot \
   -i ~/project_data/downy/Kraken-raw/${FILE}.kreport \
-  -o ~/project_data/downy/Kraken-raw/${FILE}.bracken \
-  -w ~/project_data/downy/Kraken-raw/${FILE}_S.breport \
+  -o ~/project_data/downy/Kraken-raw/${FILE}_S.bracken \
+  -w ~/project_data/downy/Kraken-raw/${FILE}.breport \
   -r 50 \
   -l S
 
@@ -45,14 +45,14 @@ kraken2 --db ~/project_data/downy/KrakenDB-prot \
 
 bracken -d ~/project_data/downy/KrakenDB-prot \
   -i ~/project_data/downy/Kraken-asm/${FILE}.kreport \
-  -o ~/project_data/downy/Kraken-asm/${FILE}.bracken \
-  -w ~/project_data/downy/Kraken-asm/${FILE}_S.breport \
+  -o ~/project_data/downy/Kraken-asm/${FILE}_S.bracken \
+  -w ~/project_data/downy/Kraken-asm/${FILE}.breport \
   -r 200 \
   -l S
 
 bracken -d ~/project_data/downy/KrakenDB-prot \
   -i ~/project_data/downy/Kraken-asm/${FILE}.kreport \
-  -o ~/project_data/downy/Kraken-asm/${FILE}.bracken \
-  -w ~/project_data/downy/Kraken-asm/${FILE}_G.breport \
+  -o ~/project_data/downy/Kraken-asm/${FILE}_G.bracken \
+  -w ~/project_data/downy/Kraken-asm/${FILE}.breport \
   -r 200 \
   -l G
