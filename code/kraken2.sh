@@ -15,7 +15,7 @@ mkdir ~/project_data/downy/Kraken-raw
 # Run kraken2 on raw reads
 kraken2 --db ~/project_data/downy/KrakenDB-prot \
   --threads 24 \
-  --output ~/project_data/downy/Kraken-raw/${FILE}.kraken \
+  --output - \
   --report ~/project_data/downy/Kraken-raw/${FILE}.kreport \
   --gzip-compressed \
   ~/project_data/downy/data/${FILE}.fastq.gz
@@ -38,7 +38,7 @@ mkdir ~/project_data/downy/Kraken-asm
 # Run bracken on the assembly data
 kraken2 --db ~/project_data/downy/KrakenDB-prot \
   --threads 24 \
-  --output ~/project_data/downy/Kraken-asm/${FILE}.kraken \
+  --output - \
   --report ~/project_data/downy/Kraken-asm/${FILE}.kreport \
   --gzip-compressed \
   ~/project_data/downy/meta-asm/${FILE}/contigs.fasta.gz
