@@ -29,8 +29,8 @@ bracken -d ~/project_data/downy/KrakenDB-prot \
 
 bracken -d ~/project_data/downy/KrakenDB-prot \
   -i ~/project_data/downy/Kraken-raw/${FILE}.kreport \
-  -o ~/project_data/downy/Kraken-raw/${FILE}.bracken \
-  -w ~/project_data/downy/Kraken-raw/${FILE}_G.breport \
+  -o ~/project_data/downy/Kraken-raw/${FILE}_G.bracken \
+  -w ~/project_data/downy/Kraken-raw/${FILE}.breport \
   -r 50 \
   -l G
 
