@@ -3,7 +3,7 @@
 #SBATCH -c 24
 #SBATCH --mem=180G
 
-KRAKEN2_DB_PATH="KrakenDB-prot"
+KRAKEN2_DB_PATH="~/project_data/downy/KrakenDB-prot"
 # add oomycete protein sequences to the Kraken2 database
 refFiles=( $(ls ~/project_data/downy/ref-seq-prot) )
 for REF_FILE in "${refFiles[@]}"; do
