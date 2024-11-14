@@ -9,19 +9,35 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r}
+```{r message=FALSE}
 library(tidyverse)
-library(cogeqc)
-library(here)
+library(gt)
+library(jsonlite)
 ```
 
-# block 1
+# BUSCO results
 
-## Phytophthora sojae V3.0
+## generic
+
+eukaryota_odb10
 
 ```{r}
-path <- here('/Users/yixuanyang/Desktop/ref-seq/Bremia-lactucae.fna')
-outpath <- here('test')
-run_busco(path, outlabel = 'sojae3.0', mode = 'genome', auto_lineage = 'prok', outpath = outpath, force = TRUE, threads = 4, download_path = '~/project_data/busco_downloads')
+path <- '~/project_data/downy/busco_results/'
+read.summary <- function(file) {
+    data <- fromJSON(file)$result %>% as.data.frame %>% select(-c(one_line_summary))
+    df <- data %>% cbind(name = basename(dirname(file)), .) 
+    return(df)
+}
+
+files <- list.files(path, pattern = 'generic', full.names = TRUE, recursive = TRUE) %>% str_subset('json')
+map_dfr(files, read.summary) %>% gt
 ```
 
+## specific
+
+stramenopiles_odb10
+
+```{r}
+files <- list.files(path, pattern = 'specific', full.names = TRUE, recursive = TRUE) %>% str_subset('json')
+map_dfr(files, read.summary) %>% gt
+```
