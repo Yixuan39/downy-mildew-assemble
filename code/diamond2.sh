@@ -8,8 +8,13 @@ refFiles=( $(ls ~/project_data/downy/ref-seq-prot | grep -v "dmnd") )
 threads=32
 
 # Loop through each combination of FILES and refFiles
-for INPUT_FILE in "${FILES[@]}"; do
-    for REF_FILE in "${refFiles[@]}"; do
+for REF_FILE in "${refFiles[@]}"; do
+    diamond makedb --in ~/project_data/downy/ref-seq-prot/${REF_FILE} \
+        --db ~/project_data/downy/ref-seq-prot/${REF_FILE} \
+        --threads ${threads}
+        
+    for INPUT_FILE in "${FILES[@]}"; do
+
         echo "Running DIAMOND for ${INPUT_FILE} against ${REF_FILE}..."
 
         # Ensure the output directory exists
@@ -35,7 +40,6 @@ for INPUT_FILE in "${FILES[@]}"; do
             --out_path ~/project_data/downy/diamond/${REF_FILE}/${INPUT_FILE}_busco \
             --mode genome \
             --download_path ~/project_data/downy/busco_downloads \
-            --cpu ${threads} \
             --offline \
             --force \
             --tar
