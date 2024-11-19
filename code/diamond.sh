@@ -8,19 +8,10 @@ WORK_PATH="/data/run/yyang"
 # refFiles=( $(ls ${WORK_PATH}/project_data/downy/ref-seq-prot | grep -v "dmnd") )
 REF_FILE="oomycete.dmnd"
 threads=32
-
-# Loop through each combination of FILES and refFiles
-#for REF_FILE in "${refFiles[@]}"; do
-#    diamond makedb --in ${WORK_PATH}/project_data/downy/ref-seq-prot/${REF_FILE} \
-#        --db ${WORK_PATH}/project_data/downy/ref-seq-prot/${REF_FILE} \
-#        --threads ${threads}
         
 for INPUT_FILE in "${FILES[@]}"; do
 
     echo "Running DIAMOND for ${INPUT_FILE} against ${REF_FILE}..."
-
-    # Ensure the output directory exists
-    mkdir -p ${WORK_PATH}/project_data/downy/diamond/${REF_FILE}
 
     # Run DIAMOND blastx
     diamond blastx \
@@ -36,7 +27,6 @@ for INPUT_FILE in "${FILES[@]}"; do
         --threads ${threads}
 
     # run busco
-    # here we are not using auto-lineage, it will make the process fast and use less memory
     busco -i ${WORK_PATH}/project_data/downy/diamond/${INPUT_FILE}.fasta \
         --out_path ${WORK_PATH}/project_data/downy/diamond/${INPUT_FILE}_busco \
         --mode genome \
@@ -54,4 +44,3 @@ for INPUT_FILE in "${FILES[@]}"; do
 
 
 done
-#done
