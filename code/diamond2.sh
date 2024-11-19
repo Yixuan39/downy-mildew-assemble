@@ -40,7 +40,7 @@ for REF_FILE in "${refFiles[@]}"; do
             --mode genome \
             --auto-lineage-euk \
             --download_path ~/project_data/downy/busco_downloads \
-            --offline \
+            --cpu ${threads} \
             --force \
             --tar
 
