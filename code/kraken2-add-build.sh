@@ -4,11 +4,11 @@
 #SBATCH --mem=180G
 PATH="/data/run/yyang"
 
-kraken2_build --download-taxonomy --db ${PATH}/project_data/downy/KrakenDB-prot --protein --use-ftp
+kraken2-build --download-taxonomy --db ${PATH}/project_data/downy/KrakenDB-prot --protein --use-ftp
 # download bacterial, fungi, human protein sequences to the Kraken2 database
-kraken2_build --download-library bacteria --db ${PATH}/project_data/downy/KrakenDB-prot --protein
-kraken2_build --download-library fungi --db ${PATH}/project_data/downy/KrakenDB-prot --protein
-kraken2_build --download-library human --db ${PATH}/project_data/downy/KrakenDB-prot --protein
+kraken2-build --download-library bacteria --db ${PATH}/project_data/downy/KrakenDB-prot --protein
+kraken2-build --download-library fungi --db ${PATH}/project_data/downy/KrakenDB-prot --protein
+kraken2-build --download-library human --db ${PATH}/project_data/downy/KrakenDB-prot --protein
 
 # add oomycete protein sequences to the Kraken2 database
 refFiles=( $(ls ${PATH}/project_data/downy/ref-seq-prot) )
