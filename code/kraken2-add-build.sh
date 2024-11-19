@@ -6,9 +6,9 @@ WORK_PATH="/data/run/yyang"
 
 kraken2-build --download-taxonomy --db ${WORK_PATH}/project_data/downy/KrakenDB-prot --protein --use-ftp
 # download bacterial, fungi, human protein sequences to the Kraken2 database
-kraken2-build --download-library bacteria --db ${WORK_PATH}/project_data/downy/KrakenDB-prot --protein
-kraken2-build --download-library fungi --db ${WORK_PATH}/project_data/downy/KrakenDB-prot --protein
-kraken2-build --download-library human --db ${WORK_PATH}/project_data/downy/KrakenDB-prot --protein
+kraken2-build --download-library bacteria --db ${WORK_PATH}/project_data/downy/KrakenDB-prot --protein --use-ftp
+kraken2-build --download-library fungi --db ${WORK_PATH}/project_data/downy/KrakenDB-prot --protein --use-ftp
+kraken2-build --download-library human --db ${WORK_PATH}/project_data/downy/KrakenDB-prot --protein --use-ftp
 
 # add oomycete protein sequences to the Kraken2 database
 refFiles=( $(ls ${WORK_PATH}/project_data/downy/ref-seq-prot) )
