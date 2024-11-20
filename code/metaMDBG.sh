@@ -8,5 +8,5 @@ for FILE in "${FILES[@]}"; do
   metaMDBG asm \
   --out-dir ${WORK_PATH}/project_data/downy/meta-asm/${FILE} \
   --in-hifi ${WORK_PATH}/project_data/downy/data/${FILE}.fastq.gz \
-  --threads 24
+  --threads 32
 done
