@@ -5,7 +5,6 @@
 # Define the arrays of files and reference files
 FILES=("MSU1" "Phumuli" "SC1982")
 WORK_PATH="/data/run/yyang"
-# refFiles=( $(ls ${WORK_PATH}/project_data/downy/ref-seq-prot | grep -v "dmnd") )
 REF_FILE="oomycete.dmnd"
 threads=32
         
@@ -28,7 +27,8 @@ for INPUT_FILE in "${FILES[@]}"; do
 
     # run busco
     busco -i ${WORK_PATH}/project_data/downy/diamond/${INPUT_FILE}.fasta \
-        --out_path ${WORK_PATH}/project_data/downy/diamond/${INPUT_FILE}_busco \
+        --out_path ${WORK_PATH}/project_data/downy/diamond \
+        --out ${INPUT_FILE}_busco \
         --mode genome \
         --auto-lineage-euk \
         --download_path ${WORK_PATH}/project_data/downy/busco_downloads \
