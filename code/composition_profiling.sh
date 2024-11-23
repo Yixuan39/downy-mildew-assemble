@@ -18,5 +18,6 @@ for FILE in "${FILES[@]}"; do
       -o ${WORK_PATH}/project_data/downy/composition_profile/${FILE}.bracken \
       -w ${WORK_PATH}/project_data/downy/composition_profile/${FILE}.breport \
       -r 50 \
+      -t 10 \
       -l S
 done
