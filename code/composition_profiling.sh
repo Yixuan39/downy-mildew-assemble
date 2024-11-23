@@ -2,6 +2,7 @@
 
 FILES=("MSU1" "Phumuli" "SC1982")
 WORK_PATH="/data/run/yyang"
+mkdir -p ${WORK_PATH}/project_data/downy/composition_profile
 
 for FILE in "${FILES[@]}"; do
     # Run kraken2 on raw reads
