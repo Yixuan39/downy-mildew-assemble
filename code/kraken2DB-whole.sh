@@ -22,3 +22,4 @@ for REF_FILE in "${refFiles[@]}"; do
 done
 
 kraken2-build --build --db ${WORK_PATH}/project_data/downy/KrakenDB-prot --protein --threads 32
+bracken-build -d ${WORK_PATH}/project_data/downy/KrakenDB-prot -l 50 -t 32
