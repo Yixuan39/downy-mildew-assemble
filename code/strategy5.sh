@@ -3,6 +3,7 @@
 FILES=("MSU1" "Phumuli" "SC1982")  # Add your file names here
 WORK_PATH="/data/run/yyang"
 threads=32
+mkdir -p ${WORK_PATH}/project_data/downy/strategy5
 
 for FILE in "${FILES[@]}"; do
     # Run diamond blastx on raw reads

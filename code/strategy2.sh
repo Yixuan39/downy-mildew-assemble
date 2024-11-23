@@ -3,6 +3,7 @@
 FILES=("MSU1" "Phumuli" "SC1982")  # Add your file names here
 WORK_PATH="/data/run/yyang"
 threads=32
+mkdir -p ${WORK_PATH}/project_data/downy/strategy2
 
 for FILE in "${FILES[@]}"; do
     # Run kraken2 on raw reads
