@@ -22,9 +22,9 @@ for FILE in "${FILES[@]}"; do
     extract_kraken_reads.py \
         -k ${WORK_PATH}/project_data/downy/strategy3/${FILE}.kraken \
         -s ${WORK_PATH}/project_data/downy/data/${FILE}.fastq.gz \
-        -t 4762 \
-        -o ${WORK_PATH}/project_data/downy/strategy3/${FILE}.oomycota.fasta
-        -r ${WORK_PATH}/project_data/downy/strategy3/${FILE}.kreport \
+        --taxid 4762 \
+        --output ${WORK_PATH}/project_data/downy/strategy3/${FILE}.oomycota.fasta \
+        --report ${WORK_PATH}/project_data/downy/strategy3/${FILE}.kreport \
         --include-children
     # busco
     busco -i ${WORK_PATH}/project_data/downy/strategy3/${FILE}.oomycota.fasta \

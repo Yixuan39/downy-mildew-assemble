@@ -17,14 +17,15 @@ for FILE in "${FILES[@]}"; do
     extract_kraken_reads.py \
         -k ${WORK_PATH}/project_data/downy/strategy1/${FILE}.kraken \
         -s ${WORK_PATH}/project_data/downy/data/${FILE}.fastq.gz \
-        -t 4762 \
-        -o ${WORK_PATH}/project_data/downy/strategy1/${FILE}.oomycota.fastq.gz
-        -r ${WORK_PATH}/project_data/downy/strategy1/${FILE}.kreport \
-        --include-children
+        --taxid 4762 \
+        --output ${WORK_PATH}/project_data/downy/strategy1/${FILE}.oomycota.fastq \
+        --report ${WORK_PATH}/project_data/downy/strategy1/${FILE}.kreport \
+        --include-children \
+        --fastq-output
     # Assemble the extracted reads
     metaMDBG asm \
         --out-dir ${WORK_PATH}/project_data/downy/strategy1/${FILE}_asm \
-        --in-hifi ${WORK_PATH}/project_data/downy/strategy1/${FILE}.oomycota.fastq.gz \
+        --in-hifi ${WORK_PATH}/project_data/downy/strategy1/${FILE}.oomycota.fastq \
         --threads ${threads}
     # busco
     busco -i ${WORK_PATH}/project_data/downy/strategy1/${FILE}_asm/contigs.fasta \
