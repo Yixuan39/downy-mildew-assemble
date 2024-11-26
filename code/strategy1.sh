@@ -6,7 +6,7 @@ RESULT_PATH="/data/run/yyang/project_data/downy/strategy1"
 KrakenDB="/data/run/yyang/project_data/downy/KrakenDB-prot"
 BUSCO_DB="/data/run/yyang/project_data/downy/BUSCO_DB"
 threads=32
-mkdir -p RESULT_PATH
+mkdir -p ${RESULT_PATH}
 
 for FILE in "${FILES[@]}"; do
     # Run kraken2 on raw reads
