@@ -47,5 +47,5 @@ for FILE in "${FILES[@]}"; do
     quast.py --output-dir ${RESULT_PATH}/${FILE}_quast \
         --threads ${threads} \
         --eukaryote \
-         ${RESULT_PATH}/${FILE}_asm.fasta
+        ${RESULT_PATH}/${FILE}_asm.fasta
 done
