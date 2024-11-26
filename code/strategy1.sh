@@ -30,6 +30,7 @@ for FILE in "${FILES[@]}"; do
         --out-dir ${RESULT_PATH}/${FILE}_asm \
         --in-hifi ${RESULT_PATH}/${FILE}.oomycota.fastq \
         --threads ${threads}
+    gzip -d ${RESULT_PATH}/${FILE}_asm/contigs.fasta.gz
     mv ${RESULT_PATH}/${FILE}_asm/contigs.fasta ${RESULT_PATH}/${FILE}_asm.fasta
     # remove unnecessary files
     rm ${RESULT_PATH}/${FILE}.kraken

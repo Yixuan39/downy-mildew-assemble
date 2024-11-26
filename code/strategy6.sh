@@ -17,7 +17,7 @@ for FILE in "${FILES[@]}"; do
     # Run kraken2 on raw assembly
     diamond blastx \
         --db ${DIAMOND_DB} \
-        --query ${RESULT_PATH}/${FILE}_asm/contigs.fasta \
+        --query ${RESULT_PATH}/${FILE}_asm/contigs.fasta.gz \
         --out ${RESULT_PATH}/${FILE}.csv \
         --al ${RESULT_PATH}/${FILE}_asm.fasta \
         --alfmt fasta \

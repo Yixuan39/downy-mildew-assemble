@@ -20,7 +20,7 @@ for FILE in "${FILES[@]}"; do
         --output ${RESULT_PATH}/${FILE}.kraken \
         --report ${RESULT_PATH}/${FILE}.kreport \
         --gzip-compressed \
-        ${RESULT_PATH}/${FILE}_asm/contigs.fasta
+        ${RESULT_PATH}/${FILE}_asm/contigs.fasta.gz
     # extract sequences classified as Oomycota (taxid 4762)
     extract_kraken_reads.py \
         -k ${RESULT_PATH}/${FILE}.kraken \

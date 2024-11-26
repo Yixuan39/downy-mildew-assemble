@@ -21,7 +21,7 @@ for FILE in "${FILES[@]}"; do
         --report ${RESULT_PATH}/${FILE}.kreport \
         --unclassified-out ${RESULT_PATH}/${FILE}_asm.fasta \
         --gzip-compressed \
-        ${RESULT_PATH}/${FILE}_asm/contigs.fasta
+        ${RESULT_PATH}/${FILE}_asm/contigs.fasta.gz
     # remove unnecessary files
     rm ${RESULT_PATH}/${FILE}.kraken
     rm -rf ${RESULT_PATH}/${FILE}_asm
