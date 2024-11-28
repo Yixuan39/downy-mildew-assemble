@@ -19,6 +19,7 @@ for FILE in "${FILES[@]}"; do
         --threads ${threads} \
         --output ${RESULT_PATH}/${FILE}.kraken \
         --report ${RESULT_PATH}/${FILE}.kreport \
+        --confidence 0.8 \
         --gzip-compressed \
         ${RESULT_PATH}/${FILE}_asm/contigs.fasta.gz
     # extract sequences classified as Oomycota (taxid 4762)
