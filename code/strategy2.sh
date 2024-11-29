@@ -15,7 +15,7 @@ for FILE in "${FILES[@]}"; do
         --output ${RESULT_PATH}/${FILE}.kraken \
         --report ${RESULT_PATH}/${FILE}.kreport \
         --unclassified-out ${RESULT_PATH}/${FILE}.unclassified.fastq.gz \
-        --confidence 0.8 \
+        --confidence 0.2 \
         --gzip-compressed \
         ${INPUT_FOLDER}/${FILE}.fastq.gz
     # Assemble the extracted reads
