@@ -3,7 +3,7 @@
 FILES=("MSU1" "Phumuli" "SC1982")  # Add your file names here
 INPUT_FOLDER="/data/run/yyang/project_data/downy/data"
 RESULT_PATH="/data/run/yyang/project_data/downy/strategy6"
-DB="/data/run/yyang/project_data/downy/diamond/oomycete.mmi"
+DB="/data/run/yyang/project_data/downy/diamond/oomycete.fasta"
 BUSCO_DB="/data/run/yyang/project_data/downy/BUSCO_DB"
 threads=32
 mkdir -p ${RESULT_PATH}
