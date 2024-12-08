@@ -19,7 +19,7 @@ for FILE in "${FILES[@]}"; do
         -t ${threads} \
         ${DB} \
         ${RESULT_PATH}/${FILE}_asm/contigs.fasta.gz | \
-        samtools fastq -F 4 - | \
+        samtools fasta -F 4 - | \
         gzip > ${RESULT_PATH}/${FILE}_asm.fasta
     # busco
     busco -i ${RESULT_PATH}/${FILE}_asm.fasta \
