@@ -15,7 +15,7 @@ for FILE in "${FILES[@]}"; do
         --in-hifi  ${INPUT_FOLDER}/${FILE}.fastq.gz \
         --threads ${threads}
     # Run minimap2 on raw assembly
-    minimap2 -ax asm20 \
+    minimap2 -ax map-hifi \
         -t ${threads} \
         ${DB} \
         ${RESULT_PATH}/${FILE}_asm/contigs.fasta.gz | \
