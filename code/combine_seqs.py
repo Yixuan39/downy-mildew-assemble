@@ -25,5 +25,5 @@ if __name__ == '__main__':
     os.makedirs(os.path.dirname(args.output_file), exist_ok=True)
     # combine fasta files
     subprocess.run(['cat'] + files, stdout=open(args.output_file, 'w'))
-    # compress output file
-    subprocess.run(['gzip', args.output_file])
+    # # compress output file
+    # subprocess.run(['gzip', args.output_file])
