@@ -16,7 +16,10 @@ if __name__ == '__main__':
 
     # list fasta files in folder
     files = glob.glob(args.input_folder + '/*', recursive=True)
-    files = [file for file in files if FastaValidator.fasta_validator(file) == 0]
+    files = [file for file in files if FastaValidator.fasta_validator(file) != 1]
+    if len(files) == 0:
+        print('No fasta files found in:', args.input_folder)
+        exit(1)
 
     print('Combining fasta files:', files)
     os.makedirs(os.path.dirname(args.output_file), exist_ok=True)
