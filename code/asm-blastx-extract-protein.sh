@@ -2,7 +2,7 @@
 
 INPUT_FOLDER="/data/run/yyang/project_data/downy/metaMDBG"
 RESULT_PATH="/data/run/yyang/project_data/downy/asm-mmseqs2-extract-protein"
-DB="/data/run/yyang/project_data/downy/combined_seqs/oomycete-protein.fasta"
+DB="/data/run/yyang/project_data/downy/combined_seqs/oomycota-protein.fasta"
 FILES=$(ls ${INPUT_FOLDER} | grep .fasta | sed 's/.fasta//g')
 mkdir -p ${RESULT_PATH}
 threads=$(nproc --all)
