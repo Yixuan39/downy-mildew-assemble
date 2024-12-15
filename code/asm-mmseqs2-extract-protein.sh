@@ -14,8 +14,6 @@ for FILE in ${FILES}; do
         ${RESULT_PATH}/${FILE}.sam \
         ${RESULT_PATH}/${FILE}.tmp \
         -e 1e-10 \
-        --translate 6 \
-        --greedy-best-hits 1 \
         --search-type 2 \
         --translation-mode 1 \
         --format-mode 1

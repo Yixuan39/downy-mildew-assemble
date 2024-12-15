@@ -13,7 +13,9 @@ for FILE in ${FILES}; do
         ${DB} \
         ${RESULT_PATH}/${FILE}.sam \
         ${RESULT_PATH}/${FILE}.tmp \
-        --search-type 3 --format-mode 1
+        -e 1e-10 \
+        --search-type 3 \
+        --format-mode 1
     # extract the reads
     samtools fasta ${RESULT_PATH}/${FILE}.sam > ${RESULT_PATH}/${FILE}.fasta
     rm ${RESULT_PATH}/${FILE}.sam
