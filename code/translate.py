@@ -2,6 +2,7 @@
 
 import os
 import argparse
+import FastaValidator
 
 def transeq(input_file, output_file):
     command = 'transeq -sequence ' + input_file + ' -outseq ' + output_file + ' -frame 6'
@@ -15,6 +16,7 @@ if __name__ == '__main__':
 
     # list fasta files in folder
     files = os.listdir(args.input_folder)
+    files = [file for file in files if FastaValidator.fasta_validator(os.path.join(args.input_folder, file)) == 0]
     os.makedirs(args.output_folder, exist_ok=True)
     for file in files:
         input_file = os.path.join(args.input_folder, file)
