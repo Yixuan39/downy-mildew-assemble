@@ -14,7 +14,6 @@ for FILE in ${FILES}; do
         --output ${RESULT_PATH}/${FILE}.kraken \
         --report ${RESULT_PATH}/${FILE}.kreport \
         --confidence 0 \
-        --gzip-compressed \
         ${INPUT_FOLDER}/${FILE}.fasta
     # extract sequences classified as Oomycota (taxid 4762)
     extract_kraken_reads.py \
