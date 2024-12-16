@@ -1,17 +1,17 @@
 #!/bin/bash
 
 INPUT_FOLDER="/data/run/yyang/project_data/downy/metaMDBG"
-RESULT_PATH="/data/run/yyang/project_data/downy/asm-mmseqs2-extract-protein"
-DB="/data/run/yyang/project_data/downy/combined_seqs/oomycota-protein.fasta"
+RESULT_PATH="/data/run/yyang/project_data/downy/asm-blast-extract-genome"
+DB="/data/run/yyang/project_data/downy/combined_seqs/oomycota-genome.fasta"
 FILES=$(ls ${INPUT_FOLDER} | grep .fasta | sed 's/.fasta//g')
 mkdir -p ${RESULT_PATH}
-threads=$(nproc --all)
+threads=32
 
-makeblastdb -in ${DB} -dbtype prot
+makeblastdb -in ${DB} -dbtype nucl
 
 for FILE in ${FILES}; do
     # run mmseqs2 on the assembly
-    blastx \
+    blastn \
     -query ${INPUT_FOLDER}/${FILE}.fasta \
     -db ${DB} \
     -outfmt "6 qseqid" \

@@ -1,18 +1,20 @@
 #!/bin/bash
 
-INPUT_FOLDER="/data/run/yyang/project_data/downy/metaMDBG"
-RESULT_PATH="/data/run/yyang/project_data/downy/asm-mmseqs2-extract-genome"
-DB="/data/run/yyang/project_data/downy/combined_seqs/oomycota-genome.fasta"
+INPUT_FOLDER="/Users/yixuanyang/project_data/downy/metaMDBG"
+RESULT_PATH="/Users/yixuanyang/project_data/downy/asm-blast-extract-protein"
+DB="/Users/yixuanyang/project_data/downy/combined_seqs/oomycota-protein.fasta"
 FILES=$(ls ${INPUT_FOLDER} | grep .fasta | sed 's/.fasta//g')
 mkdir -p ${RESULT_PATH}
-threads=$(nproc --all)
+threads=32
 
-makeblastdb -in ${DB} -dbtype nucl
+makeblastdb -in ${DB} -dbtype prot
 
 for FILE in ${FILES}; do
+    # convert input to protein
+    transeq -sequence ${INPUT_FOLDER}/${FILE}.fasta -outseq ${RESULT_PATH}/${FILE}.faa -frame 6
     # run mmseqs2 on the assembly
-    blastn \
-    -query ${INPUT_FOLDER}/${FILE}.fasta \
+    blastp \
+    -query ${RESULT_PATH}/${FILE}.faa \
     -db ${DB} \
     -outfmt "6 qseqid" \
     -out ${RESULT_PATH}/${FILE}.txt \
@@ -23,4 +25,5 @@ for FILE in ${FILES}; do
     # extract the reads
     seqtk subseq ${INPUT_FOLDER}/${FILE}.fasta ${RESULT_PATH}/${FILE}.txt > ${RESULT_PATH}/${FILE}.fasta
     rm ${RESULT_PATH}/${FILE}.txt
+    rm ${RESULT_PATH}/${FILE}.faa
 done
