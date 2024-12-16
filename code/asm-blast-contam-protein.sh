@@ -1,8 +1,8 @@
 #!/bin/bash
 
-INPUT_FOLDER="/Users/yixuanyang/project_data/downy/metaMDBG"
-RESULT_PATH="/Users/yixuanyang/project_data/downy/asm-blast-contam-protein"
-DB="/Users/yixuanyang/project_data/downy/combined_seqs/contam-protein.fasta"
+INPUT_FOLDER="/data/run/yyang/project_data/downy/metaMDBG"
+RESULT_PATH="/data/run/yyang/project_data/downy/asm-blast-contam-protein"
+DB="/data/run/yyang/project_data/downy/combined_seqs/contam-protein.fasta"
 FILES=$(ls ${INPUT_FOLDER} | grep .fasta | sed 's/.fasta//g')
 mkdir -p ${RESULT_PATH}
 threads=32
