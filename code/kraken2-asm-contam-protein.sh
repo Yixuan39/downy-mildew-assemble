@@ -1,8 +1,8 @@
 #!/bin/bash
 
 INPUT_FOLDER="/data/run/yyang/project_data/downy/data"
-RESULT_PATH="/data/run/yyang/project_data/downy/kraken2-asm-contam-genome/CS0"
-KrakenDB="/data/run/yyang/project_data/downy/KrakenDB-contam-genome"
+RESULT_PATH="/data/run/yyang/project_data/downy/kraken2-asm-contam-protein/CS0"
+KrakenDB="/data/run/yyang/project_data/downy/KrakenDB-contam-protein"
 FILES=$(ls ${INPUT_FOLDER} | grep .fasta | sed 's/.fasta//g')
 threads=32
 mkdir -p ${RESULT_PATH}

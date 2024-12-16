@@ -2,9 +2,8 @@
 
 FILES=("MSU1" "Phumuli" "SC1982")  # Add your file names here
 INPUT_FOLDER="/data/run/yyang/project_data/downy/data"
-RESULT_PATH="/data/run/yyang/project_data/downy/strategy1"
-KrakenDB="/data/run/yyang/project_data/downy/KrakenDB-prot"
-BUSCO_DB="/data/run/yyang/project_data/downy/BUSCO_DB"
+RESULT_PATH="/data/run/yyang/project_data/downy/kraken2-asm-extract-protein/CS0"
+KrakenDB="/data/run/yyang/project_data/downy/KrakenDB-whole-protein"
 threads=32
 mkdir -p ${RESULT_PATH}
 

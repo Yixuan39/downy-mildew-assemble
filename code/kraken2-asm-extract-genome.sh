@@ -1,31 +1,39 @@
 #!/bin/bash
 
+FILES=("MSU1" "Phumuli" "SC1982")  # Add your file names here
 INPUT_FOLDER="/data/run/yyang/project_data/downy/data"
-RESULT_PATH="/data/run/yyang/project_data/downy/kraken2-asm-contam-genome/CS0"
-KrakenDB="/data/run/yyang/project_data/downy/KrakenDB-contam-genome"
-FILES=$(ls ${INPUT_FOLDER} | grep .fasta | sed 's/.fasta//g')
+RESULT_PATH="/data/run/yyang/project_data/downy/kraken2-asm-extract-genome/CS0"
+KrakenDB="/data/run/yyang/project_data/downy/KrakenDB-whole-genome"
 threads=32
 mkdir -p ${RESULT_PATH}
 
-for FILE in ${FILES}; do
+for FILE in "${FILES[@]}"; do
     # Run kraken2 on raw reads
     kraken2 --db ${KrakenDB} \
         --threads ${threads} \
         --output ${RESULT_PATH}/${FILE}.kraken \
         --report ${RESULT_PATH}/${FILE}.kreport \
-        --unclassified-out ${RESULT_PATH}/${FILE}.unclassified.fastq.gz \
         --confidence 0 \
         --gzip-compressed \
         ${INPUT_FOLDER}/${FILE}.fastq.gz
+    # extract sequences classified as Oomycota (taxid 4762)
+    extract_kraken_reads.py \
+        -k ${RESULT_PATH}/${FILE}.kraken \
+        -s ${INPUT_FOLDER}/${FILE}.fastq.gz \
+        --taxid 4762 \
+        --output ${RESULT_PATH}/${FILE}.oomycota.fastq \
+        --report ${RESULT_PATH}/${FILE}.kreport \
+        --include-children \
+        --fastq-output
     # Assemble the extracted reads
     metaMDBG asm \
         --out-dir ${RESULT_PATH}/${FILE}_asm \
-        --in-hifi ${RESULT_PATH}/${FILE}.unclassified.fastq.gz \
+        --in-hifi ${RESULT_PATH}/${FILE}.oomycota.fastq \
         --threads ${threads}
     gzip -d ${RESULT_PATH}/${FILE}_asm/contigs.fasta.gz
     mv ${RESULT_PATH}/${FILE}_asm/contigs.fasta ${RESULT_PATH}/${FILE}_asm.fasta
     # remove unnecessary files
     rm ${RESULT_PATH}/${FILE}.kraken
-    rm ${RESULT_PATH}/${FILE}.unclassified.fastq.gz
+    rm ${RESULT_PATH}/${FILE}.oomycota.fastq
     rm -rf ${RESULT_PATH}/${FILE}_asm
 done
