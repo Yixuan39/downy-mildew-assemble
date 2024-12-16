@@ -1,11 +1,9 @@
 #!/bin/python3
 
 import os
-import FastaValidator
 import argparse
 import glob
 import subprocess
-
 from FastaValidator import fasta_validator
 
 if __name__ == '__main__':
@@ -15,8 +13,13 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     # list fasta files in folder
-    files = glob.glob(args.input_folder + '/*', recursive=True)
-    files = [file for file in files if FastaValidator.fasta_validator(file) != 1]
+    files = glob.glob(args.input_folder + '/**/*', recursive=True)
+    print('remove directories from list of files')
+    files = [file for file in files if os.path.isfile(file)]
+    print('avoid adding masked files to list of files')
+    files = [file for file in files if not file.endswith('.masked')]
+    print('validating fasta files...')
+    files = [file for file in files if fasta_validator(file) == 0]
     if len(files) == 0:
         print('No fasta files found in:', args.input_folder)
         exit(1)
@@ -25,5 +28,3 @@ if __name__ == '__main__':
     os.makedirs(os.path.dirname(args.output_file), exist_ok=True)
     # combine fasta files
     subprocess.run(['cat'] + files, stdout=open(args.output_file, 'w'))
-    # # compress output file
-    # subprocess.run(['gzip', args.output_file])
