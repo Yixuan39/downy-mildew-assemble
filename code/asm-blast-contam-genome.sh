@@ -20,7 +20,7 @@ for FILE in ${FILES}; do
     -max_target_seqs 1 \
     -max_hsps 1 \
     -num_threads ${threads}
-    # extract the reads
-    seqtk subseq ${INPUT_FOLDER}/${FILE}.fasta ${RESULT_PATH}/${FILE}.txt > ${RESULT_PATH}/${FILE}.fasta
+    # remove mapped reads
+    python remove_seq.py ${INPUT_FOLDER}/${FILE}.fasta ${RESULT_PATH}/${FILE}.txt ${RESULT_PATH}/${FILE}.fasta
     rm ${RESULT_PATH}/${FILE}.txt
 done
