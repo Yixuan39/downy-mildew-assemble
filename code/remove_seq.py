@@ -1,7 +1,7 @@
 #!/bin/python
 
 import argparse
-import Bio
+from Bio import SeqIO
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Remove sequence from FASTA file')
