@@ -4,7 +4,6 @@ import os
 import argparse
 import glob
 import subprocess
-from FastaValidator import fasta_validator
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='combine fasta files to a single file')
@@ -19,7 +18,7 @@ if __name__ == '__main__':
     print('avoid adding masked files to list of files')
     files = [file for file in files if not file.endswith('.masked')]
     print('validating fasta files...')
-    files = [file for file in files if fasta_validator(file) == 0]
+    files = [file for file in files if 'fna' in file or 'faa' in file]
     if len(files) == 0:
         print('No fasta files found in:', args.input_folder)
         exit(1)
