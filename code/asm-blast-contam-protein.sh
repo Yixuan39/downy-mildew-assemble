@@ -23,7 +23,5 @@ for FILE in ${FILES}; do
     -max_hsps 1 \
     -num_threads ${threads}
     # remove mapped reads
-    python remove_seq.py ${INPUT_FOLDER}/${FILE}.fasta ${RESULT_PATH}/${FILE}.txt ${RESULT_PATH}/${FILE}.fasta
-    rm ${RESULT_PATH}/${FILE}.txt
-    rm ${RESULT_PATH}/${FILE}.faa
+    python get_seq.py remove ${INPUT_FOLDER}/${FILE}.fasta ${RESULT_PATH}/${FILE}.txt ${RESULT_PATH}/${FILE}.fasta
 done

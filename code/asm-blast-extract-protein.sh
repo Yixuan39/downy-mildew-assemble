@@ -23,7 +23,5 @@ for FILE in ${FILES}; do
     -max_hsps 1 \
     -num_threads ${threads}
     # extract the reads
-    seqtk subseq ${INPUT_FOLDER}/${FILE}.fasta ${RESULT_PATH}/${FILE}.txt > ${RESULT_PATH}/${FILE}.fasta
-    rm ${RESULT_PATH}/${FILE}.txt
-    rm ${RESULT_PATH}/${FILE}.faa
+    python get_seq.py extract ${INPUT_FOLDER}/${FILE}.fasta ${RESULT_PATH}/${FILE}.txt ${RESULT_PATH}/${FILE}.fasta
 done

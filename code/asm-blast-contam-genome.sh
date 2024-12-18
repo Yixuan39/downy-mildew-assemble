@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# database was created using:
+# python combine_seqs.py /data/run/yyang/project_data/downy/KrakenDB-contam-genome/library /data/run/yyang/project_data/downy/combined_seqs/contam-genome.fasta
+
 INPUT_FOLDER="/data/run/yyang/project_data/downy/metaMDBG"
 RESULT_PATH="/data/run/yyang/project_data/downy/asm-blast-contam-genome"
 DB="/data/run/yyang/project_data/downy/combined_seqs/contam-genome.fasta"
@@ -21,6 +24,5 @@ for FILE in ${FILES}; do
     -max_hsps 1 \
     -num_threads ${threads}
     # remove mapped reads
-    python remove_seq.py ${INPUT_FOLDER}/${FILE}.fasta ${RESULT_PATH}/${FILE}.txt ${RESULT_PATH}/${FILE}.fasta
-    rm ${RESULT_PATH}/${FILE}.txt
+    python get_seq.py remove ${INPUT_FOLDER}/${FILE}.fasta ${RESULT_PATH}/${FILE}.txt ${RESULT_PATH}/${FILE}.fasta
 done
