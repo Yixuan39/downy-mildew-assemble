@@ -1,9 +1,9 @@
 #!/bin/bash
 
-FILES=("MSU1" "Phumuli" "SC1982")  # Add your file names here
 INPUT_FOLDER="/data/run/yyang/project_data/downy/data"
 RESULT_PATH="/data/run/yyang/project_data/downy/kraken2-asm-extract-genome/CS0"
 KrakenDB="/data/run/yyang/project_data/downy/KrakenDB-whole-genome"
+FILES=$(ls ${INPUT_FOLDER} | grep .fasta | sed 's/.fasta//g')
 threads=32
 mkdir -p ${RESULT_PATH}
 
@@ -31,7 +31,7 @@ for FILE in "${FILES[@]}"; do
         --in-hifi ${RESULT_PATH}/${FILE}.oomycota.fastq \
         --threads ${threads}
     gzip -d ${RESULT_PATH}/${FILE}_asm/contigs.fasta.gz
-    mv ${RESULT_PATH}/${FILE}_asm/contigs.fasta ${RESULT_PATH}/${FILE}_asm.fasta
+    mv ${RESULT_PATH}/${FILE}_asm/contigs.fasta ${RESULT_PATH}/${FILE}.fasta
     # remove unnecessary files
     rm ${RESULT_PATH}/${FILE}.kraken
     rm ${RESULT_PATH}/${FILE}.oomycota.fastq

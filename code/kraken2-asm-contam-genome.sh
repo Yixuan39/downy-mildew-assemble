@@ -23,7 +23,7 @@ for FILE in ${FILES}; do
         --in-hifi ${RESULT_PATH}/${FILE}.unclassified.fastq.gz \
         --threads ${threads}
     gzip -d ${RESULT_PATH}/${FILE}_asm/contigs.fasta.gz
-    mv ${RESULT_PATH}/${FILE}_asm/contigs.fasta ${RESULT_PATH}/${FILE}_asm.fasta
+    mv ${RESULT_PATH}/${FILE}_asm/contigs.fasta ${RESULT_PATH}/${FILE}.fasta
     # remove unnecessary files
     rm ${RESULT_PATH}/${FILE}.kraken
     rm ${RESULT_PATH}/${FILE}.unclassified.fastq.gz
