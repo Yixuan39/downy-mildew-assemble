@@ -7,7 +7,7 @@ FILES=$(ls ${INPUT_FOLDER} | grep .fastq.gz | sed 's/.fastq.gz//g')
 threads=32
 mkdir -p ${RESULT_PATH}
 
-for FILE in "${FILES[@]}"; do
+for FILE in ${FILES}; do
     # Run kraken2 on raw reads
     kraken2 --db ${KrakenDB} \
         --threads ${threads} \
