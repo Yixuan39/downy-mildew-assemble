@@ -29,3 +29,5 @@ for FILE in ${FILES}; do
     rm ${RESULT_PATH}/${FILE}.unclassified.fastq.gz
     rm -rf ${RESULT_PATH}/${FILE}_asm
 done
+
+bash quality_assessment.sh ${RESULT_PATH}

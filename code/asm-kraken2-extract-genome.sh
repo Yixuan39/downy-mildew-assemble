@@ -26,3 +26,5 @@ for FILE in ${FILES}; do
     # remove unnecessary files
     rm ${RESULT_PATH}/${FILE}.kraken
 done
+
+bash quality_assessment.sh ${RESULT_PATH}
