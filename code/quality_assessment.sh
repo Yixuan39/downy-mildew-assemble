@@ -10,6 +10,21 @@ dirs=$(dirname ${files} | sort | uniq)
 
 for dir in ${dirs}; do
     echo "Processing ${dir}"
+    files=$(find ${dir} -name "*.fasta")
+    for file in ${files}; do
+        compleasm run --assembly_path ${file} \
+                  --output_dir $(dirname ${file})/compleasm \
+                  --library_path ${BUSCO_DB} \
+                  --threads ${threads} \
+                  --lineage eukaryota_odb10
+    done
+    quast.py --output-dir ${dir}/quast \
+            --threads ${threads} \
+            --eukaryote \
+            ${dir}
+done
+
+
 #    busco --in ${dir} \
 #          --mode genome \
 #          --auto-lineage-euk \
@@ -17,16 +32,3 @@ for dir in ${dirs}; do
 #          --cpu ${threads} \
 #          --force \
 #          --tar
-    files=$(find ${dir} -name "*.fasta")
-    for file in ${files}; do
-        compleasm run --assembly_path ${file} \
-                  --output_dir $(dirname ${file})/compleasm \
-                  --library_path ${BUSCO_DB} \
-                  --threads ${threads} \
-                  --lineage eukaryota,stramenopiles_odb10
-    done
-    quast.py --output-dir ${dir}/quast \
-            --threads ${threads} \
-            --eukaryote \
-            ${dir}
-done
