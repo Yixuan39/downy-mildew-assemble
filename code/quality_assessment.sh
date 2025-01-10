@@ -19,7 +19,7 @@ for dir in ${dirs}; do
 #          --tar
     files=$(find ${dir} -name "*.fasta")
     for file in ${files}; do
-        compleasm --assembly_path ${file} \
+        compleasm run --assembly_path ${file} \
                   --output_dir $(dirname ${file})/compleasm \
                   --library_path ${BUSCO_DB} \
                   --threads ${threads} \
