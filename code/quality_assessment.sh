@@ -13,7 +13,6 @@ for out_dir in ${out_dirs}; do
     mkdir -p ${out_dir}/busco
     mkdir -p ${out_dir}/quast
     busco --in ${out_dir} \
-          --out_path ${out_dir}/busco \
           --mode genome \
           --auto-lineage-euk \
           --download_path ${BUSCO_DB} \
