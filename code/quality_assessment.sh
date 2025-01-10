@@ -23,7 +23,7 @@ for dir in ${dirs}; do
                   --output_dir $(dirname ${file})/compleasm \
                   --library_path ${BUSCO_DB} \
                   --threads ${threads} \
-                  --lineage eukaryota, stramenopiles_odb10
+                  --lineage eukaryota,stramenopiles_odb10
     done
     quast.py --output-dir ${dir}/quast \
             --threads ${threads} \
