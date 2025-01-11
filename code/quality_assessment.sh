@@ -13,12 +13,12 @@ for dir in ${dirs}; do
     files=$(find ${dir} -name "*.fasta")
     for file in ${files}; do
         compleasm run --assembly_path ${file} \
-                  --output_dir $(dirname ${file})/compleasm-eukaryota \
+                  --output_dir $(dirname ${file})/compleasm-eukaryota/$(basename ${file}) \
                   --library_path ${BUSCO_DB} \
                   --threads ${threads} \
                   --lineage eukaryota_odb10
         compleasm run --assembly_path ${file} \
-                  --output_dir $(dirname ${file})/compleasm-stramenopiles \
+                  --output_dir $(dirname ${file})/compleasm-stramenopiles/$(basename ${file}) \
                   --library_path ${BUSCO_DB} \
                   --threads ${threads} \
                   --lineage stramenopiles_odb10
