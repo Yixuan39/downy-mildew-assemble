@@ -13,15 +13,20 @@ for dir in ${dirs}; do
     files=$(find ${dir} -name "*.fasta")
     for file in ${files}; do
         compleasm run --assembly_path ${file} \
-                  --output_dir $(dirname ${file})/compleasm \
+                  --output_dir $(dirname ${file})/compleasm-eukaryota \
                   --library_path ${BUSCO_DB} \
                   --threads ${threads} \
                   --lineage eukaryota_odb10
+        compleasm run --assembly_path ${file} \
+                  --output_dir $(dirname ${file})/compleasm-stramenopiles \
+                  --library_path ${BUSCO_DB} \
+                  --threads ${threads} \
+                  --lineage stramenopiles_odb10
     done
     quast.py --output-dir ${dir}/quast \
             --threads ${threads} \
             --eukaryote \
-            ${dir}
+            ${files}
 done
 
 
