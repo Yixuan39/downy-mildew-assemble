@@ -9,6 +9,7 @@ dirs=$(dirname ${files} | sort | uniq)
 
 for dir in ${dirs}; do
     echo "Processing ${dir}"
+    files=$(find ${dir} -name "*.fasta")
     quast.py --output-dir ${dir}/quast \
             --threads ${threads} \
             --eukaryote \
