@@ -1,0 +1,61 @@
+---
+title: "R Notebook"
+output:
+  html_document:
+    df_print: paged
+---
+
+# Setup
+
+```{r}
+library(tidyverse)
+library(gt)
+```
+
+
+```{r echo=FALSE}
+path <- '/Users/yixuanyang/project_data/downy/result'
+files <- list.files(path, full.names = TRUE, recursive = TRUE)
+```
+
+BUSCO results are calculated using compleasm pipeline: https://academic.oup.com/bioinformatics/article/39/10/btad595/7284108
+
+```{r echo=FALSE}
+busco.files <- files %>% str_subset('summary.txt')
+read.result <- function(file) {
+    info <- str_split(file, '/') %>% unlist() %>% tail(5)
+    busco <- read_lines(file, skip = 1) %>% str_remove(",.*") %>% str_c(collapse = '\n')
+    result <- data.frame(method = info[1],
+                         confidence.score = as.numeric(str_remove(info[2], 'CS')),
+                         database = info[3],
+                         sample.name = info[4],
+                         busco = busco)
+    return(result)
+}
+
+busco.results <- map_dfr(busco.files, read.result)
+```
+
+# BUSCO: Eukaryota database
+
+```{r echo=FALSE}
+busco.results %>% 
+    filter(database == 'compleasm-eukaryota') %>% 
+    select(-database) %>%
+    group_by(sample.name) %>%
+    arrange(confidence.score) %>%
+    pivot_wider(names_from = method, values_from = busco) %>% 
+    gt
+```
+
+# BUSCO: Stramenopiles database
+
+```{r echo=FALSE}
+busco.results %>% 
+    filter(database == 'compleasm-stramenopiles') %>% 
+    select(-database) %>%
+    group_by(sample.name) %>%
+    arrange(confidence.score) %>%
+    pivot_wider(names_from = method, values_from = busco) %>% 
+    gt
+```
