@@ -2,7 +2,7 @@
 
 # input folder argument
 input_folder=$1
-threads=4
+threads=8
 BUSCO_DB="/data/run/yyang/project_data/downy/BUSCO_DB"
 # get the fasta file full name
 files=$(find ${input_folder} -name "*.fasta")
@@ -17,8 +17,4 @@ for dir in ${dirs}; do
           --cpu ${threads} \
           --force \
           --tar
-    quast.py --output-dir ${dir}/quast \
-            --threads ${threads} \
-            --eukaryote \
-            ${files}
 done
