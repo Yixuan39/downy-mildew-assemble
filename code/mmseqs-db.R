@@ -1,4 +1,4 @@
-
+library(stringr)
 
 combine.genomes <- function(input.folder, output.file) {
     if (file.exists(output.file)) {file.remove(output.file)}
@@ -13,7 +13,7 @@ combine.genomes <- function(input.folder, output.file) {
     #     writeXStringSet(seq, output.file, format = 'fasta', append = TRUE, compress = TRUE)
     # }
     # concatenate all files
-    system(paste0('cat', ref.seq.files, '>', output.file))
+    system(str_c('cat', ref.seq.files, '>', output.file, collapse = ' '))
 }
 
 
