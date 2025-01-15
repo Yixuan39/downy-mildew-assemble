@@ -10,7 +10,7 @@ combine.genomes <- function(input.folder, output.file, AA = FALSE) {
         } else {
             seq <- readDNAStringSet(file)
         }
-        writeXStringSet(seq, file, format = 'fasta', append = TRUE, compress = TRUE)
+        writeXStringSet(seq, output.file, format = 'fasta', append = TRUE, compress = TRUE)
     }
 }
 
