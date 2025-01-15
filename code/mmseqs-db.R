@@ -1,10 +1,10 @@
 library(Biostrings)
 
 combine.genomes <- function(input.folder, output.file, AA = FALSE) {
+    if (file.exists(output.file)) {file.remove(output.file)}
     ref.seq.files <- list.files(input.folder, full.names = TRUE, recursive = TRUE, pattern = "\\.(fasta|fna)$")
     for (file in ref.seq.files) {
         message('Processing ', file)
-        # annotate names
         if (AA) {
             seq <- readAAStringSet(file)
         } else {
