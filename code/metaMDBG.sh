@@ -2,7 +2,7 @@
 
 INPUT_FOLDER="/data/run/yyang/project_data/downy/data"
 RESULT_PATH="/data/run/yyang/project_data/downy/metaMDBG"
-FILES=$(ls ${INPUT_FOLDER}/*.fasta.gz)
+FILES=$(ls ${INPUT_FOLDER}/*.fastq.gz 2>/dev/null | xargs -n 1 basename)
 threads=32
 mkdir -p ${RESULT_PATH}
 
