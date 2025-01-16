@@ -1,5 +1,5 @@
 THREADS=32
-REF_PATH=data/run/yyang/project_data/downy/ref-seq/
+REF_PATH=/data/run/yyang/project_data/downy/ref-seq/
 # download kraken2 bacteria
 kraken2-build --download-library bacteria --db $REF_PATH/genome/bacteria --threads ${THREADS} --use-ftp --no-masking
 kraken2-build --download-library bacteria --db $REF_PATH/protein/bacteria --threads ${THREADS} --use-ftp --no-masking --protein
