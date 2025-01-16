@@ -2,11 +2,10 @@ library(Biostrings)
 library(tidyverse)
 
 combine.genomes <- function(input.folder, output.file, AA = FALSE) {
-    if (str_detect(output.file, 'gz')) {output.file <- fs::path_ext_remove(output.file)}
     # Check if output file exists and remove it
-    if (file.exists(output.file)) {
-        file.remove(output.file)
-    }
+    if (file.exists(output.file)) {file.remove(output.file)}
+    # Remove the extension if it is .gz
+    if (str_detect(output.file, 'gz')) {output.file <- fs::path_ext_remove(output.file)}
     
     # Ensure the output directory exists
     output.dir <- dirname(output.file)
@@ -27,13 +26,11 @@ combine.genomes <- function(input.folder, output.file, AA = FALSE) {
         stop("No .fasta or .fna files found in the input folder!")
     }
     message('Processing files: ')
-    message(str_c(ref.seq.files, collapse = '\n'))
-    # read in files parallel
-    genome.list <- lapply(ref.seq.files, function(file) {
-        if(AA) {readAAStringSet(file)} else {readDNAStringSet(file)}
-    })
-    genome.list <- DNAStringSetList(genome.list)
-    writeXStringSet(unlist(genome.list), output.file)
+    for (file in ref.seq.files) {
+        message(str_c(file, collapse = '\n'))
+        if(AA) {seq <- readAAStringSet(file)} else {seq <- readDNAStringSet(file)}
+        writeXStringSet(seq, output.file, append = TRUE)
+    }
     system(paste0('pigz ', output.file))
 }
 
