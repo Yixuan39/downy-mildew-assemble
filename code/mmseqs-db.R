@@ -20,7 +20,7 @@ combine.genomes <- function(input.folder, output.file, AA = FALSE) {
         full.names = TRUE,
         recursive = TRUE,
         pattern = "(fasta|fna)"
-    ) %>% filter(!str_detect('.masked'))
+    ) %>% str_subset('.masked', negate = TRUE)
     
     # Stop if no files are found
     if (length(ref.seq.files) == 0) {
