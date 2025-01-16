@@ -1,6 +1,6 @@
 library(tidyverse)
 
-combine.genomes <- function(input.folder, output.file, AA = FALSE) {
+combine.genomes <- function(input.folder, output.file) {
     # Check if output file exists and remove it
     if (file.exists(output.file)) {file.remove(output.file)}
     # Ensure the output directory exists
@@ -24,5 +24,5 @@ combine.genomes <- function(input.folder, output.file, AA = FALSE) {
 combine.genomes('/data/run/yyang/project_data/downy/KrakenDB-contam-genome', '/data/run/yyang/project_data/downy/mmseqsDB/contam-genome.fasta.gz')
 combine.genomes('/data/run/yyang/project_data/downy/ref-seq', '/data/run/yyang/project_data/downy/mmseqsDB/extract-genome.fasta.gz')
 
-combine.genomes('/data/run/yyang/project_data/downy/KrakenDB-contam-protein', '/data/run/yyang/project_data/downy/mmseqsDB/contam-protein.fasta.gz', AA = TRUE)
-combine.genomes('/data/run/yyang/project_data/downy/ref-seq-prot', '/data/run/yyang/project_data/downy/mmseqsDB/extract-protein.fasta.gz', AA = TRUE)
+combine.genomes('/data/run/yyang/project_data/downy/KrakenDB-contam-protein', '/data/run/yyang/project_data/downy/mmseqsDB/contam-protein.fasta.gz')
+combine.genomes('/data/run/yyang/project_data/downy/ref-seq-prot', '/data/run/yyang/project_data/downy/mmseqsDB/extract-protein.fasta.gz')
