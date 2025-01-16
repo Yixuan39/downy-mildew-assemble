@@ -1,5 +1,5 @@
 library(Biostrings)
-library(stringr)
+library(tidyverse)
 
 combine.genomes <- function(input.folder, output.file, AA = FALSE) {
     if (str_detect(output.file, 'gz')) {output.file <- fs::path_ext_remove(output.file)}
@@ -20,7 +20,7 @@ combine.genomes <- function(input.folder, output.file, AA = FALSE) {
         full.names = TRUE,
         recursive = TRUE,
         pattern = "(fasta|fna)"
-    )
+    ) %>% filter(!str_detect('.masked'))
     
     # Stop if no files are found
     if (length(ref.seq.files) == 0) {
@@ -40,5 +40,5 @@ combine.genomes <- function(input.folder, output.file, AA = FALSE) {
 combine.genomes('/data/run/yyang/project_data/downy/KrakenDB-contam-genome', '/data/run/yyang/project_data/downy/mmseqsDB/contam-genome.fasta.gz')
 combine.genomes('/data/run/yyang/project_data/downy/ref-seq', '/data/run/yyang/project_data/downy/mmseqsDB/extract-genome.fasta.gz')
 
-combine.genomes('/data/run/yyang/project_data/downy/KrakenDB-contam-protein', '/data/run/yyang/project_data/downy/mmseqsDB/contam-protein.fasta.gz')
-combine.genomes('/data/run/yyang/project_data/downy/ref-seq-prot', '/data/run/yyang/project_data/downy/mmseqsDB/extract-protein.fasta.gz')
+combine.genomes('/data/run/yyang/project_data/downy/KrakenDB-contam-protein', '/data/run/yyang/project_data/downy/mmseqsDB/contam-protein.fasta.gz', AA = TRUE)
+combine.genomes('/data/run/yyang/project_data/downy/ref-seq-prot', '/data/run/yyang/project_data/downy/mmseqsDB/extract-protein.fasta.gz', AA = TRUE)
