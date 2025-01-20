@@ -1,5 +1,5 @@
 ---
-title: "R Notebook"
+title: "Downy mildew assembly quality"
 output:
   html_document:
     df_print: paged
@@ -35,6 +35,44 @@ read.result <- function(file) {
 
 busco.results <- map_dfr(busco.files, read.result)
 ```
+
+```{r}
+quast.files <- files %>% str_subset('quast/report.tsv')
+read.quast <- function(file) {
+    info <- str_split(file, '/') %>% unlist() %>% tail(4)
+    quast <- read.csv(file, sep = '\t') %>%
+      as.data.frame() %>% 
+      column_to_rownames('Assembly')
+    abb.names <- c('CT', 'LN', 'GC', 'N50')
+    sub.df <- quast[c(13,15,16,17),] %>% 
+      apply(2, function(x) str_c(abb.names, x, sep = ':', collapse = '\n')) %>% 
+      as.data.frame() 
+    result <- data.frame(method = info[1],
+                         confidence.score = as.numeric(str_remove(info[2], 'CS')),
+                         database = info[3],
+                         sample.name = rownames(sub.df),
+                         quast = sub.df[,1])
+    return(result)
+}
+quast.results <- map_dfr(quast.files, read.quast)
+quast.results
+```
+
+```{r}
+# merge busco and quast results
+busco.eukaryota <- busco.results %>% 
+  filter(database == 'compleasm-eukaryota') %>% 
+  arrange(method, confidence.score, sample.name)
+busco.stramenopiles <- busco.results %>% 
+  filter(database == 'compleasm-stramenopiles') %>% 
+  arrange(method, confidence.score, sample.name)
+quast.results <- quast.results %>% 
+  arrange(method, confidence.score, sample.name)
+busco.eukaryota$quast <- quast.results$quast
+busco.stramenopiles$quast <- quast.results$quast
+
+```
+
 
 # BUSCO: Eukaryota database
 
