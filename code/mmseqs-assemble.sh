@@ -45,8 +45,9 @@ for FILE in ${FILES}; do
 done
 
 # assemble sequence first, then extract oomycota sequence use genome search
-
-DB=/data/run/yyang/project_data/downy/ref-seq/contam-genome.fasta.gz
+cat /data/run/yyang/project_data/downy/ref-seq/contam-genome.fasta.gz \
+    /data/run/yyang/project_data/downy/ref-seq/genome-bfh.fasta.gz > /data/run/yyang/project_data/downy/ref-seq/contam-large-genome.fasta.gz
+DB=/data/run/yyang/project_data/downy/ref-seq/contam-large-genome.fasta.gz
 RESULT_PATH=/data/run/yyang/project_data/downy/mmseqs_result/contam-genome
 mkdir -p ${RESULT_PATH}
 
@@ -65,8 +66,9 @@ for FILE in ${FILES}; do
 done
 
 # assemble sequence first, then extract oomycota sequence use protein search
-
-DB=/data/run/yyang/project_data/downy/ref-seq/contam-protein.fasta.gz
+cat /data/run/yyang/project_data/downy/ref-seq/contam-protein.fasta.gz \
+    /data/run/yyang/project_data/downy/ref-seq/protein-bfh.fasta.gz > /data/run/yyang/project_data/downy/ref-seq/contam-large-protein.fasta.gz
+DB=/data/run/yyang/project_data/downy/ref-seq/contam-large-protein.fasta.gz
 RESULT_PATH=/data/run/yyang/project_data/downy/mmseqs_result/contam-protein
 mkdir -p ${RESULT_PATH}
 
