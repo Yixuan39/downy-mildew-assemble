@@ -6,7 +6,7 @@ path <- '/data/run/yyang/project_data/downy/mmseqs_result/'
 # set evalue
 evalues <- c(1e-5, 1e-10, 1e-15, 1e-20)
 
-files <- list.files(path = args$input, full.names = TRUE, recursive = TRUE, pattern = '.tsv')
+files <- list.files(path = path, full.names = TRUE, recursive = TRUE, pattern = '.tsv')
 if (length(files) == 0) {stop('No .tsv files found in the input folder!')}
 
 for (ev in evalues) {
