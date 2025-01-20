@@ -21,6 +21,6 @@ for (ev in evalues) {
         # write to fasta
         out.path <- file.path(dirname(file), ev)
         if (!dir.exists(out.path)) {dir.create(out.path, recursive = TRUE)}
-        writeXStringSet(seq, file.path(out.path, paste0(fs::path_ext_remove(basename(file)), '.fasta')), format = 'fasta', compress = TRUE)
+        writeXStringSet(seq, file.path(out.path, paste0(fs::path_ext_remove(basename(file)), '.fasta.gz')), format = 'fasta', compress = TRUE)
     }
 }
