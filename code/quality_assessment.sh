@@ -9,6 +9,7 @@ files=$(find ${input_folder} -name "*.fasta")
 dirs=$(dirname ${files} | sort | uniq)
 
 for dir in ${dirs}; do
+    mkdir -p ${dir}/quality
     echo "Processing ${dir}"
     files=$(find ${dir} -name "*.fasta")
     for file in ${files}; do
@@ -22,18 +23,15 @@ for dir in ${dirs}; do
                   --library_path ${BUSCO_DB} \
                   --threads ${threads} \
                   --lineage stramenopiles_odb10
+    mv ${dir}/compleasm-eukaryota/$(basename ${file})/summary.txt ${dir}/quality/compleasm-eukaryota-$(basename ${file}).txt
+    mv ${dir}/compleasm-stramenopiles/$(basename ${file})/summary.txt ${dir}/quality/compleasm-stramenopiles-$(basename ${file}).txt
     done
     quast.py --output-dir ${dir}/quast \
             --threads ${threads} \
             --eukaryote \
             ${files}
+    mv ${dir}/quast/report.tsv ${dir}/quality/quast.tsv
+    rm -rf ${dir}/compleasm-eukaryota
+    rm -rf ${dir}/compleasm-stramenopiles
+    rm -rf ${dir}/quast
 done
-
-
-#    busco --in ${dir} \
-#          --mode genome \
-#          --auto-lineage-euk \
-#          --download_path ${BUSCO_DB} \
-#          --cpu ${threads} \
-#          --force \
-#          --tar
