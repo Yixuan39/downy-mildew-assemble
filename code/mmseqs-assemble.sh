@@ -20,7 +20,32 @@ for FILE in ${FILES}; do
     --max-seqs 1 \
     --search-type 3 \
     --format-mode 4 \
-    --format-output query,qseq,evalue
+    --format-output query,evalue
+    
+    Rscript get-mmseqs-result.R \
+    --file ${INPUT_FOLDER}/${FILE} \
+    --mmseqs ${RESULT_PATH}/${FILE}.tsv \
+    --evalue 1e-5 \
+    --output ${RESULT_PATH}/1e-5/${FILE}
+    
+    Rscript get-mmseqs-result.R \
+    --file ${INPUT_FOLDER}/${FILE} \
+    --mmseqs ${RESULT_PATH}/${FILE}.tsv \
+    --evalue 1e-10 \
+    --output ${RESULT_PATH}/1e-10/${FILE}
+    
+    Rscript get-mmseqs-result.R \
+    --file ${INPUT_FOLDER}/${FILE} \
+    --mmseqs ${RESULT_PATH}/${FILE}.tsv \
+    --evalue 1e-15 \
+    --output ${RESULT_PATH}/1e-15/${FILE}
+    
+    Rscript get-mmseqs-result.R \
+    --file ${INPUT_FOLDER}/${FILE} \
+    --mmseqs ${RESULT_PATH}/${FILE}.tsv \
+    --evalue 1e-20 \
+    --output ${RESULT_PATH}/1e-20/${FILE}
+    
 done
 
 # assemble sequence first, then extract oomycota sequence use protein search
@@ -41,7 +66,32 @@ for FILE in ${FILES}; do
     --search-type 2 \
     --translation-mode 1 \
     --format-mode 4 \
-    --format-output query,qseq,evalue
+    --format-output query,evalue
+    
+    Rscript get-mmseqs-result.R \
+    --file ${INPUT_FOLDER}/${FILE} \
+    --mmseqs ${RESULT_PATH}/${FILE}.tsv \
+    --evalue 1e-5 \
+    --output ${RESULT_PATH}/1e-5/${FILE}
+    
+    Rscript get-mmseqs-result.R \
+    --file ${INPUT_FOLDER}/${FILE} \
+    --mmseqs ${RESULT_PATH}/${FILE}.tsv \
+    --evalue 1e-10 \
+    --output ${RESULT_PATH}/1e-10/${FILE}
+    
+    Rscript get-mmseqs-result.R \
+    --file ${INPUT_FOLDER}/${FILE} \
+    --mmseqs ${RESULT_PATH}/${FILE}.tsv \
+    --evalue 1e-15 \
+    --output ${RESULT_PATH}/1e-15/${FILE}
+    
+    Rscript get-mmseqs-result.R \
+    --file ${INPUT_FOLDER}/${FILE} \
+    --mmseqs ${RESULT_PATH}/${FILE}.tsv \
+    --evalue 1e-20 \
+    --output ${RESULT_PATH}/1e-20/${FILE}
+    
 done
 
 # assemble sequence first, then extract oomycota sequence use genome search
@@ -62,7 +112,32 @@ for FILE in ${FILES}; do
     --max-seqs 1 \
     --search-type 3 \
     --format-mode 4 \
-    --format-output query,qseq,evalue
+    --format-output query,evalue
+    
+    Rscript get-mmseqs-result.R \
+    --file ${INPUT_FOLDER}/${FILE} \
+    --mmseqs ${RESULT_PATH}/${FILE}.tsv \
+    --evalue 1e-5 \
+    --output ${RESULT_PATH}/1e-5/${FILE}
+    
+    Rscript get-mmseqs-result.R \
+    --file ${INPUT_FOLDER}/${FILE} \
+    --mmseqs ${RESULT_PATH}/${FILE}.tsv \
+    --evalue 1e-10 \
+    --output ${RESULT_PATH}/1e-10/${FILE}
+    
+    Rscript get-mmseqs-result.R \
+    --file ${INPUT_FOLDER}/${FILE} \
+    --mmseqs ${RESULT_PATH}/${FILE}.tsv \
+    --evalue 1e-15 \
+    --output ${RESULT_PATH}/1e-15/${FILE}
+    
+    Rscript get-mmseqs-result.R \
+    --file ${INPUT_FOLDER}/${FILE} \
+    --mmseqs ${RESULT_PATH}/${FILE}.tsv \
+    --evalue 1e-20 \
+    --output ${RESULT_PATH}/1e-20/${FILE}
+    
 done
 
 # assemble sequence first, then extract oomycota sequence use protein search
@@ -84,5 +159,30 @@ for FILE in ${FILES}; do
     --search-type 2 \
     --translation-mode 1 \
     --format-mode 4 \
-    --format-output query,qseq,evalue
+    --format-output query,evalue
+    
+    Rscript get-mmseqs-result.R \
+    --file ${INPUT_FOLDER}/${FILE} \
+    --mmseqs ${RESULT_PATH}/${FILE}.tsv \
+    --evalue 1e-5 \
+    --output ${RESULT_PATH}/1e-5/${FILE}
+    
+    Rscript get-mmseqs-result.R \
+    --file ${INPUT_FOLDER}/${FILE} \
+    --mmseqs ${RESULT_PATH}/${FILE}.tsv \
+    --evalue 1e-10 \
+    --output ${RESULT_PATH}/1e-10/${FILE}
+    
+    Rscript get-mmseqs-result.R \
+    --file ${INPUT_FOLDER}/${FILE} \
+    --mmseqs ${RESULT_PATH}/${FILE}.tsv \
+    --evalue 1e-15 \
+    --output ${RESULT_PATH}/1e-15/${FILE}
+    
+    Rscript get-mmseqs-result.R \
+    --file ${INPUT_FOLDER}/${FILE} \
+    --mmseqs ${RESULT_PATH}/${FILE}.tsv \
+    --evalue 1e-20 \
+    --output ${RESULT_PATH}/1e-20/${FILE}
+    
 done

@@ -1,26 +1,23 @@
+library(argparser)
 library(data.table)
 library(Biostrings)
 library(fs)
 
-path <- '/data/run/yyang/project_data/downy/mmseqs_result/'
-# set evalue
-evalues <- c(1e-5, 1e-10, 1e-15, 1e-20)
+p <- arg_parser("convert mmseqs result to fasta")
+p <- add_argument(p, "--file", help = "file name of original data")
+p <- add_argument(p, "--mmseq", help = "file name of mmseqs result")
+p <- add_argument(p, "--evalue", help = "evalue threshold")
+p <- add_argument(p, "--output", help = "output file")
+argv <- parse_args(p)
 
-files <- list.files(path = path, full.names = TRUE, recursive = TRUE, pattern = '.tsv')
-if (length(files) == 0) {stop('No .tsv files found in the input folder!')}
 
-for (ev in evalues) {
-    for (file in files) {
-        message('Processing ', file)
-        # read tsv file
-        data <- fread(file)
-        # filter by evalue
-        data <- data[evalue <= ev]
-        seq <- DNAStringSet(data$qseq)
-        names(seq) <- data$query
-        # write to fasta
-        out.path <- file.path(dirname(file), ev)
-        if (!dir.exists(out.path)) {dir.create(out.path, recursive = TRUE)}
-        writeXStringSet(seq, file.path(out.path, paste0(fs::path_ext_remove(basename(file)), '.fasta.gz')), format = 'fasta', compress = TRUE)
-    }
-}
+message('Processing ', p$mmseq)
+# read tsv file
+data <- fread(p$mmseq)
+# filter by evalue
+data <- data[evalue <= p$evalue]
+seq <- readDNAStringSet(p$file)
+# write to fasta
+out.path <- file.path(dirname(p$output))
+if (!dir.exists(out.path)) {dir.create(out.path, recursive = TRUE)}
+writeXStringSet(seq, file.path(p$output), format = 'fasta', compress = TRUE)
