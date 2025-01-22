@@ -29,7 +29,7 @@ kraken2-build --db ${DB_PATH} --clean --threads ${THREADS}
 
 # build kraken2 oomycota protein db
 DB_PATH=/data/run/yyang/project_data/downy/KrakenDB/oomycota-protein
-kraken2-build --db ${DB_PATH} --download-taxonomy --threads ${THREADS} --protein
+kraken2-build --db ${DB_PATH} --download-taxonomy --threads ${THREADS} 
 kraken2-build --db ${DB_PATH} --add-to-library ${REF_PATH}/protein-bfh.fasta --threads ${THREADS} --protein
 kraken2-build --db ${DB_PATH} --add-to-library ${REF_PATH}/oomycota-protein.fasta --threads ${THREADS} --protein
 kraken2-build --db ${DB_PATH} --build --threads ${THREADS} --protein
@@ -45,7 +45,7 @@ kraken2-build --db ${DB_PATH} --clean --threads ${THREADS}
 
 # build kraken2 contam protein db
 DB_PATH=/data/run/yyang/project_data/downy/KrakenDB/contam-protein
-kraken2-build --db ${DB_PATH} --download-taxonomy --threads ${THREADS} --protein
+kraken2-build --db ${DB_PATH} --download-taxonomy --threads ${THREADS} 
 kraken2-build --db ${DB_PATH} --add-to-library ${REF_PATH}/protein-bfh.fasta --threads ${THREADS} --protein
 kraken2-build --db ${DB_PATH} --add-to-library ${REF_PATH}/contam-protein.fasta --threads ${THREADS} --protein
 kraken2-build --db ${DB_PATH} --build --threads ${THREADS} --protein
