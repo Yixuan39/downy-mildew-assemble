@@ -20,7 +20,7 @@ if __name__ == '__main__':
     output_dir = os.path.dirname(args.output_file)
     os.makedirs(output_dir, exist_ok=True)
     # read in sequence ID txt file
-    seq_id = pd.read_csv(args.reference_id_file, sep='\t', header=1)
+    seq_id = pd.read_csv(args.reference_id_file, sep='\t', header=0)
     sub_seq_id = seq_id[seq_id['evalue'] < args.evalue]
     final_id = sub_seq_id['query'].tolist()
     # remove if final_id duplicates
