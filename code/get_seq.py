@@ -27,9 +27,9 @@ if __name__ == '__main__':
     final_id = list(set(final_id))
 
     # read input file
-    if args.input_file.endswith('.fastq'):
+    if '.fastq' in args.input_file:
         records = SeqIO.parse(args.input_file, 'fastq')
-    if args.input_file.endswith('.fasta'):
+    if '.fasta' in args.input_file:
         records = SeqIO.parse(args.input_file, 'fasta')
         
     if args.action == 'extract':
