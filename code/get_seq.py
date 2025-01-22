@@ -27,10 +27,11 @@ if __name__ == '__main__':
     final_id = list(set(final_id))
 
     # read input file
-    if '.fastq' in args.input_file:
-        records = SeqIO.parse(args.input_file, 'fastq')
-    if '.fasta' in args.input_file:
-        records = SeqIO.parse(args.input_file, 'fasta')
+    with gzip.open(args.input_file, 'rt') as handle:
+        if '.fastq' in args.input_file:
+            records = SeqIO.parse(handle, 'fastq')
+        if '.fasta' in args.input_file:
+            records = SeqIO.parse(handle, 'fasta')
         
     if args.action == 'extract':
         # extract sequence
