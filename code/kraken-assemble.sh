@@ -21,13 +21,13 @@ for FILE in ${FILES}; do
         --output ${RESULT_PATH}/${FILE}.kraken \
         --report ${RESULT_PATH}/${FILE}.kreport \
         --confidence ${CS} \
-        ${INPUT_FOLDER}/${FILE}.fasta
+        ${INPUT_FOLDER}/${FILE}
     # extract sequences classified as Oomycota (taxid 4762)
     extract_kraken_reads.py \
         -k ${RESULT_PATH}/${FILE}.kraken \
-        -s ${INPUT_FOLDER}/${FILE}.fasta \
+        -s ${INPUT_FOLDER}/${FILE} \
         --taxid 4762 \
-        --output ${RESULT_PATH}/${FILE}.fasta \
+        --output ${RESULT_PATH}/${FILE} \
         --report ${RESULT_PATH}/${FILE}.kreport \
         --include-children
     # remove unnecessary files
@@ -47,13 +47,13 @@ for FILE in ${FILES}; do
         --output ${RESULT_PATH}/${FILE}.kraken \
         --report ${RESULT_PATH}/${FILE}.kreport \
         --confidence ${CS} \
-        ${INPUT_FOLDER}/${FILE}.fasta
+        ${INPUT_FOLDER}/${FILE}
     # extract sequences classified as Oomycota (taxid 4762)
     extract_kraken_reads.py \
         -k ${RESULT_PATH}/${FILE}.kraken \
-        -s ${INPUT_FOLDER}/${FILE}.fasta \
+        -s ${INPUT_FOLDER}/${FILE} \
         --taxid 4762 \
-        --output ${RESULT_PATH}/${FILE}.fasta \
+        --output ${RESULT_PATH}/${FILE} \
         --report ${RESULT_PATH}/${FILE}.kreport \
         --include-children
     # remove unnecessary files
@@ -91,9 +91,9 @@ for FILE in ${FILES}; do
         --threads ${threads} \
         --output ${RESULT_PATH}/${FILE}.kraken \
         --report ${RESULT_PATH}/${FILE}.kreport \
-        --unclassified-out ${RESULT_PATH}/${FILE}.fasta \
+        --unclassified-out ${RESULT_PATH}/${FILE} \
         --confidence ${CS} \
-        ${INPUT_FOLDER}/${FILE}.fasta
+        ${INPUT_FOLDER}/${FILE}
     # remove unnecessary files
     rm ${RESULT_PATH}/${FILE}.kraken
 done
