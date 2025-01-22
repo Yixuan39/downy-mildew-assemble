@@ -33,15 +33,15 @@ if __name__ == '__main__':
         if '.fasta' in args.input_file:
             records = SeqIO.parse(handle, 'fasta')
         
-    if args.action == 'extract':
-        # extract sequence
-        keep = [record for record in records if record.id in final_id]
-    elif args.action == 'remove':
-        # remove sequence
-        keep = [record for record in records if record.id not in final_id]
-    # write output file
-    if args.output_file.endswith('.gz'):
-        with gzip.open(args.output_file, 'wt') as f:
-            SeqIO.write(keep, f, 'fasta')
-    else:
-        SeqIO.write(keep, args.output_file, 'fasta')
+        if args.action == 'extract':
+            # extract sequence
+            keep = [record for record in records if record.id in final_id]
+        elif args.action == 'remove':
+            # remove sequence
+            keep = [record for record in records if record.id not in final_id]
+        # write output file
+        if args.output_file.endswith('.gz'):
+            with gzip.open(args.output_file, 'wt') as f:
+                SeqIO.write(keep, f, 'fasta')
+        else:
+            SeqIO.write(keep, args.output_file, 'fasta')
