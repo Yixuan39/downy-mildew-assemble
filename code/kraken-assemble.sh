@@ -27,9 +27,9 @@ for FILE in ${FILES}; do
         -k ${RESULT_PATH}/${FILE}.kraken \
         -s ${INPUT_FOLDER}/${FILE} \
         --taxid 4762 \
-        --output ${RESULT_PATH}/${FILE} \
+        --output stdout \
         --report ${RESULT_PATH}/${FILE}.kreport \
-        --include-children
+        --include-children | gzip > ${RESULT_PATH}/${FILE}
     # remove unnecessary files
     rm ${RESULT_PATH}/${FILE}.kraken
 done
@@ -53,9 +53,9 @@ for FILE in ${FILES}; do
         -k ${RESULT_PATH}/${FILE}.kraken \
         -s ${INPUT_FOLDER}/${FILE} \
         --taxid 4762 \
-        --output ${RESULT_PATH}/${FILE} \
+        --output stdout \
         --report ${RESULT_PATH}/${FILE}.kreport \
-        --include-children
+        --include-children | gzip > ${RESULT_PATH}/${FILE}
     # remove unnecessary files
     rm ${RESULT_PATH}/${FILE}.kraken
 done
@@ -72,9 +72,9 @@ for FILE in ${FILES}; do
         --threads ${threads} \
         --output ${RESULT_PATH}/${FILE}.kraken \
         --report ${RESULT_PATH}/${FILE}.kreport \
-        --unclassified-out ${RESULT_PATH}/${FILE} \
+        --unclassified-out stdout \
         --confidence ${CS} \
-        ${INPUT_FOLDER}/${FILE}
+        ${INPUT_FOLDER}/${FILE} | gzip > ${RESULT_PATH}/${FILE}
     # remove unnecessary files
     rm ${RESULT_PATH}/${FILE}.kraken
 done
@@ -91,9 +91,9 @@ for FILE in ${FILES}; do
         --threads ${threads} \
         --output ${RESULT_PATH}/${FILE}.kraken \
         --report ${RESULT_PATH}/${FILE}.kreport \
-        --unclassified-out ${RESULT_PATH}/${FILE} \
+        --unclassified-out stdout \
         --confidence ${CS} \
-        ${INPUT_FOLDER}/${FILE}
+        ${INPUT_FOLDER}/${FILE} | gzip > ${RESULT_PATH}/${FILE}
     # remove unnecessary files
     rm ${RESULT_PATH}/${FILE}.kraken
 done
