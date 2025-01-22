@@ -6,7 +6,7 @@ threads=32
 # Use metaMDBG assemble pacbio
 
 INPUT_FOLDER=/data/run/yyang/project_data/downy/metaMDBG
-FILES=$(ls ${INPUT_FOLDER}/*.fastq.gz 2>/dev/null | xargs -n 1 basename)
+FILES=$(ls ${INPUT_FOLDER}/*.fasta.gz 2>/dev/null | xargs -n 1 basename)
 
 # assemble sequence first, then extract oomycota sequence use genome search
 
@@ -27,11 +27,12 @@ for FILE in ${FILES}; do
         -k ${RESULT_PATH}/${FILE}.kraken \
         -s ${INPUT_FOLDER}/${FILE} \
         --taxid 4762 \
-        --output stdout \
+        --output ${RESULT_PATH}/${FILE%.gz} \
         --report ${RESULT_PATH}/${FILE}.kreport \
-        --include-children | gzip > ${RESULT_PATH}/${FILE}
+        --include-children
     # remove unnecessary files
     rm ${RESULT_PATH}/${FILE}.kraken
+    gzip ${RESULT_PATH}/${FILE%.gz}
 done
 
 # assemble sequence first, then extract oomycota sequence use protein search
@@ -53,11 +54,12 @@ for FILE in ${FILES}; do
         -k ${RESULT_PATH}/${FILE}.kraken \
         -s ${INPUT_FOLDER}/${FILE} \
         --taxid 4762 \
-        --output stdout \
+        --output ${RESULT_PATH}/${FILE%.gz} \
         --report ${RESULT_PATH}/${FILE}.kreport \
-        --include-children | gzip > ${RESULT_PATH}/${FILE}
+        --include-children
     # remove unnecessary files
     rm ${RESULT_PATH}/${FILE}.kraken
+    gzip ${RESULT_PATH}/${FILE%.gz}
 done
 
 # assemble sequence first, then remove contamination sequence use genome search.
@@ -72,11 +74,12 @@ for FILE in ${FILES}; do
         --threads ${threads} \
         --output ${RESULT_PATH}/${FILE}.kraken \
         --report ${RESULT_PATH}/${FILE}.kreport \
-        --unclassified-out stdout \
+        --unclassified-out ${RESULT_PATH}/${FILE%.gz} \
         --confidence ${CS} \
-        ${INPUT_FOLDER}/${FILE} | gzip > ${RESULT_PATH}/${FILE}
+        ${INPUT_FOLDER}/${FILE}
     # remove unnecessary files
     rm ${RESULT_PATH}/${FILE}.kraken
+    gzip ${RESULT_PATH}/${FILE%.gz}
 done
 
 # assemble sequence first, then remove contamination sequence use protein search.
@@ -91,11 +94,12 @@ for FILE in ${FILES}; do
         --threads ${threads} \
         --output ${RESULT_PATH}/${FILE}.kraken \
         --report ${RESULT_PATH}/${FILE}.kreport \
-        --unclassified-out stdout \
+        --unclassified-out ${RESULT_PATH}/${FILE%.gz} \
         --confidence ${CS} \
-        ${INPUT_FOLDER}/${FILE} | gzip > ${RESULT_PATH}/${FILE}
+        ${INPUT_FOLDER}/${FILE}
     # remove unnecessary files
     rm ${RESULT_PATH}/${FILE}.kraken
+    gzip ${RESULT_PATH}/${FILE%.gz}
 done
 
 
@@ -130,7 +134,7 @@ for FILE in ${FILES}; do
         --out-dir ${RESULT_PATH}/${FILE}_asm \
         --in-hifi ${RESULT_PATH}/${FILE}.tmp.fastq \
         --threads ${threads}
-    mv ${RESULT_PATH}/${FILE}_asm/contigs.fasta.gz ${RESULT_PATH}/${FILE}
+    mv ${RESULT_PATH}/${FILE}_asm/contigs.fasta.gz ${RESULT_PATH}/${FILE%.fastq.gz}.fasta.gz
     # remove unnecessary files
     rm ${RESULT_PATH}/${FILE}.kraken
     rm ${RESULT_PATH}/${FILE}.tmp.fastq
@@ -166,7 +170,7 @@ for FILE in ${FILES}; do
         --out-dir ${RESULT_PATH}/${FILE}_asm \
         --in-hifi ${RESULT_PATH}/${FILE}.tmp.fastq \
         --threads ${threads}
-    mv ${RESULT_PATH}/${FILE}_asm/contigs.fasta.gz ${RESULT_PATH}/${FILE}
+    mv ${RESULT_PATH}/${FILE}_asm/contigs.fasta.gz ${RESULT_PATH}/${FILE%.fastq.gz}.fasta.gz
     # remove unnecessary files
     rm ${RESULT_PATH}/${FILE}.kraken
     rm ${RESULT_PATH}/${FILE}.tmp.fastq
@@ -193,7 +197,7 @@ for FILE in ${FILES}; do
         --out-dir ${RESULT_PATH}/${FILE}_asm \
         --in-hifi ${RESULT_PATH}/${FILE}.tmp.fastq \
         --threads ${threads}
-    mv ${RESULT_PATH}/${FILE}_asm/contigs.fasta.gz ${RESULT_PATH}/${FILE}
+    mv ${RESULT_PATH}/${FILE}_asm/contigs.fasta.gz ${RESULT_PATH}/${FILE%.fastq.gz}.fasta.gz
     # remove unnecessary files
     rm ${RESULT_PATH}/${FILE}.kraken
     rm ${RESULT_PATH}/${FILE}.tmp.fastq
@@ -220,7 +224,7 @@ for FILE in ${FILES}; do
         --out-dir ${RESULT_PATH}/${FILE}_asm \
         --in-hifi ${RESULT_PATH}/${FILE}.tmp.fastq \
         --threads ${threads}
-    mv ${RESULT_PATH}/${FILE}_asm/contigs.fasta.gz ${RESULT_PATH}/${FILE}
+    mv ${RESULT_PATH}/${FILE}_asm/contigs.fasta.gz ${RESULT_PATH}/${FILE%.fastq.gz}.fasta.gz
     # remove unnecessary files
     rm ${RESULT_PATH}/${FILE}.kraken
     rm ${RESULT_PATH}/${FILE}.tmp.fastq
