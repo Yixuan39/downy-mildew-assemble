@@ -22,28 +22,28 @@ for FILE in ${FILES}; do
     --format-mode 4 \
     --format-output query,evalue
     
-    python get-mmseqs-result.py \
+    python get_seq.py \
     extract \
     ${INPUT_FOLDER}/${FILE} \
     ${RESULT_PATH}/${FILE}.tsv \
     1e-5 \
     ${RESULT_PATH}/1e-5/${FILE}
     
-    python get-mmseqs-result.py \
+    python get_seq.py \
     extract \
     ${INPUT_FOLDER}/${FILE} \
     ${RESULT_PATH}/${FILE}.tsv \
     1e-10 \
     ${RESULT_PATH}/1e-10/${FILE}
     
-    python get-mmseqs-result.py \
+    python get_seq.py \
     extract \
     ${INPUT_FOLDER}/${FILE} \
     ${RESULT_PATH}/${FILE}.tsv \
     1e-15 \
     ${RESULT_PATH}/1e-15/${FILE}
     
-    python get-mmseqs-result.py \
+    python get_seq.py \
     extract \
     ${INPUT_FOLDER}/${FILE} \
     ${RESULT_PATH}/${FILE}.tsv \
@@ -72,28 +72,28 @@ for FILE in ${FILES}; do
     --format-mode 4 \
     --format-output query,evalue
     
-    python get-mmseqs-result.py \
+    python get_seq.py \
     extract \
     ${INPUT_FOLDER}/${FILE} \
     ${RESULT_PATH}/${FILE}.tsv \
     1e-5 \
     ${RESULT_PATH}/1e-5/${FILE}
     
-    python get-mmseqs-result.py \
+    python get_seq.py \
     extract \
     ${INPUT_FOLDER}/${FILE} \
     ${RESULT_PATH}/${FILE}.tsv \
     1e-10 \
     ${RESULT_PATH}/1e-10/${FILE}
     
-    python get-mmseqs-result.py \
+    python get_seq.py \
     extract \
     ${INPUT_FOLDER}/${FILE} \
     ${RESULT_PATH}/${FILE}.tsv \
     1e-15 \
     ${RESULT_PATH}/1e-15/${FILE}
     
-    python get-mmseqs-result.py \
+    python get_seq.py \
     extract \
     ${INPUT_FOLDER}/${FILE} \
     ${RESULT_PATH}/${FILE}.tsv \
@@ -122,28 +122,28 @@ for FILE in ${FILES}; do
     --format-mode 4 \
     --format-output query,evalue
     
-    python get-mmseqs-result.py \
+    python get_seq.py \
     remove \
     ${INPUT_FOLDER}/${FILE} \
     ${RESULT_PATH}/${FILE}.tsv \
     1e-5 \
     ${RESULT_PATH}/1e-5/${FILE}
     
-    python get-mmseqs-result.py \
+    python get_seq.py \
     remove \
     ${INPUT_FOLDER}/${FILE} \
     ${RESULT_PATH}/${FILE}.tsv \
     1e-10 \
     ${RESULT_PATH}/1e-10/${FILE}
     
-    python get-mmseqs-result.py \
+    python get_seq.py \
     remove \
     ${INPUT_FOLDER}/${FILE} \
     ${RESULT_PATH}/${FILE}.tsv \
     1e-15 \
     ${RESULT_PATH}/1e-15/${FILE}
     
-    python get-mmseqs-result.py \
+    python get_seq.py \
     remove \
     ${INPUT_FOLDER}/${FILE} \
     ${RESULT_PATH}/${FILE}.tsv \
@@ -173,28 +173,28 @@ for FILE in ${FILES}; do
     --format-mode 4 \
     --format-output query,evalue
     
-    python get-mmseqs-result.py \
+    python get_seq.py \
     remove \
     ${INPUT_FOLDER}/${FILE} \
     ${RESULT_PATH}/${FILE}.tsv \
     1e-5 \
     ${RESULT_PATH}/1e-5/${FILE}
     
-    python get-mmseqs-result.py \
+    python get_seq.py \
     remove \
     ${INPUT_FOLDER}/${FILE} \
     ${RESULT_PATH}/${FILE}.tsv \
     1e-10 \
     ${RESULT_PATH}/1e-10/${FILE}
     
-    python get-mmseqs-result.py \
+    python get_seq.py \
     remove \
     ${INPUT_FOLDER}/${FILE} \
     ${RESULT_PATH}/${FILE}.tsv \
     1e-15 \
     ${RESULT_PATH}/1e-15/${FILE}
     
-    python get-mmseqs-result.py \
+    python get_seq.py \
     remove \
     ${INPUT_FOLDER}/${FILE} \
     ${RESULT_PATH}/${FILE}.tsv \
