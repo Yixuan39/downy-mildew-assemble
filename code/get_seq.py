@@ -13,7 +13,7 @@ if __name__ == '__main__':
     parser.add_argument('action', help='Action to perform', choices=['extract', 'remove'])
     parser.add_argument('input_file', help='Input file in FASTA or FASTQ format')
     parser.add_argument('reference_id_file', help='mmseq_result', type=str)
-    parser.add_argument('evalue', help='e-value threshold', type=float)
+    # parser.add_argument('evalue', help='e-value threshold', type=float)
     parser.add_argument('output_file', help='Output file in FASTA format', type=str)
     args = parser.parse_args()
     # make sure directory of output file exists
@@ -21,7 +21,7 @@ if __name__ == '__main__':
     os.makedirs(output_dir, exist_ok=True)
     # read in sequence ID txt file
     seq_id = pd.read_csv(args.reference_id_file, sep='\t', header=0)
-    sub_seq_id = seq_id[seq_id['evalue'] < args.evalue]
+    # sub_seq_id = seq_id[seq_id['evalue'] < args.evalue]
     final_id = sub_seq_id['query'].tolist()
     # remove if final_id duplicates
     final_id = list(set(final_id))

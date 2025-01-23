@@ -18,17 +18,16 @@ for FILE in ${FILES}; do
     ${DB} \
     ${RESULT_PATH}/${FILE}.tsv \
     tmp \
-    -e 1e-3 \
+    -e ${EV} \
     --max-seqs 1 \
     --search-type 3 \
     --format-mode 4 \
-    --format-output query,evalue
+    --format-output query
     
     python get_seq.py \
     extract \
     ${INPUT_FOLDER}/${FILE} \
     ${RESULT_PATH}/${FILE}.tsv \
-    ${EV} \
     ${RESULT_PATH}/${EV}/${FILE}
     rm ${RESULT_PATH}/${FILE}.tsv
 done
@@ -46,7 +45,7 @@ for FILE in ${FILES}; do
     ${DB} \
     ${RESULT_PATH}/${FILE}.tsv \
     tmp \
-    -e 1e-3 \
+    -e ${EV} \
     --max-seqs 1 \
     --search-type 2 \
     --translation-mode 1 \
@@ -57,7 +56,6 @@ for FILE in ${FILES}; do
     extract \
     ${INPUT_FOLDER}/${FILE} \
     ${RESULT_PATH}/${FILE}.tsv \
-    ${EV} \
     ${RESULT_PATH}/${EV}/${FILE}
     rm ${RESULT_PATH}/${FILE}.tsv
 done
@@ -76,7 +74,7 @@ for FILE in ${FILES}; do
     ${DB} \
     ${RESULT_PATH}/${FILE}.tsv \
     tmp \
-    -e 1e-3 \
+    -e ${EV} \
     --max-seqs 1 \
     --search-type 3 \
     --format-mode 4 \
@@ -86,7 +84,6 @@ for FILE in ${FILES}; do
     remove \
     ${INPUT_FOLDER}/${FILE} \
     ${RESULT_PATH}/${FILE}.tsv \
-    ${EV} \
     ${RESULT_PATH}/${EV}/${FILE}
     rm ${RESULT_PATH}/${FILE}.tsv
 done
@@ -105,7 +102,7 @@ for FILE in ${FILES}; do
     ${DB} \
     ${RESULT_PATH}/${FILE}.tsv \
     tmp \
-    -e 1e-3 \
+    -e ${EV} \
     --max-seqs 1 \
     --search-type 2 \
     --translation-mode 1 \
@@ -116,7 +113,6 @@ for FILE in ${FILES}; do
     remove \
     ${INPUT_FOLDER}/${FILE} \
     ${RESULT_PATH}/${FILE}.tsv \
-    ${EV} \
     ${RESULT_PATH}/${EV}/${FILE}
     rm ${RESULT_PATH}/${FILE}.tsv
 done
@@ -143,7 +139,7 @@ for FILE in ${FILES}; do
     ${DB} \
     ${RESULT_PATH}/${FILE}.tsv \
     tmp \
-    -e 1e-3 \
+    -e ${EV} \
     --max-seqs 1 \
     --search-type 3 \
     --format-mode 4 \
@@ -153,7 +149,6 @@ for FILE in ${FILES}; do
     extract \
     ${INPUT_FOLDER}/${FILE} \
     ${RESULT_PATH}/${FILE}.tsv \
-    ${EV} \
     ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.tmp.fasta.gz
     
     metaMDBG asm \
@@ -179,7 +174,7 @@ for FILE in ${FILES}; do
     ${DB} \
     ${RESULT_PATH}/${FILE}.tsv \
     tmp \
-    -e 1e-3 \
+    -e ${EV} \
     --max-seqs 1 \
     --search-type 2 \
     --translation-mode 1 \
@@ -190,7 +185,6 @@ for FILE in ${FILES}; do
     extract \
     ${INPUT_FOLDER}/${FILE} \
     ${RESULT_PATH}/${FILE}.tsv \
-    ${EV} \
     ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.tmp.fasta.gz
     
     metaMDBG asm \
@@ -217,7 +211,7 @@ for FILE in ${FILES}; do
     ${DB} \
     ${RESULT_PATH}/${FILE}.tsv \
     tmp \
-    -e 1e-3 \
+    -e ${EV} \
     --max-seqs 1 \
     --search-type 3 \
     --format-mode 4 \
@@ -227,7 +221,6 @@ for FILE in ${FILES}; do
     remove \
     ${INPUT_FOLDER}/${FILE} \
     ${RESULT_PATH}/${FILE}.tsv \
-    ${EV} \
     ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.tmp.fasta.gz
     
     metaMDBG asm \
@@ -254,7 +247,7 @@ for FILE in ${FILES}; do
     ${DB} \
     ${RESULT_PATH}/${FILE}.tsv \
     tmp \
-    -e 1e-3 \
+    -e ${EV} \
     --max-seqs 1 \
     --search-type 2 \
     --translation-mode 1 \
@@ -265,7 +258,6 @@ for FILE in ${FILES}; do
     remove \
     ${INPUT_FOLDER}/${FILE} \
     ${RESULT_PATH}/${FILE}.tsv \
-    ${EV} \
     ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.tmp.fasta.gz
     
     metaMDBG asm \
