@@ -19,10 +19,11 @@ for FILE in ${FILES}; do
     -e 1e-3 \
     --search-type 3 \
     --sort-results 1 \
-    --db-output 1
+    --db-output 1 \
+    -v 1
     
-    mmseqs filterdb ${RESULT_PATH}/${FILE}.tmp ${RESULT_PATH}/${FILE}.best.tmp --extract-lines 1
+    mmseqs filterdb ${RESULT_PATH}/${FILE}.tmp ${RESULT_PATH}/${FILE}.best.tmp --extract-lines 1 -v 1
     
-    mmseqs convert2fasta ${RESULT_PATH}/${FILE}.best.tmp ${RESULT_PATH}/${FILE%.gz}
-
+    mmseqs convert2fasta ${RESULT_PATH}/${FILE}.best.tmp ${RESULT_PATH}/${FILE%.gz} -v 1
+    break
 done
