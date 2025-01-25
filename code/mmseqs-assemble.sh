@@ -20,7 +20,6 @@ for FILE in ${FILES}; do
     ${RESULT_PATH}/tmp \
     -e ${EV} \
     --max-accept 1 \
-    --exhaustive-search 1 \
     --search-type 3 \
     --format-mode 4 \
     --format-output query
@@ -50,7 +49,6 @@ for FILE in ${FILES}; do
     ${RESULT_PATH}/tmp \
     -e ${EV} \
     --max-accept 1 \
-    --exhaustive-search 1 \
     --search-type 2 \
     --translation-mode 1 \
     --format-mode 4 \
@@ -81,7 +79,6 @@ for FILE in ${FILES}; do
     ${RESULT_PATH}/tmp \
     -e ${EV} \
     --max-accept 1 \
-    --exhaustive-search 1 \
     --search-type 3 \
     --format-mode 4 \
     --format-output query
@@ -112,7 +109,6 @@ for FILE in ${FILES}; do
     ${RESULT_PATH}/tmp \
     -e ${EV} \
     --max-accept 1 \
-    --exhaustive-search 1 \
     --search-type 2 \
     --translation-mode 1 \
     --format-mode 4 \
@@ -152,7 +148,6 @@ for FILE in ${FILES}; do
     ${RESULT_PATH}/tmp \
     -e ${EV} \
     --max-accept 1 \
-    --exhaustive-search 1 \
     --search-type 3 \
     --format-mode 4 \
     --format-output query
@@ -189,7 +184,6 @@ for FILE in ${FILES}; do
     ${RESULT_PATH}/tmp \
     -e ${EV} \
     --max-accept 1 \
-    --exhaustive-search 1 \
     --search-type 2 \
     --translation-mode 1 \
     --format-mode 4 \
@@ -228,7 +222,6 @@ for FILE in ${FILES}; do
     ${RESULT_PATH}/tmp \
     -e ${EV} \
     --max-accept 1 \
-    --exhaustive-search 1 \
     --search-type 3 \
     --format-mode 4 \
     --format-output query
@@ -267,7 +260,6 @@ for FILE in ${FILES}; do
     ${RESULT_PATH}/tmp \
     -e ${EV} \
     --max-accept 1 \
-    --exhaustive-search 1 \
     --search-type 2 \
     --translation-mode 1 \
     --format-mode 4 \
