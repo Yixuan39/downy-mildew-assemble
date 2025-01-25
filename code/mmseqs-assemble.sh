@@ -16,7 +16,7 @@ for FILE in ${FILES}; do
     mmseqs easy-search \
     ${INPUT_FOLDER}/${FILE} \
     ${DB} \
-    ${RESULT_PATH}/${FILE}.tsv \
+    ${RESULT_PATH}/${FILE}.txt \
     tmp \
     -e ${EV} \
     --max-seqs 1 \
@@ -24,12 +24,11 @@ for FILE in ${FILES}; do
     --format-mode 4 \
     --format-output query
     
-    python get_seq.py \
-    extract \
-    ${INPUT_FOLDER}/${FILE} \
-    ${RESULT_PATH}/${FILE}.tsv \
-    ${RESULT_PATH}/${EV}/${FILE}
-    rm ${RESULT_PATH}/${FILE}.tsv
+    seqkit grep \
+    --threads ${threads} \
+    --pattern-file ${RESULT_PATH}/${FILE}.txt \
+    --out-file ${RESULT_PATH}/${EV}/${FILE} \
+    ${INPUT_FOLDER}/${FILE} 
 done
 
 # assemble sequence first, then extract oomycota sequence use protein search
@@ -43,21 +42,20 @@ for FILE in ${FILES}; do
     mmseqs easy-search \
     ${INPUT_FOLDER}/${FILE} \
     ${DB} \
-    ${RESULT_PATH}/${FILE}.tsv \
+    ${RESULT_PATH}/${FILE}.txt \
     tmp \
     -e ${EV} \
     --max-seqs 1 \
     --search-type 2 \
     --translation-mode 1 \
     --format-mode 4 \
-    --format-output query,evalue
+    --format-output query
     
-    python get_seq.py \
-    extract \
-    ${INPUT_FOLDER}/${FILE} \
-    ${RESULT_PATH}/${FILE}.tsv \
-    ${RESULT_PATH}/${EV}/${FILE}
-    rm ${RESULT_PATH}/${FILE}.tsv
+    seqkit grep \
+    --threads ${threads} \
+    --pattern-file ${RESULT_PATH}/${FILE}.txt \
+    --out-file ${RESULT_PATH}/${EV}/${FILE} \
+    ${INPUT_FOLDER}/${FILE} 
 done
 
 # assemble sequence first, then remove contamination sequence use genome search
@@ -72,20 +70,20 @@ for FILE in ${FILES}; do
     mmseqs easy-search \
     ${INPUT_FOLDER}/${FILE} \
     ${DB} \
-    ${RESULT_PATH}/${FILE}.tsv \
+    ${RESULT_PATH}/${FILE}.txt \
     tmp \
     -e ${EV} \
     --max-seqs 1 \
     --search-type 3 \
     --format-mode 4 \
-    --format-output query,evalue
+    --format-output query
     
-    python get_seq.py \
-    remove \
-    ${INPUT_FOLDER}/${FILE} \
-    ${RESULT_PATH}/${FILE}.tsv \
-    ${RESULT_PATH}/${EV}/${FILE}
-    rm ${RESULT_PATH}/${FILE}.tsv
+    seqkit grep \
+    --invert-match \
+    --threads ${threads} \
+    --pattern-file ${RESULT_PATH}/${FILE}.txt \
+    --out-file ${RESULT_PATH}/${EV}/${FILE} \
+    ${INPUT_FOLDER}/${FILE} 
 done
 
 # assemble sequence first, then remove contamination sequence use protein search
@@ -100,21 +98,21 @@ for FILE in ${FILES}; do
     mmseqs easy-search \
     ${INPUT_FOLDER}/${FILE} \
     ${DB} \
-    ${RESULT_PATH}/${FILE}.tsv \
+    ${RESULT_PATH}/${FILE}.txt \
     tmp \
     -e ${EV} \
     --max-seqs 1 \
     --search-type 2 \
     --translation-mode 1 \
     --format-mode 4 \
-    --format-output query,evalue
+    --format-output query
     
-    python get_seq.py \
-    remove \
-    ${INPUT_FOLDER}/${FILE} \
-    ${RESULT_PATH}/${FILE}.tsv \
-    ${RESULT_PATH}/${EV}/${FILE}
-    rm ${RESULT_PATH}/${FILE}.tsv
+    seqkit grep \
+    --invert-match \
+    --threads ${threads} \
+    --pattern-file ${RESULT_PATH}/${FILE}.txt \
+    --out-file ${RESULT_PATH}/${EV}/${FILE} \
+    ${INPUT_FOLDER}/${FILE} 
 done
 
 
@@ -137,19 +135,19 @@ for FILE in ${FILES}; do
     mmseqs easy-search \
     ${INPUT_FOLDER}/${FILE} \
     ${DB} \
-    ${RESULT_PATH}/${FILE}.tsv \
+    ${RESULT_PATH}/${FILE}.txt \
     tmp \
     -e ${EV} \
     --max-seqs 1 \
     --search-type 3 \
     --format-mode 4 \
-    --format-output query,evalue
+    --format-output query
     
-    python get_seq.py \
-    extract \
-    ${INPUT_FOLDER}/${FILE} \
-    ${RESULT_PATH}/${FILE}.tsv \
-    ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.tmp.fasta.gz
+    seqkit grep \
+    --threads ${threads} \
+    --pattern-file ${RESULT_PATH}/${FILE}.txt \
+    --out-file ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.tmp.fasta.gz \
+    ${INPUT_FOLDER}/${FILE} 
     
     metaMDBG asm \
         --out-dir ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz_asm \
@@ -158,7 +156,7 @@ for FILE in ${FILES}; do
     mv ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz_asm/contigs.fasta.gz ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz
     rm -rf ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz_asm
     rm ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.tmp.fasta.gz
-    rm ${RESULT_PATH}/${FILE}.tsv
+    rm ${RESULT_PATH}/${FILE}.txt
 done
 
 # assemble sequence first, then extract oomycota sequence use protein search
@@ -172,20 +170,20 @@ for FILE in ${FILES}; do
     mmseqs easy-search \
     ${INPUT_FOLDER}/${FILE} \
     ${DB} \
-    ${RESULT_PATH}/${FILE}.tsv \
+    ${RESULT_PATH}/${FILE}.txt \
     tmp \
     -e ${EV} \
     --max-seqs 1 \
     --search-type 2 \
     --translation-mode 1 \
     --format-mode 4 \
-    --format-output query,evalue
+    --format-output query
     
-    python get_seq.py \
-    extract \
-    ${INPUT_FOLDER}/${FILE} \
-    ${RESULT_PATH}/${FILE}.tsv \
-    ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.tmp.fasta.gz
+    seqkit grep \
+    --threads ${threads} \
+    --pattern-file ${RESULT_PATH}/${FILE}.txt \
+    --out-file ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.tmp.fasta.gz \
+    ${INPUT_FOLDER}/${FILE}
     
     metaMDBG asm \
         --out-dir ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz_asm \
@@ -194,7 +192,7 @@ for FILE in ${FILES}; do
     mv ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz_asm/contigs.fasta.gz ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz
     rm -rf ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz_asm
     rm ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.tmp.fasta.gz
-    rm ${RESULT_PATH}/${FILE}.tsv
+    rm ${RESULT_PATH}/${FILE}.txt
 done
 
 # assemble sequence first, then remove contamination sequence use genome search
@@ -209,19 +207,20 @@ for FILE in ${FILES}; do
     mmseqs easy-search \
     ${INPUT_FOLDER}/${FILE} \
     ${DB} \
-    ${RESULT_PATH}/${FILE}.tsv \
+    ${RESULT_PATH}/${FILE}.txt \
     tmp \
     -e ${EV} \
     --max-seqs 1 \
     --search-type 3 \
     --format-mode 4 \
-    --format-output query,evalue
+    --format-output query
     
-    python get_seq.py \
-    remove \
-    ${INPUT_FOLDER}/${FILE} \
-    ${RESULT_PATH}/${FILE}.tsv \
-    ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.tmp.fasta.gz
+    seqkit grep \
+    --invert-match \
+    --threads ${threads} \
+    --pattern-file ${RESULT_PATH}/${FILE}.txt \
+    --out-file ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.tmp.fasta.gz \
+    ${INPUT_FOLDER}/${FILE}
     
     metaMDBG asm \
         --out-dir ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz_asm \
@@ -230,7 +229,7 @@ for FILE in ${FILES}; do
     mv ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz_asm/contigs.fasta.gz ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz
     rm -rf ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz_asm
     rm ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.tmp.fasta.gz
-    rm ${RESULT_PATH}/${FILE}.tsv
+    rm ${RESULT_PATH}/${FILE}.txt
 done
 
 # assemble sequence first, then remove contamination sequence use protein search
@@ -245,20 +244,21 @@ for FILE in ${FILES}; do
     mmseqs easy-search \
     ${INPUT_FOLDER}/${FILE} \
     ${DB} \
-    ${RESULT_PATH}/${FILE}.tsv \
+    ${RESULT_PATH}/${FILE}.txt \
     tmp \
     -e ${EV} \
     --max-seqs 1 \
     --search-type 2 \
     --translation-mode 1 \
     --format-mode 4 \
-    --format-output query,evalue
+    --format-output query
     
-    python get_seq.py \
-    remove \
-    ${INPUT_FOLDER}/${FILE} \
-    ${RESULT_PATH}/${FILE}.tsv \
-    ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.tmp.fasta.gz
+    seqkit grep \
+    --invert-match \
+    --threads ${threads} \
+    --pattern-file ${RESULT_PATH}/${FILE}.txt \
+    --out-file ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.tmp.fasta.gz \
+    ${INPUT_FOLDER}/${FILE}
     
     metaMDBG asm \
         --out-dir ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz_asm \
@@ -267,7 +267,7 @@ for FILE in ${FILES}; do
     mv ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz_asm/contigs.fasta.gz ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz
     rm -rf ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz_asm
     rm ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.tmp.fasta.gz
-    rm ${RESULT_PATH}/${FILE}.tsv
+    rm ${RESULT_PATH}/${FILE}.txt
 done
 
 
