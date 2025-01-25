@@ -26,6 +26,7 @@ for FILE in ${FILES}; do
     
     seqkit grep \
     --threads ${threads} \
+    --compress-level 6 \
     --pattern-file ${RESULT_PATH}/${FILE}.txt \
     --out-file ${RESULT_PATH}/${EV}/${FILE} \
     ${INPUT_FOLDER}/${FILE} 
@@ -55,6 +56,7 @@ for FILE in ${FILES}; do
     
     seqkit grep \
     --threads ${threads} \
+    --compress-level 6 \
     --pattern-file ${RESULT_PATH}/${FILE}.txt \
     --out-file ${RESULT_PATH}/${EV}/${FILE} \
     ${INPUT_FOLDER}/${FILE} 
@@ -85,6 +87,7 @@ for FILE in ${FILES}; do
     seqkit grep \
     --invert-match \
     --threads ${threads} \
+    --compress-level 6 \
     --pattern-file ${RESULT_PATH}/${FILE}.txt \
     --out-file ${RESULT_PATH}/${EV}/${FILE} \
     ${INPUT_FOLDER}/${FILE} 
@@ -116,6 +119,7 @@ for FILE in ${FILES}; do
     seqkit grep \
     --invert-match \
     --threads ${threads} \
+    --compress-level 6 \
     --pattern-file ${RESULT_PATH}/${FILE}.txt \
     --out-file ${RESULT_PATH}/${EV}/${FILE} \
     ${INPUT_FOLDER}/${FILE} 
