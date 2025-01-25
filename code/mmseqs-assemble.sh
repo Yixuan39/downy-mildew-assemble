@@ -29,6 +29,8 @@ for FILE in ${FILES}; do
     --pattern-file ${RESULT_PATH}/${FILE}.txt \
     --out-file ${RESULT_PATH}/${EV}/${FILE} \
     ${INPUT_FOLDER}/${FILE} 
+    
+    rm ${RESULT_PATH}/${FILE}.txt
 done
 
 # assemble sequence first, then extract oomycota sequence use protein search
@@ -56,6 +58,8 @@ for FILE in ${FILES}; do
     --pattern-file ${RESULT_PATH}/${FILE}.txt \
     --out-file ${RESULT_PATH}/${EV}/${FILE} \
     ${INPUT_FOLDER}/${FILE} 
+    
+    rm ${RESULT_PATH}/${FILE}.txt
 done
 
 # assemble sequence first, then remove contamination sequence use genome search
@@ -84,6 +88,8 @@ for FILE in ${FILES}; do
     --pattern-file ${RESULT_PATH}/${FILE}.txt \
     --out-file ${RESULT_PATH}/${EV}/${FILE} \
     ${INPUT_FOLDER}/${FILE} 
+    
+    rm ${RESULT_PATH}/${FILE}.txt
 done
 
 # assemble sequence first, then remove contamination sequence use protein search
@@ -113,6 +119,8 @@ for FILE in ${FILES}; do
     --pattern-file ${RESULT_PATH}/${FILE}.txt \
     --out-file ${RESULT_PATH}/${EV}/${FILE} \
     ${INPUT_FOLDER}/${FILE} 
+    
+    rm ${RESULT_PATH}/${FILE}.txt
 done
 
 
@@ -153,6 +161,7 @@ for FILE in ${FILES}; do
         --out-dir ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz_asm \
         --in-hifi ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.tmp.fasta.gz \
         --threads ${threads}
+        
     mv ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz_asm/contigs.fasta.gz ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz
     rm -rf ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz_asm
     rm ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.tmp.fasta.gz
@@ -189,6 +198,7 @@ for FILE in ${FILES}; do
         --out-dir ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz_asm \
         --in-hifi ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.tmp.fasta.gz \
         --threads ${threads}
+        
     mv ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz_asm/contigs.fasta.gz ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz
     rm -rf ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz_asm
     rm ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.tmp.fasta.gz
@@ -226,6 +236,7 @@ for FILE in ${FILES}; do
         --out-dir ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz_asm \
         --in-hifi ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.tmp.fasta.gz \
         --threads ${threads}
+        
     mv ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz_asm/contigs.fasta.gz ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz
     rm -rf ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz_asm
     rm ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.tmp.fasta.gz
@@ -264,6 +275,7 @@ for FILE in ${FILES}; do
         --out-dir ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz_asm \
         --in-hifi ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.tmp.fasta.gz \
         --threads ${threads}
+        
     mv ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz_asm/contigs.fasta.gz ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz
     rm -rf ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz_asm
     rm ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.tmp.fasta.gz
