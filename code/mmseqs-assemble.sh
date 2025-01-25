@@ -17,7 +17,7 @@ for FILE in ${FILES}; do
     ${INPUT_FOLDER}/${FILE} \
     ${DB} \
     ${RESULT_PATH}/${FILE}.txt \
-    tmp \
+    ${RESULT_PATH}/tmp \
     -e ${EV} \
     --max-seqs 1 \
     --search-type 3 \
@@ -31,6 +31,7 @@ for FILE in ${FILES}; do
     ${INPUT_FOLDER}/${FILE} 
     
     rm ${RESULT_PATH}/${FILE}.txt
+    rm -rf ${RESULT_PATH}/tmp
 done
 
 # assemble sequence first, then extract oomycota sequence use protein search
