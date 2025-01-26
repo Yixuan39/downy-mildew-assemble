@@ -32,17 +32,17 @@ for FILE in ${FILES}; do
     seqkit grep \
     --threads ${threads} \
     --pattern-file ${RESULT_PATH}/${FILE}.txt \
-    --out-file ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.tmp.fasta.gz \
+    --out-file ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.tmp.fasta.gz \
     ${INPUT_FOLDER}/${FILE} 
     
     metaMDBG asm \
-        --out-dir ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz_asm \
-        --in-hifi ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.tmp.fasta.gz \
+        --out-dir ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.fasta.gz_asm \
+        --in-hifi ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.tmp.fasta.gz \
         --threads ${threads}
         
-    mv ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz_asm/contigs.fasta.gz ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz
-    rm -rf ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz_asm
-    rm ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.tmp.fasta.gz
+    mv ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.fasta.gz_asm/contigs.fasta.gz ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.fasta.gz
+    rm -rf ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.fasta.gz_asm
+    rm ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.tmp.fasta.gz
     rm ${RESULT_PATH}/${FILE}.txt     
     rm -rf ${RESULT_PATH}/tmp
 done
@@ -70,17 +70,17 @@ for FILE in ${FILES}; do
     seqkit grep \
     --threads ${threads} \
     --pattern-file ${RESULT_PATH}/${FILE}.txt \
-    --out-file ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.tmp.fasta.gz \
+    --out-file ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.tmp.fasta.gz \
     ${INPUT_FOLDER}/${FILE}
     
     metaMDBG asm \
-        --out-dir ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz_asm \
-        --in-hifi ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.tmp.fasta.gz \
+        --out-dir ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.fasta.gz_asm \
+        --in-hifi ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.tmp.fasta.gz \
         --threads ${threads}
         
-    mv ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz_asm/contigs.fasta.gz ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz
-    rm -rf ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz_asm
-    rm ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.tmp.fasta.gz
+    mv ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.fasta.gz_asm/contigs.fasta.gz ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.fasta.gz
+    rm -rf ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.fasta.gz_asm
+    rm ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.tmp.fasta.gz
     rm ${RESULT_PATH}/${FILE}.txt     rm -rf ${RESULT_PATH}/tmp
 done
 
@@ -108,17 +108,17 @@ for FILE in ${FILES}; do
     --invert-match \
     --threads ${threads} \
     --pattern-file ${RESULT_PATH}/${FILE}.txt \
-    --out-file ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.tmp.fasta.gz \
+    --out-file ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.tmp.fasta.gz \
     ${INPUT_FOLDER}/${FILE}
     
     metaMDBG asm \
-        --out-dir ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz_asm \
-        --in-hifi ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.tmp.fasta.gz \
+        --out-dir ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.fasta.gz_asm \
+        --in-hifi ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.tmp.fasta.gz \
         --threads ${threads}
         
-    mv ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz_asm/contigs.fasta.gz ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz
-    rm -rf ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz_asm
-    rm ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.tmp.fasta.gz
+    mv ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.fasta.gz_asm/contigs.fasta.gz ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.fasta.gz
+    rm -rf ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.fasta.gz_asm
+    rm ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.tmp.fasta.gz
     rm ${RESULT_PATH}/${FILE}.txt     
     rm -rf ${RESULT_PATH}/tmp
 done
@@ -148,17 +148,17 @@ for FILE in ${FILES}; do
     --invert-match \
     --threads ${threads} \
     --pattern-file ${RESULT_PATH}/${FILE}.txt \
-    --out-file ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.tmp.fasta.gz \
+    --out-file ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.tmp.fasta.gz \
     ${INPUT_FOLDER}/${FILE}
     
     metaMDBG asm \
-        --out-dir ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz_asm \
-        --in-hifi ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.tmp.fasta.gz \
+        --out-dir ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.fasta.gz_asm \
+        --in-hifi ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.tmp.fasta.gz \
         --threads ${threads}
         
-    mv ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz_asm/contigs.fasta.gz ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz
-    rm -rf ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz_asm
-    rm ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.tmp.fasta.gz
+    mv ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.fasta.gz_asm/contigs.fasta.gz ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.fasta.gz
+    rm -rf ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.fasta.gz_asm
+    rm ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.tmp.fasta.gz
     rm ${RESULT_PATH}/${FILE}.txt     
     rm -rf ${RESULT_PATH}/tmp
 done
