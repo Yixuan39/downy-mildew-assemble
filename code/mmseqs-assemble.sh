@@ -3,9 +3,9 @@
 EV=$1
 threads=32
 
-
 ###########################################################################
-# classify sequence first, then assemble
+# classify sequence first, then assemble with metaMDBG                    #
+###########################################################################
 
 INPUT_FOLDER=/data/run/yyang/project_data/downy/data
 FILES=$(ls ${INPUT_FOLDER}/*.fastq.gz 2>/dev/null | xargs -n 1 basename)
@@ -163,10 +163,9 @@ for FILE in ${FILES}; do
     rm -rf ${RESULT_PATH}/tmp
 done
 
-
-
 ###########################################################################
-
+# assemble with metaMDBG first, then classify sequence                    #
+###########################################################################
 
 INPUT_FOLDER=/data/run/yyang/project_data/downy/metaMDBG
 FILES=$(ls ${INPUT_FOLDER}/*.fasta.gz 2>/dev/null | xargs -n 1 basename)
