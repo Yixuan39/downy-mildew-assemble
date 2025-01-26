@@ -60,7 +60,8 @@ for FILE in ${FILES}; do
     --out-file ${RESULT_PATH}/${EV}/${FILE} \
     ${INPUT_FOLDER}/${FILE} 
     
-    rm ${RESULT_PATH}/${FILE}.txt     rm -rf ${RESULT_PATH}/tmp
+    rm ${RESULT_PATH}/${FILE}.txt     
+    rm -rf ${RESULT_PATH}/tmp
 done
 
 # assemble sequence first, then remove contamination sequence use genome search
@@ -90,7 +91,8 @@ for FILE in ${FILES}; do
     --out-file ${RESULT_PATH}/${EV}/${FILE} \
     ${INPUT_FOLDER}/${FILE} 
     
-    rm ${RESULT_PATH}/${FILE}.txt     rm -rf ${RESULT_PATH}/tmp
+    rm ${RESULT_PATH}/${FILE}.txt     
+    rm -rf ${RESULT_PATH}/tmp
 done
 
 # assemble sequence first, then remove contamination sequence use protein search
@@ -121,7 +123,8 @@ for FILE in ${FILES}; do
     --out-file ${RESULT_PATH}/${EV}/${FILE} \
     ${INPUT_FOLDER}/${FILE} 
     
-    rm ${RESULT_PATH}/${FILE}.txt     rm -rf ${RESULT_PATH}/tmp
+    rm ${RESULT_PATH}/${FILE}.txt     
+    rm -rf ${RESULT_PATH}/tmp
 done
 
 
@@ -166,7 +169,8 @@ for FILE in ${FILES}; do
     mv ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz_asm/contigs.fasta.gz ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz
     rm -rf ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz_asm
     rm ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.tmp.fasta.gz
-    rm ${RESULT_PATH}/${FILE}.txt     rm -rf ${RESULT_PATH}/tmp
+    rm ${RESULT_PATH}/${FILE}.txt     
+    rm -rf ${RESULT_PATH}/tmp
 done
 
 # assemble sequence first, then extract oomycota sequence use protein search
@@ -241,7 +245,8 @@ for FILE in ${FILES}; do
     mv ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz_asm/contigs.fasta.gz ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz
     rm -rf ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz_asm
     rm ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.tmp.fasta.gz
-    rm ${RESULT_PATH}/${FILE}.txt     rm -rf ${RESULT_PATH}/tmp
+    rm ${RESULT_PATH}/${FILE}.txt     
+    rm -rf ${RESULT_PATH}/tmp
 done
 
 # assemble sequence first, then remove contamination sequence use protein search
@@ -280,7 +285,8 @@ for FILE in ${FILES}; do
     mv ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz_asm/contigs.fasta.gz ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz
     rm -rf ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.fasta.gz_asm
     rm ${RESULT_PATH}/${EV}/${FILE%fastq.gz}.tmp.fasta.gz
-    rm ${RESULT_PATH}/${FILE}.txt     rm -rf ${RESULT_PATH}/tmp
+    rm ${RESULT_PATH}/${FILE}.txt     
+    rm -rf ${RESULT_PATH}/tmp
 done
 
 
