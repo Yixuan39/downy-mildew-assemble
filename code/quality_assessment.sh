@@ -5,13 +5,13 @@ input_folder=$1
 threads=32
 BUSCO_DB="/data/run/yyang/project_data/downy/BUSCO_DB"
 # get the fasta file full name
-files=$(find ${input_folder} -name "*.fasta")
+files=$(find ${input_folder} -name "*.fasta.gz")
 dirs=$(dirname ${files} | sort | uniq)
 
 for dir in ${dirs}; do
     mkdir -p ${dir}/quality
     echo "Processing ${dir}"
-    files=$(find ${dir} -name "*.fasta")
+    files=$(find ${dir} -name "*.fasta.gz")
     for file in ${files}; do
         compleasm run --assembly_path ${file} \
                   --output_dir $(dirname ${file})/compleasm-eukaryota/$(basename ${file}) \
