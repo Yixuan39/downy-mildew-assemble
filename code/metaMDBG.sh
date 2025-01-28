@@ -1,9 +1,9 @@
 #!/bin/bash
 
-INPUT_FOLDER="/data/run/yyang/project_data/downy/data"
-RESULT_PATH="/data/run/yyang/project_data/downy/metaMDBG"
+INPUT_FOLDER=$HOME/project_data/downy/data
+RESULT_PATH=$HOME/project_data/downy/metaMDBG
 FILES=$(ls ${INPUT_FOLDER}/*.fastq.gz 2>/dev/null | xargs -n 1 basename)
-threads=32
+threads=24
 mkdir -p ${RESULT_PATH}
 
 for FILE in ${FILES}; do

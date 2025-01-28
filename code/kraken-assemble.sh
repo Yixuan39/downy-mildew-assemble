@@ -1,7 +1,7 @@
 #!/bin/bash
 
 CS=$1
-threads=32
+threads=24
 
 # Use metaMDBG assemble pacbio
 

@@ -2,8 +2,8 @@
 
 # input folder argument
 input_folder=$1
-threads=32
-BUSCO_DB="/data/run/yyang/project_data/downy/BUSCO_DB"
+threads=24
+BUSCO_DB=$HOME/project_data/downy/BUSCO_DB
 # get the fasta file full name
 files=$(find ${input_folder} -name "*.fasta.gz")
 dirs=$(dirname ${files} | sort | uniq)
