@@ -22,7 +22,7 @@ for FILE in ${FILES}; do
     ${INPUT_FOLDER}/${FILE} \
     ${DB} \
     ${RESULT_PATH}/${EV}/${FILE}.txt \
-    ${RESULT_PATH}${EV}/tmp \
+    ${RESULT_PATH}/${EV}/tmp \
     -e ${EV} \
     --max-accept 1 \
     --search-type 3 \
@@ -44,7 +44,7 @@ for FILE in ${FILES}; do
     rm -rf ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.fasta.gz_asm
     rm ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.tmp.fasta.gz
     rm ${RESULT_PATH}/${EV}/${FILE}.txt     
-    rm -rf ${RESULT_PATH}${EV}/tmp
+    rm -rf ${RESULT_PATH}/${EV}/tmp
 done
 
 # assemble sequence first, then extract oomycota sequence use protein search
@@ -59,7 +59,7 @@ for FILE in ${FILES}; do
     ${INPUT_FOLDER}/${FILE} \
     ${DB} \
     ${RESULT_PATH}/${EV}/${FILE}.txt \
-    ${RESULT_PATH}${EV}/tmp \
+    ${RESULT_PATH}/${EV}/tmp \
     -e ${EV} \
     --max-accept 1 \
     --search-type 2 \
@@ -81,7 +81,7 @@ for FILE in ${FILES}; do
     mv ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.fasta.gz_asm/contigs.fasta.gz ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.fasta.gz
     rm -rf ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.fasta.gz_asm
     rm ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.tmp.fasta.gz
-    rm ${RESULT_PATH}/${EV}/${FILE}.txt     rm -rf ${RESULT_PATH}${EV}/tmp
+    rm ${RESULT_PATH}/${EV}/${FILE}.txt     rm -rf ${RESULT_PATH}/${EV}/tmp
 done
 
 # assemble sequence first, then remove contamination sequence use genome search
@@ -97,7 +97,7 @@ for FILE in ${FILES}; do
     ${INPUT_FOLDER}/${FILE} \
     ${DB} \
     ${RESULT_PATH}/${EV}/${FILE}.txt \
-    ${RESULT_PATH}${EV}/tmp \
+    ${RESULT_PATH}/${EV}/tmp \
     -e ${EV} \
     --max-accept 1 \
     --search-type 3 \
@@ -120,7 +120,7 @@ for FILE in ${FILES}; do
     rm -rf ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.fasta.gz_asm
     rm ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.tmp.fasta.gz
     rm ${RESULT_PATH}/${EV}/${FILE}.txt     
-    rm -rf ${RESULT_PATH}${EV}/tmp
+    rm -rf ${RESULT_PATH}/${EV}/tmp
 done
 
 # assemble sequence first, then remove contamination sequence use protein search
@@ -136,7 +136,7 @@ for FILE in ${FILES}; do
     ${INPUT_FOLDER}/${FILE} \
     ${DB} \
     ${RESULT_PATH}/${EV}/${FILE}.txt \
-    ${RESULT_PATH}${EV}/tmp \
+    ${RESULT_PATH}/${EV}/tmp \
     -e ${EV} \
     --max-accept 1 \
     --search-type 2 \
@@ -160,7 +160,7 @@ for FILE in ${FILES}; do
     rm -rf ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.fasta.gz_asm
     rm ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.tmp.fasta.gz
     rm ${RESULT_PATH}/${EV}/${FILE}.txt     
-    rm -rf ${RESULT_PATH}${EV}/tmp
+    rm -rf ${RESULT_PATH}/${EV}/tmp
 done
 
 ###########################################################################
@@ -182,7 +182,7 @@ for FILE in ${FILES}; do
     ${INPUT_FOLDER}/${FILE} \
     ${DB} \
     ${RESULT_PATH}/${EV}/${FILE}.txt \
-    ${RESULT_PATH}${EV}/tmp \
+    ${RESULT_PATH}/${EV}/tmp \
     -e ${EV} \
     --max-accept 1 \
     --search-type 3 \
@@ -196,7 +196,7 @@ for FILE in ${FILES}; do
     ${INPUT_FOLDER}/${FILE} 
     
     rm ${RESULT_PATH}/${EV}/${FILE}.txt
-    rm -rf ${RESULT_PATH}${EV}/tmp
+    rm -rf ${RESULT_PATH}/${EV}/tmp
 done
 
 # assemble sequence first, then extract oomycota sequence use protein search
@@ -211,7 +211,7 @@ for FILE in ${FILES}; do
     ${INPUT_FOLDER}/${FILE} \
     ${DB} \
     ${RESULT_PATH}/${EV}/${FILE}.txt \
-    ${RESULT_PATH}${EV}/tmp \
+    ${RESULT_PATH}/${EV}/tmp \
     -e ${EV} \
     --max-accept 1 \
     --search-type 2 \
@@ -226,7 +226,7 @@ for FILE in ${FILES}; do
     ${INPUT_FOLDER}/${FILE} 
     
     rm ${RESULT_PATH}/${EV}/${FILE}.txt     
-    rm -rf ${RESULT_PATH}${EV}/tmp
+    rm -rf ${RESULT_PATH}/${EV}/tmp
 done
 
 # assemble sequence first, then remove contamination sequence use genome search
@@ -242,7 +242,7 @@ for FILE in ${FILES}; do
     ${INPUT_FOLDER}/${FILE} \
     ${DB} \
     ${RESULT_PATH}/${EV}/${FILE}.txt \
-    ${RESULT_PATH}${EV}/tmp \
+    ${RESULT_PATH}/${EV}/tmp \
     -e ${EV} \
     --max-accept 1 \
     --search-type 3 \
@@ -257,7 +257,7 @@ for FILE in ${FILES}; do
     ${INPUT_FOLDER}/${FILE} 
     
     rm ${RESULT_PATH}/${EV}/${FILE}.txt     
-    rm -rf ${RESULT_PATH}${EV}/tmp
+    rm -rf ${RESULT_PATH}/${EV}/tmp
 done
 
 # assemble sequence first, then remove contamination sequence use protein search
@@ -273,7 +273,7 @@ for FILE in ${FILES}; do
     ${INPUT_FOLDER}/${FILE} \
     ${DB} \
     ${RESULT_PATH}/${EV}/${FILE}.txt \
-    ${RESULT_PATH}${EV}/tmp \
+    ${RESULT_PATH}/${EV}/tmp \
     -e ${EV} \
     --max-accept 1 \
     --search-type 2 \
@@ -289,7 +289,7 @@ for FILE in ${FILES}; do
     ${INPUT_FOLDER}/${FILE} 
     
     rm ${RESULT_PATH}/${EV}/${FILE}.txt     
-    rm -rf ${RESULT_PATH}${EV}/tmp
+    rm -rf ${RESULT_PATH}/${EV}/tmp
 done
 
 
