@@ -21,7 +21,7 @@ for FILE in ${FILES}; do
     mmseqs easy-search \
     ${INPUT_FOLDER}/${FILE} \
     ${DB} \
-    ${RESULT_PATH}/${FILE}.txt \
+    ${RESULT_PATH}/${EV}/${FILE}.txt \
     ${RESULT_PATH}/tmp \
     -e ${EV} \
     --max-accept 1 \
@@ -31,7 +31,7 @@ for FILE in ${FILES}; do
     
     seqkit grep \
     --threads ${threads} \
-    --pattern-file ${RESULT_PATH}/${FILE}.txt \
+    --pattern-file ${RESULT_PATH}/${EV}/${FILE}.txt \
     --out-file ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.tmp.fasta.gz \
     ${INPUT_FOLDER}/${FILE} 
     
@@ -43,7 +43,7 @@ for FILE in ${FILES}; do
     mv ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.fasta.gz_asm/contigs.fasta.gz ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.fasta.gz
     rm -rf ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.fasta.gz_asm
     rm ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.tmp.fasta.gz
-    rm ${RESULT_PATH}/${FILE}.txt     
+    rm ${RESULT_PATH}/${EV}/${FILE}.txt     
     rm -rf ${RESULT_PATH}/tmp
 done
 
@@ -58,7 +58,7 @@ for FILE in ${FILES}; do
     mmseqs easy-search \
     ${INPUT_FOLDER}/${FILE} \
     ${DB} \
-    ${RESULT_PATH}/${FILE}.txt \
+    ${RESULT_PATH}/${EV}/${FILE}.txt \
     ${RESULT_PATH}/tmp \
     -e ${EV} \
     --max-accept 1 \
@@ -69,7 +69,7 @@ for FILE in ${FILES}; do
     
     seqkit grep \
     --threads ${threads} \
-    --pattern-file ${RESULT_PATH}/${FILE}.txt \
+    --pattern-file ${RESULT_PATH}/${EV}/${FILE}.txt \
     --out-file ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.tmp.fasta.gz \
     ${INPUT_FOLDER}/${FILE}
     
@@ -81,7 +81,7 @@ for FILE in ${FILES}; do
     mv ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.fasta.gz_asm/contigs.fasta.gz ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.fasta.gz
     rm -rf ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.fasta.gz_asm
     rm ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.tmp.fasta.gz
-    rm ${RESULT_PATH}/${FILE}.txt     rm -rf ${RESULT_PATH}/tmp
+    rm ${RESULT_PATH}/${EV}/${FILE}.txt     rm -rf ${RESULT_PATH}/tmp
 done
 
 # assemble sequence first, then remove contamination sequence use genome search
@@ -96,7 +96,7 @@ for FILE in ${FILES}; do
     mmseqs easy-search \
     ${INPUT_FOLDER}/${FILE} \
     ${DB} \
-    ${RESULT_PATH}/${FILE}.txt \
+    ${RESULT_PATH}/${EV}/${FILE}.txt \
     ${RESULT_PATH}/tmp \
     -e ${EV} \
     --max-accept 1 \
@@ -107,7 +107,7 @@ for FILE in ${FILES}; do
     seqkit grep \
     --invert-match \
     --threads ${threads} \
-    --pattern-file ${RESULT_PATH}/${FILE}.txt \
+    --pattern-file ${RESULT_PATH}/${EV}/${FILE}.txt \
     --out-file ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.tmp.fasta.gz \
     ${INPUT_FOLDER}/${FILE}
     
@@ -119,7 +119,7 @@ for FILE in ${FILES}; do
     mv ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.fasta.gz_asm/contigs.fasta.gz ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.fasta.gz
     rm -rf ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.fasta.gz_asm
     rm ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.tmp.fasta.gz
-    rm ${RESULT_PATH}/${FILE}.txt     
+    rm ${RESULT_PATH}/${EV}/${FILE}.txt     
     rm -rf ${RESULT_PATH}/tmp
 done
 
@@ -135,7 +135,7 @@ for FILE in ${FILES}; do
     mmseqs easy-search \
     ${INPUT_FOLDER}/${FILE} \
     ${DB} \
-    ${RESULT_PATH}/${FILE}.txt \
+    ${RESULT_PATH}/${EV}/${FILE}.txt \
     ${RESULT_PATH}/tmp \
     -e ${EV} \
     --max-accept 1 \
@@ -147,7 +147,7 @@ for FILE in ${FILES}; do
     seqkit grep \
     --invert-match \
     --threads ${threads} \
-    --pattern-file ${RESULT_PATH}/${FILE}.txt \
+    --pattern-file ${RESULT_PATH}/${EV}/${FILE}.txt \
     --out-file ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.tmp.fasta.gz \
     ${INPUT_FOLDER}/${FILE}
     
@@ -159,7 +159,7 @@ for FILE in ${FILES}; do
     mv ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.fasta.gz_asm/contigs.fasta.gz ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.fasta.gz
     rm -rf ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.fasta.gz_asm
     rm ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.tmp.fasta.gz
-    rm ${RESULT_PATH}/${FILE}.txt     
+    rm ${RESULT_PATH}/${EV}/${FILE}.txt     
     rm -rf ${RESULT_PATH}/tmp
 done
 
@@ -181,7 +181,7 @@ for FILE in ${FILES}; do
     mmseqs easy-search \
     ${INPUT_FOLDER}/${FILE} \
     ${DB} \
-    ${RESULT_PATH}/${FILE}.txt \
+    ${RESULT_PATH}/${EV}/${FILE}.txt \
     ${RESULT_PATH}/tmp \
     -e ${EV} \
     --max-accept 1 \
@@ -191,11 +191,11 @@ for FILE in ${FILES}; do
     
     seqkit grep \
     --threads ${threads} \
-    --pattern-file ${RESULT_PATH}/${FILE}.txt \
+    --pattern-file ${RESULT_PATH}/${EV}/${FILE}.txt \
     --out-file ${RESULT_PATH}/${EV}/${FILE} \
     ${INPUT_FOLDER}/${FILE} 
     
-    rm ${RESULT_PATH}/${FILE}.txt
+    rm ${RESULT_PATH}/${EV}/${FILE}.txt
     rm -rf ${RESULT_PATH}/tmp
 done
 
@@ -210,7 +210,7 @@ for FILE in ${FILES}; do
     mmseqs easy-search \
     ${INPUT_FOLDER}/${FILE} \
     ${DB} \
-    ${RESULT_PATH}/${FILE}.txt \
+    ${RESULT_PATH}/${EV}/${FILE}.txt \
     ${RESULT_PATH}/tmp \
     -e ${EV} \
     --max-accept 1 \
@@ -221,11 +221,11 @@ for FILE in ${FILES}; do
     
     seqkit grep \
     --threads ${threads} \
-    --pattern-file ${RESULT_PATH}/${FILE}.txt \
+    --pattern-file ${RESULT_PATH}/${EV}/${FILE}.txt \
     --out-file ${RESULT_PATH}/${EV}/${FILE} \
     ${INPUT_FOLDER}/${FILE} 
     
-    rm ${RESULT_PATH}/${FILE}.txt     
+    rm ${RESULT_PATH}/${EV}/${FILE}.txt     
     rm -rf ${RESULT_PATH}/tmp
 done
 
@@ -241,7 +241,7 @@ for FILE in ${FILES}; do
     mmseqs easy-search \
     ${INPUT_FOLDER}/${FILE} \
     ${DB} \
-    ${RESULT_PATH}/${FILE}.txt \
+    ${RESULT_PATH}/${EV}/${FILE}.txt \
     ${RESULT_PATH}/tmp \
     -e ${EV} \
     --max-accept 1 \
@@ -252,11 +252,11 @@ for FILE in ${FILES}; do
     seqkit grep \
     --invert-match \
     --threads ${threads} \
-    --pattern-file ${RESULT_PATH}/${FILE}.txt \
+    --pattern-file ${RESULT_PATH}/${EV}/${FILE}.txt \
     --out-file ${RESULT_PATH}/${EV}/${FILE} \
     ${INPUT_FOLDER}/${FILE} 
     
-    rm ${RESULT_PATH}/${FILE}.txt     
+    rm ${RESULT_PATH}/${EV}/${FILE}.txt     
     rm -rf ${RESULT_PATH}/tmp
 done
 
@@ -272,7 +272,7 @@ for FILE in ${FILES}; do
     mmseqs easy-search \
     ${INPUT_FOLDER}/${FILE} \
     ${DB} \
-    ${RESULT_PATH}/${FILE}.txt \
+    ${RESULT_PATH}/${EV}/${FILE}.txt \
     ${RESULT_PATH}/tmp \
     -e ${EV} \
     --max-accept 1 \
@@ -284,11 +284,11 @@ for FILE in ${FILES}; do
     seqkit grep \
     --invert-match \
     --threads ${threads} \
-    --pattern-file ${RESULT_PATH}/${FILE}.txt \
+    --pattern-file ${RESULT_PATH}/${EV}/${FILE}.txt \
     --out-file ${RESULT_PATH}/${EV}/${FILE} \
     ${INPUT_FOLDER}/${FILE} 
     
-    rm ${RESULT_PATH}/${FILE}.txt     
+    rm ${RESULT_PATH}/${EV}/${FILE}.txt     
     rm -rf ${RESULT_PATH}/tmp
 done
 
