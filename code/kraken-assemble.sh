@@ -5,13 +5,13 @@ threads=24
 
 # Use metaMDBG assemble pacbio
 
-INPUT_FOLDER=/data/run/yyang/project_data/downy/metaMDBG
+INPUT_FOLDER=$HOME/project_data/downy/metaMDBG
 FILES=$(ls ${INPUT_FOLDER}/*.fasta.gz 2>/dev/null | xargs -n 1 basename)
 
 # assemble sequence first, then extract oomycota sequence use genome search
 
-KrakenDB=/data/run/yyang/project_data/downy/KrakenDB/oomycota-genome
-RESULT_PATH=/data/run/yyang/project_data/downy/Kraken-result/assemble-classify-oomycota-genome/${CS}
+KrakenDB=$HOME/project_data/downy/KrakenDB/oomycota-genome
+RESULT_PATH=$HOME/project_data/downy/Kraken-result/assemble-classify-oomycota-genome/${CS}
 mkdir -p ${RESULT_PATH}
 
 for FILE in ${FILES}; do
@@ -37,8 +37,8 @@ done
 
 # assemble sequence first, then extract oomycota sequence use protein search
 
-KrakenDB=/data/run/yyang/project_data/downy/KrakenDB/oomycota-protein
-RESULT_PATH=/data/run/yyang/project_data/downy/Kraken-result/assemble-classify-oomycota-protein/${CS}
+KrakenDB=$HOME/project_data/downy/KrakenDB/oomycota-protein
+RESULT_PATH=$HOME/project_data/downy/Kraken-result/assemble-classify-oomycota-protein/${CS}
 mkdir -p ${RESULT_PATH}
 
 for FILE in ${FILES}; do
@@ -64,8 +64,8 @@ done
 
 # assemble sequence first, then remove contamination sequence use genome search.
 
-KrakenDB=/data/run/yyang/project_data/downy/KrakenDB/contam-genome
-RESULT_PATH=/data/run/yyang/project_data/downy/Kraken-result/assemble-classify-contam-genome/${CS}
+KrakenDB=$HOME/project_data/downy/KrakenDB/contam-genome
+RESULT_PATH=$HOME/project_data/downy/Kraken-result/assemble-classify-contam-genome/${CS}
 mkdir -p ${RESULT_PATH}
 
 for FILE in ${FILES}; do
@@ -84,8 +84,8 @@ done
 
 # assemble sequence first, then remove contamination sequence use protein search.
 
-KrakenDB=/data/run/yyang/project_data/downy/KrakenDB/contam-protein
-RESULT_PATH=/data/run/yyang/project_data/downy/Kraken-result/assemble-classify-contam-protein/${CS}
+KrakenDB=$HOME/project_data/downy/KrakenDB/contam-protein
+RESULT_PATH=$HOME/project_data/downy/Kraken-result/assemble-classify-contam-protein/${CS}
 mkdir -p ${RESULT_PATH}
 
 for FILE in ${FILES}; do
@@ -103,13 +103,13 @@ for FILE in ${FILES}; do
 done
 
 
-INPUT_FOLDER=/data/run/yyang/project_data/downy/data
+INPUT_FOLDER=$HOME/project_data/downy/data
 FILES=$(ls ${INPUT_FOLDER}/*.fastq.gz 2>/dev/null | xargs -n 1 basename)
 
 # extract oomycota sequence with kraken2 using genome search, then assemble the genome.
 
-KrakenDB=/data/run/yyang/project_data/downy/KrakenDB/oomycota-genome
-RESULT_PATH=/data/run/yyang/project_data/downy/Kraken-result/classify-assemble-oomycota-genome/${CS}
+KrakenDB=$HOME/project_data/downy/KrakenDB/oomycota-genome
+RESULT_PATH=$HOME/project_data/downy/Kraken-result/classify-assemble-oomycota-genome/${CS}
 mkdir -p ${RESULT_PATH}
 
 for FILE in ${FILES}; do
@@ -144,8 +144,8 @@ done
 
 # extract oomycota sequence with kraken2 using protein search, then assemble the genome.
 
-KrakenDB=/data/run/yyang/project_data/downy/KrakenDB/oomycota-protein
-RESULT_PATH=/data/run/yyang/project_data/downy/Kraken-result/classify-assemble-oomycota-protein/${CS}
+KrakenDB=$HOME/project_data/downy/KrakenDB/oomycota-protein
+RESULT_PATH=$HOME/project_data/downy/Kraken-result/classify-assemble-oomycota-protein/${CS}
 mkdir -p ${RESULT_PATH}
 
 for FILE in ${FILES}; do
@@ -179,8 +179,8 @@ done
 
 # exclude the contamination sequences first with kraken2 using genome search, then assemble the genome.
 
-KrakenDB=/data/run/yyang/project_data/downy/KrakenDB/contam-genome
-RESULT_PATH=/data/run/yyang/project_data/downy/Kraken-result/classify-assemble-contam-genome/${CS}
+KrakenDB=$HOME/project_data/downy/KrakenDB/contam-genome
+RESULT_PATH=$HOME/project_data/downy/Kraken-result/classify-assemble-contam-genome/${CS}
 mkdir -p ${RESULT_PATH}
 
 for FILE in ${FILES}; do
@@ -206,8 +206,8 @@ done
 
 # exclude the contamination sequences first with kraken2 using protein search, then assemble the genome.
 
-KrakenDB=/data/run/yyang/project_data/downy/KrakenDB/contam-protein
-RESULT_PATH=/data/run/yyang/project_data/downy/Kraken-result/classify-assemble-contam-protein/${CS}
+KrakenDB=$HOME/project_data/downy/KrakenDB/contam-protein
+RESULT_PATH=$HOME/project_data/downy/Kraken-result/classify-assemble-contam-protein/${CS}
 mkdir -p ${RESULT_PATH}
 
 for FILE in ${FILES}; do
