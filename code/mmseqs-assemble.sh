@@ -14,7 +14,7 @@ FILES=$(ls ${INPUT_FOLDER}/*.fastq.gz 2>/dev/null | xargs -n 1 basename)
 
 DB=$HOME/project_data/downy/ref-seq/oomycota-genome.fasta.gz
 RESULT_PATH=$HOME/project_data/downy/mmseqs_result/assemble-classify-oomycota-genome
-mkdir -p ${RESULT_PATH}
+mkdir -p ${RESULT_PATH}/${EV}
 
 for FILE in ${FILES}; do
     # run mmseqs2 on the assembly
@@ -22,7 +22,7 @@ for FILE in ${FILES}; do
     ${INPUT_FOLDER}/${FILE} \
     ${DB} \
     ${RESULT_PATH}/${EV}/${FILE}.txt \
-    ${RESULT_PATH}/tmp \
+    ${RESULT_PATH}${EV}/tmp \
     -e ${EV} \
     --max-accept 1 \
     --search-type 3 \
@@ -44,14 +44,14 @@ for FILE in ${FILES}; do
     rm -rf ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.fasta.gz_asm
     rm ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.tmp.fasta.gz
     rm ${RESULT_PATH}/${EV}/${FILE}.txt     
-    rm -rf ${RESULT_PATH}/tmp
+    rm -rf ${RESULT_PATH}${EV}/tmp
 done
 
 # assemble sequence first, then extract oomycota sequence use protein search
 
 DB=$HOME/project_data/downy/ref-seq/oomycota-protein.fasta.gz
 RESULT_PATH=$HOME/project_data/downy/mmseqs_result/assemble-classify-oomycota-protein
-mkdir -p ${RESULT_PATH}
+mkdir -p ${RESULT_PATH}/${EV}
 
 for FILE in ${FILES}; do
     # run mmseqs2 on the assembly
@@ -59,7 +59,7 @@ for FILE in ${FILES}; do
     ${INPUT_FOLDER}/${FILE} \
     ${DB} \
     ${RESULT_PATH}/${EV}/${FILE}.txt \
-    ${RESULT_PATH}/tmp \
+    ${RESULT_PATH}${EV}/tmp \
     -e ${EV} \
     --max-accept 1 \
     --search-type 2 \
@@ -81,7 +81,7 @@ for FILE in ${FILES}; do
     mv ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.fasta.gz_asm/contigs.fasta.gz ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.fasta.gz
     rm -rf ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.fasta.gz_asm
     rm ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.tmp.fasta.gz
-    rm ${RESULT_PATH}/${EV}/${FILE}.txt     rm -rf ${RESULT_PATH}/tmp
+    rm ${RESULT_PATH}/${EV}/${FILE}.txt     rm -rf ${RESULT_PATH}${EV}/tmp
 done
 
 # assemble sequence first, then remove contamination sequence use genome search
@@ -89,7 +89,7 @@ cat $HOME/project_data/downy/ref-seq/contam-genome.fasta.gz \
     $HOME/project_data/downy/ref-seq/genome-bfh.fasta.gz > $HOME/project_data/downy/ref-seq/contam-large-genome.fasta.gz
 DB=$HOME/project_data/downy/ref-seq/contam-large-genome.fasta.gz
 RESULT_PATH=$HOME/project_data/downy/mmseqs_result/assemble-classify-contam-genome
-mkdir -p ${RESULT_PATH}
+mkdir -p ${RESULT_PATH}/${EV}
 
 for FILE in ${FILES}; do
     # run mmseqs2 on the assembly
@@ -97,7 +97,7 @@ for FILE in ${FILES}; do
     ${INPUT_FOLDER}/${FILE} \
     ${DB} \
     ${RESULT_PATH}/${EV}/${FILE}.txt \
-    ${RESULT_PATH}/tmp \
+    ${RESULT_PATH}${EV}/tmp \
     -e ${EV} \
     --max-accept 1 \
     --search-type 3 \
@@ -120,7 +120,7 @@ for FILE in ${FILES}; do
     rm -rf ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.fasta.gz_asm
     rm ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.tmp.fasta.gz
     rm ${RESULT_PATH}/${EV}/${FILE}.txt     
-    rm -rf ${RESULT_PATH}/tmp
+    rm -rf ${RESULT_PATH}${EV}/tmp
 done
 
 # assemble sequence first, then remove contamination sequence use protein search
@@ -128,7 +128,7 @@ cat $HOME/project_data/downy/ref-seq/contam-protein.fasta.gz \
     $HOME/project_data/downy/ref-seq/protein-bfh.fasta.gz > $HOME/project_data/downy/ref-seq/contam-large-protein.fasta.gz
 DB=$HOME/project_data/downy/ref-seq/contam-large-protein.fasta.gz
 RESULT_PATH=$HOME/project_data/downy/mmseqs_result/assemble-classify-contam-protein
-mkdir -p ${RESULT_PATH}
+mkdir -p ${RESULT_PATH}/${EV}
 
 for FILE in ${FILES}; do
     # run mmseqs2 on the assembly
@@ -136,7 +136,7 @@ for FILE in ${FILES}; do
     ${INPUT_FOLDER}/${FILE} \
     ${DB} \
     ${RESULT_PATH}/${EV}/${FILE}.txt \
-    ${RESULT_PATH}/tmp \
+    ${RESULT_PATH}${EV}/tmp \
     -e ${EV} \
     --max-accept 1 \
     --search-type 2 \
@@ -160,7 +160,7 @@ for FILE in ${FILES}; do
     rm -rf ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.fasta.gz_asm
     rm ${RESULT_PATH}/${EV}/${FILE%.fastq.gz}.tmp.fasta.gz
     rm ${RESULT_PATH}/${EV}/${FILE}.txt     
-    rm -rf ${RESULT_PATH}/tmp
+    rm -rf ${RESULT_PATH}${EV}/tmp
 done
 
 ###########################################################################
@@ -174,7 +174,7 @@ FILES=$(ls ${INPUT_FOLDER}/*.fasta.gz 2>/dev/null | xargs -n 1 basename)
 
 DB=$HOME/project_data/downy/ref-seq/oomycota-genome.fasta.gz
 RESULT_PATH=$HOME/project_data/downy/mmseqs_result/assemble-classify-oomycota-genome
-mkdir -p ${RESULT_PATH}
+mkdir -p ${RESULT_PATH}/${EV}
 
 for FILE in ${FILES}; do
     # run mmseqs2 on the assembly
@@ -182,7 +182,7 @@ for FILE in ${FILES}; do
     ${INPUT_FOLDER}/${FILE} \
     ${DB} \
     ${RESULT_PATH}/${EV}/${FILE}.txt \
-    ${RESULT_PATH}/tmp \
+    ${RESULT_PATH}${EV}/tmp \
     -e ${EV} \
     --max-accept 1 \
     --search-type 3 \
@@ -196,14 +196,14 @@ for FILE in ${FILES}; do
     ${INPUT_FOLDER}/${FILE} 
     
     rm ${RESULT_PATH}/${EV}/${FILE}.txt
-    rm -rf ${RESULT_PATH}/tmp
+    rm -rf ${RESULT_PATH}${EV}/tmp
 done
 
 # assemble sequence first, then extract oomycota sequence use protein search
 
 DB=$HOME/project_data/downy/ref-seq/oomycota-protein.fasta.gz
 RESULT_PATH=$HOME/project_data/downy/mmseqs_result/assemble-classify-oomycota-protein
-mkdir -p ${RESULT_PATH}
+mkdir -p ${RESULT_PATH}/${EV}
 
 for FILE in ${FILES}; do
     # run mmseqs2 on the assembly
@@ -211,7 +211,7 @@ for FILE in ${FILES}; do
     ${INPUT_FOLDER}/${FILE} \
     ${DB} \
     ${RESULT_PATH}/${EV}/${FILE}.txt \
-    ${RESULT_PATH}/tmp \
+    ${RESULT_PATH}${EV}/tmp \
     -e ${EV} \
     --max-accept 1 \
     --search-type 2 \
@@ -226,7 +226,7 @@ for FILE in ${FILES}; do
     ${INPUT_FOLDER}/${FILE} 
     
     rm ${RESULT_PATH}/${EV}/${FILE}.txt     
-    rm -rf ${RESULT_PATH}/tmp
+    rm -rf ${RESULT_PATH}${EV}/tmp
 done
 
 # assemble sequence first, then remove contamination sequence use genome search
@@ -234,7 +234,7 @@ cat $HOME/project_data/downy/ref-seq/contam-genome.fasta.gz \
     $HOME/project_data/downy/ref-seq/genome-bfh.fasta.gz > $HOME/project_data/downy/ref-seq/contam-large-genome.fasta.gz
 DB=$HOME/project_data/downy/ref-seq/contam-large-genome.fasta.gz
 RESULT_PATH=$HOME/project_data/downy/mmseqs_result/assemble-classify-contam-genome
-mkdir -p ${RESULT_PATH}
+mkdir -p ${RESULT_PATH}/${EV}
 
 for FILE in ${FILES}; do
     # run mmseqs2 on the assembly
@@ -242,7 +242,7 @@ for FILE in ${FILES}; do
     ${INPUT_FOLDER}/${FILE} \
     ${DB} \
     ${RESULT_PATH}/${EV}/${FILE}.txt \
-    ${RESULT_PATH}/tmp \
+    ${RESULT_PATH}${EV}/tmp \
     -e ${EV} \
     --max-accept 1 \
     --search-type 3 \
@@ -257,7 +257,7 @@ for FILE in ${FILES}; do
     ${INPUT_FOLDER}/${FILE} 
     
     rm ${RESULT_PATH}/${EV}/${FILE}.txt     
-    rm -rf ${RESULT_PATH}/tmp
+    rm -rf ${RESULT_PATH}${EV}/tmp
 done
 
 # assemble sequence first, then remove contamination sequence use protein search
@@ -265,7 +265,7 @@ cat $HOME/project_data/downy/ref-seq/contam-protein.fasta.gz \
     $HOME/project_data/downy/ref-seq/protein-bfh.fasta.gz > $HOME/project_data/downy/ref-seq/contam-large-protein.fasta.gz
 DB=$HOME/project_data/downy/ref-seq/contam-large-protein.fasta.gz
 RESULT_PATH=$HOME/project_data/downy/mmseqs_result/assemble-classify-contam-protein
-mkdir -p ${RESULT_PATH}
+mkdir -p ${RESULT_PATH}/${EV}
 
 for FILE in ${FILES}; do
     # run mmseqs2 on the assembly
@@ -273,7 +273,7 @@ for FILE in ${FILES}; do
     ${INPUT_FOLDER}/${FILE} \
     ${DB} \
     ${RESULT_PATH}/${EV}/${FILE}.txt \
-    ${RESULT_PATH}/tmp \
+    ${RESULT_PATH}${EV}/tmp \
     -e ${EV} \
     --max-accept 1 \
     --search-type 2 \
@@ -289,7 +289,7 @@ for FILE in ${FILES}; do
     ${INPUT_FOLDER}/${FILE} 
     
     rm ${RESULT_PATH}/${EV}/${FILE}.txt     
-    rm -rf ${RESULT_PATH}/tmp
+    rm -rf ${RESULT_PATH}${EV}/tmp
 done
 
 
