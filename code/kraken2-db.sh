@@ -1,3 +1,5 @@
+#!/bin/sh
+
 THREADS=32
 REF_PATH=/data/run/yyang/project_data/downy/ref-seq/
 # download kraken2 bacteria
