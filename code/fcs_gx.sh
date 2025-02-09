@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # input folder argument
-input_folder=$1
+input_folder=$HOME/project_data/downy/Kraken-result/
 GX_DB=$HOME/project_data/downy/fcs-db/
 # get the fasta file full name
 files=$(find ${input_folder} -name "*.fasta.gz")
