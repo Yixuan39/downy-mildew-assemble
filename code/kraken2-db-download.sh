@@ -20,3 +20,19 @@ rm -rf ${REF_PATH}/genome
 FILES=$(find ${REF_PATH}/protein -name "*.faa")
 cat ${FILES} > ${REF_PATH}/protein-bfh.fasta
 rm -rf ${REF_PATH}/protein
+
+# build kraken2 oomycota db
+DB_PATH=$HOME/project_data/downy/KrakenDB/oomycota-genome 
+kraken2-build --db ${DB_PATH} --download-taxonomy --threads ${THREADS} --use-ftp
+
+# build kraken2 oomycota protein db
+DB_PATH=$HOME/project_data/downy/KrakenDB/oomycota-protein
+kraken2-build --db ${DB_PATH} --download-taxonomy --threads ${THREADS} --use-ftp
+
+# build kraken2 contam db
+DB_PATH=$HOME/project_data/downy/KrakenDB/contam-genome
+kraken2-build --db ${DB_PATH} --download-taxonomy --threads ${THREADS} --use-ftp
+
+# build kraken2 contam protein db
+DB_PATH=$HOME/project_data/downy/KrakenDB/contam-protein
+kraken2-build --db ${DB_PATH} --download-taxonomy --threads ${THREADS} --use-ftp
