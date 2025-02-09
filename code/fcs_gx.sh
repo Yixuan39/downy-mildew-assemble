@@ -20,3 +20,6 @@ for dir in ${dirs}; do
                   --out-basename $(basename ${file%.fasta.gz}) 
     done
 done
+
+# the gx database was retrieved using this command:
+# sync_files.py get --mft=https://ftp.ncbi.nlm.nih.gov/genomes/TOOLS/FCS/database/latest/all.manifest --dir fcs-db/
