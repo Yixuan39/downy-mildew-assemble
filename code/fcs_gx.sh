@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # input folder argument
+export GX_NUM_CORES=24
 input_folder=$HOME/project_data/downy/Kraken-result/
 GX_DB=$HOME/project_data/downy/fcs-db/
 # get the fasta file full name
