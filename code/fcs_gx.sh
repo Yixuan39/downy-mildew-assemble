@@ -1,7 +1,4 @@
 #!/bin/bash
-# SBATCH -p bigmem
-# SBATCH -c 32
-# SBATCH --mem=0
 
 # input folder argument
 export GX_NUM_CORES=32
