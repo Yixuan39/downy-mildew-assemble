@@ -12,6 +12,7 @@ threads=24
 
 INPUT_FOLDER=$HOME/project_data/downy/data
 FILES=($(ls ${INPUT_FOLDER}/*.fastq.gz 2>/dev/null))
-FILE=(${FILES[$SLURM_ARRAY_TASK_ID]} |  xargs -n 1 basename)
+FILE=${FILES[$SLURM_ARRAY_TASK_ID]} 
+FILE=$(basename $FILE)
 echo $FILES
 echo $FILE
