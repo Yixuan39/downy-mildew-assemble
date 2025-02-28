@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --array=1-3
+#SBATCH --array=0-2
 #SBATCH --cpus-per-task=24
 #SBATCH --mem=0
 
@@ -12,7 +12,6 @@ threads=24
 
 INPUT_FOLDER=$HOME/project_data/downy/data
 FILES=($(ls ${INPUT_FOLDER}/*.fastq.gz 2>/dev/null))
-FILES=$(basename $FILES)
-FILE=${FILES[$SLURM_ARRAY_TASK_ID - 1]}
+FILE=(${FILES[$SLURM_ARRAY_TASK_ID]} |  xargs -n 1 basename)
 echo $FILES
 echo $FILE
