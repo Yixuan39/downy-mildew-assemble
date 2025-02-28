@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --array=1-3
+#SBATCH --array=0-2
 #SBATCH --cpus-per-task=24
 #SBATCH --mem=0
 
@@ -11,8 +11,9 @@ threads=24
 ###########################################################################
 
 INPUT_FOLDER=$HOME/project_data/downy/metaMDBG
-FILES=(${INPUT_FOLDER}/*.fastq.gz)
-FILE=$(basename "${FILES[$((SLURM_ARRAY_TASK_ID - 1))]}")
+FILES=($(ls ${INPUT_FOLDER}/*.fasta.gz 2>/dev/null))
+FILE=${FILES[$SLURM_ARRAY_TASK_ID]} 
+FILE=$(basename $FILE)
 
 # assemble sequence first, then extract oomycota sequence use genome search
 
