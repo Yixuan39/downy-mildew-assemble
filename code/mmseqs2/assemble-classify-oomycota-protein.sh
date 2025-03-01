@@ -19,14 +19,14 @@ FILE=$(basename $FILE)
 
 DB=$HOME/project_data/downy/ref-seq/oomycota-protein.fasta.gz
 RESULT_PATH=$HOME/project_data/downy/mmseqs_result/assemble-classify-oomycota-protein
-mkdir -p ${RESULT_PATH}/${EV}
+mkdir -p ${RESULT_PATH}/${FILE}_tmp
 
 # run mmseqs2 on the assembly
 mmseqs easy-search \
 ${INPUT_FOLDER}/${FILE} \
 ${DB} \
-${RESULT_PATH}/${EV}/${FILE}.txt \
-${RESULT_PATH}/${EV}/tmp \
+${RESULT_PATH}/${FILE}.txt \
+${RESULT_PATH}/${FILE}_tmp \
 -e ${EV} \
 --max-accept 1 \
 --search-type 2 \
@@ -36,9 +36,9 @@ ${RESULT_PATH}/${EV}/tmp \
 
 seqkit grep \
 --threads ${threads} \
---pattern-file ${RESULT_PATH}/${EV}/${FILE}.txt \
---out-file ${RESULT_PATH}/${EV}/${FILE} \
+--pattern-file ${RESULT_PATH}/${FILE}.txt \
+--out-file ${RESULT_PATH}/${FILE} \
 ${INPUT_FOLDER}/${FILE} 
 
-rm ${RESULT_PATH}/${EV}/${FILE}.txt 
-rm -rf ${RESULT_PATH}/${EV}/tmp
+rm ${RESULT_PATH}/${FILE}.txt 
+rm -rf ${RESULT_PATH}/${FILE}_tmp
