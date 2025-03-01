@@ -24,7 +24,8 @@ for dir in ${dirs}; do
         gx clean-genome \
                   --input ${file} \
                   --action-report ${out_dir}/$(basename ${file%.fasta.gz}).fcs_gx_report.txt \
-                  --output ${out_dir}/$(basename ${file})
+                  --output ${out_dir}/$(basename ${file%.gz})
+        gzip ${out_dir}/$(basename ${file%.gz})
     done
 done
 
