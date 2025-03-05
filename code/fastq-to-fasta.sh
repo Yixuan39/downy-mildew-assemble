@@ -3,6 +3,7 @@
 INPUT_FOLDER=$HOME/project_data/downy/data
 FILES=$(find ${INPUT_FOLDER} -name "*.fastq.gz")
 OUTPUT_FOLDER=$HOME/project_data/downy/data-fasta
+mkdir -p $OUTPUT_FOLDER
 
 for FILE in $FILES
 do
