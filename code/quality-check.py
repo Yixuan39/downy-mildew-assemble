@@ -1,0 +1,45 @@
+import os
+import subprocess
+import argparse
+import shutil
+import pandas
+
+def compleasm(input_file, output_dir, threads, library_path, linkage):
+    output_dir = os.path.join(output_dir, linkage)
+    os.makedirs(output_dir, exist_ok=True)
+    cmd = 'compleasm.py run \
+           --assembly_path {} \
+           --output_dir {} \
+           --threads {} \
+           --library_path {} \
+           --lineage {}'.format(input_file, output_dir, threads, library_path, linkage)
+    subprocess.call(cmd, shell=True)
+    # read in the output
+    output_file = os.path.join(output_dir, 'summary.txt')
+    df = pandas.read_csv(output_file, sep='\t')
+    shutil.rmtree(output_dir, ignore_errors=False)
+    return df
+
+def quast(input_file, output_dir, threads):
+    output_dir = os.path.join(output_dir, 'quast')
+    os.makedirs(output_dir, exist_ok=True)
+    cmd = 'quast.py \
+           --output-dir {} \
+           --threads {} \
+           --eukaryote \
+           {}'.format(output_dir, threads, input_file)
+    subprocess.call(cmd, shell=True)
+    # read in the output
+    output_file = os.path.join(output_dir, 'report.tsv')
+    df = pandas.read_csv(output_file, sep='\t')
+    shutil.rmtree(output_dir, ignore_errors=False)
+    return df
+  
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Quality check')
+    parser.add_argument('input', help='Input file in fasta format')
+    parser.add_argument('output_dir', help='Output directory')
+    parser.add_argument('threads', help='Number of threads', default=24)
+    parser.add_argument('library_path', help='path to compleasm library', default='$HOME/project_data/downy/BUSCO_DB')
+    args = parser.parse_args()
+    compleasm_euk(args.input, args.output)
