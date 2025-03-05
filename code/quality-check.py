@@ -49,6 +49,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Quality check')
     parser.add_argument('--input_file', help='Input file in fasta format')
     parser.add_argument('--output_dir', help='Output directory')
+    parser.add_argument('--suffix', help='Suffix for output files', default='')
     parser.add_argument('--threads', help='Number of threads', type=int, default=24)
     parser.add_argument('--library_path', help='path to compleasm library', default='$HOME/project_data/downy/BUSCO_DB')
     args = parser.parse_args()
@@ -61,8 +62,8 @@ if __name__ == '__main__':
     compleasm_stram = pd.concat([compleasm_stram, quast_output], axis=0).reset_index(drop=True)
     
     # save output as csv
-    compleasm_euk.to_csv(os.path.join(args.output_dir, 'compleasm_euk.csv'), index=False)
-    compleasm_stram.to_csv(os.path.join(args.output_dir, 'compleasm_stram.csv'), index=False)
+    compleasm_euk.to_csv(os.path.join(args.output_dir, args.suffix + '_euk.csv'), index=False)
+    compleasm_stram.to_csv(os.path.join(args.output_dir, args.suffix + '_stram.csv'), index=False)
 
     
     
