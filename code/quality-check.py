@@ -19,8 +19,10 @@ def compleasm(input_file, output_dir, threads, library_path, linkage):
     # read in the output
     output_file = os.path.join(output_dir, 'summary.txt')
     df = pandas.read_csv(output_file, sep=',', index_col=False, skiprows=1, header=None)
+    column1 = df.iloc[:, 0]
+    split_column = column1.str.split(':', n=2).explode()
     shutil.rmtree(output_dir, ignore_errors=False)
-    return df
+    return split_column
 
 def quast(input_file, output_dir, threads):
     output_dir = os.path.join(output_dir, 'quast')
