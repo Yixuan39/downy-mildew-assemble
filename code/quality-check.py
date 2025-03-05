@@ -1,3 +1,5 @@
+#!/bin/env python
+
 import os
 import subprocess
 import argparse
@@ -16,7 +18,7 @@ def compleasm(input_file, output_dir, threads, library_path, linkage):
     subprocess.call(cmd, shell=True)
     # read in the output
     output_file = os.path.join(output_dir, 'summary.txt')
-    df = pandas.read_csv(output_file, sep=',')
+    df = pandas.read_csv(output_file, sep=',', index_col=False, skiprows=1, header=None)
     shutil.rmtree(output_dir, ignore_errors=False)
     return df
 
