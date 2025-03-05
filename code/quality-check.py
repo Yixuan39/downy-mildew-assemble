@@ -16,7 +16,7 @@ def compleasm(input_file, output_dir, threads, library_path, linkage):
     subprocess.call(cmd, shell=True)
     # read in the output
     output_file = os.path.join(output_dir, 'summary.txt')
-    df = pandas.read_csv(output_file, sep='\t')
+    df = pandas.read_csv(output_file, sep=',')
     shutil.rmtree(output_dir, ignore_errors=False)
     return df
 
