@@ -24,6 +24,8 @@ def compleasm(input_file, output_dir, threads, library_path, linkage):
     new_df = pd.DataFrame()
     new_df['Metric'] = split_column.str[0]
     new_df['Value'] = split_column.str[1]
+    # add a new row for linkage
+    new_df.loc[-1] = ['Linkage', linkage]
     shutil.rmtree(output_dir, ignore_errors=False)
     return new_df
 
@@ -39,6 +41,7 @@ def quast(input_file, output_dir, threads):
     # read in the output
     output_file = os.path.join(output_dir, 'report.tsv')
     df = pd.read_csv(output_file, sep='\t')
+    df.columns = ['Metric', 'Value']
     shutil.rmtree(output_dir, ignore_errors=False)
     return df
   
@@ -50,11 +53,16 @@ if __name__ == '__main__':
     parser.add_argument('--library_path', help='path to compleasm library', default='$HOME/project_data/downy/BUSCO_DB')
     args = parser.parse_args()
     compleasm_euk = compleasm(args.input_file, args.output_dir, args.threads, args.library_path, 'eukaryota_odb10')
-    compleasm_stramenopiles = compleasm(args.input_file, args.output_dir, args.threads, args.library_path, 'stramenopiles_odb10')
+    compleasm_stram = compleasm(args.input_file, args.output_dir, args.threads, args.library_path, 'stramenopiles_odb10')
     quast_output = quast(args.input_file, args.output_dir, args.threads)
+    
+    # combine compleasm and quast result
+    compleasm_euk = pd.concat([compleasm_euk, quast_output], axis=0).reset_index(drop=True)
+    compleasm_stram = pd.concat([compleasm_stram, quast_output], axis=0).reset_index(drop=True)
+    
     # save output as csv
     compleasm_euk.to_csv(os.path.join(args.output_dir, 'compleasm_euk.csv'), index=False)
-    compleasm_stramenopiles.to_csv(os.path.join(args.output_dir, 'compleasm_stramenopiles.csv'), index=False)
-    quast_output.to_csv(os.path.join(args.output_dir, 'quast.csv'), index=False)
+    compleasm_stram.to_csv(os.path.join(args.output_dir, 'compleasm_stram.csv'), index=False)
+
     
     
