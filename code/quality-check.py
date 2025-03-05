@@ -4,7 +4,7 @@ import argparse
 import shutil
 import pandas
 
-def compleasm(input_file, output_dir, threads, library_path, linkage):
+def compleasm(input_file, output_dir, linkage, threads=24, library_path='$HOME/project_data/downy/BUSCO_DB'):
     output_dir = os.path.join(output_dir, linkage)
     os.makedirs(output_dir, exist_ok=True)
     cmd = 'compleasm.py run \
@@ -12,7 +12,7 @@ def compleasm(input_file, output_dir, threads, library_path, linkage):
            --output_dir {} \
            --threads {} \
            --library_path {} \
-           --lineage {}'.format(input_file, output_dir, threads, library_path, linkage)
+           --lineage {}'.format(input_file, output_dir, linkage, threads=24, library_path='$HOME/project_data/downy/BUSCO_DB')
     subprocess.call(cmd, shell=True)
     # read in the output
     output_file = os.path.join(output_dir, 'summary.txt')
@@ -20,7 +20,7 @@ def compleasm(input_file, output_dir, threads, library_path, linkage):
     shutil.rmtree(output_dir, ignore_errors=False)
     return df
 
-def quast(input_file, output_dir, threads):
+def quast(input_file, output_dir, threads=24):
     output_dir = os.path.join(output_dir, 'quast')
     os.makedirs(output_dir, exist_ok=True)
     cmd = 'quast.py \
