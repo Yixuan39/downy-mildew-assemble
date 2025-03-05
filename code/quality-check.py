@@ -37,9 +37,17 @@ def quast(input_file, output_dir, threads):
   
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Quality check')
-    parser.add_argument('input', help='Input file in fasta format')
+    parser.add_argument('input_file', help='Input file in fasta format')
     parser.add_argument('output_dir', help='Output directory')
-    parser.add_argument('threads', help='Number of threads', default=24)
-    parser.add_argument('library_path', help='path to compleasm library', default='$HOME/project_data/downy/BUSCO_DB')
+    parser.add_argument('threads', help='Number of threads', default=24, required=False)
+    parser.add_argument('library_path', help='path to compleasm library', default='$HOME/project_data/downy/BUSCO_DB', required=False)
     args = parser.parse_args()
-    compleasm_euk(args.input, args.output)
+    compleasm_euk = compleasm(args.input_file, args.output_dir, args.threads, args.library_path, 'eukaryota_odb10')
+    compleasm_stramenopiles = compleasm(args.input_file, args.output_dir, args.threads, args.library_path, 'stramenopiles_odb10')
+    quast_output = quast(args.input_file, args.output_dir, args.threads)
+    # save output as csv
+    compleasm_euk.to_csv(os.path.join(args.output_dir, 'compleasm_euk.csv'), index=False)
+    compleasm_stramenopiles.to_csv(os.path.join(args.output_dir, 'compleasm_stramenopiles.csv'), index=False)
+    quast_output.to_csv(os.path.join(args.output_dir, 'quast.csv'), index=False)
+    
+    
