@@ -30,14 +30,11 @@ for file in ${FILES}; do
               --threads ${THREADS}
 done
 
-INPUT_FOLDER=$HOME/project_data/downy/data
-FILES=$(find ${INPUT_FOLDER} -name "*.fastq.gz")
+INPUT_FOLDER=$HOME/project_data/downy/data-fasta
+FILES=$(find ${INPUT_FOLDER} -name "*.fasta.gz")
 RESULT_PATH=$HOME/project_data/downy/simple-rm-contam-asm/
 
 for file in ${FILES}; do
-    # convert fastq to fasta
-    seqtk seq -A ${file} > ${file%.fastq.gz}.fasta.gz
-    file = ${file%.fastq.gz}.fasta.gz
     # check contamination in the genome, 4762 is the tax id for oomycota.
     run_gx.py --fasta ${file} \
               --tax-id 4762 \
