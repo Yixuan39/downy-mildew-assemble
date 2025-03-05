@@ -7,7 +7,7 @@ import pandas
 def compleasm(input_file, output_dir, threads, library_path, linkage):
     output_dir = os.path.join(output_dir, linkage)
     os.makedirs(output_dir, exist_ok=True)
-    cmd = 'compleasm.py run \
+    cmd = 'compleasm run \
            --assembly_path {} \
            --output_dir {} \
            --threads {} \
@@ -23,7 +23,7 @@ def compleasm(input_file, output_dir, threads, library_path, linkage):
 def quast(input_file, output_dir, threads):
     output_dir = os.path.join(output_dir, 'quast')
     os.makedirs(output_dir, exist_ok=True)
-    cmd = 'quast.py \
+    cmd = 'quast \
            --output-dir {} \
            --threads {} \
            --eukaryote \
