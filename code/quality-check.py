@@ -4,7 +4,7 @@ import os
 import subprocess
 import argparse
 import shutil
-import pandas
+import pandas as pd
 
 def compleasm(input_file, output_dir, threads, library_path, linkage):
     output_dir = os.path.join(output_dir, linkage)
@@ -18,11 +18,14 @@ def compleasm(input_file, output_dir, threads, library_path, linkage):
     subprocess.call(cmd, shell=True)
     # read in the output
     output_file = os.path.join(output_dir, 'summary.txt')
-    df = pandas.read_csv(output_file, sep=',', index_col=False, skiprows=1, header=None)
+    df = pd.read_csv(output_file, sep=',', index_col=False, skiprows=1, header=None)
     column1 = df.iloc[:, 0]
-    split_column = column1.str.split(':', n=2).explode()
+    split_column = column1.str.split(':', n=2)
+    new_df = pd.DataFrame()
+    new_df['Metric'] = split_column.str[0]
+    new_df['Value'] = split_column.str[1]
     shutil.rmtree(output_dir, ignore_errors=False)
-    return split_column
+    return new_df
 
 def quast(input_file, output_dir, threads):
     output_dir = os.path.join(output_dir, 'quast')
@@ -35,7 +38,7 @@ def quast(input_file, output_dir, threads):
     subprocess.call(cmd, shell=True)
     # read in the output
     output_file = os.path.join(output_dir, 'report.tsv')
-    df = pandas.read_csv(output_file, sep='\t')
+    df = pd.read_csv(output_file, sep='\t')
     shutil.rmtree(output_dir, ignore_errors=False)
     return df
   
