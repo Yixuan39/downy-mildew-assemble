@@ -22,10 +22,10 @@ for file in ${FILES}; do
               --output ${RESULT_PATH}/$(basename ${file%.gz})
     gzip ${RESULT_PATH}/$(basename ${file%.gz})
     # get quality report
-    python quality_check.py \
+    python quality-check.py \
               --input_file ${RESULT_PATH}/$(basename ${file}) \
               --output_dir ${RESULT_PATH} \
-              --suffix $(basename ${file%.fasta.gz})
+              --suffix $(basename ${file%.fasta.gz}) \
               --library_path ${BUSCO_DB} \
               --threads ${THREADS}
 done
@@ -48,10 +48,10 @@ for file in ${FILES}; do
               --output ${RESULT_PATH}/$(basename ${file%.gz})
     gzip ${RESULT_PATH}/$(basename ${file%.gz})
     # get quality report
-    python quality_check.py \
+    python quality-check.py \
               --input_file ${RESULT_PATH}/$(basename ${file}) \
               --output_dir ${RESULT_PATH} \
-              --suffix $(basename ${file%.fasta.gz})
+              --suffix $(basename ${file%.fasta.gz}) \
               --library_path ${BUSCO_DB} \
               --threads ${THREADS}
 done
