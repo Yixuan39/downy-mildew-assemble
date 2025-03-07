@@ -1,9 +1,9 @@
 #!/bin/bash
 
-THREADS=24
+THREADS=32
 INPUT_FOLDER=$HOME/project_data/downy/metaMDBG
 FILES=$(find ${INPUT_FOLDER} -name "*.fasta.gz")
-RESULT_PATH=$HOME/project_data/downy/simple-rm-contam-raw/
+RESULT_PATH=$HOME/project_data/downy/simple-rm-contam-asm/
 GX_DB=$HOME/project_data/downy/fcs-db/
 BUSCO_DB=$HOME/project_data/downy/BUSCO_DB
 export GX_NUM_CORES=$THREADS
@@ -32,7 +32,7 @@ done
 
 INPUT_FOLDER=$HOME/project_data/downy/data-fasta
 FILES=$(find ${INPUT_FOLDER} -name "*.fasta.gz")
-RESULT_PATH=$HOME/project_data/downy/simple-rm-contam-asm/
+RESULT_PATH=$HOME/project_data/downy/simple-rm-contam-raw/
 
 for file in ${FILES}; do
     # check contamination in the genome, 4762 is the tax id for oomycota.
