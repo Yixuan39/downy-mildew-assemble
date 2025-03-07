@@ -15,11 +15,11 @@ for dir in ${dirs}; do
     files=$(find ${dir} -name "*.fasta.gz")
     for file in ${files}; do
         # check contamination in the genome, 4762 is the tax id for oomycota.
-        # run_gx.py --fasta ${file} \
-        #           --tax-id 4762 \
-        #           --gx-db ${GX_DB} \
-        #           --out-dir ${out_dir} \
-        #           --out-basename $(basename ${file%.fasta.gz}) 
+        run_gx.py --fasta ${file} \
+                  --tax-id 4762 \
+                  --gx-db ${GX_DB} \
+                  --out-dir ${out_dir} \
+                  --out-basename $(basename ${file%.fasta.gz})
         # exclude contam read...
         gx clean-genome \
                   --input ${file} \

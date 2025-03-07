@@ -1,3 +1,4 @@
+#!/bin/bash
 # This script convert fcs db to fasta
 
 GX_DB=$HOME/project_data/downy/fcs-db/
