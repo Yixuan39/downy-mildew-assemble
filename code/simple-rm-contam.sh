@@ -50,7 +50,7 @@ for file in ${FILES}; do
     metaMDBG asm \
         --out-dir ${RESULT_PATH}/${file%.gz}_asm \
         --in-hifi ${RESULT_PATH}/$(basename ${file%.gz}) \
-        --threads ${threads}
+        --threads ${THREADS}
     mv ${RESULT_PATH}/${file%.gz}_asm/contigs.fasta.gz ${RESULT_PATH}/${file%.gz}
     gzip ${RESULT_PATH}/$(basename ${file%.gz})
     rm -rf ${RESULT_PATH}/${file%.gz}_asm
