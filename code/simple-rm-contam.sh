@@ -46,7 +46,14 @@ for file in ${FILES}; do
               --input ${file} \
               --action-report ${RESULT_PATH}/$(basename ${file%.fasta.gz}).fcs_gx_report.txt \
               --output ${RESULT_PATH}/$(basename ${file%.gz})
+    # assemble the genome
+    metaMDBG asm \
+        --out-dir ${RESULT_PATH}/${file%.gz}_asm \
+        --in-hifi ${RESULT_PATH}/$(basename ${file%.gz}) \
+        --threads ${threads}
+    mv ${RESULT_PATH}/${file%.gz}_asm/contigs.fasta.gz ${RESULT_PATH}/${file%.gz}
     gzip ${RESULT_PATH}/$(basename ${file%.gz})
+    rm -rf ${RESULT_PATH}/${file%.gz}_asm
     # get quality report
     python quality-check.py \
               --input_file ${RESULT_PATH}/$(basename ${file}) \
