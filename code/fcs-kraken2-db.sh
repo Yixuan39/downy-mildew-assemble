@@ -6,10 +6,14 @@ THREADS=24
 mkdir -p $KRAKEN_DB
 
 kraken2-build \
-    --build \
     --db $KRAKEN_DB \
     --add-to-library $REF_SEQ \
     --threads $THREADS 
+    
+kraken2-build \
+    --db $KRAKEN_DB \
+    --build \
+    --threads $THREADS
     
 kraken2-inspect \
     --db $KRAKEN_DB \
