@@ -22,13 +22,13 @@ for file in ${FILES}; do
               --action-report ${RESULT_PATH}/$(basename ${file%.fasta.gz}).fcs_gx_report.txt \
               --output ${RESULT_PATH}/$(basename ${file%.gz})
     # assemble the genome
-    mkdir -p ${RESULT_PATH}/${file%.gz}_asm
+    mkdir -p ${RESULT_PATH}/$(basename ${file%.gz})_asm
     metaMDBG asm \
-              --out-dir ${RESULT_PATH}/${file%.gz}_asm \
+              --out-dir ${RESULT_PATH}/$(basename ${file%.gz})_asm \
               --in-hifi ${RESULT_PATH}/$(basename ${file%.gz}) \
               --threads ${THREADS}
-    cp ${RESULT_PATH}/${file%.gz}_asm/contigs.fasta.gz ${RESULT_PATH}/${file}
-    rm -rf ${RESULT_PATH}/${file%.gz}_asm
+    mv ${RESULT_PATH}/$(basename ${file%.gz})_asm/contigs.fasta.gz ${RESULT_PATH}/$(basename ${file})
+    rm -rf ${RESULT_PATH}/$(basename ${file%.gz})_asm
     # get quality report
     python quality-check.py \
               --input_file ${RESULT_PATH}/$(basename ${file}) \
