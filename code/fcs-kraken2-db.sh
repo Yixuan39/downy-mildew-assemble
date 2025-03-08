@@ -3,6 +3,7 @@
 REF_SEQ=$HOME/project_data/downy/fcs-db/all.fasta
 KRAKEN_DB=$HOME/project_data/downy/KrakenDB/fcs-kraken2
 THREADS=24
+mkdir -p $KRAKEN_DB
 
 kraken2-build \
     --build \
