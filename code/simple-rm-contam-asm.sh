@@ -1,6 +1,6 @@
 #!/bin/bash
 
-THREADS=32
+THREADS=24
 INPUT_FOLDER=$HOME/project_data/downy/metaMDBG
 FILES=$(find ${INPUT_FOLDER} -name "*.fasta.gz")
 RESULT_PATH=$HOME/project_data/downy/simple-rm-contam-asm/
