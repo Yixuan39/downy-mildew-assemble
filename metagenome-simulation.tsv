@@ -1,6 +1,6 @@
-sample	taxon	tax_abundance
-sample1	4787	0.15
-sample1	1783272	0.8
-sample1	4751	0.03
-sample1	1753	0.01
-sample1	3486	0.01
+sample	taxon	read
+sample1	4787	1500
+sample1	1783272	8000
+sample1	4751	300
+sample1	1753	100
+sample1	3486	100
