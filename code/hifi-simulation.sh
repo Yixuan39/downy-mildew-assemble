@@ -5,4 +5,6 @@ mess run \
     --output $HOME/project_data/downy/hifi-simulation \
     --tech pacbio \
     --error hifi \
-    --model QSHMM-ONT-HQ 
+    --model QSHMM-ONT-HQ \
+    --rank genus \
+    --nrank 10
