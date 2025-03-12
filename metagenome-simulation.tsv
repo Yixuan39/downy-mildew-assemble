@@ -1,3 +1,7 @@
-taxon   nb  cov_sim sample
-staphylococcus_aureus   1   0.1 sample1
-1290    1   0.1 sample2
+sample	taxon	reads
+sample1	487	174840
+sample1	727	90679
+sample1	729	13129
+sample2	28132	147863
+sample2	199	147545
+sample2	729	131300
