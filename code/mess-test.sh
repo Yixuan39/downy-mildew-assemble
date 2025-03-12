@@ -1,9 +1,8 @@
 #!/bin/bash
 
 mess run \
-    --input ~/Projects/downy-mildew-assemble/metagenome-simulation.tsv \
+    --input ../metagenome-simulation.tsv \
     --output ~/project_data/downy/simulated-hifi \
-    --threads 24 \
-    --nrank 20 \
+    --threads 10 \
     --tech pacbio \
     --error hifi  
