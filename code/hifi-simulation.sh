@@ -7,4 +7,4 @@ mess run \
     --error hifi \
     --model QSHMM-ONT-HQ \
     --rank genus \
-    --nrank 10
+    --nrank 10 
