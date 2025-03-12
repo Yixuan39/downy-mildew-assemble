@@ -7,6 +7,7 @@ RESULT_PATH=$HOME/project_data/downy/fcs-genome-cleaning/
 GX_DB=$HOME/project_data/downy/fcs-db/
 KrakenDB=$HOME/project_data/downy/KrakenDB/oomycota-genome
 BUSCO_DB=$HOME/project_data/downy/BUSCO_DB
+CS=0.5
 export GX_NUM_CORES=$THREADS
 
 for file in ${FILES}; do
@@ -25,6 +26,7 @@ for file in ${FILES}; do
     # run kraken2
     kraken2 \
               --db ${KrakenDB} \
+              --confidence ${CS} \
               --threads ${THREADS} \
               --output ${RESULT_PATH}/$(basename ${file%.fasta.gz}).kraken \
               --report ${RESULT_PATH}/$(basename ${file%.fasta.gz}).kreport \
