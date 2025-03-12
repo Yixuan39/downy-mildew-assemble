@@ -6,5 +6,4 @@ mess run \
     --tech pacbio \
     --error hifi \
     --model QSHMM-ONT-HQ \
-    --rank genus \
-    --nrank 10 
+    --rank genus 
