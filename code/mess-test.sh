@@ -3,6 +3,8 @@
 mess run \
     --input ../metagenome-simulation.tsv \
     --output ~/project_data/downy/simulated-hifi \
-    --threads 10 \
+    --threads 24 \
     --tech pacbio \
-    --error hifi  
+    --error hifi \
+    --model QSHMM-ONT-HQ \
+    --passes 2 
