@@ -1,11 +1,13 @@
 #!/bin/bash
+#SBATCH -c 24
+#SBATCH --mem=500G
 
 THREADS=24
 INPUT_FOLDER=$HOME/project_data/downy/hifi-simulation/fastq
 FILES=$(find ${INPUT_FOLDER} -name "*.fq.gz")
 RESULT_PATH=$HOME/project_data/downy/fcs-cleaning-simulation/
 GX_DB=$HOME/project_data/downy/fcs-db/
-KrakenDB=$HOME/project_data/downy/KrakenDB/oomycota-genome
+KrakenDB=$HOME/project_data/downy/KrakenDB/oomycotsa-genome
 BUSCO_DB=$HOME/project_data/downy/BUSCO_DB
 CS=0.5
 export GX_NUM_CORES=$THREADS
