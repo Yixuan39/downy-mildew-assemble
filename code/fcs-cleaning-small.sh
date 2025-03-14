@@ -1,4 +1,6 @@
 #!/bin/bash
+#SBATCH -c 24
+#SBATCH --mem=500G
 
 THREADS=24
 INPUT_FOLDER=$HOME/project_data/downy/metaMDBG
