@@ -12,19 +12,19 @@ export GX_NUM_CORES=$THREADS
 
 for file in ${FILES}; do
     metaMDBG asm \
-        --out-dir ${RESULT_PATH}/${file}.asm \
-        --in-hifi ${INPUT_FOLDER}/${file} \
+        --out-dir ${RESULT_PATH}/$(basename ${file%.fq.gz}).asm \
+        --in-hifi ${file} \
         --threads ${THREADS}
 
     # check contamination in the genome, 4762 is the tax id for oomycota.
-    run_gx.py --fasta ${RESULT_PATH}/${file}.asm/contigs.fasta.gz \
+    run_gx.py --fasta ${RESULT_PATH}/$(basename ${file%.fq.gz}).asm/contigs.fasta.gz \
               --tax-id 4762 \
               --gx-db ${GX_DB} \
               --out-dir ${RESULT_PATH} \
               --out-basename $(basename ${file%.fq.gz})
     # exclude contam read...
     gx clean-genome \
-              --input ${RESULT_PATH}/${file}.asm/contigs.fasta.gz \
+              --input ${RESULT_PATH}/$(basename ${file%.fq.gz}).asm/contigs.fasta.gz \
               --action-report ${RESULT_PATH}/$(basename ${file%.fq.gz}).fcs_gx_report.txt \
               --min-seq-len 5000 \
               --output ${RESULT_PATH}/$(basename ${file%.fq.gz}).fcs_cleaned.fasta
