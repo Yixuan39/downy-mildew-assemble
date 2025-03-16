@@ -9,7 +9,7 @@ RESULT_PATH=$HOME/project_data/downy/fcs-cleaning-simulation/
 GX_DB=$HOME/project_data/downy/fcs-db/
 KrakenDB=$HOME/project_data/downy/KrakenDB/oomycota-genome
 BUSCO_DB=$HOME/project_data/downy/BUSCO_DB
-CS=0.5
+CS=0
 export GX_NUM_CORES=$THREADS
 
 for file in ${FILES}; do
