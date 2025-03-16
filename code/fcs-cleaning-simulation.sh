@@ -63,7 +63,5 @@ for file in ${FILES}; do
     # compress both files
     gzip ${RESULT_PATH}/$(basename ${file%.fq.gz}).fcs_cleaned.fasta
     gzip ${RESULT_PATH}/$(basename ${file%.fq.gz}).kraken_cleaned.fasta
-    # remove unnecessary files
-    rm -rf ${RESULT_PATH}/${file}.asm
 done
 
