@@ -7,16 +7,16 @@ INPUT_FOLDER=$HOME/project_data/downy/hifi-simulation/fastq
 FILES=$(find ${INPUT_FOLDER} -name "*.fq.gz")
 RESULT_PATH=$HOME/project_data/downy/fcs-cleaning-simulation/
 GX_DB=$HOME/project_data/downy/fcs-db/
-KrakenDB=$HOME/project_data/downy/KrakenDB/oomycotsa-genome
+KrakenDB=$HOME/project_data/downy/KrakenDB/oomycota-genome
 BUSCO_DB=$HOME/project_data/downy/BUSCO_DB
 CS=0.5
 export GX_NUM_CORES=$THREADS
 
 for file in ${FILES}; do
-    metaMDBG asm \
-        --out-dir ${RESULT_PATH}/$(basename ${file%.fq.gz}).asm \
-        --in-hifi ${file} \
-        --threads ${THREADS}
+    # metaMDBG asm \
+    #     --out-dir ${RESULT_PATH}/$(basename ${file%.fq.gz}).asm \
+    #     --in-hifi ${file} \
+    #     --threads ${THREADS}
 
     # check contamination in the genome, 4762 is the tax id for oomycota.
     run_gx.py --fasta ${RESULT_PATH}/$(basename ${file%.fq.gz}).asm/contigs.fasta.gz \
