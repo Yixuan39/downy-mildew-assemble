@@ -1,10 +1,10 @@
 #!/bin/bash
 
-PATH=/data/run/yyang
+WD=/data/run/yyang
 
 mess run \
     --threads 24 \
     --input ../metagenome-simulation.tsv \
-    --output $PATH/project_data/downy/hifi-simulation \
+    --output ${WD}/project_data/downy/hifi-simulation \
     --tech pacbio \
     --error hifi
