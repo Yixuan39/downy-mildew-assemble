@@ -13,10 +13,10 @@ CS=0
 export GX_NUM_CORES=$THREADS
 
 for file in ${FILES}; do
-    # metaMDBG asm \
-    #     --out-dir ${RESULT_PATH}/$(basename ${file%.fq.gz}).asm \
-    #     --in-hifi ${file} \
-    #     --threads ${THREADS}
+    metaMDBG asm \
+        --out-dir ${RESULT_PATH}/$(basename ${file%.fq.gz}).asm \
+        --in-hifi ${file} \
+        --threads ${THREADS}
 
     # check contamination in the genome, 4762 is the tax id for oomycota.
     run_gx.py --fasta ${RESULT_PATH}/$(basename ${file%.fq.gz}).asm/contigs.fasta.gz \
