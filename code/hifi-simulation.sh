@@ -7,6 +7,7 @@ mess run \
     --tech pacbio \
     --tool pbsim3 \
     --error hifi \
+    --ratio '22:45:33' \
     --max_len 1000000 \
     --mean_len 9000 \
     --min_len 100 \
