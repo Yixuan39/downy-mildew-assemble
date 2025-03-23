@@ -1,8 +1,10 @@
 #!/bin/bash
 
 mess run \
-    --input ../subsample.tsv \
+    --input ../subsample-seqabn.tsv \
     --output $HOME/project_data/downy/hifi-simulation \
     --threads 8 \
     --tech pacbio \
-    --model QSHMM-RSII
+    --model QSHMM-RSII \
+    --error hifi \
+    --base 10G
