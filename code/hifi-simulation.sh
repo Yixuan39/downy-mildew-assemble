@@ -7,4 +7,4 @@ mess run \
     --tech pacbio \
     --model QSHMM-RSII \
     --error hifi \
-    --base 10G
+    --bases 10G
