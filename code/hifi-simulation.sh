@@ -6,5 +6,4 @@ mess run \
     --threads 8 \
     --tech pacbio \
     --model QSHMM-RSII \
-    --error hifi \
-    --bases 10G
+    --error hifi
