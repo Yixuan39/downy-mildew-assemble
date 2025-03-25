@@ -7,7 +7,6 @@ mess run \
     --tech pacbio \
     --model QSHMM-RSII \
     --error hifi \
-    --length-min 100 \
-    --length-max 1000000 \
-    --length-mean 9000 \
-    --length-sd 7000 
+    --mean-len 9000 \
+    --accuracy 0.999 \
+    --passes 10
