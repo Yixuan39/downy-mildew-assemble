@@ -9,5 +9,5 @@ FILE=${FILES[$SLURM_ARRAY_TASK_ID]}
 OUTPUT_DIR=$HOME/project_data/downy/GSL_Data/fastq
 mkdir -p $OUTPUT_DIR
 
-bam2fastq --output $OUTPUT_DIR/$(dirname $FILE) $FILE
+bam2fastq --output $OUTPUT_DIR/$(basename $(dirname $FILE)) $FILE
 
