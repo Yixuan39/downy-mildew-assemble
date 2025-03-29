@@ -17,14 +17,14 @@ CS=CS_LIST[$SLURM_ARRAY_TASK_ID]
 TAXID=4762
 MIN_LENGTH=5000
 THREADS=24
-EXTRACT=true
+EXTRACT=false
 
 
 # assemble first, then use fcs, then kraken2
 OUTPUT_DIR=$HOME/project_data/downy/kraken2-extract/asm-fcs-kraken2/oomycota-genomic/${CS}
 mkdir -p $OUTPUT_DIR
 for FILE in ${FILES}; do
-    bash asm-fcs-kraken2.sh \
+    bash kraken2-asm-fcs.sh \
       -i $FILE \
       -o $OUTPUT_DIR \
       -d $GX_DB \
@@ -40,7 +40,7 @@ done
 OUTPUT_DIR=$HOME/project_data/downy/kraken2-extract/asm-fcs-kraken2/contam-genomic/${CS}
 mkdir -p $OUTPUT_DIR
 for FILE in ${FILES}; do
-    bash asm-fcs-kraken2.sh \
+    bash kraken2-asm-fcs.sh \
       -i $FILE \
       -o $OUTPUT_DIR \
       -d $GX_DB \
@@ -56,7 +56,7 @@ done
 OUTPUT_DIR=$HOME/project_data/downy/kraken2-extract/asm-fcs-kraken2/oomycota-protein/${CS}
 mkdir -p $OUTPUT_DIR
 for FILE in ${FILES}; do
-    bash asm-fcs-kraken2.sh \
+    bash kraken2-asm-fcs.sh \
       -i $FILE \
       -o $OUTPUT_DIR \
       -d $GX_DB \
@@ -72,7 +72,7 @@ done
 OUTPUT_DIR=$HOME/project_data/downy/kraken2-extract/asm-fcs-kraken2/contam-protein/${CS}
 mkdir -p $OUTPUT_DIR
 for FILE in ${FILES}; do
-    bash asm-fcs-kraken2.sh \
+    bash kraken2-asm-fcs.sh \
       -i $FILE \
       -o $OUTPUT_DIR \
       -d $GX_DB \

@@ -2,6 +2,7 @@
 #SBATCH --job-name=run
 #SBATCH --array=0-3
 #SBATCH --cpus-per-task=24
+#SBATCH --mem=500G
 
 INPUT_DIR=$HOME/project_data/downy/GSL_Data/fastq
 FILES=($(find "$INPUT_DIR" -type f -name "*.fastq.gz"))

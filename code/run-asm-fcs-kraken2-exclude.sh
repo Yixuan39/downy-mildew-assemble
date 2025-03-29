@@ -17,7 +17,7 @@ CS=CS_LIST[$SLURM_ARRAY_TASK_ID]
 TAXID=4762
 MIN_LENGTH=5000
 THREADS=24
-EXTRACT=true
+EXTRACT=false
 
 
 # assemble first, then use fcs, then kraken2

@@ -2,6 +2,7 @@
 #SBATCH --job-name=run
 #SBATCH --array=0-3
 #SBATCH --cpus-per-task=24
+#SBATCH --mem=500G
 
 INPUT_DIR=$HOME/project_data/downy/GSL_Data/fastq
 FILES=($(find "$INPUT_DIR" -type f -name "*.fastq.gz"))
@@ -23,7 +24,7 @@ EXTRACT=true
 OUTPUT_DIR=$HOME/project_data/downy/kraken2-extract/asm-fcs-kraken2/oomycota-genomic/${CS}
 mkdir -p $OUTPUT_DIR
 for FILE in ${FILES}; do
-    bash asm-fcs-kraken2.sh \
+    bash asm-kraken2-fcs.sh \
       -i $FILE \
       -o $OUTPUT_DIR \
       -d $GX_DB \
@@ -39,7 +40,7 @@ done
 OUTPUT_DIR=$HOME/project_data/downy/kraken2-extract/asm-fcs-kraken2/contam-genomic/${CS}
 mkdir -p $OUTPUT_DIR
 for FILE in ${FILES}; do
-    bash asm-fcs-kraken2.sh \
+    bash asm-kraken2-fcs.sh \
       -i $FILE \
       -o $OUTPUT_DIR \
       -d $GX_DB \
@@ -55,7 +56,7 @@ done
 OUTPUT_DIR=$HOME/project_data/downy/kraken2-extract/asm-fcs-kraken2/oomycota-protein/${CS}
 mkdir -p $OUTPUT_DIR
 for FILE in ${FILES}; do
-    bash asm-fcs-kraken2.sh \
+    bash asm-kraken2-fcs.sh \
       -i $FILE \
       -o $OUTPUT_DIR \
       -d $GX_DB \
@@ -71,7 +72,7 @@ done
 OUTPUT_DIR=$HOME/project_data/downy/kraken2-extract/asm-fcs-kraken2/contam-protein/${CS}
 mkdir -p $OUTPUT_DIR
 for FILE in ${FILES}; do
-    bash asm-fcs-kraken2.sh \
+    bash asm-kraken2-fcs.sh \
       -i $FILE \
       -o $OUTPUT_DIR \
       -d $GX_DB \
