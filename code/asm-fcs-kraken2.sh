@@ -38,27 +38,6 @@ while getopts "i:o:d:k:b:c:t:m:p:h" opt; do
     esac
 done
 
-# Validate required arguments
-if [[ -z "$INPUT_FILE" || -z "$RESULT_DIR" ]]; then
-    echo "Error: Missing required arguments!"
-    usage
-fi
-
-# Display parsed parameters
-echo "-----------------------------"
-echo "🚀 Running with parameters:"
-echo "Input file:      ${INPUT_FILE:-Not provided}"
-echo "Output directory:${RESULT_DIR:-Not provided}"
-echo "GX database:     ${GX_DB:-Not provided}"
-echo "KrakenDB:        ${KrakenDB:-Not provided}"
-echo "BUSCO database:  ${BUSCO_DB:-Not provided}"
-echo "Confidence Score:${CS:-Not provided}"
-echo "Taxonomic ID:    ${TAXID:-Not provided}"
-echo "Extract Reads:   ${EXTRACT:-Not provided}"
-echo "Min Length:      ${MIN_LENGTH:-Not provided}"
-echo "Threads:         ${THREADS:-Not provided}"
-echo "-----------------------------"
-
 export GX_NUM_CORES=$THREADS
 # get base name
 BASENAME=$(basename ${INPUT_FILE})
