@@ -15,6 +15,8 @@ THREADS=24
 EXTRACT=true
 export GX_NUM_CORES=$THREADS
 
+echo "Files: ${FILES[@]}"sc
+
 
 # assemble first, then use fcs, then kraken2
 OUTPUT_DIR=$HOME/project_data/downy/kraken2-extract/asm-fcs-kraken2-smalldb/oomycota-genomic/${CS}
