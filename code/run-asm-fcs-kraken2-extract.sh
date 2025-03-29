@@ -24,7 +24,7 @@ OUTPUT_DIR=$HOME/project_data/downy/kraken2-extract/asm-fcs-kraken2/oomycota-gen
 mkdir -p $OUTPUT_DIR
 for FILE in ${FILES}; do
     bash asm-kraken2-fcs.sh \
-      -i $FILE
+      -i $FILE \
       -o $OUTPUT_DIR \
       -d $GX_DB \
       -k $KrakenDB_oomycota_genomic \
@@ -40,7 +40,7 @@ OUTPUT_DIR=$HOME/project_data/downy/kraken2-extract/asm-fcs-kraken2/contam-genom
 mkdir -p $OUTPUT_DIR
 for FILE in ${FILES}; do
     bash asm-kraken2-fcs.sh \
-      -i $FILE
+      -i $FILE \
       -o $OUTPUT_DIR \
       -d $GX_DB \
       -k $KrakenDB_contam_genomic \
@@ -56,7 +56,7 @@ OUTPUT_DIR=$HOME/project_data/downy/kraken2-extract/asm-fcs-kraken2/oomycota-pro
 mkdir -p $OUTPUT_DIR
 for FILE in ${FILES}; do
     bash asm-kraken2-fcs.sh \
-      -i $FILE
+      -i $FILE \
       -o $OUTPUT_DIR \
       -d $GX_DB \
       -k $KrakenDB_oomycota_protein \
@@ -72,7 +72,7 @@ OUTPUT_DIR=$HOME/project_data/downy/kraken2-extract/asm-fcs-kraken2/contam-prote
 mkdir -p $OUTPUT_DIR
 for FILE in ${FILES}; do
     bash asm-kraken2-fcs.sh \
-      -i $FILE
+      -i $FILE \
       -o $OUTPUT_DIR \
       -d $GX_DB \
       -k $KrakenDB_contam_protein \
