@@ -4,7 +4,7 @@
 #SBATCH --mem=500G
 
 INPUT_DIR=$HOME/project_data/downy/GSL_Data/fastq
-FILES=($(find ${INPUT_DIR} -name "*.fastq.gz"))
+FILES=($(find "$INPUT_DIR" -type f -name "*.fastq.gz"))
 GX_DB=$HOME/project_data/downy/fcs-db/
 KrakenDB_oomycota_genomic=$HOME/project_data/downy/KrakenDB/oomycota-genome-small
 BUSCO_DB=$HOME/project_data/downy/BUSCO_DB
@@ -13,9 +13,6 @@ TAXID=4762
 MIN_LENGTH=5000
 THREADS=24
 EXTRACT=true
-export GX_NUM_CORES=$THREADS
-
-echo "Files: ${FILES[@]}"sc
 
 
 # assemble first, then use fcs, then kraken2
