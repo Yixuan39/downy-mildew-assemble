@@ -16,7 +16,7 @@ EXTRACT=true
 
 
 # assemble first, then use fcs, then kraken2
-OUTPUT_DIR=$HOME/project_data/downy/kraken2-extract/asm-fcs-kraken2/oomycota-genomic/${CS}
+OUTPUT_DIR=$HOME/project_data/downy/kraken2-extract/asm-fcs-kraken2-smalldb/oomycota-genomic/${CS}
 mkdir -p $OUTPUT_DIR
 for FILE in ${FILES}; do
     bash asm-fcs-kraken2.sh \
