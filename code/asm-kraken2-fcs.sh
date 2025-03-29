@@ -1,6 +1,4 @@
 #!/bin/bash
-#SBATCH -c 24
-#SBATCH --mem=500G
 
 EXTRACT=true
 
