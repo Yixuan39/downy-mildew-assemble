@@ -24,16 +24,16 @@ OUTPUT_DIR=$HOME/project_data/downy/kraken2-extract/asm-fcs-kraken2/oomycota-gen
 mkdir -p $OUTPUT_DIR
 for FILE in ${FILES}; do
     bash asm-fcs-kraken2.sh \
-      -i $FILE
-      -o $OUTPUT_DIR \
-      -d $GX_DB \
-      -k $KrakenDB_oomycota_genomic \
-      -b $BUSCO_DB \
-      -c $CS \
-      -t $TAXID \
-      -e $EXTRACT \
-      -m $MIN_LENGTH \
-      -p $THREADS
+      -i "$FILE"
+      -o "$OUTPUT_DIR" \
+      -d "$GX_DB" \
+      -k "$KrakenDB_oomycota_genomic" \
+      -b "$BUSCO_DB" \
+      -c "$CS" \
+      -t "$TAXID" \
+      -e "$EXTRACT" \
+      -m "$MIN_LENGTH" \
+      -p "$THREADS"
 done
 
 OUTPUT_DIR=$HOME/project_data/downy/kraken2-extract/asm-fcs-kraken2/contam-genomic/${CS}
