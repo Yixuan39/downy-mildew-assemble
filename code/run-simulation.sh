@@ -17,7 +17,7 @@ THREADS=24
 EXTRACT=true
 
 mkdir -p $OUTPUT_DIR
-bash kraken2-asm-fcs.sh \
+bash asm-fcs-kraken2.sh \
       -i $FILE \
       -o $OUTPUT_DIR \
       -d $GX_DB \
