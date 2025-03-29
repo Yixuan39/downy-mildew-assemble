@@ -20,7 +20,7 @@ usage() {
 }
 
 # Parse command-line options
-while getopts "i:o:d:k:b:c:t:m:p:h" opt; do
+while getopts "i:o:d:k:b:c:t:e:m:p:h" opt; do
     case $opt in
         i) INPUT_FILE="$OPTARG" ;;
         o) RESULT_DIR="$OPTARG" ;;

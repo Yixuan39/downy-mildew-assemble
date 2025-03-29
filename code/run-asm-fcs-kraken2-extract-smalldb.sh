@@ -13,6 +13,7 @@ TAXID=4762
 MIN_LENGTH=5000
 THREADS=24
 EXTRACT=true
+export GX_NUM_CORES=$THREADS
 
 
 # assemble first, then use fcs, then kraken2
