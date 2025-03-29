@@ -35,7 +35,6 @@ while getopts "i:o:d:k:b:c:t:m:p:h" opt; do
         m) MIN_LENGTH="$OPTARG" ;;
         p) THREADS="$OPTARG" ;;
         h) usage ;;
-        \?) echo "Invalid option: -$OPTARG" >&2; usage ;;
     esac
 done
 
