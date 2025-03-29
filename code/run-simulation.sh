@@ -1,6 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=simulation
 #SBATCH --cpus-per-task=24
+#SBATCH --array=0-3
 #SBATCH --mem=500G
 
 FILE=$HOME/project_data/downy/hifi-simulation/fastq/subsample-prop.fq.gz
@@ -8,7 +9,8 @@ OUTPUT_DIR=$HOME/project_data/downy/simulation-result
 GX_DB=$HOME/project_data/downy/fcs-db/
 KrakenDB_oomycota_genomic=$HOME/project_data/downy/KrakenDB/oomycota-genome
 BUSCO_DB=$HOME/project_data/downy/BUSCO_DB
-CS=0.5
+CS_LIST=[0,0.25,0.5,0.75]
+CS=CS_LIST[$SLURM_ARRAY_TASK_ID]
 TAXID=4762
 MIN_LENGTH=5000
 THREADS=24
