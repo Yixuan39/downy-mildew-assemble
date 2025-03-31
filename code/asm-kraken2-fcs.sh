@@ -52,8 +52,8 @@ metaMDBG asm \
 ASSEMBLED_FILE=${RESULT_DIR}/${BASENAME}.asm.fasta.gz
 seqtk seq \
     -L ${MIN_LENGTH} \
-    ${RESULT_DIR}/${BASENAME}.asm/contigs.fasta.gz\
-    > ${ASSEMBLED_FILE}
+    ${RESULT_DIR}/${BASENAME}.asm/contigs.fasta.gz \
+    | gzip > ${ASSEMBLED_FILE}
 rm -rf ${RESULT_DIR}/${BASENAME}.asm
 
 if [ ${EXTRACT} ] 
