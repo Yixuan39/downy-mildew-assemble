@@ -103,14 +103,14 @@ gx clean-genome \
 # get quality report for fcs cleaned INPUT_FILE
 python quality-check.py \
     --input_file ${RESULT_DIR}/${BASENAME}.fcs_cleaned.fasta \
-    --output_dir ${RESULT_PATH} \
+    --output_dir ${RESULT_DIR} \
     --suffix ${BASENAME}.fcs_cleaned \
     --library_path ${BUSCO_DB} \
     --threads ${THREADS}
     # get quality report for kraken2 cleaned INPUT_FILE
 python quality-check.py \
     --input_file ${RESULT_DIR}/${BASENAME}.kraken_cleaned.fasta \
-    --output_dir ${RESULT_PATH} \
+    --output_dir ${RESULT_DIR} \
     --suffix ${BASENAME}.kraken_cleaned \
     --library_path ${BUSCO_DB} \
     --threads ${THREADS}
