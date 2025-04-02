@@ -42,14 +42,18 @@ BASENAME=$(basename ${INPUT_FILE})
 BASENAME=${BASENAME%.fastq}
 BASENAME=${BASENAME%.gz}
 
-# assemble the genome
-metaMDBG asm \
-    --out-dir ${RESULT_DIR}/${BASENAME}.asm \
-    --in-hifi ${INPUT_FILE} \
-    --threads ${THREADS}
+# # assemble the genome
+# metaMDBG asm \
+#     --out-dir ${RESULT_DIR}/${BASENAME}.asm \
+#     --in-hifi ${INPUT_FILE} \
+#     --threads ${THREADS}
+#     
+
+# ASSEMBLED_FILE=${RESULT_DIR}/${BASENAME}.asm.fasta.gz
+# assume input files are already assembled
+ASSEMBLED_FILE=${INPUT_FILE}
     
 # discard contigs shorter than 5000 bp
-ASSEMBLED_FILE=${RESULT_DIR}/${BASENAME}.asm.fasta.gz
 seqtk seq \
     -L ${MIN_LENGTH} \
     ${RESULT_DIR}/${BASENAME}.asm/contigs.fasta.gz \
