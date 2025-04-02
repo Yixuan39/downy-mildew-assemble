@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=run
+#SBATCH --job-name=metaMDBG
 #SBATCH --array=0-3
 #SBATCH --cpus-per-task=24
 
