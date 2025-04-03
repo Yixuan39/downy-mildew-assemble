@@ -3,8 +3,8 @@
 #SBATCH --cpus-per-task=24
 #SBATCH --mem=500G
 
-INPUT_DIR=$HOME/project_data/downy/GSL_Data/fastq
-FILES=($(find "$INPUT_DIR" -type f -name "*.fastq.gz"))
+INPUT_DIR=$HOME/project_data/downy/GSL_Data/metaMDBG
+FILES=($(find "$INPUT_DIR" -type f -name "*.fasta.gz"))
 GX_DB=$HOME/project_data/downy/fcs-db/
 KrakenDB_oomycota_genomic=$HOME/project_data/downy/KrakenDB/oomycota-genome-small
 BUSCO_DB=$HOME/project_data/downy/BUSCO_DB
