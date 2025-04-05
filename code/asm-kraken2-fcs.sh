@@ -37,10 +37,14 @@ while getopts "i:o:d:k:b:c:t:e:m:p:h" opt; do
 done
 
 export GX_NUM_CORES=$THREADS
-# get base name
-BASENAME=$(basename ${INPUT_FILE})
-BASENAME=${BASENAME%.fastq}
-BASENAME=${BASENAME%.gz}
+# # get base name
+# BASENAME=$(basename "$INPUT_FILE")  
+# BASENAME=${BASENAME%.fastq.gz}  
+# BASENAME=${BASENAME%.fq.gz}  
+# BASENAME=${BASENAME%.fastq}  
+# BASENAME=${BASENAME%.fq} 
+# 
+# echo "Base name: $BASENAME"
 
 # # assemble the genome
 # metaMDBG asm \
@@ -48,7 +52,10 @@ BASENAME=${BASENAME%.gz}
 #     --in-hifi ${INPUT_FILE} \
 #     --threads ${THREADS}
 #     
-
+# get base name
+BASENAME=$(basename "$INPUT_FILE")  
+BASENAME=${BASENAME%.fasta.gz}  
+echo "Base name: $BASENAME"
 ASSEMBLED_FILE=${RESULT_DIR}/${BASENAME}.asm.fasta.gz
     
 # discard contigs shorter than 5000 bp
