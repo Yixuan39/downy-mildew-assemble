@@ -53,16 +53,15 @@ echo "Base name: $BASENAME"
 #     --threads ${THREADS}
 #     
 
-# ASSEMBLED_FILE=${RESULT_DIR}/${BASENAME}.asm.fasta.gz
-# assume input files are already assembled
-ASSEMBLED_FILE=${INPUT_FILE}
+ASSEMBLED_FILE=${RESULT_DIR}/${BASENAME}.asm.fasta.gz
 
 # discard contigs shorter than 5000 bp
+# previous input file: ${RESULT_DIR}/${BASENAME}.asm/contigs.fasta.gz \
 seqtk seq \
     -L ${MIN_LENGTH} \
-    ${RESULT_DIR}/${BASENAME}.asm/contigs.fasta.gz \
+    ${INPUT_FILE} \
     | gzip > ${ASSEMBLED_FILE}
-rm -rf ${RESULT_DIR}/${BASENAME}.asm
+# rm -rf ${RESULT_DIR}/${BASENAME}.asm
 
 # fcs screen and remove contamination
 run_gx.py \
