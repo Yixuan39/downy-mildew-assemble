@@ -37,6 +37,17 @@ while getopts "i:o:d:k:b:c:t:e:m:p:h" opt; do
 done
 
 export GX_NUM_CORES=$THREADS
+
+# Pin both .gxs and .gxi files into memory to prevent disk thrashing
+for GX_FILE in "${GX_DB}/all.gxs" "${GX_DB}/all.gxi"; do
+    if [[ -f "$GX_FILE" ]]; then
+        echo "Locking $GX_FILE into memory with vmtouch..."
+        vmtouch -l "$GX_FILE"
+    else
+        echo "Warning: $GX_FILE not found."
+    fi
+done
+
 # get base name
 BASENAME=$(basename ${INPUT_FILE})
 BASENAME=${BASENAME%.fastq}
@@ -121,4 +132,10 @@ python quality-check.py \
 gzip ${RESULT_DIR}/${BASENAME}.fcs_cleaned.fasta
 mv ${ASSEMBLED_FILE} ${RESULT_DIR}/${BASENAME}.kraken_cleaned.fasta.gz
 
-
+# Clean up: unlock pinned GX DB files
+for GX_FILE in "${GX_DB}/all.gxs" "${GX_DB}/all.gxi"; do
+    if [[ -f "$GX_FILE" ]]; then
+        echo "Unlocking $GX_FILE from memory..."
+        vmtouch -dl "$GX_FILE"
+    fi
+done
