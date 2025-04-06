@@ -17,11 +17,9 @@ CS=${CS_LIST[$SLURM_ARRAY_TASK_ID]}
 TAXID=4762
 MIN_LENGTH=5000
 THREADS=24
-EXTRACT=true
-
 
 # assemble first, then use fcs, then kraken2
-OUTPUT_DIR=$HOME/project_data/downy/kraken2-extract/asm-fcs-kraken2/oomycota-genomic/${CS}
+OUTPUT_DIR=$HOME/project_data/downy/result/asm-fcs-kraken2/oomycota-genomic/${CS}
 mkdir -p $OUTPUT_DIR
 for FILE in ${FILES[@]}; do
     bash asm-kraken2-fcs.sh \
@@ -32,12 +30,12 @@ for FILE in ${FILES[@]}; do
       -b $BUSCO_DB \
       -c $CS \
       -t $TAXID \
-      -e $EXTRACT \
+      -e true \
       -m $MIN_LENGTH \
       -p $THREADS
 done
 
-OUTPUT_DIR=$HOME/project_data/downy/kraken2-extract/asm-fcs-kraken2/contam-genomic/${CS}
+OUTPUT_DIR=$HOME/project_data/downy/result/asm-fcs-kraken2/contam-genomic/${CS}
 mkdir -p $OUTPUT_DIR
 for FILE in ${FILES[@]}; do
     bash asm-kraken2-fcs.sh \
@@ -48,12 +46,12 @@ for FILE in ${FILES[@]}; do
       -b $BUSCO_DB \
       -c $CS \
       -t $TAXID \
-      -e $EXTRACT \
+      -e false \
       -m $MIN_LENGTH \
       -p $THREADS
 done
 
-OUTPUT_DIR=$HOME/project_data/downy/kraken2-extract/asm-fcs-kraken2/oomycota-protein/${CS}
+OUTPUT_DIR=$HOME/project_data/downy/result/asm-fcs-kraken2/oomycota-protein/${CS}
 mkdir -p $OUTPUT_DIR
 for FILE in ${FILES[@]}; do
     bash asm-kraken2-fcs.sh \
@@ -64,12 +62,12 @@ for FILE in ${FILES[@]}; do
       -b $BUSCO_DB \
       -c $CS \
       -t $TAXID \
-      -e $EXTRACT \
+      -e true \
       -m $MIN_LENGTH \
       -p $THREADS
 done
 
-OUTPUT_DIR=$HOME/project_data/downy/kraken2-extract/asm-fcs-kraken2/contam-protein/${CS}
+OUTPUT_DIR=$HOME/project_data/downy/result/asm-fcs-kraken2/contam-protein/${CS}
 mkdir -p $OUTPUT_DIR
 for FILE in ${FILES[@]}; do
     bash asm-kraken2-fcs.sh \
@@ -80,7 +78,7 @@ for FILE in ${FILES[@]}; do
       -b $BUSCO_DB \
       -c $CS \
       -t $TAXID \
-      -e $EXTRACT \
+      -e false \
       -m $MIN_LENGTH \
       -p $THREADS
 done
