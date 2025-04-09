@@ -19,7 +19,7 @@ MIN_LENGTH=5000
 THREADS=24
 
 # assemble first, then use fcs, then kraken2
-OUTPUT_DIR=$HOME/project_data/downy/result/asm-fcs-kraken2/oomycota-genomic/${CS}
+OUTPUT_DIR=$HOME/project_data/downy/result/kraken2-asm-fcs/oomycota-genomic/${CS}
 mkdir -p $OUTPUT_DIR
 for FILE in ${FILES[@]}; do
     bash kraken2-asm-fcs.sh \
@@ -35,7 +35,7 @@ for FILE in ${FILES[@]}; do
       -p $THREADS
 done
 
-OUTPUT_DIR=$HOME/project_data/downy/result/asm-fcs-kraken2/contam-genomic/${CS}
+OUTPUT_DIR=$HOME/project_data/downy/result/kraken2-asm-fcs/contam-genomic/${CS}
 mkdir -p $OUTPUT_DIR
 for FILE in ${FILES[@]}; do
     bash kraken2-asm-fcs.sh \
@@ -51,7 +51,7 @@ for FILE in ${FILES[@]}; do
       -p $THREADS
 done
 
-OUTPUT_DIR=$HOME/project_data/downy/result/asm-fcs-kraken2/oomycota-protein/${CS}
+OUTPUT_DIR=$HOME/project_data/downy/result/kraken2-asm-fcs/oomycota-protein/${CS}
 mkdir -p $OUTPUT_DIR
 for FILE in ${FILES[@]}; do
     bash kraken2-asm-fcs.sh \
@@ -67,7 +67,7 @@ for FILE in ${FILES[@]}; do
       -p $THREADS
 done
 
-OUTPUT_DIR=$HOME/project_data/downy/result/asm-fcs-kraken2/contam-protein/${CS}
+OUTPUT_DIR=$HOME/project_data/downy/result/kraken2-asm-fcs/contam-protein/${CS}
 mkdir -p $OUTPUT_DIR
 for FILE in ${FILES[@]}; do
     bash kraken2-asm-fcs.sh \
