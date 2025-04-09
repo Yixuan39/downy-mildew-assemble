@@ -85,8 +85,7 @@ seqtk seq \
     ${RESULT_DIR}/${BASENAME}.asm/contigs.fasta.gz \
     | gzip > ${ASSEMBLED_FILE}
 rm -rf ${RESULT_DIR}/${BASENAME}.asm
-
-
+rm ${RESULT_DIR}/${BASENAME}.kraken_cleaned.fasta
 
 # fcs screen and remove contamination
 run_gx.py \
@@ -101,7 +100,8 @@ gx clean-genome \
     --action-report ${RESULT_DIR}/${BASENAME}.fcs_gx_report.txt \
     --output ${RESULT_DIR}/${BASENAME}.fcs_cleaned.fasta
 
-
+mv ${ASSEMBLED_FILE} ${RESULT_DIR}/${BASENAME}.kraken_cleaned.fasta.gz
+gzip -d ${RESULT_DIR}/${BASENAME}.kraken_cleaned.fasta.gz
   
 # get quality report for fcs cleaned INPUT_FILE
 python quality-check.py \
@@ -112,13 +112,14 @@ python quality-check.py \
     --threads ${THREADS}
 # get quality report for kraken2 cleaned then assembled INPUT_FILE
 python quality-check.py \
-    --input_file ${ASSEMBLED_FILE} \
+    --input_file ${RESULT_DIR}/${BASENAME}.kraken_cleaned.fasta \
     --output_dir ${RESULT_DIR} \
     --suffix ${BASENAME}.kraken_cleaned \
     --library_path ${BUSCO_DB} \
     --threads ${THREADS}
 # compress both INPUT_FILEs
 gzip ${RESULT_DIR}/${BASENAME}.fcs_cleaned.fasta
-mv ${ASSEMBLED_FILE} ${RESULT_DIR}/${BASENAME}.kraken_cleaned.fasta.gz
+gzip ${RESULT_DIR}/${BASENAME}.kraken_cleaned.fasta
+
 
 
