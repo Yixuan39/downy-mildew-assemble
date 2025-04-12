@@ -24,8 +24,8 @@ def compleasm(input_file, output_dir, threads, library_path, linkage):
     new_df = pd.DataFrame()
     new_df['Metric'] = split_column.str[0]
     new_df['Value'] = split_column.str[1]
-    # add a new row for linkage
-    new_df.loc[-1] = ['Linkage', linkage]
+    new_df = new_df.set_index('Metric').T
+    new_df['Linkage'] = linkage
     shutil.rmtree(output_dir, ignore_errors=False)
     return new_df
 
@@ -42,6 +42,7 @@ def quast(input_file, output_dir, threads):
     output_file = os.path.join(output_dir, 'report.tsv')
     df = pd.read_csv(output_file, sep='\t')
     df.columns = ['Metric', 'Value']
+    df = df.set_index('Metric').T
     shutil.rmtree(output_dir, ignore_errors=False)
     return df
   
@@ -58,8 +59,8 @@ if __name__ == '__main__':
     quast_output = quast(args.input_file, args.output_dir, args.threads)
     
     # combine compleasm and quast result
-    compleasm_euk = pd.concat([compleasm_euk, quast_output], axis=0).reset_index(drop=True)
-    compleasm_stram = pd.concat([compleasm_stram, quast_output], axis=0).reset_index(drop=True)
+    compleasm_euk = pd.concat([compleasm_euk, quast_output], axis=1)
+    compleasm_stram = pd.concat([compleasm_stram, quast_output], axis=1)
     
     # save output as csv
     compleasm_euk.to_csv(os.path.join(args.output_dir, args.suffix + '_euk.csv'), index=False)
