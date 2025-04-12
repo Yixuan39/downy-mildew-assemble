@@ -54,6 +54,9 @@ if __name__ == '__main__':
     parser.add_argument('--threads', help='Number of threads', type=int, default=24)
     parser.add_argument('--library_path', help='path to compleasm library', default='$HOME/project_data/downy/BUSCO_DB')
     args = parser.parse_args()
+    # check if input file exists
+    if not os.path.exists(args.input_file):
+        assert False, 'Input file does not exist'
     compleasm_euk = compleasm(args.input_file, args.output_dir, args.threads, args.library_path, 'eukaryota_odb10')
     compleasm_stram = compleasm(args.input_file, args.output_dir, args.threads, args.library_path, 'stramenopiles_odb10')
     quast_output = quast(args.input_file, args.output_dir, args.threads)
