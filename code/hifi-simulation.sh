@@ -3,7 +3,7 @@
 mess run \
     --input ../simulation-info/subsample-prop.tsv \
     --output $HOME/project_data/downy/hifi-simulation \
-    --bases 10G \
+    --bases 15G \
     --tech pacbio \
     --model QSHMM-RSII \
     --error hifi \
