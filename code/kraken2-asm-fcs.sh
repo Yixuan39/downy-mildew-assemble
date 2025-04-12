@@ -59,7 +59,7 @@ then
         -s ${INPUT_FILE} \
         --report ${RESULT_DIR}/${BASENAME}.kreport \
         --taxid ${TAXID} \
-        --output ${RESULT_DIR}/${BASENAME}.kraken_cleaned.fasta \
+        --output ${RESULT_DIR}/${BASENAME}.kraken.fasta \
         --include-children
 else
     kraken2 \
@@ -68,58 +68,57 @@ else
         --threads ${THREADS} \
         --output ${RESULT_DIR}/${BASENAME}.kraken \
         --report ${RESULT_DIR}/${BASENAME}.kreport \
-        --unclassified-out ${RESULT_DIR}/${BASENAME}.kraken_cleaned.fasta \
+        --unclassified-out ${RESULT_DIR}/${BASENAME}.kraken.fasta \
         ${INPUT_FILE}
 fi 
 
 # assemble the genome
 metaMDBG asm \
     --out-dir ${RESULT_DIR}/${BASENAME}.asm \
-    --in-hifi ${RESULT_DIR}/${BASENAME}.kraken_cleaned.fasta \
+    --in-hifi ${RESULT_DIR}/${BASENAME}.kraken.fasta \
     --threads ${THREADS}
+rm ${RESULT_DIR}/${BASENAME}.kraken.fasta
     
 # discard contigs shorter than 5000 bp
-ASSEMBLED_FILE=${RESULT_DIR}/${BASENAME}.asm.fasta.gz
 seqtk seq \
     -L ${MIN_LENGTH} \
     ${RESULT_DIR}/${BASENAME}.asm/contigs.fasta.gz \
-    | gzip > ${ASSEMBLED_FILE}
+    > ${RESULT_DIR}/${BASENAME}.kraken.fasta
 rm -rf ${RESULT_DIR}/${BASENAME}.asm
-rm ${RESULT_DIR}/${BASENAME}.kraken_cleaned.fasta
 
 # fcs screen and remove contamination
 run_gx.py \
-    --fasta ${ASSEMBLED_FILE} \
+    --fasta ${RESULT_DIR}/${BASENAME}.kraken.fasta \
     --tax-id ${TAXID} \
     --gx-db ${GX_DB} \
     --out-dir ${RESULT_DIR} \
     --out-basename ${BASENAME}
 
 gx clean-genome \
-    --input ${ASSEMBLED_FILE} \
+    --input ${RESULT_DIR}/${BASENAME}.kraken.fasta \
     --action-report ${RESULT_DIR}/${BASENAME}.fcs_gx_report.txt \
-    --output ${RESULT_DIR}/${BASENAME}.fcs_cleaned.fasta
-
-mv ${ASSEMBLED_FILE} ${RESULT_DIR}/${BASENAME}.kraken_cleaned.fasta.gz
-gzip -d ${RESULT_DIR}/${BASENAME}.kraken_cleaned.fasta.gz
+    --output ${RESULT_DIR}/${BASENAME}.fcs.fasta
+    
+# compress both INPUT_FILEs
+gzip ${RESULT_DIR}/${BASENAME}.fcs.fasta
+gzip ${RESULT_DIR}/${BASENAME}.kraken.fasta
+# remove useless files
+rm ${RESULT_DIR}/${BASENAME}.kraken
   
 # get quality report for fcs cleaned INPUT_FILE
 python quality-check.py \
-    --input_file ${RESULT_DIR}/${BASENAME}.fcs_cleaned.fasta \
+    --input_file ${RESULT_DIR}/${BASENAME}.fcs.fasta \
     --output_dir ${RESULT_DIR} \
-    --suffix ${BASENAME}.fcs_cleaned \
+    --suffix ${BASENAME}.fcs \
     --library_path ${BUSCO_DB} \
     --threads ${THREADS}
 # get quality report for kraken2 cleaned then assembled INPUT_FILE
 python quality-check.py \
-    --input_file ${RESULT_DIR}/${BASENAME}.kraken_cleaned.fasta \
+    --input_file ${RESULT_DIR}/${BASENAME}.kraken.fasta \
     --output_dir ${RESULT_DIR} \
-    --suffix ${BASENAME}.kraken_cleaned \
+    --suffix ${BASENAME}.kraken \
     --library_path ${BUSCO_DB} \
     --threads ${THREADS}
-# compress both INPUT_FILEs
-gzip ${RESULT_DIR}/${BASENAME}.fcs_cleaned.fasta
-gzip ${RESULT_DIR}/${BASENAME}.kraken_cleaned.fasta
 
 
 
