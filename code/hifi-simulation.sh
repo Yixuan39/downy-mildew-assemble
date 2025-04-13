@@ -3,6 +3,7 @@
 mess run \
     --input ../simulation-info/subsample-prop.tsv \
     --output $HOME/project_data/downy/hifi-simulation \
+    --threads 24 \
     --bases 15G \
     --tech pacbio \
     --model QSHMM-RSII \
