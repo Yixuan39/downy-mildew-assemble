@@ -39,8 +39,7 @@ done
 export GX_NUM_CORES=$THREADS
 # get base name
 BASENAME=$(basename ${INPUT_FILE})
-BASENAME=${BASENAME%.fastq}
-BASENAME=${BASENAME%.gz}
+BASENAME=${BASENAME%.fastq.gz}
 
 # use kraken2 classify read first
 if [ ${EXTRACT} ]
