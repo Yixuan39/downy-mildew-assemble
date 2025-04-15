@@ -106,14 +106,14 @@ rm ${RESULT_DIR}/${BASENAME}.kraken
   
 # get quality report for fcs cleaned INPUT_FILE
 python quality-check.py \
-    --input_file ${RESULT_DIR}/${BASENAME}.fcs.fasta \
+    --input_file ${RESULT_DIR}/${BASENAME}.fcs.fasta.gz \
     --output_dir ${RESULT_DIR} \
     --suffix ${BASENAME}.fcs \
     --library_path ${BUSCO_DB} \
     --threads ${THREADS}
 # get quality report for kraken2 cleaned then assembled INPUT_FILE
 python quality-check.py \
-    --input_file ${RESULT_DIR}/${BASENAME}.kraken.fasta \
+    --input_file ${RESULT_DIR}/${BASENAME}.kraken.fasta.gz \
     --output_dir ${RESULT_DIR} \
     --suffix ${BASENAME}.kraken \
     --library_path ${BUSCO_DB} \
