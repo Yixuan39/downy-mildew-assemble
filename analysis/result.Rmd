@@ -6,16 +6,48 @@ output: html_document
 ```{r}
 library(tidyverse)
 library(data.table)
+library(openxlsx)
+library(here)
 ```
 
 ```{r}
 path <- '~/project_data/downy/result'
-list.files(path, pattern = 'csv', full.names = TRUE, recursive = TRUE) %>% 
+data <- list.files(path, pattern = 'csv', full.names = TRUE, recursive = TRUE) %>% 
   map_dfr(function(x) {
     data <- fread(x, header = TRUE, sep = ',') %>% as.data.frame()
-    data$confidence.score <- basename(dirname(x))
-    data$sample <- basename(x) %>% str_replace('.csv', '') %>% str_replace('_cleaned_','.')
+    info <- str_split(x, '/')[[1]]
+    data$sample <- tail(info,1)[1] %>% str_replace('.csv', '')
+    data$confidence.score <- tail(info,2)[1]
+    data$data.base <- tail(info,3)[1]
+    data$method <- tail(info,4)[1]
+    data <- data %>%
+      separate(sample, into = c('sample','tool'), sep = '\\.') %>% 
+      separate(tool, into = c('tool', 'linkage'), sep = '_') %>% 
+      sapply(function(x) str_remove(x,'\\%'))
     return(data)
-  })
+  }) %>%
+  mutate(across(everything(), ~ {
+    converted <- suppressWarnings(as.numeric(.))
+    if (all(is.na(converted)) && !all(is.na(.))) . else converted
+  })) %>% 
+  mutate(`Total length`= round(`Total length`/1e+6, 2))
 ```
 
+
+```{r}
+smalldb <- data %>% 
+  filter(str_detect(method, 'smalldb'),
+         tool == 'kraken')
+```
+
+```{r}
+smalldb %>%
+  mutate(across(-sample, ~ paste0(cur_column(), ":", .))) %>% 
+  unite(metric, 'S', 'D', 'F','M','N', 'Total length', '# contigs', 'N50','L50', sep = '<br>') %>% 
+  select(metric, sample, Linkage) %>% 
+  group_by(Linkage) %>% 
+  pivot_wider(names_from = sample, values_from = metric) %>% 
+  gt %>% 
+  fmt_markdown(columns = everything())
+
+```
