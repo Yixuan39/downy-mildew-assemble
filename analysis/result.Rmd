@@ -1,0 +1,21 @@
+---
+title: "result"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+library(data.table)
+```
+
+```{r}
+path <- '~/project_data/downy/result'
+list.files(path, pattern = 'csv', full.names = TRUE, recursive = TRUE) %>% 
+  map_dfr(function(x) {
+    data <- fread(x, header = TRUE, sep = ',') %>% as.data.frame()
+    data$confidence.score <- basename(dirname(x))
+    data$sample <- basename(x) %>% str_replace('.csv', '') %>% str_replace('_cleaned_','.')
+    return(data)
+  })
+```
+
