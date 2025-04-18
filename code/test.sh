@@ -1,0 +1,31 @@
+#!/bin/bash
+#SBATCH --job-name=run
+#SBATCH --cpus-per-task=24
+#SBATCH --mem=500G
+
+INPUT_DIR=$HOME/project_data/downy/GSL_Data/metaMDBG
+FILES=($(find "$INPUT_DIR" -type f -name "*.fasta.gz"))
+GX_DB=$HOME/project_data/downy/fcs-db/
+KrakenDB_oomycota_genomic=$HOME/project_data/downy/KrakenDB/oomycota-genome-small
+BUSCO_DB=$HOME/project_data/downy/BUSCO_DB
+CS=0.5
+TAXID=4762
+MIN_LENGTH=5000
+THREADS=24
+
+
+# assemble first, then use fcs, then kraken2
+OUTPUT_DIR=$HOME/project_data/downy/result/test/
+mkdir -p $OUTPUT_DIR
+FILE = FILES[1]
+bash asm-fcs-kraken2.sh \
+  -i $FILE \
+  -o $OUTPUT_DIR \
+  -d $GX_DB \
+  -k $KrakenDB_oomycota_genomic \
+  -b $BUSCO_DB \
+  -c $CS \
+  -t $TAXID \
+  -e false \
+  -m $MIN_LENGTH \
+  -p $THREADS
