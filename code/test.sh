@@ -17,7 +17,7 @@ THREADS=24
 # assemble first, then use fcs, then kraken2
 OUTPUT_DIR=$HOME/project_data/downy/result/test/
 mkdir -p $OUTPUT_DIR
-FILE = FILES[1]
+FILE=${FILES[0]}
 bash asm-fcs-kraken2.sh \
   -i $FILE \
   -o $OUTPUT_DIR \
