@@ -42,7 +42,7 @@ BASENAME=$(basename ${INPUT_FILE})
 BASENAME=${BASENAME%.fastq.gz}
 
 # use kraken2 classify read first
-if [ ${EXTRACT} ]
+if [ "$EXTRACT" = true ]
 then
     # run kraken2
     kraken2 \

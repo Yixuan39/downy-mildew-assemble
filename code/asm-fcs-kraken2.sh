@@ -77,7 +77,7 @@ gx clean-genome \
     --action-report ${RESULT_DIR}/${BASENAME}.fcs_gx_report.txt \
     --output ${RESULT_DIR}/${BASENAME}.fcs.fasta
 
-if [ ${EXTRACT} ]
+if [ "$EXTRACT" = true ]
 then
     # run kraken2
     kraken2 \

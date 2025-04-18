@@ -64,7 +64,7 @@ seqtk seq \
     | gzip > ${RESULT_DIR}/${BASENAME}.asm.fasta.gz
 # rm -rf ${RESULT_DIR}/${BASENAME}.asm
 
-if [ ${EXTRACT} ] 
+if [ "$EXTRACT" = true ]
 then
     # run kraken2
     kraken2 \
