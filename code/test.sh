@@ -6,7 +6,7 @@
 INPUT_DIR=$HOME/project_data/downy/GSL_Data/metaMDBG
 FILES=($(find "$INPUT_DIR" -type f -name "*.fasta.gz"))
 GX_DB=$HOME/project_data/downy/fcs-db/
-KrakenDB_oomycota_genomic=$HOME/project_data/downy/KrakenDB/oomycota-genome-small
+KrakenDB_oomycota_genomic=$HOME/project_data/downy/KrakenDB/contam-genome
 BUSCO_DB=$HOME/project_data/downy/BUSCO_DB
 CS=0.5
 TAXID=4762
