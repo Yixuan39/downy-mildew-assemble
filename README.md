@@ -136,3 +136,6 @@ Usage: clean-asm.sh -i <input_file> -o <output_dir> -d <gx_db> -k <kraken_db> -b
   -h  Show this help message
 ```
 
+# Analysis
+
+[Compleasm and QUAST results](https://yixuan39.github.io/downy-mildew-assemble/analysis/result.html)

@@ -3,14 +3,16 @@ title: "result"
 output: html_document
 ---
 
-```{r}
+```{r message=FALSE}
+rm(list = ls())
 library(tidyverse)
 library(data.table)
 library(openxlsx)
 library(here)
+library(gt)
 ```
 
-```{r}
+```{r echo=FALSE}
 path <- '~/project_data/downy/result'
 data <- list.files(path, pattern = 'csv', full.names = TRUE, recursive = TRUE) %>% 
   map_dfr(function(x) {
@@ -29,19 +31,61 @@ data <- list.files(path, pattern = 'csv', full.names = TRUE, recursive = TRUE) %
   mutate(across(everything(), ~ {
     converted <- suppressWarnings(as.numeric(.))
     if (all(is.na(converted)) && !all(is.na(.))) . else converted
-  })) %>% 
-  mutate(`Total length`= round(`Total length`/1e+6, 2))
+  }))
 ```
 
+```{r echo=FALSE}
+full.table <- data %>% 
+  filter(method != 'asm-fcs-kraken2-smalldb',
+         (method == 'asm-fcs-kraken2' & tool == 'kraken')|
+         (method == 'asm-kraken2-fcs' & tool == 'fcs')|
+         (method == 'kraken2-asm-fcs' & tool == 'fcs')) %>% 
+  split(.$Linkage)
+```
 
-```{r}
+# Compleasm and QUAST results
+
+## eukaryota_odb10
+
+```{r echo=FALSE}
+full.table$eukaryota_odb10 %>% 
+  mutate(across(`# contigs (>= 0 bp)`:`# N's per 100 kbp`, scales::label_comma())) %>%
+  mutate(across(-c(sample, confidence.score, method, data.base), ~ paste0(cur_column(), ":", .))) %>% 
+  unite(metric, 'S', 'D', 'F','M','N', 'Total length', '# contigs', 'N50','L50', sep = '<br>') %>% 
+  mutate(method = str_c(method, data.base, sep = '\n')) %>% 
+  select(metric, sample, method, confidence.score) %>% 
+  group_by(sample) %>% 
+  pivot_wider(names_from = method, values_from = metric) %>% arrange(confidence.score) %>% 
+  gt %>% 
+  fmt_markdown(columns = everything())
+```
+
+## stramenopiles_odb10
+
+```{r echo=FALSE}
+full.table$stramenopiles_odb10 %>% 
+  mutate(across(`# contigs (>= 0 bp)`:`# N's per 100 kbp`, scales::label_comma())) %>%
+  mutate(across(-c(sample, confidence.score, method, data.base), ~ paste0(cur_column(), ":", .))) %>% 
+  unite(metric, 'S', 'D', 'F','M','N', 'Total length', '# contigs', 'N50','L50', sep = '<br>') %>% 
+  mutate(method = str_c(method, data.base, sep = '\n')) %>% 
+  select(metric, sample, method, confidence.score) %>% 
+  group_by(sample) %>% 
+  pivot_wider(names_from = method, values_from = metric) %>% arrange(confidence.score) %>% 
+  gt %>% 
+  fmt_markdown(columns = everything())
+```
+
+## performance using small Kraken2 database
+
+```{r echo=FALSE}
 smalldb <- data %>% 
   filter(str_detect(method, 'smalldb'),
          tool == 'kraken')
 ```
 
-```{r}
-smalldb %>%
+```{r echo=FALSE}
+smalldb %>% 
+  mutate(across(`# contigs (>= 0 bp)`:`# N's per 100 kbp`, scales::label_comma())) %>%
   mutate(across(-sample, ~ paste0(cur_column(), ":", .))) %>% 
   unite(metric, 'S', 'D', 'F','M','N', 'Total length', '# contigs', 'N50','L50', sep = '<br>') %>% 
   select(metric, sample, Linkage) %>% 
@@ -51,3 +95,5 @@ smalldb %>%
   fmt_markdown(columns = everything())
 
 ```
+
+
