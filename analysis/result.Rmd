@@ -52,7 +52,8 @@ full.table$eukaryota_odb10 %>%
   mutate(across(`# contigs (>= 0 bp)`:`# N's per 100 kbp`, scales::label_comma())) %>%
   mutate(across(-c(sample, confidence.score, method, data.base), ~ paste0(cur_column(), ":", .))) %>% 
   unite(metric, 'S', 'D', 'F','M','N', 'Total length', '# contigs', 'N50','L50', sep = '<br>') %>% 
-  mutate(method = str_c(method, data.base, sep = '\n')) %>% 
+  mutate(method = str_c(data.base, method, sep = '\n')) %>% 
+  arrange(method) %>% 
   select(metric, sample, method, confidence.score) %>% 
   group_by(sample) %>% 
   pivot_wider(names_from = method, values_from = metric) %>% arrange(confidence.score) %>% 
@@ -67,7 +68,8 @@ full.table$stramenopiles_odb10 %>%
   mutate(across(`# contigs (>= 0 bp)`:`# N's per 100 kbp`, scales::label_comma())) %>%
   mutate(across(-c(sample, confidence.score, method, data.base), ~ paste0(cur_column(), ":", .))) %>% 
   unite(metric, 'S', 'D', 'F','M','N', 'Total length', '# contigs', 'N50','L50', sep = '<br>') %>% 
-  mutate(method = str_c(method, data.base, sep = '\n')) %>% 
+  mutate(method = str_c(data.base, method, sep = '\n')) %>% 
+  arrange(method) %>% 
   select(metric, sample, method, confidence.score) %>% 
   group_by(sample) %>% 
   pivot_wider(names_from = method, values_from = metric) %>% arrange(confidence.score) %>% 
@@ -79,21 +81,36 @@ full.table$stramenopiles_odb10 %>%
 
 ```{r echo=FALSE}
 smalldb <- data %>% 
-  filter(str_detect(method, 'smalldb'),
-         tool == 'kraken')
+  filter(method == 'asm-fcs-kraken2-smalldb'& tool == 'kraken' |
+         method == 'asm-fcs-kraken2'& tool == 'kraken', 
+         data.base == 'oomycota-genomic',
+         confidence.score == 0.5) %>% 
+  split(.$Linkage)
 ```
 
 ```{r echo=FALSE}
-smalldb %>% 
+smalldb$eukaryota_odb10 %>% 
   mutate(across(`# contigs (>= 0 bp)`:`# N's per 100 kbp`, scales::label_comma())) %>%
-  mutate(across(-sample, ~ paste0(cur_column(), ":", .))) %>% 
+  mutate(across(-c(sample, confidence.score, method, data.base), ~ paste0(cur_column(), ":", .))) %>% 
   unite(metric, 'S', 'D', 'F','M','N', 'Total length', '# contigs', 'N50','L50', sep = '<br>') %>% 
-  select(metric, sample, Linkage) %>% 
-  group_by(Linkage) %>% 
-  pivot_wider(names_from = sample, values_from = metric) %>% 
+  select(metric, sample, method, confidence.score) %>% 
+  group_by(sample) %>% 
+  pivot_wider(names_from = method, values_from = metric) %>% arrange(confidence.score) %>% 
   gt %>% 
   fmt_markdown(columns = everything())
 
 ```
 
 
+```{r echo=FALSE}
+smalldb$stramenopiles_odb10 %>% 
+  mutate(across(`# contigs (>= 0 bp)`:`# N's per 100 kbp`, scales::label_comma())) %>%
+  mutate(across(-c(sample, confidence.score, method, data.base), ~ paste0(cur_column(), ":", .))) %>% 
+  unite(metric, 'S', 'D', 'F','M','N', 'Total length', '# contigs', 'N50','L50', sep = '<br>') %>% 
+  select(metric, sample, method, confidence.score) %>% 
+  group_by(sample) %>% 
+  pivot_wider(names_from = method, values_from = metric) %>% arrange(confidence.score) %>% 
+  gt %>% 
+  fmt_markdown(columns = everything())
+
+```
