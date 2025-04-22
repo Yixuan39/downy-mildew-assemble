@@ -17,7 +17,7 @@ EXTRACT=true
 
 OUTPUT_DIR=$HOME/project_data/downy/simulation-result/${CS}
 mkdir -p $OUTPUT_DIR
-bash asm-fcs-kraken2.sh \
+bash clean-asm.sh \
       -i $FILE \
       -o $OUTPUT_DIR \
       -d $GX_DB \

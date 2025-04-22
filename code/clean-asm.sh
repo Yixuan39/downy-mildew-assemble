@@ -40,6 +40,9 @@ export GX_NUM_CORES=$THREADS
 # get base name
 BASENAME=$(basename "$INPUT_FILE")
 BASENAME=${BASENAME%.fastq.gz}
+BASENAME=${BASENAME%.fq.gz}
+BASENAME=${BASENAME%.fastq}
+BASENAME=${BASENAME%.fq}
 
 echo "Base name: $BASENAME"
 
