@@ -6,6 +6,16 @@ This project aimed to assemble downy mildew genome collected from highly contami
 
 ## Environment
 
+Required softwares:
+
+1. [metaMDBG](https://github.com/GaetanBenoitDev/metaMDBG)
+2. [FCS-GX](https://github.com/ncbi/fcs-gx)
+3. [Kraken2](https://github.com/DerrickWood/kraken2)
+4. [Kraken Tools](https://github.com/jenniferlu717/KrakenTools)
+5. [seqtk](https://github.com/lh3/seqtk)
+6. [compleasm](https://github.com/huangnengCSU/compleasm)
+7. [QUAST](https://github.com/ablab/quast)
+
 You can create the environment with the following command
 
 ```
