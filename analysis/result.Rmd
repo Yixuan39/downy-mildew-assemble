@@ -3,7 +3,7 @@ title: "result"
 output: html_document
 ---
 
-```{r message=FALSE}
+```{r message=FALSE, echo=FALSE}
 rm(list = ls())
 library(tidyverse)
 library(data.table)
