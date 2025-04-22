@@ -42,7 +42,7 @@ data %>%
   unite(metric, 'S', 'D', 'F','M','N', 'Total length', '# contigs', 'N50','L50', sep = '<br>') %>% 
   select(metric, tool, confidence.score, Linkage) %>% arrange(confidence.score) %>% 
   group_by(Linkage) %>% 
-  pivot_wider(names_from = confidence.score, values_from = metric) %>% 
+  pivot_wider(names_from = tool, values_from = metric) %>% 
   gt %>% 
   fmt_markdown(columns = everything())
 ```
