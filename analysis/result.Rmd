@@ -36,7 +36,9 @@ data <- list.files(path, pattern = 'csv', full.names = TRUE, recursive = TRUE) %
 
 ```{r echo=FALSE}
 full.table <- data %>% 
+  mutate(method = if_else((method == 'asm-fcs-kraken2' & tool == 'fcs'), 'asm-fcs', method)) %>% 
   filter(method != 'asm-fcs-kraken2-smalldb',
+         (method == 'asm-fcs' & tool == 'fcs')|
          (method == 'asm-fcs-kraken2' & tool == 'kraken')|
          (method == 'asm-kraken2-fcs' & tool == 'fcs')|
          (method == 'kraken2-asm-fcs' & tool == 'fcs')) %>% 
