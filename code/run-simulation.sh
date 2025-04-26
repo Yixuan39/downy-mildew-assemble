@@ -15,7 +15,7 @@ MIN_LENGTH=5000
 THREADS=24
 EXTRACT=true
 
-OUTPUT_DIR=$HOME/project_data/downy/simulation-result/${CS}
+OUTPUT_DIR=$HOME/project_data/downy/simulation-result/genomic/${CS}
 mkdir -p $OUTPUT_DIR
 bash clean-asm.sh \
       -i $FILE \
