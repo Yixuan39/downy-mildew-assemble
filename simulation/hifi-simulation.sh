@@ -1,8 +1,9 @@
 #!/bin/bash
 
 mess run \
-    --input ./information/subsample-prop.tsv \
+    --input ./information/accession.tsv \
     --output $HOME/project_data/downy/hifi-simulation \
+    --accession \
     --reference False \
     --atypical False \
     --threads 24 \
