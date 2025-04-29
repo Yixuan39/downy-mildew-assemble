@@ -4,6 +4,7 @@ mess run \
     --input ./information/subsample-prop.tsv \
     --output $HOME/project_data/downy/hifi-simulation \
     --reference False \
+    --atypical False \
     --threads 24 \
     --bases 10G \
     --tech pacbio \
