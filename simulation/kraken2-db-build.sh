@@ -1,7 +1,6 @@
 #!/bin/sh
-#SBATCH --cpus-per-task=32
 
-THREADS=32
+THREADS=24
 REF_PATH=$HOME/project_data/downy/ref-seq/
 
 # build kraken2 oomycota db
