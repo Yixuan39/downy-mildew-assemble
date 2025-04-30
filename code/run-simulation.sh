@@ -4,9 +4,9 @@
 #SBATCH --array=0-3
 #SBATCH --mem=500G
 
-FILE=$HOME/project_data/downy/hifi-simulation/fastq/subsample-prop.fq.gz
+FILE=$HOME/project_data/downy/hifi-simulation/fastq/accession.fq.gz
 GX_DB=$HOME/project_data/downy/fcs-db/
-KrakenDB_oomycota_genomic=$HOME/project_data/downy/KrakenDB/oomycota-protein
+KrakenDB_oomycota_genomic=$HOME/project_data/downy/KrakenDB/simulation
 BUSCO_DB=$HOME/project_data/downy/BUSCO_DB
 CS_LIST=(0 0.25 0.5 0.75) 
 CS=${CS_LIST[$SLURM_ARRAY_TASK_ID]} 
@@ -15,7 +15,7 @@ MIN_LENGTH=5000
 THREADS=24
 EXTRACT=true
 
-OUTPUT_DIR=$HOME/project_data/downy/simulation-result/protein/${CS}
+OUTPUT_DIR=$HOME/project_data/downy/result/simulation/genomic/${CS}
 mkdir -p $OUTPUT_DIR
 bash clean-asm.sh \
       -i $FILE \

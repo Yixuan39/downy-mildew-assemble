@@ -104,6 +104,7 @@ fi
 gzip ${RESULT_DIR}/${BASENAME}.fcs.fasta
 gzip ${RESULT_DIR}/${BASENAME}.kraken.fasta
 # remove useless files
+rm -rf ${RESULT_DIR}/${BASENAME}.asm
 rm ${RESULT_DIR}/${BASENAME}.kraken
 rm ${RESULT_DIR}/${BASENAME}.asm.fasta.gz
   
