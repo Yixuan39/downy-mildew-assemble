@@ -17,7 +17,7 @@ EXTRACT=true
 
 OUTPUT_DIR=$HOME/project_data/downy/result/simulation/genomic/${CS}
 mkdir -p $OUTPUT_DIR
-bash clean-asm.sh \
+bash ../code/clean-asm.sh \
       -i $FILE \
       -o $OUTPUT_DIR \
       -d $GX_DB \
