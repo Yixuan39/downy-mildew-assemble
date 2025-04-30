@@ -42,6 +42,7 @@ Composition of the database:
 
 ```
 KrakenDB=$HOME/KrakenDB
+kraken2-build --db ${KrakenDB} --download-taxonomy
 kraken2-build --db ${KrakenDB} --add-to-library ${REF_PATH}/oomycota-genome.fasta
 kraken2-build --db ${KrakenDB} --add-to-library ${REF_PATH}/common-contam-genome.fasta
 kraken2-build --db ${KrakenDB} --build --threads 24
