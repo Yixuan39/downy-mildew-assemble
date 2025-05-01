@@ -7,7 +7,7 @@ mess run \
     --reference False \
     --atypical False \
     --threads 24 \
-    --bases 10G \
+    --bases 20G \
     --tech pacbio \
     --model QSHMM-RSII \
     --error hifi \
