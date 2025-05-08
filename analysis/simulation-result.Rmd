@@ -13,7 +13,7 @@ library(gt)
 ```
 
 ```{r echo=FALSE}
-path <- '~/project_data/downy/simulation-result/'
+path <- '~/project_data/downy/result/simulation'
 data <- list.files(path, pattern = 'csv', full.names = TRUE, recursive = TRUE) %>% 
   map_dfr(function(x) {
     data <- fread(x, header = TRUE, sep = ',') %>% as.data.frame()
