@@ -1,0 +1,42 @@
+---
+title: "analysis sample composition"
+output: html_document
+---
+
+```{r}
+library(tidyverse)
+library(data.table)
+library(here)
+library(insect)
+```
+
+```{r}
+# read in tax file
+path <- '~/project_data/downy/result/asm-fcs-kraken2/oomycota-genomic/0.5/'
+df <- list.files(path, pattern = '.taxonomy.rpt', full.names = T) %>% 
+  map_dfr(function(x) {
+    fread(x) %>% 
+      mutate(sample = str_remove(basename(x), '.taxonomy.rpt'))
+  })
+```
+
+
+```{r}
+db <- taxonomy(db = 'NCBI')
+tax <- get_lineage(df$`tax-id-1`, db, cores = 32)
+```
+
+
+```{r}
+freq <- df %>% 
+  group_by(sample,top_tax_name) %>% 
+  summarise(count = n()) %>% 
+  arrange(desc(count)) %>% 
+  pivot_wider(names_from = sample, values_from = count)
+```
+
+```{r}
+ggplot(freq) +
+  geom_bar(aes(x = sample, y = count, fill = top_tax_name), stat = 'identity', show.legend = F)
+```
+

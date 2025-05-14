@@ -1,18 +1,16 @@
 #!/bin/bash
 #SBATCH --job-name=verification
-#SBATCH --cpus-per-task=24
-#SBATCH --array=0-3
+#SBATCH --cpus-per-task=32
 #SBATCH --mem=500G
 
 FILE=$HOME/project_data/downy/verification/SRR15142133.fastq.gz
 GX_DB=$HOME/project_data/downy/fcs-db/
 KrakenDB_oomycota_genomic=$HOME/project_data/downy/KrakenDB/verification
 BUSCO_DB=$HOME/project_data/downy/BUSCO_DB
-CS_LIST=(0 0.25 0.5 0.75) 
-CS=${CS_LIST[$SLURM_ARRAY_TASK_ID]} 
+CS_LIST="0,0.05,0.1,0.15,0.2"
 TAXID=4762
 MIN_LENGTH=5000
-THREADS=24
+THREADS=32
 EXTRACT=true
 
 OUTPUT_DIR=$HOME/project_data/downy/result/verification/genomic/${CS}
@@ -23,7 +21,7 @@ bash clean-asm.sh \
       -d $GX_DB \
       -k $KrakenDB_oomycota_genomic \
       -b $BUSCO_DB \
-      -c $CS \
+      -c $CS_LIST \
       -t $TAXID \
       -e $EXTRACT \
       -m $MIN_LENGTH \

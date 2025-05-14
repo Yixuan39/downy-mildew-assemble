@@ -9,18 +9,19 @@ library(data.table)
 library(gt)
 library(here)
 theme_set(theme_bw())
-files <- list.files('~/project_data/downy/GSL_Data/length/',
+```
+
+# Read distribution of the PacBio raw reads
+
+```{r echo=FALSE}
+files <- list.files('~/project_data/downy/GSL_Data/length/raw',
                     full.names = TRUE, recursive = TRUE, pattern = '.tsv.gz')
 df <- map_dfr(files, function(file) {
   data <- fread(file, nThread = 20)
   colnames(data) <- c('id', 'length')
   data <- data %>% mutate(file = str_remove(basename(file), '.tsv.gz'))
 })
-```
 
-Read distribution of the PacBio raw reads
-
-```{r echo=FALSE}
 ggplot(df) +
   geom_histogram(aes(x = length), binwidth = 1000) +
   scale_y_continuous(labels = scales::label_comma()) +
@@ -40,4 +41,62 @@ df %>%
   gt %>% fmt_auto()
 ```
 
+# contig length distribution using FCS
 
+```{r echo=FALSE}
+files <- list.files('~/project_data/downy/GSL_Data/length/fcs',
+                    full.names = TRUE, recursive = TRUE, pattern = '.tsv.gz')
+df <- map_dfr(files, function(file) {
+  data <- fread(file, nThread = 20)
+  colnames(data) <- c('id', 'length')
+  data <- data %>% mutate(file = str_remove(basename(file), '.tsv.gz'))
+})
+
+ggplot(df) +
+  geom_histogram(aes(x = length), binwidth = 1000) +
+  scale_y_continuous(labels = scales::label_comma()) +
+  facet_wrap(~file, ncol = 1, scales = 'free')
+```
+
+Summary statistics
+
+```{r echo=FALSE}
+df %>%
+  group_by(file) %>% 
+  summarise(min = min(length),
+            median = median(length),
+            mean = mean(length),
+            sd = sd(length),
+            max = max(length)) %>% 
+  gt %>% fmt_auto()
+```
+
+# contig length distribution using Kraken2 after FCS
+
+```{r echo=FALSE}
+files <- list.files('~/project_data/downy/GSL_Data/length/kraken',
+                    full.names = TRUE, recursive = TRUE, pattern = '.tsv.gz')
+df <- map_dfr(files, function(file) {
+  data <- fread(file, nThread = 20)
+  colnames(data) <- c('id', 'length')
+  data <- data %>% mutate(file = str_remove(basename(file), '.tsv.gz'))
+})
+
+ggplot(df) +
+  geom_histogram(aes(x = length), binwidth = 1000) +
+  scale_y_continuous(labels = scales::label_comma()) +
+  facet_wrap(~file, ncol = 1, scales = 'free')
+```
+
+Summary statistics
+
+```{r echo=FALSE}
+df %>%
+  group_by(file) %>% 
+  summarise(min = min(length),
+            median = median(length),
+            mean = mean(length),
+            sd = sd(length),
+            max = max(length)) %>% 
+  gt %>% fmt_auto()
+```
