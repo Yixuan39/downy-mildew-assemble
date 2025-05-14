@@ -7,36 +7,50 @@ output: html_document
 library(tidyverse)
 library(data.table)
 library(here)
-library(insect)
+library(pctax)
+library(pcutils)
+library(gt)
 ```
 
 ```{r}
 # read in tax file
 path <- '~/project_data/downy/result/asm-fcs-kraken2/oomycota-genomic/0.5/'
-df <- list.files(path, pattern = '.taxonomy.rpt', full.names = T) %>% 
+df <- list.files(path, pattern = '.fcs_gx_report.txt', full.names = T) %>% 
   map_dfr(function(x) {
     fread(x) %>% 
-      mutate(sample = str_remove(basename(x), '.taxonomy.rpt'))
+      mutate(sample = str_remove(basename(x), '.fcs_gx_report.txt'))
   })
+
 ```
 
 
-```{r}
-db <- taxonomy(db = 'NCBI')
-tax <- get_lineage(df$`tax-id-1`, db, cores = 32)
-```
-
-
-```{r}
-freq <- df %>% 
+```{r,message=FALSE}
+otu <- df %>% 
   group_by(sample,top_tax_name) %>% 
   summarise(count = n()) %>% 
   arrange(desc(count)) %>% 
-  pivot_wider(names_from = sample, values_from = count)
+  pivot_wider(names_from = sample, values_from = count, values_fill = 0) %>% 
+  column_to_rownames('top_tax_name')
+
+tax <- name_or_id2df(rownames(otu), mode = 'name', add_prefix = FALSE) %>% 
+  select(-taxid) %>% 
+  column_to_rownames('name')
+  
 ```
 
 ```{r}
-ggplot(freq) +
-  geom_bar(aes(x = sample, y = count, fill = top_tax_name), stat = 'identity', show.legend = F)
+otu.prop <- trans(otu, method = 'total')
+phylum <- hebing(otu.prop, tax$Phylum, margin = 1, act = "sum")
+stackplot(phylum)
 ```
+```{r}
+otu.prop %>% 
+  mutate(mean = rowMeans(.)) %>% 
+  arrange(desc(mean)) %>% 
+  select(-mean) %>%
+  head(30) %>% 
+  gt(rownames_to_stub = TRUE) %>%
+  fmt_percent()
+```
+
 
