@@ -3,7 +3,7 @@ title: "analysis sample composition"
 output: html_document
 ---
 
-```{r}
+```{r message=FALSE}
 library(tidyverse)
 library(data.table)
 library(here)
@@ -15,10 +15,10 @@ library(gt)
 ```{r}
 # read in tax file
 path <- '~/project_data/downy/result/asm-fcs-kraken2/oomycota-genomic/0.5/'
-df <- list.files(path, pattern = '.fcs_gx_report.txt', full.names = T) %>% 
+df <- list.files(path, pattern = '.taxonomy.rpt', full.names = T) %>% 
   map_dfr(function(x) {
     fread(x) %>% 
-      mutate(sample = str_remove(basename(x), '.fcs_gx_report.txt'))
+      mutate(sample = str_remove(basename(x), '.taxonomy.rpt'))
   })
 
 ```
@@ -26,11 +26,12 @@ df <- list.files(path, pattern = '.fcs_gx_report.txt', full.names = T) %>%
 
 ```{r,message=FALSE}
 otu <- df %>% 
-  group_by(sample,top_tax_name) %>% 
+  group_by(sample,`tax-name-1`) %>% 
   summarise(count = n()) %>% 
   arrange(desc(count)) %>% 
-  pivot_wider(names_from = sample, values_from = count, values_fill = 0) %>% 
-  column_to_rownames('top_tax_name')
+  pivot_wider(names_from = sample, values_from = count, values_fill = 0) %>%
+  mutate(`tax-name-1` = ifelse(`tax-name-1` == "", "Unclassified", `tax-name-1`)) %>% 
+  column_to_rownames('tax-name-1')
 
 tax <- name_or_id2df(rownames(otu), mode = 'name', add_prefix = FALSE) %>% 
   select(-taxid) %>% 
@@ -53,4 +54,72 @@ otu.prop %>%
   fmt_percent()
 ```
 
+# Kraken2 result
+
+```{r}
+path <- '~/project_data/downy/result/asm-fcs-kraken2/oomycota-genomic/0/'
+df <- list.files(path, pattern = '.kreport', full.names = T) %>% 
+  map_dfr(function(x) {
+    df <- fread(x)[,c(1,4,6)]
+    colnames(df) <- c('percentage','rank', 'name')
+    df <- df %>% mutate(sample = str_remove(basename(x), '.kreport'))
+  })
+
+```
+
+```{r}
+df %>% 
+  filter(rank %in% c('P', 'U')) %>% 
+  ggplot() +
+  geom_bar(aes(x = sample, y = percentage, fill = name), stat = 'identity') 
+```
+
+# Effusa data
+
+```{r}
+# read in tax file
+path <- '~/project_data/downy/result/verification/genomic/'
+df <- list.files(path, pattern = '.taxonomy.rpt', full.names = T, recursive = T) %>% 
+  map_dfr(function(x) {
+    fread(x) %>% 
+      mutate(sample = str_remove(basename(x), '.taxonomy.rpt'))
+  })
+
+```
+
+
+```{r,message=FALSE}
+otu <- df %>% 
+  group_by(sample,`tax-name-1`) %>% 
+  summarise(count = n()) %>% 
+  arrange(desc(count)) %>% 
+  pivot_wider(names_from = sample, values_from = count, values_fill = 0) %>%
+  mutate(`tax-name-1` = ifelse(`tax-name-1` == "", "Unclassified", `tax-name-1`)) %>% 
+  column_to_rownames('tax-name-1')
+
+tax <- name_or_id2df(rownames(otu), mode = 'name', add_prefix = FALSE) %>% 
+  select(-taxid) %>% 
+  column_to_rownames('name')
+  
+```
+
+```{r}
+otu.prop <- trans(otu, method = 'total')
+phylum <- hebing(otu.prop, tax$Phylum, margin = 1, act = "sum")
+phylum %>% 
+  rownames_to_column('name') %>%
+  pivot_longer(SRR15142133,names_to = 'sample', values_to = 'percentage') %>% 
+  ggplot() +
+  geom_bar(aes(x = sample, y = percentage, fill = name), stat = 'identity') +
+  coord_polar("y", start=0)
+```
+```{r}
+otu.prop %>% 
+  mutate(mean = rowMeans(.)) %>% 
+  arrange(desc(mean)) %>% 
+  select(-mean) %>%
+  head(30) %>% 
+  gt(rownames_to_stub = TRUE) %>%
+  fmt_percent()
+```
 
