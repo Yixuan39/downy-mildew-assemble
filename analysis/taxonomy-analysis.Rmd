@@ -10,6 +10,7 @@ library(here)
 library(pctax)
 library(pcutils)
 library(gt)
+theme_set(theme_minimal())
 ```
 
 ```{r}
@@ -24,7 +25,7 @@ df <- list.files(path, pattern = '.taxonomy.rpt', full.names = T) %>%
 ```
 
 
-```{r,message=FALSE}
+```{r,message=FALSE, warning=FALSE}
 otu <- df %>% 
   group_by(sample,`tax-name-1`) %>% 
   summarise(count = n()) %>% 
