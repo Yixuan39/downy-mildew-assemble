@@ -10,7 +10,9 @@ This project aimed to assemble downy mildew genome collected from highly contami
 
 [Compleasm and QUAST results](https://yixuan39.github.io/downy-mildew-assemble/analysis/result.html)
 
-[Simulated sample of Phytophthora infestans](https://yixuan39.github.io/downy-mildew-assemble/analysis/simulation-result.html)
+[Taxonomy composition](https://yixuan39.github.io/downy-mildew-assemble/analysis/taxonomy-composition.html)
+
+[Assemble genome quality of P.effusa](https://yixuan39.github.io/downy-mildew-assemble/analysis/verification-result.html)
 
 # Pipeline
 
