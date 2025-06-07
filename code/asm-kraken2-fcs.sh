@@ -110,7 +110,7 @@ gx clean-genome \
 gzip ${RESULT_DIR}/${BASENAME}.fcs.fasta
 gzip ${RESULT_DIR}/${BASENAME}.kraken.fasta
 # remove useless files
-rm ${RESULT_DIR}/${BASENAME}.kraken
+# rm ${RESULT_DIR}/${BASENAME}.kraken
 rm ${RESULT_DIR}/${BASENAME}.asm.fasta.gz
   
 # get quality report for fcs cleaned INPUT_FILE

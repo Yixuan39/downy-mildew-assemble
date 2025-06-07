@@ -11,7 +11,7 @@
 
 <meta name="author" content="Yixuan Yang" />
 
-<meta name="date" content="2024-10-26" />
+<meta name="date" content="2025-06-07" />
 
 <title>busco-analysis-refseq</title>
 
@@ -352,42 +352,29 @@ display: none;
 
 <h1 class="title toc-ignore">busco-analysis-refseq</h1>
 <h4 class="author">Yixuan Yang</h4>
-<h4 class="date">2024-10-26</h4>
+<h4 class="date">2025-06-07</h4>
 
 </div>
 
 
-<pre class="r"><code>library(tidyverse)
-library(gt)
-library(jsonlite)</code></pre>
-<div id="busco-results" class="section level1">
-<h1>BUSCO results</h1>
-<div id="generic" class="section level2">
-<h2>generic</h2>
-<p>eukaryota_odb10</p>
-<pre class="r"><code>path &lt;- &#39;~/project_data/downy/busco_results/&#39;
-read.summary &lt;- function(file) {
-    data &lt;- fromJSON(file)$result %&gt;% as.data.frame %&gt;% select(-c(one_line_summary))
-    df &lt;- data %&gt;% cbind(name = basename(dirname(file)), .) 
-    return(df)
-}
-
-files &lt;- list.files(path, pattern = &#39;generic&#39;, full.names = TRUE, recursive = TRUE) %&gt;% str_subset(&#39;json&#39;)
-map_dfr(files, read.summary) %&gt;% gt</code></pre>
-<div id="zjqjajigfv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#zjqjajigfv table {
+<div id="compleasm-results" class="section level1">
+<h1>COMPLEASM results</h1>
+<div id="eukaryota_odb10" class="section level2">
+<h2>eukaryota_odb10</h2>
+<div id="hulgcabfir" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hulgcabfir table {
 font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 -webkit-font-smoothing: antialiased;
 -moz-osx-font-smoothing: grayscale;
 }
-#zjqjajigfv thead, #zjqjajigfv tbody, #zjqjajigfv tfoot, #zjqjajigfv tr, #zjqjajigfv td, #zjqjajigfv th {
+#hulgcabfir thead, #hulgcabfir tbody, #hulgcabfir tfoot, #hulgcabfir tr, #hulgcabfir td, #hulgcabfir th {
 border-style: none;
 }
-#zjqjajigfv p {
+#hulgcabfir p {
 margin: 0;
 padding: 0;
 }
-#zjqjajigfv .gt_table {
+#hulgcabfir .gt_table {
 display: table;
 border-collapse: collapse;
 line-height: normal;
@@ -412,11 +399,11 @@ border-left-style: none;
 border-left-width: 2px;
 border-left-color: #D3D3D3;
 }
-#zjqjajigfv .gt_caption {
+#hulgcabfir .gt_caption {
 padding-top: 4px;
 padding-bottom: 4px;
 }
-#zjqjajigfv .gt_title {
+#hulgcabfir .gt_title {
 color: #333333;
 font-size: 125%;
 font-weight: initial;
@@ -427,7 +414,7 @@ padding-right: 5px;
 border-bottom-color: #FFFFFF;
 border-bottom-width: 0;
 }
-#zjqjajigfv .gt_subtitle {
+#hulgcabfir .gt_subtitle {
 color: #333333;
 font-size: 85%;
 font-weight: initial;
@@ -438,7 +425,7 @@ padding-right: 5px;
 border-top-color: #FFFFFF;
 border-top-width: 0;
 }
-#zjqjajigfv .gt_heading {
+#hulgcabfir .gt_heading {
 background-color: #FFFFFF;
 text-align: center;
 border-bottom-color: #FFFFFF;
@@ -449,12 +436,12 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-#zjqjajigfv .gt_bottom_border {
+#hulgcabfir .gt_bottom_border {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#zjqjajigfv .gt_col_headings {
+#hulgcabfir .gt_col_headings {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -468,7 +455,7 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-#zjqjajigfv .gt_col_heading {
+#hulgcabfir .gt_col_heading {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -487,7 +474,7 @@ padding-left: 5px;
 padding-right: 5px;
 overflow-x: hidden;
 }
-#zjqjajigfv .gt_column_spanner_outer {
+#hulgcabfir .gt_column_spanner_outer {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -498,13 +485,13 @@ padding-bottom: 0;
 padding-left: 4px;
 padding-right: 4px;
 }
-#zjqjajigfv .gt_column_spanner_outer:first-child {
+#hulgcabfir .gt_column_spanner_outer:first-child {
 padding-left: 0;
 }
-#zjqjajigfv .gt_column_spanner_outer:last-child {
+#hulgcabfir .gt_column_spanner_outer:last-child {
 padding-right: 0;
 }
-#zjqjajigfv .gt_column_spanner {
+#hulgcabfir .gt_column_spanner {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
@@ -515,10 +502,10 @@ overflow-x: hidden;
 display: inline-block;
 width: 100%;
 }
-#zjqjajigfv .gt_spanner_row {
+#hulgcabfir .gt_spanner_row {
 border-bottom-style: hidden;
 }
-#zjqjajigfv .gt_group_heading {
+#hulgcabfir .gt_group_heading {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -543,7 +530,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 text-align: left;
 }
-#zjqjajigfv .gt_empty_group_heading {
+#hulgcabfir .gt_empty_group_heading {
 padding: 0.5px;
 color: #333333;
 background-color: #FFFFFF;
@@ -557,13 +544,13 @@ border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 vertical-align: middle;
 }
-#zjqjajigfv .gt_from_md > :first-child {
+#hulgcabfir .gt_from_md > :first-child {
 margin-top: 0;
 }
-#zjqjajigfv .gt_from_md > :last-child {
+#hulgcabfir .gt_from_md > :last-child {
 margin-bottom: 0;
 }
-#zjqjajigfv .gt_row {
+#hulgcabfir .gt_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -581,7 +568,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 overflow-x: hidden;
 }
-#zjqjajigfv .gt_stub {
+#hulgcabfir .gt_stub {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -593,7 +580,7 @@ border-right-color: #D3D3D3;
 padding-left: 5px;
 padding-right: 5px;
 }
-#zjqjajigfv .gt_stub_row_group {
+#hulgcabfir .gt_stub_row_group {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -606,13 +593,13 @@ padding-left: 5px;
 padding-right: 5px;
 vertical-align: top;
 }
-#zjqjajigfv .gt_row_group_first td {
+#hulgcabfir .gt_row_group_first td {
 border-top-width: 2px;
 }
-#zjqjajigfv .gt_row_group_first th {
+#hulgcabfir .gt_row_group_first th {
 border-top-width: 2px;
 }
-#zjqjajigfv .gt_summary_row {
+#hulgcabfir .gt_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -621,14 +608,14 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#zjqjajigfv .gt_first_summary_row {
+#hulgcabfir .gt_first_summary_row {
 border-top-style: solid;
 border-top-color: #D3D3D3;
 }
-#zjqjajigfv .gt_first_summary_row.thick {
+#hulgcabfir .gt_first_summary_row.thick {
 border-top-width: 2px;
 }
-#zjqjajigfv .gt_last_summary_row {
+#hulgcabfir .gt_last_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -637,7 +624,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#zjqjajigfv .gt_grand_summary_row {
+#hulgcabfir .gt_grand_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -646,7 +633,7 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#zjqjajigfv .gt_first_grand_summary_row {
+#hulgcabfir .gt_first_grand_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -655,7 +642,7 @@ border-top-style: double;
 border-top-width: 6px;
 border-top-color: #D3D3D3;
 }
-#zjqjajigfv .gt_last_grand_summary_row_top {
+#hulgcabfir .gt_last_grand_summary_row_top {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -664,10 +651,10 @@ border-bottom-style: double;
 border-bottom-width: 6px;
 border-bottom-color: #D3D3D3;
 }
-#zjqjajigfv .gt_striped {
+#hulgcabfir .gt_striped {
 background-color: rgba(128, 128, 128, 0.05);
 }
-#zjqjajigfv .gt_table_body {
+#hulgcabfir .gt_table_body {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -675,7 +662,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#zjqjajigfv .gt_footnotes {
+#hulgcabfir .gt_footnotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -688,7 +675,7 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-#zjqjajigfv .gt_footnote {
+#hulgcabfir .gt_footnote {
 margin: 0px;
 font-size: 90%;
 padding-top: 4px;
@@ -696,7 +683,7 @@ padding-bottom: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#zjqjajigfv .gt_sourcenotes {
+#hulgcabfir .gt_sourcenotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -709,472 +696,515 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-#zjqjajigfv .gt_sourcenote {
+#hulgcabfir .gt_sourcenote {
 font-size: 90%;
 padding-top: 4px;
 padding-bottom: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#zjqjajigfv .gt_left {
+#hulgcabfir .gt_left {
 text-align: left;
 }
-#zjqjajigfv .gt_center {
+#hulgcabfir .gt_center {
 text-align: center;
 }
-#zjqjajigfv .gt_right {
+#hulgcabfir .gt_right {
 text-align: right;
 font-variant-numeric: tabular-nums;
 }
-#zjqjajigfv .gt_font_normal {
+#hulgcabfir .gt_font_normal {
 font-weight: normal;
 }
-#zjqjajigfv .gt_font_bold {
+#hulgcabfir .gt_font_bold {
 font-weight: bold;
 }
-#zjqjajigfv .gt_font_italic {
+#hulgcabfir .gt_font_italic {
 font-style: italic;
 }
-#zjqjajigfv .gt_super {
+#hulgcabfir .gt_super {
 font-size: 65%;
 }
-#zjqjajigfv .gt_footnote_marks {
+#hulgcabfir .gt_footnote_marks {
 font-size: 75%;
 vertical-align: 0.4em;
 position: initial;
 }
-#zjqjajigfv .gt_asterisk {
+#hulgcabfir .gt_asterisk {
 font-size: 100%;
 vertical-align: 0;
 }
-#zjqjajigfv .gt_indent_1 {
+#hulgcabfir .gt_indent_1 {
 text-indent: 5px;
 }
-#zjqjajigfv .gt_indent_2 {
+#hulgcabfir .gt_indent_2 {
 text-indent: 10px;
 }
-#zjqjajigfv .gt_indent_3 {
+#hulgcabfir .gt_indent_3 {
 text-indent: 15px;
 }
-#zjqjajigfv .gt_indent_4 {
+#hulgcabfir .gt_indent_4 {
 text-indent: 20px;
 }
-#zjqjajigfv .gt_indent_5 {
+#hulgcabfir .gt_indent_5 {
 text-indent: 25px;
 }
-#zjqjajigfv .katex-display {
+#hulgcabfir .katex-display {
 display: inline-flex !important;
 margin-bottom: 0.75em !important;
 }
-#zjqjajigfv div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#hulgcabfir div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
 height: 0px !important;
 }
 </style>
 <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
   <thead>
     <tr class="gt_col_headings">
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="name">name</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Complete.percentage">Complete.percentage</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Complete.BUSCOs">Complete.BUSCOs</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Single.copy.percentage">Single.copy.percentage</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Single.copy.BUSCOs">Single.copy.BUSCOs</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Multi.copy.percentage">Multi.copy.percentage</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Multi.copy.BUSCOs">Multi.copy.BUSCOs</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Fragmented.percentage">Fragmented.percentage</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Fragmented.BUSCOs">Fragmented.BUSCOs</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Missing.percentage">Missing.percentage</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Missing.BUSCOs">Missing.BUSCOs</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="n_markers">n_markers</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="avg_identity">avg_identity</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="domain">domain</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="internal_stop_codon_count">internal_stop_codon_count</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="internal_stop_codon_percent">internal_stop_codon_percent</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Number.of.scaffolds">Number.of.scaffolds</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Number.of.contigs">Number.of.contigs</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total.length">Total.length</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Percent.gaps">Percent.gaps</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Scaffold.N50">Scaffold.N50</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Contigs.N50">Contigs.N50</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="a::stub"></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="S">S</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="D">D</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="F">F</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="I">I</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="M">M</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="N">N</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Linkage">Linkage</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="a#-contigs-(&gt;=-0-bp)"># contigs (&gt;= 0 bp)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="a#-contigs-(&gt;=-1000-bp)"># contigs (&gt;= 1000 bp)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="a#-contigs-(&gt;=-5000-bp)"># contigs (&gt;= 5000 bp)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="a#-contigs-(&gt;=-10000-bp)"># contigs (&gt;= 10000 bp)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="a#-contigs-(&gt;=-25000-bp)"># contigs (&gt;= 25000 bp)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="a#-contigs-(&gt;=-50000-bp)"># contigs (&gt;= 50000 bp)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total-length-(&gt;=-0-bp)">Total length (&gt;= 0 bp)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total-length-(&gt;=-1000-bp)">Total length (&gt;= 1000 bp)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total-length-(&gt;=-5000-bp)">Total length (&gt;= 5000 bp)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total-length-(&gt;=-10000-bp)">Total length (&gt;= 10000 bp)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total-length-(&gt;=-25000-bp)">Total length (&gt;= 25000 bp)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total-length-(&gt;=-50000-bp)">Total length (&gt;= 50000 bp)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="a#-contigs"># contigs</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Largest-contig">Largest contig</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total-length">Total length</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="GC-(%)">GC (%)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="N50">N50</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="N90">N90</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="auN">auN</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="L50">L50</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="L90">L90</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="a#-N&#39;s-per-100-kbp"># N&#39;s per 100 kbp</th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td headers="name" class="gt_row gt_left">Bremia-lactucae</td>
-<td headers="Complete.percentage" class="gt_row gt_right">92.6</td>
-<td headers="Complete.BUSCOs" class="gt_row gt_right">236</td>
-<td headers="Single.copy.percentage" class="gt_row gt_right">90.2</td>
-<td headers="Single.copy.BUSCOs" class="gt_row gt_right">230</td>
-<td headers="Multi.copy.percentage" class="gt_row gt_right">2.4</td>
-<td headers="Multi.copy.BUSCOs" class="gt_row gt_right">6</td>
-<td headers="Fragmented.percentage" class="gt_row gt_right">3.9</td>
-<td headers="Fragmented.BUSCOs" class="gt_row gt_right">10</td>
-<td headers="Missing.percentage" class="gt_row gt_right">3.5</td>
-<td headers="Missing.BUSCOs" class="gt_row gt_right">9</td>
-<td headers="n_markers" class="gt_row gt_right">255</td>
-<td headers="avg_identity" class="gt_row gt_right">0.62</td>
-<td headers="domain" class="gt_row gt_left">eukaryota</td>
-<td headers="internal_stop_codon_count" class="gt_row gt_right">7</td>
-<td headers="internal_stop_codon_percent" class="gt_row gt_right">3.0</td>
-<td headers="Number.of.scaffolds" class="gt_row gt_right">220</td>
-<td headers="Number.of.contigs" class="gt_row gt_right">5220</td>
-<td headers="Total.length" class="gt_row gt_right">115935664</td>
-<td headers="Percent.gaps" class="gt_row gt_right">21.496%</td>
-<td headers="Scaffold.N50" class="gt_row gt_right">5324134</td>
-<td headers="Contigs.N50" class="gt_row gt_right">28789</td></tr>
-    <tr><td headers="name" class="gt_row gt_left">Peronosclerospora-sorghi</td>
-<td headers="Complete.percentage" class="gt_row gt_right">93.7</td>
-<td headers="Complete.BUSCOs" class="gt_row gt_right">239</td>
-<td headers="Single.copy.percentage" class="gt_row gt_right">85.1</td>
-<td headers="Single.copy.BUSCOs" class="gt_row gt_right">217</td>
-<td headers="Multi.copy.percentage" class="gt_row gt_right">8.6</td>
-<td headers="Multi.copy.BUSCOs" class="gt_row gt_right">22</td>
-<td headers="Fragmented.percentage" class="gt_row gt_right">2.4</td>
-<td headers="Fragmented.BUSCOs" class="gt_row gt_right">6</td>
-<td headers="Missing.percentage" class="gt_row gt_right">3.9</td>
-<td headers="Missing.BUSCOs" class="gt_row gt_right">10</td>
-<td headers="n_markers" class="gt_row gt_right">255</td>
-<td headers="avg_identity" class="gt_row gt_right">0.61</td>
-<td headers="domain" class="gt_row gt_left">eukaryota</td>
-<td headers="internal_stop_codon_count" class="gt_row gt_right">6</td>
-<td headers="internal_stop_codon_percent" class="gt_row gt_right">2.5</td>
-<td headers="Number.of.scaffolds" class="gt_row gt_right">6744</td>
-<td headers="Number.of.contigs" class="gt_row gt_right">17452</td>
-<td headers="Total.length" class="gt_row gt_right">325250994</td>
-<td headers="Percent.gaps" class="gt_row gt_right">6.792%</td>
-<td headers="Scaffold.N50" class="gt_row gt_right">19437638</td>
-<td headers="Contigs.N50" class="gt_row gt_right">42491</td></tr>
-    <tr><td headers="name" class="gt_row gt_left">Peronospora-belbahrii</td>
-<td headers="Complete.percentage" class="gt_row gt_right">93.3</td>
-<td headers="Complete.BUSCOs" class="gt_row gt_right">238</td>
-<td headers="Single.copy.percentage" class="gt_row gt_right">90.2</td>
-<td headers="Single.copy.BUSCOs" class="gt_row gt_right">230</td>
-<td headers="Multi.copy.percentage" class="gt_row gt_right">3.1</td>
-<td headers="Multi.copy.BUSCOs" class="gt_row gt_right">8</td>
-<td headers="Fragmented.percentage" class="gt_row gt_right">3.1</td>
-<td headers="Fragmented.BUSCOs" class="gt_row gt_right">8</td>
-<td headers="Missing.percentage" class="gt_row gt_right">3.6</td>
-<td headers="Missing.BUSCOs" class="gt_row gt_right">9</td>
-<td headers="n_markers" class="gt_row gt_right">255</td>
-<td headers="avg_identity" class="gt_row gt_right">0.62</td>
-<td headers="domain" class="gt_row gt_left">eukaryota</td>
-<td headers="internal_stop_codon_count" class="gt_row gt_right">8</td>
-<td headers="internal_stop_codon_percent" class="gt_row gt_right">3.4</td>
-<td headers="Number.of.scaffolds" class="gt_row gt_right">2780</td>
-<td headers="Number.of.contigs" class="gt_row gt_right">14619</td>
-<td headers="Total.length" class="gt_row gt_right">35394047</td>
-<td headers="Percent.gaps" class="gt_row gt_right">18.200%</td>
-<td headers="Scaffold.N50" class="gt_row gt_right">246531</td>
-<td headers="Contigs.N50" class="gt_row gt_right">8233</td></tr>
-    <tr><td headers="name" class="gt_row gt_left">Peronospora-destructor</td>
-<td headers="Complete.percentage" class="gt_row gt_right">96.1</td>
-<td headers="Complete.BUSCOs" class="gt_row gt_right">245</td>
-<td headers="Single.copy.percentage" class="gt_row gt_right">93.7</td>
-<td headers="Single.copy.BUSCOs" class="gt_row gt_right">239</td>
-<td headers="Multi.copy.percentage" class="gt_row gt_right">2.4</td>
-<td headers="Multi.copy.BUSCOs" class="gt_row gt_right">6</td>
-<td headers="Fragmented.percentage" class="gt_row gt_right">0.8</td>
-<td headers="Fragmented.BUSCOs" class="gt_row gt_right">2</td>
-<td headers="Missing.percentage" class="gt_row gt_right">3.1</td>
-<td headers="Missing.BUSCOs" class="gt_row gt_right">8</td>
-<td headers="n_markers" class="gt_row gt_right">255</td>
-<td headers="avg_identity" class="gt_row gt_right">0.63</td>
-<td headers="domain" class="gt_row gt_left">eukaryota</td>
-<td headers="internal_stop_codon_count" class="gt_row gt_right">5</td>
-<td headers="internal_stop_codon_percent" class="gt_row gt_right">2.0</td>
-<td headers="Number.of.scaffolds" class="gt_row gt_right">74</td>
-<td headers="Number.of.contigs" class="gt_row gt_right">74</td>
-<td headers="Total.length" class="gt_row gt_right">29334786</td>
-<td headers="Percent.gaps" class="gt_row gt_right">0.000%</td>
-<td headers="Scaffold.N50" class="gt_row gt_right">727749</td>
-<td headers="Contigs.N50" class="gt_row gt_right">727749</td></tr>
-    <tr><td headers="name" class="gt_row gt_left">Peronospora-effusa</td>
-<td headers="Complete.percentage" class="gt_row gt_right">96.1</td>
-<td headers="Complete.BUSCOs" class="gt_row gt_right">245</td>
-<td headers="Single.copy.percentage" class="gt_row gt_right">93.7</td>
-<td headers="Single.copy.BUSCOs" class="gt_row gt_right">239</td>
-<td headers="Multi.copy.percentage" class="gt_row gt_right">2.4</td>
-<td headers="Multi.copy.BUSCOs" class="gt_row gt_right">6</td>
-<td headers="Fragmented.percentage" class="gt_row gt_right">1.2</td>
-<td headers="Fragmented.BUSCOs" class="gt_row gt_right">3</td>
-<td headers="Missing.percentage" class="gt_row gt_right">2.7</td>
-<td headers="Missing.BUSCOs" class="gt_row gt_right">7</td>
-<td headers="n_markers" class="gt_row gt_right">255</td>
-<td headers="avg_identity" class="gt_row gt_right">0.62</td>
-<td headers="domain" class="gt_row gt_left">eukaryota</td>
-<td headers="internal_stop_codon_count" class="gt_row gt_right">4</td>
-<td headers="internal_stop_codon_percent" class="gt_row gt_right">1.6</td>
-<td headers="Number.of.scaffolds" class="gt_row gt_right">17</td>
-<td headers="Number.of.contigs" class="gt_row gt_right">18</td>
-<td headers="Total.length" class="gt_row gt_right">58578433</td>
-<td headers="Percent.gaps" class="gt_row gt_right">0.000%</td>
-<td headers="Scaffold.N50" class="gt_row gt_right">3727724</td>
-<td headers="Contigs.N50" class="gt_row gt_right">3727724</td></tr>
-    <tr><td headers="name" class="gt_row gt_left">Peronospora-tabacina</td>
-<td headers="Complete.percentage" class="gt_row gt_right">94.1</td>
-<td headers="Complete.BUSCOs" class="gt_row gt_right">240</td>
-<td headers="Single.copy.percentage" class="gt_row gt_right">61.2</td>
-<td headers="Single.copy.BUSCOs" class="gt_row gt_right">156</td>
-<td headers="Multi.copy.percentage" class="gt_row gt_right">32.9</td>
-<td headers="Multi.copy.BUSCOs" class="gt_row gt_right">84</td>
-<td headers="Fragmented.percentage" class="gt_row gt_right">2.0</td>
-<td headers="Fragmented.BUSCOs" class="gt_row gt_right">5</td>
-<td headers="Missing.percentage" class="gt_row gt_right">3.9</td>
-<td headers="Missing.BUSCOs" class="gt_row gt_right">10</td>
-<td headers="n_markers" class="gt_row gt_right">255</td>
-<td headers="avg_identity" class="gt_row gt_right">0.64</td>
-<td headers="domain" class="gt_row gt_left">eukaryota</td>
-<td headers="internal_stop_codon_count" class="gt_row gt_right">6</td>
-<td headers="internal_stop_codon_percent" class="gt_row gt_right">2.5</td>
-<td headers="Number.of.scaffolds" class="gt_row gt_right">4015</td>
-<td headers="Number.of.contigs" class="gt_row gt_right">10797</td>
-<td headers="Total.length" class="gt_row gt_right">63065868</td>
-<td headers="Percent.gaps" class="gt_row gt_right">27.367%</td>
-<td headers="Scaffold.N50" class="gt_row gt_right">78591</td>
-<td headers="Contigs.N50" class="gt_row gt_right">10960</td></tr>
-    <tr><td headers="name" class="gt_row gt_left">Phythophthora-rubi</td>
-<td headers="Complete.percentage" class="gt_row gt_right">96.1</td>
-<td headers="Complete.BUSCOs" class="gt_row gt_right">245</td>
-<td headers="Single.copy.percentage" class="gt_row gt_right">91.0</td>
-<td headers="Single.copy.BUSCOs" class="gt_row gt_right">232</td>
-<td headers="Multi.copy.percentage" class="gt_row gt_right">5.1</td>
-<td headers="Multi.copy.BUSCOs" class="gt_row gt_right">13</td>
-<td headers="Fragmented.percentage" class="gt_row gt_right">1.6</td>
-<td headers="Fragmented.BUSCOs" class="gt_row gt_right">4</td>
-<td headers="Missing.percentage" class="gt_row gt_right">2.3</td>
-<td headers="Missing.BUSCOs" class="gt_row gt_right">6</td>
-<td headers="n_markers" class="gt_row gt_right">255</td>
-<td headers="avg_identity" class="gt_row gt_right">0.63</td>
-<td headers="domain" class="gt_row gt_left">eukaryota</td>
-<td headers="internal_stop_codon_count" class="gt_row gt_right">6</td>
-<td headers="internal_stop_codon_percent" class="gt_row gt_right">2.4</td>
-<td headers="Number.of.scaffolds" class="gt_row gt_right">2387</td>
-<td headers="Number.of.contigs" class="gt_row gt_right">4521</td>
-<td headers="Total.length" class="gt_row gt_right">78973475</td>
-<td headers="Percent.gaps" class="gt_row gt_right">7.102%</td>
-<td headers="Scaffold.N50" class="gt_row gt_right">84001</td>
-<td headers="Contigs.N50" class="gt_row gt_right">40507</td></tr>
-    <tr><td headers="name" class="gt_row gt_left">Phytophthora-capsici</td>
-<td headers="Complete.percentage" class="gt_row gt_right">95.7</td>
-<td headers="Complete.BUSCOs" class="gt_row gt_right">244</td>
-<td headers="Single.copy.percentage" class="gt_row gt_right">91.4</td>
-<td headers="Single.copy.BUSCOs" class="gt_row gt_right">233</td>
-<td headers="Multi.copy.percentage" class="gt_row gt_right">4.3</td>
-<td headers="Multi.copy.BUSCOs" class="gt_row gt_right">11</td>
-<td headers="Fragmented.percentage" class="gt_row gt_right">2.4</td>
-<td headers="Fragmented.BUSCOs" class="gt_row gt_right">6</td>
-<td headers="Missing.percentage" class="gt_row gt_right">1.9</td>
-<td headers="Missing.BUSCOs" class="gt_row gt_right">5</td>
-<td headers="n_markers" class="gt_row gt_right">255</td>
-<td headers="avg_identity" class="gt_row gt_right">0.65</td>
-<td headers="domain" class="gt_row gt_left">eukaryota</td>
-<td headers="internal_stop_codon_count" class="gt_row gt_right">4</td>
-<td headers="internal_stop_codon_percent" class="gt_row gt_right">1.6</td>
-<td headers="Number.of.scaffolds" class="gt_row gt_right">34</td>
-<td headers="Number.of.contigs" class="gt_row gt_right">117</td>
-<td headers="Total.length" class="gt_row gt_right">78752024</td>
-<td headers="Percent.gaps" class="gt_row gt_right">0.011%</td>
-<td headers="Scaffold.N50" class="gt_row gt_right">4242565</td>
-<td headers="Contigs.N50" class="gt_row gt_right">1566642</td></tr>
-    <tr><td headers="name" class="gt_row gt_left">Phytophthora-nicotianae</td>
-<td headers="Complete.percentage" class="gt_row gt_right">95.3</td>
-<td headers="Complete.BUSCOs" class="gt_row gt_right">243</td>
-<td headers="Single.copy.percentage" class="gt_row gt_right">93.3</td>
-<td headers="Single.copy.BUSCOs" class="gt_row gt_right">238</td>
-<td headers="Multi.copy.percentage" class="gt_row gt_right">2.0</td>
-<td headers="Multi.copy.BUSCOs" class="gt_row gt_right">5</td>
-<td headers="Fragmented.percentage" class="gt_row gt_right">2.0</td>
-<td headers="Fragmented.BUSCOs" class="gt_row gt_right">5</td>
-<td headers="Missing.percentage" class="gt_row gt_right">2.7</td>
-<td headers="Missing.BUSCOs" class="gt_row gt_right">7</td>
-<td headers="n_markers" class="gt_row gt_right">255</td>
-<td headers="avg_identity" class="gt_row gt_right">0.67</td>
-<td headers="domain" class="gt_row gt_left">eukaryota</td>
-<td headers="internal_stop_codon_count" class="gt_row gt_right">6</td>
-<td headers="internal_stop_codon_percent" class="gt_row gt_right">2.5</td>
-<td headers="Number.of.scaffolds" class="gt_row gt_right">708</td>
-<td headers="Number.of.contigs" class="gt_row gt_right">8791</td>
-<td headers="Total.length" class="gt_row gt_right">82389172</td>
-<td headers="Percent.gaps" class="gt_row gt_right">34.614%</td>
-<td headers="Scaffold.N50" class="gt_row gt_right">888348</td>
-<td headers="Contigs.N50" class="gt_row gt_right">24397</td></tr>
-    <tr><td headers="name" class="gt_row gt_left">Phytophthora-sojae-2023</td>
-<td headers="Complete.percentage" class="gt_row gt_right">96.0</td>
-<td headers="Complete.BUSCOs" class="gt_row gt_right">245</td>
-<td headers="Single.copy.percentage" class="gt_row gt_right">92.9</td>
-<td headers="Single.copy.BUSCOs" class="gt_row gt_right">237</td>
-<td headers="Multi.copy.percentage" class="gt_row gt_right">3.1</td>
-<td headers="Multi.copy.BUSCOs" class="gt_row gt_right">8</td>
-<td headers="Fragmented.percentage" class="gt_row gt_right">1.2</td>
-<td headers="Fragmented.BUSCOs" class="gt_row gt_right">3</td>
-<td headers="Missing.percentage" class="gt_row gt_right">2.8</td>
-<td headers="Missing.BUSCOs" class="gt_row gt_right">7</td>
-<td headers="n_markers" class="gt_row gt_right">255</td>
-<td headers="avg_identity" class="gt_row gt_right">0.64</td>
-<td headers="domain" class="gt_row gt_left">eukaryota</td>
-<td headers="internal_stop_codon_count" class="gt_row gt_right">4</td>
-<td headers="internal_stop_codon_percent" class="gt_row gt_right">1.6</td>
-<td headers="Number.of.scaffolds" class="gt_row gt_right">12</td>
-<td headers="Number.of.contigs" class="gt_row gt_right">12</td>
-<td headers="Total.length" class="gt_row gt_right">85131815</td>
-<td headers="Percent.gaps" class="gt_row gt_right">0.000%</td>
-<td headers="Scaffold.N50" class="gt_row gt_right">8105859</td>
-<td headers="Contigs.N50" class="gt_row gt_right">8105859</td></tr>
-    <tr><td headers="name" class="gt_row gt_left">Phytophthora-sojae-V3.0</td>
-<td headers="Complete.percentage" class="gt_row gt_right">96.1</td>
-<td headers="Complete.BUSCOs" class="gt_row gt_right">245</td>
-<td headers="Single.copy.percentage" class="gt_row gt_right">92.2</td>
-<td headers="Single.copy.BUSCOs" class="gt_row gt_right">235</td>
-<td headers="Multi.copy.percentage" class="gt_row gt_right">3.9</td>
-<td headers="Multi.copy.BUSCOs" class="gt_row gt_right">10</td>
-<td headers="Fragmented.percentage" class="gt_row gt_right">1.2</td>
-<td headers="Fragmented.BUSCOs" class="gt_row gt_right">3</td>
-<td headers="Missing.percentage" class="gt_row gt_right">2.7</td>
-<td headers="Missing.BUSCOs" class="gt_row gt_right">7</td>
-<td headers="n_markers" class="gt_row gt_right">255</td>
-<td headers="avg_identity" class="gt_row gt_right">0.65</td>
-<td headers="domain" class="gt_row gt_left">eukaryota</td>
-<td headers="internal_stop_codon_count" class="gt_row gt_right">4</td>
-<td headers="internal_stop_codon_percent" class="gt_row gt_right">1.6</td>
-<td headers="Number.of.scaffolds" class="gt_row gt_right">82</td>
-<td headers="Number.of.contigs" class="gt_row gt_right">862</td>
-<td headers="Total.length" class="gt_row gt_right">82597641</td>
-<td headers="Percent.gaps" class="gt_row gt_right">3.959%</td>
-<td headers="Scaffold.N50" class="gt_row gt_right">7609242</td>
-<td headers="Contigs.N50" class="gt_row gt_right">385992</td></tr>
-    <tr><td headers="name" class="gt_row gt_left">Phytopthora-infestans</td>
-<td headers="Complete.percentage" class="gt_row gt_right">93.8</td>
-<td headers="Complete.BUSCOs" class="gt_row gt_right">239</td>
-<td headers="Single.copy.percentage" class="gt_row gt_right">86.7</td>
-<td headers="Single.copy.BUSCOs" class="gt_row gt_right">221</td>
-<td headers="Multi.copy.percentage" class="gt_row gt_right">7.1</td>
-<td headers="Multi.copy.BUSCOs" class="gt_row gt_right">18</td>
-<td headers="Fragmented.percentage" class="gt_row gt_right">2.7</td>
-<td headers="Fragmented.BUSCOs" class="gt_row gt_right">7</td>
-<td headers="Missing.percentage" class="gt_row gt_right">3.5</td>
-<td headers="Missing.BUSCOs" class="gt_row gt_right">9</td>
-<td headers="n_markers" class="gt_row gt_right">255</td>
-<td headers="avg_identity" class="gt_row gt_right">0.63</td>
-<td headers="domain" class="gt_row gt_left">eukaryota</td>
-<td headers="internal_stop_codon_count" class="gt_row gt_right">4</td>
-<td headers="internal_stop_codon_percent" class="gt_row gt_right">1.7</td>
-<td headers="Number.of.scaffolds" class="gt_row gt_right">4921</td>
-<td headers="Number.of.contigs" class="gt_row gt_right">18288</td>
-<td headers="Total.length" class="gt_row gt_right">228543505</td>
-<td headers="Percent.gaps" class="gt_row gt_right">16.806%</td>
-<td headers="Scaffold.N50" class="gt_row gt_right">1588622</td>
-<td headers="Contigs.N50" class="gt_row gt_right">44484</td></tr>
-    <tr><td headers="name" class="gt_row gt_left">Phytopthora-ramorum</td>
-<td headers="Complete.percentage" class="gt_row gt_right">96.1</td>
-<td headers="Complete.BUSCOs" class="gt_row gt_right">245</td>
-<td headers="Single.copy.percentage" class="gt_row gt_right">90.6</td>
-<td headers="Single.copy.BUSCOs" class="gt_row gt_right">231</td>
-<td headers="Multi.copy.percentage" class="gt_row gt_right">5.5</td>
-<td headers="Multi.copy.BUSCOs" class="gt_row gt_right">14</td>
-<td headers="Fragmented.percentage" class="gt_row gt_right">1.2</td>
-<td headers="Fragmented.BUSCOs" class="gt_row gt_right">3</td>
-<td headers="Missing.percentage" class="gt_row gt_right">2.7</td>
-<td headers="Missing.BUSCOs" class="gt_row gt_right">7</td>
-<td headers="n_markers" class="gt_row gt_right">255</td>
-<td headers="avg_identity" class="gt_row gt_right">0.63</td>
-<td headers="domain" class="gt_row gt_left">eukaryota</td>
-<td headers="internal_stop_codon_count" class="gt_row gt_right">3</td>
-<td headers="internal_stop_codon_percent" class="gt_row gt_right">1.2</td>
-<td headers="Number.of.scaffolds" class="gt_row gt_right">28</td>
-<td headers="Number.of.contigs" class="gt_row gt_right">71</td>
-<td headers="Total.length" class="gt_row gt_right">57451392</td>
-<td headers="Percent.gaps" class="gt_row gt_right">0.341%</td>
-<td headers="Scaffold.N50" class="gt_row gt_right">3611744</td>
-<td headers="Contigs.N50" class="gt_row gt_right">1193636</td></tr>
-    <tr><td headers="name" class="gt_row gt_left">Plasmopara-halstedii</td>
-<td headers="Complete.percentage" class="gt_row gt_right">94.9</td>
-<td headers="Complete.BUSCOs" class="gt_row gt_right">242</td>
-<td headers="Single.copy.percentage" class="gt_row gt_right">93.7</td>
-<td headers="Single.copy.BUSCOs" class="gt_row gt_right">239</td>
-<td headers="Multi.copy.percentage" class="gt_row gt_right">1.2</td>
-<td headers="Multi.copy.BUSCOs" class="gt_row gt_right">3</td>
-<td headers="Fragmented.percentage" class="gt_row gt_right">2.0</td>
-<td headers="Fragmented.BUSCOs" class="gt_row gt_right">5</td>
-<td headers="Missing.percentage" class="gt_row gt_right">3.1</td>
-<td headers="Missing.BUSCOs" class="gt_row gt_right">8</td>
-<td headers="n_markers" class="gt_row gt_right">255</td>
-<td headers="avg_identity" class="gt_row gt_right">0.70</td>
-<td headers="domain" class="gt_row gt_left">eukaryota</td>
-<td headers="internal_stop_codon_count" class="gt_row gt_right">4</td>
-<td headers="internal_stop_codon_percent" class="gt_row gt_right">1.7</td>
-<td headers="Number.of.scaffolds" class="gt_row gt_right">3162</td>
-<td headers="Number.of.contigs" class="gt_row gt_right">25359</td>
-<td headers="Total.length" class="gt_row gt_right">75321785</td>
-<td headers="Percent.gaps" class="gt_row gt_right">11.322%</td>
-<td headers="Scaffold.N50" class="gt_row gt_right">1546205</td>
-<td headers="Contigs.N50" class="gt_row gt_right">16233</td></tr>
-    <tr><td headers="name" class="gt_row gt_left">Plasmopara-viticola</td>
-<td headers="Complete.percentage" class="gt_row gt_right">95.7</td>
-<td headers="Complete.BUSCOs" class="gt_row gt_right">244</td>
-<td headers="Single.copy.percentage" class="gt_row gt_right">89.4</td>
-<td headers="Single.copy.BUSCOs" class="gt_row gt_right">228</td>
-<td headers="Multi.copy.percentage" class="gt_row gt_right">6.3</td>
-<td headers="Multi.copy.BUSCOs" class="gt_row gt_right">16</td>
-<td headers="Fragmented.percentage" class="gt_row gt_right">1.6</td>
-<td headers="Fragmented.BUSCOs" class="gt_row gt_right">4</td>
-<td headers="Missing.percentage" class="gt_row gt_right">2.7</td>
-<td headers="Missing.BUSCOs" class="gt_row gt_right">7</td>
-<td headers="n_markers" class="gt_row gt_right">255</td>
-<td headers="avg_identity" class="gt_row gt_right">0.63</td>
-<td headers="domain" class="gt_row gt_left">eukaryota</td>
-<td headers="internal_stop_codon_count" class="gt_row gt_right">5</td>
-<td headers="internal_stop_codon_percent" class="gt_row gt_right">2.0</td>
-<td headers="Number.of.scaffolds" class="gt_row gt_right">358</td>
-<td headers="Number.of.contigs" class="gt_row gt_right">374</td>
-<td headers="Total.length" class="gt_row gt_right">92937831</td>
-<td headers="Percent.gaps" class="gt_row gt_right">0.037%</td>
-<td headers="Scaffold.N50" class="gt_row gt_right">706521</td>
-<td headers="Contigs.N50" class="gt_row gt_right">666562</td></tr>
-    <tr><td headers="name" class="gt_row gt_left">Pseudoperonospora-humuli</td>
-<td headers="Complete.percentage" class="gt_row gt_right">95.7</td>
-<td headers="Complete.BUSCOs" class="gt_row gt_right">244</td>
-<td headers="Single.copy.percentage" class="gt_row gt_right">90.2</td>
-<td headers="Single.copy.BUSCOs" class="gt_row gt_right">230</td>
-<td headers="Multi.copy.percentage" class="gt_row gt_right">5.5</td>
-<td headers="Multi.copy.BUSCOs" class="gt_row gt_right">14</td>
-<td headers="Fragmented.percentage" class="gt_row gt_right">1.2</td>
-<td headers="Fragmented.BUSCOs" class="gt_row gt_right">3</td>
-<td headers="Missing.percentage" class="gt_row gt_right">3.1</td>
-<td headers="Missing.BUSCOs" class="gt_row gt_right">8</td>
-<td headers="n_markers" class="gt_row gt_right">255</td>
-<td headers="avg_identity" class="gt_row gt_right">0.63</td>
-<td headers="domain" class="gt_row gt_left">eukaryota</td>
-<td headers="internal_stop_codon_count" class="gt_row gt_right">7</td>
-<td headers="internal_stop_codon_percent" class="gt_row gt_right">2.9</td>
-<td headers="Number.of.scaffolds" class="gt_row gt_right">5534</td>
-<td headers="Number.of.contigs" class="gt_row gt_right">6496</td>
-<td headers="Total.length" class="gt_row gt_right">40506691</td>
-<td headers="Percent.gaps" class="gt_row gt_right">0.238%</td>
-<td headers="Scaffold.N50" class="gt_row gt_right">19165</td>
-<td headers="Contigs.N50" class="gt_row gt_right">18715</td></tr>
+    <tr><th id="stub_1_1" scope="row" class="gt_row gt_left gt_stub">Bremia-lactucae</th>
+<td headers="stub_1_1 S" class="gt_row gt_right">91.37%</td>
+<td headers="stub_1_1 D" class="gt_row gt_right">1.57%</td>
+<td headers="stub_1_1 F" class="gt_row gt_right">3.92%</td>
+<td headers="stub_1_1 I" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_1 M" class="gt_row gt_right">3.14%</td>
+<td headers="stub_1_1 N" class="gt_row gt_right">255</td>
+<td headers="stub_1_1 Linkage" class="gt_row gt_left">eukaryota_odb10</td>
+<td headers="stub_1_1 # contigs (&gt;= 0 bp)" class="gt_row gt_right">220</td>
+<td headers="stub_1_1 # contigs (&gt;= 1000 bp)" class="gt_row gt_right">214</td>
+<td headers="stub_1_1 # contigs (&gt;= 5000 bp)" class="gt_row gt_right">160</td>
+<td headers="stub_1_1 # contigs (&gt;= 10000 bp)" class="gt_row gt_right">120</td>
+<td headers="stub_1_1 # contigs (&gt;= 25000 bp)" class="gt_row gt_right">79</td>
+<td headers="stub_1_1 # contigs (&gt;= 50000 bp)" class="gt_row gt_right">55</td>
+<td headers="stub_1_1 Total length (&gt;= 0 bp)" class="gt_row gt_right">115935664</td>
+<td headers="stub_1_1 Total length (&gt;= 1000 bp)" class="gt_row gt_right">115930437</td>
+<td headers="stub_1_1 Total length (&gt;= 5000 bp)" class="gt_row gt_right">115782306</td>
+<td headers="stub_1_1 Total length (&gt;= 10000 bp)" class="gt_row gt_right">115481774</td>
+<td headers="stub_1_1 Total length (&gt;= 25000 bp)" class="gt_row gt_right">114766319</td>
+<td headers="stub_1_1 Total length (&gt;= 50000 bp)" class="gt_row gt_right">113924609</td>
+<td headers="stub_1_1 # contigs" class="gt_row gt_right">220</td>
+<td headers="stub_1_1 Largest contig" class="gt_row gt_right">16032334</td>
+<td headers="stub_1_1 Total length" class="gt_row gt_right">115935664</td>
+<td headers="stub_1_1 GC (%)" class="gt_row gt_right">45.85</td>
+<td headers="stub_1_1 N50" class="gt_row gt_right">5324134</td>
+<td headers="stub_1_1 N90" class="gt_row gt_right">1233567</td>
+<td headers="stub_1_1 auN" class="gt_row gt_right">6241117.4</td>
+<td headers="stub_1_1 L50" class="gt_row gt_right">7</td>
+<td headers="stub_1_1 L90" class="gt_row gt_right">23</td>
+<td headers="stub_1_1 # N&#39;s per 100 kbp" class="gt_row gt_right">21496.42</td></tr>
+    <tr><th id="stub_1_2" scope="row" class="gt_row gt_left gt_stub">Peronospora-belbahrii</th>
+<td headers="stub_1_2 S" class="gt_row gt_right">89.80%</td>
+<td headers="stub_1_2 D" class="gt_row gt_right">1.96%</td>
+<td headers="stub_1_2 F" class="gt_row gt_right">5.10%</td>
+<td headers="stub_1_2 I" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_2 M" class="gt_row gt_right">3.14%</td>
+<td headers="stub_1_2 N" class="gt_row gt_right">255</td>
+<td headers="stub_1_2 Linkage" class="gt_row gt_left">eukaryota_odb10</td>
+<td headers="stub_1_2 # contigs (&gt;= 0 bp)" class="gt_row gt_right">2780</td>
+<td headers="stub_1_2 # contigs (&gt;= 1000 bp)" class="gt_row gt_right">911</td>
+<td headers="stub_1_2 # contigs (&gt;= 5000 bp)" class="gt_row gt_right">318</td>
+<td headers="stub_1_2 # contigs (&gt;= 10000 bp)" class="gt_row gt_right">281</td>
+<td headers="stub_1_2 # contigs (&gt;= 25000 bp)" class="gt_row gt_right">200</td>
+<td headers="stub_1_2 # contigs (&gt;= 50000 bp)" class="gt_row gt_right">154</td>
+<td headers="stub_1_2 Total length (&gt;= 0 bp)" class="gt_row gt_right">35394047</td>
+<td headers="stub_1_2 Total length (&gt;= 1000 bp)" class="gt_row gt_right">34421594</td>
+<td headers="stub_1_2 Total length (&gt;= 5000 bp)" class="gt_row gt_right">33266839</td>
+<td headers="stub_1_2 Total length (&gt;= 10000 bp)" class="gt_row gt_right">32993451</td>
+<td headers="stub_1_2 Total length (&gt;= 25000 bp)" class="gt_row gt_right">31747080</td>
+<td headers="stub_1_2 Total length (&gt;= 50000 bp)" class="gt_row gt_right">30089165</td>
+<td headers="stub_1_2 # contigs" class="gt_row gt_right">1709</td>
+<td headers="stub_1_2 Largest contig" class="gt_row gt_right">1239522</td>
+<td headers="stub_1_2 Total length" class="gt_row gt_right">34990926</td>
+<td headers="stub_1_2 GC (%)" class="gt_row gt_right">45.84</td>
+<td headers="stub_1_2 N50" class="gt_row gt_right">248464</td>
+<td headers="stub_1_2 N90" class="gt_row gt_right">29092</td>
+<td headers="stub_1_2 auN" class="gt_row gt_right">278195.1</td>
+<td headers="stub_1_2 L50" class="gt_row gt_right">46</td>
+<td headers="stub_1_2 L90" class="gt_row gt_right">191</td>
+<td headers="stub_1_2 # N&#39;s per 100 kbp" class="gt_row gt_right">18404.15</td></tr>
+    <tr><th id="stub_1_3" scope="row" class="gt_row gt_left gt_stub">Peronospora-destructor</th>
+<td headers="stub_1_3 S" class="gt_row gt_right">94.12%</td>
+<td headers="stub_1_3 D" class="gt_row gt_right">0.78%</td>
+<td headers="stub_1_3 F" class="gt_row gt_right">1.96%</td>
+<td headers="stub_1_3 I" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_3 M" class="gt_row gt_right">3.14%</td>
+<td headers="stub_1_3 N" class="gt_row gt_right">255</td>
+<td headers="stub_1_3 Linkage" class="gt_row gt_left">eukaryota_odb10</td>
+<td headers="stub_1_3 # contigs (&gt;= 0 bp)" class="gt_row gt_right">74</td>
+<td headers="stub_1_3 # contigs (&gt;= 1000 bp)" class="gt_row gt_right">73</td>
+<td headers="stub_1_3 # contigs (&gt;= 5000 bp)" class="gt_row gt_right">73</td>
+<td headers="stub_1_3 # contigs (&gt;= 10000 bp)" class="gt_row gt_right">71</td>
+<td headers="stub_1_3 # contigs (&gt;= 25000 bp)" class="gt_row gt_right">68</td>
+<td headers="stub_1_3 # contigs (&gt;= 50000 bp)" class="gt_row gt_right">62</td>
+<td headers="stub_1_3 Total length (&gt;= 0 bp)" class="gt_row gt_right">29334786</td>
+<td headers="stub_1_3 Total length (&gt;= 1000 bp)" class="gt_row gt_right">29334473</td>
+<td headers="stub_1_3 Total length (&gt;= 5000 bp)" class="gt_row gt_right">29334473</td>
+<td headers="stub_1_3 Total length (&gt;= 10000 bp)" class="gt_row gt_right">29320227</td>
+<td headers="stub_1_3 Total length (&gt;= 25000 bp)" class="gt_row gt_right">29281385</td>
+<td headers="stub_1_3 Total length (&gt;= 50000 bp)" class="gt_row gt_right">29080324</td>
+<td headers="stub_1_3 # contigs" class="gt_row gt_right">73</td>
+<td headers="stub_1_3 Largest contig" class="gt_row gt_right">2283970</td>
+<td headers="stub_1_3 Total length" class="gt_row gt_right">29334473</td>
+<td headers="stub_1_3 GC (%)" class="gt_row gt_right">48.48</td>
+<td headers="stub_1_3 N50" class="gt_row gt_right">727749</td>
+<td headers="stub_1_3 N90" class="gt_row gt_right">202513</td>
+<td headers="stub_1_3 auN" class="gt_row gt_right">906930.3</td>
+<td headers="stub_1_3 L50" class="gt_row gt_right">12</td>
+<td headers="stub_1_3 L90" class="gt_row gt_right">42</td>
+<td headers="stub_1_3 # N&#39;s per 100 kbp" class="gt_row gt_right">0.00</td></tr>
+    <tr><th id="stub_1_4" scope="row" class="gt_row gt_left gt_stub">Peronospora-effusa</th>
+<td headers="stub_1_4 S" class="gt_row gt_right">93.73%</td>
+<td headers="stub_1_4 D" class="gt_row gt_right">1.57%</td>
+<td headers="stub_1_4 F" class="gt_row gt_right">1.96%</td>
+<td headers="stub_1_4 I" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_4 M" class="gt_row gt_right">2.75%</td>
+<td headers="stub_1_4 N" class="gt_row gt_right">255</td>
+<td headers="stub_1_4 Linkage" class="gt_row gt_left">eukaryota_odb10</td>
+<td headers="stub_1_4 # contigs (&gt;= 0 bp)" class="gt_row gt_right">17</td>
+<td headers="stub_1_4 # contigs (&gt;= 1000 bp)" class="gt_row gt_right">17</td>
+<td headers="stub_1_4 # contigs (&gt;= 5000 bp)" class="gt_row gt_right">17</td>
+<td headers="stub_1_4 # contigs (&gt;= 10000 bp)" class="gt_row gt_right">17</td>
+<td headers="stub_1_4 # contigs (&gt;= 25000 bp)" class="gt_row gt_right">17</td>
+<td headers="stub_1_4 # contigs (&gt;= 50000 bp)" class="gt_row gt_right">17</td>
+<td headers="stub_1_4 Total length (&gt;= 0 bp)" class="gt_row gt_right">58578433</td>
+<td headers="stub_1_4 Total length (&gt;= 1000 bp)" class="gt_row gt_right">58578433</td>
+<td headers="stub_1_4 Total length (&gt;= 5000 bp)" class="gt_row gt_right">58578433</td>
+<td headers="stub_1_4 Total length (&gt;= 10000 bp)" class="gt_row gt_right">58578433</td>
+<td headers="stub_1_4 Total length (&gt;= 25000 bp)" class="gt_row gt_right">58578433</td>
+<td headers="stub_1_4 Total length (&gt;= 50000 bp)" class="gt_row gt_right">58578433</td>
+<td headers="stub_1_4 # contigs" class="gt_row gt_right">17</td>
+<td headers="stub_1_4 Largest contig" class="gt_row gt_right">8417896</td>
+<td headers="stub_1_4 Total length" class="gt_row gt_right">58578433</td>
+<td headers="stub_1_4 GC (%)" class="gt_row gt_right">48.58</td>
+<td headers="stub_1_4 N50" class="gt_row gt_right">3727724</td>
+<td headers="stub_1_4 N90" class="gt_row gt_right">2196953</td>
+<td headers="stub_1_4 auN" class="gt_row gt_right">4242195.3</td>
+<td headers="stub_1_4 L50" class="gt_row gt_right">6</td>
+<td headers="stub_1_4 L90" class="gt_row gt_right">15</td>
+<td headers="stub_1_4 # N&#39;s per 100 kbp" class="gt_row gt_right">0.17</td></tr>
+    <tr><th id="stub_1_5" scope="row" class="gt_row gt_left gt_stub">Phythophthora-rubi</th>
+<td headers="stub_1_5 S" class="gt_row gt_right">92.16%</td>
+<td headers="stub_1_5 D" class="gt_row gt_right">3.14%</td>
+<td headers="stub_1_5 F" class="gt_row gt_right">2.35%</td>
+<td headers="stub_1_5 I" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_5 M" class="gt_row gt_right">2.35%</td>
+<td headers="stub_1_5 N" class="gt_row gt_right">255</td>
+<td headers="stub_1_5 Linkage" class="gt_row gt_left">eukaryota_odb10</td>
+<td headers="stub_1_5 # contigs (&gt;= 0 bp)" class="gt_row gt_right">2387</td>
+<td headers="stub_1_5 # contigs (&gt;= 1000 bp)" class="gt_row gt_right">2386</td>
+<td headers="stub_1_5 # contigs (&gt;= 5000 bp)" class="gt_row gt_right">1632</td>
+<td headers="stub_1_5 # contigs (&gt;= 10000 bp)" class="gt_row gt_right">1314</td>
+<td headers="stub_1_5 # contigs (&gt;= 25000 bp)" class="gt_row gt_right">896</td>
+<td headers="stub_1_5 # contigs (&gt;= 50000 bp)" class="gt_row gt_right">538</td>
+<td headers="stub_1_5 Total length (&gt;= 0 bp)" class="gt_row gt_right">78973475</td>
+<td headers="stub_1_5 Total length (&gt;= 1000 bp)" class="gt_row gt_right">78972523</td>
+<td headers="stub_1_5 Total length (&gt;= 5000 bp)" class="gt_row gt_right">77178613</td>
+<td headers="stub_1_5 Total length (&gt;= 10000 bp)" class="gt_row gt_right">74903968</td>
+<td headers="stub_1_5 Total length (&gt;= 25000 bp)" class="gt_row gt_right">67966428</td>
+<td headers="stub_1_5 Total length (&gt;= 50000 bp)" class="gt_row gt_right">55056124</td>
+<td headers="stub_1_5 # contigs" class="gt_row gt_right">2387</td>
+<td headers="stub_1_5 Largest contig" class="gt_row gt_right">390187</td>
+<td headers="stub_1_5 Total length" class="gt_row gt_right">78973475</td>
+<td headers="stub_1_5 GC (%)" class="gt_row gt_right">53.33</td>
+<td headers="stub_1_5 N50" class="gt_row gt_right">84001</td>
+<td headers="stub_1_5 N90" class="gt_row gt_right">18703</td>
+<td headers="stub_1_5 auN" class="gt_row gt_right">97896.4</td>
+<td headers="stub_1_5 L50" class="gt_row gt_right">293</td>
+<td headers="stub_1_5 L90" class="gt_row gt_right">1038</td>
+<td headers="stub_1_5 # N&#39;s per 100 kbp" class="gt_row gt_right">7102.41</td></tr>
+    <tr><th id="stub_1_6" scope="row" class="gt_row gt_left gt_stub">Phytophthora-capsici</th>
+<td headers="stub_1_6 S" class="gt_row gt_right">94.12%</td>
+<td headers="stub_1_6 D" class="gt_row gt_right">1.96%</td>
+<td headers="stub_1_6 F" class="gt_row gt_right">1.96%</td>
+<td headers="stub_1_6 I" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_6 M" class="gt_row gt_right">1.96%</td>
+<td headers="stub_1_6 N" class="gt_row gt_right">255</td>
+<td headers="stub_1_6 Linkage" class="gt_row gt_left">eukaryota_odb10</td>
+<td headers="stub_1_6 # contigs (&gt;= 0 bp)" class="gt_row gt_right">34</td>
+<td headers="stub_1_6 # contigs (&gt;= 1000 bp)" class="gt_row gt_right">34</td>
+<td headers="stub_1_6 # contigs (&gt;= 5000 bp)" class="gt_row gt_right">34</td>
+<td headers="stub_1_6 # contigs (&gt;= 10000 bp)" class="gt_row gt_right">34</td>
+<td headers="stub_1_6 # contigs (&gt;= 25000 bp)" class="gt_row gt_right">32</td>
+<td headers="stub_1_6 # contigs (&gt;= 50000 bp)" class="gt_row gt_right">28</td>
+<td headers="stub_1_6 Total length (&gt;= 0 bp)" class="gt_row gt_right">78752024</td>
+<td headers="stub_1_6 Total length (&gt;= 1000 bp)" class="gt_row gt_right">78752024</td>
+<td headers="stub_1_6 Total length (&gt;= 5000 bp)" class="gt_row gt_right">78752024</td>
+<td headers="stub_1_6 Total length (&gt;= 10000 bp)" class="gt_row gt_right">78752024</td>
+<td headers="stub_1_6 Total length (&gt;= 25000 bp)" class="gt_row gt_right">78723140</td>
+<td headers="stub_1_6 Total length (&gt;= 50000 bp)" class="gt_row gt_right">78597601</td>
+<td headers="stub_1_6 # contigs" class="gt_row gt_right">34</td>
+<td headers="stub_1_6 Largest contig" class="gt_row gt_right">6028800</td>
+<td headers="stub_1_6 Total length" class="gt_row gt_right">78752024</td>
+<td headers="stub_1_6 GC (%)" class="gt_row gt_right">51.19</td>
+<td headers="stub_1_6 N50" class="gt_row gt_right">4242565</td>
+<td headers="stub_1_6 N90" class="gt_row gt_right">2782523</td>
+<td headers="stub_1_6 auN" class="gt_row gt_right">4053547.7</td>
+<td headers="stub_1_6 L50" class="gt_row gt_right">9</td>
+<td headers="stub_1_6 L90" class="gt_row gt_right">18</td>
+<td headers="stub_1_6 # N&#39;s per 100 kbp" class="gt_row gt_right">10.54</td></tr>
+    <tr><th id="stub_1_7" scope="row" class="gt_row gt_left gt_stub">Phytophthora-nicotianae</th>
+<td headers="stub_1_7 S" class="gt_row gt_right">95.29%</td>
+<td headers="stub_1_7 D" class="gt_row gt_right">0.39%</td>
+<td headers="stub_1_7 F" class="gt_row gt_right">1.96%</td>
+<td headers="stub_1_7 I" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_7 M" class="gt_row gt_right">2.35%</td>
+<td headers="stub_1_7 N" class="gt_row gt_right">255</td>
+<td headers="stub_1_7 Linkage" class="gt_row gt_left">eukaryota_odb10</td>
+<td headers="stub_1_7 # contigs (&gt;= 0 bp)" class="gt_row gt_right">708</td>
+<td headers="stub_1_7 # contigs (&gt;= 1000 bp)" class="gt_row gt_right">708</td>
+<td headers="stub_1_7 # contigs (&gt;= 5000 bp)" class="gt_row gt_right">483</td>
+<td headers="stub_1_7 # contigs (&gt;= 10000 bp)" class="gt_row gt_right">293</td>
+<td headers="stub_1_7 # contigs (&gt;= 25000 bp)" class="gt_row gt_right">202</td>
+<td headers="stub_1_7 # contigs (&gt;= 50000 bp)" class="gt_row gt_right">161</td>
+<td headers="stub_1_7 Total length (&gt;= 0 bp)" class="gt_row gt_right">82389172</td>
+<td headers="stub_1_7 Total length (&gt;= 1000 bp)" class="gt_row gt_right">82389172</td>
+<td headers="stub_1_7 Total length (&gt;= 5000 bp)" class="gt_row gt_right">81830892</td>
+<td headers="stub_1_7 Total length (&gt;= 10000 bp)" class="gt_row gt_right">80535334</td>
+<td headers="stub_1_7 Total length (&gt;= 25000 bp)" class="gt_row gt_right">79194467</td>
+<td headers="stub_1_7 Total length (&gt;= 50000 bp)" class="gt_row gt_right">77480296</td>
+<td headers="stub_1_7 # contigs" class="gt_row gt_right">708</td>
+<td headers="stub_1_7 Largest contig" class="gt_row gt_right">4724858</td>
+<td headers="stub_1_7 Total length" class="gt_row gt_right">82389172</td>
+<td headers="stub_1_7 GC (%)" class="gt_row gt_right">49.51</td>
+<td headers="stub_1_7 N50" class="gt_row gt_right">888348</td>
+<td headers="stub_1_7 N90" class="gt_row gt_right">100381</td>
+<td headers="stub_1_7 auN" class="gt_row gt_right">1287662.2</td>
+<td headers="stub_1_7 L50" class="gt_row gt_right">25</td>
+<td headers="stub_1_7 L90" class="gt_row gt_right">114</td>
+<td headers="stub_1_7 # N&#39;s per 100 kbp" class="gt_row gt_right">34613.66</td></tr>
+    <tr><th id="stub_1_8" scope="row" class="gt_row gt_left gt_stub">Phytophthora-sojae-2023</th>
+<td headers="stub_1_8 S" class="gt_row gt_right">94.12%</td>
+<td headers="stub_1_8 D" class="gt_row gt_right">1.18%</td>
+<td headers="stub_1_8 F" class="gt_row gt_right">2.35%</td>
+<td headers="stub_1_8 I" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_8 M" class="gt_row gt_right">2.35%</td>
+<td headers="stub_1_8 N" class="gt_row gt_right">255</td>
+<td headers="stub_1_8 Linkage" class="gt_row gt_left">eukaryota_odb10</td>
+<td headers="stub_1_8 # contigs (&gt;= 0 bp)" class="gt_row gt_right">12</td>
+<td headers="stub_1_8 # contigs (&gt;= 1000 bp)" class="gt_row gt_right">12</td>
+<td headers="stub_1_8 # contigs (&gt;= 5000 bp)" class="gt_row gt_right">12</td>
+<td headers="stub_1_8 # contigs (&gt;= 10000 bp)" class="gt_row gt_right">12</td>
+<td headers="stub_1_8 # contigs (&gt;= 25000 bp)" class="gt_row gt_right">12</td>
+<td headers="stub_1_8 # contigs (&gt;= 50000 bp)" class="gt_row gt_right">12</td>
+<td headers="stub_1_8 Total length (&gt;= 0 bp)" class="gt_row gt_right">85131815</td>
+<td headers="stub_1_8 Total length (&gt;= 1000 bp)" class="gt_row gt_right">85131815</td>
+<td headers="stub_1_8 Total length (&gt;= 5000 bp)" class="gt_row gt_right">85131815</td>
+<td headers="stub_1_8 Total length (&gt;= 10000 bp)" class="gt_row gt_right">85131815</td>
+<td headers="stub_1_8 Total length (&gt;= 25000 bp)" class="gt_row gt_right">85131815</td>
+<td headers="stub_1_8 Total length (&gt;= 50000 bp)" class="gt_row gt_right">85131815</td>
+<td headers="stub_1_8 # contigs" class="gt_row gt_right">12</td>
+<td headers="stub_1_8 Largest contig" class="gt_row gt_right">12371788</td>
+<td headers="stub_1_8 Total length" class="gt_row gt_right">85131815</td>
+<td headers="stub_1_8 GC (%)" class="gt_row gt_right">54.81</td>
+<td headers="stub_1_8 N50" class="gt_row gt_right">8105859</td>
+<td headers="stub_1_8 N90" class="gt_row gt_right">4824709</td>
+<td headers="stub_1_8 auN" class="gt_row gt_right">8105589.8</td>
+<td headers="stub_1_8 L50" class="gt_row gt_right">5</td>
+<td headers="stub_1_8 L90" class="gt_row gt_right">10</td>
+<td headers="stub_1_8 # N&#39;s per 100 kbp" class="gt_row gt_right">0.00</td></tr>
+    <tr><th id="stub_1_9" scope="row" class="gt_row gt_left gt_stub">Phytophthora-sojae-V3.0</th>
+<td headers="stub_1_9 S" class="gt_row gt_right">92.94%</td>
+<td headers="stub_1_9 D" class="gt_row gt_right">1.96%</td>
+<td headers="stub_1_9 F" class="gt_row gt_right">2.75%</td>
+<td headers="stub_1_9 I" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_9 M" class="gt_row gt_right">2.35%</td>
+<td headers="stub_1_9 N" class="gt_row gt_right">255</td>
+<td headers="stub_1_9 Linkage" class="gt_row gt_left">eukaryota_odb10</td>
+<td headers="stub_1_9 # contigs (&gt;= 0 bp)" class="gt_row gt_right">82</td>
+<td headers="stub_1_9 # contigs (&gt;= 1000 bp)" class="gt_row gt_right">82</td>
+<td headers="stub_1_9 # contigs (&gt;= 5000 bp)" class="gt_row gt_right">68</td>
+<td headers="stub_1_9 # contigs (&gt;= 10000 bp)" class="gt_row gt_right">52</td>
+<td headers="stub_1_9 # contigs (&gt;= 25000 bp)" class="gt_row gt_right">40</td>
+<td headers="stub_1_9 # contigs (&gt;= 50000 bp)" class="gt_row gt_right">31</td>
+<td headers="stub_1_9 Total length (&gt;= 0 bp)" class="gt_row gt_right">82597641</td>
+<td headers="stub_1_9 Total length (&gt;= 1000 bp)" class="gt_row gt_right">82597641</td>
+<td headers="stub_1_9 Total length (&gt;= 5000 bp)" class="gt_row gt_right">82553802</td>
+<td headers="stub_1_9 Total length (&gt;= 10000 bp)" class="gt_row gt_right">82424808</td>
+<td headers="stub_1_9 Total length (&gt;= 25000 bp)" class="gt_row gt_right">82234212</td>
+<td headers="stub_1_9 Total length (&gt;= 50000 bp)" class="gt_row gt_right">81871803</td>
+<td headers="stub_1_9 # contigs" class="gt_row gt_right">82</td>
+<td headers="stub_1_9 Largest contig" class="gt_row gt_right">13391543</td>
+<td headers="stub_1_9 Total length" class="gt_row gt_right">82597641</td>
+<td headers="stub_1_9 GC (%)" class="gt_row gt_right">54.61</td>
+<td headers="stub_1_9 N50" class="gt_row gt_right">7609242</td>
+<td headers="stub_1_9 N90" class="gt_row gt_right">2041583</td>
+<td headers="stub_1_9 auN" class="gt_row gt_right">7532014.8</td>
+<td headers="stub_1_9 L50" class="gt_row gt_right">4</td>
+<td headers="stub_1_9 L90" class="gt_row gt_right">13</td>
+<td headers="stub_1_9 # N&#39;s per 100 kbp" class="gt_row gt_right">3959.42</td></tr>
+    <tr><th id="stub_1_10" scope="row" class="gt_row gt_left gt_stub">Phytopthora-ramorum</th>
+<td headers="stub_1_10 S" class="gt_row gt_right">92.55%</td>
+<td headers="stub_1_10 D" class="gt_row gt_right">2.75%</td>
+<td headers="stub_1_10 F" class="gt_row gt_right">2.35%</td>
+<td headers="stub_1_10 I" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_10 M" class="gt_row gt_right">2.35%</td>
+<td headers="stub_1_10 N" class="gt_row gt_right">255</td>
+<td headers="stub_1_10 Linkage" class="gt_row gt_left">eukaryota_odb10</td>
+<td headers="stub_1_10 # contigs (&gt;= 0 bp)" class="gt_row gt_right">28</td>
+<td headers="stub_1_10 # contigs (&gt;= 1000 bp)" class="gt_row gt_right">28</td>
+<td headers="stub_1_10 # contigs (&gt;= 5000 bp)" class="gt_row gt_right">28</td>
+<td headers="stub_1_10 # contigs (&gt;= 10000 bp)" class="gt_row gt_right">28</td>
+<td headers="stub_1_10 # contigs (&gt;= 25000 bp)" class="gt_row gt_right">28</td>
+<td headers="stub_1_10 # contigs (&gt;= 50000 bp)" class="gt_row gt_right">28</td>
+<td headers="stub_1_10 Total length (&gt;= 0 bp)" class="gt_row gt_right">57451392</td>
+<td headers="stub_1_10 Total length (&gt;= 1000 bp)" class="gt_row gt_right">57451392</td>
+<td headers="stub_1_10 Total length (&gt;= 5000 bp)" class="gt_row gt_right">57451392</td>
+<td headers="stub_1_10 Total length (&gt;= 10000 bp)" class="gt_row gt_right">57451392</td>
+<td headers="stub_1_10 Total length (&gt;= 25000 bp)" class="gt_row gt_right">57451392</td>
+<td headers="stub_1_10 Total length (&gt;= 50000 bp)" class="gt_row gt_right">57451392</td>
+<td headers="stub_1_10 # contigs" class="gt_row gt_right">28</td>
+<td headers="stub_1_10 Largest contig" class="gt_row gt_right">6138019</td>
+<td headers="stub_1_10 Total length" class="gt_row gt_right">57451392</td>
+<td headers="stub_1_10 GC (%)" class="gt_row gt_right">54.37</td>
+<td headers="stub_1_10 N50" class="gt_row gt_right">3611744</td>
+<td headers="stub_1_10 N90" class="gt_row gt_right">1156066</td>
+<td headers="stub_1_10 auN" class="gt_row gt_right">3504717.7</td>
+<td headers="stub_1_10 L50" class="gt_row gt_right">6</td>
+<td headers="stub_1_10 L90" class="gt_row gt_right">18</td>
+<td headers="stub_1_10 # N&#39;s per 100 kbp" class="gt_row gt_right">341.32</td></tr>
+    <tr><th id="stub_1_11" scope="row" class="gt_row gt_left gt_stub">Plasmopara-halstedii</th>
+<td headers="stub_1_11 S" class="gt_row gt_right">94.90%</td>
+<td headers="stub_1_11 D" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_11 F" class="gt_row gt_right">2.35%</td>
+<td headers="stub_1_11 I" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_11 M" class="gt_row gt_right">2.75%</td>
+<td headers="stub_1_11 N" class="gt_row gt_right">255</td>
+<td headers="stub_1_11 Linkage" class="gt_row gt_left">eukaryota_odb10</td>
+<td headers="stub_1_11 # contigs (&gt;= 0 bp)" class="gt_row gt_right">3162</td>
+<td headers="stub_1_11 # contigs (&gt;= 1000 bp)" class="gt_row gt_right">741</td>
+<td headers="stub_1_11 # contigs (&gt;= 5000 bp)" class="gt_row gt_right">220</td>
+<td headers="stub_1_11 # contigs (&gt;= 10000 bp)" class="gt_row gt_right">162</td>
+<td headers="stub_1_11 # contigs (&gt;= 25000 bp)" class="gt_row gt_right">107</td>
+<td headers="stub_1_11 # contigs (&gt;= 50000 bp)" class="gt_row gt_right">79</td>
+<td headers="stub_1_11 Total length (&gt;= 0 bp)" class="gt_row gt_right">75321785</td>
+<td headers="stub_1_11 Total length (&gt;= 1000 bp)" class="gt_row gt_right">74136393</td>
+<td headers="stub_1_11 Total length (&gt;= 5000 bp)" class="gt_row gt_right">73188886</td>
+<td headers="stub_1_11 Total length (&gt;= 10000 bp)" class="gt_row gt_right">72755364</td>
+<td headers="stub_1_11 Total length (&gt;= 25000 bp)" class="gt_row gt_right">71870870</td>
+<td headers="stub_1_11 Total length (&gt;= 50000 bp)" class="gt_row gt_right">70924250</td>
+<td headers="stub_1_11 # contigs" class="gt_row gt_right">1612</td>
+<td headers="stub_1_11 Largest contig" class="gt_row gt_right">3420761</td>
+<td headers="stub_1_11 Total length" class="gt_row gt_right">74743905</td>
+<td headers="stub_1_11 GC (%)" class="gt_row gt_right">45.28</td>
+<td headers="stub_1_11 N50" class="gt_row gt_right">1546205</td>
+<td headers="stub_1_11 N90" class="gt_row gt_right">287999</td>
+<td headers="stub_1_11 auN" class="gt_row gt_right">1638643.3</td>
+<td headers="stub_1_11 L50" class="gt_row gt_right">16</td>
+<td headers="stub_1_11 L90" class="gt_row gt_right">54</td>
+<td headers="stub_1_11 # N&#39;s per 100 kbp" class="gt_row gt_right">11408.23</td></tr>
+    <tr><th id="stub_1_12" scope="row" class="gt_row gt_left gt_stub">Pseudoperonospora-cubensis</th>
+<td headers="stub_1_12 S" class="gt_row gt_right">90.20%</td>
+<td headers="stub_1_12 D" class="gt_row gt_right">1.57%</td>
+<td headers="stub_1_12 F" class="gt_row gt_right">4.71%</td>
+<td headers="stub_1_12 I" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_12 M" class="gt_row gt_right">3.53%</td>
+<td headers="stub_1_12 N" class="gt_row gt_right">255</td>
+<td headers="stub_1_12 Linkage" class="gt_row gt_left">eukaryota_odb10</td>
+<td headers="stub_1_12 # contigs (&gt;= 0 bp)" class="gt_row gt_right">35539</td>
+<td headers="stub_1_12 # contigs (&gt;= 1000 bp)" class="gt_row gt_right">14380</td>
+<td headers="stub_1_12 # contigs (&gt;= 5000 bp)" class="gt_row gt_right">2468</td>
+<td headers="stub_1_12 # contigs (&gt;= 10000 bp)" class="gt_row gt_right">942</td>
+<td headers="stub_1_12 # contigs (&gt;= 25000 bp)" class="gt_row gt_right">187</td>
+<td headers="stub_1_12 # contigs (&gt;= 50000 bp)" class="gt_row gt_right">23</td>
+<td headers="stub_1_12 Total length (&gt;= 0 bp)" class="gt_row gt_right">64332776</td>
+<td headers="stub_1_12 Total length (&gt;= 1000 bp)" class="gt_row gt_right">52994159</td>
+<td headers="stub_1_12 Total length (&gt;= 5000 bp)" class="gt_row gt_right">28584532</td>
+<td headers="stub_1_12 Total length (&gt;= 10000 bp)" class="gt_row gt_right">18194151</td>
+<td headers="stub_1_12 Total length (&gt;= 25000 bp)" class="gt_row gt_right">6816236</td>
+<td headers="stub_1_12 Total length (&gt;= 50000 bp)" class="gt_row gt_right">1397072</td>
+<td headers="stub_1_12 # contigs" class="gt_row gt_right">25072</td>
+<td headers="stub_1_12 Largest contig" class="gt_row gt_right">106007</td>
+<td headers="stub_1_12 Total length" class="gt_row gt_right">60603206</td>
+<td headers="stub_1_12 GC (%)" class="gt_row gt_right">53.83</td>
+<td headers="stub_1_12 N50" class="gt_row gt_right">4456</td>
+<td headers="stub_1_12 N90" class="gt_row gt_right">886</td>
+<td headers="stub_1_12 auN" class="gt_row gt_right">9853.5</td>
+<td headers="stub_1_12 L50" class="gt_row gt_right">2831</td>
+<td headers="stub_1_12 L90" class="gt_row gt_right">16027</td>
+<td headers="stub_1_12 # N&#39;s per 100 kbp" class="gt_row gt_right">0.00</td></tr>
+    <tr><th id="stub_1_13" scope="row" class="gt_row gt_left gt_stub">Pseudoperonospora-humuli</th>
+<td headers="stub_1_13 S" class="gt_row gt_right">90.20%</td>
+<td headers="stub_1_13 D" class="gt_row gt_right">4.31%</td>
+<td headers="stub_1_13 F" class="gt_row gt_right">2.35%</td>
+<td headers="stub_1_13 I" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_13 M" class="gt_row gt_right">3.14%</td>
+<td headers="stub_1_13 N" class="gt_row gt_right">255</td>
+<td headers="stub_1_13 Linkage" class="gt_row gt_left">eukaryota_odb10</td>
+<td headers="stub_1_13 # contigs (&gt;= 0 bp)" class="gt_row gt_right">5534</td>
+<td headers="stub_1_13 # contigs (&gt;= 1000 bp)" class="gt_row gt_right">4517</td>
+<td headers="stub_1_13 # contigs (&gt;= 5000 bp)" class="gt_row gt_right">1892</td>
+<td headers="stub_1_13 # contigs (&gt;= 10000 bp)" class="gt_row gt_right">1026</td>
+<td headers="stub_1_13 # contigs (&gt;= 25000 bp)" class="gt_row gt_right">368</td>
+<td headers="stub_1_13 # contigs (&gt;= 50000 bp)" class="gt_row gt_right">105</td>
+<td headers="stub_1_13 Total length (&gt;= 0 bp)" class="gt_row gt_right">40506691</td>
+<td headers="stub_1_13 Total length (&gt;= 1000 bp)" class="gt_row gt_right">39750331</td>
+<td headers="stub_1_13 Total length (&gt;= 5000 bp)" class="gt_row gt_right">33231139</td>
+<td headers="stub_1_13 Total length (&gt;= 10000 bp)" class="gt_row gt_right">27110564</td>
+<td headers="stub_1_13 Total length (&gt;= 25000 bp)" class="gt_row gt_right">16971984</td>
+<td headers="stub_1_13 Total length (&gt;= 50000 bp)" class="gt_row gt_right">7796649</td>
+<td headers="stub_1_13 # contigs" class="gt_row gt_right">5534</td>
+<td headers="stub_1_13 Largest contig" class="gt_row gt_right">195040</td>
+<td headers="stub_1_13 Total length" class="gt_row gt_right">40506691</td>
+<td headers="stub_1_13 GC (%)" class="gt_row gt_right">48.90</td>
+<td headers="stub_1_13 N50" class="gt_row gt_right">19165</td>
+<td headers="stub_1_13 N90" class="gt_row gt_right">3013</td>
+<td headers="stub_1_13 auN" class="gt_row gt_right">29633.8</td>
+<td headers="stub_1_13 L50" class="gt_row gt_right">520</td>
+<td headers="stub_1_13 L90" class="gt_row gt_right">2717</td>
+<td headers="stub_1_13 # N&#39;s per 100 kbp" class="gt_row gt_right">240.31</td></tr>
   </tbody>
   
   
 </table>
 </div>
 </div>
-<div id="specific" class="section level2">
-<h2>specific</h2>
-<p>stramenopiles_odb10</p>
-<pre class="r"><code>files &lt;- list.files(path, pattern = &#39;specific&#39;, full.names = TRUE, recursive = TRUE) %&gt;% str_subset(&#39;json&#39;)
-map_dfr(files, read.summary) %&gt;% gt</code></pre>
-<div id="pxvmudqwmf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#pxvmudqwmf table {
+<div id="stramenopiles_odb10" class="section level2">
+<h2>stramenopiles_odb10</h2>
+<div id="ejprhopecz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ejprhopecz table {
 font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 -webkit-font-smoothing: antialiased;
 -moz-osx-font-smoothing: grayscale;
 }
-#pxvmudqwmf thead, #pxvmudqwmf tbody, #pxvmudqwmf tfoot, #pxvmudqwmf tr, #pxvmudqwmf td, #pxvmudqwmf th {
+#ejprhopecz thead, #ejprhopecz tbody, #ejprhopecz tfoot, #ejprhopecz tr, #ejprhopecz td, #ejprhopecz th {
 border-style: none;
 }
-#pxvmudqwmf p {
+#ejprhopecz p {
 margin: 0;
 padding: 0;
 }
-#pxvmudqwmf .gt_table {
+#ejprhopecz .gt_table {
 display: table;
 border-collapse: collapse;
 line-height: normal;
@@ -1199,11 +1229,11 @@ border-left-style: none;
 border-left-width: 2px;
 border-left-color: #D3D3D3;
 }
-#pxvmudqwmf .gt_caption {
+#ejprhopecz .gt_caption {
 padding-top: 4px;
 padding-bottom: 4px;
 }
-#pxvmudqwmf .gt_title {
+#ejprhopecz .gt_title {
 color: #333333;
 font-size: 125%;
 font-weight: initial;
@@ -1214,7 +1244,7 @@ padding-right: 5px;
 border-bottom-color: #FFFFFF;
 border-bottom-width: 0;
 }
-#pxvmudqwmf .gt_subtitle {
+#ejprhopecz .gt_subtitle {
 color: #333333;
 font-size: 85%;
 font-weight: initial;
@@ -1225,7 +1255,7 @@ padding-right: 5px;
 border-top-color: #FFFFFF;
 border-top-width: 0;
 }
-#pxvmudqwmf .gt_heading {
+#ejprhopecz .gt_heading {
 background-color: #FFFFFF;
 text-align: center;
 border-bottom-color: #FFFFFF;
@@ -1236,12 +1266,12 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-#pxvmudqwmf .gt_bottom_border {
+#ejprhopecz .gt_bottom_border {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#pxvmudqwmf .gt_col_headings {
+#ejprhopecz .gt_col_headings {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -1255,7 +1285,7 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-#pxvmudqwmf .gt_col_heading {
+#ejprhopecz .gt_col_heading {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -1274,7 +1304,7 @@ padding-left: 5px;
 padding-right: 5px;
 overflow-x: hidden;
 }
-#pxvmudqwmf .gt_column_spanner_outer {
+#ejprhopecz .gt_column_spanner_outer {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -1285,13 +1315,13 @@ padding-bottom: 0;
 padding-left: 4px;
 padding-right: 4px;
 }
-#pxvmudqwmf .gt_column_spanner_outer:first-child {
+#ejprhopecz .gt_column_spanner_outer:first-child {
 padding-left: 0;
 }
-#pxvmudqwmf .gt_column_spanner_outer:last-child {
+#ejprhopecz .gt_column_spanner_outer:last-child {
 padding-right: 0;
 }
-#pxvmudqwmf .gt_column_spanner {
+#ejprhopecz .gt_column_spanner {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
@@ -1302,10 +1332,10 @@ overflow-x: hidden;
 display: inline-block;
 width: 100%;
 }
-#pxvmudqwmf .gt_spanner_row {
+#ejprhopecz .gt_spanner_row {
 border-bottom-style: hidden;
 }
-#pxvmudqwmf .gt_group_heading {
+#ejprhopecz .gt_group_heading {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -1330,7 +1360,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 text-align: left;
 }
-#pxvmudqwmf .gt_empty_group_heading {
+#ejprhopecz .gt_empty_group_heading {
 padding: 0.5px;
 color: #333333;
 background-color: #FFFFFF;
@@ -1344,13 +1374,13 @@ border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 vertical-align: middle;
 }
-#pxvmudqwmf .gt_from_md > :first-child {
+#ejprhopecz .gt_from_md > :first-child {
 margin-top: 0;
 }
-#pxvmudqwmf .gt_from_md > :last-child {
+#ejprhopecz .gt_from_md > :last-child {
 margin-bottom: 0;
 }
-#pxvmudqwmf .gt_row {
+#ejprhopecz .gt_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -1368,7 +1398,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 overflow-x: hidden;
 }
-#pxvmudqwmf .gt_stub {
+#ejprhopecz .gt_stub {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -1380,7 +1410,7 @@ border-right-color: #D3D3D3;
 padding-left: 5px;
 padding-right: 5px;
 }
-#pxvmudqwmf .gt_stub_row_group {
+#ejprhopecz .gt_stub_row_group {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -1393,13 +1423,13 @@ padding-left: 5px;
 padding-right: 5px;
 vertical-align: top;
 }
-#pxvmudqwmf .gt_row_group_first td {
+#ejprhopecz .gt_row_group_first td {
 border-top-width: 2px;
 }
-#pxvmudqwmf .gt_row_group_first th {
+#ejprhopecz .gt_row_group_first th {
 border-top-width: 2px;
 }
-#pxvmudqwmf .gt_summary_row {
+#ejprhopecz .gt_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -1408,14 +1438,14 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#pxvmudqwmf .gt_first_summary_row {
+#ejprhopecz .gt_first_summary_row {
 border-top-style: solid;
 border-top-color: #D3D3D3;
 }
-#pxvmudqwmf .gt_first_summary_row.thick {
+#ejprhopecz .gt_first_summary_row.thick {
 border-top-width: 2px;
 }
-#pxvmudqwmf .gt_last_summary_row {
+#ejprhopecz .gt_last_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -1424,7 +1454,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#pxvmudqwmf .gt_grand_summary_row {
+#ejprhopecz .gt_grand_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -1433,7 +1463,7 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#pxvmudqwmf .gt_first_grand_summary_row {
+#ejprhopecz .gt_first_grand_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -1442,7 +1472,7 @@ border-top-style: double;
 border-top-width: 6px;
 border-top-color: #D3D3D3;
 }
-#pxvmudqwmf .gt_last_grand_summary_row_top {
+#ejprhopecz .gt_last_grand_summary_row_top {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -1451,10 +1481,10 @@ border-bottom-style: double;
 border-bottom-width: 6px;
 border-bottom-color: #D3D3D3;
 }
-#pxvmudqwmf .gt_striped {
+#ejprhopecz .gt_striped {
 background-color: rgba(128, 128, 128, 0.05);
 }
-#pxvmudqwmf .gt_table_body {
+#ejprhopecz .gt_table_body {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -1462,7 +1492,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#pxvmudqwmf .gt_footnotes {
+#ejprhopecz .gt_footnotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -1475,7 +1505,7 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-#pxvmudqwmf .gt_footnote {
+#ejprhopecz .gt_footnote {
 margin: 0px;
 font-size: 90%;
 padding-top: 4px;
@@ -1483,7 +1513,7 @@ padding-bottom: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#pxvmudqwmf .gt_sourcenotes {
+#ejprhopecz .gt_sourcenotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -1496,464 +1526,493 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-#pxvmudqwmf .gt_sourcenote {
+#ejprhopecz .gt_sourcenote {
 font-size: 90%;
 padding-top: 4px;
 padding-bottom: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#pxvmudqwmf .gt_left {
+#ejprhopecz .gt_left {
 text-align: left;
 }
-#pxvmudqwmf .gt_center {
+#ejprhopecz .gt_center {
 text-align: center;
 }
-#pxvmudqwmf .gt_right {
+#ejprhopecz .gt_right {
 text-align: right;
 font-variant-numeric: tabular-nums;
 }
-#pxvmudqwmf .gt_font_normal {
+#ejprhopecz .gt_font_normal {
 font-weight: normal;
 }
-#pxvmudqwmf .gt_font_bold {
+#ejprhopecz .gt_font_bold {
 font-weight: bold;
 }
-#pxvmudqwmf .gt_font_italic {
+#ejprhopecz .gt_font_italic {
 font-style: italic;
 }
-#pxvmudqwmf .gt_super {
+#ejprhopecz .gt_super {
 font-size: 65%;
 }
-#pxvmudqwmf .gt_footnote_marks {
+#ejprhopecz .gt_footnote_marks {
 font-size: 75%;
 vertical-align: 0.4em;
 position: initial;
 }
-#pxvmudqwmf .gt_asterisk {
+#ejprhopecz .gt_asterisk {
 font-size: 100%;
 vertical-align: 0;
 }
-#pxvmudqwmf .gt_indent_1 {
+#ejprhopecz .gt_indent_1 {
 text-indent: 5px;
 }
-#pxvmudqwmf .gt_indent_2 {
+#ejprhopecz .gt_indent_2 {
 text-indent: 10px;
 }
-#pxvmudqwmf .gt_indent_3 {
+#ejprhopecz .gt_indent_3 {
 text-indent: 15px;
 }
-#pxvmudqwmf .gt_indent_4 {
+#ejprhopecz .gt_indent_4 {
 text-indent: 20px;
 }
-#pxvmudqwmf .gt_indent_5 {
+#ejprhopecz .gt_indent_5 {
 text-indent: 25px;
 }
-#pxvmudqwmf .katex-display {
+#ejprhopecz .katex-display {
 display: inline-flex !important;
 margin-bottom: 0.75em !important;
 }
-#pxvmudqwmf div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ejprhopecz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
 height: 0px !important;
 }
 </style>
 <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
   <thead>
     <tr class="gt_col_headings">
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="name">name</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="parent_dataset">parent_dataset</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Complete.percentage">Complete.percentage</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Complete.BUSCOs">Complete.BUSCOs</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Single.copy.percentage">Single.copy.percentage</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Single.copy.BUSCOs">Single.copy.BUSCOs</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Multi.copy.percentage">Multi.copy.percentage</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Multi.copy.BUSCOs">Multi.copy.BUSCOs</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Fragmented.percentage">Fragmented.percentage</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Fragmented.BUSCOs">Fragmented.BUSCOs</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Missing.percentage">Missing.percentage</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Missing.BUSCOs">Missing.BUSCOs</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="n_markers">n_markers</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="avg_identity">avg_identity</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="domain">domain</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="internal_stop_codon_count">internal_stop_codon_count</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="internal_stop_codon_percent">internal_stop_codon_percent</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Number.of.scaffolds">Number.of.scaffolds</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Number.of.contigs">Number.of.contigs</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total.length">Total.length</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Percent.gaps">Percent.gaps</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Scaffold.N50">Scaffold.N50</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Contigs.N50">Contigs.N50</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="a::stub"></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="S">S</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="D">D</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="F">F</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="I">I</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="M">M</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="N">N</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Linkage">Linkage</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="a#-contigs-(&gt;=-0-bp)"># contigs (&gt;= 0 bp)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="a#-contigs-(&gt;=-1000-bp)"># contigs (&gt;= 1000 bp)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="a#-contigs-(&gt;=-5000-bp)"># contigs (&gt;= 5000 bp)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="a#-contigs-(&gt;=-10000-bp)"># contigs (&gt;= 10000 bp)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="a#-contigs-(&gt;=-25000-bp)"># contigs (&gt;= 25000 bp)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="a#-contigs-(&gt;=-50000-bp)"># contigs (&gt;= 50000 bp)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total-length-(&gt;=-0-bp)">Total length (&gt;= 0 bp)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total-length-(&gt;=-1000-bp)">Total length (&gt;= 1000 bp)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total-length-(&gt;=-5000-bp)">Total length (&gt;= 5000 bp)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total-length-(&gt;=-10000-bp)">Total length (&gt;= 10000 bp)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total-length-(&gt;=-25000-bp)">Total length (&gt;= 25000 bp)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total-length-(&gt;=-50000-bp)">Total length (&gt;= 50000 bp)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="a#-contigs"># contigs</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Largest-contig">Largest contig</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total-length">Total length</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="GC-(%)">GC (%)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="N50">N50</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="N90">N90</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="auN">auN</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="L50">L50</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="L90">L90</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="a#-N&#39;s-per-100-kbp"># N&#39;s per 100 kbp</th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td headers="name" class="gt_row gt_left">Bremia-lactucae</td>
-<td headers="parent_dataset" class="gt_row gt_left">eukaryota_odb10</td>
-<td headers="Complete.percentage" class="gt_row gt_right">99</td>
-<td headers="Complete.BUSCOs" class="gt_row gt_right">99</td>
-<td headers="Single.copy.percentage" class="gt_row gt_right">95</td>
-<td headers="Single.copy.BUSCOs" class="gt_row gt_right">95</td>
-<td headers="Multi.copy.percentage" class="gt_row gt_right">4</td>
-<td headers="Multi.copy.BUSCOs" class="gt_row gt_right">4</td>
-<td headers="Fragmented.percentage" class="gt_row gt_right">0</td>
-<td headers="Fragmented.BUSCOs" class="gt_row gt_right">0</td>
-<td headers="Missing.percentage" class="gt_row gt_right">1</td>
-<td headers="Missing.BUSCOs" class="gt_row gt_right">1</td>
-<td headers="n_markers" class="gt_row gt_right">100</td>
-<td headers="avg_identity" class="gt_row gt_right">0.82</td>
-<td headers="domain" class="gt_row gt_left">eukaryota</td>
-<td headers="internal_stop_codon_count" class="gt_row gt_right">1</td>
-<td headers="internal_stop_codon_percent" class="gt_row gt_right">1.0</td>
-<td headers="Number.of.scaffolds" class="gt_row gt_right">220</td>
-<td headers="Number.of.contigs" class="gt_row gt_right">5220</td>
-<td headers="Total.length" class="gt_row gt_right">115935664</td>
-<td headers="Percent.gaps" class="gt_row gt_right">21.496%</td>
-<td headers="Scaffold.N50" class="gt_row gt_right">5324134</td>
-<td headers="Contigs.N50" class="gt_row gt_right">28789</td></tr>
-    <tr><td headers="name" class="gt_row gt_left">Peronosclerospora-sorghi</td>
-<td headers="parent_dataset" class="gt_row gt_left">eukaryota_odb10</td>
-<td headers="Complete.percentage" class="gt_row gt_right">99</td>
-<td headers="Complete.BUSCOs" class="gt_row gt_right">99</td>
-<td headers="Single.copy.percentage" class="gt_row gt_right">98</td>
-<td headers="Single.copy.BUSCOs" class="gt_row gt_right">98</td>
-<td headers="Multi.copy.percentage" class="gt_row gt_right">1</td>
-<td headers="Multi.copy.BUSCOs" class="gt_row gt_right">1</td>
-<td headers="Fragmented.percentage" class="gt_row gt_right">0</td>
-<td headers="Fragmented.BUSCOs" class="gt_row gt_right">0</td>
-<td headers="Missing.percentage" class="gt_row gt_right">1</td>
-<td headers="Missing.BUSCOs" class="gt_row gt_right">1</td>
-<td headers="n_markers" class="gt_row gt_right">100</td>
-<td headers="avg_identity" class="gt_row gt_right">0.81</td>
-<td headers="domain" class="gt_row gt_left">eukaryota</td>
-<td headers="internal_stop_codon_count" class="gt_row gt_right">0</td>
-<td headers="internal_stop_codon_percent" class="gt_row gt_right">0.0</td>
-<td headers="Number.of.scaffolds" class="gt_row gt_right">6744</td>
-<td headers="Number.of.contigs" class="gt_row gt_right">17452</td>
-<td headers="Total.length" class="gt_row gt_right">325250994</td>
-<td headers="Percent.gaps" class="gt_row gt_right">6.792%</td>
-<td headers="Scaffold.N50" class="gt_row gt_right">19437638</td>
-<td headers="Contigs.N50" class="gt_row gt_right">42491</td></tr>
-    <tr><td headers="name" class="gt_row gt_left">Peronospora-belbahrii</td>
-<td headers="parent_dataset" class="gt_row gt_left">eukaryota_odb10</td>
-<td headers="Complete.percentage" class="gt_row gt_right">97</td>
-<td headers="Complete.BUSCOs" class="gt_row gt_right">97</td>
-<td headers="Single.copy.percentage" class="gt_row gt_right">96</td>
-<td headers="Single.copy.BUSCOs" class="gt_row gt_right">96</td>
-<td headers="Multi.copy.percentage" class="gt_row gt_right">1</td>
-<td headers="Multi.copy.BUSCOs" class="gt_row gt_right">1</td>
-<td headers="Fragmented.percentage" class="gt_row gt_right">2</td>
-<td headers="Fragmented.BUSCOs" class="gt_row gt_right">2</td>
-<td headers="Missing.percentage" class="gt_row gt_right">1</td>
-<td headers="Missing.BUSCOs" class="gt_row gt_right">1</td>
-<td headers="n_markers" class="gt_row gt_right">100</td>
-<td headers="avg_identity" class="gt_row gt_right">0.83</td>
-<td headers="domain" class="gt_row gt_left">eukaryota</td>
-<td headers="internal_stop_codon_count" class="gt_row gt_right">2</td>
-<td headers="internal_stop_codon_percent" class="gt_row gt_right">2.1</td>
-<td headers="Number.of.scaffolds" class="gt_row gt_right">2780</td>
-<td headers="Number.of.contigs" class="gt_row gt_right">14619</td>
-<td headers="Total.length" class="gt_row gt_right">35394047</td>
-<td headers="Percent.gaps" class="gt_row gt_right">18.200%</td>
-<td headers="Scaffold.N50" class="gt_row gt_right">246531</td>
-<td headers="Contigs.N50" class="gt_row gt_right">8233</td></tr>
-    <tr><td headers="name" class="gt_row gt_left">Peronospora-destructor</td>
-<td headers="parent_dataset" class="gt_row gt_left">eukaryota_odb10</td>
-<td headers="Complete.percentage" class="gt_row gt_right">99</td>
-<td headers="Complete.BUSCOs" class="gt_row gt_right">99</td>
-<td headers="Single.copy.percentage" class="gt_row gt_right">97</td>
-<td headers="Single.copy.BUSCOs" class="gt_row gt_right">97</td>
-<td headers="Multi.copy.percentage" class="gt_row gt_right">2</td>
-<td headers="Multi.copy.BUSCOs" class="gt_row gt_right">2</td>
-<td headers="Fragmented.percentage" class="gt_row gt_right">0</td>
-<td headers="Fragmented.BUSCOs" class="gt_row gt_right">0</td>
-<td headers="Missing.percentage" class="gt_row gt_right">1</td>
-<td headers="Missing.BUSCOs" class="gt_row gt_right">1</td>
-<td headers="n_markers" class="gt_row gt_right">100</td>
-<td headers="avg_identity" class="gt_row gt_right">0.85</td>
-<td headers="domain" class="gt_row gt_left">eukaryota</td>
-<td headers="internal_stop_codon_count" class="gt_row gt_right">0</td>
-<td headers="internal_stop_codon_percent" class="gt_row gt_right">0.0</td>
-<td headers="Number.of.scaffolds" class="gt_row gt_right">74</td>
-<td headers="Number.of.contigs" class="gt_row gt_right">74</td>
-<td headers="Total.length" class="gt_row gt_right">29334786</td>
-<td headers="Percent.gaps" class="gt_row gt_right">0.000%</td>
-<td headers="Scaffold.N50" class="gt_row gt_right">727749</td>
-<td headers="Contigs.N50" class="gt_row gt_right">727749</td></tr>
-    <tr><td headers="name" class="gt_row gt_left">Peronospora-effusa</td>
-<td headers="parent_dataset" class="gt_row gt_left">eukaryota_odb10</td>
-<td headers="Complete.percentage" class="gt_row gt_right">99</td>
-<td headers="Complete.BUSCOs" class="gt_row gt_right">99</td>
-<td headers="Single.copy.percentage" class="gt_row gt_right">98</td>
-<td headers="Single.copy.BUSCOs" class="gt_row gt_right">98</td>
-<td headers="Multi.copy.percentage" class="gt_row gt_right">1</td>
-<td headers="Multi.copy.BUSCOs" class="gt_row gt_right">1</td>
-<td headers="Fragmented.percentage" class="gt_row gt_right">0</td>
-<td headers="Fragmented.BUSCOs" class="gt_row gt_right">0</td>
-<td headers="Missing.percentage" class="gt_row gt_right">1</td>
-<td headers="Missing.BUSCOs" class="gt_row gt_right">1</td>
-<td headers="n_markers" class="gt_row gt_right">100</td>
-<td headers="avg_identity" class="gt_row gt_right">0.83</td>
-<td headers="domain" class="gt_row gt_left">eukaryota</td>
-<td headers="internal_stop_codon_count" class="gt_row gt_right">1</td>
-<td headers="internal_stop_codon_percent" class="gt_row gt_right">1.0</td>
-<td headers="Number.of.scaffolds" class="gt_row gt_right">17</td>
-<td headers="Number.of.contigs" class="gt_row gt_right">18</td>
-<td headers="Total.length" class="gt_row gt_right">58578433</td>
-<td headers="Percent.gaps" class="gt_row gt_right">0.000%</td>
-<td headers="Scaffold.N50" class="gt_row gt_right">3727724</td>
-<td headers="Contigs.N50" class="gt_row gt_right">3727724</td></tr>
-    <tr><td headers="name" class="gt_row gt_left">Peronospora-tabacina</td>
-<td headers="parent_dataset" class="gt_row gt_left">eukaryota_odb10</td>
-<td headers="Complete.percentage" class="gt_row gt_right">96</td>
-<td headers="Complete.BUSCOs" class="gt_row gt_right">96</td>
-<td headers="Single.copy.percentage" class="gt_row gt_right">63</td>
-<td headers="Single.copy.BUSCOs" class="gt_row gt_right">63</td>
-<td headers="Multi.copy.percentage" class="gt_row gt_right">33</td>
-<td headers="Multi.copy.BUSCOs" class="gt_row gt_right">33</td>
-<td headers="Fragmented.percentage" class="gt_row gt_right">3</td>
-<td headers="Fragmented.BUSCOs" class="gt_row gt_right">3</td>
-<td headers="Missing.percentage" class="gt_row gt_right">1</td>
-<td headers="Missing.BUSCOs" class="gt_row gt_right">1</td>
-<td headers="n_markers" class="gt_row gt_right">100</td>
-<td headers="avg_identity" class="gt_row gt_right">0.83</td>
-<td headers="domain" class="gt_row gt_left">eukaryota</td>
-<td headers="internal_stop_codon_count" class="gt_row gt_right">1</td>
-<td headers="internal_stop_codon_percent" class="gt_row gt_right">1.0</td>
-<td headers="Number.of.scaffolds" class="gt_row gt_right">4015</td>
-<td headers="Number.of.contigs" class="gt_row gt_right">10797</td>
-<td headers="Total.length" class="gt_row gt_right">63065868</td>
-<td headers="Percent.gaps" class="gt_row gt_right">27.367%</td>
-<td headers="Scaffold.N50" class="gt_row gt_right">78591</td>
-<td headers="Contigs.N50" class="gt_row gt_right">10960</td></tr>
-    <tr><td headers="name" class="gt_row gt_left">Phythophthora-rubi</td>
-<td headers="parent_dataset" class="gt_row gt_left">eukaryota_odb10</td>
-<td headers="Complete.percentage" class="gt_row gt_right">100</td>
-<td headers="Complete.BUSCOs" class="gt_row gt_right">100</td>
-<td headers="Single.copy.percentage" class="gt_row gt_right">100</td>
-<td headers="Single.copy.BUSCOs" class="gt_row gt_right">100</td>
-<td headers="Multi.copy.percentage" class="gt_row gt_right">0</td>
-<td headers="Multi.copy.BUSCOs" class="gt_row gt_right">0</td>
-<td headers="Fragmented.percentage" class="gt_row gt_right">0</td>
-<td headers="Fragmented.BUSCOs" class="gt_row gt_right">0</td>
-<td headers="Missing.percentage" class="gt_row gt_right">0</td>
-<td headers="Missing.BUSCOs" class="gt_row gt_right">0</td>
-<td headers="n_markers" class="gt_row gt_right">100</td>
-<td headers="avg_identity" class="gt_row gt_right">0.90</td>
-<td headers="domain" class="gt_row gt_left">eukaryota</td>
-<td headers="internal_stop_codon_count" class="gt_row gt_right">3</td>
-<td headers="internal_stop_codon_percent" class="gt_row gt_right">3.0</td>
-<td headers="Number.of.scaffolds" class="gt_row gt_right">2387</td>
-<td headers="Number.of.contigs" class="gt_row gt_right">4521</td>
-<td headers="Total.length" class="gt_row gt_right">78973475</td>
-<td headers="Percent.gaps" class="gt_row gt_right">7.102%</td>
-<td headers="Scaffold.N50" class="gt_row gt_right">84001</td>
-<td headers="Contigs.N50" class="gt_row gt_right">40507</td></tr>
-    <tr><td headers="name" class="gt_row gt_left">Phytophthora-capsici</td>
-<td headers="parent_dataset" class="gt_row gt_left">eukaryota_odb10</td>
-<td headers="Complete.percentage" class="gt_row gt_right">100</td>
-<td headers="Complete.BUSCOs" class="gt_row gt_right">100</td>
-<td headers="Single.copy.percentage" class="gt_row gt_right">100</td>
-<td headers="Single.copy.BUSCOs" class="gt_row gt_right">100</td>
-<td headers="Multi.copy.percentage" class="gt_row gt_right">0</td>
-<td headers="Multi.copy.BUSCOs" class="gt_row gt_right">0</td>
-<td headers="Fragmented.percentage" class="gt_row gt_right">0</td>
-<td headers="Fragmented.BUSCOs" class="gt_row gt_right">0</td>
-<td headers="Missing.percentage" class="gt_row gt_right">0</td>
-<td headers="Missing.BUSCOs" class="gt_row gt_right">0</td>
-<td headers="n_markers" class="gt_row gt_right">100</td>
-<td headers="avg_identity" class="gt_row gt_right">0.88</td>
-<td headers="domain" class="gt_row gt_left">eukaryota</td>
-<td headers="internal_stop_codon_count" class="gt_row gt_right">1</td>
-<td headers="internal_stop_codon_percent" class="gt_row gt_right">1.0</td>
-<td headers="Number.of.scaffolds" class="gt_row gt_right">34</td>
-<td headers="Number.of.contigs" class="gt_row gt_right">117</td>
-<td headers="Total.length" class="gt_row gt_right">78752024</td>
-<td headers="Percent.gaps" class="gt_row gt_right">0.011%</td>
-<td headers="Scaffold.N50" class="gt_row gt_right">4242565</td>
-<td headers="Contigs.N50" class="gt_row gt_right">1566642</td></tr>
-    <tr><td headers="name" class="gt_row gt_left">Phytophthora-nicotianae</td>
-<td headers="parent_dataset" class="gt_row gt_left">eukaryota_odb10</td>
-<td headers="Complete.percentage" class="gt_row gt_right">99</td>
-<td headers="Complete.BUSCOs" class="gt_row gt_right">99</td>
-<td headers="Single.copy.percentage" class="gt_row gt_right">99</td>
-<td headers="Single.copy.BUSCOs" class="gt_row gt_right">99</td>
-<td headers="Multi.copy.percentage" class="gt_row gt_right">0</td>
-<td headers="Multi.copy.BUSCOs" class="gt_row gt_right">0</td>
-<td headers="Fragmented.percentage" class="gt_row gt_right">1</td>
-<td headers="Fragmented.BUSCOs" class="gt_row gt_right">1</td>
-<td headers="Missing.percentage" class="gt_row gt_right">0</td>
-<td headers="Missing.BUSCOs" class="gt_row gt_right">0</td>
-<td headers="n_markers" class="gt_row gt_right">100</td>
-<td headers="avg_identity" class="gt_row gt_right">0.93</td>
-<td headers="domain" class="gt_row gt_left">eukaryota</td>
-<td headers="internal_stop_codon_count" class="gt_row gt_right">0</td>
-<td headers="internal_stop_codon_percent" class="gt_row gt_right">0.0</td>
-<td headers="Number.of.scaffolds" class="gt_row gt_right">708</td>
-<td headers="Number.of.contigs" class="gt_row gt_right">8791</td>
-<td headers="Total.length" class="gt_row gt_right">82389172</td>
-<td headers="Percent.gaps" class="gt_row gt_right">34.614%</td>
-<td headers="Scaffold.N50" class="gt_row gt_right">888348</td>
-<td headers="Contigs.N50" class="gt_row gt_right">24397</td></tr>
-    <tr><td headers="name" class="gt_row gt_left">Phytophthora-sojae-2023</td>
-<td headers="parent_dataset" class="gt_row gt_left">eukaryota_odb10</td>
-<td headers="Complete.percentage" class="gt_row gt_right">100</td>
-<td headers="Complete.BUSCOs" class="gt_row gt_right">100</td>
-<td headers="Single.copy.percentage" class="gt_row gt_right">100</td>
-<td headers="Single.copy.BUSCOs" class="gt_row gt_right">100</td>
-<td headers="Multi.copy.percentage" class="gt_row gt_right">0</td>
-<td headers="Multi.copy.BUSCOs" class="gt_row gt_right">0</td>
-<td headers="Fragmented.percentage" class="gt_row gt_right">0</td>
-<td headers="Fragmented.BUSCOs" class="gt_row gt_right">0</td>
-<td headers="Missing.percentage" class="gt_row gt_right">0</td>
-<td headers="Missing.BUSCOs" class="gt_row gt_right">0</td>
-<td headers="n_markers" class="gt_row gt_right">100</td>
-<td headers="avg_identity" class="gt_row gt_right">0.94</td>
-<td headers="domain" class="gt_row gt_left">eukaryota</td>
-<td headers="internal_stop_codon_count" class="gt_row gt_right">0</td>
-<td headers="internal_stop_codon_percent" class="gt_row gt_right">0.0</td>
-<td headers="Number.of.scaffolds" class="gt_row gt_right">12</td>
-<td headers="Number.of.contigs" class="gt_row gt_right">12</td>
-<td headers="Total.length" class="gt_row gt_right">85131815</td>
-<td headers="Percent.gaps" class="gt_row gt_right">0.000%</td>
-<td headers="Scaffold.N50" class="gt_row gt_right">8105859</td>
-<td headers="Contigs.N50" class="gt_row gt_right">8105859</td></tr>
-    <tr><td headers="name" class="gt_row gt_left">Phytophthora-sojae-V3.0</td>
-<td headers="parent_dataset" class="gt_row gt_left">eukaryota_odb10</td>
-<td headers="Complete.percentage" class="gt_row gt_right">100</td>
-<td headers="Complete.BUSCOs" class="gt_row gt_right">100</td>
-<td headers="Single.copy.percentage" class="gt_row gt_right">99</td>
-<td headers="Single.copy.BUSCOs" class="gt_row gt_right">99</td>
-<td headers="Multi.copy.percentage" class="gt_row gt_right">1</td>
-<td headers="Multi.copy.BUSCOs" class="gt_row gt_right">1</td>
-<td headers="Fragmented.percentage" class="gt_row gt_right">0</td>
-<td headers="Fragmented.BUSCOs" class="gt_row gt_right">0</td>
-<td headers="Missing.percentage" class="gt_row gt_right">0</td>
-<td headers="Missing.BUSCOs" class="gt_row gt_right">0</td>
-<td headers="n_markers" class="gt_row gt_right">100</td>
-<td headers="avg_identity" class="gt_row gt_right">0.94</td>
-<td headers="domain" class="gt_row gt_left">eukaryota</td>
-<td headers="internal_stop_codon_count" class="gt_row gt_right">0</td>
-<td headers="internal_stop_codon_percent" class="gt_row gt_right">0.0</td>
-<td headers="Number.of.scaffolds" class="gt_row gt_right">82</td>
-<td headers="Number.of.contigs" class="gt_row gt_right">862</td>
-<td headers="Total.length" class="gt_row gt_right">82597641</td>
-<td headers="Percent.gaps" class="gt_row gt_right">3.959%</td>
-<td headers="Scaffold.N50" class="gt_row gt_right">7609242</td>
-<td headers="Contigs.N50" class="gt_row gt_right">385992</td></tr>
-    <tr><td headers="name" class="gt_row gt_left">Phytopthora-infestans</td>
-<td headers="parent_dataset" class="gt_row gt_left">eukaryota_odb10</td>
-<td headers="Complete.percentage" class="gt_row gt_right">100</td>
-<td headers="Complete.BUSCOs" class="gt_row gt_right">100</td>
-<td headers="Single.copy.percentage" class="gt_row gt_right">98</td>
-<td headers="Single.copy.BUSCOs" class="gt_row gt_right">98</td>
-<td headers="Multi.copy.percentage" class="gt_row gt_right">2</td>
-<td headers="Multi.copy.BUSCOs" class="gt_row gt_right">2</td>
-<td headers="Fragmented.percentage" class="gt_row gt_right">0</td>
-<td headers="Fragmented.BUSCOs" class="gt_row gt_right">0</td>
-<td headers="Missing.percentage" class="gt_row gt_right">0</td>
-<td headers="Missing.BUSCOs" class="gt_row gt_right">0</td>
-<td headers="n_markers" class="gt_row gt_right">100</td>
-<td headers="avg_identity" class="gt_row gt_right">0.91</td>
-<td headers="domain" class="gt_row gt_left">eukaryota</td>
-<td headers="internal_stop_codon_count" class="gt_row gt_right">0</td>
-<td headers="internal_stop_codon_percent" class="gt_row gt_right">0.0</td>
-<td headers="Number.of.scaffolds" class="gt_row gt_right">4921</td>
-<td headers="Number.of.contigs" class="gt_row gt_right">18288</td>
-<td headers="Total.length" class="gt_row gt_right">228543505</td>
-<td headers="Percent.gaps" class="gt_row gt_right">16.806%</td>
-<td headers="Scaffold.N50" class="gt_row gt_right">1588622</td>
-<td headers="Contigs.N50" class="gt_row gt_right">44484</td></tr>
-    <tr><td headers="name" class="gt_row gt_left">Phytopthora-ramorum</td>
-<td headers="parent_dataset" class="gt_row gt_left">eukaryota_odb10</td>
-<td headers="Complete.percentage" class="gt_row gt_right">100</td>
-<td headers="Complete.BUSCOs" class="gt_row gt_right">100</td>
-<td headers="Single.copy.percentage" class="gt_row gt_right">98</td>
-<td headers="Single.copy.BUSCOs" class="gt_row gt_right">98</td>
-<td headers="Multi.copy.percentage" class="gt_row gt_right">2</td>
-<td headers="Multi.copy.BUSCOs" class="gt_row gt_right">2</td>
-<td headers="Fragmented.percentage" class="gt_row gt_right">0</td>
-<td headers="Fragmented.BUSCOs" class="gt_row gt_right">0</td>
-<td headers="Missing.percentage" class="gt_row gt_right">0</td>
-<td headers="Missing.BUSCOs" class="gt_row gt_right">0</td>
-<td headers="n_markers" class="gt_row gt_right">100</td>
-<td headers="avg_identity" class="gt_row gt_right">0.88</td>
-<td headers="domain" class="gt_row gt_left">eukaryota</td>
-<td headers="internal_stop_codon_count" class="gt_row gt_right">1</td>
-<td headers="internal_stop_codon_percent" class="gt_row gt_right">1.0</td>
-<td headers="Number.of.scaffolds" class="gt_row gt_right">28</td>
-<td headers="Number.of.contigs" class="gt_row gt_right">71</td>
-<td headers="Total.length" class="gt_row gt_right">57451392</td>
-<td headers="Percent.gaps" class="gt_row gt_right">0.341%</td>
-<td headers="Scaffold.N50" class="gt_row gt_right">3611744</td>
-<td headers="Contigs.N50" class="gt_row gt_right">1193636</td></tr>
-    <tr><td headers="name" class="gt_row gt_left">Plasmopara-halstedii</td>
-<td headers="parent_dataset" class="gt_row gt_left">eukaryota_odb10</td>
-<td headers="Complete.percentage" class="gt_row gt_right">100</td>
-<td headers="Complete.BUSCOs" class="gt_row gt_right">100</td>
-<td headers="Single.copy.percentage" class="gt_row gt_right">100</td>
-<td headers="Single.copy.BUSCOs" class="gt_row gt_right">100</td>
-<td headers="Multi.copy.percentage" class="gt_row gt_right">0</td>
-<td headers="Multi.copy.BUSCOs" class="gt_row gt_right">0</td>
-<td headers="Fragmented.percentage" class="gt_row gt_right">0</td>
-<td headers="Fragmented.BUSCOs" class="gt_row gt_right">0</td>
-<td headers="Missing.percentage" class="gt_row gt_right">0</td>
-<td headers="Missing.BUSCOs" class="gt_row gt_right">0</td>
-<td headers="n_markers" class="gt_row gt_right">100</td>
-<td headers="avg_identity" class="gt_row gt_right">0.86</td>
-<td headers="domain" class="gt_row gt_left">eukaryota</td>
-<td headers="internal_stop_codon_count" class="gt_row gt_right">1</td>
-<td headers="internal_stop_codon_percent" class="gt_row gt_right">1.0</td>
-<td headers="Number.of.scaffolds" class="gt_row gt_right">3162</td>
-<td headers="Number.of.contigs" class="gt_row gt_right">25359</td>
-<td headers="Total.length" class="gt_row gt_right">75321785</td>
-<td headers="Percent.gaps" class="gt_row gt_right">11.322%</td>
-<td headers="Scaffold.N50" class="gt_row gt_right">1546205</td>
-<td headers="Contigs.N50" class="gt_row gt_right">16233</td></tr>
-    <tr><td headers="name" class="gt_row gt_left">Plasmopara-viticola</td>
-<td headers="parent_dataset" class="gt_row gt_left">eukaryota_odb10</td>
-<td headers="Complete.percentage" class="gt_row gt_right">100</td>
-<td headers="Complete.BUSCOs" class="gt_row gt_right">100</td>
-<td headers="Single.copy.percentage" class="gt_row gt_right">93</td>
-<td headers="Single.copy.BUSCOs" class="gt_row gt_right">93</td>
-<td headers="Multi.copy.percentage" class="gt_row gt_right">7</td>
-<td headers="Multi.copy.BUSCOs" class="gt_row gt_right">7</td>
-<td headers="Fragmented.percentage" class="gt_row gt_right">0</td>
-<td headers="Fragmented.BUSCOs" class="gt_row gt_right">0</td>
-<td headers="Missing.percentage" class="gt_row gt_right">0</td>
-<td headers="Missing.BUSCOs" class="gt_row gt_right">0</td>
-<td headers="n_markers" class="gt_row gt_right">100</td>
-<td headers="avg_identity" class="gt_row gt_right">0.86</td>
-<td headers="domain" class="gt_row gt_left">eukaryota</td>
-<td headers="internal_stop_codon_count" class="gt_row gt_right">1</td>
-<td headers="internal_stop_codon_percent" class="gt_row gt_right">1.0</td>
-<td headers="Number.of.scaffolds" class="gt_row gt_right">358</td>
-<td headers="Number.of.contigs" class="gt_row gt_right">374</td>
-<td headers="Total.length" class="gt_row gt_right">92937831</td>
-<td headers="Percent.gaps" class="gt_row gt_right">0.037%</td>
-<td headers="Scaffold.N50" class="gt_row gt_right">706521</td>
-<td headers="Contigs.N50" class="gt_row gt_right">666562</td></tr>
-    <tr><td headers="name" class="gt_row gt_left">Pseudoperonospora-humuli</td>
-<td headers="parent_dataset" class="gt_row gt_left">eukaryota_odb10</td>
-<td headers="Complete.percentage" class="gt_row gt_right">99</td>
-<td headers="Complete.BUSCOs" class="gt_row gt_right">99</td>
-<td headers="Single.copy.percentage" class="gt_row gt_right">95</td>
-<td headers="Single.copy.BUSCOs" class="gt_row gt_right">95</td>
-<td headers="Multi.copy.percentage" class="gt_row gt_right">4</td>
-<td headers="Multi.copy.BUSCOs" class="gt_row gt_right">4</td>
-<td headers="Fragmented.percentage" class="gt_row gt_right">1</td>
-<td headers="Fragmented.BUSCOs" class="gt_row gt_right">1</td>
-<td headers="Missing.percentage" class="gt_row gt_right">0</td>
-<td headers="Missing.BUSCOs" class="gt_row gt_right">0</td>
-<td headers="n_markers" class="gt_row gt_right">100</td>
-<td headers="avg_identity" class="gt_row gt_right">0.85</td>
-<td headers="domain" class="gt_row gt_left">eukaryota</td>
-<td headers="internal_stop_codon_count" class="gt_row gt_right">0</td>
-<td headers="internal_stop_codon_percent" class="gt_row gt_right">0.0</td>
-<td headers="Number.of.scaffolds" class="gt_row gt_right">5534</td>
-<td headers="Number.of.contigs" class="gt_row gt_right">6496</td>
-<td headers="Total.length" class="gt_row gt_right">40506691</td>
-<td headers="Percent.gaps" class="gt_row gt_right">0.238%</td>
-<td headers="Scaffold.N50" class="gt_row gt_right">19165</td>
-<td headers="Contigs.N50" class="gt_row gt_right">18715</td></tr>
+    <tr><th id="stub_1_1" scope="row" class="gt_row gt_left gt_stub">Bremia-lactucae</th>
+<td headers="stub_1_1 S" class="gt_row gt_right">95.00%</td>
+<td headers="stub_1_1 D" class="gt_row gt_right">4.00%</td>
+<td headers="stub_1_1 F" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_1 I" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_1 M" class="gt_row gt_right">1.00%</td>
+<td headers="stub_1_1 N" class="gt_row gt_right">100</td>
+<td headers="stub_1_1 Linkage" class="gt_row gt_left">stramenopiles_odb10</td>
+<td headers="stub_1_1 # contigs (&gt;= 0 bp)" class="gt_row gt_right">220</td>
+<td headers="stub_1_1 # contigs (&gt;= 1000 bp)" class="gt_row gt_right">214</td>
+<td headers="stub_1_1 # contigs (&gt;= 5000 bp)" class="gt_row gt_right">160</td>
+<td headers="stub_1_1 # contigs (&gt;= 10000 bp)" class="gt_row gt_right">120</td>
+<td headers="stub_1_1 # contigs (&gt;= 25000 bp)" class="gt_row gt_right">79</td>
+<td headers="stub_1_1 # contigs (&gt;= 50000 bp)" class="gt_row gt_right">55</td>
+<td headers="stub_1_1 Total length (&gt;= 0 bp)" class="gt_row gt_right">115935664</td>
+<td headers="stub_1_1 Total length (&gt;= 1000 bp)" class="gt_row gt_right">115930437</td>
+<td headers="stub_1_1 Total length (&gt;= 5000 bp)" class="gt_row gt_right">115782306</td>
+<td headers="stub_1_1 Total length (&gt;= 10000 bp)" class="gt_row gt_right">115481774</td>
+<td headers="stub_1_1 Total length (&gt;= 25000 bp)" class="gt_row gt_right">114766319</td>
+<td headers="stub_1_1 Total length (&gt;= 50000 bp)" class="gt_row gt_right">113924609</td>
+<td headers="stub_1_1 # contigs" class="gt_row gt_right">220</td>
+<td headers="stub_1_1 Largest contig" class="gt_row gt_right">16032334</td>
+<td headers="stub_1_1 Total length" class="gt_row gt_right">115935664</td>
+<td headers="stub_1_1 GC (%)" class="gt_row gt_right">45.85</td>
+<td headers="stub_1_1 N50" class="gt_row gt_right">5324134</td>
+<td headers="stub_1_1 N90" class="gt_row gt_right">1233567</td>
+<td headers="stub_1_1 auN" class="gt_row gt_right">6241117.4</td>
+<td headers="stub_1_1 L50" class="gt_row gt_right">7</td>
+<td headers="stub_1_1 L90" class="gt_row gt_right">23</td>
+<td headers="stub_1_1 # N&#39;s per 100 kbp" class="gt_row gt_right">21496.42</td></tr>
+    <tr><th id="stub_1_2" scope="row" class="gt_row gt_left gt_stub">Peronospora-belbahrii</th>
+<td headers="stub_1_2 S" class="gt_row gt_right">96.00%</td>
+<td headers="stub_1_2 D" class="gt_row gt_right">1.00%</td>
+<td headers="stub_1_2 F" class="gt_row gt_right">2.00%</td>
+<td headers="stub_1_2 I" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_2 M" class="gt_row gt_right">1.00%</td>
+<td headers="stub_1_2 N" class="gt_row gt_right">100</td>
+<td headers="stub_1_2 Linkage" class="gt_row gt_left">stramenopiles_odb10</td>
+<td headers="stub_1_2 # contigs (&gt;= 0 bp)" class="gt_row gt_right">2780</td>
+<td headers="stub_1_2 # contigs (&gt;= 1000 bp)" class="gt_row gt_right">911</td>
+<td headers="stub_1_2 # contigs (&gt;= 5000 bp)" class="gt_row gt_right">318</td>
+<td headers="stub_1_2 # contigs (&gt;= 10000 bp)" class="gt_row gt_right">281</td>
+<td headers="stub_1_2 # contigs (&gt;= 25000 bp)" class="gt_row gt_right">200</td>
+<td headers="stub_1_2 # contigs (&gt;= 50000 bp)" class="gt_row gt_right">154</td>
+<td headers="stub_1_2 Total length (&gt;= 0 bp)" class="gt_row gt_right">35394047</td>
+<td headers="stub_1_2 Total length (&gt;= 1000 bp)" class="gt_row gt_right">34421594</td>
+<td headers="stub_1_2 Total length (&gt;= 5000 bp)" class="gt_row gt_right">33266839</td>
+<td headers="stub_1_2 Total length (&gt;= 10000 bp)" class="gt_row gt_right">32993451</td>
+<td headers="stub_1_2 Total length (&gt;= 25000 bp)" class="gt_row gt_right">31747080</td>
+<td headers="stub_1_2 Total length (&gt;= 50000 bp)" class="gt_row gt_right">30089165</td>
+<td headers="stub_1_2 # contigs" class="gt_row gt_right">1709</td>
+<td headers="stub_1_2 Largest contig" class="gt_row gt_right">1239522</td>
+<td headers="stub_1_2 Total length" class="gt_row gt_right">34990926</td>
+<td headers="stub_1_2 GC (%)" class="gt_row gt_right">45.84</td>
+<td headers="stub_1_2 N50" class="gt_row gt_right">248464</td>
+<td headers="stub_1_2 N90" class="gt_row gt_right">29092</td>
+<td headers="stub_1_2 auN" class="gt_row gt_right">278195.1</td>
+<td headers="stub_1_2 L50" class="gt_row gt_right">46</td>
+<td headers="stub_1_2 L90" class="gt_row gt_right">191</td>
+<td headers="stub_1_2 # N&#39;s per 100 kbp" class="gt_row gt_right">18404.15</td></tr>
+    <tr><th id="stub_1_3" scope="row" class="gt_row gt_left gt_stub">Peronospora-destructor</th>
+<td headers="stub_1_3 S" class="gt_row gt_right">97.00%</td>
+<td headers="stub_1_3 D" class="gt_row gt_right">2.00%</td>
+<td headers="stub_1_3 F" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_3 I" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_3 M" class="gt_row gt_right">1.00%</td>
+<td headers="stub_1_3 N" class="gt_row gt_right">100</td>
+<td headers="stub_1_3 Linkage" class="gt_row gt_left">stramenopiles_odb10</td>
+<td headers="stub_1_3 # contigs (&gt;= 0 bp)" class="gt_row gt_right">74</td>
+<td headers="stub_1_3 # contigs (&gt;= 1000 bp)" class="gt_row gt_right">73</td>
+<td headers="stub_1_3 # contigs (&gt;= 5000 bp)" class="gt_row gt_right">73</td>
+<td headers="stub_1_3 # contigs (&gt;= 10000 bp)" class="gt_row gt_right">71</td>
+<td headers="stub_1_3 # contigs (&gt;= 25000 bp)" class="gt_row gt_right">68</td>
+<td headers="stub_1_3 # contigs (&gt;= 50000 bp)" class="gt_row gt_right">62</td>
+<td headers="stub_1_3 Total length (&gt;= 0 bp)" class="gt_row gt_right">29334786</td>
+<td headers="stub_1_3 Total length (&gt;= 1000 bp)" class="gt_row gt_right">29334473</td>
+<td headers="stub_1_3 Total length (&gt;= 5000 bp)" class="gt_row gt_right">29334473</td>
+<td headers="stub_1_3 Total length (&gt;= 10000 bp)" class="gt_row gt_right">29320227</td>
+<td headers="stub_1_3 Total length (&gt;= 25000 bp)" class="gt_row gt_right">29281385</td>
+<td headers="stub_1_3 Total length (&gt;= 50000 bp)" class="gt_row gt_right">29080324</td>
+<td headers="stub_1_3 # contigs" class="gt_row gt_right">73</td>
+<td headers="stub_1_3 Largest contig" class="gt_row gt_right">2283970</td>
+<td headers="stub_1_3 Total length" class="gt_row gt_right">29334473</td>
+<td headers="stub_1_3 GC (%)" class="gt_row gt_right">48.48</td>
+<td headers="stub_1_3 N50" class="gt_row gt_right">727749</td>
+<td headers="stub_1_3 N90" class="gt_row gt_right">202513</td>
+<td headers="stub_1_3 auN" class="gt_row gt_right">906930.3</td>
+<td headers="stub_1_3 L50" class="gt_row gt_right">12</td>
+<td headers="stub_1_3 L90" class="gt_row gt_right">42</td>
+<td headers="stub_1_3 # N&#39;s per 100 kbp" class="gt_row gt_right">0.00</td></tr>
+    <tr><th id="stub_1_4" scope="row" class="gt_row gt_left gt_stub">Peronospora-effusa</th>
+<td headers="stub_1_4 S" class="gt_row gt_right">98.00%</td>
+<td headers="stub_1_4 D" class="gt_row gt_right">1.00%</td>
+<td headers="stub_1_4 F" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_4 I" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_4 M" class="gt_row gt_right">1.00%</td>
+<td headers="stub_1_4 N" class="gt_row gt_right">100</td>
+<td headers="stub_1_4 Linkage" class="gt_row gt_left">stramenopiles_odb10</td>
+<td headers="stub_1_4 # contigs (&gt;= 0 bp)" class="gt_row gt_right">17</td>
+<td headers="stub_1_4 # contigs (&gt;= 1000 bp)" class="gt_row gt_right">17</td>
+<td headers="stub_1_4 # contigs (&gt;= 5000 bp)" class="gt_row gt_right">17</td>
+<td headers="stub_1_4 # contigs (&gt;= 10000 bp)" class="gt_row gt_right">17</td>
+<td headers="stub_1_4 # contigs (&gt;= 25000 bp)" class="gt_row gt_right">17</td>
+<td headers="stub_1_4 # contigs (&gt;= 50000 bp)" class="gt_row gt_right">17</td>
+<td headers="stub_1_4 Total length (&gt;= 0 bp)" class="gt_row gt_right">58578433</td>
+<td headers="stub_1_4 Total length (&gt;= 1000 bp)" class="gt_row gt_right">58578433</td>
+<td headers="stub_1_4 Total length (&gt;= 5000 bp)" class="gt_row gt_right">58578433</td>
+<td headers="stub_1_4 Total length (&gt;= 10000 bp)" class="gt_row gt_right">58578433</td>
+<td headers="stub_1_4 Total length (&gt;= 25000 bp)" class="gt_row gt_right">58578433</td>
+<td headers="stub_1_4 Total length (&gt;= 50000 bp)" class="gt_row gt_right">58578433</td>
+<td headers="stub_1_4 # contigs" class="gt_row gt_right">17</td>
+<td headers="stub_1_4 Largest contig" class="gt_row gt_right">8417896</td>
+<td headers="stub_1_4 Total length" class="gt_row gt_right">58578433</td>
+<td headers="stub_1_4 GC (%)" class="gt_row gt_right">48.58</td>
+<td headers="stub_1_4 N50" class="gt_row gt_right">3727724</td>
+<td headers="stub_1_4 N90" class="gt_row gt_right">2196953</td>
+<td headers="stub_1_4 auN" class="gt_row gt_right">4242195.3</td>
+<td headers="stub_1_4 L50" class="gt_row gt_right">6</td>
+<td headers="stub_1_4 L90" class="gt_row gt_right">15</td>
+<td headers="stub_1_4 # N&#39;s per 100 kbp" class="gt_row gt_right">0.17</td></tr>
+    <tr><th id="stub_1_5" scope="row" class="gt_row gt_left gt_stub">Phythophthora-rubi</th>
+<td headers="stub_1_5 S" class="gt_row gt_right">100.00%</td>
+<td headers="stub_1_5 D" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_5 F" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_5 I" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_5 M" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_5 N" class="gt_row gt_right">100</td>
+<td headers="stub_1_5 Linkage" class="gt_row gt_left">stramenopiles_odb10</td>
+<td headers="stub_1_5 # contigs (&gt;= 0 bp)" class="gt_row gt_right">2387</td>
+<td headers="stub_1_5 # contigs (&gt;= 1000 bp)" class="gt_row gt_right">2386</td>
+<td headers="stub_1_5 # contigs (&gt;= 5000 bp)" class="gt_row gt_right">1632</td>
+<td headers="stub_1_5 # contigs (&gt;= 10000 bp)" class="gt_row gt_right">1314</td>
+<td headers="stub_1_5 # contigs (&gt;= 25000 bp)" class="gt_row gt_right">896</td>
+<td headers="stub_1_5 # contigs (&gt;= 50000 bp)" class="gt_row gt_right">538</td>
+<td headers="stub_1_5 Total length (&gt;= 0 bp)" class="gt_row gt_right">78973475</td>
+<td headers="stub_1_5 Total length (&gt;= 1000 bp)" class="gt_row gt_right">78972523</td>
+<td headers="stub_1_5 Total length (&gt;= 5000 bp)" class="gt_row gt_right">77178613</td>
+<td headers="stub_1_5 Total length (&gt;= 10000 bp)" class="gt_row gt_right">74903968</td>
+<td headers="stub_1_5 Total length (&gt;= 25000 bp)" class="gt_row gt_right">67966428</td>
+<td headers="stub_1_5 Total length (&gt;= 50000 bp)" class="gt_row gt_right">55056124</td>
+<td headers="stub_1_5 # contigs" class="gt_row gt_right">2387</td>
+<td headers="stub_1_5 Largest contig" class="gt_row gt_right">390187</td>
+<td headers="stub_1_5 Total length" class="gt_row gt_right">78973475</td>
+<td headers="stub_1_5 GC (%)" class="gt_row gt_right">53.33</td>
+<td headers="stub_1_5 N50" class="gt_row gt_right">84001</td>
+<td headers="stub_1_5 N90" class="gt_row gt_right">18703</td>
+<td headers="stub_1_5 auN" class="gt_row gt_right">97896.4</td>
+<td headers="stub_1_5 L50" class="gt_row gt_right">293</td>
+<td headers="stub_1_5 L90" class="gt_row gt_right">1038</td>
+<td headers="stub_1_5 # N&#39;s per 100 kbp" class="gt_row gt_right">7102.41</td></tr>
+    <tr><th id="stub_1_6" scope="row" class="gt_row gt_left gt_stub">Phytophthora-capsici</th>
+<td headers="stub_1_6 S" class="gt_row gt_right">100.00%</td>
+<td headers="stub_1_6 D" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_6 F" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_6 I" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_6 M" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_6 N" class="gt_row gt_right">100</td>
+<td headers="stub_1_6 Linkage" class="gt_row gt_left">stramenopiles_odb10</td>
+<td headers="stub_1_6 # contigs (&gt;= 0 bp)" class="gt_row gt_right">34</td>
+<td headers="stub_1_6 # contigs (&gt;= 1000 bp)" class="gt_row gt_right">34</td>
+<td headers="stub_1_6 # contigs (&gt;= 5000 bp)" class="gt_row gt_right">34</td>
+<td headers="stub_1_6 # contigs (&gt;= 10000 bp)" class="gt_row gt_right">34</td>
+<td headers="stub_1_6 # contigs (&gt;= 25000 bp)" class="gt_row gt_right">32</td>
+<td headers="stub_1_6 # contigs (&gt;= 50000 bp)" class="gt_row gt_right">28</td>
+<td headers="stub_1_6 Total length (&gt;= 0 bp)" class="gt_row gt_right">78752024</td>
+<td headers="stub_1_6 Total length (&gt;= 1000 bp)" class="gt_row gt_right">78752024</td>
+<td headers="stub_1_6 Total length (&gt;= 5000 bp)" class="gt_row gt_right">78752024</td>
+<td headers="stub_1_6 Total length (&gt;= 10000 bp)" class="gt_row gt_right">78752024</td>
+<td headers="stub_1_6 Total length (&gt;= 25000 bp)" class="gt_row gt_right">78723140</td>
+<td headers="stub_1_6 Total length (&gt;= 50000 bp)" class="gt_row gt_right">78597601</td>
+<td headers="stub_1_6 # contigs" class="gt_row gt_right">34</td>
+<td headers="stub_1_6 Largest contig" class="gt_row gt_right">6028800</td>
+<td headers="stub_1_6 Total length" class="gt_row gt_right">78752024</td>
+<td headers="stub_1_6 GC (%)" class="gt_row gt_right">51.19</td>
+<td headers="stub_1_6 N50" class="gt_row gt_right">4242565</td>
+<td headers="stub_1_6 N90" class="gt_row gt_right">2782523</td>
+<td headers="stub_1_6 auN" class="gt_row gt_right">4053547.7</td>
+<td headers="stub_1_6 L50" class="gt_row gt_right">9</td>
+<td headers="stub_1_6 L90" class="gt_row gt_right">18</td>
+<td headers="stub_1_6 # N&#39;s per 100 kbp" class="gt_row gt_right">10.54</td></tr>
+    <tr><th id="stub_1_7" scope="row" class="gt_row gt_left gt_stub">Phytophthora-nicotianae</th>
+<td headers="stub_1_7 S" class="gt_row gt_right">99.00%</td>
+<td headers="stub_1_7 D" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_7 F" class="gt_row gt_right">1.00%</td>
+<td headers="stub_1_7 I" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_7 M" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_7 N" class="gt_row gt_right">100</td>
+<td headers="stub_1_7 Linkage" class="gt_row gt_left">stramenopiles_odb10</td>
+<td headers="stub_1_7 # contigs (&gt;= 0 bp)" class="gt_row gt_right">708</td>
+<td headers="stub_1_7 # contigs (&gt;= 1000 bp)" class="gt_row gt_right">708</td>
+<td headers="stub_1_7 # contigs (&gt;= 5000 bp)" class="gt_row gt_right">483</td>
+<td headers="stub_1_7 # contigs (&gt;= 10000 bp)" class="gt_row gt_right">293</td>
+<td headers="stub_1_7 # contigs (&gt;= 25000 bp)" class="gt_row gt_right">202</td>
+<td headers="stub_1_7 # contigs (&gt;= 50000 bp)" class="gt_row gt_right">161</td>
+<td headers="stub_1_7 Total length (&gt;= 0 bp)" class="gt_row gt_right">82389172</td>
+<td headers="stub_1_7 Total length (&gt;= 1000 bp)" class="gt_row gt_right">82389172</td>
+<td headers="stub_1_7 Total length (&gt;= 5000 bp)" class="gt_row gt_right">81830892</td>
+<td headers="stub_1_7 Total length (&gt;= 10000 bp)" class="gt_row gt_right">80535334</td>
+<td headers="stub_1_7 Total length (&gt;= 25000 bp)" class="gt_row gt_right">79194467</td>
+<td headers="stub_1_7 Total length (&gt;= 50000 bp)" class="gt_row gt_right">77480296</td>
+<td headers="stub_1_7 # contigs" class="gt_row gt_right">708</td>
+<td headers="stub_1_7 Largest contig" class="gt_row gt_right">4724858</td>
+<td headers="stub_1_7 Total length" class="gt_row gt_right">82389172</td>
+<td headers="stub_1_7 GC (%)" class="gt_row gt_right">49.51</td>
+<td headers="stub_1_7 N50" class="gt_row gt_right">888348</td>
+<td headers="stub_1_7 N90" class="gt_row gt_right">100381</td>
+<td headers="stub_1_7 auN" class="gt_row gt_right">1287662.2</td>
+<td headers="stub_1_7 L50" class="gt_row gt_right">25</td>
+<td headers="stub_1_7 L90" class="gt_row gt_right">114</td>
+<td headers="stub_1_7 # N&#39;s per 100 kbp" class="gt_row gt_right">34613.66</td></tr>
+    <tr><th id="stub_1_8" scope="row" class="gt_row gt_left gt_stub">Phytophthora-sojae-2023</th>
+<td headers="stub_1_8 S" class="gt_row gt_right">100.00%</td>
+<td headers="stub_1_8 D" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_8 F" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_8 I" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_8 M" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_8 N" class="gt_row gt_right">100</td>
+<td headers="stub_1_8 Linkage" class="gt_row gt_left">stramenopiles_odb10</td>
+<td headers="stub_1_8 # contigs (&gt;= 0 bp)" class="gt_row gt_right">12</td>
+<td headers="stub_1_8 # contigs (&gt;= 1000 bp)" class="gt_row gt_right">12</td>
+<td headers="stub_1_8 # contigs (&gt;= 5000 bp)" class="gt_row gt_right">12</td>
+<td headers="stub_1_8 # contigs (&gt;= 10000 bp)" class="gt_row gt_right">12</td>
+<td headers="stub_1_8 # contigs (&gt;= 25000 bp)" class="gt_row gt_right">12</td>
+<td headers="stub_1_8 # contigs (&gt;= 50000 bp)" class="gt_row gt_right">12</td>
+<td headers="stub_1_8 Total length (&gt;= 0 bp)" class="gt_row gt_right">85131815</td>
+<td headers="stub_1_8 Total length (&gt;= 1000 bp)" class="gt_row gt_right">85131815</td>
+<td headers="stub_1_8 Total length (&gt;= 5000 bp)" class="gt_row gt_right">85131815</td>
+<td headers="stub_1_8 Total length (&gt;= 10000 bp)" class="gt_row gt_right">85131815</td>
+<td headers="stub_1_8 Total length (&gt;= 25000 bp)" class="gt_row gt_right">85131815</td>
+<td headers="stub_1_8 Total length (&gt;= 50000 bp)" class="gt_row gt_right">85131815</td>
+<td headers="stub_1_8 # contigs" class="gt_row gt_right">12</td>
+<td headers="stub_1_8 Largest contig" class="gt_row gt_right">12371788</td>
+<td headers="stub_1_8 Total length" class="gt_row gt_right">85131815</td>
+<td headers="stub_1_8 GC (%)" class="gt_row gt_right">54.81</td>
+<td headers="stub_1_8 N50" class="gt_row gt_right">8105859</td>
+<td headers="stub_1_8 N90" class="gt_row gt_right">4824709</td>
+<td headers="stub_1_8 auN" class="gt_row gt_right">8105589.8</td>
+<td headers="stub_1_8 L50" class="gt_row gt_right">5</td>
+<td headers="stub_1_8 L90" class="gt_row gt_right">10</td>
+<td headers="stub_1_8 # N&#39;s per 100 kbp" class="gt_row gt_right">0.00</td></tr>
+    <tr><th id="stub_1_9" scope="row" class="gt_row gt_left gt_stub">Phytophthora-sojae-V3.0</th>
+<td headers="stub_1_9 S" class="gt_row gt_right">99.00%</td>
+<td headers="stub_1_9 D" class="gt_row gt_right">1.00%</td>
+<td headers="stub_1_9 F" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_9 I" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_9 M" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_9 N" class="gt_row gt_right">100</td>
+<td headers="stub_1_9 Linkage" class="gt_row gt_left">stramenopiles_odb10</td>
+<td headers="stub_1_9 # contigs (&gt;= 0 bp)" class="gt_row gt_right">82</td>
+<td headers="stub_1_9 # contigs (&gt;= 1000 bp)" class="gt_row gt_right">82</td>
+<td headers="stub_1_9 # contigs (&gt;= 5000 bp)" class="gt_row gt_right">68</td>
+<td headers="stub_1_9 # contigs (&gt;= 10000 bp)" class="gt_row gt_right">52</td>
+<td headers="stub_1_9 # contigs (&gt;= 25000 bp)" class="gt_row gt_right">40</td>
+<td headers="stub_1_9 # contigs (&gt;= 50000 bp)" class="gt_row gt_right">31</td>
+<td headers="stub_1_9 Total length (&gt;= 0 bp)" class="gt_row gt_right">82597641</td>
+<td headers="stub_1_9 Total length (&gt;= 1000 bp)" class="gt_row gt_right">82597641</td>
+<td headers="stub_1_9 Total length (&gt;= 5000 bp)" class="gt_row gt_right">82553802</td>
+<td headers="stub_1_9 Total length (&gt;= 10000 bp)" class="gt_row gt_right">82424808</td>
+<td headers="stub_1_9 Total length (&gt;= 25000 bp)" class="gt_row gt_right">82234212</td>
+<td headers="stub_1_9 Total length (&gt;= 50000 bp)" class="gt_row gt_right">81871803</td>
+<td headers="stub_1_9 # contigs" class="gt_row gt_right">82</td>
+<td headers="stub_1_9 Largest contig" class="gt_row gt_right">13391543</td>
+<td headers="stub_1_9 Total length" class="gt_row gt_right">82597641</td>
+<td headers="stub_1_9 GC (%)" class="gt_row gt_right">54.61</td>
+<td headers="stub_1_9 N50" class="gt_row gt_right">7609242</td>
+<td headers="stub_1_9 N90" class="gt_row gt_right">2041583</td>
+<td headers="stub_1_9 auN" class="gt_row gt_right">7532014.8</td>
+<td headers="stub_1_9 L50" class="gt_row gt_right">4</td>
+<td headers="stub_1_9 L90" class="gt_row gt_right">13</td>
+<td headers="stub_1_9 # N&#39;s per 100 kbp" class="gt_row gt_right">3959.42</td></tr>
+    <tr><th id="stub_1_10" scope="row" class="gt_row gt_left gt_stub">Phytopthora-ramorum</th>
+<td headers="stub_1_10 S" class="gt_row gt_right">98.00%</td>
+<td headers="stub_1_10 D" class="gt_row gt_right">2.00%</td>
+<td headers="stub_1_10 F" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_10 I" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_10 M" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_10 N" class="gt_row gt_right">100</td>
+<td headers="stub_1_10 Linkage" class="gt_row gt_left">stramenopiles_odb10</td>
+<td headers="stub_1_10 # contigs (&gt;= 0 bp)" class="gt_row gt_right">28</td>
+<td headers="stub_1_10 # contigs (&gt;= 1000 bp)" class="gt_row gt_right">28</td>
+<td headers="stub_1_10 # contigs (&gt;= 5000 bp)" class="gt_row gt_right">28</td>
+<td headers="stub_1_10 # contigs (&gt;= 10000 bp)" class="gt_row gt_right">28</td>
+<td headers="stub_1_10 # contigs (&gt;= 25000 bp)" class="gt_row gt_right">28</td>
+<td headers="stub_1_10 # contigs (&gt;= 50000 bp)" class="gt_row gt_right">28</td>
+<td headers="stub_1_10 Total length (&gt;= 0 bp)" class="gt_row gt_right">57451392</td>
+<td headers="stub_1_10 Total length (&gt;= 1000 bp)" class="gt_row gt_right">57451392</td>
+<td headers="stub_1_10 Total length (&gt;= 5000 bp)" class="gt_row gt_right">57451392</td>
+<td headers="stub_1_10 Total length (&gt;= 10000 bp)" class="gt_row gt_right">57451392</td>
+<td headers="stub_1_10 Total length (&gt;= 25000 bp)" class="gt_row gt_right">57451392</td>
+<td headers="stub_1_10 Total length (&gt;= 50000 bp)" class="gt_row gt_right">57451392</td>
+<td headers="stub_1_10 # contigs" class="gt_row gt_right">28</td>
+<td headers="stub_1_10 Largest contig" class="gt_row gt_right">6138019</td>
+<td headers="stub_1_10 Total length" class="gt_row gt_right">57451392</td>
+<td headers="stub_1_10 GC (%)" class="gt_row gt_right">54.37</td>
+<td headers="stub_1_10 N50" class="gt_row gt_right">3611744</td>
+<td headers="stub_1_10 N90" class="gt_row gt_right">1156066</td>
+<td headers="stub_1_10 auN" class="gt_row gt_right">3504717.7</td>
+<td headers="stub_1_10 L50" class="gt_row gt_right">6</td>
+<td headers="stub_1_10 L90" class="gt_row gt_right">18</td>
+<td headers="stub_1_10 # N&#39;s per 100 kbp" class="gt_row gt_right">341.32</td></tr>
+    <tr><th id="stub_1_11" scope="row" class="gt_row gt_left gt_stub">Plasmopara-halstedii</th>
+<td headers="stub_1_11 S" class="gt_row gt_right">100.00%</td>
+<td headers="stub_1_11 D" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_11 F" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_11 I" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_11 M" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_11 N" class="gt_row gt_right">100</td>
+<td headers="stub_1_11 Linkage" class="gt_row gt_left">stramenopiles_odb10</td>
+<td headers="stub_1_11 # contigs (&gt;= 0 bp)" class="gt_row gt_right">3162</td>
+<td headers="stub_1_11 # contigs (&gt;= 1000 bp)" class="gt_row gt_right">741</td>
+<td headers="stub_1_11 # contigs (&gt;= 5000 bp)" class="gt_row gt_right">220</td>
+<td headers="stub_1_11 # contigs (&gt;= 10000 bp)" class="gt_row gt_right">162</td>
+<td headers="stub_1_11 # contigs (&gt;= 25000 bp)" class="gt_row gt_right">107</td>
+<td headers="stub_1_11 # contigs (&gt;= 50000 bp)" class="gt_row gt_right">79</td>
+<td headers="stub_1_11 Total length (&gt;= 0 bp)" class="gt_row gt_right">75321785</td>
+<td headers="stub_1_11 Total length (&gt;= 1000 bp)" class="gt_row gt_right">74136393</td>
+<td headers="stub_1_11 Total length (&gt;= 5000 bp)" class="gt_row gt_right">73188886</td>
+<td headers="stub_1_11 Total length (&gt;= 10000 bp)" class="gt_row gt_right">72755364</td>
+<td headers="stub_1_11 Total length (&gt;= 25000 bp)" class="gt_row gt_right">71870870</td>
+<td headers="stub_1_11 Total length (&gt;= 50000 bp)" class="gt_row gt_right">70924250</td>
+<td headers="stub_1_11 # contigs" class="gt_row gt_right">1612</td>
+<td headers="stub_1_11 Largest contig" class="gt_row gt_right">3420761</td>
+<td headers="stub_1_11 Total length" class="gt_row gt_right">74743905</td>
+<td headers="stub_1_11 GC (%)" class="gt_row gt_right">45.28</td>
+<td headers="stub_1_11 N50" class="gt_row gt_right">1546205</td>
+<td headers="stub_1_11 N90" class="gt_row gt_right">287999</td>
+<td headers="stub_1_11 auN" class="gt_row gt_right">1638643.3</td>
+<td headers="stub_1_11 L50" class="gt_row gt_right">16</td>
+<td headers="stub_1_11 L90" class="gt_row gt_right">54</td>
+<td headers="stub_1_11 # N&#39;s per 100 kbp" class="gt_row gt_right">11408.23</td></tr>
+    <tr><th id="stub_1_12" scope="row" class="gt_row gt_left gt_stub">Pseudoperonospora-cubensis</th>
+<td headers="stub_1_12 S" class="gt_row gt_right">98.00%</td>
+<td headers="stub_1_12 D" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_12 F" class="gt_row gt_right">1.00%</td>
+<td headers="stub_1_12 I" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_12 M" class="gt_row gt_right">1.00%</td>
+<td headers="stub_1_12 N" class="gt_row gt_right">100</td>
+<td headers="stub_1_12 Linkage" class="gt_row gt_left">stramenopiles_odb10</td>
+<td headers="stub_1_12 # contigs (&gt;= 0 bp)" class="gt_row gt_right">35539</td>
+<td headers="stub_1_12 # contigs (&gt;= 1000 bp)" class="gt_row gt_right">14380</td>
+<td headers="stub_1_12 # contigs (&gt;= 5000 bp)" class="gt_row gt_right">2468</td>
+<td headers="stub_1_12 # contigs (&gt;= 10000 bp)" class="gt_row gt_right">942</td>
+<td headers="stub_1_12 # contigs (&gt;= 25000 bp)" class="gt_row gt_right">187</td>
+<td headers="stub_1_12 # contigs (&gt;= 50000 bp)" class="gt_row gt_right">23</td>
+<td headers="stub_1_12 Total length (&gt;= 0 bp)" class="gt_row gt_right">64332776</td>
+<td headers="stub_1_12 Total length (&gt;= 1000 bp)" class="gt_row gt_right">52994159</td>
+<td headers="stub_1_12 Total length (&gt;= 5000 bp)" class="gt_row gt_right">28584532</td>
+<td headers="stub_1_12 Total length (&gt;= 10000 bp)" class="gt_row gt_right">18194151</td>
+<td headers="stub_1_12 Total length (&gt;= 25000 bp)" class="gt_row gt_right">6816236</td>
+<td headers="stub_1_12 Total length (&gt;= 50000 bp)" class="gt_row gt_right">1397072</td>
+<td headers="stub_1_12 # contigs" class="gt_row gt_right">25072</td>
+<td headers="stub_1_12 Largest contig" class="gt_row gt_right">106007</td>
+<td headers="stub_1_12 Total length" class="gt_row gt_right">60603206</td>
+<td headers="stub_1_12 GC (%)" class="gt_row gt_right">53.83</td>
+<td headers="stub_1_12 N50" class="gt_row gt_right">4456</td>
+<td headers="stub_1_12 N90" class="gt_row gt_right">886</td>
+<td headers="stub_1_12 auN" class="gt_row gt_right">9853.5</td>
+<td headers="stub_1_12 L50" class="gt_row gt_right">2831</td>
+<td headers="stub_1_12 L90" class="gt_row gt_right">16027</td>
+<td headers="stub_1_12 # N&#39;s per 100 kbp" class="gt_row gt_right">0.00</td></tr>
+    <tr><th id="stub_1_13" scope="row" class="gt_row gt_left gt_stub">Pseudoperonospora-humuli</th>
+<td headers="stub_1_13 S" class="gt_row gt_right">95.00%</td>
+<td headers="stub_1_13 D" class="gt_row gt_right">4.00%</td>
+<td headers="stub_1_13 F" class="gt_row gt_right">1.00%</td>
+<td headers="stub_1_13 I" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_13 M" class="gt_row gt_right">0.00%</td>
+<td headers="stub_1_13 N" class="gt_row gt_right">100</td>
+<td headers="stub_1_13 Linkage" class="gt_row gt_left">stramenopiles_odb10</td>
+<td headers="stub_1_13 # contigs (&gt;= 0 bp)" class="gt_row gt_right">5534</td>
+<td headers="stub_1_13 # contigs (&gt;= 1000 bp)" class="gt_row gt_right">4517</td>
+<td headers="stub_1_13 # contigs (&gt;= 5000 bp)" class="gt_row gt_right">1892</td>
+<td headers="stub_1_13 # contigs (&gt;= 10000 bp)" class="gt_row gt_right">1026</td>
+<td headers="stub_1_13 # contigs (&gt;= 25000 bp)" class="gt_row gt_right">368</td>
+<td headers="stub_1_13 # contigs (&gt;= 50000 bp)" class="gt_row gt_right">105</td>
+<td headers="stub_1_13 Total length (&gt;= 0 bp)" class="gt_row gt_right">40506691</td>
+<td headers="stub_1_13 Total length (&gt;= 1000 bp)" class="gt_row gt_right">39750331</td>
+<td headers="stub_1_13 Total length (&gt;= 5000 bp)" class="gt_row gt_right">33231139</td>
+<td headers="stub_1_13 Total length (&gt;= 10000 bp)" class="gt_row gt_right">27110564</td>
+<td headers="stub_1_13 Total length (&gt;= 25000 bp)" class="gt_row gt_right">16971984</td>
+<td headers="stub_1_13 Total length (&gt;= 50000 bp)" class="gt_row gt_right">7796649</td>
+<td headers="stub_1_13 # contigs" class="gt_row gt_right">5534</td>
+<td headers="stub_1_13 Largest contig" class="gt_row gt_right">195040</td>
+<td headers="stub_1_13 Total length" class="gt_row gt_right">40506691</td>
+<td headers="stub_1_13 GC (%)" class="gt_row gt_right">48.90</td>
+<td headers="stub_1_13 N50" class="gt_row gt_right">19165</td>
+<td headers="stub_1_13 N90" class="gt_row gt_right">3013</td>
+<td headers="stub_1_13 auN" class="gt_row gt_right">29633.8</td>
+<td headers="stub_1_13 L50" class="gt_row gt_right">520</td>
+<td headers="stub_1_13 L90" class="gt_row gt_right">2717</td>
+<td headers="stub_1_13 # N&#39;s per 100 kbp" class="gt_row gt_right">240.31</td></tr>
   </tbody>
   
   

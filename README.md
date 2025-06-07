@@ -2,7 +2,17 @@
 
 This project aimed to assemble downy mildew genome collected from highly contaminated sample sequenced by PacBio HIFI technology.
 
-# Prepare
+# Analysis
+
+[Read length distribution](https://yixuan39.github.io/downy-mildew-assemble/analysis/read_distribution.html)
+
+[Reference genome quality](https://yixuan39.github.io/downy-mildew-assemble/analysis/ref-genome-quality.html)
+
+[Compleasm and QUAST results](https://yixuan39.github.io/downy-mildew-assemble/analysis/result.html)
+
+[Simulated sample of Phytophthora infestans](https://yixuan39.github.io/downy-mildew-assemble/analysis/simulation-result.html)
+
+# Pipeline
 
 ## Environment
 
@@ -147,8 +157,3 @@ Usage: clean-asm.sh -i <input_file> -o <output_dir> -d <gx_db> -k <kraken_db> -b
   -h  Show this help message
 ```
 
-# Analysis
-
-[Compleasm and QUAST results](https://yixuan39.github.io/downy-mildew-assemble/analysis/result.html)
-
-[Simulated sample of Phytophthora infestans](https://yixuan39.github.io/downy-mildew-assemble/analysis/simulation-result.html)

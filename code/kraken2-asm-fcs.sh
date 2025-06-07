@@ -76,8 +76,9 @@ metaMDBG asm \
     --out-dir ${RESULT_DIR}/${BASENAME}.asm \
     --in-hifi ${RESULT_DIR}/${BASENAME}.kraken.fasta \
     --threads ${THREADS}
-rm ${RESULT_DIR}/${BASENAME}.kraken.fasta
     
+rm ${RESULT_DIR}/${BASENAME}.kraken.fasta
+
 # discard contigs shorter than 5000 bp
 seqtk seq \
     -L ${MIN_LENGTH} \
@@ -97,13 +98,13 @@ gx clean-genome \
     --input ${RESULT_DIR}/${BASENAME}.kraken.fasta \
     --action-report ${RESULT_DIR}/${BASENAME}.fcs_gx_report.txt \
     --output ${RESULT_DIR}/${BASENAME}.fcs.fasta
-    
+
 # compress both INPUT_FILEs
 gzip ${RESULT_DIR}/${BASENAME}.fcs.fasta
 gzip ${RESULT_DIR}/${BASENAME}.kraken.fasta
 # remove useless files
-rm ${RESULT_DIR}/${BASENAME}.kraken
-  
+# rm ${RESULT_DIR}/${BASENAME}.kraken
+
 # get quality report for fcs cleaned INPUT_FILE
 python quality-check.py \
     --input_file ${RESULT_DIR}/${BASENAME}.fcs.fasta.gz \

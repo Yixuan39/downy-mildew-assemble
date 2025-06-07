@@ -1,0 +1,48 @@
+---
+title: "busco-analysis-refseq"
+author: "Yixuan Yang"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r message=FALSE, echo=FALSE}
+library(tidyverse)
+library(gt)
+library(data.table)
+```
+
+# COMPLEASM results
+
+```{r echo=FALSE}
+path <- '~/project_data/downy/oomycota-genome/compleasm/'
+files <- list.files(path, pattern = 'csv', full.names = TRUE)
+df <- map_dfr(files,
+              function(x) {
+                df <- fread(x) %>% 
+                  mutate(file = str_remove(basename(x), '.csv')) %>% 
+                  separate(file, into = c('species', 'linkage'), sep = '_')
+              }) %>% select(-linkage) %>% 
+  group_by(Linkage) %>% group_split()
+```
+
+## eukaryota_odb10
+
+```{r echo=FALSE}
+df[[1]] %>% 
+  column_to_rownames('species') %>% 
+  gt(rownames_to_stub = TRUE)
+```
+
+
+## stramenopiles_odb10
+
+```{r echo=FALSE}
+df[[2]] %>% 
+  column_to_rownames('species') %>% 
+  gt(rownames_to_stub = TRUE)
+```
+

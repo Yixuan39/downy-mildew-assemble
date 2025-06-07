@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=verification
-#SBATCH --cpus-per-task=32
+#SBATCH --cpus-per-task=24
 #SBATCH --mem=500G
 
 FILE=$HOME/project_data/downy/verification/SRR15142133.fastq.gz
@@ -10,7 +10,7 @@ BUSCO_DB=$HOME/project_data/downy/BUSCO_DB
 CS_LIST="0,0.05,0.1,0.15,0.2"
 TAXID=4762
 MIN_LENGTH=5000
-THREADS=32
+THREADS=24
 EXTRACT=true
 
 OUTPUT_DIR=$HOME/project_data/downy/result/verification/genomic/${CS}
@@ -26,4 +26,6 @@ bash clean-asm.sh \
       -e $EXTRACT \
       -m $MIN_LENGTH \
       -p $THREADS
+
+      
 
