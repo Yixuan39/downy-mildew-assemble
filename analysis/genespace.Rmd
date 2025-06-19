@@ -1,0 +1,35 @@
+---
+title: "genespace"
+output: html_document
+date: "2025-06-18"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(GENESPACE)
+```
+
+
+set wd
+
+```{r}
+genomeRepo <- "~/project_data/genespace/genomes"
+wd <- "~/project_data/genespace/genespace"
+path2mcscanx <- "~/software/MCScanX-1.0.0"
+```
+
+
+parse annotation
+
+```{r}
+genomes2run <- c("human", "mouse", "platypus", "chicken", "sandLizard")
+parsedPaths <- parse_annotations(
+  rawGenomeRepo = genomeRepo,
+  genomeDirs = genomes2run,
+  genomeIDs = genomes2run,
+  presets = "ncbi",
+  genespaceWd = wd)
+```

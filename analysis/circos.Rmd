@@ -1,0 +1,51 @@
+---
+title: "circos"
+output: html_document
+---
+
+```{r message=FALSE}
+library(OmicCircos)
+library(rtracklayer)
+library(tidyverse)
+library(data.table)
+library(cogeqc)
+```
+
+```{r}
+path <- '~/project_data/downy/orthofinder-data'
+orthofinder.files <- list.files(path, recursive = TRUE, full.names = TRUE, pattern = '__v__.*\\.kraken\\.tsv$')
+orthofinder <- lapply(orthofinder.files, fread)
+names(orthofinder) <- orthofinder.files
+```
+
+```{r}
+effusa.genes <- import.gff3('~/project_data/downy/orthofinder-data/Peronospora-effusa.gff') %>% 
+  subset(type == 'gene')
+effusa.df <- data.frame(gene_id=effusa.genes$ID, chr=as.character(seqnames(effusa.genes)), 
+                  start=start(effusa.genes), end=end(effusa.genes))
+```
+
+
+```{r}
+# load genome annotation
+path <- '~/project_data/downy/result/asm-fcs-kraken2/oomycota-genomic/0.5/helixer/'
+gffs.files <- list.files(path, recursive = TRUE, full.names = TRUE, pattern = '.gff')
+gffs <- lapply(gffs.files, function(x) {
+  genes <- import.gff3(x) %>% subset(type == 'gene')
+  df <- data.frame(gene_id=genes$ID, chr=as.character(seqnames(genes)), 
+                  start=start(genes), end=end(genes))
+  ortho.path <- '~/project_data/downy/orthofinder-data'
+  ortho.file <- list.files(file.path(ortho.path, str_remove(basename(x), '.kraken.gff3')),
+                            recursive = TRUE, full.names = TRUE, pattern = '__v__.*\\.kraken\\.tsv$')
+  # fread(ortho.file) %>% head() %>% print()
+  fn <- str_remove(basename(x), '.gff3')
+  links <- fread(ortho.file) %>%
+    left_join(effusa.df, by=c("Peronospora-effusa" = "gene_id"))
+  print(links)
+
+  })
+names(gffs) <- basename(gffs.files)
+```
+
+
+
