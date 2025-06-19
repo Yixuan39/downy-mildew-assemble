@@ -1,35 +1,81 @@
 ---
-title: "genespace"
+title: "test"
+author: "Yixuan Yang"
+date: "`r Sys.Date()`"
 output: html_document
-date: "2025-06-18"
 ---
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
 ```{r}
 library(GENESPACE)
+library(here)
 ```
-
 
 set wd
 
 ```{r}
-genomeRepo <- "~/project_data/genespace/genomes"
-wd <- "~/project_data/genespace/genespace"
-path2mcscanx <- "~/software/MCScanX-1.0.0"
+genomeRepo <- "~/project_data/downy/genespace/genomes/"
+wd <- "~/project_data/downy/genespace/genespace/"
+path2mcscanx <- "/Users/yixuanyang/miniforge3/bin/"
 ```
 
 
 parse annotation
 
 ```{r}
-genomes2run <- c("human", "mouse", "platypus", "chicken", "sandLizard")
+genomes2run <- c("Peronospora_effusa", "Bremia_lactucae", "Phytophthora_sojae")
 parsedPaths <- parse_annotations(
   rawGenomeRepo = genomeRepo,
   genomeDirs = genomes2run,
   genomeIDs = genomes2run,
-  presets = "ncbi",
+  headerSep = NA,
+  headerEntryIndex = 1,
   genespaceWd = wd)
+genomes2run <- c("MSU1", "SC1982", "Phumuli")
+parsedPaths <- parse_annotations(
+  rawGenomeRepo = genomeRepo,
+  genomeDirs = genomes2run,
+  genomeIDs = genomes2run,
+  headerSep = NA,
+  headerEntryIndex = 1,
+  gffIdColumn = "ID",
+  genespaceWd = wd)
+```
+
+initialize
+
+```{r}
+gpar <- init_genespace(
+  wd = wd,
+  path2mcscanx = path2mcscanx)
+```
+
+```{r}
+out <- run_genespace(gpar, overwrite = T)
+```
+
+```{r}
+ripd <- plot_riparian(
+  gsParam = out,
+  genomeIDs = c("MSU1", "Peronospora_effusa", "Bremia_lactucae", "Phytophthora_sojae"),
+  pdfFile = here('figures','MSU1.pdf'),
+  chrLabFontSize = 2,
+  useRegions = FALSE)
+```
+
+```{r}
+ripd <- plot_riparian(
+  gsParam = out,
+  genomeIDs = c("Phumuli", "Peronospora_effusa", "Bremia_lactucae", "Phytophthora_sojae"),
+  pdfFile = here('figures','Phumuli.pdf'),
+  chrLabFontSize = 2,
+  useRegions = FALSE)
+```
+
+```{r}
+ripd <- plot_riparian(
+  gsParam = out,
+  genomeIDs = c("SC1982", "Peronospora_effusa", "Bremia_lactucae", "Phytophthora_sojae"),
+  pdfFile = here('figures','SC1982.pdf'),
+  chrLabFontSize = 2,
+  useRegions = FALSE)
 ```
