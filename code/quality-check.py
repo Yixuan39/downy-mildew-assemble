@@ -5,18 +5,13 @@ import subprocess
 import argparse
 import shutil
 import pandas as pd
+import tempfile
 
-def compleasm(input_file, output_dir, threads, library_path, linkage):
-    output_dir = os.path.join(output_dir, linkage)
+def compleasm(input_file, temp_dir, threads, library_path, linkage):
+    output_dir = os.path.join(temp_dir, linkage)
     os.makedirs(output_dir, exist_ok=True)
-    cmd = 'compleasm run \
-           --assembly_path {} \
-           --output_dir {} \
-           --threads {} \
-           --library_path {} \
-           --lineage {}'.format(input_file, output_dir, threads, library_path, linkage)
+    cmd = f'compleasm run --assembly_path {input_file} --output_dir {output_dir} --threads {threads} --library_path {library_path} --lineage {linkage}'
     subprocess.call(cmd, shell=True)
-    # read in the output
     output_file = os.path.join(output_dir, 'summary.txt')
     df = pd.read_csv(output_file, sep=',', index_col=False, skiprows=1, header=None)
     column1 = df.iloc[:, 0]
@@ -29,45 +24,43 @@ def compleasm(input_file, output_dir, threads, library_path, linkage):
     shutil.rmtree(output_dir, ignore_errors=False)
     return new_df
 
-def quast(input_file, output_dir, threads):
-    output_dir = os.path.join(output_dir, 'quast')
+def quast(input_file, temp_dir, threads):
+    output_dir = os.path.join(temp_dir, 'quast')
     os.makedirs(output_dir, exist_ok=True)
-    cmd = 'quast \
-           --output-dir {} \
-           --threads {} \
-           --eukaryote \
-           {}'.format(output_dir, threads, input_file)
+    cmd = f'quast --output-dir {output_dir} --threads {threads} --eukaryote {input_file}'
     subprocess.call(cmd, shell=True)
-    # read in the output
     output_file = os.path.join(output_dir, 'report.tsv')
     df = pd.read_csv(output_file, sep='\t')
     df.columns = ['Metric', 'Value']
     df = df.set_index('Metric').T
     shutil.rmtree(output_dir, ignore_errors=False)
     return df
-  
+
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Quality check')
+    parser = argparse.ArgumentParser(description='Quality check with temp storage')
     parser.add_argument('--input_file', help='Input file in fasta format')
     parser.add_argument('--output_dir', help='Output directory')
     parser.add_argument('--suffix', help='Suffix for output files', default='')
     parser.add_argument('--threads', help='Number of threads', type=int, default=24)
-    parser.add_argument('--library_path', help='path to compleasm library', default='$HOME/project_data/downy/BUSCO_DB')
+    parser.add_argument('--library_path', help='Path to compleasm library', default='$HOME/project_data/downy/BUSCO_DB')
     args = parser.parse_args()
-    # check if input file exists
+
     if not os.path.exists(args.input_file):
-        assert False, 'Input file does not exist'
-    compleasm_euk = compleasm(args.input_file, args.output_dir, args.threads, args.library_path, 'eukaryota_odb10')
-    compleasm_stram = compleasm(args.input_file, args.output_dir, args.threads, args.library_path, 'stramenopiles_odb10')
-    quast_output = quast(args.input_file, args.output_dir, args.threads)
-    
-    # combine compleasm and quast result
+        raise FileNotFoundError('Input file does not exist')
+
+    temp_dir = tempfile.mkdtemp(prefix="qualitycheck_temp_")
+    print(f"Storing intermediate files in: {temp_dir}")
+
+    compleasm_euk = compleasm(args.input_file, temp_dir, args.threads, args.library_path, 'eukaryota_odb10')
+    compleasm_stram = compleasm(args.input_file, temp_dir, args.threads, args.library_path, 'stramenopiles_odb10')
+    quast_output = quast(args.input_file, temp_dir, args.threads)
+
     compleasm_euk = pd.concat([compleasm_euk, quast_output], axis=1)
     compleasm_stram = pd.concat([compleasm_stram, quast_output], axis=1)
-    
-    # save output as csv
+
+    os.makedirs(args.output_dir, exist_ok=True)
     compleasm_euk.to_csv(os.path.join(args.output_dir, args.suffix + '_euk.csv'), index=False)
     compleasm_stram.to_csv(os.path.join(args.output_dir, args.suffix + '_stram.csv'), index=False)
 
-    
-    
+    shutil.rmtree(temp_dir, ignore_errors=False)
+    print(f"Cleaned up temporary directory: {temp_dir}")

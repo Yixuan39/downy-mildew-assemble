@@ -1,23 +1,27 @@
 #!/bin/bash
+#SBATCH --array=0-2
 #SBATCH --cpus-per-task=32
 
-INPUT_DIR=$HOME/project_data/downy/result/asm-fcs-kraken2/oomycota-genomic/0.5
-FILES=($(find "$INPUT_DIR" -type f -name "*kraken.fasta.gz"))
-Peffusa=$HOME/project_data/downy/oomycota-genome/Peronospora-effusa.fna
-OUTPUT_DIR=$INPUT_DIR/helixer
-mkdir -p $OUTPUT_DIR
+INPUT_DIR=$HOME/project_data/downy/GSL_Data/hifiasm-fcs-dedup
+RESULT_DIR=$HOME/project_data/downy/helixer-fcs-dedup
+FILES=($(find "$INPUT_DIR" -type f -name "*.fasta.gz"))
+FILE=${FILES[$SLURM_ARRAY_TASK_ID]}
+THREADS=32
 
-for FILE in ${FILES[@]}; do
-    BASENAME=$(basename ${FILE})  
-    BASENAME=${BASENAME%.fasta.gz}
-    gzip -d -k -c $FILE > ${OUTPUT_DIR}/${BASENAME}.fasta
-    helixerlite \
-    --cpus 32 \
-    --lineage fungi \
-    --fasta ${OUTPUT_DIR}/${BASENAME}.fasta \
-    --out ${OUTPUT_DIR}/${BASENAME}.gff3
-    gffread \
-    ${OUTPUT_DIR}/${BASENAME}.gff3 \
-    -g ${OUTPUT_DIR}/${BASENAME}.fasta \
-    -y ${OUTPUT_DIR}/${BASENAME}.faa
-done
+echo "Processing: $FILE"
+BASENAME=$(basename ${FILE})  
+BASENAME=${BASENAME%.fasta.gz}
+mkdir -p ${RESULT_DIR}/${BASENAME}
+cp ${FILE} ${RESULT_DIR}/${BASENAME}/${BASENAME}.fasta.gz
+gzip -d ${RESULT_DIR}/${BASENAME}/${BASENAME}.fasta.gz
+
+helixerlite \
+  --cpus ${THREADS} \
+  --lineage fungi \
+  --fasta ${RESULT_DIR}/${BASENAME}/${BASENAME}.fasta \
+  --out ${RESULT_DIR}/${BASENAME}/${BASENAME}.gff
+
+gffread \
+  ${RESULT_DIR}/${BASENAME}/${BASENAME}.gff \
+  -g ${RESULT_DIR}/${BASENAME}/${BASENAME}.fasta \
+  -y ${RESULT_DIR}/${BASENAME}/${BASENAME}.faa
