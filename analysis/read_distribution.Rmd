@@ -32,7 +32,17 @@ ggplot(df) +
 ```
 
 
-# contig length distribution using FCS
+# contig length distribution
+
+Here, we are showing results return by the pipeline s.13.e:
+
+hifiasm -> fcs-gx -> purge_dups
+
+purge_dups is manually adjusted using the parameters: calcuts -l 5 -m 150 -u 450
+
+lower bound: 5
+transition between haploid and diploid: 150
+upper bound for read depth: 450
 
 ```{r echo=FALSE}
 files <- list.files('~/project_data/downy/hifiasm/fcs-gx/purge_dups3/compleasm/',
