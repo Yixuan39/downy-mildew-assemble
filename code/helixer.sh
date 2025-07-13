@@ -2,26 +2,24 @@
 #SBATCH --array=0-2
 #SBATCH --cpus-per-task=32
 
-INPUT_DIR=$HOME/project_data/downy/GSL_Data/hifiasm-fcs-dedup
-RESULT_DIR=$HOME/project_data/downy/helixer-fcs-dedup
+INPUT_DIR=$HOME/project_data/downy/hifiasm/fcs-gx/purge_dups3
+RESULT_DIR=$INPUT_DIR/helixer
 FILES=($(find "$INPUT_DIR" -type f -name "*.fasta.gz"))
 FILE=${FILES[$SLURM_ARRAY_TASK_ID]}
 THREADS=32
-
+mkdir -p ${RESULT_DIR}
 echo "Processing: $FILE"
 BASENAME=$(basename ${FILE})  
 BASENAME=${BASENAME%.fasta.gz}
-mkdir -p ${RESULT_DIR}/${BASENAME}
-cp ${FILE} ${RESULT_DIR}/${BASENAME}/${BASENAME}.fasta.gz
-gzip -d ${RESULT_DIR}/${BASENAME}/${BASENAME}.fasta.gz
+gzip -d -k ${FILE}
 
 helixerlite \
   --cpus ${THREADS} \
   --lineage fungi \
-  --fasta ${RESULT_DIR}/${BASENAME}/${BASENAME}.fasta \
-  --out ${RESULT_DIR}/${BASENAME}/${BASENAME}.gff
+  --fasta ${FILE%.gz} \
+  --out ${RESULT_DIR}/${BASENAME}.gff
 
 gffread \
-  ${RESULT_DIR}/${BASENAME}/${BASENAME}.gff \
-  -g ${RESULT_DIR}/${BASENAME}/${BASENAME}.fasta \
-  -y ${RESULT_DIR}/${BASENAME}/${BASENAME}.faa
+  ${RESULT_DIR}/${BASENAME}.gff \
+  -g ${FILE%.gz} \
+  -y ${RESULT_DIR}/${BASENAME}.faa

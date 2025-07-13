@@ -1,15 +1,15 @@
 #!/bin/bash
 #SBATCH --job-name=purge_dups
 #SBATCH --array=0-2
-#SBATCH --cpus-per-task=24
+#SBATCH --cpus-per-task=32
 
 set -euo pipefail
 
 ASM_DIR="$HOME/project_data/downy/hifiasm/fcs-gx"
 HIFI_DIR="$HOME/project_data/downy/GSL_Data/fastq"
-RESULT_DIR="$ASM_DIR/purge_dups"
+RESULT_DIR="$ASM_DIR/purge_dups3"
 BUSCO_DB="$HOME/project_data/downy/BUSCO_DB"
-THREADS=24
+THREADS=32
 
 mkdir -p "$RESULT_DIR"
 

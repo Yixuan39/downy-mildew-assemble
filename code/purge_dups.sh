@@ -40,7 +40,7 @@ minimap2 -xasm20 -t "${THREADS}" \
 pbcstat -O "${RESULT_DIR}/${BASENAME}" \
   "${RESULT_DIR}/${BASENAME}/${BASENAME}.paf.gz"
 
-calcuts "${RESULT_DIR}/${BASENAME}/PB.stat" \
+calcuts  -l 5 -m 150 -u 450 "${RESULT_DIR}/${BASENAME}/PB.stat" \
   > "${RESULT_DIR}/${BASENAME}/cutoffs"
 
 split_fa \
@@ -85,4 +85,3 @@ hist_plot.py \
   "${RESULT_DIR}/${BASENAME}/PB.stat" \
   "${RESULT_DIR}/compleasm/${BASENAME}.png"
 
-rm -rf "${RESULT_DIR}/${BASENAME}"

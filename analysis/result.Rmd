@@ -3,116 +3,34 @@ title: "result"
 output: html_document
 ---
 
-```{r message=FALSE, echo=FALSE}
-rm(list = ls())
-library(tidyverse)
-library(data.table)
-library(openxlsx)
-library(here)
+```{r echo=FALSE, message=FALSE}
 library(gt)
+library(data.table)
+library(tidyverse)
 ```
 
-```{r echo=FALSE}
-path <- '~/project_data/downy/result'
-data <- list.files(path, pattern = 'csv', full.names = TRUE, recursive = TRUE) %>% 
-  map_dfr(function(x) {
-    data <- fread(x, header = TRUE, sep = ',') %>% as.data.frame()
-    info <- str_split(x, '/')[[1]]
-    data$sample <- tail(info,1)[1] %>% str_replace('.csv', '')
-    data$confidence.score <- tail(info,2)[1]
-    data$data.base <- tail(info,3)[1]
-    data$method <- tail(info,4)[1]
-    data <- data %>%
-      separate(sample, into = c('sample','tool'), sep = '\\.') %>% 
-      separate(tool, into = c('tool', 'linkage'), sep = '_') %>% 
-      sapply(function(x) str_remove(x,'\\%'))
-    return(data)
-  }) %>%
-  mutate(across(everything(), ~ {
-    converted <- suppressWarnings(as.numeric(.))
-    if (all(is.na(converted)) && !all(is.na(.))) . else converted
-  }))
-```
-
-```{r echo=FALSE}
-full.table <- data %>% 
-  mutate(method = if_else((method == 'asm-fcs-kraken2' & tool == 'fcs'), 'asm-fcs', method)) %>% 
-  filter(method != 'asm-fcs-kraken2-smalldb',
-         (method == 'asm-fcs' & tool == 'fcs')|
-         (method == 'asm-fcs-kraken2' & tool == 'kraken')|
-         (method == 'asm-kraken2-fcs' & tool == 'fcs')|
-         (method == 'kraken2-asm-fcs' & tool == 'fcs')) %>% 
-  split(.$Linkage)
-```
-
-# Compleasm and QUAST results
-
-## eukaryota_odb10
-
-```{r echo=FALSE}
-full.table$eukaryota_odb10 %>% 
-  mutate(across(`# contigs (>= 0 bp)`:`# N's per 100 kbp`, scales::label_comma())) %>%
-  mutate(across(-c(sample, confidence.score, method, data.base), ~ paste0(cur_column(), ":", .))) %>% 
-  unite(metric, 'S', 'D', 'F','M','N', 'Total length', '# contigs', 'N50','L50', sep = '<br>') %>% 
-  mutate(method = str_c(data.base, method, sep = '\n')) %>% 
-  arrange(method) %>% 
-  select(metric, sample, method, confidence.score) %>% 
-  group_by(sample) %>% 
-  pivot_wider(names_from = method, values_from = metric) %>% arrange(confidence.score) %>% 
-  gt %>% 
-  fmt_markdown(columns = everything())
-```
-
-## stramenopiles_odb10
-
-```{r echo=FALSE}
-full.table$stramenopiles_odb10 %>% 
-  mutate(across(`# contigs (>= 0 bp)`:`# N's per 100 kbp`, scales::label_comma())) %>%
-  mutate(across(-c(sample, confidence.score, method, data.base), ~ paste0(cur_column(), ":", .))) %>% 
-  unite(metric, 'S', 'D', 'F','M','N', 'Total length', '# contigs', 'N50','L50', sep = '<br>') %>% 
-  mutate(method = str_c(data.base, method, sep = '\n')) %>% 
-  arrange(method) %>% 
-  select(metric, sample, method, confidence.score) %>% 
-  group_by(sample) %>% 
-  pivot_wider(names_from = method, values_from = metric) %>% arrange(confidence.score) %>% 
-  gt %>% 
-  fmt_markdown(columns = everything())
-```
-
-## performance using small Kraken2 database
-
-```{r echo=FALSE}
-smalldb <- data %>% 
-  filter(method == 'asm-fcs-kraken2-smalldb'& tool == 'kraken' |
-         method == 'asm-fcs-kraken2'& tool == 'kraken', 
-         data.base == 'oomycota-genomic',
-         confidence.score == 0.5) %>% 
-  split(.$Linkage)
-```
-
-```{r echo=FALSE}
-smalldb$eukaryota_odb10 %>% 
-  mutate(across(`# contigs (>= 0 bp)`:`# N's per 100 kbp`, scales::label_comma())) %>%
-  mutate(across(-c(sample, confidence.score, method, data.base), ~ paste0(cur_column(), ":", .))) %>% 
-  unite(metric, 'S', 'D', 'F','M','N', 'Total length', '# contigs', 'N50','L50', sep = '<br>') %>% 
-  select(metric, sample, method, confidence.score) %>% 
-  group_by(sample) %>% 
-  pivot_wider(names_from = method, values_from = metric) %>% arrange(confidence.score) %>% 
-  gt %>% 
-  fmt_markdown(columns = everything())
-
+```{r echo=FALSE, message=FALSE}
+read.tb <- function(path, method) {
+  files <- list.files(path, full.names = TRUE, pattern = 'stram.csv')
+  tb <- map_dfr(files, function(x) {data.frame(method = method,
+                                               sample = str_remove(basename(x), '_stram.csv'),
+                                               fread(x))})
+  return(tb)
+}
 ```
 
 
-```{r echo=FALSE}
-smalldb$stramenopiles_odb10 %>% 
-  mutate(across(`# contigs (>= 0 bp)`:`# N's per 100 kbp`, scales::label_comma())) %>%
-  mutate(across(-c(sample, confidence.score, method, data.base), ~ paste0(cur_column(), ":", .))) %>% 
-  unite(metric, 'S', 'D', 'F','M','N', 'Total length', '# contigs', 'N50','L50', sep = '<br>') %>% 
-  select(metric, sample, method, confidence.score) %>% 
-  group_by(sample) %>% 
-  pivot_wider(names_from = method, values_from = metric) %>% arrange(confidence.score) %>% 
-  gt %>% 
-  fmt_markdown(columns = everything())
-
+```{r echo=FALSE, message=FALSE}
+result <- bind_rows(read.tb('~/project_data/downy/hifiasm/compleasm/', 's.13.a'),
+                    read.tb('~/project_data/downy/hifiasm-10kb/compleasm/', 's.13.b'),
+                    read.tb('~/project_data/downy/hifiasm/purge_dups/compleasm/', 's.13.c'),
+                    read.tb('~/project_data/downy/hifiasm-10kb/purge_dups/compleasm/', 's.13.d'),
+                    read.tb('~/project_data/downy/hifiasm/fcs-gx/purge_dups3/compleasm/', 's.13.e'),
+                    read.tb('~/project_data/downy/hifiasm-10kb/fcs-gx/purge_dups/compleasm/', 's.13.f'))
 ```
+
+```{r echo=FALSE, message=FALSE}
+result %>% group_by(sample) %>% gt()
+```
+
+

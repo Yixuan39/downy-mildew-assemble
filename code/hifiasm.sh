@@ -19,40 +19,59 @@ while getopts "i:o:b:p:h" opt; do
         b) BUSCO_DB="$OPTARG" ;;
         p) THREADS="$OPTARG" ;;
         h) usage ;;
+        *) usage ;;
     esac
 done
+
 set -euo pipefail
-# get base name
-BASENAME=$(basename "$INPUT_FILE")  
-BASENAME=${BASENAME%.fastq.gz}  
-mkdir -p "${RESULT_DIR}/${BASENAME}"
+
+# Validate required arguments
+if [ -z "${INPUT_FILE:-}" ] || [ -z "${RESULT_DIR:-}" ] || [ -z "${BUSCO_DB:-}" ] || [ -z "${THREADS:-}" ]; then
+    usage
+fi
+
+# Get base name without extension
+BASENAME=$(basename "$INPUT_FILE")
+BASENAME="${BASENAME%.fastq.gz}"
+
 echo "Base name: $BASENAME"
 
-# 1. Run hifiasm with --primary
+# Create output directories
+mkdir -p "${RESULT_DIR}/${BASENAME}"
+mkdir -p "${RESULT_DIR}/compleasm"
+
+# Run hifiasm, disallow purge dup, only generate primary
+echo "Running hifiasm..."
 hifiasm \
-  -t "${THREADS}" \
-  --primary \
-  -o "${RESULT_DIR}/${BASENAME}/${BASENAME}.asm" \
-  "${INPUT_FILE}"
+    -t "${THREADS}" \
+    -l0 \
+    --primary \
+    -o "${RESULT_DIR}/${BASENAME}/${BASENAME}.asm" \
+    "${INPUT_FILE}"
 
-# 2. Convert primary GFA to FASTA
+echo "Converting GFA to FASTA..."
 gfatools gfa2fa \
-  "${RESULT_DIR}/${BASENAME}/${BASENAME}.asm.p_ctg.gfa" \
-  > "${RESULT_DIR}/${BASENAME}/${BASENAME}.asm.p_ctg.fa"
-  
-gzip -c "${RESULT_DIR}/${BASENAME}/${BASENAME}.asm.p_ctg.fa" > "${RESULT_DIR}/${BASENAME}.fasta.gz"
-rm -rf "${RESULT_DIR}/${BASENAME}"
- 
+    "${RESULT_DIR}/${BASENAME}/${BASENAME}.asm.p_ctg.gfa" \
+    > "${RESULT_DIR}/${BASENAME}/${BASENAME}.asm.p_ctg.fa"
+
+gzip -c "${RESULT_DIR}/${BASENAME}/${BASENAME}.asm.p_ctg.fa" \
+    > "${RESULT_DIR}/${BASENAME}.fasta.gz"
+
+# Clean up intermediate directory
+rm -rf "${RESULT_DIR:?}/${BASENAME}"
+
+echo "Running quality-check..."
 python quality-check.py \
-  --input_file "${RESULT_DIR}/${BASENAME}.fasta.gz" \
-  --output_dir "${RESULT_DIR}/compleasm" \
-  --suffix ${BASENAME} \
-  --library_path ${BUSCO_DB} \
-  --threads ${THREADS}
-    
+    --input_file "${RESULT_DIR}/${BASENAME}.fasta.gz" \
+    --output_dir "${RESULT_DIR}/compleasm" \
+    --suffix "${BASENAME}" \
+    --library_path "${BUSCO_DB}" \
+    --threads "${THREADS}"
+
+echo "Generating seqkit summary..."
 seqkit fx2tab \
-  "${RESULT_DIR}/${BASENAME}.fasta.gz" \
-  -n -l -j ${THREADS} \
-  -o "${RESULT_DIR}/compleasm/${BASENAME}.tsv.gz"
+    -n -l -j "${THREADS}" \
+    "${RESULT_DIR}/${BASENAME}.fasta.gz" \
+    | gzip > "${RESULT_DIR}/compleasm/${BASENAME}.tsv.gz"
 
-
+echo "All steps completed successfully for ${BASENAME}."

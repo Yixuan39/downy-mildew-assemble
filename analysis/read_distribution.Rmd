@@ -6,56 +6,47 @@ output: html_document
 ```{r echo=FALSE, message=FALSE}
 library(tidyverse)
 library(data.table)
+library(taxizedb)
 library(gt)
 library(here)
 theme_set(theme_bw())
 ```
 
-# Read distribution of the PacBio raw reads
+# Read distribution of the PacBio HIFI reads
 
 ```{r echo=FALSE}
-files <- list.files('~/project_data/downy/GSL_Data/length/raw',
-                    full.names = TRUE, recursive = TRUE, pattern = '.tsv.gz')
+# child ids under oomycota: 4762
+child.id <- c(taxizedb::downstream(4762)$`4762`$childtaxa_id, '4762')
+files <- list.files('~/project_data/downy/result/kraken2-asm-fcs/oomycota-genomic/0',
+                    full.names = TRUE, recursive = TRUE, pattern = '.kraken$')
 df <- map_dfr(files, function(file) {
-  data <- fread(file, nThread = 20)
-  colnames(data) <- c('id', 'length')
-  data <- data %>% mutate(file = str_remove(basename(file), '.tsv.gz'))
-})
+  data <- fread(file, drop = 5, showProgress = FALSE)
+  colnames(data) <- c('status', 'id', 'tax', 'length')
+  data <- data %>% mutate(file = str_remove(basename(file), '.kraken'))
+}) %>% mutate(is.oomycota = (tax %in% child.id))
 
 ggplot(df) +
-  geom_histogram(aes(x = length), binwidth = 1000) +
+  geom_histogram(aes(x = length, fill = is.oomycota), binwidth = 1000) +
   scale_y_continuous(labels = scales::label_comma()) +
-  facet_wrap(~file, ncol = 1, scales = 'free')
+  facet_wrap(~file, ncol = 1, scales = 'free_y')
 ```
 
-Summary statistics
-
-```{r echo=FALSE}
-df %>%
-  group_by(file) %>% 
-  summarise(min = min(length),
-            median = median(length),
-            mean = mean(length),
-            sd = sd(length),
-            max = max(length)) %>% 
-  gt %>% fmt_auto()
-```
 
 # contig length distribution using FCS
 
 ```{r echo=FALSE}
-files <- list.files('~/project_data/downy/GSL_Data/length/fcs',
+files <- list.files('~/project_data/downy/hifiasm/fcs-gx/purge_dups3/compleasm/',
                     full.names = TRUE, recursive = TRUE, pattern = '.tsv.gz')
 df <- map_dfr(files, function(file) {
-  data <- fread(file, nThread = 20)
+  data <- fread(file)
   colnames(data) <- c('id', 'length')
   data <- data %>% mutate(file = str_remove(basename(file), '.tsv.gz'))
 })
 
 ggplot(df) +
-  geom_histogram(aes(x = length), binwidth = 1000) +
-  scale_y_continuous(labels = scales::label_comma()) +
-  facet_wrap(~file, ncol = 1, scales = 'free')
+  # geom_histogram(aes(x = length), binwidth = 1000) +
+  stat_ecdf(aes(x = length, color = file)) +
+  scale_y_continuous(labels = scales::label_comma())
 ```
 
 Summary statistics
@@ -68,35 +59,6 @@ df %>%
             mean = mean(length),
             sd = sd(length),
             max = max(length)) %>% 
-  gt %>% fmt_auto()
+  gt %>% fmt_number()
 ```
 
-# contig length distribution using Kraken2 after FCS
-
-```{r echo=FALSE}
-files <- list.files('~/project_data/downy/GSL_Data/length/kraken',
-                    full.names = TRUE, recursive = TRUE, pattern = '.tsv.gz')
-df <- map_dfr(files, function(file) {
-  data <- fread(file, nThread = 20)
-  colnames(data) <- c('id', 'length')
-  data <- data %>% mutate(file = str_remove(basename(file), '.tsv.gz'))
-})
-
-ggplot(df) +
-  geom_histogram(aes(x = length), binwidth = 1000) +
-  scale_y_continuous(labels = scales::label_comma()) +
-  facet_wrap(~file, ncol = 1, scales = 'free')
-```
-
-Summary statistics
-
-```{r echo=FALSE}
-df %>%
-  group_by(file) %>% 
-  summarise(min = min(length),
-            median = median(length),
-            mean = mean(length),
-            sd = sd(length),
-            max = max(length)) %>% 
-  gt %>% fmt_auto()
-```
