@@ -5,23 +5,25 @@ date: "`r Sys.Date()`"
 output: html_document
 ---
 
-```{r}
+```{r echo=FALSE, message=FALSE}
 library(GENESPACE)
 library(here)
+library(data.table)
+library(tidyverse)
+library(gt)
 ```
 
-set wd
+# Set Up
 
-```{r}
+```{r echo=FALSE}
 genomeRepo <- "~/project_data/downy/genespace/genomes/"
-wd <- "~/project_data/downy/genespace/genespace/"
+wd <- "~/project_data/downy/genespace/"
 path2mcscanx <- "/Users/yixuanyang/miniforge3/bin/"
 ```
 
-
 parse annotation
 
-```{r}
+```{r echo=FALSE}
 genomes2run <- c("Peronospora_effusa", "Bremia_lactucae", "Phytophthora_sojae")
 parsedPaths <- parse_annotations(
   rawGenomeRepo = genomeRepo,
@@ -30,52 +32,83 @@ parsedPaths <- parse_annotations(
   headerSep = NA,
   headerEntryIndex = 1,
   genespaceWd = wd)
-genomes2run <- c("MSU1", "SC1982", "Phumuli")
+asm2run <- c("Quesada_SQIIe_MSU1", "Quesada_SQIIe_SC1982", "Quesada_SQIIe_Phumuli")
 parsedPaths <- parse_annotations(
   rawGenomeRepo = genomeRepo,
-  genomeDirs = genomes2run,
-  genomeIDs = genomes2run,
+  genomeDirs = asm2run,
+  genomeIDs = asm2run,
   headerSep = NA,
   headerEntryIndex = 1,
   gffIdColumn = "ID",
   genespaceWd = wd)
 ```
 
+# Run Genespace
+
 initialize
 
-```{r}
+```{r message=FALSE, echo=FALSE}
 gpar <- init_genespace(
   wd = wd,
+  nCores = 10,
+  dotplots = 'never',
   path2mcscanx = path2mcscanx)
+
+out <- run_genespace(gpar)
+```
+# Ripanrian plots
+
+```{r echo=FALSE}
+for (asm in asm2run){
+  plot_riparian(
+    gsParam = out,
+    genomeIDs = c(asm, genomes2run),
+    refGenome = "Peronospora_effusa",
+    chrLabFontSize = 2,
+    useRegions = FALSE)
+}
 ```
 
-```{r}
-out <- run_genespace(gpar, overwrite = T)
+# Number of Chromosomes
+
+```{r echo=FALSE}
+syntenicRegion <- file.path(wd, 'results','syntenicRegion_coordinates.csv') |> 
+  fread() |> filter((genome1 %in% asm2run)& genome2 == "Peronospora_effusa") |>
+  group_by(genome1)
+
+syntenicRegion |>
+  summarise(unique_chr_count = n_distinct(chr1)) |> 
+  gt()
 ```
 
-```{r}
-ripd <- plot_riparian(
-  gsParam = out,
-  genomeIDs = c("MSU1", "Peronospora_effusa", "Bremia_lactucae", "Phytophthora_sojae"),
-  pdfFile = here('figures','MSU1.pdf'),
-  chrLabFontSize = 2,
-  useRegions = FALSE)
+# Chromosome matching table for each sample v.s. P.effusa
+
+```{r echo=FALSE}
+syntenicRegion.list <- syntenicRegion |> 
+  group_split() |> 
+  lapply(function(x) {
+    x |> group_by(chr2) |> arrange(str_rank(chr2, numeric = TRUE)) |> gt()
+  })
 ```
 
-```{r}
-ripd <- plot_riparian(
-  gsParam = out,
-  genomeIDs = c("Phumuli", "Peronospora_effusa", "Bremia_lactucae", "Phytophthora_sojae"),
-  pdfFile = here('figures','Phumuli.pdf'),
-  chrLabFontSize = 2,
-  useRegions = FALSE)
+## MSU1
+
+```{r echo=FALSE}
+syntenicRegion.list[[1]]
 ```
 
-```{r}
-ripd <- plot_riparian(
-  gsParam = out,
-  genomeIDs = c("SC1982", "Peronospora_effusa", "Bremia_lactucae", "Phytophthora_sojae"),
-  pdfFile = here('figures','SC1982.pdf'),
-  chrLabFontSize = 2,
-  useRegions = FALSE)
+## Phumuli
+
+```{r echo=FALSE}
+syntenicRegion.list[[2]]
 ```
+
+## SC1982
+
+```{r echo=FALSE}
+syntenicRegion.list[[3]]
+```
+
+
+
+
