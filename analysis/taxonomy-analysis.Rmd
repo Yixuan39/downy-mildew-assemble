@@ -15,7 +15,7 @@ theme_set(theme_minimal())
 
 ```{r echo=FALSE}
 # read in tax file
-path <- '~/project_data/downy/result/asm-fcs-kraken2/oomycota-genomic/0.5/'
+path <- '~/project_data/downy/hifiasm/fcs-gx/'
 df <- list.files(path, pattern = '.taxonomy.rpt', full.names = T) %>% 
   map_dfr(function(x) {
     fread(x) %>% 
@@ -43,7 +43,7 @@ tax <- name_or_id2df(rownames(otu),
   
 ```
 
-FCS classified relative contig abundance
+# FCS classified relative contig abundance
 
 ```{r echo=FALSE}
 otu.prop <- trans(otu, method = 'total')
@@ -51,7 +51,7 @@ phylum <- hebing(otu.prop, tax$Phylum, margin = 1, act = "sum")
 stackplot(phylum)
 ```
 
-Top 30 contaminants
+# Top 30 contig-wise taxonomy for each sample
 
 ```{r echo=FALSE}
 otu.prop %>% 
@@ -63,108 +63,6 @@ otu.prop %>%
   fmt_percent()
 ```
 
-# Kraken2 result
-
-When confidence score = 0
-
-```{r echo=FALSE}
-path <- '~/project_data/downy/result/asm-fcs-kraken2/oomycota-genomic/0/'
-df <- list.files(path, pattern = '.kraken$', full.names = T) %>% 
-  map_dfr(function(x) {
-    df <- fread(x, drop = 5)
-    colnames(df) <- c('status', 'id', 'tax', 'length')
-    df <- df %>% mutate(sample = str_remove(basename(x), '.kraken'))
-  })
-kraken.tax <- name_or_id2df(df$tax,
-                     mode = 'id', 
-                     fill_miss_rank = FALSE,
-                     add_prefix = FALSE) %>% 
-  mutate(Phylum = ifelse(Phylum == "", "Unclassified", Phylum))
-
-data.frame(df,kraken.tax) %>% 
-  group_by(sample, Phylum) %>% 
-  summarise(count = n()) %>% 
-  ungroup() %>% 
-  group_by(sample) %>% 
-  mutate(prop = count/sum(count)) %>% 
-  mutate(Phylum = if_else(prop < 0.1, 'Other', Phylum)) %>% 
-  ggplot() +
-  geom_bar(aes(x = sample, y = prop, fill = Phylum), stat = 'identity') 
-```
-
-When confidence score = 0.5
-
-```{r echo=FALSE}
-path <- '~/project_data/downy/result/asm-fcs-kraken2/oomycota-genomic/0.5/'
-df <- list.files(path, pattern = '.kraken$', full.names = T) %>% 
-  map_dfr(function(x) {
-    df <- fread(x, drop = 5)
-    colnames(df) <- c('status', 'id', 'tax', 'length')
-    df <- df %>% mutate(sample = str_remove(basename(x), '.kraken'))
-  })
-kraken.tax <- name_or_id2df(df$tax,
-                     mode = 'id', 
-                     fill_miss_rank = FALSE,
-                     add_prefix = FALSE) %>% 
-  mutate(Phylum = ifelse(Phylum == "", "Unclassified", Phylum))
-
-data.frame(df,kraken.tax) %>% 
-  group_by(sample, Phylum) %>% 
-  summarise(count = n()) %>% 
-  ungroup() %>% 
-  group_by(sample) %>% 
-  mutate(prop = count/sum(count)) %>% 
-  mutate(Phylum = if_else(prop < 0.1, 'Other', Phylum)) %>% 
-  ggplot() +
-  geom_bar(aes(x = sample, y = prop, fill = Phylum), stat = 'identity') 
-```
-
-# Effusa data
-
-```{r echo=FALSE}
-# read in tax file
-path <- '~/project_data/downy/result/verification/genomic/'
-df <- list.files(path, pattern = '.taxonomy.rpt', full.names = T, recursive = T) %>% 
-  map_dfr(function(x) {
-    fread(x) %>% 
-      mutate(sample = str_remove(basename(x), '.taxonomy.rpt'))
-  })
-
-```
 
 
-```{r,message=FALSE, echo=FALSE}
-otu <- df %>% 
-  group_by(sample,`tax-name-1`) %>% 
-  summarise(count = n()) %>% 
-  arrange(desc(count)) %>% 
-  pivot_wider(names_from = sample, values_from = count, values_fill = 0) %>%
-  mutate(`tax-name-1` = ifelse(`tax-name-1` == "", "Unclassified", `tax-name-1`)) %>% 
-  column_to_rownames('tax-name-1')
-
-tax <- name_or_id2df(rownames(otu), mode = 'name', add_prefix = FALSE) %>% 
-  select(-taxid) %>% 
-  column_to_rownames('name')
-  
-```
-
-```{r echo=FALSE}
-otu.prop <- trans(otu, method = 'total')
-phylum <- hebing(otu.prop, tax$Phylum, margin = 1, act = "sum")
-phylum %>% 
-  rownames_to_column('name') %>%
-  pivot_longer(SRR15142133,names_to = 'sample', values_to = 'percentage') %>% 
-  ggplot() +
-  geom_bar(aes(x = sample, y = percentage, fill = name), stat = 'identity') +
-  coord_polar("y", start=0)
-```
-```{r echo=FALSE}
-otu.prop %>% 
-  mutate(mean = rowMeans(.)) %>% 
-  arrange(desc(mean)) %>% 
-  select(-mean) %>%
-  head(30) %>% 
-  gt(rownames_to_stub = TRUE) %>%
-  fmt_percent()
-```
 
