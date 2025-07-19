@@ -33,4 +33,20 @@ result <- bind_rows(read.tb('~/project_data/downy/hifiasm/compleasm/', 's.13.a')
 result %>% group_by(sample) %>% gt()
 ```
 
+# Quality s.13.e
+
+Oplimized result of method s.13.e
+
+Purge_dups parameters:
+
+MSU1: -l 80 -m 220 -u 360
+
+Phumuli: -l 80 -m 220 -u 400
+
+SC1982: -l 7 -m 120 -u 180
+
+```{r echo=FALSE, message=FALSE}
+read.tb('~/project_data/downy/hifiasm/fcs-gx/purge_dups/compleasm/', 'Optimized') |> gt()
+```
+
 
