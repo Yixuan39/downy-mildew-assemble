@@ -10,9 +10,9 @@ This project aimed to assemble downy mildew genome collected from highly contami
 
 [Compleasm and QUAST results](https://yixuan39.github.io/downy-mildew-assemble/analysis/result.html)
 
-[Taxonomy composition](https://yixuan39.github.io/downy-mildew-assemble/analysis/taxonomy-analysis.html)
+[Taxonomy composition of contigs](https://yixuan39.github.io/downy-mildew-assemble/analysis/taxonomy-analysis.html)
 
-[Assemble genome quality of P.effusa](https://yixuan39.github.io/downy-mildew-assemble/analysis/verification-result.html)
+[Orthofinder & Genespace](https://yixuan39.github.io/downy-mildew-assemble/analysis/genespace.html)
 
 # Pipeline
 
@@ -111,25 +111,4 @@ see [purge_dups.sh](https://yixuan39.github.io/downy-mildew-assemble/code/purge_
 ## 4.Quality evaluation
 
 You can evaluate the genome assembly quality with the tool you prefer. In this study we used `compleasm` and `QUAST`.
-
-# Wrapper for the pipeline
-
-To make the pipeline easier, we wrap each step up into a script.
-
-```
-bash clean-asm.sh -h
-Usage: clean-asm.sh -i <input_file> -o <output_dir> -d <gx_db> -k <kraken_db> -b <busco_db> -c <confidence_score> -t <taxid> -m <min_length> -p <threads>
-
-  -i  Input FASTQ file
-  -o  Output directory
-  -d  GX database path
-  -k  Kraken database path
-  -b  BUSCO database path
-  -c  Confidence score
-  -t  Taxonomic ID
-  -e  Extract reads classified as TAXID, default: true
-  -m  Minimum sequence length
-  -p  Number of threads
-  -h  Show this help message
-```
 
