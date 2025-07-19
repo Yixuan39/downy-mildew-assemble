@@ -25,7 +25,7 @@ result <- bind_rows(read.tb('~/project_data/downy/hifiasm/compleasm/', 's.13.a')
                     read.tb('~/project_data/downy/hifiasm-10kb/compleasm/', 's.13.b'),
                     read.tb('~/project_data/downy/hifiasm/purge_dups/compleasm/', 's.13.c'),
                     read.tb('~/project_data/downy/hifiasm-10kb/purge_dups/compleasm/', 's.13.d'),
-                    read.tb('~/project_data/downy/hifiasm/fcs-gx/purge_dups3/compleasm/', 's.13.e'),
+                    read.tb('~/project_data/downy/hifiasm/fcs-gx/purge_dups/compleasm/', 's.13.e'),
                     read.tb('~/project_data/downy/hifiasm-10kb/fcs-gx/purge_dups/compleasm/', 's.13.f'))
 ```
 
