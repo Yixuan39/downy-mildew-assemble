@@ -5,6 +5,7 @@
 
 set -euo pipefail
 
+# with hifiasm results, run purge_dups on the primary assembly.
 ASM_DIR="$HOME/project_data/downy/hifiasm"
 HIFI_DIR="$HOME/project_data/downy/GSL_Data/fastq"
 RESULT_DIR="$ASM_DIR/purge_dups"

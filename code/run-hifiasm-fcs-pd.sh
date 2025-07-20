@@ -5,6 +5,7 @@
 
 set -euo pipefail
 
+# with the FCS-GX cleaned hifiasm primary assembly, decrease duplication with purge_dups.
 ASM_DIR="$HOME/project_data/downy/hifiasm/fcs-gx"
 HIFI_DIR="$HOME/project_data/downy/GSL_Data/fastq"
 RESULT_DIR="$ASM_DIR/purge_dups"

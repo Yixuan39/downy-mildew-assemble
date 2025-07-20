@@ -3,6 +3,7 @@
 #SBATCH --array=0-2
 #SBATCH --cpus-per-task=32
 
+# run hifiasm on raw pacbio hifi reads
 INPUT_DIR=$HOME/project_data/downy/GSL_Data/fastq
 RESULT_DIR=$HOME/project_data/downy/hifiasm
 FILES=($(find "$INPUT_DIR" -type f -name "*.fastq.gz"))
