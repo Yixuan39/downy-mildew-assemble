@@ -60,15 +60,9 @@ Here we use `sample.fastq.gz` to represent the PacBio HIFI read file.
 
 ## 1.Assemble the PacBio data
 
-Assemble genome with `metaMDBG`
+Assemble genome with `hifiasm`
 
 ```
-metaMDBG asm \
-    --out-dir ./sample.asm \
-    --in-hifi ./sample.fastq.gz \
-    --threads 24
-mv ./sample.asm/contigs.fasta.gz ./sample.fasta.gz
-
 hifiasm \
     -t 24 \
     -l0 \
