@@ -20,24 +20,55 @@ read.tb <- function(path, method) {
 ```
 
 
-```{r echo=FALSE, message=FALSE}
+```{r echo=FALSE, message=FALSE, include=FALSE}
 result <- bind_rows(read.tb('~/project_data/downy/hifiasm/compleasm/', 's.13.a'),
                     read.tb('~/project_data/downy/hifiasm-10kb/compleasm/', 's.13.b'),
                     read.tb('~/project_data/downy/hifiasm/purge_dups/compleasm/', 's.13.c'),
                     read.tb('~/project_data/downy/hifiasm-10kb/purge_dups/compleasm/', 's.13.d'),
                     read.tb('~/project_data/downy/hifiasm/fcs-gx/purge_dups/compleasm/', 's.13.e'),
                     read.tb('~/project_data/downy/hifiasm-10kb/fcs-gx/purge_dups/compleasm/', 's.13.f'))
-```
 
-```{r echo=FALSE, message=FALSE}
 result %>% group_by(sample) %>% gt()
 ```
 
-# Quality s.13.e
+# Pipeline
 
-Oplimized result of method s.13.e
+## hifiasm
+
+Step 1, assemble the raw Pacbio read into contigs. Here we check the quality of the assembled genome.
+
+Each isolates showed 100% completeness, but the duplications were high.
+
+```{r}
+read.tb('~/project_data/downy/hifiasm/compleasm/', 'hifiasm') |> gt()
+```
+
+## Decontamination
+
+There could be many contamination reads in each isolates. Here, we use FCS-GX to clean the genome.
+
+```{r}
+read.tb('~/project_data/downy/hifiasm/fcs-gx/compleasm/', 'FCS') |> gt()
+```
+
+## Purge_dups
+
+The duplication rates are still too high. Here we can try to use purge_dups software. However, purge_dups sometimes fails on setting threshold parameters. Therefore, we set them manually. 
 
 Purge_dups parameters:
+
+MSU1: -l 80 -m 165 -u 360
+
+Phumuli: -l 80 -m 220 -u 400
+
+SC1982: -l 7 -m 65 -u 180
+
+```{r echo=FALSE, message=FALSE}
+read.tb('~/project_data/downy/hifiasm/fcs-gx/purge_dups/compleasm/', 'Purge_dups') |> gt()
+```
+
+
+**we can set more aggressive parameters**
 
 MSU1: -l 80 -m 220 -u 360
 
@@ -46,7 +77,7 @@ Phumuli: -l 80 -m 220 -u 400
 SC1982: -l 7 -m 120 -u 180
 
 ```{r echo=FALSE, message=FALSE}
-read.tb('~/project_data/downy/hifiasm/fcs-gx/purge_dups/compleasm/', 'Optimized') |> gt()
+read.tb('~/project_data/downy/hifiasm/fcs-gx/purge_dups-old/compleasm/', 'Purge_dups optimized') |> gt()
 ```
 
 
