@@ -24,25 +24,6 @@ gffread \
   ${RESULT_DIR}/${BASENAME}.gff \
   -g ${FILE%.gz} \
   -y ${RESULT_DIR}/${BASENAME}.faa
-  
-gffread \
-  ${RESULT_DIR}/${BASENAME}.gff \
-  -g ${FILE%.gz} \
-  -x ${RESULT_DIR}/${BASENAME}.fasta
-  
-gzip -f ${RESULT_DIR}/${BASENAME}.fasta
-  
-python quality-check.py \
-  --input_file "${RESULT_DIR}/${BASENAME}.fasta.gz" \
-  --output_dir "${RESULT_DIR}/compleasm" \
-  --suffix ${BASENAME} \
-  --library_path ${BUSCO_DB} \
-  --threads ${THREADS}
-
-seqkit fx2tab \
-  "${RESULT_DIR}/${BASENAME}.fasta.gz" \
-  -n -l -j ${THREADS} \
-  -o "${RESULT_DIR}/compleasm/${BASENAME}.tsv.gz"
 
 rm ${FILE%.gz}
 rm ${FILE%.gz}.fai
