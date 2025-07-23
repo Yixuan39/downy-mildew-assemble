@@ -10,6 +10,7 @@ library(GENESPACE)
 library(here)
 library(data.table)
 library(tidyverse)
+library(Biostrings)
 library(gt)
 ```
 
@@ -47,7 +48,7 @@ parsedPaths <- parse_annotations(
 
 initialize
 
-```{r message=FALSE, echo=FALSE}
+```{r message=FALSE, echo=FALSE, results=FALSE}
 gpar <- init_genespace(
   wd = wd,
   nCores = 10,
@@ -56,6 +57,12 @@ gpar <- init_genespace(
 
 out <- run_genespace(gpar)
 ```
+
+```{bash eval=FALSE}
+orthofinder -f /Users/yixuanyang/project_data/downy/genespace//tmp -t 10 -a 1 -X -o /Users/yixuanyang/project_data/downy/genespace//orthofinder
+```
+
+
 # Ripanrian plots
 
 ```{r echo=FALSE}
@@ -81,33 +88,75 @@ syntenicRegion |>
   gt()
 ```
 
-# Chromosome matching table for each sample v.s. P.effusa
+# Glue syntenic contigs together
 
-```{r echo=FALSE}
-syntenicRegion.list <- syntenicRegion |> 
+Prepare syntenic and sequence data.
+
+```{r}
+syntenic.list <- syntenicRegion |> 
   group_split() |> 
   lapply(function(x) {
-    x |> group_by(chr2) |> arrange(str_rank(chr2, numeric = TRUE)) |> gt()
+    x |> group_by(chr2) |> arrange(str_rank(chr2, numeric = TRUE))
   })
+
+asm.files <- list.files('~/project_data/downy/hifiasm/fcs-gx/purge_dups', full.names = TRUE, pattern = '.fasta.gz') |> 
+  str_sort() |> 
+  lapply(function(file) {readDNAStringSet(file)})
 ```
 
-## MSU1
+Below is a function that glues all syntenic contigs and also keep other non-cds contigs
 
-```{r echo=FALSE}
-syntenicRegion.list[[1]]
+```{r}
+glue.contigs <- function(syntenic, asm) {
+  new_chromosomes <- DNAStringSet()
+  # Glue contigs based on the synteny map 
+  # here we assume chr1 is isolate contig name, and chr2 is the ref genome contig name
+  for (chr in unique(syntenic$chr2)) {
+    df <- syntenic |> filter(chr2 == chr)
+    current_chr_contigs <- DNAStringSet()
+    for(i in 1:nrow(df)){
+      contig_name <- df$chr1[i] 
+      sequence <- asm[contig_name]
+      if (df$orient[i] == '+') {
+        current_chr_contigs <- c(current_chr_contigs, sequence)
+      } else { # match orientation
+        current_chr_contigs <- c(current_chr_contigs, reverseComplement(sequence))
+      }
+    }
+    glued_sequence <- unlist(current_chr_contigs)
+    new_chromosomes <- c(new_chromosomes, DNAStringSet(glued_sequence))
+  }
+  names(new_chromosomes) <- paste0('glued_', seq_along(new_chromosomes))
+  
+  # for contigs without cds region, we directly add them to the new asm
+  unused_contig_names <- setdiff(names(asm), unique(syntenic$chr1))
+
+  final_assembly <- c(new_chromosomes, asm[unused_contig_names])
+  return(final_assembly)
+}
 ```
 
-## Phumuli
+Glue contigs and save as new asm file for each isolates
 
-```{r echo=FALSE}
-syntenicRegion.list[[2]]
+```{r}
+path <- '~/project_data/downy/hifiasm/fcs-gx/purge_dups/glued'
+dir.create(path, showWarnings = FALSE)
+MSU1 <- glue.contigs(syntenic.list[[1]], asm.files[[1]])
+writeXStringSet(MSU1, file.path(path, 'Quesada_SQIIe_MSU1.fasta.gz'), compress = TRUE)
+
+Phumuli <- glue.contigs(syntenic.list[[2]], asm.files[[2]])
+writeXStringSet(Phumuli, file.path(path, 'Quesada_SQIIe_Phumili.fasta.gz'), compress = TRUE)
+
+SC1982 <- glue.contigs(syntenic.list[[3]], asm.files[[3]])
+writeXStringSet(SC1982, file.path(path, 'Quesada_SQIIe_SC1982.fasta.gz'), compress = TRUE)
 ```
 
-## SC1982
 
-```{r echo=FALSE}
-syntenicRegion.list[[3]]
-```
+
+
+
+
+
 
 
 
