@@ -1,5 +1,5 @@
 ---
-title: "test"
+title: "Synteny Analysis"
 author: "Yixuan Yang"
 date: "`r Sys.Date()`"
 output: html_document
@@ -145,7 +145,7 @@ MSU1 <- glue.contigs(syntenic.list[[1]], asm.files[[1]])
 writeXStringSet(MSU1, file.path(path, 'Quesada_SQIIe_MSU1.fasta.gz'), compress = TRUE)
 
 Phumuli <- glue.contigs(syntenic.list[[2]], asm.files[[2]])
-writeXStringSet(Phumuli, file.path(path, 'Quesada_SQIIe_Phumili.fasta.gz'), compress = TRUE)
+writeXStringSet(Phumuli, file.path(path, 'Quesada_SQIIe_Phumuli.fasta.gz'), compress = TRUE)
 
 SC1982 <- glue.contigs(syntenic.list[[3]], asm.files[[3]])
 writeXStringSet(SC1982, file.path(path, 'Quesada_SQIIe_SC1982.fasta.gz'), compress = TRUE)
