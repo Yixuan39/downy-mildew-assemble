@@ -96,7 +96,7 @@ Prepare syntenic and sequence data.
 syntenic.list <- syntenicRegion |> 
   group_split() |> 
   lapply(function(x) {
-    x |> group_by(chr2) |> arrange(str_rank(chr2, numeric = TRUE))
+    x |> group_by(chr2) |> arrange(str_rank(startOrd2, numeric = TRUE))
   })
 
 asm.files <- list.files('~/project_data/downy/hifiasm/fcs-gx/purge_dups', full.names = TRUE, pattern = '.fasta.gz') |> 
