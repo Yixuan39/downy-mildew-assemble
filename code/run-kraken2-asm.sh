@@ -3,13 +3,13 @@
 #SBATCH --array=0-2
 #SBATCH --cpus-per-task=24
 #SBATCH --partition=standard,bigmem,gpu
-#SBATCH --mem=350G
+#SBATCH --mem=100G
 
 set -euo pipefail
 
 INPUT_DIR="$HOME/project_data/downy/hifiasm"
 RESULT_DIR="$HOME/project_data/downy/Kraken2/asm"
-Kraken_DB="$HOME/project_data/downy/kraken-nt"
+Kraken_DB="$HOME/project_data/downy/KrakenDB/oomycota-genome"
 THREADS=24
 
 mkdir -p "$RESULT_DIR"

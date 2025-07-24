@@ -1,5 +1,5 @@
 ---
-title: "Read Distribution"
+title: "Read Distribution and Taxonomy Analysis"
 output: html_document
 ---
 
@@ -10,8 +10,6 @@ library(taxizedb)
 library(gt)
 library(here)
 library(pavian)
-library(pctax)
-library(pcutils)
 theme_set(theme_bw())
 ```
 
@@ -36,7 +34,7 @@ ggplot(df) +
 
 # Taxonomy abundance of PacBio raw reads
 
-```{r}
+```{r echo=FALSE}
 files <- list.files('~/project_data/downy/Kraken2/raw',
                     full.names = TRUE, recursive = TRUE, pattern = '.kreport$')
 df.rpt <- map_dfr(files, function(file) {
@@ -44,13 +42,53 @@ df.rpt <- map_dfr(files, function(file) {
     mutate(file = str_remove(basename(file), '.fastq.gz.kreport'))})
 ```
 
-Is there any interesting species other than oomycota?
+Is there any interesting species other than oomycota? Here, we are showing top 10 species level taxa with highest percentage for each isolates.
 
-```{r}
+```{r echo=FALSE}
 df.rpt %>% 
-  filter(taxRank %in% c('U', 'S'), P != 'p_Oomycota') %>% 
+  filter(taxRank %in% c('U', 'S')) %>% 
   select(percentage, P, S, file) %>% 
   group_by(file) %>% 
-  slice_max(order_by = percentage, n = 30) %>% 
-  split(.$file)
+  slice_max(order_by = percentage, n = 10) %>% 
+  gt(row_group_as_column = T) %>% 
+  fmt_number()
 ```
+
+# Taxonomy of contigs before using FCS
+
+Here we are looking at top 10 species level taxa with highest percentage for each isolates.
+
+```{r echo=FALSE}
+files <- list.files('~/project_data/downy/Kraken2/asm',
+                    full.names = TRUE, recursive = TRUE, pattern = '.kreport$')
+map_dfr(files, function(file) {
+  read_report2(file, add_taxRank_columns = TRUE) %>%
+  mutate(file = str_remove(basename(file), '.fasta.gz.kreport'))}) %>% 
+  filter(taxRank %in% c('U', 'S')) %>% 
+  select(percentage, P, S, file) %>% 
+  group_by(file) %>% 
+  slice_max(order_by = percentage, n = 10) %>% 
+  gt(row_group_as_column = T) %>% 
+  fmt_number()
+```
+
+# Taxonomy of contigs in final assembly
+
+We are looking at top 10 phylum level taxa with highest percentage for each isolates to check if most of the contigs belong to oomycete. 
+
+In isolate SC1982, the taxonomy is still diverse, and only a small part of contigs classified as oomycete. This might because this isolate has many non-coding regions.
+
+```{r echo=FALSE}
+files <- list.files('~/project_data/downy/Kraken2/final',
+                    full.names = TRUE, recursive = TRUE, pattern = '.kreport$')
+map_dfr(files, function(file) {
+  read_report2(file, add_taxRank_columns = TRUE) %>%
+  mutate(file = str_remove(basename(file), '.fasta.gz.kreport'))}) %>% 
+  filter(taxRank %in% c('U', 'P')) %>% 
+  select(percentage, P, file) %>% 
+  group_by(file) %>% 
+  slice_max(order_by = percentage, n = 10) %>% 
+  gt(row_group_as_column = T) %>% 
+  fmt_number()
+```
+
