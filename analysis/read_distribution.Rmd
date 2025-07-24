@@ -9,6 +9,9 @@ library(data.table)
 library(taxizedb)
 library(gt)
 library(here)
+library(pavian)
+library(pctax)
+library(pcutils)
 theme_set(theme_bw())
 ```
 
@@ -17,12 +20,12 @@ theme_set(theme_bw())
 ```{r echo=FALSE}
 # child ids under oomycota: 4762
 child.id <- c(taxizedb::downstream(4762)$`4762`$childtaxa_id, '4762')
-files <- list.files('~/project_data/downy/result/kraken2-asm-fcs/oomycota-genomic/0',
+files <- list.files('~/project_data/downy/Kraken2/raw',
                     full.names = TRUE, recursive = TRUE, pattern = '.kraken$')
 df <- map_dfr(files, function(file) {
   data <- fread(file, drop = 5, showProgress = FALSE)
   colnames(data) <- c('status', 'id', 'tax', 'length')
-  data <- data %>% mutate(file = str_remove(basename(file), '.kraken'))
+  data <- data %>% mutate(file = str_remove(basename(file), '.fastq.gz.kraken'))
 }) %>% mutate(is.oomycota = (tax %in% child.id))
 
 ggplot(df) +
@@ -31,44 +34,23 @@ ggplot(df) +
   facet_wrap(~file, ncol = 1, scales = 'free_y')
 ```
 
+# Taxonomy abundance of PacBio raw reads
 
-# contig length distribution
-
-Here, we are showing results return by the pipeline s.13.e:
-
-hifiasm -> fcs-gx -> purge_dups
-
-purge_dups is manually adjusted using the parameters: calcuts -l 5 -m 150 -u 450
-
-lower bound: 5
-transition between haploid and diploid: 150
-upper bound for read depth: 450
-
-```{r echo=FALSE}
-files <- list.files('~/project_data/downy/hifiasm/fcs-gx/purge_dups3/compleasm/',
-                    full.names = TRUE, recursive = TRUE, pattern = '.tsv.gz')
-df <- map_dfr(files, function(file) {
-  data <- fread(file)
-  colnames(data) <- c('id', 'length')
-  data <- data %>% mutate(file = str_remove(basename(file), '.tsv.gz'))
-})
-
-ggplot(df) +
-  # geom_histogram(aes(x = length), binwidth = 1000) +
-  stat_ecdf(aes(x = length, color = file)) +
-  scale_y_continuous(labels = scales::label_comma())
+```{r}
+files <- list.files('~/project_data/downy/Kraken2/raw',
+                    full.names = TRUE, recursive = TRUE, pattern = '.kreport$')
+df.rpt <- map_dfr(files, function(file) {
+  read_report2(file, add_taxRank_columns = TRUE) %>%
+    mutate(file = str_remove(basename(file), '.fastq.gz.kreport'))})
 ```
 
-Summary statistics
+Is there any interesting species other than oomycota?
 
-```{r echo=FALSE}
-df %>%
+```{r}
+df.rpt %>% 
+  filter(taxRank %in% c('U', 'S'), P != 'p_Oomycota') %>% 
+  select(percentage, P, S, file) %>% 
   group_by(file) %>% 
-  summarise(min = min(length),
-            median = median(length),
-            mean = mean(length),
-            sd = sd(length),
-            max = max(length)) %>% 
-  gt %>% fmt_number()
+  slice_max(order_by = percentage, n = 30) %>% 
+  split(.$file)
 ```
-
