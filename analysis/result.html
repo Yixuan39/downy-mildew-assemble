@@ -353,20 +353,29 @@ display: none;
 </div>
 
 
-<div id="qlfjwnfbcc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#qlfjwnfbcc table {
+<div id="pipeline" class="section level1">
+<h1>Pipeline</h1>
+<div id="hifiasm" class="section level2">
+<h2>hifiasm</h2>
+<p>Step 1, assemble the raw Pacbio read into contigs. Here we check the
+quality of the assembled genome.</p>
+<p>Each isolates showed 100% completeness, but the duplications were
+high.</p>
+<pre class="r"><code>read.tb(&#39;~/project_data/downy/hifiasm/compleasm/&#39;, &#39;hifiasm&#39;) |&gt; gt()</code></pre>
+<div id="tzaidnvefu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tzaidnvefu table {
 font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 -webkit-font-smoothing: antialiased;
 -moz-osx-font-smoothing: grayscale;
 }
-#qlfjwnfbcc thead, #qlfjwnfbcc tbody, #qlfjwnfbcc tfoot, #qlfjwnfbcc tr, #qlfjwnfbcc td, #qlfjwnfbcc th {
+#tzaidnvefu thead, #tzaidnvefu tbody, #tzaidnvefu tfoot, #tzaidnvefu tr, #tzaidnvefu td, #tzaidnvefu th {
 border-style: none;
 }
-#qlfjwnfbcc p {
+#tzaidnvefu p {
 margin: 0;
 padding: 0;
 }
-#qlfjwnfbcc .gt_table {
+#tzaidnvefu .gt_table {
 display: table;
 border-collapse: collapse;
 line-height: normal;
@@ -391,11 +400,11 @@ border-left-style: none;
 border-left-width: 2px;
 border-left-color: #D3D3D3;
 }
-#qlfjwnfbcc .gt_caption {
+#tzaidnvefu .gt_caption {
 padding-top: 4px;
 padding-bottom: 4px;
 }
-#qlfjwnfbcc .gt_title {
+#tzaidnvefu .gt_title {
 color: #333333;
 font-size: 125%;
 font-weight: initial;
@@ -406,7 +415,7 @@ padding-right: 5px;
 border-bottom-color: #FFFFFF;
 border-bottom-width: 0;
 }
-#qlfjwnfbcc .gt_subtitle {
+#tzaidnvefu .gt_subtitle {
 color: #333333;
 font-size: 85%;
 font-weight: initial;
@@ -417,7 +426,7 @@ padding-right: 5px;
 border-top-color: #FFFFFF;
 border-top-width: 0;
 }
-#qlfjwnfbcc .gt_heading {
+#tzaidnvefu .gt_heading {
 background-color: #FFFFFF;
 text-align: center;
 border-bottom-color: #FFFFFF;
@@ -428,12 +437,12 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-#qlfjwnfbcc .gt_bottom_border {
+#tzaidnvefu .gt_bottom_border {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#qlfjwnfbcc .gt_col_headings {
+#tzaidnvefu .gt_col_headings {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -447,7 +456,7 @@ border-right-style: none;
 border-right-width: 1px;
 border-right-color: #D3D3D3;
 }
-#qlfjwnfbcc .gt_col_heading {
+#tzaidnvefu .gt_col_heading {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -466,7 +475,7 @@ padding-left: 5px;
 padding-right: 5px;
 overflow-x: hidden;
 }
-#qlfjwnfbcc .gt_column_spanner_outer {
+#tzaidnvefu .gt_column_spanner_outer {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -477,13 +486,13 @@ padding-bottom: 0;
 padding-left: 4px;
 padding-right: 4px;
 }
-#qlfjwnfbcc .gt_column_spanner_outer:first-child {
+#tzaidnvefu .gt_column_spanner_outer:first-child {
 padding-left: 0;
 }
-#qlfjwnfbcc .gt_column_spanner_outer:last-child {
+#tzaidnvefu .gt_column_spanner_outer:last-child {
 padding-right: 0;
 }
-#qlfjwnfbcc .gt_column_spanner {
+#tzaidnvefu .gt_column_spanner {
 border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
@@ -494,10 +503,10 @@ overflow-x: hidden;
 display: inline-block;
 width: 100%;
 }
-#qlfjwnfbcc .gt_spanner_row {
+#tzaidnvefu .gt_spanner_row {
 border-bottom-style: hidden;
 }
-#qlfjwnfbcc .gt_group_heading {
+#tzaidnvefu .gt_group_heading {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -522,7 +531,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 text-align: left;
 }
-#qlfjwnfbcc .gt_empty_group_heading {
+#tzaidnvefu .gt_empty_group_heading {
 padding: 0.5px;
 color: #333333;
 background-color: #FFFFFF;
@@ -536,13 +545,13 @@ border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 vertical-align: middle;
 }
-#qlfjwnfbcc .gt_from_md > :first-child {
+#tzaidnvefu .gt_from_md > :first-child {
 margin-top: 0;
 }
-#qlfjwnfbcc .gt_from_md > :last-child {
+#tzaidnvefu .gt_from_md > :last-child {
 margin-bottom: 0;
 }
-#qlfjwnfbcc .gt_row {
+#tzaidnvefu .gt_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -560,7 +569,7 @@ border-right-color: #D3D3D3;
 vertical-align: middle;
 overflow-x: hidden;
 }
-#qlfjwnfbcc .gt_stub {
+#tzaidnvefu .gt_stub {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -572,1000 +581,7 @@ border-right-color: #D3D3D3;
 padding-left: 5px;
 padding-right: 5px;
 }
-#qlfjwnfbcc .gt_stub_row_group {
-color: #333333;
-background-color: #FFFFFF;
-font-size: 100%;
-font-weight: initial;
-text-transform: inherit;
-border-right-style: solid;
-border-right-width: 2px;
-border-right-color: #D3D3D3;
-padding-left: 5px;
-padding-right: 5px;
-vertical-align: top;
-}
-#qlfjwnfbcc .gt_row_group_first td {
-border-top-width: 2px;
-}
-#qlfjwnfbcc .gt_row_group_first th {
-border-top-width: 2px;
-}
-#qlfjwnfbcc .gt_summary_row {
-color: #333333;
-background-color: #FFFFFF;
-text-transform: inherit;
-padding-top: 8px;
-padding-bottom: 8px;
-padding-left: 5px;
-padding-right: 5px;
-}
-#qlfjwnfbcc .gt_first_summary_row {
-border-top-style: solid;
-border-top-color: #D3D3D3;
-}
-#qlfjwnfbcc .gt_first_summary_row.thick {
-border-top-width: 2px;
-}
-#qlfjwnfbcc .gt_last_summary_row {
-padding-top: 8px;
-padding-bottom: 8px;
-padding-left: 5px;
-padding-right: 5px;
-border-bottom-style: solid;
-border-bottom-width: 2px;
-border-bottom-color: #D3D3D3;
-}
-#qlfjwnfbcc .gt_grand_summary_row {
-color: #333333;
-background-color: #FFFFFF;
-text-transform: inherit;
-padding-top: 8px;
-padding-bottom: 8px;
-padding-left: 5px;
-padding-right: 5px;
-}
-#qlfjwnfbcc .gt_first_grand_summary_row {
-padding-top: 8px;
-padding-bottom: 8px;
-padding-left: 5px;
-padding-right: 5px;
-border-top-style: double;
-border-top-width: 6px;
-border-top-color: #D3D3D3;
-}
-#qlfjwnfbcc .gt_last_grand_summary_row_top {
-padding-top: 8px;
-padding-bottom: 8px;
-padding-left: 5px;
-padding-right: 5px;
-border-bottom-style: double;
-border-bottom-width: 6px;
-border-bottom-color: #D3D3D3;
-}
-#qlfjwnfbcc .gt_striped {
-background-color: rgba(128, 128, 128, 0.05);
-}
-#qlfjwnfbcc .gt_table_body {
-border-top-style: solid;
-border-top-width: 2px;
-border-top-color: #D3D3D3;
-border-bottom-style: solid;
-border-bottom-width: 2px;
-border-bottom-color: #D3D3D3;
-}
-#qlfjwnfbcc .gt_footnotes {
-color: #333333;
-background-color: #FFFFFF;
-border-bottom-style: none;
-border-bottom-width: 2px;
-border-bottom-color: #D3D3D3;
-border-left-style: none;
-border-left-width: 2px;
-border-left-color: #D3D3D3;
-border-right-style: none;
-border-right-width: 2px;
-border-right-color: #D3D3D3;
-}
-#qlfjwnfbcc .gt_footnote {
-margin: 0px;
-font-size: 90%;
-padding-top: 4px;
-padding-bottom: 4px;
-padding-left: 5px;
-padding-right: 5px;
-}
-#qlfjwnfbcc .gt_sourcenotes {
-color: #333333;
-background-color: #FFFFFF;
-border-bottom-style: none;
-border-bottom-width: 2px;
-border-bottom-color: #D3D3D3;
-border-left-style: none;
-border-left-width: 2px;
-border-left-color: #D3D3D3;
-border-right-style: none;
-border-right-width: 2px;
-border-right-color: #D3D3D3;
-}
-#qlfjwnfbcc .gt_sourcenote {
-font-size: 90%;
-padding-top: 4px;
-padding-bottom: 4px;
-padding-left: 5px;
-padding-right: 5px;
-}
-#qlfjwnfbcc .gt_left {
-text-align: left;
-}
-#qlfjwnfbcc .gt_center {
-text-align: center;
-}
-#qlfjwnfbcc .gt_right {
-text-align: right;
-font-variant-numeric: tabular-nums;
-}
-#qlfjwnfbcc .gt_font_normal {
-font-weight: normal;
-}
-#qlfjwnfbcc .gt_font_bold {
-font-weight: bold;
-}
-#qlfjwnfbcc .gt_font_italic {
-font-style: italic;
-}
-#qlfjwnfbcc .gt_super {
-font-size: 65%;
-}
-#qlfjwnfbcc .gt_footnote_marks {
-font-size: 75%;
-vertical-align: 0.4em;
-position: initial;
-}
-#qlfjwnfbcc .gt_asterisk {
-font-size: 100%;
-vertical-align: 0;
-}
-#qlfjwnfbcc .gt_indent_1 {
-text-indent: 5px;
-}
-#qlfjwnfbcc .gt_indent_2 {
-text-indent: 10px;
-}
-#qlfjwnfbcc .gt_indent_3 {
-text-indent: 15px;
-}
-#qlfjwnfbcc .gt_indent_4 {
-text-indent: 20px;
-}
-#qlfjwnfbcc .gt_indent_5 {
-text-indent: 25px;
-}
-#qlfjwnfbcc .katex-display {
-display: inline-flex !important;
-margin-bottom: 0.75em !important;
-}
-#qlfjwnfbcc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
-height: 0px !important;
-}
-</style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-  <thead>
-    <tr class="gt_col_headings">
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="method">method</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="S">S</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="D">D</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="F">F</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="I">I</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="M">M</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="N">N</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Linkage">Linkage</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="X..contigs.....0.bp.">X..contigs.....0.bp.</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="X..contigs.....1000.bp.">X..contigs.....1000.bp.</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="X..contigs.....5000.bp.">X..contigs.....5000.bp.</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="X..contigs.....10000.bp.">X..contigs.....10000.bp.</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="X..contigs.....25000.bp.">X..contigs.....25000.bp.</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="X..contigs.....50000.bp.">X..contigs.....50000.bp.</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total.length.....0.bp.">Total.length.....0.bp.</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total.length.....1000.bp.">Total.length.....1000.bp.</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total.length.....5000.bp.">Total.length.....5000.bp.</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total.length.....10000.bp.">Total.length.....10000.bp.</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total.length.....25000.bp.">Total.length.....25000.bp.</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total.length.....50000.bp.">Total.length.....50000.bp.</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="X..contigs">X..contigs</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Largest.contig">Largest.contig</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total.length">Total.length</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="GC....">GC....</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="N50">N50</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="N90">N90</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="auN">auN</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="L50">L50</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="L90">L90</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="X..N.s.per.100.kbp">X..N.s.per.100.kbp</th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr class="gt_group_heading_row">
-      <th colspan="30" class="gt_group_heading" scope="colgroup" id="Quesada_SQIIe_MSU1">Quesada_SQIIe_MSU1</th>
-    </tr>
-    <tr class="gt_row_group_first"><td headers="Quesada_SQIIe_MSU1  method" class="gt_row gt_left">s.13.a</td>
-<td headers="Quesada_SQIIe_MSU1  S" class="gt_row gt_right">72.00%</td>
-<td headers="Quesada_SQIIe_MSU1  D" class="gt_row gt_right">28.00%</td>
-<td headers="Quesada_SQIIe_MSU1  F" class="gt_row gt_right">0.00%</td>
-<td headers="Quesada_SQIIe_MSU1  I" class="gt_row gt_right">0.00%</td>
-<td headers="Quesada_SQIIe_MSU1  M" class="gt_row gt_right">0.00%</td>
-<td headers="Quesada_SQIIe_MSU1  N" class="gt_row gt_right">100</td>
-<td headers="Quesada_SQIIe_MSU1  Linkage" class="gt_row gt_left">stramenopiles_odb10</td>
-<td headers="Quesada_SQIIe_MSU1  X..contigs.....0.bp." class="gt_row gt_right">2580</td>
-<td headers="Quesada_SQIIe_MSU1  X..contigs.....1000.bp." class="gt_row gt_right">2580</td>
-<td headers="Quesada_SQIIe_MSU1  X..contigs.....5000.bp." class="gt_row gt_right">2554</td>
-<td headers="Quesada_SQIIe_MSU1  X..contigs.....10000.bp." class="gt_row gt_right">2442</td>
-<td headers="Quesada_SQIIe_MSU1  X..contigs.....25000.bp." class="gt_row gt_right">2041</td>
-<td headers="Quesada_SQIIe_MSU1  X..contigs.....50000.bp." class="gt_row gt_right">985</td>
-<td headers="Quesada_SQIIe_MSU1  Total.length.....0.bp." class="gt_row gt_right">386796481</td>
-<td headers="Quesada_SQIIe_MSU1  Total.length.....1000.bp." class="gt_row gt_right">386796481</td>
-<td headers="Quesada_SQIIe_MSU1  Total.length.....5000.bp." class="gt_row gt_right">386695231</td>
-<td headers="Quesada_SQIIe_MSU1  Total.length.....10000.bp." class="gt_row gt_right">385897575</td>
-<td headers="Quesada_SQIIe_MSU1  Total.length.....25000.bp." class="gt_row gt_right">378303421</td>
-<td headers="Quesada_SQIIe_MSU1  Total.length.....50000.bp." class="gt_row gt_right">339922820</td>
-<td headers="Quesada_SQIIe_MSU1  X..contigs" class="gt_row gt_right">2580</td>
-<td headers="Quesada_SQIIe_MSU1  Largest.contig" class="gt_row gt_right">11721044</td>
-<td headers="Quesada_SQIIe_MSU1  Total.length" class="gt_row gt_right">386796481</td>
-<td headers="Quesada_SQIIe_MSU1  GC...." class="gt_row gt_right">55.19</td>
-<td headers="Quesada_SQIIe_MSU1  N50" class="gt_row gt_right">1941657</td>
-<td headers="Quesada_SQIIe_MSU1  N90" class="gt_row gt_right">44657</td>
-<td headers="Quesada_SQIIe_MSU1  auN" class="gt_row gt_right">2825210.7</td>
-<td headers="Quesada_SQIIe_MSU1  L50" class="gt_row gt_right">48</td>
-<td headers="Quesada_SQIIe_MSU1  L90" class="gt_row gt_right">1159</td>
-<td headers="Quesada_SQIIe_MSU1  X..N.s.per.100.kbp" class="gt_row gt_right">0.00</td></tr>
-    <tr><td headers="Quesada_SQIIe_MSU1  method" class="gt_row gt_left">s.13.b</td>
-<td headers="Quesada_SQIIe_MSU1  S" class="gt_row gt_right">78.00%</td>
-<td headers="Quesada_SQIIe_MSU1  D" class="gt_row gt_right">22.00%</td>
-<td headers="Quesada_SQIIe_MSU1  F" class="gt_row gt_right">0.00%</td>
-<td headers="Quesada_SQIIe_MSU1  I" class="gt_row gt_right">0.00%</td>
-<td headers="Quesada_SQIIe_MSU1  M" class="gt_row gt_right">0.00%</td>
-<td headers="Quesada_SQIIe_MSU1  N" class="gt_row gt_right">100</td>
-<td headers="Quesada_SQIIe_MSU1  Linkage" class="gt_row gt_left">stramenopiles_odb10</td>
-<td headers="Quesada_SQIIe_MSU1  X..contigs.....0.bp." class="gt_row gt_right">2262</td>
-<td headers="Quesada_SQIIe_MSU1  X..contigs.....1000.bp." class="gt_row gt_right">2262</td>
-<td headers="Quesada_SQIIe_MSU1  X..contigs.....5000.bp." class="gt_row gt_right">2262</td>
-<td headers="Quesada_SQIIe_MSU1  X..contigs.....10000.bp." class="gt_row gt_right">2262</td>
-<td headers="Quesada_SQIIe_MSU1  X..contigs.....25000.bp." class="gt_row gt_right">2038</td>
-<td headers="Quesada_SQIIe_MSU1  X..contigs.....50000.bp." class="gt_row gt_right">1096</td>
-<td headers="Quesada_SQIIe_MSU1  Total.length.....0.bp." class="gt_row gt_right">372449455</td>
-<td headers="Quesada_SQIIe_MSU1  Total.length.....1000.bp." class="gt_row gt_right">372449455</td>
-<td headers="Quesada_SQIIe_MSU1  Total.length.....5000.bp." class="gt_row gt_right">372449455</td>
-<td headers="Quesada_SQIIe_MSU1  Total.length.....10000.bp." class="gt_row gt_right">372449455</td>
-<td headers="Quesada_SQIIe_MSU1  Total.length.....25000.bp." class="gt_row gt_right">367837314</td>
-<td headers="Quesada_SQIIe_MSU1  Total.length.....50000.bp." class="gt_row gt_right">333485049</td>
-<td headers="Quesada_SQIIe_MSU1  X..contigs" class="gt_row gt_right">2262</td>
-<td headers="Quesada_SQIIe_MSU1  Largest.contig" class="gt_row gt_right">10443126</td>
-<td headers="Quesada_SQIIe_MSU1  Total.length" class="gt_row gt_right">372449455</td>
-<td headers="Quesada_SQIIe_MSU1  GC...." class="gt_row gt_right">54.29</td>
-<td headers="Quesada_SQIIe_MSU1  N50" class="gt_row gt_right">2085827</td>
-<td headers="Quesada_SQIIe_MSU1  N90" class="gt_row gt_right">48458</td>
-<td headers="Quesada_SQIIe_MSU1  auN" class="gt_row gt_right">2755243.7</td>
-<td headers="Quesada_SQIIe_MSU1  L50" class="gt_row gt_right">44</td>
-<td headers="Quesada_SQIIe_MSU1  L90" class="gt_row gt_right">1131</td>
-<td headers="Quesada_SQIIe_MSU1  X..N.s.per.100.kbp" class="gt_row gt_right">0.00</td></tr>
-    <tr><td headers="Quesada_SQIIe_MSU1  method" class="gt_row gt_left">s.13.c</td>
-<td headers="Quesada_SQIIe_MSU1  S" class="gt_row gt_right">13.00%</td>
-<td headers="Quesada_SQIIe_MSU1  D" class="gt_row gt_right">10.00%</td>
-<td headers="Quesada_SQIIe_MSU1  F" class="gt_row gt_right">1.00%</td>
-<td headers="Quesada_SQIIe_MSU1  I" class="gt_row gt_right">0.00%</td>
-<td headers="Quesada_SQIIe_MSU1  M" class="gt_row gt_right">76.00%</td>
-<td headers="Quesada_SQIIe_MSU1  N" class="gt_row gt_right">100</td>
-<td headers="Quesada_SQIIe_MSU1  Linkage" class="gt_row gt_left">stramenopiles_odb10</td>
-<td headers="Quesada_SQIIe_MSU1  X..contigs.....0.bp." class="gt_row gt_right">1030</td>
-<td headers="Quesada_SQIIe_MSU1  X..contigs.....1000.bp." class="gt_row gt_right">1030</td>
-<td headers="Quesada_SQIIe_MSU1  X..contigs.....5000.bp." class="gt_row gt_right">1029</td>
-<td headers="Quesada_SQIIe_MSU1  X..contigs.....10000.bp." class="gt_row gt_right">976</td>
-<td headers="Quesada_SQIIe_MSU1  X..contigs.....25000.bp." class="gt_row gt_right">845</td>
-<td headers="Quesada_SQIIe_MSU1  X..contigs.....50000.bp." class="gt_row gt_right">557</td>
-<td headers="Quesada_SQIIe_MSU1  Total.length.....0.bp." class="gt_row gt_right">162155928</td>
-<td headers="Quesada_SQIIe_MSU1  Total.length.....1000.bp." class="gt_row gt_right">162155928</td>
-<td headers="Quesada_SQIIe_MSU1  Total.length.....5000.bp." class="gt_row gt_right">162151586</td>
-<td headers="Quesada_SQIIe_MSU1  Total.length.....10000.bp." class="gt_row gt_right">161756560</td>
-<td headers="Quesada_SQIIe_MSU1  Total.length.....25000.bp." class="gt_row gt_right">159398132</td>
-<td headers="Quesada_SQIIe_MSU1  Total.length.....50000.bp." class="gt_row gt_right">148598444</td>
-<td headers="Quesada_SQIIe_MSU1  X..contigs" class="gt_row gt_right">1030</td>
-<td headers="Quesada_SQIIe_MSU1  Largest.contig" class="gt_row gt_right">11721044</td>
-<td headers="Quesada_SQIIe_MSU1  Total.length" class="gt_row gt_right">162155928</td>
-<td headers="Quesada_SQIIe_MSU1  GC...." class="gt_row gt_right">59.75</td>
-<td headers="Quesada_SQIIe_MSU1  N50" class="gt_row gt_right">661779</td>
-<td headers="Quesada_SQIIe_MSU1  N90" class="gt_row gt_right">54964</td>
-<td headers="Quesada_SQIIe_MSU1  auN" class="gt_row gt_right">2941173.0</td>
-<td headers="Quesada_SQIIe_MSU1  L50" class="gt_row gt_right">26</td>
-<td headers="Quesada_SQIIe_MSU1  L90" class="gt_row gt_right">507</td>
-<td headers="Quesada_SQIIe_MSU1  X..N.s.per.100.kbp" class="gt_row gt_right">0.00</td></tr>
-    <tr><td headers="Quesada_SQIIe_MSU1  method" class="gt_row gt_left">s.13.d</td>
-<td headers="Quesada_SQIIe_MSU1  S" class="gt_row gt_right">11.00%</td>
-<td headers="Quesada_SQIIe_MSU1  D" class="gt_row gt_right">9.00%</td>
-<td headers="Quesada_SQIIe_MSU1  F" class="gt_row gt_right">0.00%</td>
-<td headers="Quesada_SQIIe_MSU1  I" class="gt_row gt_right">0.00%</td>
-<td headers="Quesada_SQIIe_MSU1  M" class="gt_row gt_right">80.00%</td>
-<td headers="Quesada_SQIIe_MSU1  N" class="gt_row gt_right">100</td>
-<td headers="Quesada_SQIIe_MSU1  Linkage" class="gt_row gt_left">stramenopiles_odb10</td>
-<td headers="Quesada_SQIIe_MSU1  X..contigs.....0.bp." class="gt_row gt_right">740</td>
-<td headers="Quesada_SQIIe_MSU1  X..contigs.....1000.bp." class="gt_row gt_right">740</td>
-<td headers="Quesada_SQIIe_MSU1  X..contigs.....5000.bp." class="gt_row gt_right">740</td>
-<td headers="Quesada_SQIIe_MSU1  X..contigs.....10000.bp." class="gt_row gt_right">740</td>
-<td headers="Quesada_SQIIe_MSU1  X..contigs.....25000.bp." class="gt_row gt_right">720</td>
-<td headers="Quesada_SQIIe_MSU1  X..contigs.....50000.bp." class="gt_row gt_right">485</td>
-<td headers="Quesada_SQIIe_MSU1  Total.length.....0.bp." class="gt_row gt_right">127673152</td>
-<td headers="Quesada_SQIIe_MSU1  Total.length.....1000.bp." class="gt_row gt_right">127673152</td>
-<td headers="Quesada_SQIIe_MSU1  Total.length.....5000.bp." class="gt_row gt_right">127673152</td>
-<td headers="Quesada_SQIIe_MSU1  Total.length.....10000.bp." class="gt_row gt_right">127673152</td>
-<td headers="Quesada_SQIIe_MSU1  Total.length.....25000.bp." class="gt_row gt_right">127253314</td>
-<td headers="Quesada_SQIIe_MSU1  Total.length.....50000.bp." class="gt_row gt_right">118213403</td>
-<td headers="Quesada_SQIIe_MSU1  X..contigs" class="gt_row gt_right">740</td>
-<td headers="Quesada_SQIIe_MSU1  Largest.contig" class="gt_row gt_right">9960374</td>
-<td headers="Quesada_SQIIe_MSU1  Total.length" class="gt_row gt_right">127673152</td>
-<td headers="Quesada_SQIIe_MSU1  GC...." class="gt_row gt_right">57.73</td>
-<td headers="Quesada_SQIIe_MSU1  N50" class="gt_row gt_right">525075</td>
-<td headers="Quesada_SQIIe_MSU1  N90" class="gt_row gt_right">56469</td>
-<td headers="Quesada_SQIIe_MSU1  auN" class="gt_row gt_right">2614139.9</td>
-<td headers="Quesada_SQIIe_MSU1  L50" class="gt_row gt_right">22</td>
-<td headers="Quesada_SQIIe_MSU1  L90" class="gt_row gt_right">423</td>
-<td headers="Quesada_SQIIe_MSU1  X..N.s.per.100.kbp" class="gt_row gt_right">0.00</td></tr>
-    <tr><td headers="Quesada_SQIIe_MSU1  method" class="gt_row gt_left">s.13.e</td>
-<td headers="Quesada_SQIIe_MSU1  S" class="gt_row gt_right">97.00%</td>
-<td headers="Quesada_SQIIe_MSU1  D" class="gt_row gt_right">3.00%</td>
-<td headers="Quesada_SQIIe_MSU1  F" class="gt_row gt_right">0.00%</td>
-<td headers="Quesada_SQIIe_MSU1  I" class="gt_row gt_right">0.00%</td>
-<td headers="Quesada_SQIIe_MSU1  M" class="gt_row gt_right">0.00%</td>
-<td headers="Quesada_SQIIe_MSU1  N" class="gt_row gt_right">100</td>
-<td headers="Quesada_SQIIe_MSU1  Linkage" class="gt_row gt_left">stramenopiles_odb10</td>
-<td headers="Quesada_SQIIe_MSU1  X..contigs.....0.bp." class="gt_row gt_right">56</td>
-<td headers="Quesada_SQIIe_MSU1  X..contigs.....1000.bp." class="gt_row gt_right">56</td>
-<td headers="Quesada_SQIIe_MSU1  X..contigs.....5000.bp." class="gt_row gt_right">56</td>
-<td headers="Quesada_SQIIe_MSU1  X..contigs.....10000.bp." class="gt_row gt_right">56</td>
-<td headers="Quesada_SQIIe_MSU1  X..contigs.....25000.bp." class="gt_row gt_right">54</td>
-<td headers="Quesada_SQIIe_MSU1  X..contigs.....50000.bp." class="gt_row gt_right">51</td>
-<td headers="Quesada_SQIIe_MSU1  Total.length.....0.bp." class="gt_row gt_right">85609558</td>
-<td headers="Quesada_SQIIe_MSU1  Total.length.....1000.bp." class="gt_row gt_right">85609558</td>
-<td headers="Quesada_SQIIe_MSU1  Total.length.....5000.bp." class="gt_row gt_right">85609558</td>
-<td headers="Quesada_SQIIe_MSU1  Total.length.....10000.bp." class="gt_row gt_right">85609558</td>
-<td headers="Quesada_SQIIe_MSU1  Total.length.....25000.bp." class="gt_row gt_right">85565615</td>
-<td headers="Quesada_SQIIe_MSU1  Total.length.....50000.bp." class="gt_row gt_right">85421257</td>
-<td headers="Quesada_SQIIe_MSU1  X..contigs" class="gt_row gt_right">56</td>
-<td headers="Quesada_SQIIe_MSU1  Largest.contig" class="gt_row gt_right">6243570</td>
-<td headers="Quesada_SQIIe_MSU1  Total.length" class="gt_row gt_right">85609558</td>
-<td headers="Quesada_SQIIe_MSU1  GC...." class="gt_row gt_right">49.29</td>
-<td headers="Quesada_SQIIe_MSU1  N50" class="gt_row gt_right">2499709</td>
-<td headers="Quesada_SQIIe_MSU1  N90" class="gt_row gt_right">1128847</td>
-<td headers="Quesada_SQIIe_MSU1  auN" class="gt_row gt_right">2707276.1</td>
-<td headers="Quesada_SQIIe_MSU1  L50" class="gt_row gt_right">13</td>
-<td headers="Quesada_SQIIe_MSU1  L90" class="gt_row gt_right">32</td>
-<td headers="Quesada_SQIIe_MSU1  X..N.s.per.100.kbp" class="gt_row gt_right">5.22</td></tr>
-    <tr><td headers="Quesada_SQIIe_MSU1  method" class="gt_row gt_left">s.13.f</td>
-<td headers="Quesada_SQIIe_MSU1  S" class="gt_row gt_right">95.00%</td>
-<td headers="Quesada_SQIIe_MSU1  D" class="gt_row gt_right">3.00%</td>
-<td headers="Quesada_SQIIe_MSU1  F" class="gt_row gt_right">0.00%</td>
-<td headers="Quesada_SQIIe_MSU1  I" class="gt_row gt_right">0.00%</td>
-<td headers="Quesada_SQIIe_MSU1  M" class="gt_row gt_right">2.00%</td>
-<td headers="Quesada_SQIIe_MSU1  N" class="gt_row gt_right">100</td>
-<td headers="Quesada_SQIIe_MSU1  Linkage" class="gt_row gt_left">stramenopiles_odb10</td>
-<td headers="Quesada_SQIIe_MSU1  X..contigs.....0.bp." class="gt_row gt_right">55</td>
-<td headers="Quesada_SQIIe_MSU1  X..contigs.....1000.bp." class="gt_row gt_right">55</td>
-<td headers="Quesada_SQIIe_MSU1  X..contigs.....5000.bp." class="gt_row gt_right">55</td>
-<td headers="Quesada_SQIIe_MSU1  X..contigs.....10000.bp." class="gt_row gt_right">55</td>
-<td headers="Quesada_SQIIe_MSU1  X..contigs.....25000.bp." class="gt_row gt_right">55</td>
-<td headers="Quesada_SQIIe_MSU1  X..contigs.....50000.bp." class="gt_row gt_right">49</td>
-<td headers="Quesada_SQIIe_MSU1  Total.length.....0.bp." class="gt_row gt_right">85604953</td>
-<td headers="Quesada_SQIIe_MSU1  Total.length.....1000.bp." class="gt_row gt_right">85604953</td>
-<td headers="Quesada_SQIIe_MSU1  Total.length.....5000.bp." class="gt_row gt_right">85604953</td>
-<td headers="Quesada_SQIIe_MSU1  Total.length.....10000.bp." class="gt_row gt_right">85604953</td>
-<td headers="Quesada_SQIIe_MSU1  Total.length.....25000.bp." class="gt_row gt_right">85604953</td>
-<td headers="Quesada_SQIIe_MSU1  Total.length.....50000.bp." class="gt_row gt_right">85405043</td>
-<td headers="Quesada_SQIIe_MSU1  X..contigs" class="gt_row gt_right">55</td>
-<td headers="Quesada_SQIIe_MSU1  Largest.contig" class="gt_row gt_right">6826519</td>
-<td headers="Quesada_SQIIe_MSU1  Total.length" class="gt_row gt_right">85604953</td>
-<td headers="Quesada_SQIIe_MSU1  GC...." class="gt_row gt_right">49.27</td>
-<td headers="Quesada_SQIIe_MSU1  N50" class="gt_row gt_right">3209046</td>
-<td headers="Quesada_SQIIe_MSU1  N90" class="gt_row gt_right">1104307</td>
-<td headers="Quesada_SQIIe_MSU1  auN" class="gt_row gt_right">3592851.3</td>
-<td headers="Quesada_SQIIe_MSU1  L50" class="gt_row gt_right">9</td>
-<td headers="Quesada_SQIIe_MSU1  L90" class="gt_row gt_right">25</td>
-<td headers="Quesada_SQIIe_MSU1  X..N.s.per.100.kbp" class="gt_row gt_right">47.84</td></tr>
-    <tr class="gt_group_heading_row">
-      <th colspan="30" class="gt_group_heading" scope="colgroup" id="Quesada_SQIIe_Phumuli">Quesada_SQIIe_Phumuli</th>
-    </tr>
-    <tr class="gt_row_group_first"><td headers="Quesada_SQIIe_Phumuli  method" class="gt_row gt_left">s.13.a</td>
-<td headers="Quesada_SQIIe_Phumuli  S" class="gt_row gt_right">59.00%</td>
-<td headers="Quesada_SQIIe_Phumuli  D" class="gt_row gt_right">41.00%</td>
-<td headers="Quesada_SQIIe_Phumuli  F" class="gt_row gt_right">0.00%</td>
-<td headers="Quesada_SQIIe_Phumuli  I" class="gt_row gt_right">0.00%</td>
-<td headers="Quesada_SQIIe_Phumuli  M" class="gt_row gt_right">0.00%</td>
-<td headers="Quesada_SQIIe_Phumuli  N" class="gt_row gt_right">100</td>
-<td headers="Quesada_SQIIe_Phumuli  Linkage" class="gt_row gt_left">stramenopiles_odb10</td>
-<td headers="Quesada_SQIIe_Phumuli  X..contigs.....0.bp." class="gt_row gt_right">5254</td>
-<td headers="Quesada_SQIIe_Phumuli  X..contigs.....1000.bp." class="gt_row gt_right">5253</td>
-<td headers="Quesada_SQIIe_Phumuli  X..contigs.....5000.bp." class="gt_row gt_right">5252</td>
-<td headers="Quesada_SQIIe_Phumuli  X..contigs.....10000.bp." class="gt_row gt_right">5069</td>
-<td headers="Quesada_SQIIe_Phumuli  X..contigs.....25000.bp." class="gt_row gt_right">3542</td>
-<td headers="Quesada_SQIIe_Phumuli  X..contigs.....50000.bp." class="gt_row gt_right">998</td>
-<td headers="Quesada_SQIIe_Phumuli  Total.length.....0.bp." class="gt_row gt_right">297538937</td>
-<td headers="Quesada_SQIIe_Phumuli  Total.length.....1000.bp." class="gt_row gt_right">297538485</td>
-<td headers="Quesada_SQIIe_Phumuli  Total.length.....5000.bp." class="gt_row gt_right">297533573</td>
-<td headers="Quesada_SQIIe_Phumuli  Total.length.....10000.bp." class="gt_row gt_right">296015189</td>
-<td headers="Quesada_SQIIe_Phumuli  Total.length.....25000.bp." class="gt_row gt_right">268023379</td>
-<td headers="Quesada_SQIIe_Phumuli  Total.length.....50000.bp." class="gt_row gt_right">179192978</td>
-<td headers="Quesada_SQIIe_Phumuli  X..contigs" class="gt_row gt_right">5253</td>
-<td headers="Quesada_SQIIe_Phumuli  Largest.contig" class="gt_row gt_right">6511362</td>
-<td headers="Quesada_SQIIe_Phumuli  Total.length" class="gt_row gt_right">297538485</td>
-<td headers="Quesada_SQIIe_Phumuli  GC...." class="gt_row gt_right">45.18</td>
-<td headers="Quesada_SQIIe_Phumuli  N50" class="gt_row gt_right">69762</td>
-<td headers="Quesada_SQIIe_Phumuli  N90" class="gt_row gt_right">25074</td>
-<td headers="Quesada_SQIIe_Phumuli  auN" class="gt_row gt_right">969548.7</td>
-<td headers="Quesada_SQIIe_Phumuli  L50" class="gt_row gt_right">476</td>
-<td headers="Quesada_SQIIe_Phumuli  L90" class="gt_row gt_right">3533</td>
-<td headers="Quesada_SQIIe_Phumuli  X..N.s.per.100.kbp" class="gt_row gt_right">0.00</td></tr>
-    <tr><td headers="Quesada_SQIIe_Phumuli  method" class="gt_row gt_left">s.13.b</td>
-<td headers="Quesada_SQIIe_Phumuli  S" class="gt_row gt_right">93.00%</td>
-<td headers="Quesada_SQIIe_Phumuli  D" class="gt_row gt_right">7.00%</td>
-<td headers="Quesada_SQIIe_Phumuli  F" class="gt_row gt_right">0.00%</td>
-<td headers="Quesada_SQIIe_Phumuli  I" class="gt_row gt_right">0.00%</td>
-<td headers="Quesada_SQIIe_Phumuli  M" class="gt_row gt_right">0.00%</td>
-<td headers="Quesada_SQIIe_Phumuli  N" class="gt_row gt_right">100</td>
-<td headers="Quesada_SQIIe_Phumuli  Linkage" class="gt_row gt_left">stramenopiles_odb10</td>
-<td headers="Quesada_SQIIe_Phumuli  X..contigs.....0.bp." class="gt_row gt_right">2518</td>
-<td headers="Quesada_SQIIe_Phumuli  X..contigs.....1000.bp." class="gt_row gt_right">2518</td>
-<td headers="Quesada_SQIIe_Phumuli  X..contigs.....5000.bp." class="gt_row gt_right">2518</td>
-<td headers="Quesada_SQIIe_Phumuli  X..contigs.....10000.bp." class="gt_row gt_right">2518</td>
-<td headers="Quesada_SQIIe_Phumuli  X..contigs.....25000.bp." class="gt_row gt_right">2241</td>
-<td headers="Quesada_SQIIe_Phumuli  X..contigs.....50000.bp." class="gt_row gt_right">630</td>
-<td headers="Quesada_SQIIe_Phumuli  Total.length.....0.bp." class="gt_row gt_right">196231514</td>
-<td headers="Quesada_SQIIe_Phumuli  Total.length.....1000.bp." class="gt_row gt_right">196231514</td>
-<td headers="Quesada_SQIIe_Phumuli  Total.length.....5000.bp." class="gt_row gt_right">196231514</td>
-<td headers="Quesada_SQIIe_Phumuli  Total.length.....10000.bp." class="gt_row gt_right">196231514</td>
-<td headers="Quesada_SQIIe_Phumuli  Total.length.....25000.bp." class="gt_row gt_right">190078685</td>
-<td headers="Quesada_SQIIe_Phumuli  Total.length.....50000.bp." class="gt_row gt_right">133163527</td>
-<td headers="Quesada_SQIIe_Phumuli  X..contigs" class="gt_row gt_right">2518</td>
-<td headers="Quesada_SQIIe_Phumuli  Largest.contig" class="gt_row gt_right">5016121</td>
-<td headers="Quesada_SQIIe_Phumuli  Total.length" class="gt_row gt_right">196231514</td>
-<td headers="Quesada_SQIIe_Phumuli  GC...." class="gt_row gt_right">43.09</td>
-<td headers="Quesada_SQIIe_Phumuli  N50" class="gt_row gt_right">112011</td>
-<td headers="Quesada_SQIIe_Phumuli  N90" class="gt_row gt_right">30797</td>
-<td headers="Quesada_SQIIe_Phumuli  auN" class="gt_row gt_right">1245082.2</td>
-<td headers="Quesada_SQIIe_Phumuli  L50" class="gt_row gt_right">119</td>
-<td headers="Quesada_SQIIe_Phumuli  L90" class="gt_row gt_right">1761</td>
-<td headers="Quesada_SQIIe_Phumuli  X..N.s.per.100.kbp" class="gt_row gt_right">0.00</td></tr>
-    <tr><td headers="Quesada_SQIIe_Phumuli  method" class="gt_row gt_left">s.13.c</td>
-<td headers="Quesada_SQIIe_Phumuli  S" class="gt_row gt_right">32.00%</td>
-<td headers="Quesada_SQIIe_Phumuli  D" class="gt_row gt_right">10.00%</td>
-<td headers="Quesada_SQIIe_Phumuli  F" class="gt_row gt_right">4.00%</td>
-<td headers="Quesada_SQIIe_Phumuli  I" class="gt_row gt_right">0.00%</td>
-<td headers="Quesada_SQIIe_Phumuli  M" class="gt_row gt_right">54.00%</td>
-<td headers="Quesada_SQIIe_Phumuli  N" class="gt_row gt_right">100</td>
-<td headers="Quesada_SQIIe_Phumuli  Linkage" class="gt_row gt_left">stramenopiles_odb10</td>
-<td headers="Quesada_SQIIe_Phumuli  X..contigs.....0.bp." class="gt_row gt_right">1925</td>
-<td headers="Quesada_SQIIe_Phumuli  X..contigs.....1000.bp." class="gt_row gt_right">1925</td>
-<td headers="Quesada_SQIIe_Phumuli  X..contigs.....5000.bp." class="gt_row gt_right">1924</td>
-<td headers="Quesada_SQIIe_Phumuli  X..contigs.....10000.bp." class="gt_row gt_right">1814</td>
-<td headers="Quesada_SQIIe_Phumuli  X..contigs.....25000.bp." class="gt_row gt_right">1105</td>
-<td headers="Quesada_SQIIe_Phumuli  X..contigs.....50000.bp." class="gt_row gt_right">353</td>
-<td headers="Quesada_SQIIe_Phumuli  Total.length.....0.bp." class="gt_row gt_right">102455990</td>
-<td headers="Quesada_SQIIe_Phumuli  Total.length.....1000.bp." class="gt_row gt_right">102455990</td>
-<td headers="Quesada_SQIIe_Phumuli  Total.length.....5000.bp." class="gt_row gt_right">102451078</td>
-<td headers="Quesada_SQIIe_Phumuli  Total.length.....10000.bp." class="gt_row gt_right">101537716</td>
-<td headers="Quesada_SQIIe_Phumuli  Total.length.....25000.bp." class="gt_row gt_right">89200718</td>
-<td headers="Quesada_SQIIe_Phumuli  Total.length.....50000.bp." class="gt_row gt_right">63245704</td>
-<td headers="Quesada_SQIIe_Phumuli  X..contigs" class="gt_row gt_right">1925</td>
-<td headers="Quesada_SQIIe_Phumuli  Largest.contig" class="gt_row gt_right">6511362</td>
-<td headers="Quesada_SQIIe_Phumuli  Total.length" class="gt_row gt_right">102455990</td>
-<td headers="Quesada_SQIIe_Phumuli  GC...." class="gt_row gt_right">54.02</td>
-<td headers="Quesada_SQIIe_Phumuli  N50" class="gt_row gt_right">80314</td>
-<td headers="Quesada_SQIIe_Phumuli  N90" class="gt_row gt_right">22153</td>
-<td headers="Quesada_SQIIe_Phumuli  auN" class="gt_row gt_right">1313560.2</td>
-<td headers="Quesada_SQIIe_Phumuli  L50" class="gt_row gt_right">158</td>
-<td headers="Quesada_SQIIe_Phumuli  L90" class="gt_row gt_right">1233</td>
-<td headers="Quesada_SQIIe_Phumuli  X..N.s.per.100.kbp" class="gt_row gt_right">0.00</td></tr>
-    <tr><td headers="Quesada_SQIIe_Phumuli  method" class="gt_row gt_left">s.13.d</td>
-<td headers="Quesada_SQIIe_Phumuli  S" class="gt_row gt_right">13.00%</td>
-<td headers="Quesada_SQIIe_Phumuli  D" class="gt_row gt_right">7.00%</td>
-<td headers="Quesada_SQIIe_Phumuli  F" class="gt_row gt_right">3.00%</td>
-<td headers="Quesada_SQIIe_Phumuli  I" class="gt_row gt_right">0.00%</td>
-<td headers="Quesada_SQIIe_Phumuli  M" class="gt_row gt_right">77.00%</td>
-<td headers="Quesada_SQIIe_Phumuli  N" class="gt_row gt_right">100</td>
-<td headers="Quesada_SQIIe_Phumuli  Linkage" class="gt_row gt_left">stramenopiles_odb10</td>
-<td headers="Quesada_SQIIe_Phumuli  X..contigs.....0.bp." class="gt_row gt_right">489</td>
-<td headers="Quesada_SQIIe_Phumuli  X..contigs.....1000.bp." class="gt_row gt_right">489</td>
-<td headers="Quesada_SQIIe_Phumuli  X..contigs.....5000.bp." class="gt_row gt_right">489</td>
-<td headers="Quesada_SQIIe_Phumuli  X..contigs.....10000.bp." class="gt_row gt_right">489</td>
-<td headers="Quesada_SQIIe_Phumuli  X..contigs.....25000.bp." class="gt_row gt_right">460</td>
-<td headers="Quesada_SQIIe_Phumuli  X..contigs.....50000.bp." class="gt_row gt_right">182</td>
-<td headers="Quesada_SQIIe_Phumuli  Total.length.....0.bp." class="gt_row gt_right">41702497</td>
-<td headers="Quesada_SQIIe_Phumuli  Total.length.....1000.bp." class="gt_row gt_right">41702497</td>
-<td headers="Quesada_SQIIe_Phumuli  Total.length.....5000.bp." class="gt_row gt_right">41702497</td>
-<td headers="Quesada_SQIIe_Phumuli  Total.length.....10000.bp." class="gt_row gt_right">41702497</td>
-<td headers="Quesada_SQIIe_Phumuli  Total.length.....25000.bp." class="gt_row gt_right">41070227</td>
-<td headers="Quesada_SQIIe_Phumuli  Total.length.....50000.bp." class="gt_row gt_right">31087468</td>
-<td headers="Quesada_SQIIe_Phumuli  X..contigs" class="gt_row gt_right">489</td>
-<td headers="Quesada_SQIIe_Phumuli  Largest.contig" class="gt_row gt_right">4627301</td>
-<td headers="Quesada_SQIIe_Phumuli  Total.length" class="gt_row gt_right">41702497</td>
-<td headers="Quesada_SQIIe_Phumuli  GC...." class="gt_row gt_right">55.06</td>
-<td headers="Quesada_SQIIe_Phumuli  N50" class="gt_row gt_right">115107</td>
-<td headers="Quesada_SQIIe_Phumuli  N90" class="gt_row gt_right">33524</td>
-<td headers="Quesada_SQIIe_Phumuli  auN" class="gt_row gt_right">982516.9</td>
-<td headers="Quesada_SQIIe_Phumuli  L50" class="gt_row gt_right">42</td>
-<td headers="Quesada_SQIIe_Phumuli  L90" class="gt_row gt_right">341</td>
-<td headers="Quesada_SQIIe_Phumuli  X..N.s.per.100.kbp" class="gt_row gt_right">0.00</td></tr>
-    <tr><td headers="Quesada_SQIIe_Phumuli  method" class="gt_row gt_left">s.13.e</td>
-<td headers="Quesada_SQIIe_Phumuli  S" class="gt_row gt_right">96.00%</td>
-<td headers="Quesada_SQIIe_Phumuli  D" class="gt_row gt_right">4.00%</td>
-<td headers="Quesada_SQIIe_Phumuli  F" class="gt_row gt_right">0.00%</td>
-<td headers="Quesada_SQIIe_Phumuli  I" class="gt_row gt_right">0.00%</td>
-<td headers="Quesada_SQIIe_Phumuli  M" class="gt_row gt_right">0.00%</td>
-<td headers="Quesada_SQIIe_Phumuli  N" class="gt_row gt_right">100</td>
-<td headers="Quesada_SQIIe_Phumuli  Linkage" class="gt_row gt_left">stramenopiles_odb10</td>
-<td headers="Quesada_SQIIe_Phumuli  X..contigs.....0.bp." class="gt_row gt_right">130</td>
-<td headers="Quesada_SQIIe_Phumuli  X..contigs.....1000.bp." class="gt_row gt_right">130</td>
-<td headers="Quesada_SQIIe_Phumuli  X..contigs.....5000.bp." class="gt_row gt_right">130</td>
-<td headers="Quesada_SQIIe_Phumuli  X..contigs.....10000.bp." class="gt_row gt_right">121</td>
-<td headers="Quesada_SQIIe_Phumuli  X..contigs.....25000.bp." class="gt_row gt_right">91</td>
-<td headers="Quesada_SQIIe_Phumuli  X..contigs.....50000.bp." class="gt_row gt_right">58</td>
-<td headers="Quesada_SQIIe_Phumuli  Total.length.....0.bp." class="gt_row gt_right">73821196</td>
-<td headers="Quesada_SQIIe_Phumuli  Total.length.....1000.bp." class="gt_row gt_right">73821196</td>
-<td headers="Quesada_SQIIe_Phumuli  Total.length.....5000.bp." class="gt_row gt_right">73821196</td>
-<td headers="Quesada_SQIIe_Phumuli  Total.length.....10000.bp." class="gt_row gt_right">73748348</td>
-<td headers="Quesada_SQIIe_Phumuli  Total.length.....25000.bp." class="gt_row gt_right">73221368</td>
-<td headers="Quesada_SQIIe_Phumuli  Total.length.....50000.bp." class="gt_row gt_right">72100844</td>
-<td headers="Quesada_SQIIe_Phumuli  X..contigs" class="gt_row gt_right">130</td>
-<td headers="Quesada_SQIIe_Phumuli  Largest.contig" class="gt_row gt_right">4035383</td>
-<td headers="Quesada_SQIIe_Phumuli  Total.length" class="gt_row gt_right">73821196</td>
-<td headers="Quesada_SQIIe_Phumuli  GC...." class="gt_row gt_right">48.98</td>
-<td headers="Quesada_SQIIe_Phumuli  N50" class="gt_row gt_right">1742363</td>
-<td headers="Quesada_SQIIe_Phumuli  N90" class="gt_row gt_right">682840</td>
-<td headers="Quesada_SQIIe_Phumuli  auN" class="gt_row gt_right">1991629.2</td>
-<td headers="Quesada_SQIIe_Phumuli  L50" class="gt_row gt_right">14</td>
-<td headers="Quesada_SQIIe_Phumuli  L90" class="gt_row gt_right">38</td>
-<td headers="Quesada_SQIIe_Phumuli  X..N.s.per.100.kbp" class="gt_row gt_right">14.64</td></tr>
-    <tr><td headers="Quesada_SQIIe_Phumuli  method" class="gt_row gt_left">s.13.f</td>
-<td headers="Quesada_SQIIe_Phumuli  S" class="gt_row gt_right">0.00%</td>
-<td headers="Quesada_SQIIe_Phumuli  D" class="gt_row gt_right">0.00%</td>
-<td headers="Quesada_SQIIe_Phumuli  F" class="gt_row gt_right">0.00%</td>
-<td headers="Quesada_SQIIe_Phumuli  I" class="gt_row gt_right">0.00%</td>
-<td headers="Quesada_SQIIe_Phumuli  M" class="gt_row gt_right">100.00%</td>
-<td headers="Quesada_SQIIe_Phumuli  N" class="gt_row gt_right">100</td>
-<td headers="Quesada_SQIIe_Phumuli  Linkage" class="gt_row gt_left">stramenopiles_odb10</td>
-<td headers="Quesada_SQIIe_Phumuli  X..contigs.....0.bp." class="gt_row gt_right">67</td>
-<td headers="Quesada_SQIIe_Phumuli  X..contigs.....1000.bp." class="gt_row gt_right">67</td>
-<td headers="Quesada_SQIIe_Phumuli  X..contigs.....5000.bp." class="gt_row gt_right">67</td>
-<td headers="Quesada_SQIIe_Phumuli  X..contigs.....10000.bp." class="gt_row gt_right">67</td>
-<td headers="Quesada_SQIIe_Phumuli  X..contigs.....25000.bp." class="gt_row gt_right">55</td>
-<td headers="Quesada_SQIIe_Phumuli  X..contigs.....50000.bp." class="gt_row gt_right">13</td>
-<td headers="Quesada_SQIIe_Phumuli  Total.length.....0.bp." class="gt_row gt_right">2818253</td>
-<td headers="Quesada_SQIIe_Phumuli  Total.length.....1000.bp." class="gt_row gt_right">2818253</td>
-<td headers="Quesada_SQIIe_Phumuli  Total.length.....5000.bp." class="gt_row gt_right">2818253</td>
-<td headers="Quesada_SQIIe_Phumuli  Total.length.....10000.bp." class="gt_row gt_right">2818253</td>
-<td headers="Quesada_SQIIe_Phumuli  Total.length.....25000.bp." class="gt_row gt_right">2540975</td>
-<td headers="Quesada_SQIIe_Phumuli  Total.length.....50000.bp." class="gt_row gt_right">1112245</td>
-<td headers="Quesada_SQIIe_Phumuli  X..contigs" class="gt_row gt_right">67</td>
-<td headers="Quesada_SQIIe_Phumuli  Largest.contig" class="gt_row gt_right">186212</td>
-<td headers="Quesada_SQIIe_Phumuli  Total.length" class="gt_row gt_right">2818253</td>
-<td headers="Quesada_SQIIe_Phumuli  GC...." class="gt_row gt_right">35.01</td>
-<td headers="Quesada_SQIIe_Phumuli  N50" class="gt_row gt_right">42193</td>
-<td headers="Quesada_SQIIe_Phumuli  N90" class="gt_row gt_right">25121</td>
-<td headers="Quesada_SQIIe_Phumuli  auN" class="gt_row gt_right">60455.2</td>
-<td headers="Quesada_SQIIe_Phumuli  L50" class="gt_row gt_right">20</td>
-<td headers="Quesada_SQIIe_Phumuli  L90" class="gt_row gt_right">55</td>
-<td headers="Quesada_SQIIe_Phumuli  X..N.s.per.100.kbp" class="gt_row gt_right">0.00</td></tr>
-    <tr class="gt_group_heading_row">
-      <th colspan="30" class="gt_group_heading" scope="colgroup" id="Quesada_SQIIe_SC1982">Quesada_SQIIe_SC1982</th>
-    </tr>
-    <tr class="gt_row_group_first"><td headers="Quesada_SQIIe_SC1982  method" class="gt_row gt_left">s.13.a</td>
-<td headers="Quesada_SQIIe_SC1982  S" class="gt_row gt_right">47.00%</td>
-<td headers="Quesada_SQIIe_SC1982  D" class="gt_row gt_right">53.00%</td>
-<td headers="Quesada_SQIIe_SC1982  F" class="gt_row gt_right">0.00%</td>
-<td headers="Quesada_SQIIe_SC1982  I" class="gt_row gt_right">0.00%</td>
-<td headers="Quesada_SQIIe_SC1982  M" class="gt_row gt_right">0.00%</td>
-<td headers="Quesada_SQIIe_SC1982  N" class="gt_row gt_right">100</td>
-<td headers="Quesada_SQIIe_SC1982  Linkage" class="gt_row gt_left">stramenopiles_odb10</td>
-<td headers="Quesada_SQIIe_SC1982  X..contigs.....0.bp." class="gt_row gt_right">6139</td>
-<td headers="Quesada_SQIIe_SC1982  X..contigs.....1000.bp." class="gt_row gt_right">6139</td>
-<td headers="Quesada_SQIIe_SC1982  X..contigs.....5000.bp." class="gt_row gt_right">6129</td>
-<td headers="Quesada_SQIIe_SC1982  X..contigs.....10000.bp." class="gt_row gt_right">6024</td>
-<td headers="Quesada_SQIIe_SC1982  X..contigs.....25000.bp." class="gt_row gt_right">3805</td>
-<td headers="Quesada_SQIIe_SC1982  X..contigs.....50000.bp." class="gt_row gt_right">1745</td>
-<td headers="Quesada_SQIIe_SC1982  Total.length.....0.bp." class="gt_row gt_right">646594707</td>
-<td headers="Quesada_SQIIe_SC1982  Total.length.....1000.bp." class="gt_row gt_right">646594707</td>
-<td headers="Quesada_SQIIe_SC1982  Total.length.....5000.bp." class="gt_row gt_right">646555671</td>
-<td headers="Quesada_SQIIe_SC1982  Total.length.....10000.bp." class="gt_row gt_right">645682035</td>
-<td headers="Quesada_SQIIe_SC1982  Total.length.....25000.bp." class="gt_row gt_right">604880161</td>
-<td headers="Quesada_SQIIe_SC1982  Total.length.....50000.bp." class="gt_row gt_right">533334108</td>
-<td headers="Quesada_SQIIe_SC1982  X..contigs" class="gt_row gt_right">6139</td>
-<td headers="Quesada_SQIIe_SC1982  Largest.contig" class="gt_row gt_right">8407856</td>
-<td headers="Quesada_SQIIe_SC1982  Total.length" class="gt_row gt_right">646594707</td>
-<td headers="Quesada_SQIIe_SC1982  GC...." class="gt_row gt_right">56.25</td>
-<td headers="Quesada_SQIIe_SC1982  N50" class="gt_row gt_right">698622</td>
-<td headers="Quesada_SQIIe_SC1982  N90" class="gt_row gt_right">31380</td>
-<td headers="Quesada_SQIIe_SC1982  auN" class="gt_row gt_right">1887523.4</td>
-<td headers="Quesada_SQIIe_SC1982  L50" class="gt_row gt_right">136</td>
-<td headers="Quesada_SQIIe_SC1982  L90" class="gt_row gt_right">2985</td>
-<td headers="Quesada_SQIIe_SC1982  X..N.s.per.100.kbp" class="gt_row gt_right">0.00</td></tr>
-    <tr><td headers="Quesada_SQIIe_SC1982  method" class="gt_row gt_left">s.13.b</td>
-<td headers="Quesada_SQIIe_SC1982  S" class="gt_row gt_right">92.00%</td>
-<td headers="Quesada_SQIIe_SC1982  D" class="gt_row gt_right">7.00%</td>
-<td headers="Quesada_SQIIe_SC1982  F" class="gt_row gt_right">1.00%</td>
-<td headers="Quesada_SQIIe_SC1982  I" class="gt_row gt_right">0.00%</td>
-<td headers="Quesada_SQIIe_SC1982  M" class="gt_row gt_right">0.00%</td>
-<td headers="Quesada_SQIIe_SC1982  N" class="gt_row gt_right">100</td>
-<td headers="Quesada_SQIIe_SC1982  Linkage" class="gt_row gt_left">stramenopiles_odb10</td>
-<td headers="Quesada_SQIIe_SC1982  X..contigs.....0.bp." class="gt_row gt_right">3227</td>
-<td headers="Quesada_SQIIe_SC1982  X..contigs.....1000.bp." class="gt_row gt_right">3227</td>
-<td headers="Quesada_SQIIe_SC1982  X..contigs.....5000.bp." class="gt_row gt_right">3227</td>
-<td headers="Quesada_SQIIe_SC1982  X..contigs.....10000.bp." class="gt_row gt_right">3227</td>
-<td headers="Quesada_SQIIe_SC1982  X..contigs.....25000.bp." class="gt_row gt_right">2766</td>
-<td headers="Quesada_SQIIe_SC1982  X..contigs.....50000.bp." class="gt_row gt_right">1390</td>
-<td headers="Quesada_SQIIe_SC1982  Total.length.....0.bp." class="gt_row gt_right">369528098</td>
-<td headers="Quesada_SQIIe_SC1982  Total.length.....1000.bp." class="gt_row gt_right">369528098</td>
-<td headers="Quesada_SQIIe_SC1982  Total.length.....5000.bp." class="gt_row gt_right">369528098</td>
-<td headers="Quesada_SQIIe_SC1982  Total.length.....10000.bp." class="gt_row gt_right">369528098</td>
-<td headers="Quesada_SQIIe_SC1982  Total.length.....25000.bp." class="gt_row gt_right">359683677</td>
-<td headers="Quesada_SQIIe_SC1982  Total.length.....50000.bp." class="gt_row gt_right">310684743</td>
-<td headers="Quesada_SQIIe_SC1982  X..contigs" class="gt_row gt_right">3227</td>
-<td headers="Quesada_SQIIe_SC1982  Largest.contig" class="gt_row gt_right">8325615</td>
-<td headers="Quesada_SQIIe_SC1982  Total.length" class="gt_row gt_right">369528098</td>
-<td headers="Quesada_SQIIe_SC1982  GC...." class="gt_row gt_right">54.32</td>
-<td headers="Quesada_SQIIe_SC1982  N50" class="gt_row gt_right">289635</td>
-<td headers="Quesada_SQIIe_SC1982  N90" class="gt_row gt_right">38189</td>
-<td headers="Quesada_SQIIe_SC1982  auN" class="gt_row gt_right">1511205.3</td>
-<td headers="Quesada_SQIIe_SC1982  L50" class="gt_row gt_right">178</td>
-<td headers="Quesada_SQIIe_SC1982  L90" class="gt_row gt_right">1891</td>
-<td headers="Quesada_SQIIe_SC1982  X..N.s.per.100.kbp" class="gt_row gt_right">0.00</td></tr>
-    <tr><td headers="Quesada_SQIIe_SC1982  method" class="gt_row gt_left">s.13.c</td>
-<td headers="Quesada_SQIIe_SC1982  S" class="gt_row gt_right">30.00%</td>
-<td headers="Quesada_SQIIe_SC1982  D" class="gt_row gt_right">8.00%</td>
-<td headers="Quesada_SQIIe_SC1982  F" class="gt_row gt_right">3.00%</td>
-<td headers="Quesada_SQIIe_SC1982  I" class="gt_row gt_right">0.00%</td>
-<td headers="Quesada_SQIIe_SC1982  M" class="gt_row gt_right">59.00%</td>
-<td headers="Quesada_SQIIe_SC1982  N" class="gt_row gt_right">100</td>
-<td headers="Quesada_SQIIe_SC1982  Linkage" class="gt_row gt_left">stramenopiles_odb10</td>
-<td headers="Quesada_SQIIe_SC1982  X..contigs.....0.bp." class="gt_row gt_right">2545</td>
-<td headers="Quesada_SQIIe_SC1982  X..contigs.....1000.bp." class="gt_row gt_right">2545</td>
-<td headers="Quesada_SQIIe_SC1982  X..contigs.....5000.bp." class="gt_row gt_right">2543</td>
-<td headers="Quesada_SQIIe_SC1982  X..contigs.....10000.bp." class="gt_row gt_right">2513</td>
-<td headers="Quesada_SQIIe_SC1982  X..contigs.....25000.bp." class="gt_row gt_right">1853</td>
-<td headers="Quesada_SQIIe_SC1982  X..contigs.....50000.bp." class="gt_row gt_right">982</td>
-<td headers="Quesada_SQIIe_SC1982  Total.length.....0.bp." class="gt_row gt_right">292244429</td>
-<td headers="Quesada_SQIIe_SC1982  Total.length.....1000.bp." class="gt_row gt_right">292244429</td>
-<td headers="Quesada_SQIIe_SC1982  Total.length.....5000.bp." class="gt_row gt_right">292235057</td>
-<td headers="Quesada_SQIIe_SC1982  Total.length.....10000.bp." class="gt_row gt_right">291990998</td>
-<td headers="Quesada_SQIIe_SC1982  Total.length.....25000.bp." class="gt_row gt_right">279631338</td>
-<td headers="Quesada_SQIIe_SC1982  Total.length.....50000.bp." class="gt_row gt_right">248765924</td>
-<td headers="Quesada_SQIIe_SC1982  X..contigs" class="gt_row gt_right">2545</td>
-<td headers="Quesada_SQIIe_SC1982  Largest.contig" class="gt_row gt_right">6816211</td>
-<td headers="Quesada_SQIIe_SC1982  Total.length" class="gt_row gt_right">292244429</td>
-<td headers="Quesada_SQIIe_SC1982  GC...." class="gt_row gt_right">57.19</td>
-<td headers="Quesada_SQIIe_SC1982  N50" class="gt_row gt_right">538978</td>
-<td headers="Quesada_SQIIe_SC1982  N90" class="gt_row gt_right">37566</td>
-<td headers="Quesada_SQIIe_SC1982  auN" class="gt_row gt_right">1985687.2</td>
-<td headers="Quesada_SQIIe_SC1982  L50" class="gt_row gt_right">64</td>
-<td headers="Quesada_SQIIe_SC1982  L90" class="gt_row gt_right">1314</td>
-<td headers="Quesada_SQIIe_SC1982  X..N.s.per.100.kbp" class="gt_row gt_right">0.00</td></tr>
-    <tr><td headers="Quesada_SQIIe_SC1982  method" class="gt_row gt_left">s.13.d</td>
-<td headers="Quesada_SQIIe_SC1982  S" class="gt_row gt_right">93.00%</td>
-<td headers="Quesada_SQIIe_SC1982  D" class="gt_row gt_right">5.00%</td>
-<td headers="Quesada_SQIIe_SC1982  F" class="gt_row gt_right">1.00%</td>
-<td headers="Quesada_SQIIe_SC1982  I" class="gt_row gt_right">0.00%</td>
-<td headers="Quesada_SQIIe_SC1982  M" class="gt_row gt_right">1.00%</td>
-<td headers="Quesada_SQIIe_SC1982  N" class="gt_row gt_right">100</td>
-<td headers="Quesada_SQIIe_SC1982  Linkage" class="gt_row gt_left">stramenopiles_odb10</td>
-<td headers="Quesada_SQIIe_SC1982  X..contigs.....0.bp." class="gt_row gt_right">1574</td>
-<td headers="Quesada_SQIIe_SC1982  X..contigs.....1000.bp." class="gt_row gt_right">1574</td>
-<td headers="Quesada_SQIIe_SC1982  X..contigs.....5000.bp." class="gt_row gt_right">1574</td>
-<td headers="Quesada_SQIIe_SC1982  X..contigs.....10000.bp." class="gt_row gt_right">1574</td>
-<td headers="Quesada_SQIIe_SC1982  X..contigs.....25000.bp." class="gt_row gt_right">1397</td>
-<td headers="Quesada_SQIIe_SC1982  X..contigs.....50000.bp." class="gt_row gt_right">880</td>
-<td headers="Quesada_SQIIe_SC1982  Total.length.....0.bp." class="gt_row gt_right">261434949</td>
-<td headers="Quesada_SQIIe_SC1982  Total.length.....1000.bp." class="gt_row gt_right">261434949</td>
-<td headers="Quesada_SQIIe_SC1982  Total.length.....5000.bp." class="gt_row gt_right">261434949</td>
-<td headers="Quesada_SQIIe_SC1982  Total.length.....10000.bp." class="gt_row gt_right">261434949</td>
-<td headers="Quesada_SQIIe_SC1982  Total.length.....25000.bp." class="gt_row gt_right">257645457</td>
-<td headers="Quesada_SQIIe_SC1982  Total.length.....50000.bp." class="gt_row gt_right">239119481</td>
-<td headers="Quesada_SQIIe_SC1982  X..contigs" class="gt_row gt_right">1574</td>
-<td headers="Quesada_SQIIe_SC1982  Largest.contig" class="gt_row gt_right">8325615</td>
-<td headers="Quesada_SQIIe_SC1982  Total.length" class="gt_row gt_right">261434949</td>
-<td headers="Quesada_SQIIe_SC1982  GC...." class="gt_row gt_right">53.89</td>
-<td headers="Quesada_SQIIe_SC1982  N50" class="gt_row gt_right">430502</td>
-<td headers="Quesada_SQIIe_SC1982  N90" class="gt_row gt_right">55558</td>
-<td headers="Quesada_SQIIe_SC1982  auN" class="gt_row gt_right">1687018.5</td>
-<td headers="Quesada_SQIIe_SC1982  L50" class="gt_row gt_right">87</td>
-<td headers="Quesada_SQIIe_SC1982  L90" class="gt_row gt_right">808</td>
-<td headers="Quesada_SQIIe_SC1982  X..N.s.per.100.kbp" class="gt_row gt_right">0.00</td></tr>
-    <tr><td headers="Quesada_SQIIe_SC1982  method" class="gt_row gt_left">s.13.e</td>
-<td headers="Quesada_SQIIe_SC1982  S" class="gt_row gt_right">95.00%</td>
-<td headers="Quesada_SQIIe_SC1982  D" class="gt_row gt_right">4.00%</td>
-<td headers="Quesada_SQIIe_SC1982  F" class="gt_row gt_right">0.00%</td>
-<td headers="Quesada_SQIIe_SC1982  I" class="gt_row gt_right">0.00%</td>
-<td headers="Quesada_SQIIe_SC1982  M" class="gt_row gt_right">1.00%</td>
-<td headers="Quesada_SQIIe_SC1982  N" class="gt_row gt_right">100</td>
-<td headers="Quesada_SQIIe_SC1982  Linkage" class="gt_row gt_left">stramenopiles_odb10</td>
-<td headers="Quesada_SQIIe_SC1982  X..contigs.....0.bp." class="gt_row gt_right">398</td>
-<td headers="Quesada_SQIIe_SC1982  X..contigs.....1000.bp." class="gt_row gt_right">398</td>
-<td headers="Quesada_SQIIe_SC1982  X..contigs.....5000.bp." class="gt_row gt_right">396</td>
-<td headers="Quesada_SQIIe_SC1982  X..contigs.....10000.bp." class="gt_row gt_right">393</td>
-<td headers="Quesada_SQIIe_SC1982  X..contigs.....25000.bp." class="gt_row gt_right">253</td>
-<td headers="Quesada_SQIIe_SC1982  X..contigs.....50000.bp." class="gt_row gt_right">113</td>
-<td headers="Quesada_SQIIe_SC1982  Total.length.....0.bp." class="gt_row gt_right">99718666</td>
-<td headers="Quesada_SQIIe_SC1982  Total.length.....1000.bp." class="gt_row gt_right">99718666</td>
-<td headers="Quesada_SQIIe_SC1982  Total.length.....5000.bp." class="gt_row gt_right">99711092</td>
-<td headers="Quesada_SQIIe_SC1982  Total.length.....10000.bp." class="gt_row gt_right">99687789</td>
-<td headers="Quesada_SQIIe_SC1982  Total.length.....25000.bp." class="gt_row gt_right">97031013</td>
-<td headers="Quesada_SQIIe_SC1982  Total.length.....50000.bp." class="gt_row gt_right">92457178</td>
-<td headers="Quesada_SQIIe_SC1982  X..contigs" class="gt_row gt_right">398</td>
-<td headers="Quesada_SQIIe_SC1982  Largest.contig" class="gt_row gt_right">5124138</td>
-<td headers="Quesada_SQIIe_SC1982  Total.length" class="gt_row gt_right">99718666</td>
-<td headers="Quesada_SQIIe_SC1982  GC...." class="gt_row gt_right">49.37</td>
-<td headers="Quesada_SQIIe_SC1982  N50" class="gt_row gt_right">1777080</td>
-<td headers="Quesada_SQIIe_SC1982  N90" class="gt_row gt_right">167073</td>
-<td headers="Quesada_SQIIe_SC1982  auN" class="gt_row gt_right">1841614.5</td>
-<td headers="Quesada_SQIIe_SC1982  L50" class="gt_row gt_right">19</td>
-<td headers="Quesada_SQIIe_SC1982  L90" class="gt_row gt_right">80</td>
-<td headers="Quesada_SQIIe_SC1982  X..N.s.per.100.kbp" class="gt_row gt_right">204.14</td></tr>
-    <tr><td headers="Quesada_SQIIe_SC1982  method" class="gt_row gt_left">s.13.f</td>
-<td headers="Quesada_SQIIe_SC1982  S" class="gt_row gt_right">91.00%</td>
-<td headers="Quesada_SQIIe_SC1982  D" class="gt_row gt_right">1.00%</td>
-<td headers="Quesada_SQIIe_SC1982  F" class="gt_row gt_right">1.00%</td>
-<td headers="Quesada_SQIIe_SC1982  I" class="gt_row gt_right">0.00%</td>
-<td headers="Quesada_SQIIe_SC1982  M" class="gt_row gt_right">7.00%</td>
-<td headers="Quesada_SQIIe_SC1982  N" class="gt_row gt_right">100</td>
-<td headers="Quesada_SQIIe_SC1982  Linkage" class="gt_row gt_left">stramenopiles_odb10</td>
-<td headers="Quesada_SQIIe_SC1982  X..contigs.....0.bp." class="gt_row gt_right">434</td>
-<td headers="Quesada_SQIIe_SC1982  X..contigs.....1000.bp." class="gt_row gt_right">434</td>
-<td headers="Quesada_SQIIe_SC1982  X..contigs.....5000.bp." class="gt_row gt_right">434</td>
-<td headers="Quesada_SQIIe_SC1982  X..contigs.....10000.bp." class="gt_row gt_right">433</td>
-<td headers="Quesada_SQIIe_SC1982  X..contigs.....25000.bp." class="gt_row gt_right">393</td>
-<td headers="Quesada_SQIIe_SC1982  X..contigs.....50000.bp." class="gt_row gt_right">280</td>
-<td headers="Quesada_SQIIe_SC1982  Total.length.....0.bp." class="gt_row gt_right">68189316</td>
-<td headers="Quesada_SQIIe_SC1982  Total.length.....1000.bp." class="gt_row gt_right">68189316</td>
-<td headers="Quesada_SQIIe_SC1982  Total.length.....5000.bp." class="gt_row gt_right">68189316</td>
-<td headers="Quesada_SQIIe_SC1982  Total.length.....10000.bp." class="gt_row gt_right">68180117</td>
-<td headers="Quesada_SQIIe_SC1982  Total.length.....25000.bp." class="gt_row gt_right">67325781</td>
-<td headers="Quesada_SQIIe_SC1982  Total.length.....50000.bp." class="gt_row gt_right">63397901</td>
-<td headers="Quesada_SQIIe_SC1982  X..contigs" class="gt_row gt_right">434</td>
-<td headers="Quesada_SQIIe_SC1982  Largest.contig" class="gt_row gt_right">2522324</td>
-<td headers="Quesada_SQIIe_SC1982  Total.length" class="gt_row gt_right">68189316</td>
-<td headers="Quesada_SQIIe_SC1982  GC...." class="gt_row gt_right">49.00</td>
-<td headers="Quesada_SQIIe_SC1982  N50" class="gt_row gt_right">278408</td>
-<td headers="Quesada_SQIIe_SC1982  N90" class="gt_row gt_right">72624</td>
-<td headers="Quesada_SQIIe_SC1982  auN" class="gt_row gt_right">433824.3</td>
-<td headers="Quesada_SQIIe_SC1982  L50" class="gt_row gt_right">70</td>
-<td headers="Quesada_SQIIe_SC1982  L90" class="gt_row gt_right">246</td>
-<td headers="Quesada_SQIIe_SC1982  X..N.s.per.100.kbp" class="gt_row gt_right">4.11</td></tr>
-  </tbody>
-  
-  
-</table>
-</div>
-<div id="quality-s.13.e" class="section level1">
-<h1>Quality s.13.e</h1>
-<p>Oplimized result of method s.13.e</p>
-<p>Purge_dups parameters:</p>
-<p>MSU1: -l 80 -m 220 -u 360</p>
-<p>Phumuli: -l 80 -m 220 -u 400</p>
-<p>SC1982: -l 7 -m 120 -u 180</p>
-<div id="kfricpflmq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#kfricpflmq table {
-font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
--webkit-font-smoothing: antialiased;
--moz-osx-font-smoothing: grayscale;
-}
-#kfricpflmq thead, #kfricpflmq tbody, #kfricpflmq tfoot, #kfricpflmq tr, #kfricpflmq td, #kfricpflmq th {
-border-style: none;
-}
-#kfricpflmq p {
-margin: 0;
-padding: 0;
-}
-#kfricpflmq .gt_table {
-display: table;
-border-collapse: collapse;
-line-height: normal;
-margin-left: auto;
-margin-right: auto;
-color: #333333;
-font-size: 16px;
-font-weight: normal;
-font-style: normal;
-background-color: #FFFFFF;
-width: auto;
-border-top-style: solid;
-border-top-width: 2px;
-border-top-color: #A8A8A8;
-border-right-style: none;
-border-right-width: 2px;
-border-right-color: #D3D3D3;
-border-bottom-style: solid;
-border-bottom-width: 2px;
-border-bottom-color: #A8A8A8;
-border-left-style: none;
-border-left-width: 2px;
-border-left-color: #D3D3D3;
-}
-#kfricpflmq .gt_caption {
-padding-top: 4px;
-padding-bottom: 4px;
-}
-#kfricpflmq .gt_title {
-color: #333333;
-font-size: 125%;
-font-weight: initial;
-padding-top: 4px;
-padding-bottom: 4px;
-padding-left: 5px;
-padding-right: 5px;
-border-bottom-color: #FFFFFF;
-border-bottom-width: 0;
-}
-#kfricpflmq .gt_subtitle {
-color: #333333;
-font-size: 85%;
-font-weight: initial;
-padding-top: 3px;
-padding-bottom: 5px;
-padding-left: 5px;
-padding-right: 5px;
-border-top-color: #FFFFFF;
-border-top-width: 0;
-}
-#kfricpflmq .gt_heading {
-background-color: #FFFFFF;
-text-align: center;
-border-bottom-color: #FFFFFF;
-border-left-style: none;
-border-left-width: 1px;
-border-left-color: #D3D3D3;
-border-right-style: none;
-border-right-width: 1px;
-border-right-color: #D3D3D3;
-}
-#kfricpflmq .gt_bottom_border {
-border-bottom-style: solid;
-border-bottom-width: 2px;
-border-bottom-color: #D3D3D3;
-}
-#kfricpflmq .gt_col_headings {
-border-top-style: solid;
-border-top-width: 2px;
-border-top-color: #D3D3D3;
-border-bottom-style: solid;
-border-bottom-width: 2px;
-border-bottom-color: #D3D3D3;
-border-left-style: none;
-border-left-width: 1px;
-border-left-color: #D3D3D3;
-border-right-style: none;
-border-right-width: 1px;
-border-right-color: #D3D3D3;
-}
-#kfricpflmq .gt_col_heading {
-color: #333333;
-background-color: #FFFFFF;
-font-size: 100%;
-font-weight: normal;
-text-transform: inherit;
-border-left-style: none;
-border-left-width: 1px;
-border-left-color: #D3D3D3;
-border-right-style: none;
-border-right-width: 1px;
-border-right-color: #D3D3D3;
-vertical-align: bottom;
-padding-top: 5px;
-padding-bottom: 6px;
-padding-left: 5px;
-padding-right: 5px;
-overflow-x: hidden;
-}
-#kfricpflmq .gt_column_spanner_outer {
-color: #333333;
-background-color: #FFFFFF;
-font-size: 100%;
-font-weight: normal;
-text-transform: inherit;
-padding-top: 0;
-padding-bottom: 0;
-padding-left: 4px;
-padding-right: 4px;
-}
-#kfricpflmq .gt_column_spanner_outer:first-child {
-padding-left: 0;
-}
-#kfricpflmq .gt_column_spanner_outer:last-child {
-padding-right: 0;
-}
-#kfricpflmq .gt_column_spanner {
-border-bottom-style: solid;
-border-bottom-width: 2px;
-border-bottom-color: #D3D3D3;
-vertical-align: bottom;
-padding-top: 5px;
-padding-bottom: 5px;
-overflow-x: hidden;
-display: inline-block;
-width: 100%;
-}
-#kfricpflmq .gt_spanner_row {
-border-bottom-style: hidden;
-}
-#kfricpflmq .gt_group_heading {
-padding-top: 8px;
-padding-bottom: 8px;
-padding-left: 5px;
-padding-right: 5px;
-color: #333333;
-background-color: #FFFFFF;
-font-size: 100%;
-font-weight: initial;
-text-transform: inherit;
-border-top-style: solid;
-border-top-width: 2px;
-border-top-color: #D3D3D3;
-border-bottom-style: solid;
-border-bottom-width: 2px;
-border-bottom-color: #D3D3D3;
-border-left-style: none;
-border-left-width: 1px;
-border-left-color: #D3D3D3;
-border-right-style: none;
-border-right-width: 1px;
-border-right-color: #D3D3D3;
-vertical-align: middle;
-text-align: left;
-}
-#kfricpflmq .gt_empty_group_heading {
-padding: 0.5px;
-color: #333333;
-background-color: #FFFFFF;
-font-size: 100%;
-font-weight: initial;
-border-top-style: solid;
-border-top-width: 2px;
-border-top-color: #D3D3D3;
-border-bottom-style: solid;
-border-bottom-width: 2px;
-border-bottom-color: #D3D3D3;
-vertical-align: middle;
-}
-#kfricpflmq .gt_from_md > :first-child {
-margin-top: 0;
-}
-#kfricpflmq .gt_from_md > :last-child {
-margin-bottom: 0;
-}
-#kfricpflmq .gt_row {
-padding-top: 8px;
-padding-bottom: 8px;
-padding-left: 5px;
-padding-right: 5px;
-margin: 10px;
-border-top-style: solid;
-border-top-width: 1px;
-border-top-color: #D3D3D3;
-border-left-style: none;
-border-left-width: 1px;
-border-left-color: #D3D3D3;
-border-right-style: none;
-border-right-width: 1px;
-border-right-color: #D3D3D3;
-vertical-align: middle;
-overflow-x: hidden;
-}
-#kfricpflmq .gt_stub {
-color: #333333;
-background-color: #FFFFFF;
-font-size: 100%;
-font-weight: initial;
-text-transform: inherit;
-border-right-style: solid;
-border-right-width: 2px;
-border-right-color: #D3D3D3;
-padding-left: 5px;
-padding-right: 5px;
-}
-#kfricpflmq .gt_stub_row_group {
+#tzaidnvefu .gt_stub_row_group {
 color: #333333;
 background-color: #FFFFFF;
 font-size: 100%;
@@ -1578,13 +594,13 @@ padding-left: 5px;
 padding-right: 5px;
 vertical-align: top;
 }
-#kfricpflmq .gt_row_group_first td {
+#tzaidnvefu .gt_row_group_first td {
 border-top-width: 2px;
 }
-#kfricpflmq .gt_row_group_first th {
+#tzaidnvefu .gt_row_group_first th {
 border-top-width: 2px;
 }
-#kfricpflmq .gt_summary_row {
+#tzaidnvefu .gt_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -1593,14 +609,14 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#kfricpflmq .gt_first_summary_row {
+#tzaidnvefu .gt_first_summary_row {
 border-top-style: solid;
 border-top-color: #D3D3D3;
 }
-#kfricpflmq .gt_first_summary_row.thick {
+#tzaidnvefu .gt_first_summary_row.thick {
 border-top-width: 2px;
 }
-#kfricpflmq .gt_last_summary_row {
+#tzaidnvefu .gt_last_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -1609,7 +625,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#kfricpflmq .gt_grand_summary_row {
+#tzaidnvefu .gt_grand_summary_row {
 color: #333333;
 background-color: #FFFFFF;
 text-transform: inherit;
@@ -1618,7 +634,7 @@ padding-bottom: 8px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#kfricpflmq .gt_first_grand_summary_row {
+#tzaidnvefu .gt_first_grand_summary_row {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -1627,7 +643,7 @@ border-top-style: double;
 border-top-width: 6px;
 border-top-color: #D3D3D3;
 }
-#kfricpflmq .gt_last_grand_summary_row_top {
+#tzaidnvefu .gt_last_grand_summary_row_top {
 padding-top: 8px;
 padding-bottom: 8px;
 padding-left: 5px;
@@ -1636,10 +652,10 @@ border-bottom-style: double;
 border-bottom-width: 6px;
 border-bottom-color: #D3D3D3;
 }
-#kfricpflmq .gt_striped {
+#tzaidnvefu .gt_striped {
 background-color: rgba(128, 128, 128, 0.05);
 }
-#kfricpflmq .gt_table_body {
+#tzaidnvefu .gt_table_body {
 border-top-style: solid;
 border-top-width: 2px;
 border-top-color: #D3D3D3;
@@ -1647,7 +663,7 @@ border-bottom-style: solid;
 border-bottom-width: 2px;
 border-bottom-color: #D3D3D3;
 }
-#kfricpflmq .gt_footnotes {
+#tzaidnvefu .gt_footnotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -1660,7 +676,7 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-#kfricpflmq .gt_footnote {
+#tzaidnvefu .gt_footnote {
 margin: 0px;
 font-size: 90%;
 padding-top: 4px;
@@ -1668,7 +684,7 @@ padding-bottom: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#kfricpflmq .gt_sourcenotes {
+#tzaidnvefu .gt_sourcenotes {
 color: #333333;
 background-color: #FFFFFF;
 border-bottom-style: none;
@@ -1681,64 +697,64 @@ border-right-style: none;
 border-right-width: 2px;
 border-right-color: #D3D3D3;
 }
-#kfricpflmq .gt_sourcenote {
+#tzaidnvefu .gt_sourcenote {
 font-size: 90%;
 padding-top: 4px;
 padding-bottom: 4px;
 padding-left: 5px;
 padding-right: 5px;
 }
-#kfricpflmq .gt_left {
+#tzaidnvefu .gt_left {
 text-align: left;
 }
-#kfricpflmq .gt_center {
+#tzaidnvefu .gt_center {
 text-align: center;
 }
-#kfricpflmq .gt_right {
+#tzaidnvefu .gt_right {
 text-align: right;
 font-variant-numeric: tabular-nums;
 }
-#kfricpflmq .gt_font_normal {
+#tzaidnvefu .gt_font_normal {
 font-weight: normal;
 }
-#kfricpflmq .gt_font_bold {
+#tzaidnvefu .gt_font_bold {
 font-weight: bold;
 }
-#kfricpflmq .gt_font_italic {
+#tzaidnvefu .gt_font_italic {
 font-style: italic;
 }
-#kfricpflmq .gt_super {
+#tzaidnvefu .gt_super {
 font-size: 65%;
 }
-#kfricpflmq .gt_footnote_marks {
+#tzaidnvefu .gt_footnote_marks {
 font-size: 75%;
 vertical-align: 0.4em;
 position: initial;
 }
-#kfricpflmq .gt_asterisk {
+#tzaidnvefu .gt_asterisk {
 font-size: 100%;
 vertical-align: 0;
 }
-#kfricpflmq .gt_indent_1 {
+#tzaidnvefu .gt_indent_1 {
 text-indent: 5px;
 }
-#kfricpflmq .gt_indent_2 {
+#tzaidnvefu .gt_indent_2 {
 text-indent: 10px;
 }
-#kfricpflmq .gt_indent_3 {
+#tzaidnvefu .gt_indent_3 {
 text-indent: 15px;
 }
-#kfricpflmq .gt_indent_4 {
+#tzaidnvefu .gt_indent_4 {
 text-indent: 20px;
 }
-#kfricpflmq .gt_indent_5 {
+#tzaidnvefu .gt_indent_5 {
 text-indent: 25px;
 }
-#kfricpflmq .katex-display {
+#tzaidnvefu .katex-display {
 display: inline-flex !important;
 margin-bottom: 0.75em !important;
 }
-#kfricpflmq div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#tzaidnvefu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
 height: 0px !important;
 }
 </style>
@@ -1779,7 +795,1085 @@ height: 0px !important;
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td headers="method" class="gt_row gt_left">Optimized</td>
+    <tr><td headers="method" class="gt_row gt_left">hifiasm</td>
+<td headers="sample" class="gt_row gt_left">Quesada_SQIIe_MSU1</td>
+<td headers="S" class="gt_row gt_right">72.00%</td>
+<td headers="D" class="gt_row gt_right">28.00%</td>
+<td headers="F" class="gt_row gt_right">0.00%</td>
+<td headers="I" class="gt_row gt_right">0.00%</td>
+<td headers="M" class="gt_row gt_right">0.00%</td>
+<td headers="N" class="gt_row gt_right">100</td>
+<td headers="Linkage" class="gt_row gt_left">stramenopiles_odb10</td>
+<td headers="X..contigs.....0.bp." class="gt_row gt_right">2580</td>
+<td headers="X..contigs.....1000.bp." class="gt_row gt_right">2580</td>
+<td headers="X..contigs.....5000.bp." class="gt_row gt_right">2554</td>
+<td headers="X..contigs.....10000.bp." class="gt_row gt_right">2442</td>
+<td headers="X..contigs.....25000.bp." class="gt_row gt_right">2041</td>
+<td headers="X..contigs.....50000.bp." class="gt_row gt_right">985</td>
+<td headers="Total.length.....0.bp." class="gt_row gt_right">386796481</td>
+<td headers="Total.length.....1000.bp." class="gt_row gt_right">386796481</td>
+<td headers="Total.length.....5000.bp." class="gt_row gt_right">386695231</td>
+<td headers="Total.length.....10000.bp." class="gt_row gt_right">385897575</td>
+<td headers="Total.length.....25000.bp." class="gt_row gt_right">378303421</td>
+<td headers="Total.length.....50000.bp." class="gt_row gt_right">339922820</td>
+<td headers="X..contigs" class="gt_row gt_right">2580</td>
+<td headers="Largest.contig" class="gt_row gt_right">11721044</td>
+<td headers="Total.length" class="gt_row gt_right">386796481</td>
+<td headers="GC...." class="gt_row gt_right">55.19</td>
+<td headers="N50" class="gt_row gt_right">1941657</td>
+<td headers="N90" class="gt_row gt_right">44657</td>
+<td headers="auN" class="gt_row gt_right">2825210.7</td>
+<td headers="L50" class="gt_row gt_right">48</td>
+<td headers="L90" class="gt_row gt_right">1159</td>
+<td headers="X..N.s.per.100.kbp" class="gt_row gt_right">0</td></tr>
+    <tr><td headers="method" class="gt_row gt_left">hifiasm</td>
+<td headers="sample" class="gt_row gt_left">Quesada_SQIIe_Phumuli</td>
+<td headers="S" class="gt_row gt_right">59.00%</td>
+<td headers="D" class="gt_row gt_right">41.00%</td>
+<td headers="F" class="gt_row gt_right">0.00%</td>
+<td headers="I" class="gt_row gt_right">0.00%</td>
+<td headers="M" class="gt_row gt_right">0.00%</td>
+<td headers="N" class="gt_row gt_right">100</td>
+<td headers="Linkage" class="gt_row gt_left">stramenopiles_odb10</td>
+<td headers="X..contigs.....0.bp." class="gt_row gt_right">5254</td>
+<td headers="X..contigs.....1000.bp." class="gt_row gt_right">5253</td>
+<td headers="X..contigs.....5000.bp." class="gt_row gt_right">5252</td>
+<td headers="X..contigs.....10000.bp." class="gt_row gt_right">5069</td>
+<td headers="X..contigs.....25000.bp." class="gt_row gt_right">3542</td>
+<td headers="X..contigs.....50000.bp." class="gt_row gt_right">998</td>
+<td headers="Total.length.....0.bp." class="gt_row gt_right">297538937</td>
+<td headers="Total.length.....1000.bp." class="gt_row gt_right">297538485</td>
+<td headers="Total.length.....5000.bp." class="gt_row gt_right">297533573</td>
+<td headers="Total.length.....10000.bp." class="gt_row gt_right">296015189</td>
+<td headers="Total.length.....25000.bp." class="gt_row gt_right">268023379</td>
+<td headers="Total.length.....50000.bp." class="gt_row gt_right">179192978</td>
+<td headers="X..contigs" class="gt_row gt_right">5253</td>
+<td headers="Largest.contig" class="gt_row gt_right">6511362</td>
+<td headers="Total.length" class="gt_row gt_right">297538485</td>
+<td headers="GC...." class="gt_row gt_right">45.18</td>
+<td headers="N50" class="gt_row gt_right">69762</td>
+<td headers="N90" class="gt_row gt_right">25074</td>
+<td headers="auN" class="gt_row gt_right">969548.7</td>
+<td headers="L50" class="gt_row gt_right">476</td>
+<td headers="L90" class="gt_row gt_right">3533</td>
+<td headers="X..N.s.per.100.kbp" class="gt_row gt_right">0</td></tr>
+    <tr><td headers="method" class="gt_row gt_left">hifiasm</td>
+<td headers="sample" class="gt_row gt_left">Quesada_SQIIe_SC1982</td>
+<td headers="S" class="gt_row gt_right">47.00%</td>
+<td headers="D" class="gt_row gt_right">53.00%</td>
+<td headers="F" class="gt_row gt_right">0.00%</td>
+<td headers="I" class="gt_row gt_right">0.00%</td>
+<td headers="M" class="gt_row gt_right">0.00%</td>
+<td headers="N" class="gt_row gt_right">100</td>
+<td headers="Linkage" class="gt_row gt_left">stramenopiles_odb10</td>
+<td headers="X..contigs.....0.bp." class="gt_row gt_right">6139</td>
+<td headers="X..contigs.....1000.bp." class="gt_row gt_right">6139</td>
+<td headers="X..contigs.....5000.bp." class="gt_row gt_right">6129</td>
+<td headers="X..contigs.....10000.bp." class="gt_row gt_right">6024</td>
+<td headers="X..contigs.....25000.bp." class="gt_row gt_right">3805</td>
+<td headers="X..contigs.....50000.bp." class="gt_row gt_right">1745</td>
+<td headers="Total.length.....0.bp." class="gt_row gt_right">646594707</td>
+<td headers="Total.length.....1000.bp." class="gt_row gt_right">646594707</td>
+<td headers="Total.length.....5000.bp." class="gt_row gt_right">646555671</td>
+<td headers="Total.length.....10000.bp." class="gt_row gt_right">645682035</td>
+<td headers="Total.length.....25000.bp." class="gt_row gt_right">604880161</td>
+<td headers="Total.length.....50000.bp." class="gt_row gt_right">533334108</td>
+<td headers="X..contigs" class="gt_row gt_right">6139</td>
+<td headers="Largest.contig" class="gt_row gt_right">8407856</td>
+<td headers="Total.length" class="gt_row gt_right">646594707</td>
+<td headers="GC...." class="gt_row gt_right">56.25</td>
+<td headers="N50" class="gt_row gt_right">698622</td>
+<td headers="N90" class="gt_row gt_right">31380</td>
+<td headers="auN" class="gt_row gt_right">1887523.4</td>
+<td headers="L50" class="gt_row gt_right">136</td>
+<td headers="L90" class="gt_row gt_right">2985</td>
+<td headers="X..N.s.per.100.kbp" class="gt_row gt_right">0</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+<div id="decontamination" class="section level2">
+<h2>Decontamination</h2>
+<p>There could be many contamination reads in each isolates. Here, we
+use FCS-GX to clean the genome.</p>
+<pre class="r"><code>read.tb(&#39;~/project_data/downy/hifiasm/fcs-gx/compleasm/&#39;, &#39;FCS&#39;) |&gt; gt()</code></pre>
+<div id="jfsptuqomw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jfsptuqomw table {
+font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+#jfsptuqomw thead, #jfsptuqomw tbody, #jfsptuqomw tfoot, #jfsptuqomw tr, #jfsptuqomw td, #jfsptuqomw th {
+border-style: none;
+}
+#jfsptuqomw p {
+margin: 0;
+padding: 0;
+}
+#jfsptuqomw .gt_table {
+display: table;
+border-collapse: collapse;
+line-height: normal;
+margin-left: auto;
+margin-right: auto;
+color: #333333;
+font-size: 16px;
+font-weight: normal;
+font-style: normal;
+background-color: #FFFFFF;
+width: auto;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #A8A8A8;
+border-right-style: none;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #A8A8A8;
+border-left-style: none;
+border-left-width: 2px;
+border-left-color: #D3D3D3;
+}
+#jfsptuqomw .gt_caption {
+padding-top: 4px;
+padding-bottom: 4px;
+}
+#jfsptuqomw .gt_title {
+color: #333333;
+font-size: 125%;
+font-weight: initial;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-color: #FFFFFF;
+border-bottom-width: 0;
+}
+#jfsptuqomw .gt_subtitle {
+color: #333333;
+font-size: 85%;
+font-weight: initial;
+padding-top: 3px;
+padding-bottom: 5px;
+padding-left: 5px;
+padding-right: 5px;
+border-top-color: #FFFFFF;
+border-top-width: 0;
+}
+#jfsptuqomw .gt_heading {
+background-color: #FFFFFF;
+text-align: center;
+border-bottom-color: #FFFFFF;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+}
+#jfsptuqomw .gt_bottom_border {
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#jfsptuqomw .gt_col_headings {
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+}
+#jfsptuqomw .gt_col_heading {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: normal;
+text-transform: inherit;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+vertical-align: bottom;
+padding-top: 5px;
+padding-bottom: 6px;
+padding-left: 5px;
+padding-right: 5px;
+overflow-x: hidden;
+}
+#jfsptuqomw .gt_column_spanner_outer {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: normal;
+text-transform: inherit;
+padding-top: 0;
+padding-bottom: 0;
+padding-left: 4px;
+padding-right: 4px;
+}
+#jfsptuqomw .gt_column_spanner_outer:first-child {
+padding-left: 0;
+}
+#jfsptuqomw .gt_column_spanner_outer:last-child {
+padding-right: 0;
+}
+#jfsptuqomw .gt_column_spanner {
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+vertical-align: bottom;
+padding-top: 5px;
+padding-bottom: 5px;
+overflow-x: hidden;
+display: inline-block;
+width: 100%;
+}
+#jfsptuqomw .gt_spanner_row {
+border-bottom-style: hidden;
+}
+#jfsptuqomw .gt_group_heading {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+vertical-align: middle;
+text-align: left;
+}
+#jfsptuqomw .gt_empty_group_heading {
+padding: 0.5px;
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+vertical-align: middle;
+}
+#jfsptuqomw .gt_from_md > :first-child {
+margin-top: 0;
+}
+#jfsptuqomw .gt_from_md > :last-child {
+margin-bottom: 0;
+}
+#jfsptuqomw .gt_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+margin: 10px;
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+vertical-align: middle;
+overflow-x: hidden;
+}
+#jfsptuqomw .gt_stub {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+padding-left: 5px;
+padding-right: 5px;
+}
+#jfsptuqomw .gt_stub_row_group {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+padding-left: 5px;
+padding-right: 5px;
+vertical-align: top;
+}
+#jfsptuqomw .gt_row_group_first td {
+border-top-width: 2px;
+}
+#jfsptuqomw .gt_row_group_first th {
+border-top-width: 2px;
+}
+#jfsptuqomw .gt_summary_row {
+color: #333333;
+background-color: #FFFFFF;
+text-transform: inherit;
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#jfsptuqomw .gt_first_summary_row {
+border-top-style: solid;
+border-top-color: #D3D3D3;
+}
+#jfsptuqomw .gt_first_summary_row.thick {
+border-top-width: 2px;
+}
+#jfsptuqomw .gt_last_summary_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#jfsptuqomw .gt_grand_summary_row {
+color: #333333;
+background-color: #FFFFFF;
+text-transform: inherit;
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#jfsptuqomw .gt_first_grand_summary_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-top-style: double;
+border-top-width: 6px;
+border-top-color: #D3D3D3;
+}
+#jfsptuqomw .gt_last_grand_summary_row_top {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-style: double;
+border-bottom-width: 6px;
+border-bottom-color: #D3D3D3;
+}
+#jfsptuqomw .gt_striped {
+background-color: rgba(128, 128, 128, 0.05);
+}
+#jfsptuqomw .gt_table_body {
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#jfsptuqomw .gt_footnotes {
+color: #333333;
+background-color: #FFFFFF;
+border-bottom-style: none;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 2px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+}
+#jfsptuqomw .gt_footnote {
+margin: 0px;
+font-size: 90%;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#jfsptuqomw .gt_sourcenotes {
+color: #333333;
+background-color: #FFFFFF;
+border-bottom-style: none;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 2px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+}
+#jfsptuqomw .gt_sourcenote {
+font-size: 90%;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#jfsptuqomw .gt_left {
+text-align: left;
+}
+#jfsptuqomw .gt_center {
+text-align: center;
+}
+#jfsptuqomw .gt_right {
+text-align: right;
+font-variant-numeric: tabular-nums;
+}
+#jfsptuqomw .gt_font_normal {
+font-weight: normal;
+}
+#jfsptuqomw .gt_font_bold {
+font-weight: bold;
+}
+#jfsptuqomw .gt_font_italic {
+font-style: italic;
+}
+#jfsptuqomw .gt_super {
+font-size: 65%;
+}
+#jfsptuqomw .gt_footnote_marks {
+font-size: 75%;
+vertical-align: 0.4em;
+position: initial;
+}
+#jfsptuqomw .gt_asterisk {
+font-size: 100%;
+vertical-align: 0;
+}
+#jfsptuqomw .gt_indent_1 {
+text-indent: 5px;
+}
+#jfsptuqomw .gt_indent_2 {
+text-indent: 10px;
+}
+#jfsptuqomw .gt_indent_3 {
+text-indent: 15px;
+}
+#jfsptuqomw .gt_indent_4 {
+text-indent: 20px;
+}
+#jfsptuqomw .gt_indent_5 {
+text-indent: 25px;
+}
+#jfsptuqomw .katex-display {
+display: inline-flex !important;
+margin-bottom: 0.75em !important;
+}
+#jfsptuqomw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="method">method</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="sample">sample</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="S">S</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="D">D</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="F">F</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="I">I</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="M">M</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="N">N</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Linkage">Linkage</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="X..contigs.....0.bp.">X..contigs.....0.bp.</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="X..contigs.....1000.bp.">X..contigs.....1000.bp.</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="X..contigs.....5000.bp.">X..contigs.....5000.bp.</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="X..contigs.....10000.bp.">X..contigs.....10000.bp.</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="X..contigs.....25000.bp.">X..contigs.....25000.bp.</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="X..contigs.....50000.bp.">X..contigs.....50000.bp.</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total.length.....0.bp.">Total.length.....0.bp.</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total.length.....1000.bp.">Total.length.....1000.bp.</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total.length.....5000.bp.">Total.length.....5000.bp.</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total.length.....10000.bp.">Total.length.....10000.bp.</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total.length.....25000.bp.">Total.length.....25000.bp.</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total.length.....50000.bp.">Total.length.....50000.bp.</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="X..contigs">X..contigs</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Largest.contig">Largest.contig</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total.length">Total.length</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="GC....">GC....</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="N50">N50</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="N90">N90</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="auN">auN</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="L50">L50</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="L90">L90</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="X..N.s.per.100.kbp">X..N.s.per.100.kbp</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="method" class="gt_row gt_left">FCS</td>
+<td headers="sample" class="gt_row gt_left">Quesada_SQIIe_MSU1</td>
+<td headers="S" class="gt_row gt_right">73.00%</td>
+<td headers="D" class="gt_row gt_right">27.00%</td>
+<td headers="F" class="gt_row gt_right">0.00%</td>
+<td headers="I" class="gt_row gt_right">0.00%</td>
+<td headers="M" class="gt_row gt_right">0.00%</td>
+<td headers="N" class="gt_row gt_right">100</td>
+<td headers="Linkage" class="gt_row gt_left">stramenopiles_odb10</td>
+<td headers="X..contigs.....0.bp." class="gt_row gt_right">1068</td>
+<td headers="X..contigs.....1000.bp." class="gt_row gt_right">1068</td>
+<td headers="X..contigs.....5000.bp." class="gt_row gt_right">1044</td>
+<td headers="X..contigs.....10000.bp." class="gt_row gt_right">942</td>
+<td headers="X..contigs.....25000.bp." class="gt_row gt_right">726</td>
+<td headers="X..contigs.....50000.bp." class="gt_row gt_right">234</td>
+<td headers="Total.length.....0.bp." class="gt_row gt_right">130317135</td>
+<td headers="Total.length.....1000.bp." class="gt_row gt_right">130317135</td>
+<td headers="Total.length.....5000.bp." class="gt_row gt_right">130224196</td>
+<td headers="Total.length.....10000.bp." class="gt_row gt_right">129499289</td>
+<td headers="Total.length.....25000.bp." class="gt_row gt_right">125494404</td>
+<td headers="Total.length.....50000.bp." class="gt_row gt_right">108163797</td>
+<td headers="X..contigs" class="gt_row gt_right">1068</td>
+<td headers="Largest.contig" class="gt_row gt_right">6243570</td>
+<td headers="Total.length" class="gt_row gt_right">130317135</td>
+<td headers="GC...." class="gt_row gt_right">46.82</td>
+<td headers="N50" class="gt_row gt_right">1765244</td>
+<td headers="N90" class="gt_row gt_right">35870</td>
+<td headers="auN" class="gt_row gt_right">1860246.9</td>
+<td headers="L50" class="gt_row gt_right">24</td>
+<td headers="L90" class="gt_row gt_right">452</td>
+<td headers="X..N.s.per.100.kbp" class="gt_row gt_right">3.43</td></tr>
+    <tr><td headers="method" class="gt_row gt_left">FCS</td>
+<td headers="sample" class="gt_row gt_left">Quesada_SQIIe_Phumuli</td>
+<td headers="S" class="gt_row gt_right">62.00%</td>
+<td headers="D" class="gt_row gt_right">38.00%</td>
+<td headers="F" class="gt_row gt_right">0.00%</td>
+<td headers="I" class="gt_row gt_right">0.00%</td>
+<td headers="M" class="gt_row gt_right">0.00%</td>
+<td headers="N" class="gt_row gt_right">100</td>
+<td headers="Linkage" class="gt_row gt_left">stramenopiles_odb10</td>
+<td headers="X..contigs.....0.bp." class="gt_row gt_right">3194</td>
+<td headers="X..contigs.....1000.bp." class="gt_row gt_right">3193</td>
+<td headers="X..contigs.....5000.bp." class="gt_row gt_right">3193</td>
+<td headers="X..contigs.....10000.bp." class="gt_row gt_right">3103</td>
+<td headers="X..contigs.....25000.bp." class="gt_row gt_right">2306</td>
+<td headers="X..contigs.....50000.bp." class="gt_row gt_right">559</td>
+<td headers="Total.length.....0.bp." class="gt_row gt_right">186825136</td>
+<td headers="Total.length.....1000.bp." class="gt_row gt_right">186824684</td>
+<td headers="Total.length.....5000.bp." class="gt_row gt_right">186824684</td>
+<td headers="Total.length.....10000.bp." class="gt_row gt_right">186081942</td>
+<td headers="Total.length.....25000.bp." class="gt_row gt_right">171187231</td>
+<td headers="Total.length.....50000.bp." class="gt_row gt_right">110403366</td>
+<td headers="X..contigs" class="gt_row gt_right">3193</td>
+<td headers="Largest.contig" class="gt_row gt_right">4035383</td>
+<td headers="Total.length" class="gt_row gt_right">186824684</td>
+<td headers="GC...." class="gt_row gt_right">38.81</td>
+<td headers="N50" class="gt_row gt_right">68726</td>
+<td headers="N90" class="gt_row gt_right">26093</td>
+<td headers="auN" class="gt_row gt_right">821251.8</td>
+<td headers="L50" class="gt_row gt_right">265</td>
+<td headers="L90" class="gt_row gt_right">2187</td>
+<td headers="X..N.s.per.100.kbp" class="gt_row gt_right">5.78</td></tr>
+    <tr><td headers="method" class="gt_row gt_left">FCS</td>
+<td headers="sample" class="gt_row gt_left">Quesada_SQIIe_SC1982</td>
+<td headers="S" class="gt_row gt_right">48.00%</td>
+<td headers="D" class="gt_row gt_right">52.00%</td>
+<td headers="F" class="gt_row gt_right">0.00%</td>
+<td headers="I" class="gt_row gt_right">0.00%</td>
+<td headers="M" class="gt_row gt_right">0.00%</td>
+<td headers="N" class="gt_row gt_right">100</td>
+<td headers="Linkage" class="gt_row gt_left">stramenopiles_odb10</td>
+<td headers="X..contigs.....0.bp." class="gt_row gt_right">1419</td>
+<td headers="X..contigs.....1000.bp." class="gt_row gt_right">1419</td>
+<td headers="X..contigs.....5000.bp." class="gt_row gt_right">1409</td>
+<td headers="X..contigs.....10000.bp." class="gt_row gt_right">1366</td>
+<td headers="X..contigs.....25000.bp." class="gt_row gt_right">854</td>
+<td headers="X..contigs.....50000.bp." class="gt_row gt_right">404</td>
+<td headers="Total.length.....0.bp." class="gt_row gt_right">172030357</td>
+<td headers="Total.length.....1000.bp." class="gt_row gt_right">172030357</td>
+<td headers="Total.length.....5000.bp." class="gt_row gt_right">171991321</td>
+<td headers="Total.length.....10000.bp." class="gt_row gt_right">171647304</td>
+<td headers="Total.length.....25000.bp." class="gt_row gt_right">162273878</td>
+<td headers="Total.length.....50000.bp." class="gt_row gt_right">146948438</td>
+<td headers="X..contigs" class="gt_row gt_right">1419</td>
+<td headers="Largest.contig" class="gt_row gt_right">5124138</td>
+<td headers="Total.length" class="gt_row gt_right">172030357</td>
+<td headers="GC...." class="gt_row gt_right">48.74</td>
+<td headers="N50" class="gt_row gt_right">683939</td>
+<td headers="N90" class="gt_row gt_right">33877</td>
+<td headers="auN" class="gt_row gt_right">1201018.7</td>
+<td headers="L50" class="gt_row gt_right">55</td>
+<td headers="L90" class="gt_row gt_right">598</td>
+<td headers="X..N.s.per.100.kbp" class="gt_row gt_right">121.52</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+<div id="purge_dups" class="section level2">
+<h2>Purge_dups</h2>
+<p>The duplication rates are still too high. Here we can try to use
+purge_dups software. However, purge_dups sometimes fails on setting
+threshold parameters. Therefore, we set them manually.</p>
+<p>Purge_dups parameters:</p>
+<p>MSU1: -l 80 -m 165 -u 360</p>
+<p>Phumuli: -l 80 -m 220 -u 400</p>
+<p>SC1982: -l 7 -m 65 -u 180</p>
+<div id="oobwdughoj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#oobwdughoj table {
+font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+#oobwdughoj thead, #oobwdughoj tbody, #oobwdughoj tfoot, #oobwdughoj tr, #oobwdughoj td, #oobwdughoj th {
+border-style: none;
+}
+#oobwdughoj p {
+margin: 0;
+padding: 0;
+}
+#oobwdughoj .gt_table {
+display: table;
+border-collapse: collapse;
+line-height: normal;
+margin-left: auto;
+margin-right: auto;
+color: #333333;
+font-size: 16px;
+font-weight: normal;
+font-style: normal;
+background-color: #FFFFFF;
+width: auto;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #A8A8A8;
+border-right-style: none;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #A8A8A8;
+border-left-style: none;
+border-left-width: 2px;
+border-left-color: #D3D3D3;
+}
+#oobwdughoj .gt_caption {
+padding-top: 4px;
+padding-bottom: 4px;
+}
+#oobwdughoj .gt_title {
+color: #333333;
+font-size: 125%;
+font-weight: initial;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-color: #FFFFFF;
+border-bottom-width: 0;
+}
+#oobwdughoj .gt_subtitle {
+color: #333333;
+font-size: 85%;
+font-weight: initial;
+padding-top: 3px;
+padding-bottom: 5px;
+padding-left: 5px;
+padding-right: 5px;
+border-top-color: #FFFFFF;
+border-top-width: 0;
+}
+#oobwdughoj .gt_heading {
+background-color: #FFFFFF;
+text-align: center;
+border-bottom-color: #FFFFFF;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+}
+#oobwdughoj .gt_bottom_border {
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#oobwdughoj .gt_col_headings {
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+}
+#oobwdughoj .gt_col_heading {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: normal;
+text-transform: inherit;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+vertical-align: bottom;
+padding-top: 5px;
+padding-bottom: 6px;
+padding-left: 5px;
+padding-right: 5px;
+overflow-x: hidden;
+}
+#oobwdughoj .gt_column_spanner_outer {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: normal;
+text-transform: inherit;
+padding-top: 0;
+padding-bottom: 0;
+padding-left: 4px;
+padding-right: 4px;
+}
+#oobwdughoj .gt_column_spanner_outer:first-child {
+padding-left: 0;
+}
+#oobwdughoj .gt_column_spanner_outer:last-child {
+padding-right: 0;
+}
+#oobwdughoj .gt_column_spanner {
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+vertical-align: bottom;
+padding-top: 5px;
+padding-bottom: 5px;
+overflow-x: hidden;
+display: inline-block;
+width: 100%;
+}
+#oobwdughoj .gt_spanner_row {
+border-bottom-style: hidden;
+}
+#oobwdughoj .gt_group_heading {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+vertical-align: middle;
+text-align: left;
+}
+#oobwdughoj .gt_empty_group_heading {
+padding: 0.5px;
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+vertical-align: middle;
+}
+#oobwdughoj .gt_from_md > :first-child {
+margin-top: 0;
+}
+#oobwdughoj .gt_from_md > :last-child {
+margin-bottom: 0;
+}
+#oobwdughoj .gt_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+margin: 10px;
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+vertical-align: middle;
+overflow-x: hidden;
+}
+#oobwdughoj .gt_stub {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+padding-left: 5px;
+padding-right: 5px;
+}
+#oobwdughoj .gt_stub_row_group {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+padding-left: 5px;
+padding-right: 5px;
+vertical-align: top;
+}
+#oobwdughoj .gt_row_group_first td {
+border-top-width: 2px;
+}
+#oobwdughoj .gt_row_group_first th {
+border-top-width: 2px;
+}
+#oobwdughoj .gt_summary_row {
+color: #333333;
+background-color: #FFFFFF;
+text-transform: inherit;
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#oobwdughoj .gt_first_summary_row {
+border-top-style: solid;
+border-top-color: #D3D3D3;
+}
+#oobwdughoj .gt_first_summary_row.thick {
+border-top-width: 2px;
+}
+#oobwdughoj .gt_last_summary_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#oobwdughoj .gt_grand_summary_row {
+color: #333333;
+background-color: #FFFFFF;
+text-transform: inherit;
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#oobwdughoj .gt_first_grand_summary_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-top-style: double;
+border-top-width: 6px;
+border-top-color: #D3D3D3;
+}
+#oobwdughoj .gt_last_grand_summary_row_top {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-style: double;
+border-bottom-width: 6px;
+border-bottom-color: #D3D3D3;
+}
+#oobwdughoj .gt_striped {
+background-color: rgba(128, 128, 128, 0.05);
+}
+#oobwdughoj .gt_table_body {
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#oobwdughoj .gt_footnotes {
+color: #333333;
+background-color: #FFFFFF;
+border-bottom-style: none;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 2px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+}
+#oobwdughoj .gt_footnote {
+margin: 0px;
+font-size: 90%;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#oobwdughoj .gt_sourcenotes {
+color: #333333;
+background-color: #FFFFFF;
+border-bottom-style: none;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 2px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+}
+#oobwdughoj .gt_sourcenote {
+font-size: 90%;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#oobwdughoj .gt_left {
+text-align: left;
+}
+#oobwdughoj .gt_center {
+text-align: center;
+}
+#oobwdughoj .gt_right {
+text-align: right;
+font-variant-numeric: tabular-nums;
+}
+#oobwdughoj .gt_font_normal {
+font-weight: normal;
+}
+#oobwdughoj .gt_font_bold {
+font-weight: bold;
+}
+#oobwdughoj .gt_font_italic {
+font-style: italic;
+}
+#oobwdughoj .gt_super {
+font-size: 65%;
+}
+#oobwdughoj .gt_footnote_marks {
+font-size: 75%;
+vertical-align: 0.4em;
+position: initial;
+}
+#oobwdughoj .gt_asterisk {
+font-size: 100%;
+vertical-align: 0;
+}
+#oobwdughoj .gt_indent_1 {
+text-indent: 5px;
+}
+#oobwdughoj .gt_indent_2 {
+text-indent: 10px;
+}
+#oobwdughoj .gt_indent_3 {
+text-indent: 15px;
+}
+#oobwdughoj .gt_indent_4 {
+text-indent: 20px;
+}
+#oobwdughoj .gt_indent_5 {
+text-indent: 25px;
+}
+#oobwdughoj .katex-display {
+display: inline-flex !important;
+margin-bottom: 0.75em !important;
+}
+#oobwdughoj div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="method">method</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="sample">sample</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="S">S</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="D">D</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="F">F</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="I">I</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="M">M</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="N">N</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Linkage">Linkage</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="X..contigs.....0.bp.">X..contigs.....0.bp.</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="X..contigs.....1000.bp.">X..contigs.....1000.bp.</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="X..contigs.....5000.bp.">X..contigs.....5000.bp.</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="X..contigs.....10000.bp.">X..contigs.....10000.bp.</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="X..contigs.....25000.bp.">X..contigs.....25000.bp.</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="X..contigs.....50000.bp.">X..contigs.....50000.bp.</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total.length.....0.bp.">Total.length.....0.bp.</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total.length.....1000.bp.">Total.length.....1000.bp.</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total.length.....5000.bp.">Total.length.....5000.bp.</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total.length.....10000.bp.">Total.length.....10000.bp.</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total.length.....25000.bp.">Total.length.....25000.bp.</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total.length.....50000.bp.">Total.length.....50000.bp.</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="X..contigs">X..contigs</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Largest.contig">Largest.contig</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total.length">Total.length</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="GC....">GC....</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="N50">N50</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="N90">N90</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="auN">auN</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="L50">L50</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="L90">L90</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="X..N.s.per.100.kbp">X..N.s.per.100.kbp</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="method" class="gt_row gt_left">Purge_dups</td>
 <td headers="sample" class="gt_row gt_left">Quesada_SQIIe_MSU1</td>
 <td headers="S" class="gt_row gt_right">97.00%</td>
 <td headers="D" class="gt_row gt_right">3.00%</td>
@@ -1788,29 +1882,29 @@ height: 0px !important;
 <td headers="M" class="gt_row gt_right">0.00%</td>
 <td headers="N" class="gt_row gt_right">100</td>
 <td headers="Linkage" class="gt_row gt_left">stramenopiles_odb10</td>
-<td headers="X..contigs.....0.bp." class="gt_row gt_right">56</td>
-<td headers="X..contigs.....1000.bp." class="gt_row gt_right">56</td>
-<td headers="X..contigs.....5000.bp." class="gt_row gt_right">56</td>
-<td headers="X..contigs.....10000.bp." class="gt_row gt_right">56</td>
-<td headers="X..contigs.....25000.bp." class="gt_row gt_right">54</td>
-<td headers="X..contigs.....50000.bp." class="gt_row gt_right">51</td>
-<td headers="Total.length.....0.bp." class="gt_row gt_right">85609558</td>
-<td headers="Total.length.....1000.bp." class="gt_row gt_right">85609558</td>
-<td headers="Total.length.....5000.bp." class="gt_row gt_right">85609558</td>
-<td headers="Total.length.....10000.bp." class="gt_row gt_right">85609558</td>
-<td headers="Total.length.....25000.bp." class="gt_row gt_right">85565615</td>
-<td headers="Total.length.....50000.bp." class="gt_row gt_right">85421257</td>
-<td headers="X..contigs" class="gt_row gt_right">56</td>
+<td headers="X..contigs.....0.bp." class="gt_row gt_right">57</td>
+<td headers="X..contigs.....1000.bp." class="gt_row gt_right">57</td>
+<td headers="X..contigs.....5000.bp." class="gt_row gt_right">57</td>
+<td headers="X..contigs.....10000.bp." class="gt_row gt_right">57</td>
+<td headers="X..contigs.....25000.bp." class="gt_row gt_right">55</td>
+<td headers="X..contigs.....50000.bp." class="gt_row gt_right">52</td>
+<td headers="Total.length.....0.bp." class="gt_row gt_right">85812751</td>
+<td headers="Total.length.....1000.bp." class="gt_row gt_right">85812751</td>
+<td headers="Total.length.....5000.bp." class="gt_row gt_right">85812751</td>
+<td headers="Total.length.....10000.bp." class="gt_row gt_right">85812751</td>
+<td headers="Total.length.....25000.bp." class="gt_row gt_right">85768808</td>
+<td headers="Total.length.....50000.bp." class="gt_row gt_right">85624450</td>
+<td headers="X..contigs" class="gt_row gt_right">57</td>
 <td headers="Largest.contig" class="gt_row gt_right">6243570</td>
-<td headers="Total.length" class="gt_row gt_right">85609558</td>
+<td headers="Total.length" class="gt_row gt_right">85812751</td>
 <td headers="GC...." class="gt_row gt_right">49.29</td>
 <td headers="N50" class="gt_row gt_right">2499709</td>
-<td headers="N90" class="gt_row gt_right">1128847</td>
-<td headers="auN" class="gt_row gt_right">2707276</td>
+<td headers="N90" class="gt_row gt_right">1060486</td>
+<td headers="auN" class="gt_row gt_right">2701347</td>
 <td headers="L50" class="gt_row gt_right">13</td>
-<td headers="L90" class="gt_row gt_right">32</td>
-<td headers="X..N.s.per.100.kbp" class="gt_row gt_right">5.22</td></tr>
-    <tr><td headers="method" class="gt_row gt_left">Optimized</td>
+<td headers="L90" class="gt_row gt_right">33</td>
+<td headers="X..N.s.per.100.kbp" class="gt_row gt_right">5.21</td></tr>
+    <tr><td headers="method" class="gt_row gt_left">Purge_dups</td>
 <td headers="sample" class="gt_row gt_left">Quesada_SQIIe_Phumuli</td>
 <td headers="S" class="gt_row gt_right">96.00%</td>
 <td headers="D" class="gt_row gt_right">4.00%</td>
@@ -1841,7 +1935,542 @@ height: 0px !important;
 <td headers="L50" class="gt_row gt_right">14</td>
 <td headers="L90" class="gt_row gt_right">38</td>
 <td headers="X..N.s.per.100.kbp" class="gt_row gt_right">14.64</td></tr>
-    <tr><td headers="method" class="gt_row gt_left">Optimized</td>
+    <tr><td headers="method" class="gt_row gt_left">Purge_dups</td>
+<td headers="sample" class="gt_row gt_left">Quesada_SQIIe_SC1982</td>
+<td headers="S" class="gt_row gt_right">95.00%</td>
+<td headers="D" class="gt_row gt_right">4.00%</td>
+<td headers="F" class="gt_row gt_right">0.00%</td>
+<td headers="I" class="gt_row gt_right">0.00%</td>
+<td headers="M" class="gt_row gt_right">1.00%</td>
+<td headers="N" class="gt_row gt_right">100</td>
+<td headers="Linkage" class="gt_row gt_left">stramenopiles_odb10</td>
+<td headers="X..contigs.....0.bp." class="gt_row gt_right">404</td>
+<td headers="X..contigs.....1000.bp." class="gt_row gt_right">404</td>
+<td headers="X..contigs.....5000.bp." class="gt_row gt_right">402</td>
+<td headers="X..contigs.....10000.bp." class="gt_row gt_right">399</td>
+<td headers="X..contigs.....25000.bp." class="gt_row gt_right">258</td>
+<td headers="X..contigs.....50000.bp." class="gt_row gt_right">116</td>
+<td headers="Total.length.....0.bp." class="gt_row gt_right">100278796</td>
+<td headers="Total.length.....1000.bp." class="gt_row gt_right">100278796</td>
+<td headers="Total.length.....5000.bp." class="gt_row gt_right">100271222</td>
+<td headers="Total.length.....10000.bp." class="gt_row gt_right">100247919</td>
+<td headers="Total.length.....25000.bp." class="gt_row gt_right">97569092</td>
+<td headers="Total.length.....50000.bp." class="gt_row gt_right">92936138</td>
+<td headers="X..contigs" class="gt_row gt_right">404</td>
+<td headers="Largest.contig" class="gt_row gt_right">5124138</td>
+<td headers="Total.length" class="gt_row gt_right">100278796</td>
+<td headers="GC...." class="gt_row gt_right">49.37</td>
+<td headers="N50" class="gt_row gt_right">1777080</td>
+<td headers="N90" class="gt_row gt_right">159259</td>
+<td headers="auN" class="gt_row gt_right">1835564</td>
+<td headers="L50" class="gt_row gt_right">19</td>
+<td headers="L90" class="gt_row gt_right">82</td>
+<td headers="X..N.s.per.100.kbp" class="gt_row gt_right">203.00</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+<p><strong>we can set more aggressive parameters</strong></p>
+<p>MSU1: -l 80 -m 220 -u 360</p>
+<p>Phumuli: -l 80 -m 220 -u 400</p>
+<p>SC1982: -l 7 -m 120 -u 180</p>
+<div id="ruqrwtwhwl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ruqrwtwhwl table {
+font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+#ruqrwtwhwl thead, #ruqrwtwhwl tbody, #ruqrwtwhwl tfoot, #ruqrwtwhwl tr, #ruqrwtwhwl td, #ruqrwtwhwl th {
+border-style: none;
+}
+#ruqrwtwhwl p {
+margin: 0;
+padding: 0;
+}
+#ruqrwtwhwl .gt_table {
+display: table;
+border-collapse: collapse;
+line-height: normal;
+margin-left: auto;
+margin-right: auto;
+color: #333333;
+font-size: 16px;
+font-weight: normal;
+font-style: normal;
+background-color: #FFFFFF;
+width: auto;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #A8A8A8;
+border-right-style: none;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #A8A8A8;
+border-left-style: none;
+border-left-width: 2px;
+border-left-color: #D3D3D3;
+}
+#ruqrwtwhwl .gt_caption {
+padding-top: 4px;
+padding-bottom: 4px;
+}
+#ruqrwtwhwl .gt_title {
+color: #333333;
+font-size: 125%;
+font-weight: initial;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-color: #FFFFFF;
+border-bottom-width: 0;
+}
+#ruqrwtwhwl .gt_subtitle {
+color: #333333;
+font-size: 85%;
+font-weight: initial;
+padding-top: 3px;
+padding-bottom: 5px;
+padding-left: 5px;
+padding-right: 5px;
+border-top-color: #FFFFFF;
+border-top-width: 0;
+}
+#ruqrwtwhwl .gt_heading {
+background-color: #FFFFFF;
+text-align: center;
+border-bottom-color: #FFFFFF;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+}
+#ruqrwtwhwl .gt_bottom_border {
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#ruqrwtwhwl .gt_col_headings {
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+}
+#ruqrwtwhwl .gt_col_heading {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: normal;
+text-transform: inherit;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+vertical-align: bottom;
+padding-top: 5px;
+padding-bottom: 6px;
+padding-left: 5px;
+padding-right: 5px;
+overflow-x: hidden;
+}
+#ruqrwtwhwl .gt_column_spanner_outer {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: normal;
+text-transform: inherit;
+padding-top: 0;
+padding-bottom: 0;
+padding-left: 4px;
+padding-right: 4px;
+}
+#ruqrwtwhwl .gt_column_spanner_outer:first-child {
+padding-left: 0;
+}
+#ruqrwtwhwl .gt_column_spanner_outer:last-child {
+padding-right: 0;
+}
+#ruqrwtwhwl .gt_column_spanner {
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+vertical-align: bottom;
+padding-top: 5px;
+padding-bottom: 5px;
+overflow-x: hidden;
+display: inline-block;
+width: 100%;
+}
+#ruqrwtwhwl .gt_spanner_row {
+border-bottom-style: hidden;
+}
+#ruqrwtwhwl .gt_group_heading {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+vertical-align: middle;
+text-align: left;
+}
+#ruqrwtwhwl .gt_empty_group_heading {
+padding: 0.5px;
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+vertical-align: middle;
+}
+#ruqrwtwhwl .gt_from_md > :first-child {
+margin-top: 0;
+}
+#ruqrwtwhwl .gt_from_md > :last-child {
+margin-bottom: 0;
+}
+#ruqrwtwhwl .gt_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+margin: 10px;
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+vertical-align: middle;
+overflow-x: hidden;
+}
+#ruqrwtwhwl .gt_stub {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+padding-left: 5px;
+padding-right: 5px;
+}
+#ruqrwtwhwl .gt_stub_row_group {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+padding-left: 5px;
+padding-right: 5px;
+vertical-align: top;
+}
+#ruqrwtwhwl .gt_row_group_first td {
+border-top-width: 2px;
+}
+#ruqrwtwhwl .gt_row_group_first th {
+border-top-width: 2px;
+}
+#ruqrwtwhwl .gt_summary_row {
+color: #333333;
+background-color: #FFFFFF;
+text-transform: inherit;
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#ruqrwtwhwl .gt_first_summary_row {
+border-top-style: solid;
+border-top-color: #D3D3D3;
+}
+#ruqrwtwhwl .gt_first_summary_row.thick {
+border-top-width: 2px;
+}
+#ruqrwtwhwl .gt_last_summary_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#ruqrwtwhwl .gt_grand_summary_row {
+color: #333333;
+background-color: #FFFFFF;
+text-transform: inherit;
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#ruqrwtwhwl .gt_first_grand_summary_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-top-style: double;
+border-top-width: 6px;
+border-top-color: #D3D3D3;
+}
+#ruqrwtwhwl .gt_last_grand_summary_row_top {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-style: double;
+border-bottom-width: 6px;
+border-bottom-color: #D3D3D3;
+}
+#ruqrwtwhwl .gt_striped {
+background-color: rgba(128, 128, 128, 0.05);
+}
+#ruqrwtwhwl .gt_table_body {
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#ruqrwtwhwl .gt_footnotes {
+color: #333333;
+background-color: #FFFFFF;
+border-bottom-style: none;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 2px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+}
+#ruqrwtwhwl .gt_footnote {
+margin: 0px;
+font-size: 90%;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#ruqrwtwhwl .gt_sourcenotes {
+color: #333333;
+background-color: #FFFFFF;
+border-bottom-style: none;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 2px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+}
+#ruqrwtwhwl .gt_sourcenote {
+font-size: 90%;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#ruqrwtwhwl .gt_left {
+text-align: left;
+}
+#ruqrwtwhwl .gt_center {
+text-align: center;
+}
+#ruqrwtwhwl .gt_right {
+text-align: right;
+font-variant-numeric: tabular-nums;
+}
+#ruqrwtwhwl .gt_font_normal {
+font-weight: normal;
+}
+#ruqrwtwhwl .gt_font_bold {
+font-weight: bold;
+}
+#ruqrwtwhwl .gt_font_italic {
+font-style: italic;
+}
+#ruqrwtwhwl .gt_super {
+font-size: 65%;
+}
+#ruqrwtwhwl .gt_footnote_marks {
+font-size: 75%;
+vertical-align: 0.4em;
+position: initial;
+}
+#ruqrwtwhwl .gt_asterisk {
+font-size: 100%;
+vertical-align: 0;
+}
+#ruqrwtwhwl .gt_indent_1 {
+text-indent: 5px;
+}
+#ruqrwtwhwl .gt_indent_2 {
+text-indent: 10px;
+}
+#ruqrwtwhwl .gt_indent_3 {
+text-indent: 15px;
+}
+#ruqrwtwhwl .gt_indent_4 {
+text-indent: 20px;
+}
+#ruqrwtwhwl .gt_indent_5 {
+text-indent: 25px;
+}
+#ruqrwtwhwl .katex-display {
+display: inline-flex !important;
+margin-bottom: 0.75em !important;
+}
+#ruqrwtwhwl div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="method">method</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="sample">sample</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="S">S</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="D">D</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="F">F</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="I">I</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="M">M</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="N">N</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Linkage">Linkage</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="X..contigs.....0.bp.">X..contigs.....0.bp.</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="X..contigs.....1000.bp.">X..contigs.....1000.bp.</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="X..contigs.....5000.bp.">X..contigs.....5000.bp.</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="X..contigs.....10000.bp.">X..contigs.....10000.bp.</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="X..contigs.....25000.bp.">X..contigs.....25000.bp.</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="X..contigs.....50000.bp.">X..contigs.....50000.bp.</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total.length.....0.bp.">Total.length.....0.bp.</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total.length.....1000.bp.">Total.length.....1000.bp.</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total.length.....5000.bp.">Total.length.....5000.bp.</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total.length.....10000.bp.">Total.length.....10000.bp.</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total.length.....25000.bp.">Total.length.....25000.bp.</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total.length.....50000.bp.">Total.length.....50000.bp.</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="X..contigs">X..contigs</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Largest.contig">Largest.contig</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Total.length">Total.length</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="GC....">GC....</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="N50">N50</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="N90">N90</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="auN">auN</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="L50">L50</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="L90">L90</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="X..N.s.per.100.kbp">X..N.s.per.100.kbp</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="method" class="gt_row gt_left">Purge_dups optimized</td>
+<td headers="sample" class="gt_row gt_left">Quesada_SQIIe_MSU1</td>
+<td headers="S" class="gt_row gt_right">97.00%</td>
+<td headers="D" class="gt_row gt_right">3.00%</td>
+<td headers="F" class="gt_row gt_right">0.00%</td>
+<td headers="I" class="gt_row gt_right">0.00%</td>
+<td headers="M" class="gt_row gt_right">0.00%</td>
+<td headers="N" class="gt_row gt_right">100</td>
+<td headers="Linkage" class="gt_row gt_left">stramenopiles_odb10</td>
+<td headers="X..contigs.....0.bp." class="gt_row gt_right">56</td>
+<td headers="X..contigs.....1000.bp." class="gt_row gt_right">56</td>
+<td headers="X..contigs.....5000.bp." class="gt_row gt_right">56</td>
+<td headers="X..contigs.....10000.bp." class="gt_row gt_right">56</td>
+<td headers="X..contigs.....25000.bp." class="gt_row gt_right">54</td>
+<td headers="X..contigs.....50000.bp." class="gt_row gt_right">51</td>
+<td headers="Total.length.....0.bp." class="gt_row gt_right">85609558</td>
+<td headers="Total.length.....1000.bp." class="gt_row gt_right">85609558</td>
+<td headers="Total.length.....5000.bp." class="gt_row gt_right">85609558</td>
+<td headers="Total.length.....10000.bp." class="gt_row gt_right">85609558</td>
+<td headers="Total.length.....25000.bp." class="gt_row gt_right">85565615</td>
+<td headers="Total.length.....50000.bp." class="gt_row gt_right">85421257</td>
+<td headers="X..contigs" class="gt_row gt_right">56</td>
+<td headers="Largest.contig" class="gt_row gt_right">6243570</td>
+<td headers="Total.length" class="gt_row gt_right">85609558</td>
+<td headers="GC...." class="gt_row gt_right">49.29</td>
+<td headers="N50" class="gt_row gt_right">2499709</td>
+<td headers="N90" class="gt_row gt_right">1128847</td>
+<td headers="auN" class="gt_row gt_right">2707276</td>
+<td headers="L50" class="gt_row gt_right">13</td>
+<td headers="L90" class="gt_row gt_right">32</td>
+<td headers="X..N.s.per.100.kbp" class="gt_row gt_right">5.22</td></tr>
+    <tr><td headers="method" class="gt_row gt_left">Purge_dups optimized</td>
+<td headers="sample" class="gt_row gt_left">Quesada_SQIIe_Phumuli</td>
+<td headers="S" class="gt_row gt_right">96.00%</td>
+<td headers="D" class="gt_row gt_right">4.00%</td>
+<td headers="F" class="gt_row gt_right">0.00%</td>
+<td headers="I" class="gt_row gt_right">0.00%</td>
+<td headers="M" class="gt_row gt_right">0.00%</td>
+<td headers="N" class="gt_row gt_right">100</td>
+<td headers="Linkage" class="gt_row gt_left">stramenopiles_odb10</td>
+<td headers="X..contigs.....0.bp." class="gt_row gt_right">130</td>
+<td headers="X..contigs.....1000.bp." class="gt_row gt_right">130</td>
+<td headers="X..contigs.....5000.bp." class="gt_row gt_right">130</td>
+<td headers="X..contigs.....10000.bp." class="gt_row gt_right">121</td>
+<td headers="X..contigs.....25000.bp." class="gt_row gt_right">91</td>
+<td headers="X..contigs.....50000.bp." class="gt_row gt_right">58</td>
+<td headers="Total.length.....0.bp." class="gt_row gt_right">73821196</td>
+<td headers="Total.length.....1000.bp." class="gt_row gt_right">73821196</td>
+<td headers="Total.length.....5000.bp." class="gt_row gt_right">73821196</td>
+<td headers="Total.length.....10000.bp." class="gt_row gt_right">73748348</td>
+<td headers="Total.length.....25000.bp." class="gt_row gt_right">73221368</td>
+<td headers="Total.length.....50000.bp." class="gt_row gt_right">72100844</td>
+<td headers="X..contigs" class="gt_row gt_right">130</td>
+<td headers="Largest.contig" class="gt_row gt_right">4035383</td>
+<td headers="Total.length" class="gt_row gt_right">73821196</td>
+<td headers="GC...." class="gt_row gt_right">48.98</td>
+<td headers="N50" class="gt_row gt_right">1742363</td>
+<td headers="N90" class="gt_row gt_right">682840</td>
+<td headers="auN" class="gt_row gt_right">1991629</td>
+<td headers="L50" class="gt_row gt_right">14</td>
+<td headers="L90" class="gt_row gt_right">38</td>
+<td headers="X..N.s.per.100.kbp" class="gt_row gt_right">14.64</td></tr>
+    <tr><td headers="method" class="gt_row gt_left">Purge_dups optimized</td>
 <td headers="sample" class="gt_row gt_left">Quesada_SQIIe_SC1982</td>
 <td headers="S" class="gt_row gt_right">95.00%</td>
 <td headers="D" class="gt_row gt_right">4.00%</td>
@@ -1876,6 +2505,7 @@ height: 0px !important;
   
   
 </table>
+</div>
 </div>
 </div>
 
