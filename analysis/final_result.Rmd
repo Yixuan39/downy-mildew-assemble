@@ -1,0 +1,120 @@
+---
+title: "Final Assembly"
+author: "Yixuan Yang"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r echo=FALSE, message=FALSE}
+library(GENESPACE)
+library(here)
+library(tidyverse)
+library(Biostrings)
+library(data.table)
+library(gt)
+theme_set(theme_bw())
+```
+
+```{r echo=FALSE, message=FALSE}
+read.tb <- function(path, method) {
+  files <- list.files(path, full.names = TRUE, pattern = 'stram.csv')
+  tb <- map_dfr(files, function(x) {data.frame(method = method,
+                                               sample = str_remove(basename(x), '_stram.csv'),
+                                               fread(x))})
+  return(tb)
+}
+```
+
+After synteny with P.effusa, we have new assembly files where some of the contigs are glued. Let's check their qualities.
+
+```{r echo=FALSE}
+read.tb('~/project_data/downy/hifiasm/fcs-gx/purge_dups/glued/compleasm/', 'final assembly') |> gt()
+```
+
+# Read Length
+
+```{r echo=FALSE}
+read.length <- list.files('~/project_data/downy/hifiasm/fcs-gx/purge_dups/glued', pattern = '.fasta.gz', full.names = TRUE) |> 
+  map_dfr(function(file) {
+    seq <- readDNAStringSet(file)
+    data.frame(sample = str_remove(basename(file), '.fasta.gz'),
+               contig = names(seq),
+               length = width(seq))
+    }) |> group_by(sample) |> 
+  arrange(desc(length)) |>
+  top_n(30) |> 
+  mutate(rank = 1:n()) |> 
+  mutate(is.glued.contig = str_detect(contig, 'glue')) |> 
+  ungroup()
+
+ggplot(read.length, aes(x = factor(rank), y = length, fill = is.glued.contig)) +
+  geom_col() +
+  scale_y_continuous(labels = scales::label_number(big.mark = ",")) +
+  facet_wrap(~sample, scales = 'free_y', ncol = 1) +
+  labs(
+    title = "Top 30 Longest Contigs",
+    subtitle = "Ordered by length",
+    x = "Rank",
+    y = "Length (bp)"
+  )
+```
+
+We see there's one long contig in SC1982 that is not glued (or there's no cds sequence detected by helixer). `ptg000092l_1` is the name of that contig.
+
+```{r echo=FALSE}
+read.length |> filter(sample == 'Quesada_SQIIe_SC1982') |> head()
+```
+
+
+# Syntenic Plots
+
+Here, we can run genespace and check those syntenic plots again.
+
+```{r echo=FALSE}
+genomeRepo <- "~/project_data/downy/genespace-syn/genomes/"
+wd <- "~/project_data/downy/genespace-syn/"
+path2mcscanx <- "/Users/yixuanyang/miniforge3/bin/"
+
+genomes2run <- c("Peronospora_effusa", "Bremia_lactucae", "Phytophthora_sojae")
+parsedPaths <- parse_annotations(
+  rawGenomeRepo = genomeRepo,
+  genomeDirs = genomes2run,
+  genomeIDs = genomes2run,
+  headerSep = NA,
+  headerEntryIndex = 1,
+  genespaceWd = wd)
+asm2run <- c("Quesada_SQIIe_MSU1", "Quesada_SQIIe_SC1982", "Quesada_SQIIe_Phumuli")
+parsedPaths <- parse_annotations(
+  rawGenomeRepo = genomeRepo,
+  genomeDirs = asm2run,
+  genomeIDs = asm2run,
+  headerSep = NA,
+  headerEntryIndex = 1,
+  gffIdColumn = "ID",
+  genespaceWd = wd)
+
+gpar <- init_genespace(
+  wd = wd,
+  nCores = 10,
+  dotplots = 'never',
+  path2mcscanx = path2mcscanx)
+
+out <- run_genespace(gpar)
+```
+
+# Riparian
+
+```{r echo=FALSE}
+for (asm in asm2run){
+  plot_riparian(
+    gsParam = out,
+    genomeIDs = c(asm, genomes2run),
+    refGenome = "Peronospora_effusa",
+    chrLabFontSize = 2,
+    useRegions = FALSE)
+}
+```
+
+
+
+
