@@ -20,7 +20,7 @@ mapfile -t HIFI_FILES < <(printf '%s\n' "$HIFI_DIR"/*.fastq.gz | sort)
 
 # you might want to adjust these numbers based on your sample.
 L=(80 80 7)
-M=(220 220 120)
+M=(165 220 65)
 U=(360 400 180)
 
 ASM_FILE="${ASM_FILES[$SLURM_ARRAY_TASK_ID]}"
