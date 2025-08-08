@@ -20,7 +20,7 @@ def compleasm(input_file, temp_dir, threads, library_path, linkage):
     new_df['Metric'] = split_column.str[0]
     new_df['Value'] = split_column.str[1]
     new_df = new_df.set_index('Metric').T
-    new_df['Linkage'] = linkage
+    # new_df['Linkage'] = linkage
     shutil.rmtree(output_dir, ignore_errors=False)
     return new_df
 
@@ -51,15 +51,12 @@ if __name__ == '__main__':
     temp_dir = tempfile.mkdtemp(prefix="qualitycheck_temp_")
     print(f"Storing intermediate files in: {temp_dir}")
 
-    # compleasm_euk = compleasm(args.input_file, temp_dir, args.threads, args.library_path, 'eukaryota_odb10')
-    compleasm_stram = compleasm(args.input_file, temp_dir, args.threads, args.library_path, 'stramenopiles_odb10')
+    compleasm_stram = compleasm(args.input_file, temp_dir, args.threads, args.library_path, 'stramenopiles')
     quast_output = quast(args.input_file, temp_dir, args.threads)
 
-    # compleasm_euk = pd.concat([compleasm_euk, quast_output], axis=1)
     compleasm_stram = pd.concat([compleasm_stram, quast_output], axis=1)
 
     os.makedirs(args.output_dir, exist_ok=True)
-    # compleasm_euk.to_csv(os.path.join(args.output_dir, args.suffix + '_euk.csv'), index=False)
     compleasm_stram.to_csv(os.path.join(args.output_dir, args.suffix + '_stram.csv'), index=False)
 
     shutil.rmtree(temp_dir, ignore_errors=False)
