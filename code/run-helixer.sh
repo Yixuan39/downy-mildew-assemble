@@ -2,7 +2,7 @@
 #SBATCH --array=0-2
 #SBATCH --cpus-per-task=32
 
-INPUT_DIR=$HOME/project_data/downy/hifiasm/fcs-gx/purge_dups
+INPUT_DIR=$HOME/project_data/downy/hifiasm/fcs-gx/kraken2/purge_dups/rag_tag
 RESULT_DIR=$INPUT_DIR/helixer
 FILES=($(find "$INPUT_DIR" -type f -name "*.fasta.gz"))
 FILE=${FILES[$SLURM_ARRAY_TASK_ID]}
