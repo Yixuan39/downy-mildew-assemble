@@ -25,23 +25,13 @@ df <- map_dfr(files,
                 df <- fread(x) %>% 
                   mutate(file = str_remove(basename(x), '.csv')) %>% 
                   separate(file, into = c('species', 'linkage'), sep = '_')
-              }) %>% select(-linkage) %>% 
-  group_by(Linkage) %>% group_split()
+              }) %>% select(-linkage)
 ```
-
-## eukaryota_odb10
-
-```{r echo=FALSE}
-df[[1]] %>% 
-  column_to_rownames('species') %>% 
-  gt(rownames_to_stub = TRUE)
-```
-
 
 ## stramenopiles_odb10
 
 ```{r echo=FALSE}
-df[[2]] %>% 
+df %>% 
   column_to_rownames('species') %>% 
   gt(rownames_to_stub = TRUE)
 ```
