@@ -28,13 +28,13 @@ read.tb <- function(path, method) {
 After synteny with P.effusa, we have new assembly files where some of the contigs are glued. Let's check their qualities.
 
 ```{r echo=FALSE}
-read.tb('~/project_data/downy/hifiasm/fcs-gx/purge_dups/glued/compleasm/', 'final assembly') |> gt()
+read.tb('~/project_data/downy/hifiasm/fcs-gx/kraken2/purge_dups/rag_tag/compleasm/', 'final assembly') |> gt() |> fmt_number()
 ```
 
 # Read Length
 
 ```{r echo=FALSE}
-read.length <- list.files('~/project_data/downy/hifiasm/fcs-gx/purge_dups/glued', pattern = '.fasta.gz', full.names = TRUE) |> 
+read.length <- list.files('~/project_data/downy/hifiasm/fcs-gx/kraken2/purge_dups/rag_tag', pattern = '.fasta.gz', full.names = TRUE) |> 
   map_dfr(function(file) {
     seq <- readDNAStringSet(file)
     data.frame(sample = str_remove(basename(file), '.fasta.gz'),
@@ -44,10 +44,10 @@ read.length <- list.files('~/project_data/downy/hifiasm/fcs-gx/purge_dups/glued'
   arrange(desc(length)) |>
   top_n(30) |> 
   mutate(rank = 1:n()) |> 
-  mutate(is.glued.contig = str_detect(contig, 'glue')) |> 
+  mutate(is_scaffolded = str_detect(contig, '_RagTag')) |> 
   ungroup()
 
-ggplot(read.length, aes(x = factor(rank), y = length, fill = is.glued.contig)) +
+ggplot(read.length, aes(x = factor(rank), y = length, fill = is_scaffolded)) +
   geom_col() +
   scale_y_continuous(labels = scales::label_number(big.mark = ",")) +
   facet_wrap(~sample, scales = 'free_y', ncol = 1) +
@@ -59,20 +59,30 @@ ggplot(read.length, aes(x = factor(rank), y = length, fill = is.glued.contig)) +
   )
 ```
 
-We see there's one long contig in SC1982 that is not glued (or there's no cds sequence detected by helixer). `ptg000092l_1` is the name of that contig.
+We see there's one long contig in SC1982 that is not glued (or there's no cds sequence detected by helixer). `ptg000299l_1` is the name of that contig.
 
 ```{r echo=FALSE}
-read.length |> filter(sample == 'Quesada_SQIIe_SC1982') |> head()
+(read.length |> filter(sample == 'Quesada_SQIIe_SC1982'))[17,]
 ```
 
 
 # Syntenic Plots
 
-Here, we can run genespace and check those syntenic plots again.
+Here, we can run orthofinder and genespace to check the synteny of each isolate.
 
-```{r echo=FALSE}
-genomeRepo <- "~/project_data/downy/genespace-syn/genomes/"
-wd <- "~/project_data/downy/genespace-syn/"
+The orthofinder we used is:
+
+```{bash eval=FALSE}
+orthofinder -f /Users/yixuanyang/project_data/downy/genespace/tmp -t 10 -a 1 -X -o /Users/yixuanyang/project_data/downy/genespace/orthofinder
+```
+
+Reference genomes: Peronospora effusa, Bremia lactucae, Phytophthora sojae
+
+Our isolates: Quesada_SQIIe_MSU1, Quesada_SQIIe_SC1982, Quesada_SQIIe_Phumuli
+
+```{r  message=FALSE, echo=FALSE, results=FALSE}
+genomeRepo <- "~/project_data/downy/genespace/genomes/"
+wd <- "~/project_data/downy/genespace/"
 path2mcscanx <- "/Users/yixuanyang/miniforge3/bin/"
 
 genomes2run <- c("Peronospora_effusa", "Bremia_lactucae", "Phytophthora_sojae")
@@ -83,7 +93,7 @@ parsedPaths <- parse_annotations(
   headerSep = NA,
   headerEntryIndex = 1,
   genespaceWd = wd)
-asm2run <- c("Quesada_SQIIe_MSU1", "Quesada_SQIIe_SC1982", "Quesada_SQIIe_Phumuli")
+asm2run <- c("Quesada_SQIIe_MSU1", "Quesada_SQIIe_Phumuli", "Quesada_SQIIe_SC1982")
 parsedPaths <- parse_annotations(
   rawGenomeRepo = genomeRepo,
   genomeDirs = asm2run,
@@ -115,6 +125,16 @@ for (asm in asm2run){
 }
 ```
 
+Number of contigs mapped to P.effusa
 
+```{r echo=FALSE}
+syntenicRegion <- file.path(wd, 'results','syntenicBlock_coordinates.csv') |> 
+  fread() |> filter((genome1 %in% asm2run)& genome2 == "Peronospora_effusa") |>
+  group_by(genome1)
+
+syntenicRegion |>
+  summarise(unique_chr_count = n_distinct(chr1)) |> 
+  gt()
+```
 
 
