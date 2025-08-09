@@ -19,18 +19,6 @@ read.tb <- function(path, method) {
 }
 ```
 
-
-```{r echo=FALSE, message=FALSE, include=FALSE}
-result <- bind_rows(read.tb('~/project_data/downy/hifiasm/compleasm/', 's.13.a'),
-                    read.tb('~/project_data/downy/hifiasm-10kb/compleasm/', 's.13.b'),
-                    read.tb('~/project_data/downy/hifiasm/purge_dups/compleasm/', 's.13.c'),
-                    read.tb('~/project_data/downy/hifiasm-10kb/purge_dups/compleasm/', 's.13.d'),
-                    read.tb('~/project_data/downy/hifiasm/fcs-gx/purge_dups/compleasm/', 's.13.e'),
-                    read.tb('~/project_data/downy/hifiasm-10kb/fcs-gx/purge_dups/compleasm/', 's.13.f'))
-
-result %>% group_by(sample) %>% gt()
-```
-
 # Pipeline
 
 ## hifiasm
@@ -39,16 +27,22 @@ Step 1, assemble the raw Pacbio read into contigs. Here we check the quality of 
 
 Each isolates showed 100% completeness, but the duplications were high.
 
-```{r}
-read.tb('~/project_data/downy/hifiasm/compleasm/', 'hifiasm') |> gt()
+```{r echo=FALSE, message=FALSE}
+read.tb('~/project_data/downy/hifiasm/compleasm/', 'hifiasm') |> gt() |> fmt_number()
 ```
 
 ## Decontamination
 
 There could be many contamination reads in each isolates. Here, we use FCS-GX to clean the genome.
 
-```{r}
-read.tb('~/project_data/downy/hifiasm/fcs-gx/compleasm/', 'FCS') |> gt()
+```{r echo=FALSE, message=FALSE}
+read.tb('~/project_data/downy/hifiasm/fcs-gx/compleasm/', 'FCS') |> gt() |> fmt_number()
+```
+
+We notice there are some contigs that are not classified by fcs. Here, we check the fcs cleaned data with kraken2
+
+```{r echo=FALSE, message=FALSE}
+read.tb('~/project_data/downy/hifiasm/fcs-gx/kraken2/compleasm/', 'Kraken2') |> gt() |> fmt_number()
 ```
 
 ## Purge_dups
@@ -64,20 +58,37 @@ Phumuli: -l 80 -m 220 -u 400
 SC1982: -l 7 -m 65 -u 180
 
 ```{r echo=FALSE, message=FALSE}
-read.tb('~/project_data/downy/hifiasm/fcs-gx/purge_dups/compleasm/', 'Purge_dups') |> gt()
+read.tb('~/project_data/downy/hifiasm/fcs-gx/kraken2/purge_dups/compleasm/', 'Purge_dups') |> gt() |> fmt_number()
 ```
 
-
-**we can set more aggressive parameters**
-
-MSU1: -l 80 -m 220 -u 360
-
-Phumuli: -l 80 -m 220 -u 400
-
-SC1982: -l 7 -m 120 -u 180
+# Synteny with ragtag
 
 ```{r echo=FALSE, message=FALSE}
-read.tb('~/project_data/downy/hifiasm/fcs-gx/purge_dups-old/compleasm/', 'Purge_dups optimized') |> gt()
+read.tb('~/project_data/downy/hifiasm/fcs-gx/kraken2/purge_dups/rag_tag/compleasm/', 'Rag_tag') |> gt() |> fmt_number()
 ```
 
+# Trace Plots
 
+```{r echo=FALSE}
+df <- bind_rows(read.tb('~/project_data/downy/hifiasm/compleasm/', 'hifiasm'), 
+                read.tb('~/project_data/downy/hifiasm/fcs-gx/compleasm/', 'FCS'),
+                read.tb('~/project_data/downy/hifiasm/fcs-gx/kraken2/compleasm/', 'Kraken2'),
+                read.tb('~/project_data/downy/hifiasm/fcs-gx/kraken2/purge_dups/compleasm/', 'Purge_dups'),
+                read.tb('~/project_data/downy/hifiasm/fcs-gx/kraken2/purge_dups/rag_tag/compleasm/', 'Rag_tag'))
+df$method <- factor(df$method, levels = c('hifiasm', 'FCS', 'Kraken2', 'Purge_dups', 'Rag_tag'))
+```
+
+```{r echo=FALSE}
+ggplot(df, aes(x = method, y = X..contigs, color = sample, group = sample)) +
+  geom_point() + geom_line() + ylab('Number of contigs')
+```
+
+```{r echo=FALSE}
+ggplot(df, aes(x = method, y = Total.length, color = sample, group = sample)) +
+  geom_point() + geom_line()
+```
+
+```{r echo=FALSE}
+ggplot(df, aes(x = method, y = N50, color = sample, group = sample)) +
+  geom_point() + geom_line()
+```
