@@ -3,7 +3,7 @@
 #SBATCH --array=0-2
 #SBATCH --cpus-per-task=32
 
-set -euo pipefail
+# set -euo pipefail
 
 # after cleaning with fcs, verify and clean with Kraken2
 INPUT_DIR="$HOME/project_data/downy/hifiasm"
@@ -17,39 +17,6 @@ FILE="${FILES[$SLURM_ARRAY_TASK_ID]}"
 
 echo "Processing: $FILE"
 
-# test for genomic database
-Kraken_DB="$HOME/project_data/downy/KrakenDB/oomycota-genome"
-for C in "${CONF[@]}"; do
-  RESULT_DIR="$HOME/project_data/downy/Kraken2/asm/genomic-extract-$C"
-  mkdir -p "$RESULT_DIR"
-  bash kraken2.sh \
-    -i "$FILE" \
-    -o "$RESULT_DIR" \
-    -b "$BUSCO_DB" \
-    -k "$Kraken_DB" \
-    -m extract \
-    -t "$TAXID" \
-    -c "$C" \
-    -p "$THREADS"
-done
-
-# test for protein database
-Kraken_DB="$HOME/project_data/downy/KrakenDB/oomycota-protein"
-for C in "${CONF[@]}"; do
-  RESULT_DIR="$HOME/project_data/downy/Kraken2/asm/protein-extract-$C"
-  mkdir -p "$RESULT_DIR"
-  bash kraken2.sh \
-    -i "$FILE" \
-    -o "$RESULT_DIR" \
-    -b "$BUSCO_DB" \
-    -k "$Kraken_DB" \
-    -m extract \
-    -t "$TAXID" \
-    -c "$C" \
-    -p "$THREADS"
-done
-
-# same logic, but without reference data
 # test for genomic database
 Kraken_DB="$HOME/project_data/downy/KrakenDB/contam-genome"
 for C in "${CONF[@]}"; do

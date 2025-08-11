@@ -2,7 +2,7 @@
 
 # --- Script Configuration ---
 # Exit immediately if a command exits with a non-zero status.
-set -euo pipefail
+# set -euo pipefail
 
 # --- Default Parameters ---
 THREADS=1
@@ -146,13 +146,11 @@ elif [ "$MODE" = "extract" ] || [ "$MODE" = "exclude" ]; then
           --report "${KREPORT_OUT}" \
           --output "${KRAKEN_OUT}" \
           --unclassified-out "${RESULT_DIR}/${BASENAME}.fasta" \
-          --taxid "${TAXID}" \
-          --include-children \
           "${INPUT_FILE}"
     fi
 
     echo "Compressing filtered reads..."
-    gzip -c "${RESULT_DIR}/${BASENAME}.fasta" > "${RESULT_DIR}/${BASENAME}.fasta.gz"
+    pigz -c "${RESULT_DIR}/${BASENAME}.fasta" > "${RESULT_DIR}/${BASENAME}.fasta.gz"
     rm "${RESULT_DIR}/${BASENAME}.fasta"
 
     echo "--- Starting Quality Check ---"

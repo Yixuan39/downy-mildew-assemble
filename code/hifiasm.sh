@@ -33,6 +33,7 @@ fi
 # Get base name without extension
 BASENAME=$(basename "$INPUT_FILE")
 BASENAME="${BASENAME%.fastq.gz}"
+BASENAME="${BASENAME%.fasta.gz}"
 
 echo "Base name: $BASENAME"
 

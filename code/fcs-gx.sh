@@ -40,9 +40,11 @@ run_gx.py \
   --gx-db ${GX_DB} \
   --out-dir ${RESULT_DIR} \
   --out-basename ${BASENAME}
+  
+gzip -dkc ${INPUT_FILE} > ${RESULT_DIR}/${BASENAME}/tmp.fasta
 
 gx clean-genome \
-  --input ${INPUT_FILE} \
+  --input ${RESULT_DIR}/${BASENAME}/tmp.fasta \
   --action-report ${RESULT_DIR}/${BASENAME}.fcs_gx_report.txt \
   --output ${RESULT_DIR}/${BASENAME}/${BASENAME}.fasta
     

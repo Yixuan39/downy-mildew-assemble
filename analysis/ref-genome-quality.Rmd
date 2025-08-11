@@ -19,20 +19,18 @@ library(data.table)
 
 ```{r echo=FALSE}
 path <- '~/project_data/downy/oomycota-genome/compleasm/'
-files <- list.files(path, pattern = 'csv', full.names = TRUE)
-df <- map_dfr(files,
-              function(x) {
-                df <- fread(x) %>% 
-                  mutate(file = str_remove(basename(x), '.csv')) %>% 
-                  separate(file, into = c('species', 'linkage'), sep = '_')
-              }) %>% select(-linkage)
+read.tb <- function(path, method) {
+  files <- list.files(path, full.names = TRUE, pattern = 'stram.csv')
+  tb <- map_dfr(files, function(x) {data.frame(method = method,
+                                               sample = str_remove(basename(x), '_stram.csv'),
+                                               fread(x))})
+  return(tb)
+}
 ```
 
 ## stramenopiles_odb10
 
 ```{r echo=FALSE}
-df %>% 
-  column_to_rownames('species') %>% 
-  gt(rownames_to_stub = TRUE)
+read.tb(path, '') %>% select(-method) %>% gt() %>% fmt_number()
 ```
 

@@ -1,0 +1,66 @@
+---
+title: "kraken2-experiment"
+output: html_document
+---
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(gt)
+library(here)
+```
+
+# Data Bases
+
+1. Genomic:
+  a. comprehensive database: oomycetes, human, plant, fungi, bacteria (*oomycota-genome*)
+  b. contamination database: human, plant, fungi, bacteria (*contam-genome*)
+  
+2. Protein:
+  a. comprehensive database: oomycetes, human, plant, fungi, bacteria (*oomycota-protein*)
+  b. contamination database: human, plant, fungi, bacteria (*contam-protein*)
+
+When using comprehensicve database, we extract the sequences that are assign to the oomycete taxa. When using contamination database, we exclude all sequences that mapped to the reference database, and only keep those unmapped sequences.
+
+# Workflow order
+
+1. Classify all the Pacbio sequences with Kraken2 and use metaMDBG to assemble the classified sequences. (*classify-assemble*)
+
+2. Assemble all the Pacbio sequences using metaMDBG, then use Kraken2 to classify the assembled sequences. (*assemble-classify*)
+
+# Confidence score adjustment
+
+definition of confidence score in Kraken2: proportion of matching k-mers assigned to the taxon. The default parameter is 0.
+
+A higher confidence score can reduce misclassification, but also reduce the number of classified sequences. Here, we test four different confidence scores: 0, 0.25, 0.5, 0.75. 
+
+```{r}
+read.tb <- function(files, method) {
+  info <- str_split(files,'/') %>%
+    lapply(function(x) x[length(x)-2]) %>% 
+    as_vector() %>% data.frame(info = .) %>%
+    separate(info, c('database', 'method', 'confidence'), sep = '-')
+  tb <- map_dfr(files, function(x) {data.frame(sample = str_remove(basename(x), '_stram.csv'),
+                                               fread(x))}) %>% 
+    bind_cols(info, .) %>% 
+    mutate(across(where(is.character), ~if_else(str_detect(., '%'), str_remove(., '%'), .)))
+  return(tb)
+}
+```
+
+```{r}
+path <- '~/project_data/downy/Kraken2/asm/'
+files <- list.files(path, recursive = T, pattern = '.csv')
+asm.tb <- read.tb(file.path(path, files), method = 'asm') %>% 
+  data.frame(data = 'asm', .)
+
+```
+
+```{r}
+full.tb <- asm.tb %>% 
+  mutate(busco = as.numeric(S) + as.numeric(D))
+
+ggplot(full.tb) +
+  geom_tile(aes(x = database, y = confidence, fill = busco)) +
+  facet_wrap(~sample)
+```
+
