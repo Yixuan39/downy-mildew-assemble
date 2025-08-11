@@ -12,8 +12,6 @@ This project aimed to assemble downy mildew genome collected from highly contami
 
 [FCS-GX taxonomy analysis of contigs](https://yixuan39.github.io/downy-mildew-assemble/analysis/taxonomy-analysis.html)
 
-[Synteny analysis based on P.effusa](https://yixuan39.github.io/downy-mildew-assemble/analysis/genespace.html)
-
 [Final assembly](https://yixuan39.github.io/downy-mildew-assemble/analysis/final_result.html)
 
 # Pipeline
