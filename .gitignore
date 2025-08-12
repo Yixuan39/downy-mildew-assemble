@@ -59,7 +59,6 @@ rsconnect/
 
 # large input files
 *.fna*
-*.fasta
 *.fastq
 *.fastq.gz
 *.fq.gz
