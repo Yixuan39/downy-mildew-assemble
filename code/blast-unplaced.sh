@@ -13,7 +13,7 @@ BASENAME=$(basename ${FILE})
 BASENAME=${BASENAME%.fasta}
 
 blastn -query "$FILE" \
-  -db /home1/ncbi/July2023/nt \
+  -db nt \
   -outfmt 6 \
   -max_target_seqs 1 \
   -max_hsps 1 \
@@ -21,4 +21,4 @@ blastn -query "$FILE" \
   -out "$RESULT_DIR/$BASENAME.tsv"
   
 # Compress the output file
-gzip "$RESULT_DIR/$BASENAME.tsv"
+gzip -f "$RESULT_DIR/$BASENAME.tsv"
