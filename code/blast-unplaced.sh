@@ -14,11 +14,9 @@ BASENAME=${BASENAME%.fasta}
 
 blastn -query "$FILE" \
   -db nt \
-  -outfmt 6 \
+  -outfmt "6 qseqid sseqid pident length qstart qend sstart send evalue **staxids**" \
   -max_target_seqs 1 \
   -max_hsps 1 \
   -num_threads "$THREADS" \
   -out "$RESULT_DIR/$BASENAME.tsv"
   
-# Compress the output file
-gzip -f "$RESULT_DIR/$BASENAME.tsv"
