@@ -46,29 +46,29 @@ hifiasm_meta \
     -o "${RESULT_DIR}/${BASENAME}/${BASENAME}.asm" \
     "${INPUT_FILE}"
 
-# echo "Converting GFA to FASTA..."
-# gfatools gfa2fa \
-#     "${RESULT_DIR}/${BASENAME}/${BASENAME}.asm.p_ctg.gfa" \
-#     > "${RESULT_DIR}/${BASENAME}/${BASENAME}.asm.p_ctg.fa"
-# 
-# gzip -c "${RESULT_DIR}/${BASENAME}/${BASENAME}.asm.p_ctg.fa" \
-#     > "${RESULT_DIR}/${BASENAME}.fasta.gz"
-# 
-# # Clean up intermediate directory
-# rm -rf "${RESULT_DIR:?}/${BASENAME}"
-# 
-# echo "Running quality-check..."
-# python quality-check.py \
-#     --input_file "${RESULT_DIR}/${BASENAME}.fasta.gz" \
-#     --output_dir "${RESULT_DIR}/compleasm" \
-#     --suffix "${BASENAME}" \
-#     --library_path "${BUSCO_DB}" \
-#     --threads "${THREADS}"
-# 
-# echo "Generating seqkit summary..."
-# seqkit fx2tab \
-#     -n -l -j "${THREADS}" \
-#     "${RESULT_DIR}/${BASENAME}.fasta.gz" \
-#     | gzip > "${RESULT_DIR}/compleasm/${BASENAME}.tsv.gz"
-# 
-# echo "All steps completed successfully for ${BASENAME}."
+echo "Converting GFA to FASTA..."
+gfatools gfa2fa \
+    "${RESULT_DIR}/${BASENAME}/${BASENAME}.asm.p_ctg.gfa" \
+    > "${RESULT_DIR}/${BASENAME}/${BASENAME}.asm.p_ctg.fa"
+
+gzip -c "${RESULT_DIR}/${BASENAME}/${BASENAME}.asm.p_ctg.fa" \
+    > "${RESULT_DIR}/${BASENAME}.fasta.gz"
+
+# Clean up intermediate directory
+rm -rf "${RESULT_DIR:?}/${BASENAME}"
+
+echo "Running quality-check..."
+python quality-check.py \
+    --input_file "${RESULT_DIR}/${BASENAME}.fasta.gz" \
+    --output_dir "${RESULT_DIR}/compleasm" \
+    --suffix "${BASENAME}" \
+    --library_path "${BUSCO_DB}" \
+    --threads "${THREADS}"
+
+echo "Generating seqkit summary..."
+seqkit fx2tab \
+    -n -l -j "${THREADS}" \
+    "${RESULT_DIR}/${BASENAME}.fasta.gz" \
+    | gzip > "${RESULT_DIR}/compleasm/${BASENAME}.tsv.gz"
+
+echo "All steps completed successfully for ${BASENAME}."

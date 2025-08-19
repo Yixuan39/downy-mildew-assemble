@@ -13,7 +13,7 @@ THREADS=32
 BUSCO_DB=$HOME/project_data/downy/BUSCO_DB
 
 echo "Processing: $FILE"
-bash hifiasm-meta.sh \
+bash ../code/hifiasm-meta.sh \
   -i ${FILE} \
   -o ${RESULT_DIR} \
   -b ${BUSCO_DB} \
