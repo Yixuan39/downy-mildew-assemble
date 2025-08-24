@@ -11,6 +11,8 @@ library(here)
 library(tidyverse)
 library(Biostrings)
 library(data.table)
+library(pctax)
+library(pcutils)
 library(gt)
 theme_set(theme_bw())
 ```
@@ -58,6 +60,17 @@ ggplot(read.length, aes(x = factor(rank), y = length, fill = is_scaffolded)) +
     y = "Length (bp)"
   )
 ```
+
+```{r}
+genomes.path <- list.files('~/project_data/downy/hifiasm/fcs-gx/kraken2/purge_dups/rag_tag', pattern = '.fasta.gz', full.names = TRUE)
+genomes <- list()
+for (file in genomes.path) {
+  genome <- readDNAStringSet(file)
+  unplaced.congtigs <- genome |> names() |> str_subset('RagTag', negate = T)
+  writeXStringSet(genome[unplaced.congtigs], here('data', 'unplaced-contigs', str_remove(basename(file), '.gz')))
+}
+```
+
 
 We see there's one long contig in SC1982 that is not glued (or there's no cds sequence detected by helixer). `ptg000299l_1` is the name of that contig.
 
@@ -118,12 +131,28 @@ out <- run_genespace(gpar)
 for (asm in asm2run){
   plot_riparian(
     gsParam = out,
-    genomeIDs = c(asm, genomes2run),
-    refGenome = "Peronospora_effusa",
+    genomeIDs = c(asm, genomes2run[1]),
+    refGenome = asm,
     chrLabFontSize = 2,
     useRegions = FALSE)
 }
 ```
+
+```{r echo=FALSE}
+for (ref in genomes2run){
+  for (asm in asm2run){
+    plot_riparian(
+      gsParam = out,
+      genomeIDs = c(asm, ref),
+      refGenome = asm,
+      pdfFile = here('figures', str_c(asm, '-vs-', ref, '.pdf')),
+      chrLabFontSize = 3,
+      useRegions = FALSE)
+  }
+}
+
+```
+
 
 Number of contigs mapped to P.effusa
 
@@ -135,6 +164,35 @@ syntenicRegion <- file.path(wd, 'results','syntenicBlock_coordinates.csv') |>
 syntenicRegion |>
   summarise(unique_chr_count = n_distinct(chr1)) |> 
   gt()
+```
+
+# Phylogenetic Tree
+
+```{r}
+library(ggtree)
+tree.path <- file.path(wd, '/orthofinder/Results_Aug09/Species_Tree/SpeciesTree_rooted.txt')
+ggtree(read.tree(tree.path)) + geom_tiplab(align = T)  + xlim(0, 0.6)
+```
+
+# Unplaced contigs
+
+```{r}
+blast.tb <- list.files(here('data', 'unplaced-contigs'), pattern = '.tsv', full.names = TRUE) |> 
+  map_dfr(function(file) {
+    read.table(file) |> mutate(sample = str_remove(basename(file), '.tsv'))
+  })
+blast <- data.frame(sample = blast.tb$sample,
+                    seqid = blast.tb$V1,
+                    e.value = blast.tb$V9,
+                    name_or_id2df(blast.tb$V10,mode = 'id',fill_miss_rank = FALSE,add_prefix = FALSE) |> select(Phylum, Species))
+blast |> 
+  group_by(sample) |> 
+  summarise(unplaced.hit=n()) |> 
+  gt()
+
+blast |> 
+  group_by(sample) |> 
+  gt() 
 ```
 
 
