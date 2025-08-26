@@ -19,11 +19,11 @@ mkdir -p "${RESULT_DIR}/compleasm"
 
 echo "Processing file: $FILE"
 metaMDBG asm \
-  --out-dir ${RESULT_DIR}/${BASENAME}.asm \
+  --out-dir ${RESULT_DIR}/${BASENAME} \
   --in-hifi ${FILE} \
   --threads ${THREADS}
-mv ${RESULT_DIR}/${BASENAME}.asm/contigs.fasta.gz ${RESULT_DIR}/${BASENAME}.fasta.gz
-rm -r ${RESULT_DIR}/${BASENAME}.asm
+mv ${RESULT_DIR}/${BASENAME}/contigs.fasta.gz ${RESULT_DIR}/${BASENAME}.fasta.gz
+rm -r ${RESULT_DIR}/${BASENAME}
 
 echo "Running quality-check..."
 python quality-check.py \
