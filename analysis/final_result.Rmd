@@ -170,7 +170,7 @@ syntenicRegion |>
 
 ```{r}
 library(ggtree)
-tree.path <- file.path(wd, '/orthofinder/Results_Aug09/Species_Tree/SpeciesTree_rooted.txt')
+tree.path <- file.path(wd, 'results/SpeciesTree_rooted.txt')
 ggtree(read.tree(tree.path)) + geom_tiplab(align = T)  + xlim(0, 0.6)
 ```
 
