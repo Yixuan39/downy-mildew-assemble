@@ -2,7 +2,6 @@
 #SBATCH --job-name=hifiasm-meta
 #SBATCH --array=0-2
 #SBATCH --cpus-per-task=32
-#SBATCH --mem=0
 
 # run hifiasm on raw pacbio hifi reads
 INPUT_DIR=$HOME/project_data/downy/GSL_Data/filtered_fastq
@@ -13,7 +12,7 @@ THREADS=32
 BUSCO_DB=$HOME/project_data/downy/BUSCO_DB
 
 echo "Processing: $FILE"
-bash ../code/hifiasm-meta.sh \
+bash hifiasm-meta.sh \
   -i ${FILE} \
   -o ${RESULT_DIR} \
   -b ${BUSCO_DB} \
