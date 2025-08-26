@@ -43,14 +43,22 @@ ragtag.py scaffold \
   ${REF} \
   ${RESULT_DIR}/${BASENAME}/${BASENAME}.fasta
   
+# self patching
 ragtag.py patch \
   -o ${RESULT_DIR}/${BASENAME} \
   -w \
-  -u \
   ${RESULT_DIR}/${BASENAME}/ragtag.scaffold.fasta \
   ${RESULT_DIR}/${BASENAME}/${BASENAME}.query.fasta
   
-gzip -c "${RESULT_DIR}/${BASENAME}/ragtag.patch.fasta" > "${RESULT_DIR}/${BASENAME}.fasta.gz"
+# refine scaffolding
+ragtag.py scaffold \
+  -o ${RESULT_DIR}/${BASENAME} \
+  -w \
+  -t ${THREADS} \
+  ${REF} \
+  ${RESULT_DIR}/${BASENAME}/ragtag.patch.fasta
+  
+gzip -c "${RESULT_DIR}/${BASENAME}/ragtag.scaffold.fasta" > "${RESULT_DIR}/${BASENAME}.fasta.gz"
 rm -rf "${RESULT_DIR}/${BASENAME}"
 
 python quality-check.py \

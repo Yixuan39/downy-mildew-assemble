@@ -1,13 +1,13 @@
 #!/bin/bash
 #SBATCH --array=0-2
-#SBATCH --cpus-per-task=32
+#SBATCH --cpus-per-task=24
 
 INPUT_DIR=$HOME/project_data/downy/hifiasm/fcs-gx/kraken2/purge_dups/rag_tag
 RESULT_DIR=$INPUT_DIR/helixer
 FILES=($(find "$INPUT_DIR" -type f -name "*.fasta.gz"))
 FILE=${FILES[$SLURM_ARRAY_TASK_ID]}
 BUSCO_DB="$HOME/project_data/downy/BUSCO_DB"
-THREADS=32
+THREADS=24
 mkdir -p ${RESULT_DIR}
 echo "Processing: $FILE"
 BASENAME=$(basename ${FILE})  
