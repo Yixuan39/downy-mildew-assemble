@@ -84,9 +84,9 @@ ggplot(full.tb, aes(x = confidence, y = as.numeric(S), color = database)) +
   geom_point() +
   facet_grid(data~sample)
 
-ggplot(full.tb, aes(x = confidence, y = busco, color = database)) +
+ggplot(full.tb, aes(x = confidence, y = busco, color = database, shape = factor(sample))) +
   geom_point() +
-  facet_grid(data~sample)
+  facet_grid(data~method)
 ```
 
 
