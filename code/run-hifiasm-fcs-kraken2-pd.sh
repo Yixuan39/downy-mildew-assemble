@@ -19,9 +19,9 @@ mapfile -t ASM_FILES < <(printf '%s\n' "$ASM_DIR"/*.fasta.gz | sort)
 mapfile -t HIFI_FILES < <(printf '%s\n' "$HIFI_DIR"/*.fastq.gz | sort)
 
 # you might want to adjust these numbers based on your sample.
-L=(70 70 5)
-M=(170 240 65)
-U=(380 410 180)
+L=(80 70 7)
+M=(165 220 65)
+U=(360 400 180)
 
 ASM_FILE="${ASM_FILES[$SLURM_ARRAY_TASK_ID]}"
 HIFI_FILE="${HIFI_FILES[$SLURM_ARRAY_TASK_ID]}"
