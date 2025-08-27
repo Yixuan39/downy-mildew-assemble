@@ -8,7 +8,7 @@ set -euo pipefail
 # with the FCS-GX cleaned hifiasm primary assembly, decrease duplication with purge_dups.
 ASM_DIR="$HOME/project_data/downy/hifiasm/fcs-gx/kraken2"
 HIFI_DIR="$HOME/project_data/downy/GSL_Data/filtered_fastq"
-RESULT_DIR="$ASM_DIR/purge_dups2"
+RESULT_DIR="$ASM_DIR/purge_dups"
 BUSCO_DB="$HOME/project_data/downy/BUSCO_DB"
 THREADS=32
 
@@ -19,8 +19,8 @@ mapfile -t ASM_FILES < <(printf '%s\n' "$ASM_DIR"/*.fasta.gz | sort)
 mapfile -t HIFI_FILES < <(printf '%s\n' "$HIFI_DIR"/*.fastq.gz | sort)
 
 # you might want to adjust these numbers based on your sample.
-L=(80 70 7)
-M=(165 220 65)
+L=(80 80 5)
+M=(165 240 65)
 U=(360 400 180)
 
 ASM_FILE="${ASM_FILES[$SLURM_ARRAY_TASK_ID]}"
