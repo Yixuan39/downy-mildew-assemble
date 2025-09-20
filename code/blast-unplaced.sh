@@ -2,8 +2,8 @@
 #SBATCH --array=0-2
 #SBATCH --cpus-per-task=32
 
-INPUT_DIR=$HOME/Projects/downy-mildew-assemble/data/unplaced-contigs
-RESULT_DIR=$HOME/Projects/downy-mildew-assemble/data/unplaced-contigs
+INPUT_DIR=$HOME/project_data/downy/hifiasm/fcs-gx/kraken2/purge_dups/rag_tag/unplaced-contigs
+RESULT_DIR=$HOME/project_data/downy/hifiasm/fcs-gx/kraken2/purge_dups/rag_tag/unplaced-contigs
 FILES=($(find "$INPUT_DIR" -type f -name "*.fasta"))
 FILE=${FILES[$SLURM_ARRAY_TASK_ID]}
 THREADS=32
