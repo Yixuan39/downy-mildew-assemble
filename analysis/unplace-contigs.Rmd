@@ -1,0 +1,45 @@
+---
+title: "unplace-contigs"
+output: html_document
+---
+
+```{r}
+library(Biostrings)
+library(tidyverse)
+```
+
+
+```{r}
+genome.path <- '~/project_data/downy/hifiasm/fcs-gx/kraken2/purge_dups/rag_tag'
+genome.files <- list.files(genome.path, pattern = '.fasta.gz', full.names = TRUE)
+dir.create(file.path(genome.path, 'unplaced-contigs'), showWarnings = FALSE)
+genomes <- list()
+for (file in genome.files) {
+  genome <- readDNAStringSet(file)
+  unplaced.congtigs <- genome |> names() |> str_subset('RagTag', negate = T)
+  writeXStringSet(genome[unplaced.congtigs], file.path(genomes.path, 'unplaced-contigs', str_remove(basename(file), '.gz')))
+}
+```
+
+
+# Unplaced contigs
+
+```{r}
+blast.tb <- list.files(file.path(genomes.path, 'unplaced-contigs'), pattern = '.tsv', full.names = TRUE) |> 
+  map_dfr(function(file) {
+    read.table(file, colClasses = c('character')) |> mutate(sample = str_remove(basename(file), '.tsv'))
+  })
+blast <- data.frame(sample = blast.tb$sample,
+                    seqid = blast.tb$V1,
+                    length = blast.tb$V4,
+                    e.value = blast.tb$V9,
+                    name_or_id2df(blast.tb$V10,mode = 'id',fill_miss_rank = FALSE,add_prefix = FALSE) |> select(Phylum, Species))
+blast |> 
+  group_by(sample) |> 
+  summarise(unplaced.hit=n()) |> 
+  gt()
+
+blast |> 
+  group_by(sample, seqid) |> 
+  gt() 
+```
