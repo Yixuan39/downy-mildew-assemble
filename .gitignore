@@ -58,7 +58,6 @@ rsconnect/
 .gitattributes
 
 # large input files
-*.fna*
 *.fastq
 *.fastq.gz
 *.fq.gz
