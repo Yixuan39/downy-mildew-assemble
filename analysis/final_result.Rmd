@@ -61,17 +61,6 @@ ggplot(read.length, aes(x = factor(rank), y = length, fill = is_scaffolded)) +
   )
 ```
 
-```{r}
-genomes.path <- list.files('~/project_data/downy/hifiasm/fcs-gx/kraken2/purge_dups/rag_tag', pattern = '.fasta.gz', full.names = TRUE)
-genomes <- list()
-for (file in genomes.path) {
-  genome <- readDNAStringSet(file)
-  unplaced.congtigs <- genome |> names() |> str_subset('RagTag', negate = T)
-  writeXStringSet(genome[unplaced.congtigs], here('data', 'unplaced-contigs', str_remove(basename(file), '.gz')))
-}
-```
-
-
 We see there's one long contig in SC1982 that is not glued (or there's no cds sequence detected by helixer). `ptg000299l_1` is the name of that contig.
 
 ```{r echo=FALSE}
@@ -139,6 +128,16 @@ for (asm in asm2run){
 ```
 
 ```{r echo=FALSE}
+plot_riparian(
+  gsParam = out,
+  genomeIDs = asm2run,
+  refGenome = asm2run[1],
+  chrLabFontSize = 2,
+  useRegions = FALSE)
+```
+
+
+```{r echo=FALSE}
 for (ref in genomes2run){
   for (asm in asm2run){
     plot_riparian(
@@ -174,25 +173,6 @@ tree.path <- file.path(wd, 'results/SpeciesTree_rooted.txt')
 ggtree(read.tree(tree.path)) + geom_tiplab(align = T)  + xlim(0, 0.6)
 ```
 
-# Unplaced contigs
 
-```{r}
-blast.tb <- list.files(here('data', 'unplaced-contigs'), pattern = '.tsv', full.names = TRUE) |> 
-  map_dfr(function(file) {
-    read.table(file) |> mutate(sample = str_remove(basename(file), '.tsv'))
-  })
-blast <- data.frame(sample = blast.tb$sample,
-                    seqid = blast.tb$V1,
-                    e.value = blast.tb$V9,
-                    name_or_id2df(blast.tb$V10,mode = 'id',fill_miss_rank = FALSE,add_prefix = FALSE) |> select(Phylum, Species))
-blast |> 
-  group_by(sample) |> 
-  summarise(unplaced.hit=n()) |> 
-  gt()
-
-blast |> 
-  group_by(sample) |> 
-  gt() 
-```
 
 
