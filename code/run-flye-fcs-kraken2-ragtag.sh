@@ -6,7 +6,7 @@
 set -euo pipefail
 
 # with hifiasm results, run purge_dups on the primary assembly.
-INPUT_DIR="$HOME/project_data/downy/hifiasm/fcs-gx/kraken2/purge_dups"
+INPUT_DIR="$HOME/project_data/downy/flye/fcs-gx/kraken2/"
 REF="$HOME/project_data/downy/oomycota-genome/Peronospora-effusa.fna"
 RESULT_DIR="$INPUT_DIR/rag_tag"
 BUSCO_DB="$HOME/project_data/downy/BUSCO_DB"

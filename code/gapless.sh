@@ -32,18 +32,18 @@ BASENAME=$(basename "$INPUT_FILE")
 BASENAME=${BASENAME%.fasta.gz}  
 mkdir -p "${RESULT_DIR}/${BASENAME}"
 echo "Base name: $BASENAME"
+echo "input: $INPUT_FILE"
+echo "query: $QUERY"
 
-gzip -dkc ${INPUT_FILE} > ${RESULT_DIR}/${BASENAME}/${BASENAME}.fasta
-gzip -dkc ${QUERY} > ${RESULT_DIR}/${BASENAME}/${BASENAME}.query.fasta
-
-ragtag.py scaffold \
+gapless.sh \
+  -r \
+  -i ${INPUT_FILE} \
+  -t pb_hifi \
+  -j ${THREADS} \
   -o ${RESULT_DIR}/${BASENAME} \
-  -w \
-  -t ${THREADS} \
-  ${REF} \
-  ${RESULT_DIR}/${BASENAME}/${BASENAME}.fasta
+  ${QUERY}
   
-gzip -c "${RESULT_DIR}/${BASENAME}/ragtag.scaffold.fasta" > "${RESULT_DIR}/${BASENAME}.fasta.gz"
+gzip -c "${RESULT_DIR}/${BASENAME}/gapless.fa" > "${RESULT_DIR}/${BASENAME}.fasta.gz"
 rm -rf "${RESULT_DIR}/${BASENAME}"
 
 python quality-check.py \

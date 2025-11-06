@@ -6,7 +6,7 @@
 set -euo pipefail
 
 # after cleaning with fcs, verify and clean with Kraken2
-INPUT_DIR="$HOME/project_data/downy/hifiasm"
+INPUT_DIR="$HOME/project_data/downy/flye/fcs-gx"
 RESULT_DIR="$INPUT_DIR/kraken2"
 Kraken_DB="$HOME/project_data/downy/KrakenDB/oomycota-genome"
 BUSCO_DB="$HOME/project_data/downy/BUSCO_DB"

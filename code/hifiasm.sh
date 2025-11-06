@@ -45,7 +45,6 @@ mkdir -p "${RESULT_DIR}/compleasm"
 echo "Running hifiasm..."
 hifiasm \
     -t "${THREADS}" \
-    -l0 \
     --primary \
     -o "${RESULT_DIR}/${BASENAME}/${BASENAME}.asm" \
     "${INPUT_FILE}"

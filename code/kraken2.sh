@@ -137,6 +137,15 @@ elif [ "$MODE" = "extract" ] || [ "$MODE" = "exclude" ]; then
           --output "${RESULT_DIR}/${BASENAME}.fasta" \
           --include-children
           
+        extract_kraken_reads.py \
+          -k "${KRAKEN_OUT}" \
+          -s "${INPUT_FILE}" \
+          --report "${KREPORT_OUT}" \
+          --taxid ${TAXID} \
+          --output "${RESULT_DIR}/${BASENAME}.fastq" \
+          --include-children \
+          --fastq-output
+          
     else # exclude mode
         echo "Running in 'exclude' mode for TAXID ${TAXID}..."
         kraken2 \
@@ -152,6 +161,9 @@ elif [ "$MODE" = "extract" ] || [ "$MODE" = "exclude" ]; then
     echo "Compressing filtered reads..."
     pigz -c "${RESULT_DIR}/${BASENAME}.fasta" > "${RESULT_DIR}/${BASENAME}.fasta.gz"
     rm "${RESULT_DIR}/${BASENAME}.fasta"
+    
+    pigz -c "${RESULT_DIR}/${BASENAME}.fastq" > "${RESULT_DIR}/${BASENAME}.fastq.gz"
+    rm "${RESULT_DIR}/${BASENAME}.fastq"
 
     echo "--- Starting Quality Check ---"
     python quality-check.py \

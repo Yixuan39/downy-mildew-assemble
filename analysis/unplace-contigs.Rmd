@@ -34,13 +34,12 @@ blast.tb <- list.files(file.path(genome.path, 'unplaced-contigs'), pattern = '.n
   })
 blast <- data.frame(sample = blast.tb$sample,
                     seqid = blast.tb$V1,
-                    length = blast.tb$V4,
-                    e.value = blast.tb$V9,
-                    name_or_id2df(blast.tb$V10,mode = 'id',fill_miss_rank = FALSE,add_prefix = FALSE) |> select(Phylum, Species))
-blast |> 
-  group_by(sample) |> 
-  summarise(unplaced.hit=n()) |> 
-  gt()
+                    pident = blast.tb$V3, # percentage identity
+                    align.length = blast.tb$V4, # alignment length
+                    query.length = blast.tb$V5,
+                    subject.length = blast.tb$V6,
+                    e.value = blast.tb$V7,
+                    name_or_id2df(blast.tb$V8,mode = 'id',fill_miss_rank = FALSE,add_prefix = FALSE) |> select(Phylum, Species))
 
 blast |> 
   group_by(sample, seqid) |> 
@@ -56,8 +55,11 @@ blast.tb <- list.files(file.path(genome.path, 'unplaced-contigs'), pattern = '.m
   })
 blast <- data.frame(sample = blast.tb$sample,
                     seqid = blast.tb$V1,
-                    length = blast.tb$V4,
-                    e.value = blast.tb$V9)
+                    pident = blast.tb$V3, # percentage identity
+                    align.length = blast.tb$V4, # alignment length
+                    query.length = blast.tb$V5,
+                    subject.length = blast.tb$V6,
+                    e.value = blast.tb$V7)
 
 blast |> 
   group_by(sample) |> 

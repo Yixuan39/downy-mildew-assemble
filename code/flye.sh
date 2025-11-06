@@ -40,18 +40,17 @@ echo "Base name: $BASENAME"
 # Create output directories
 mkdir -p "${RESULT_DIR}/${BASENAME}"
 mkdir -p "${RESULT_DIR}/compleasm"
+
+# Run hifiasm, disallow purge dup, only generate primary
+echo "Running flye..."
     
-hifiasm_meta \
-    -t "${THREADS}" \
-    -o "${RESULT_DIR}/${BASENAME}/${BASENAME}.asm" \
-    "${INPUT_FILE}"
+flye \
+    --threads "${THREADS}" \
+    --pacbio-hifi "${INPUT_FILE}" \
+    --out-dir "${RESULT_DIR}/${BASENAME}/${BASENAME}.asm" \
+    --no-alt-contigs
 
-echo "Converting GFA to FASTA..."
-gfatools gfa2fa \
-    "${RESULT_DIR}/${BASENAME}/${BASENAME}.asm.p_ctg.gfa" \
-    > "${RESULT_DIR}/${BASENAME}/${BASENAME}.asm.p_ctg.fa"
-
-gzip -c "${RESULT_DIR}/${BASENAME}/${BASENAME}.asm.p_ctg.fa" \
+gzip -c "${RESULT_DIR}/${BASENAME}/${BASENAME}.asm/assembly.fasta" \
     > "${RESULT_DIR}/${BASENAME}.fasta.gz"
 
 # Clean up intermediate directory

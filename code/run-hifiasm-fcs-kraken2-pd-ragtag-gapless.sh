@@ -1,26 +1,27 @@
 #!/bin/bash
-#SBATCH --job-name=rag_tag
+#SBATCH --job-name=gapless
 #SBATCH --array=0-2
-#SBATCH --cpus-per-task=24
+#SBATCH --cpus-per-task=32
 
 set -euo pipefail
 
 # with hifiasm results, run purge_dups on the primary assembly.
-INPUT_DIR="$HOME/project_data/downy/hifiasm/fcs-gx/kraken2/purge_dups"
+INPUT_DIR="$HOME/project_data/downy/hifiasm/fcs-gx/kraken2/purge_dups/rag_tag"
 REF="$HOME/project_data/downy/oomycota-genome/Peronospora-effusa.fna"
-RESULT_DIR="$INPUT_DIR/rag_tag"
+RESULT_DIR="$INPUT_DIR/gapless"
 BUSCO_DB="$HOME/project_data/downy/BUSCO_DB"
-THREADS=24
+THREADS=32
 
 mkdir -p "$RESULT_DIR"
 
 FILES=("$INPUT_DIR"/*.fasta.gz)
 FILE="${FILES[$SLURM_ARRAY_TASK_ID]}"
 BASENAME=$(basename "$FILE")  
+BASENAME=${BASENAME%.fasta.gz}  
 
-QUERRY="$HOME/project_data/downy/hifiasm/$BASENAME"
+QUERRY="$HOME/project_data/downy/GSL_Data/filtered_fastq/$BASENAME.fastq.gz"
 
-bash ragtag.sh \
+bash gapless.sh \
   -i "$FILE" \
   -o "$RESULT_DIR" \
   -b "$BUSCO_DB" \
