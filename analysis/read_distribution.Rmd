@@ -18,12 +18,12 @@ theme_set(theme_bw())
 ```{r echo=FALSE}
 # child ids under oomycota: 4762
 child.id <- c(taxizedb::downstream(4762)$`4762`$childtaxa_id, '4762')
-files <- list.files('~/project_data/downy/Kraken2/raw',
+files <- list.files('~/project_data/downy/Kraken2',
                     full.names = TRUE, recursive = TRUE, pattern = '.kraken$')
 df <- map_dfr(files, function(file) {
   data <- fread(file, drop = 5, showProgress = FALSE)
   colnames(data) <- c('status', 'id', 'tax', 'length')
-  data <- data %>% mutate(file = str_remove(basename(file), '.fastq.gz.kraken'))
+  data <- data %>% mutate(file = str_remove(basename(file), '.kraken'))
 }) %>% mutate(is.oomycota = (tax %in% child.id))
 
 ggplot(df) +

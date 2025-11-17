@@ -1,12 +1,11 @@
 #!/bin/bash
 
 usage() {
-    echo "Usage: $0 -i <input_file> -o <output_dir> -b <busco_db> -r <refseq> -q <query> -p <threads>"
+    echo "Usage: $0 -i <input_file> -o <output_dir> -b <busco_db> -q <query> -p <threads>"
     echo ""
     echo "  -i  Input FASTA file"
     echo "  -o  Output directory"
     echo "  -b  BUSCO database path"
-    echo "  -r  reference file"
     echo "  -q  query asm file for patching"
     echo "  -p  Number of threads"
     echo "  -h  Show this help message"
@@ -19,7 +18,6 @@ while getopts "i:o:d:b:r:q:p:h" opt; do
         i) INPUT_FILE="$OPTARG" ;;
         o) RESULT_DIR="$OPTARG" ;;
         b) BUSCO_DB="$OPTARG" ;;
-        r) REF="$OPTARG" ;;
         q) QUERY="$OPTARG" ;;
         p) THREADS="$OPTARG" ;;
         h) usage ;;
@@ -31,17 +29,14 @@ set -euo pipefail
 BASENAME=$(basename "$INPUT_FILE")  
 BASENAME=${BASENAME%.fasta.gz}  
 mkdir -p "${RESULT_DIR}/${BASENAME}"
-echo "Base name: $BASENAME"
-echo "input: $INPUT_FILE"
-echo "query: $QUERY"
 
 gapless.sh \
   -r \
+  -n 3 \
   -i ${INPUT_FILE} \
   -t pb_hifi \
   -j ${THREADS} \
-  -o ${RESULT_DIR}/${BASENAME} \
-  ${QUERY}
+  -o ${RESULT_DIR}/${BASENAME} $QUERY
   
 gzip -c "${RESULT_DIR}/${BASENAME}/gapless.fa" > "${RESULT_DIR}/${BASENAME}.fasta.gz"
 rm -rf "${RESULT_DIR}/${BASENAME}"

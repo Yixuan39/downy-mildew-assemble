@@ -4,7 +4,7 @@
 #SBATCH --cpus-per-task=32
 
 # run hifiasm on raw pacbio hifi reads
-INPUT_DIR=$HOME/project_data/downy/GSL_Data/filtered_fastq
+INPUT_DIR=$HOME/project_data/downy/filtlong/
 RESULT_DIR=$HOME/project_data/downy/hifiasm
 FILES=($(find "$INPUT_DIR" -type f -name "*.fastq.gz"))
 FILE=${FILES[$SLURM_ARRAY_TASK_ID]}

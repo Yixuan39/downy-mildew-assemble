@@ -7,7 +7,7 @@ set -euo pipefail
 
 # with the FCS-GX cleaned hifiasm primary assembly, decrease duplication with purge_dups.
 ASM_DIR="$HOME/project_data/downy/hifiasm/fcs-gx/kraken2"
-HIFI_DIR="$HOME/project_data/downy/GSL_Data/filtered_fastq"
+HIFI_DIR="$HOME/project_data/downy/hifiasm/fcs-gx/kraken2/minimap2"
 RESULT_DIR="$ASM_DIR/purge_dups"
 BUSCO_DB="$HOME/project_data/downy/BUSCO_DB"
 THREADS=32
@@ -34,11 +34,18 @@ echo "  m: " ${M[$SLURM_ARRAY_TASK_ID]}
 echo "  u: " ${U[$SLURM_ARRAY_TASK_ID]}
 
 bash purge_dups.sh \
-  -a "$ASM_FILE" \
-  -r "$HIFI_FILE" \
-  -o "$RESULT_DIR" \
-  -l ${L[$SLURM_ARRAY_TASK_ID]} \
-  -m ${M[$SLURM_ARRAY_TASK_ID]} \
-  -u ${U[$SLURM_ARRAY_TASK_ID]} \
-  -b "$BUSCO_DB" \
-  -p "$THREADS"
+   -a "$ASM_FILE" \
+   -r "$HIFI_FILE" \
+   -o "$RESULT_DIR" \
+   -b "$BUSCO_DB" \
+   -p "$THREADS"
+
+#bash purge_dups.sh \
+#   -a "$ASM_FILE" \
+#   -r "$HIFI_FILE" \
+#   -o "$RESULT_DIR" \
+#   -l ${L[$SLURM_ARRAY_TASK_ID]} \
+#   -m ${M[$SLURM_ARRAY_TASK_ID]} \
+#   -u ${U[$SLURM_ARRAY_TASK_ID]} \
+#   -b "$BUSCO_DB" \
+#   -p "$THREADS"

@@ -4,8 +4,8 @@
 #SBATCH --cpus-per-task=32
 
 # run flye on raw pacbio hifi reads
-INPUT_DIR=$HOME/project_data/downy/GSL_Data/filtered_fastq
-RESULT_DIR=$HOME/project_data/downy/flye
+INPUT_DIR=$HOME/project_data/downy/filtlong/filtadapt
+RESULT_DIR=$HOME/project_data/downy/flye_test
 FILES=($(find "$INPUT_DIR" -type f -name "*.fastq.gz"))
 FILE=${FILES[$SLURM_ARRAY_TASK_ID]}
 THREADS=32
