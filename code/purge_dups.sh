@@ -70,6 +70,11 @@ else
     calcuts "${RESULT_DIR}/${BASENAME}/PB.stat" \
       > "${RESULT_DIR}/${BASENAME}/cutoffs"
 fi
+mkdir -p ${RESULT_DIR}/compleasm
+hist_plot.py \
+  -c "${RESULT_DIR}/${BASENAME}/cutoffs" \
+  "${RESULT_DIR}/${BASENAME}/PB.stat" \
+  "${RESULT_DIR}/compleasm/${BASENAME}.png"
 
 split_fa \
   "${ASM_FILE}" \
@@ -80,7 +85,7 @@ minimap2 -xasm5 -DP -t "${THREADS}" \
   "${RESULT_DIR}/${BASENAME}/${BASENAME}.split.fasta" \
   | gzip -c - > "${RESULT_DIR}/${BASENAME}/${BASENAME}.split.self.paf.gz"
 
-purge_dups -2 \
+purge_dups \
   -T "${RESULT_DIR}/${BASENAME}/cutoffs" \
   -c "${RESULT_DIR}/${BASENAME}/PB.base.cov" \
   "${RESULT_DIR}/${BASENAME}/${BASENAME}.split.self.paf.gz" \
@@ -102,16 +107,6 @@ python quality-check.py \
   --suffix ${BASENAME} \
   --library_path ${BUSCO_DB} \
   --threads ${THREADS}
-
-seqkit fx2tab \
-  "${RESULT_DIR}/${BASENAME}.fasta.gz" \
-  -n -l -j ${THREADS} \
-  -o "${RESULT_DIR}/compleasm/${BASENAME}.tsv.gz"
-
-hist_plot.py \
-  -c "${RESULT_DIR}/${BASENAME}/cutoffs" \
-  "${RESULT_DIR}/${BASENAME}/PB.stat" \
-  "${RESULT_DIR}/compleasm/${BASENAME}.png"
 
 # remove the temporary directory
 rm -rf "${RESULT_DIR}/${BASENAME}"

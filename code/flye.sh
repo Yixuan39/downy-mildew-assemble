@@ -48,8 +48,8 @@ flye \
     --threads "${THREADS}" \
     --pacbio-hifi "${INPUT_FILE}" \
     --out-dir "${RESULT_DIR}/${BASENAME}/${BASENAME}.asm" \
-    --no-alt-contigs
-
+    --meta 
+    
 gzip -c "${RESULT_DIR}/${BASENAME}/${BASENAME}.asm/assembly.fasta" \
     > "${RESULT_DIR}/${BASENAME}.fasta.gz"
 

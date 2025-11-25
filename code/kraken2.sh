@@ -137,15 +137,6 @@ elif [ "$MODE" = "extract" ] || [ "$MODE" = "exclude" ]; then
           --output "${RESULT_DIR}/${BASENAME}.fasta" \
           --include-children
           
-        extract_kraken_reads.py \
-          -k "${KRAKEN_OUT}" \
-          -s "${INPUT_FILE}" \
-          --report "${KREPORT_OUT}" \
-          --taxid ${TAXID} \
-          --output "${RESULT_DIR}/${BASENAME}.fastq" \
-          --include-children \
-          --fastq-output
-          
     else # exclude mode
         echo "Running in 'exclude' mode for TAXID ${TAXID}..."
         kraken2 \

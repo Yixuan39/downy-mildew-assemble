@@ -7,8 +7,8 @@
 
 set -euo pipefail
 
-# with hifiasm results, clean up the primary assembly with FCS-GX
-INPUT_DIR="$HOME/project_data/downy/hifiasm"
+# with flye results, clean up the primary assembly with FCS-GX
+INPUT_DIR="$HOME/project_data/downy/hifiasm-meta"
 RESULT_DIR="$INPUT_DIR/fcs-gx"
 GX_DB="$HOME/project_data/downy/fcs-db"
 BUSCO_DB="$HOME/project_data/downy/BUSCO_DB"

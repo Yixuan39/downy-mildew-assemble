@@ -6,7 +6,7 @@
 set -euo pipefail
 
 # after cleaning with fcs, verify and clean with Kraken2
-INPUT_DIR="$HOME/project_data/downy/hifiasm/fcs-gx/kraken2"
+INPUT_DIR="$HOME/project_data/downy/flye-meta/fcs-gx/"
 RESULT_DIR="$INPUT_DIR/minimap2"
 THREADS=32
 
@@ -22,8 +22,8 @@ echo "Base name: $BASENAME"
 echo "input: $FILE"
 echo "query: $QUERY"
 
-minimap2 -x map-hifi --secondary=no -a -t $THREADS $FILE $QUERY \
-| samtools view -b -F 0x904 -q 30 \
+minimap2 -ax map-hifi --secondary=no -t $THREADS $FILE $QUERY \
+| samtools view -b -F 0x4 \
 | samtools fastq -n - \
 | gzip > "${RESULT_DIR}/${BASENAME}.fastq.gz"
 

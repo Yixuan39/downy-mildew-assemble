@@ -6,13 +6,13 @@ This project aimed to assemble downy mildew genome collected from highly contami
 
 [Reference genome quality](https://yixuan39.github.io/downy-mildew-assemble/analysis/ref-genome-quality.html)
 
-[Results of pipeline: hifiasm->FCS-GX->purge_dups](https://yixuan39.github.io/downy-mildew-assemble/analysis/pipeline-result.html)
-
 [Read length distribution and taxonomy analysis](https://yixuan39.github.io/downy-mildew-assemble/analysis/read_distribution.html)
 
-[FCS-GX taxonomy analysis of contigs](https://yixuan39.github.io/downy-mildew-assemble/analysis/taxonomy-analysis.html)
-
 [Final assembly](https://yixuan39.github.io/downy-mildew-assemble/analysis/final_result.html)
+
+[unplaced contigs](https://yixuan39.github.io/downy-mildew-assemble/analysis/unplaced-contigs.html)
+
+[scaffolds](https://yixuan39.github.io/downy-mildew-assemble/analysis/scaffolds.html)
 
 # Pipeline
 

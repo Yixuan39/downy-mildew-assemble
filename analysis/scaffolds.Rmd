@@ -1,0 +1,59 @@
+---
+title: "unplace-contigs"
+output: html_document
+---
+
+```{r message=FALSE, echo=FALSE}
+library(Biostrings)
+library(tidyverse)
+library(pctax)
+library(pcutils)
+library(gt)
+```
+
+# mitochondria
+
+```{r echo=FALSE}
+blast.tb <- list.files('~/project_data/downy/metaMDBG/fcs-gx/minimap2/rasusa/hifiasm/fcs-gx/rag_tag/blast',
+                       pattern = '.mito.tsv', full.names = TRUE) |> 
+  map_dfr(function(file) {
+    read.table(file, colClasses = c('character')) |> mutate(sample = str_remove(basename(file), '.mito.tsv'))
+  })
+blast <- data.frame(sample = blast.tb$sample,
+                    seqid = blast.tb$V1,
+                    pident = blast.tb$V3, # percentage identity
+                    align.length = blast.tb$V4, # alignment length
+                    query.length = blast.tb$V5,
+                    subject.length = blast.tb$V6,
+                    e.value = blast.tb$V7)
+
+blast |> 
+  filter(str_detect(seqid, 'RagTag')) |> 
+  group_by(sample) |> 
+  gt() 
+```
+
+# BLAST nt/nr
+
+```{r echo=FALSE}
+blast.tb <- list.files('~/project_data/downy/metaMDBG/fcs-gx/minimap2/rasusa/hifiasm/fcs-gx/rag_tag/blast',
+                       pattern = '.nt.tsv', full.names = TRUE) |> 
+  map_dfr(function(file) {
+    read.table(file, colClasses = c('character')) |> mutate(sample = str_remove(basename(file), '.nt.tsv'))
+  })
+blast <- data.frame(sample = blast.tb$sample,
+                    seqid = blast.tb$V1,
+                    pident = blast.tb$V3, # percentage identity
+                    align.length = blast.tb$V4, # alignment length
+                    query.length = blast.tb$V5,
+                    subject.length = blast.tb$V6,
+                    e.value = blast.tb$V7,
+                    name_or_id2df(blast.tb$V8,mode = 'id',fill_miss_rank = FALSE,add_prefix = FALSE) |> select(Phylum, Species))
+
+blast |> 
+  filter(str_detect(seqid, 'RagTag')) |> 
+  group_by(sample, seqid) |> 
+  gt() 
+```
+
+

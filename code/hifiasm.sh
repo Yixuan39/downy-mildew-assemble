@@ -45,22 +45,16 @@ mkdir -p "${RESULT_DIR}/compleasm"
 echo "Running hifiasm..."
 hifiasm \
     -t "${THREADS}" \
+    -l 1 \
     --primary \
-    -o "${RESULT_DIR}/${BASENAME}/${BASENAME}.asm" \
+    -o "${RESULT_DIR}/${BASENAME}/asm" \
     "${INPUT_FILE}"
 
-echo "Converting GFA to FASTA..."
 gfatools gfa2fa \
-    "${RESULT_DIR}/${BASENAME}/${BASENAME}.asm.p_ctg.gfa" \
-    > "${RESULT_DIR}/${BASENAME}/${BASENAME}.asm.p_ctg.fa"
+    "${RESULT_DIR}/${BASENAME}/asm.p_ctg.gfa" \
+    | pigz -p "${THREADS}" > "${RESULT_DIR}/${BASENAME}.fasta.gz"
 
-gzip -c "${RESULT_DIR}/${BASENAME}/${BASENAME}.asm.p_ctg.fa" \
-    > "${RESULT_DIR}/${BASENAME}.fasta.gz"
 
-# Clean up intermediate directory
-rm -rf "${RESULT_DIR:?}/${BASENAME}"
-
-echo "Running quality-check..."
 python quality-check.py \
     --input_file "${RESULT_DIR}/${BASENAME}.fasta.gz" \
     --output_dir "${RESULT_DIR}/compleasm" \
@@ -68,10 +62,3 @@ python quality-check.py \
     --library_path "${BUSCO_DB}" \
     --threads "${THREADS}"
 
-echo "Generating seqkit summary..."
-seqkit fx2tab \
-    -n -l -j "${THREADS}" \
-    "${RESULT_DIR}/${BASENAME}.fasta.gz" \
-    | gzip > "${RESULT_DIR}/compleasm/${BASENAME}.tsv.gz"
-
-echo "All steps completed successfully for ${BASENAME}."

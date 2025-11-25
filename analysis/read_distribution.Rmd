@@ -6,19 +6,18 @@ output: html_document
 ```{r echo=FALSE, message=FALSE}
 library(tidyverse)
 library(data.table)
-library(taxizedb)
 library(gt)
 library(here)
 library(pavian)
 theme_set(theme_bw())
+# child ids under oomycota: 4762
+child.id <- c(taxizedb::downstream(4762)$`4762`$childtaxa_id, '4762')
 ```
 
 # Read distribution of the PacBio HIFI reads
 
 ```{r echo=FALSE}
-# child ids under oomycota: 4762
-child.id <- c(taxizedb::downstream(4762)$`4762`$childtaxa_id, '4762')
-files <- list.files('~/project_data/downy/Kraken2',
+files <- list.files('~/project_data/downy/k2_pfp',
                     full.names = TRUE, recursive = TRUE, pattern = '.kraken$')
 df <- map_dfr(files, function(file) {
   data <- fread(file, drop = 5, showProgress = FALSE)
@@ -32,19 +31,13 @@ ggplot(df) +
   facet_wrap(~file, ncol = 1, scales = 'free_y')
 ```
 
-# Taxonomy abundance of PacBio raw reads
-
 ```{r echo=FALSE}
-files <- list.files('~/project_data/downy/Kraken2/raw',
+files <- list.files('~/project_data/downy/k2_pfp',
                     full.names = TRUE, recursive = TRUE, pattern = '.kreport$')
 df.rpt <- map_dfr(files, function(file) {
   read_report2(file, add_taxRank_columns = TRUE) %>%
     mutate(file = str_remove(basename(file), '.fastq.gz.kreport'))})
-```
 
-Is there any interesting species other than oomycota? Here, we are showing top 10 species level taxa with highest percentage for each isolates.
-
-```{r echo=FALSE}
 df.rpt %>% 
   filter(taxRank %in% c('U', 'S')) %>% 
   select(percentage, P, S, file) %>% 
@@ -54,16 +47,31 @@ df.rpt %>%
   fmt_number()
 ```
 
-# Taxonomy of contigs before using FCS
-
-Here we are looking at top 10 species level taxa with highest percentage for each isolates.
+# Read distribution of the PacBio HIFI reads
 
 ```{r echo=FALSE}
-files <- list.files('~/project_data/downy/Kraken2/asm',
+files <- list.files('~/project_data/downy/k2',
+                    full.names = TRUE, recursive = TRUE, pattern = '.kraken$')
+df <- map_dfr(files, function(file) {
+  data <- fread(file, drop = 5, showProgress = FALSE)
+  colnames(data) <- c('status', 'id', 'tax', 'length')
+  data <- data %>% mutate(file = str_remove(basename(file), '.kraken'))
+}) %>% mutate(is.oomycota = (tax %in% child.id))
+
+ggplot(df) +
+  geom_histogram(aes(x = length, fill = is.oomycota), binwidth = 1000) +
+  scale_y_continuous(labels = scales::label_comma()) +
+  facet_wrap(~file, ncol = 1, scales = 'free_y')
+```
+
+```{r echo=FALSE}
+files <- list.files('~/project_data/downy/k2',
                     full.names = TRUE, recursive = TRUE, pattern = '.kreport$')
-map_dfr(files, function(file) {
+df.rpt <- map_dfr(files, function(file) {
   read_report2(file, add_taxRank_columns = TRUE) %>%
-  mutate(file = str_remove(basename(file), '.fasta.gz.kreport'))}) %>% 
+    mutate(file = str_remove(basename(file), '.fastq.gz.kreport'))})
+
+df.rpt %>% 
   filter(taxRank %in% c('U', 'S')) %>% 
   select(percentage, P, S, file) %>% 
   group_by(file) %>% 
@@ -72,23 +80,20 @@ map_dfr(files, function(file) {
   fmt_number()
 ```
 
-# Taxonomy of contigs in final assembly
+The humuli genome.Total number of contigs: 5534
 
-We are looking at top 10 phylum level taxa with highest percentage for each isolates to check if most of the contigs belong to oomycete. 
-
-In isolate SC1982, the taxonomy is still diverse, and only a small part of contigs classified as oomycete. This might because this isolate has many non-coding regions.
-
-```{r echo=FALSE}
-files <- list.files('~/project_data/downy/Kraken2/final',
-                    full.names = TRUE, recursive = TRUE, pattern = '.kreport$')
-map_dfr(files, function(file) {
-  read_report2(file, add_taxRank_columns = TRUE) %>%
-  mutate(file = str_remove(basename(file), '.fasta.gz.kreport'))}) %>% 
-  filter(taxRank %in% c('U', 'P')) %>% 
-  select(percentage, P, file) %>% 
-  group_by(file) %>% 
-  slice_max(order_by = percentage, n = 10) %>% 
-  gt(row_group_as_column = T) %>% 
-  fmt_number()
+```{r}
+humuli.contam <- fread('~/project_data/downy/oomycota-genome/fcs-gx/Pseudoperonospora-humuli.fna.gz.fcs_gx_report.txt')
+head(humuli.contam)
+nrow(humuli.contam)
 ```
+
+The cubensis genome.Total number of contigs: 35539, and number of cantamination contigs are 21691
+
+```{r}
+cubensis.contam <- fread('~/project_data/downy/oomycota-genome/fcs-gx/Pseudoperonospora-cubensis.fna.gz.fcs_gx_report.txt')
+head(cubensis.contam)
+nrow(cubensis.contam)
+```
+
 
