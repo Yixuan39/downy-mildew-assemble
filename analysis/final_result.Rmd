@@ -30,13 +30,13 @@ read.tb <- function(path, method) {
 After synteny with P.effusa, we have new assembly files where some of the contigs are glued. Let's check their qualities.
 
 ```{r echo=FALSE}
-read.tb('~/project_data/downy/hifiasm/fcs-gx/kraken2/purge_dups/rag_tag/compleasm/', 'final assembly') |> gt() |> fmt_number()
+read.tb('~/project_data/downy/metaMDBG/fcs-gx/minimap2/rasusa/hifiasm/fcs-gx/rag_tag/compleasm/', 'final assembly') |> gt() |> fmt_number()
 ```
 
 # Read Length
 
 ```{r echo=FALSE}
-read.length <- list.files('~/project_data/downy/hifiasm/fcs-gx/kraken2/purge_dups/rag_tag', pattern = '.fasta.gz', full.names = TRUE) |> 
+read.length <- list.files('~/project_data/downy/metaMDBG/fcs-gx/minimap2/rasusa/hifiasm/fcs-gx/rag_tag', pattern = '.fasta.gz', full.names = TRUE) |> 
   map_dfr(function(file) {
     seq <- readDNAStringSet(file)
     data.frame(sample = str_remove(basename(file), '.fasta.gz'),
@@ -46,10 +46,12 @@ read.length <- list.files('~/project_data/downy/hifiasm/fcs-gx/kraken2/purge_dup
   arrange(desc(length)) |>
   top_n(30) |> 
   mutate(rank = 1:n()) |> 
-  mutate(is_scaffolded = str_detect(contig, '_RagTag')) |> 
+  mutate(ragtag = if_else(str_detect(contig, '_RagTag'), 'scaffold' ,'unplaced contigs')) |> 
   ungroup()
 
-ggplot(read.length, aes(x = factor(rank), y = length, fill = is_scaffolded)) +
+read.length$sample <- factor(read.length$sample, levels = c("Quesada_SQIIe_SC1982", "Quesada_SQIIe_MSU1", "Quesada_SQIIe_Phumuli"))
+
+ggplot(read.length, aes(x = factor(rank), y = length, fill = ragtag)) +
   geom_col() +
   scale_y_continuous(labels = scales::label_number(big.mark = ",")) +
   facet_wrap(~sample, scales = 'free_y', ncol = 1) +
@@ -61,12 +63,6 @@ ggplot(read.length, aes(x = factor(rank), y = length, fill = is_scaffolded)) +
   )
 ```
 
-We see there's one long contig in SC1982 that is not glued (or there's no cds sequence detected by helixer). `ptg000299l_1` is the name of that contig.
-
-```{r echo=FALSE}
-(read.length |> filter(sample == 'Quesada_SQIIe_SC1982'))[17,]
-```
-
 
 # Syntenic Plots
 
@@ -75,7 +71,7 @@ Here, we can run orthofinder and genespace to check the synteny of each isolate.
 The orthofinder we used is:
 
 ```{bash eval=FALSE}
-orthofinder -f /Users/yixuanyang/project_data/downy/genespace/tmp -t 10 -a 1 -X -o /Users/yixuanyang/project_data/downy/genespace/orthofinder
+orthofinder -f "$HOME/project_data/downy/genespace/tmp" -t 10 -a 10 -X -o "$HOME/project_data/downy/genespace/orthofinder"
 ```
 
 Reference genomes: Peronospora effusa, Bremia lactucae, Phytophthora sojae
@@ -95,7 +91,7 @@ parsedPaths <- parse_annotations(
   headerSep = NA,
   headerEntryIndex = 1,
   genespaceWd = wd)
-asm2run <- c("Quesada_SQIIe_MSU1", "Quesada_SQIIe_Phumuli", "Quesada_SQIIe_SC1982")
+asm2run <- c("Quesada_SQIIe_SC1982", "Quesada_SQIIe_MSU1", "Quesada_SQIIe_Phumuli")
 parsedPaths <- parse_annotations(
   rawGenomeRepo = genomeRepo,
   genomeDirs = asm2run,
@@ -121,23 +117,32 @@ for (asm in asm2run){
   plot_riparian(
     gsParam = out,
     genomeIDs = c(asm, genomes2run[1]),
-    refGenome = asm,
+    refGenome = genomes2run[1],
     chrLabFontSize = 2,
     useRegions = FALSE)
 }
 ```
 
 ```{r echo=FALSE}
-plot_riparian(
+full.plot <- plot_riparian(
   gsParam = out,
-  genomeIDs = asm2run,
-  refGenome = asm2run[1],
+  genomeIDs = c(genomes2run[1],asm2run),
+  refGenome = genomes2run[1],
+  chrLabFontSize = 2,
+  useRegions = FALSE)
+```
+
+```{r echo=FALSE}
+full.plot <- plot_riparian(
+  gsParam = out,
+  genomeIDs = c(genomes2run,asm2run),
+  refGenome = genomes2run[1],
   chrLabFontSize = 2,
   useRegions = FALSE)
 ```
 
 
-```{r echo=FALSE}
+```{r echo=FALSE, include=FALSE}
 for (ref in genomes2run){
   for (asm in asm2run){
     plot_riparian(
@@ -152,10 +157,7 @@ for (ref in genomes2run){
 
 ```
 
-
-Number of contigs mapped to P.effusa
-
-```{r echo=FALSE}
+```{r echo=FALSE, include=FALSE}
 syntenicRegion <- file.path(wd, 'results','syntenicBlock_coordinates.csv') |> 
   fread() |> filter((genome1 %in% asm2run)& genome2 == "Peronospora_effusa") |>
   group_by(genome1)
@@ -167,7 +169,7 @@ syntenicRegion |>
 
 # Phylogenetic Tree
 
-```{r}
+```{r echo=FALSE, message=FALSE}
 library(ggtree)
 tree.path <- file.path(wd, 'results/SpeciesTree_rooted.txt')
 ggtree(read.tree(tree.path)) + geom_tiplab(align = T)  + xlim(0, 0.6)
