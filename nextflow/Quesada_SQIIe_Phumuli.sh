@@ -3,7 +3,6 @@ set -euo pipefail
 
 nextflow run ${HOME}/software/TEA/main.nf \
     -profile slurm \
-    -resume \
     --reads "${HOME}/project_data/downy/GSL_Data/fastq/filtered/Quesada_SQIIe_Phumuli.fastq.gz" \
     --outdir "${HOME}/project_data/downy/results/Quesada_SQIIe_Phumuli" \
     --gx_db "${HOME}/project_data/downy/fcs-db" \
