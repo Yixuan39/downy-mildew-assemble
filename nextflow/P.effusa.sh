@@ -1,0 +1,13 @@
+#!/bin/bash
+set -euo pipefail
+
+nextflow run ${HOME}/software/TEA/main.nf \
+    -profile slurm \
+    --reads "${HOME}/project_data/downy/p.effusa/SRR15142133.fastq.gz" \
+    --outdir "${HOME}/project_data/downy/results/p.effusa" \
+    --gx_db "${HOME}/project_data/downy/fcs-db" \
+    --tax_id 4762 \
+    --rasusa_bases 3600000000 \
+    --threads 24 \
+    --quality_library "${HOME}/project_data/downy/BUSCO_DB" \
+    --quality_lineage stramenopiles
