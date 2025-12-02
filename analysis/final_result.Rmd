@@ -19,10 +19,8 @@ theme_set(theme_bw())
 
 ```{r echo=FALSE, message=FALSE}
 read.tb <- function(path, method) {
-  files <- list.files(path, full.names = TRUE, pattern = 'stram.csv')
-  tb <- map_dfr(files, function(x) {data.frame(method = method,
-                                               sample = str_remove(basename(x), '_stram.csv'),
-                                               fread(x))})
+  files <- list.files(path, full.names = TRUE, pattern = 'quality.csv', recursive = TRUE)
+  tb <- map_dfr(files, function(x) {data.frame(fread(x))})
   return(tb)
 }
 ```
@@ -30,7 +28,10 @@ read.tb <- function(path, method) {
 After synteny with P.effusa, we have new assembly files where some of the contigs are glued. Let's check their qualities.
 
 ```{r echo=FALSE}
-read.tb('~/project_data/downy/metaMDBG/fcs-gx/minimap2/rasusa/hifiasm/fcs-gx/rag_tag/compleasm/', 'final assembly') |> gt() |> fmt_number()
+read.tb('~/project_data/downy/Scaffold', 'final assembly') |> 
+  cbind(sample = c('Quessda_MSU1','Quessda_Phumuli','Quessda_SC1982'))|>
+  relocate(sample) |> 
+  gt() |> fmt_number()
 ```
 
 # Read Length
