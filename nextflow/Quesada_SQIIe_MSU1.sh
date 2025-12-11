@@ -8,6 +8,9 @@ nextflow run ${HOME}/software/TEA/main.nf \
     --gx_db "${HOME}/project_data/downy/fcs-db" \
     --tax_id 4762 \
     --target_bases 5400000000 \
+    --hifiasm_option '-l 2' \
+    --rasusa_seed 2025 \
     --threads 32 \
     --quality_library "${HOME}/project_data/downy/BUSCO_DB" \
-    --quality_lineage stramenopiles
+    --quality_lineage stramenopiles \
+    --keep_intermediates

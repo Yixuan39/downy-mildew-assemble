@@ -37,7 +37,7 @@ read.tb('~/project_data/downy/Scaffold', 'final assembly') |>
 # Read Length
 
 ```{r echo=FALSE}
-read.length <- list.files('~/project_data/downy/metaMDBG/fcs-gx/minimap2/rasusa/hifiasm/fcs-gx/rag_tag', pattern = '.fasta.gz', full.names = TRUE) |> 
+read.length <- list.files('~/project_data/downy/Scaffold', pattern = '.fasta.gz', full.names = TRUE, recursive = TRUE) |> 
   map_dfr(function(file) {
     seq <- readDNAStringSet(file)
     data.frame(sample = str_remove(basename(file), '.fasta.gz'),

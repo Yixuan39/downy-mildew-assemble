@@ -7,6 +7,8 @@ nextflow run ${HOME}/software/TEA/main.nf \
     --outdir "${HOME}/project_data/downy/Assembly/p.effusa" \
     --gx_db "${HOME}/project_data/downy/fcs-db" \
     --tax_id 4762 \
-    --threads 24 \
+    --hifiasm_option '-l 2' \
+    --threads 32 \
     --quality_library "${HOME}/project_data/downy/BUSCO_DB" \
-    --quality_lineage stramenopiles
+    --quality_lineage stramenopiles \
+    --keep_intermediates

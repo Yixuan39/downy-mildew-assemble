@@ -62,49 +62,49 @@ use_gpu: False
 rule_resources:
   default:
     partition: standard
-    mem_mb: 100000
-    cpus: 24
+    mem_mb: 0
+    cpus: 32
     time: 0  
 
   preprocess:
     partition: standard
-    mem_mb: 100000
-    cpus: 24
+    mem_mb: 0
+    cpus: 32
     time: 0
 
   blast:
     partition: standard  # If use_gpu is True, this must be a partition with GPUs
-    mem_mb: 100000
-    cpus: 24
+    mem_mb: 0
+    cpus: 32
     gpus: 1 
     time: 0
 
   align:
     partition: standard
-    mem_mb: 100000
-    cpus: 24
+    mem_mb: 0
+    cpus: 32
     time: 0
 
   convert:
     partition: standard
-    mem_mb: 100000
-    cpus: 24
+    mem_mb: 0
+    cpus: 32
     time: 0
 
   copy_hal:
     partition: standard
-    mem_mb: 100000
-    cpus: 1
+    mem_mb: 0
+    cpus: 32
     time: 0
 
   append:
     partition: standard
-    mem_mb: 100000
-    cpus: 24
+    mem_mb: 0
+    cpus: 32
     time: 0
 
   maf:
     partition: standard
-    mem_mb: 100000
-    cpus: 24
+    mem_mb: 0
+    cpus: 32
     time: 0
