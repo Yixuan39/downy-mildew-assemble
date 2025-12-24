@@ -1,6 +1,7 @@
 ---
 title: "unplace-contigs"
-output: html_document
+output:
+  html_document: default
 ---
 
 ```{r message=FALSE, echo=FALSE}
@@ -13,46 +14,72 @@ library(gt)
 
 # mitochondria
 
+Showing top 10 contigs with longest alignment length.
+
+threshold: alignment length >= 3000
+
 ```{r echo=FALSE}
-blast.tb <- list.files('~/project_data/downy/metaMDBG/fcs-gx/minimap2/rasusa/hifiasm/fcs-gx/rag_tag/blast',
+blast.tb <- list.files('~/project_data/downy/BLAST',
                        pattern = '.mito.tsv', full.names = TRUE) |> 
   map_dfr(function(file) {
     read.table(file, colClasses = c('character')) |> mutate(sample = str_remove(basename(file), '.mito.tsv'))
   })
-blast <- data.frame(sample = blast.tb$sample,
-                    seqid = blast.tb$V1,
-                    pident = blast.tb$V3, # percentage identity
-                    align.length = blast.tb$V4, # alignment length
-                    query.length = blast.tb$V5,
-                    subject.length = blast.tb$V6,
-                    e.value = blast.tb$V7)
+blast <- blast.tb |>
+  transmute(
+    sample = sample,
+    seqid = V1,
+    pident = V3,
+    align.length = V4,
+    query.length = V5,
+    subject.length = V6,
+    e.value = V7
+  ) |>
+  mutate(across(-c(sample, seqid), \(x) type.convert(x, as.is = TRUE))) |> 
+  mutate(`align/query` = align.length/query.length)
 
 blast |> 
-  filter(!str_detect(seqid, 'RagTag')) |> 
+  filter(!str_detect(seqid, 'RagTag'), align.length >= 3000) |> 
   group_by(sample) |> 
+  arrange(desc(align.length), desc(pident), .by_group = TRUE) |> 
+  slice_head(n = 392) |> 
   gt() 
+
+
+blast |> 
+  filter(!str_detect(seqid, 'RagTag'), align.length >= 3000) |> 
+  group_by(sample) |> 
+  arrange(desc(align.length), desc(pident), .by_group = TRUE) |> 
+  summarise(count = n()) 
 ```
 
 # BLAST nt/nr
 
+threshold: alignment length >= 3000, alignment/query rate >= 0.15
+
 ```{r echo=FALSE}
-blast.tb <- list.files('~/project_data/downy/metaMDBG/fcs-gx/minimap2/rasusa/hifiasm/fcs-gx/rag_tag/blast',
+blast.tb <- list.files('~/project_data/downy/BLAST',
                        pattern = '.nt.tsv', full.names = TRUE) |> 
   map_dfr(function(file) {
     read.table(file, colClasses = c('character')) |> mutate(sample = str_remove(basename(file), '.nt.tsv'))
   })
-blast <- data.frame(sample = blast.tb$sample,
-                    seqid = blast.tb$V1,
-                    pident = blast.tb$V3, # percentage identity
-                    align.length = blast.tb$V4, # alignment length
-                    query.length = blast.tb$V5,
-                    subject.length = blast.tb$V6,
-                    e.value = blast.tb$V7,
-                    name_or_id2df(blast.tb$V8,mode = 'id',fill_miss_rank = FALSE,add_prefix = FALSE) |> select(Phylum, Species))
+
+blast <- blast.tb |>
+  transmute(
+    sample = sample,
+    seqid = V1,
+    pident = V3,
+    align.length = V4,
+    query.length = V5,
+    subject.length = V6,
+    e.value = V7,
+    name_or_id2df(blast.tb$V8,mode = 'id',fill_miss_rank = FALSE,add_prefix = FALSE) |> select(Phylum, Species)) |>
+  mutate(across(-c(sample, seqid), \(x) type.convert(x, as.is = TRUE))) |> 
+  mutate(`align/query` = align.length/query.length)
 
 blast |> 
-  filter(!str_detect(seqid, 'RagTag')) |> 
+  filter(!str_detect(seqid, 'RagTag'), align.length >= 3000, `align/query` >= 0.15) |> 
   group_by(sample, seqid) |> 
+  arrange(desc(align.length), desc(`pident`), .by_group = TRUE) |> 
   gt() 
 ```
 
