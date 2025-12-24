@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --array=0-2
+#SBATCH --array=0-3
 #SBATCH -p gpu
 #SBATCH -c 16
 
