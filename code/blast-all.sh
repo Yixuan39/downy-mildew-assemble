@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --array=0-2
+#SBATCH --array=0-3
 #SBATCH --cpus-per-task=32
 
 INPUT_DIR=$HOME/project_data/downy/Scaffold
