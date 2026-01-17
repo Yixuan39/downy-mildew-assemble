@@ -6,8 +6,8 @@
 set -euo pipefail
 
 # with hifiasm results, run purge_dups on the primary assembly.
-INPUT_DIR='../data/cleaned_contigs'
-RESULT_DIR='../data/cleaned_contigs'
+INPUT_DIR=$HOME/Projects/downy-mildew-assemble/data/cleaned_contigs
+RESULT_DIR=$HOME/Projects/downy-mildew-assemble/data/cleaned_contigs
 FILES=($(find "$INPUT_DIR" -type f -name "*.fasta.gz"))
 FILE=${FILES[$SLURM_ARRAY_TASK_ID]}
 BUSCO_DB=$HOME/project_data/downy/BUSCO_DB
