@@ -1,21 +1,18 @@
 #!/bin/bash
 #SBATCH --job-name=QC
-#SBATCH --array=0-2
 #SBATCH --cpus-per-task=24
 
 set -euo pipefail
 
 # with hifiasm results, run purge_dups on the primary assembly.
-INPUT_DIR=$HOME/Projects/downy-mildew-assemble/data/cleaned_contigs
-RESULT_DIR=$HOME/Projects/downy-mildew-assemble/data/cleaned_contigs
-FILES=($(find "$INPUT_DIR" -type f -name "*.fasta.gz"))
-FILE=${FILES[$SLURM_ARRAY_TASK_ID]}
+INPUT=$HOME/Projects/downy-mildew-assemble/data/cleaned_contigs/Quesada_SQIIe_Phumuli/*.fasta.gz
+RESULT_DIR=$HOME/Projects/downy-mildew-assemble/data/cleaned_contigs/Quesada_SQIIe_Phumuli
 BUSCO_DB=$HOME/project_data/downy/BUSCO_DB
 THREADS=24
 mkdir -p $RESULT_DIR
 
 python quality-check.py \
-  --input_file $FILE \
+  --input_file $RESULT_DIR/Quesada_SQIIe_Phumuli.fasta.gz \
   --output_dir $RESULT_DIR \
   --library_path $BUSCO_DB \
   --threads $THREADS
