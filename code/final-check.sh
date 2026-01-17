@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=QC
-#SBATCH --array=0-3
+#SBATCH --array=0-2
 #SBATCH --cpus-per-task=24
 
 set -euo pipefail
