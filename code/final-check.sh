@@ -15,7 +15,7 @@ THREADS=24
 mkdir -p $RESULT_DIR
 
 python quality-check.py \
-  --input_file $RESULT_DIR/$FILE \
+  --input_file $FILE \
   --output_dir $RESULT_DIR \
   --library_path $BUSCO_DB \
   --threads $THREADS
