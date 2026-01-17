@@ -24,7 +24,7 @@ blast.tb <- list.files('~/project_data/downy/BLAST',
   map_dfr(function(file) {
     read.table(file, colClasses = c('character')) |> mutate(sample = str_remove(basename(file), '.mito.tsv'))
   })
-blast <- blast.tb |>
+blast.mito <- blast.tb |>
   transmute(
     sample = sample,
     seqid = V1,
@@ -35,35 +35,55 @@ blast <- blast.tb |>
     e.value = V7
   ) |>
   mutate(across(-c(sample, seqid), \(x) type.convert(x, as.is = TRUE))) |> 
-  mutate(`align/query` = align.length/query.length)
+  mutate(`align/query` = round(align.length/query.length, 3))
 
-blast |> 
-  filter(!str_detect(seqid, 'RagTag'), align.length >= 3000) |> 
+blast.mito |> 
+  filter(!str_detect(seqid, 'RagTag')) |> 
   group_by(sample) |> 
-  arrange(desc(align.length), desc(pident), .by_group = TRUE) |> 
-  slice_head(n = 392) |> 
+  arrange(desc(`align/query`), desc(align.length), .by_group = TRUE) |> 
+  slice_head(n = 10) |> 
   gt() 
-
-
-blast |> 
-  filter(!str_detect(seqid, 'RagTag'), align.length >= 3000) |> 
-  group_by(sample) |> 
-  arrange(desc(align.length), desc(pident), .by_group = TRUE) |> 
-  summarise(count = n()) 
 ```
+
+# Clean up unplaced contigs from assemblies.
+
+Some unplaced contigs are mapped to the mitochondrial genome.
+
+```{r}
+unplaced.keep <- blast.mito |> 
+  filter(!str_detect(seqid, 'RagTag')) |> 
+  filter(!(e.value == 0 & `align/query` >= 0.5)) 
+unplaced.keep |> 
+  group_by(sample) |> 
+  arrange(desc(`align/query`), desc(align.length), .by_group = TRUE) |> 
+  gt() 
+```
+
+```{r}
+files <- list.files('~/project_data/downy/Scaffold/', recursive = TRUE, full.names = TRUE, pattern = '.fasta.gz')
+for (file in files) {
+  data <- readDNAStringSet(file)
+  scaffolds <- names(data)[str_detect(names(data), 'RagTag')]
+  unplaced.contigs <- filter(unplaced.keep, sample == str_remove(basename(file),'.fasta.gz'))$seqid
+  contigs <- c(scaffolds, unplaced.contigs)
+  dir.create(path <- here('data', 'cleaned_contigs', str_remove(basename(file),'.fasta.gz')), recursive = TRUE, showWarnings = FALSE)
+  writeXStringSet(data[contigs], file.path(path, basename(file)), compress = TRUE)
+}
+```
+
 
 # BLAST nt/nr
 
 threshold: alignment length >= 3000, alignment/query rate >= 0.15
 
-```{r echo=FALSE}
+```{r echo=FALSE, eval=FALSE}
 blast.tb <- list.files('~/project_data/downy/BLAST',
                        pattern = '.nt.tsv', full.names = TRUE) |> 
   map_dfr(function(file) {
     read.table(file, colClasses = c('character')) |> mutate(sample = str_remove(basename(file), '.nt.tsv'))
   })
 
-blast <- blast.tb |>
+blast.nt <- blast.tb |>
   transmute(
     sample = sample,
     seqid = V1,
@@ -76,11 +96,28 @@ blast <- blast.tb |>
   mutate(across(-c(sample, seqid), \(x) type.convert(x, as.is = TRUE))) |> 
   mutate(`align/query` = align.length/query.length)
 
-blast |> 
+blast.nt |> 
   filter(!str_detect(seqid, 'RagTag'), align.length >= 3000, `align/query` >= 0.15) |> 
   group_by(sample, seqid) |> 
   arrange(desc(align.length), desc(`pident`), .by_group = TRUE) |> 
   gt() 
+
+blast.nt.top <-  blast.nt |> 
+  filter(!str_detect(seqid, 'RagTag')) |> 
+  group_by(sample, seqid) |> 
+  arrange(desc(align.length), desc(`pident`), .by_group = TRUE) |>
+  slice_head(n = 1)
 ```
 
+
+
+```{r include=FALSE, eval=FALSE}
+blast.join <- left_join(blast.mito, blast.nt.top, by = c('sample','seqid'), suffix = c('.mito', '.nt'))
+blast.join |> 
+  filter(!str_detect(seqid, 'RagTag')) |> 
+  group_by(sample) |> 
+  arrange(desc(align.length.mito), .by_group = TRUE) |> 
+  slice_head(n = 10) |> 
+  gt() 
+```
 
