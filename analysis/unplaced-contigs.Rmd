@@ -41,7 +41,6 @@ blast.mito |>
   filter(!str_detect(seqid, 'RagTag')) |> 
   group_by(sample) |> 
   arrange(desc(`align/query`), desc(align.length), .by_group = TRUE) |> 
-  slice_head(n = 10) |> 
   gt() 
 ```
 
@@ -52,7 +51,7 @@ Some unplaced contigs are mapped to the mitochondrial genome.
 ```{r}
 unplaced.keep <- blast.mito |> 
   filter(!str_detect(seqid, 'RagTag')) |> 
-  filter(!(e.value == 0 & `align/query` >= 0.5)) 
+  filter(!(e.value == 0 & `align/query` >= 0.5 & query.length <= subject.length)) 
 unplaced.keep |> 
   group_by(sample) |> 
   arrange(desc(`align/query`), desc(align.length), .by_group = TRUE) |> 
