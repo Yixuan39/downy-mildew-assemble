@@ -14,6 +14,14 @@ BASENAME=${BASENAME%.fasta.gz}
 gzip -d -k ${FILE} 
 
 blastn -query ${FILE%.gz} \
+  -subject "../data/KT072718.1.fna" \
+  -outfmt "6 qseqid sseqid pident length qlen slen evalue staxids" \
+  -max_target_seqs 1 \
+  -max_hsps 1 \
+  -num_threads "$THREADS" \
+  -out "$RESULT_DIR/$BASENAME.mito.tsv"
+
+blastn -query ${FILE%.gz} \
   -task megablast \
   -db nt \
   -outfmt "6 qseqid sseqid pident length qlen slen evalue staxids" \
@@ -21,13 +29,5 @@ blastn -query ${FILE%.gz} \
   -max_hsps 1 \
   -num_threads "$THREADS" \
   -out "$RESULT_DIR/$BASENAME.nt.tsv"
-  
-blastn -query ${FILE%.gz} \
-  -subject "../data/KT072718.1.fna" \
-  -outfmt "6 qseqid sseqid pident length qlen slen evalue staxids" \
-  -max_target_seqs 1 \
-  -max_hsps 1 \
-  -num_threads "$THREADS" \
-  -out "$RESULT_DIR/$BASENAME.mito.tsv"
   
 [ -f "${FILE%.gz}" ] && rm "${FILE%.gz}"
