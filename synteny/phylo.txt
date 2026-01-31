@@ -1,5 +1,0 @@
-(((Quesada_SQIIe_MSU1,Quesada_SQIIe_SC1982),Quesada_SQIIe_Phumuli),Peronospora_effusa);
-Quesada_SQIIe_MSU1	project_data/downy/Scaffold/Quesada_SQIIe_MSU1/Quesada_SQIIe_MSU1.fasta.gz
-Quesada_SQIIe_SC1982	project_data/downy/Scaffold/Quesada_SQIIe_SC1982/Quesada_SQIIe_SC1982.fasta.gz
-Quesada_SQIIe_Phumuli	project_data/downy/Scaffold/Quesada_SQIIe_Phumuli/Quesada_SQIIe_Phumuli.fasta.gz
-Peronospora_effusa	project_data/downy/oomycota-genome/Peronospora-effusa.fna
