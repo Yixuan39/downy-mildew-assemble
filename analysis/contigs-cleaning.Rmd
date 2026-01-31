@@ -58,7 +58,7 @@ files <- list.files('~/project_data/downy/Scaffold/', recursive = TRUE, full.nam
 for (file in files) {
   data <- readDNAStringSet(file)
   contigs.exclude <- filter(unplaced.exclude, sample == str_remove(basename(file),'.fasta.gz'))$seqid
-  dir.create(path <- here('data', 'cleaned_contigs', str_remove(basename(file),'.fasta.gz')),
+  dir.create(path <- file.path('~/project_data/downy/cleaned_contigs/', str_remove(basename(file),'.fasta.gz')),
              recursive = TRUE, showWarnings = FALSE)
   writeXStringSet(data[!(names(data) %in% contigs.exclude)], 
                   file.path(path, basename(file)), compress = TRUE)

@@ -5,8 +5,8 @@
 set -euo pipefail
 
 # with hifiasm results, run purge_dups on the primary assembly.
-INPUT=$HOME/project_data/downy/Assembly/p.effusa/SRR15142133.fasta.gz
-RESULT_DIR=$HOME/project_data/downy/Scaffold/p.effusa
+INPUT=$HOME/project_data/downy/Assembly/p_effusa/p_effusa.fasta.gz
+RESULT_DIR=$HOME/project_data/downy/Scaffold/p_effusa
 REF=$HOME/project_data/downy/oomycota-genome/Peronospora-effusa.fna
 BUSCO_DB=$HOME/project_data/downy/BUSCO_DB
 THREADS=24
@@ -22,12 +22,12 @@ ragtag.py scaffold \
   $REF \
   $INPUT.fasta
 
-gzip -c $RESULT_DIR/ragtag/ragtag.scaffold.fasta > $RESULT_DIR/SRR15142133.fasta.gz
+gzip -c $RESULT_DIR/ragtag/ragtag.scaffold.fasta > $RESULT_DIR/p_effusa.fasta.gz
 rm -rf $RESULT_DIR/ragtag
 rm $INPUT.fasta
 
 python quality-check.py \
-  --input_file $RESULT_DIR/SRR15142133.fasta.gz \
+  --input_file $RESULT_DIR/p_effusa.fasta.gz \
   --output_dir $RESULT_DIR \
   --library_path $BUSCO_DB \
   --threads $THREADS
