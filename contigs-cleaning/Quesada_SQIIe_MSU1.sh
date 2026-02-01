@@ -5,8 +5,8 @@
 set -euo pipefail
 
 # with hifiasm results, run purge_dups on the primary assembly.
-INPUT=$HOME/Projects/downy-mildew-assemble/data/cleaned_contigs/Quesada_SQIIe_MSU1/*.fasta.gz
-RESULT_DIR=$HOME/Projects/downy-mildew-assemble/data/cleaned_contigs/Quesada_SQIIe_MSU1
+INPUT=$HOME/project_data/downy/cleaned_contigs/Quesada_SQIIe_MSU1/*.fasta.gz
+RESULT_DIR=$HOME/project_data/downy/cleaned_contigs/Quesada_SQIIe_MSU1
 BUSCO_DB=$HOME/project_data/downy/BUSCO_DB
 THREADS=24
 mkdir -p $RESULT_DIR
