@@ -4,7 +4,7 @@ mkdir -p $HOME/project_data/downy/coverage
 
 minimap2 -ax map-hifi -t 32 \
 $HOME/project_data/downy/cleaned_contigs/p_effusa/p_effusa.fasta.gz \
-$HOME/project_data/downy/GSL_Data/fastq/filtered/p_effusa.fastq.gz | \
+$HOME/project_data/downy/p_effusa/p_effusa.fastq.gz | \
 samtools sort -@ 16 --write-index -o $HOME/project_data/downy/coverage/p_effusa.bam -
 
 minimap2 -ax map-hifi -t 32 \
