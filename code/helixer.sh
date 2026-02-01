@@ -3,7 +3,7 @@
 #SBATCH -p gpu
 #SBATCH -c 16
 
-INPUT_DIR=$HOME/project_data/downy/Scaffold
+INPUT_DIR=$HOME/project_data/downy/cleaned_contigs
 RESULT_DIR=$HOME/project_data/downy/Helixer
 FILES=($(find "$INPUT_DIR" -type f -name "*.fasta.gz"))
 FILE=${FILES[$SLURM_ARRAY_TASK_ID]}
