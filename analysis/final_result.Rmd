@@ -28,8 +28,8 @@ read.tb <- function(path, method) {
 After synteny with P.effusa, we have new assembly files where some of the contigs are glued. Let's check their qualities.
 
 ```{r echo=FALSE}
-read.tb('~/project_data/downy/Scaffold', 'final assembly') |> 
-  cbind(sample = c('Quessda_MSU1','Quessda_Phumuli','Quessda_SC1982'))|>
+read.tb('~/project_data/downy/cleaned_contigs', 'final assembly') |> 
+  cbind(sample = c('p_effusa', 'Quessda_MSU1','Quessda_Phumuli','Quessda_SC1982'))|>
   relocate(sample) |> 
   gt() |> fmt_number()
 ```
@@ -37,7 +37,7 @@ read.tb('~/project_data/downy/Scaffold', 'final assembly') |>
 # Read Length
 
 ```{r echo=FALSE}
-read.length <- list.files('~/project_data/downy/Scaffold', pattern = '.fasta.gz', full.names = TRUE, recursive = TRUE) |> 
+read.length <- list.files('~/project_data/downy/cleaned_contigs', pattern = '.fasta.gz', full.names = TRUE, recursive = TRUE) |> 
   map_dfr(function(file) {
     seq <- readDNAStringSet(file)
     data.frame(sample = str_remove(basename(file), '.fasta.gz'),
@@ -50,7 +50,7 @@ read.length <- list.files('~/project_data/downy/Scaffold', pattern = '.fasta.gz'
   mutate(ragtag = if_else(str_detect(contig, '_RagTag'), 'scaffold' ,'unplaced contigs')) |> 
   ungroup()
 
-read.length$sample <- factor(read.length$sample, levels = c("Quesada_SQIIe_SC1982", "Quesada_SQIIe_MSU1", "Quesada_SQIIe_Phumuli"))
+read.length$sample <- factor(read.length$sample, levels = c("p_effusa", "Quesada_SQIIe_SC1982", "Quesada_SQIIe_MSU1", "Quesada_SQIIe_Phumuli"))
 
 ggplot(read.length, aes(x = factor(rank), y = length, fill = ragtag)) +
   geom_col() +
