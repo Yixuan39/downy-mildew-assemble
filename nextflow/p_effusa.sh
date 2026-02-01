@@ -3,7 +3,7 @@ set -euo pipefail
 
 nextflow run ${HOME}/software/TEA/main.nf \
     -profile slurm \
-    --reads "${HOME}/project_data/downy/p_effusa/p_effusa.fastq.gz" \
+    --reads "${HOME}/project_data/downy/p_effusa/filtered/p_effusa.fastq.gz" \
     --outdir "${HOME}/project_data/downy/Assembly/p_effusa" \
     --gx_db "${HOME}/project_data/downy/fcs-db" \
     --tax_id 4762 \
