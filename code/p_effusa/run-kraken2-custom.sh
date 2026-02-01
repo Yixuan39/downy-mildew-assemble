@@ -11,8 +11,7 @@ Kraken_DB=$HOME/project_data/downy/KrakenDB
 BUSCO_DB=$HOME/project_data/downy/BUSCO_DB
 THREADS=24
 
-FILES=("$INPUT_DIR"/*.fastq.gz)
-FILE="${FILES[$SLURM_ARRAY_TASK_ID]}"
+FILE=("$INPUT_DIR"/*.fastq.gz)
 
 BASENAME=$(basename "$FILE")  
 BASENAME=${BASENAME%.fastq.gz}
