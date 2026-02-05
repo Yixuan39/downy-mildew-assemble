@@ -1,9 +1,9 @@
 #!/bin/bash
 #SBATCH --array=0-3
 
-INPUT_DIR=$HOME/project_data/downy/Scaffold
-RESULT_DIR=$HOME/project_data/downy/BLAST-long
-FILES=($(find "$INPUT_DIR" -type f -name "*.fasta.gz"))
+INPUT_DIR=$HOME/project_data/downy/Assembly
+RESULT_DIR=$HOME/project_data/downy/BLAST-asm
+FILES=($(find "$INPUT_DIR" -maxdepth 2 -type f -name "*.fasta.gz"))
 FILE=${FILES[$SLURM_ARRAY_TASK_ID]}
 THREADS=32
 mkdir -p ${RESULT_DIR}
@@ -16,6 +16,7 @@ blastn -query ${FILE%.gz} \
   -subject "../data/KT072718.1.fna" \
   -outfmt "6 qseqid sseqid pident length qlen qstart qend slen sstart send evalue" \
   -max_target_seqs 1 \
+  -max_hsps 1 \
   -out "$RESULT_DIR/$BASENAME.mito.tsv"
 
 # blastn -query ${FILE%.gz} \
