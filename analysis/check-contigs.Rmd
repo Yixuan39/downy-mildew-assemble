@@ -1,0 +1,47 @@
+---
+title: "unplace-contigs"
+output:
+  html_document: default
+  word_document: default
+  pdf_document: default
+---
+
+```{r message=FALSE, echo=FALSE}
+library(Biostrings)
+library(tidyverse)
+library(gt)
+library(here)
+```
+
+Map scaffold with mitochondrial genome.
+
+```{r echo=FALSE}
+blast.tb <- list.files('~/project_data/downy/BLAST-long',
+                       pattern = '.mito.tsv', full.names = TRUE) |> 
+  map_dfr(function(file) {
+    read.table(file, colClasses = c('character')) |> mutate(sample = str_remove(basename(file), '.mito.tsv'))
+  })
+blast.mito <- blast.tb |>
+  transmute(
+    sample = sample,
+    seqid = V1,
+    pident = V3,
+    align.length = V4,
+    query.length = V5,
+    query.start = V6,
+    query.end = V7,
+    subject.length = V8,
+    subject.start = V9,
+    subject.end = V10,
+    e.value = V11
+  ) |>
+  mutate(across(-c(sample, seqid), \(x) type.convert(x, as.is = TRUE))) |> 
+  mutate(`align/query` = round(align.length/query.length, 3))
+
+blast.mito |> 
+  filter(str_detect(seqid, 'RagTag'), align.length > 500) |> 
+  group_by(sample, seqid) |> 
+  arrange(desc(`align/query`), desc(align.length), .by_group = TRUE) |> 
+  gt() 
+```
+

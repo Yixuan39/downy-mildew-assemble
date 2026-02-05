@@ -26,8 +26,12 @@ blast.mito <- blast.tb |>
     pident = V3,
     align.length = V4,
     query.length = V5,
-    subject.length = V6,
-    e.value = V7
+    query.start = V6,
+    query.end = V7,
+    subject.length = V8,
+    subject.start = V9,
+    subject.end = V10,
+    e.value = V11
   ) |>
   mutate(across(-c(sample, seqid), \(x) type.convert(x, as.is = TRUE))) |> 
   mutate(`align/query` = round(align.length/query.length, 3))

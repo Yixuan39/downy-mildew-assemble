@@ -7,16 +7,13 @@ output:
 ```{r message=FALSE, echo=FALSE}
 library(Biostrings)
 library(tidyverse)
-library(pctax)
-library(pcutils)
+# library(pctax)
+# library(pcutils)
 library(gt)
+library(here)
 ```
 
 # mitochondria
-
-Showing top 10 contigs with longest alignment length.
-
-threshold: alignment length >= 3000
 
 ```{r echo=FALSE}
 blast.tb <- list.files('~/project_data/downy/BLAST',
@@ -49,10 +46,10 @@ blast.mito |>
 Some unplaced contigs are mapped to the mitochondrial genome.
 
 ```{r}
-unplaced.keep <- blast.mito |> 
-  filter(!str_detect(seqid, 'RagTag')) |> 
-  filter(!(e.value == 0 & `align/query` >= 0.5 & query.length <= subject.length)) 
-unplaced.keep |> 
+unplaced.exclude <- blast.mito |> 
+  filter(!str_detect(seqid, 'RagTag')) |> # only look at unplaced contigs
+  filter(e.value == 0 & `align/query` >= 0.5) # remove contigs that aligned to mito genome under these threshold
+unplaced.exclude |> 
   group_by(sample) |> 
   arrange(desc(`align/query`), desc(align.length), .by_group = TRUE) |> 
   gt() 
@@ -62,11 +59,11 @@ unplaced.keep |>
 files <- list.files('~/project_data/downy/Scaffold/', recursive = TRUE, full.names = TRUE, pattern = '.fasta.gz')
 for (file in files) {
   data <- readDNAStringSet(file)
-  scaffolds <- names(data)[str_detect(names(data), 'RagTag')]
-  unplaced.contigs <- filter(unplaced.keep, sample == str_remove(basename(file),'.fasta.gz'))$seqid
-  contigs <- c(scaffolds, unplaced.contigs)
-  dir.create(path <- here('data', 'cleaned_contigs', str_remove(basename(file),'.fasta.gz')), recursive = TRUE, showWarnings = FALSE)
-  writeXStringSet(data[contigs], file.path(path, basename(file)), compress = TRUE)
+  contigs.exclude <- filter(unplaced.exclude, sample == str_remove(basename(file),'.fasta.gz'))$seqid
+  dir.create(path <- here('data', 'cleaned_contigs', str_remove(basename(file),'.fasta.gz')),
+             recursive = TRUE, showWarnings = FALSE)
+  writeXStringSet(data[!(names(data) %in% contigs.exclude)], 
+                  file.path(path, basename(file)), compress = TRUE)
 }
 ```
 
