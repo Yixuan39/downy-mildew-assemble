@@ -14,7 +14,7 @@ library(here)
 # mitochondria
 
 ```{r echo=FALSE}
-blast.tb <- list.files('~/project_data/downy/BLAST',
+blast.tb <- list.files('~/project_data/downy/BLAST-asm',
                        pattern = '.mito.tsv', full.names = TRUE) |> 
   map_dfr(function(file) {
     read.table(file, colClasses = c('character')) |> mutate(sample = str_remove(basename(file), '.mito.tsv'))
@@ -37,7 +37,6 @@ blast.mito <- blast.tb |>
   mutate(`align/query` = round(align.length/query.length, 3))
 
 blast.mito |> 
-  filter(!str_detect(seqid, 'RagTag')) |> 
   group_by(sample) |> 
   arrange(desc(`align/query`), desc(align.length), .by_group = TRUE) |> 
   gt() 
@@ -49,7 +48,6 @@ Some unplaced contigs are mapped to the mitochondrial genome.
 
 ```{r}
 unplaced.exclude <- blast.mito |> 
-  filter(!str_detect(seqid, 'RagTag')) |> # only look at unplaced contigs
   filter(e.value == 0 & `align/query` >= 0.5) # remove contigs that aligned to mito genome under these threshold
 unplaced.exclude |> 
   group_by(sample) |> 
@@ -58,13 +56,21 @@ unplaced.exclude |>
 ```
 
 ```{r}
-files <- list.files('~/project_data/downy/Scaffold/', recursive = TRUE, full.names = TRUE, pattern = '.fasta.gz')
+library(fs)
+files <- dir_ls('~/project_data/downy/Assembly/', glob = "*/*.fasta.gz", recurse = 1)
 for (file in files) {
   data <- readDNAStringSet(file)
+  # get mito exclude list
   contigs.exclude <- filter(unplaced.exclude, sample == str_remove(basename(file),'.fasta.gz'))$seqid
-  dir.create(path <- file.path('~/project_data/downy/cleaned_contigs/', str_remove(basename(file),'.fasta.gz')),
+  # create dir
+  dir.create(path.clean <- file.path('~/project_data/downy/cleaned_contigs/', str_remove(basename(file),'.fasta.gz')),
              recursive = TRUE, showWarnings = FALSE)
+  dir.create(path.mito <- file.path('~/project_data/downy/mitochondrial_contigs/', str_remove(basename(file),'.fasta.gz')),
+             recursive = TRUE, showWarnings = FALSE)
+  # write fasta
   writeXStringSet(data[!(names(data) %in% contigs.exclude)], 
-                  file.path(path, basename(file)), compress = TRUE)
+                  file.path(path.clean, basename(file)), compress = TRUE)
+  writeXStringSet(data[(names(data) %in% contigs.exclude)], 
+                  file.path(path.mito, basename(file)), compress = TRUE)
 }
 ```

@@ -5,7 +5,7 @@
 set -euo pipefail
 
 # with hifiasm results, run purge_dups on the primary assembly.
-INPUT=$HOME/project_data/downy/Assembly/Quesada_SQIIe_Phumuli/*.fasta.gz
+INPUT=$HOME/project_data/downy/cleaned_contigs/Quesada_SQIIe_Phumuli/*.fasta.gz
 RESULT_DIR=$HOME/project_data/downy/Scaffold/Quesada_SQIIe_Phumuli
 REF=$HOME/project_data/downy/oomycota-genome/Peronospora-effusa.fna
 BUSCO_DB=$HOME/project_data/downy/BUSCO_DB
