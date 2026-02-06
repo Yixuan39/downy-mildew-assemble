@@ -48,7 +48,7 @@ Some unplaced contigs are mapped to the mitochondrial genome.
 
 ```{r}
 unplaced.exclude <- blast.mito |> 
-  filter(e.value == 0 & `align/query` >= 0.5) # remove contigs that aligned to mito genome under these threshold
+  filter(`align/query` >= 0.1) # remove contigs that aligned to mito genome under these threshold
 unplaced.exclude |> 
   group_by(sample) |> 
   arrange(desc(`align/query`), desc(align.length), .by_group = TRUE) |> 
