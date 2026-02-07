@@ -11,8 +11,6 @@ library(here)
 library(tidyverse)
 library(Biostrings)
 library(data.table)
-library(pctax)
-library(pcutils)
 library(gt)
 theme_set(theme_bw())
 ```
@@ -63,119 +61,5 @@ ggplot(read.length, aes(x = factor(rank), y = length, fill = ragtag)) +
     y = "Length (bp)"
   )
 ```
-
-
-# Syntenic Plots
-
-Here, we can run orthofinder and genespace to check the synteny of each isolate.
-
-The orthofinder we used is:
-
-```{bash eval=FALSE}
-orthofinder -f "$HOME/project_data/downy/genespace/tmp" -t 10 -a 10 -X -o "$HOME/project_data/downy/genespace/orthofinder"
-```
-
-Reference genomes: Peronospora effusa, Bremia lactucae, Phytophthora sojae
-
-Our isolates: Quesada_SQIIe_MSU1, Quesada_SQIIe_SC1982, Quesada_SQIIe_Phumuli
-
-```{r  message=FALSE, echo=FALSE, results=FALSE}
-genomeRepo <- "~/project_data/downy/genespace/genomes/"
-wd <- "~/project_data/downy/genespace/"
-path2mcscanx <- "/Users/yixuanyang/miniforge3/bin/"
-
-genomes2run <- c("Peronospora_effusa", "Bremia_lactucae", "Phytophthora_sojae")
-parsedPaths <- parse_annotations(
-  rawGenomeRepo = genomeRepo,
-  genomeDirs = genomes2run,
-  genomeIDs = genomes2run,
-  headerSep = NA,
-  headerEntryIndex = 1,
-  genespaceWd = wd)
-asm2run <- c("Quesada_SQIIe_SC1982", "Quesada_SQIIe_MSU1", "Quesada_SQIIe_Phumuli")
-parsedPaths <- parse_annotations(
-  rawGenomeRepo = genomeRepo,
-  genomeDirs = asm2run,
-  genomeIDs = asm2run,
-  headerSep = NA,
-  headerEntryIndex = 1,
-  gffIdColumn = "ID",
-  genespaceWd = wd)
-
-gpar <- init_genespace(
-  wd = wd,
-  nCores = 10,
-  dotplots = 'never',
-  path2mcscanx = path2mcscanx)
-
-out <- run_genespace(gpar)
-```
-
-# Riparian
-
-```{r echo=FALSE}
-for (asm in asm2run){
-  plot_riparian(
-    gsParam = out,
-    genomeIDs = c(asm, genomes2run[1]),
-    refGenome = genomes2run[1],
-    chrLabFontSize = 2,
-    useRegions = FALSE)
-}
-```
-
-```{r echo=FALSE}
-full.plot <- plot_riparian(
-  gsParam = out,
-  genomeIDs = c(genomes2run[1],asm2run),
-  refGenome = genomes2run[1],
-  chrLabFontSize = 2,
-  useRegions = FALSE)
-```
-
-```{r echo=FALSE}
-full.plot <- plot_riparian(
-  gsParam = out,
-  genomeIDs = c(genomes2run,asm2run),
-  refGenome = genomes2run[1],
-  chrLabFontSize = 2,
-  useRegions = FALSE)
-```
-
-
-```{r echo=FALSE, include=FALSE}
-for (ref in genomes2run){
-  for (asm in asm2run){
-    plot_riparian(
-      gsParam = out,
-      genomeIDs = c(asm, ref),
-      refGenome = asm,
-      pdfFile = here('figures', str_c(asm, '-vs-', ref, '.pdf')),
-      chrLabFontSize = 3,
-      useRegions = FALSE)
-  }
-}
-
-```
-
-```{r echo=FALSE, include=FALSE}
-syntenicRegion <- file.path(wd, 'results','syntenicBlock_coordinates.csv') |> 
-  fread() |> filter((genome1 %in% asm2run)& genome2 == "Peronospora_effusa") |>
-  group_by(genome1)
-
-syntenicRegion |>
-  summarise(unique_chr_count = n_distinct(chr1)) |> 
-  gt()
-```
-
-# Phylogenetic Tree
-
-```{r echo=FALSE, message=FALSE}
-library(ggtree)
-tree.path <- file.path(wd, 'results/SpeciesTree_rooted.txt')
-ggtree(read.tree(tree.path)) + geom_tiplab(align = T)  + xlim(0, 0.6)
-```
-
-
 
 

@@ -68,6 +68,9 @@ for (file in files) {
   dir.create(path.mito <- file.path('~/project_data/downy/mitochondrial_contigs/', str_remove(basename(file),'.fasta.gz')),
              recursive = TRUE, showWarnings = FALSE)
   # write fasta
+  message(basename(file))
+  message('number of contigs retained: ', length(data[!(names(data) %in% contigs.exclude)]))
+  message('number of mito contigs: ', length(data[(names(data) %in% contigs.exclude)]))
   writeXStringSet(data[!(names(data) %in% contigs.exclude)], 
                   file.path(path.clean, basename(file)), compress = TRUE)
   writeXStringSet(data[(names(data) %in% contigs.exclude)], 
