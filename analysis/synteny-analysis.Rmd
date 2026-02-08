@@ -78,46 +78,25 @@ full.plot <- plot_riparian(
 ```{r echo=FALSE}
 full.plot <- plot_riparian(
   gsParam = out,
-  genomeIDs = c(genomes2run,asm2run),
+  genomeIDs = c(genomes2run[3:1],asm2run[3:1]),
   refGenome = genomes2run[1],
   chrLabFontSize = 2,
   useRegions = FALSE)
 ```
 
 
-```{r echo=FALSE, include=FALSE}
-for (ref in genomes2run){
-  for (asm in asm2run){
-    plot_riparian(
-      gsParam = out,
-      genomeIDs = c(asm, ref),
-      refGenome = asm,
-      pdfFile = here('figures', str_c(asm, '-vs-', ref, '.pdf')),
-      chrLabFontSize = 3,
-      useRegions = FALSE)
-  }
-}
-
-```
-
-```{r echo=FALSE, include=FALSE}
-syntenicRegion <- file.path(wd, 'results','syntenicBlock_coordinates.csv') |> 
-  fread() |> filter((genome1 %in% asm2run)& genome2 == "Peronospora_effusa") |>
-  group_by(genome1)
-
-syntenicRegion |>
-  summarise(unique_chr_count = n_distinct(chr1)) |> 
-  gt()
-```
-
 # Phylogenetic Tree
 
 ```{r echo=FALSE, message=FALSE}
 library(ggtree)
 tree.path <- file.path(wd, 'results/SpeciesTree_rooted.txt')
-ggtree(read.tree(tree.path)) + geom_tiplab(align = T)  + xlim(0, 0.6)
+tree <- ggtree(read.tree(tree.path))
 ```
 
 
+```{r}
+library(patchwork)
+tree + full.plot$plotData$ggplotObj + plot_layout(widths = c(1, 4))
+```
 
 
