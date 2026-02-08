@@ -8,20 +8,10 @@ This project aimed to assemble downy mildew genome collected from highly contami
 
 [Read length distribution and taxonomy analysis](https://yixuan39.github.io/downy-mildew-assemble/analysis/read_distribution.html)
 
+[Mitochondrial contigs removal](https://yixuan39.github.io/downy-mildew-assemble/analysis/contigs-cleaning.html)
+
 [Final assembly](https://yixuan39.github.io/downy-mildew-assemble/analysis/final_result.html)
 
-[unplaced contigs](https://yixuan39.github.io/downy-mildew-assemble/analysis/unplaced-contigs.html)
+[Synteny plots](https://yixuan39.github.io/downy-mildew-assemble/analysis/synteny-analysis.html)
 
-[scaffolds](https://yixuan39.github.io/downy-mildew-assemble/analysis/scaffolds.html)
-
-**get database**
-
-`FCS-GX` database. This database will require approximately 500GB memory.
-
-```
-sync_files.py get \
-    --mft=https://ftp.ncbi.nlm.nih.gov/genomes/TOOLS/FCS/database/latest/all.manifest \
-    --dir ./fcs-db/
-GX_DB=$HOME/fcs-db/
-```
 
