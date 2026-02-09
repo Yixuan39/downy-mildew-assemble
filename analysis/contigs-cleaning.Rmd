@@ -1,5 +1,5 @@
 ---
-title: "unplace-contigs"
+title: "Contigs Screening"
 output:
   html_document: default
 ---
@@ -11,7 +11,9 @@ library(gt)
 library(here)
 ```
 
-# mitochondria
+# BLAST result contigs v.s. mitochondria genome
+
+The table below is showing the BLAST results when comparing our contigs for each isolate against the mitochondrial genome. We can see a clear pattern that some of the short contigs are either fully mapped or contanminated by the mitochondrial genome.
 
 ```{r echo=FALSE}
 blast.tb <- list.files('~/project_data/downy/BLAST-asm',
@@ -42,9 +44,11 @@ blast.mito |>
   gt() 
 ```
 
-# Clean up unplaced contigs from assemblies.
+# Exclude contigs that are mapped to the mitochondrial genome
 
-Some unplaced contigs are mapped to the mitochondrial genome.
+Here, we set a threshold that exclude contigs that are contaminated by mitochondrial (`align/query` > 0.1).
+
+Showing top 10 hits for each isolate. Make sure we are doing everything right.
 
 ```{r}
 unplaced.exclude <- blast.mito |> 
@@ -52,6 +56,7 @@ unplaced.exclude <- blast.mito |>
 unplaced.exclude |> 
   group_by(sample) |> 
   arrange(desc(`align/query`), desc(align.length), .by_group = TRUE) |> 
+  slice_head(n = 10) |>  
   gt() 
 ```
 
