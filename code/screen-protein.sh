@@ -16,29 +16,36 @@ start=$EPOCHREALTIME
 
 diamond blastp \
 --threads $THREADS \
+--quiet \
 --db $HOME/diamond_db/nr \
---out $RESULT_DIR/$BASENAME.tsv \
---header simple \
---evalue 0.00001 \
---max-target-seqs 10 \
+--out $RESULT_DIR/$BASENAME.daa \
 --ultra-sensitive \
 --query $FILE \
---outfmt "6 qseqid sseqid pident length qlen slen evalue staxids qstart qend sstart send"
+--outfmt 100
 
 end=$EPOCHREALTIME
 runtime=$(echo "$end - $start" | bc)
 echo "Runtime: $runtime seconds"
 
-diamond blastp \
+# convert result to tab format
+diamond view \
 --threads $THREADS \
---db $HOME/diamond_db/nr \
---out $RESULT_DIR/$BASENAME.txt \
+--quiet \
 --header simple \
 --evalue 0.00001 \
 --max-target-seqs 10 \
---ultra-sensitive \
---query $FILE \
---outfmt 0
+--out $RESULT_DIR/$BASENAME.tsv \
+--outfmt 6 qseqid sseqid pident length qlen slen evalue staxids qstart qend sstart send \
+--daa $RESULT_DIR/$BASENAME.daa \
+--forwardonly
 
-runtime=$(echo "$end - $start" | bc)
-echo "Runtime: $runtime seconds"
+# convert result to pairwise alignment format
+diamond view \
+--threads $THREADS \
+--quiet \
+--evalue 0.00001 \
+--max-target-seqs 10 \
+--out $RESULT_DIR/$BASENAME.txt \
+--outfmt 0 \
+--daa $RESULT_DIR/$BASENAME.daa \
+--forwardonly
