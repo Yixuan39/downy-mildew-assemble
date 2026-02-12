@@ -32,7 +32,7 @@ echo "Runtime: $runtime seconds"
 diamond blastp \
 --threads $THREADS \
 --db $HOME/diamond_db/nr \
---out $RESULT_DIR/$BASENAME.tsv \
+--out $RESULT_DIR/$BASENAME.txt \
 --header simple \
 --evalue 0.00001 \
 --max-target-seqs 10 \
