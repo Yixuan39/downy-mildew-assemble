@@ -1,5 +1,6 @@
 #!/bin/bash
 #SBATCH --array=0-3
+#SBATCH -c 32
 
 INPUT_DIR=$HOME/project_data/downy/Helixer
 RESULT_DIR=$HOME/project_data/downy/Helixer
