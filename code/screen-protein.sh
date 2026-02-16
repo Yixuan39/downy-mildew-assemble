@@ -19,7 +19,7 @@ diamond blastp \
 --threads $THREADS \
 --evalue 0.00001 \
 --max-target-seqs 10 \
---db $HOME/diamond_db/nr \
+--db $HOME/diamond_db/nr.dmnd \
 --out $RESULT_DIR/$BASENAME.daa \
 --faster \
 --query $FILE \
