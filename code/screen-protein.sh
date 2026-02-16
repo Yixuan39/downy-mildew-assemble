@@ -21,9 +21,7 @@ diamond blastp \
 --max-target-seqs 10 \
 --db $HOME/diamond_db/nr \
 --out $RESULT_DIR/$BASENAME.daa \
---ultra-sensitive \
---block-size 20 \
---index-chunks 1 \
+--faster \
 --query $FILE \
 --outfmt 100
 
