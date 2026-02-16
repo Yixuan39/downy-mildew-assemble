@@ -21,7 +21,7 @@ diamond blastp \
 --max-target-seqs 10 \
 --db $HOME/diamond_db/nr.dmnd \
 --out $RESULT_DIR/$BASENAME.daa \
---faster \
+--ultra-sensitive \
 --query $FILE \
 --outfmt 100
 
@@ -34,7 +34,7 @@ diamond view \
 --threads $THREADS \
 --header simple \
 --out $RESULT_DIR/$BASENAME.tsv \
---outfmt 6 qseqid sseqid pident length qlen slen evalue staxids qstart qend sstart send \
+--outfmt 6 qseqid sseqid pident length qlen slen evalue qstart qend sstart send staxids sphylum sgenus\
 --daa $RESULT_DIR/$BASENAME.daa \
 --forwardonly
 
