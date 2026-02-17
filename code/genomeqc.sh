@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH -c 32
-#SBATCH -p bigmem
-#SBATCH -mem=0
+#SBATCH --cpus-per-task=24
+#SBATCH --partition=bigmem,standard
+#SBATCH --mem=500G
 
 nextflow run nf-core/genomeqc \
    -r dev \
