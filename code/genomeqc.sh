@@ -1,6 +1,7 @@
 #!/bin/bash
-#SBATCH -c 24
-#SBATCH -mem=500G
+#SBATCH -c 32
+#SBATCH -p bigmem
+#SBATCH -mem=0
 
 nextflow run nf-core/genomeqc \
    -r dev \
