@@ -5,6 +5,8 @@
 
 nextflow run nf-core/genomeqc \
    -r dev \
+   -resume \
+   -c fix_gffread.config \
    -profile singularity \
    --input ../data/samplesheet.csv \
    --busco_lineage stramenopiles_odb12 \
