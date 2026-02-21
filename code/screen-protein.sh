@@ -22,7 +22,6 @@ diamond blastp \
 --db $HOME/diamond_db/nr.dmnd \
 --out $RESULT_DIR/$BASENAME.daa \
 --sensitive \
---range-culling \
 --index-chunks 1 \
 --query $FILE \
 --outfmt 100
