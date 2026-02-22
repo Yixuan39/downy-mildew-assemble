@@ -3,7 +3,6 @@
 #SBATCH -c 32
 #SBATCH --mem=0
 
-mamba activate diamond
 INPUT_DIR=$HOME/project_data/downy/Helixer
 RESULT_DIR=$HOME/project_data/downy/Helixer
 FILES=($(find "$INPUT_DIR" -type f -name "*.faa"))
