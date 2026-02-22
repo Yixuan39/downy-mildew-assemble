@@ -35,7 +35,7 @@ diamond view \
 --threads $THREADS \
 --header simple \
 --out $RESULT_DIR/$BASENAME.tsv \
---outfmt 6 qseqid sseqid pident length qlen slen evalue qstart qend sstart send staxids sphylum sgenus \
+--outfmt 6 qseqid sseqid pident length qlen slen evalue qstart qend sstart send staxids sphylums sgenus \
 --daa $RESULT_DIR/$BASENAME.daa \
 --forwardonly
 
