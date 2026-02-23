@@ -25,8 +25,7 @@ diamond blastp \
 --query $FILE \
 --header simple \
 --out $RESULT_DIR/$BASENAME.tsv \
---outfmt 6 qseqid sseqid pident length qlen slen evalue qstart qend sstart send staxids sphylums sgenus \
---forwardonly
+--outfmt 6 qseqid sseqid pident length qlen slen evalue qstart qend sstart send staxids sphylums sgenus
 
 end=$EPOCHREALTIME
 runtime=$(echo "$end - $start" | bc)
@@ -40,8 +39,7 @@ diamond blastp \
 --index-chunks 1 \
 --query $FILE \
 --out $RESULT_DIR/$BASENAME.txt \
---outfmt 0 \
---forwardonly
+--outfmt 0
 
 
 echo "Runtime: $runtime seconds"
