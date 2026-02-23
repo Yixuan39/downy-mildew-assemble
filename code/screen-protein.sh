@@ -20,29 +20,45 @@ diamond blastp \
 --evalue 0.00001 \
 --max-target-seqs 10 \
 --db $HOME/diamond_db/nr.dmnd \
---out $RESULT_DIR/$BASENAME.daa \
 --sensitive \
 --index-chunks 1 \
 --query $FILE \
---outfmt 100
-
-end=$EPOCHREALTIME
-runtime=$(echo "$end - $start" | bc)
-echo "Runtime: $runtime seconds"
-
-# convert result to tab format
-diamond view \
---threads $THREADS \
 --header simple \
 --out $RESULT_DIR/$BASENAME.tsv \
 --outfmt 6 qseqid sseqid pident length qlen slen evalue qstart qend sstart send staxids sphylums sgenus \
---daa $RESULT_DIR/$BASENAME.daa \
 --forwardonly
 
-# convert result to pairwise alignment format
-diamond view \
+end=$EPOCHREALTIME
+runtime=$(echo "$end - $start" | bc)
+
+diamond blastp \
 --threads $THREADS \
+--evalue 0.00001 \
+--max-target-seqs 10 \
+--db $HOME/diamond_db/nr.dmnd \
+--sensitive \
+--index-chunks 1 \
+--query $FILE \
 --out $RESULT_DIR/$BASENAME.txt \
 --outfmt 0 \
---daa $RESULT_DIR/$BASENAME.daa \
 --forwardonly
+
+
+echo "Runtime: $runtime seconds"
+
+# # convert result to tab format
+# diamond view \
+# --threads $THREADS \
+# --header simple \
+# --out $RESULT_DIR/$BASENAME.tsv \
+# --outfmt 6 qseqid sseqid pident length qlen slen evalue qstart qend sstart send staxids sphylums sgenus \
+# --daa $RESULT_DIR/$BASENAME.daa \
+# --forwardonly
+# 
+# # convert result to pairwise alignment format
+# diamond view \
+# --threads $THREADS \
+# --out $RESULT_DIR/$BASENAME.txt \
+# --outfmt 0 \
+# --daa $RESULT_DIR/$BASENAME.daa \
+# --forwardonly
