@@ -22,9 +22,9 @@ Reference genomes: Peronospora effusa, Bremia lactucae, Phytophthora sojae
 Our isolates: Quesada_SQIIe_MSU1, Quesada_SQIIe_SC1982, Quesada_SQIIe_Phumuli
 
 ```{r  message=FALSE, echo=FALSE, results=FALSE}
-genomeRepo <- "~/project_data/downy/genespace/genomes/"
-wd <- "~/project_data/downy/genespace/"
-path2mcscanx <- "/Users/yixuanyang/miniforge3/bin/"
+genomeRepo <- "~/project_data/downy/genespace/genomes"
+wd <- "~/project_data/downy/genespace"
+path2mcscanx <- "/home5/yyang55/miniforge3/bin"
 folders <- list.dirs(genomeRepo, recursive = FALSE, full.names = FALSE)
 # all folder except c("Quesada_SQIIe_SC1982", "Quesada_SQIIe_MSU1", "Quesada_SQIIe_Phumuli")
 genomes2run <- folders[!folders %in% c("Quesada_SQIIe_SC1982", "Quesada_SQIIe_MSU1", "Quesada_SQIIe_Phumuli", "Phytophthora_agathidicida")]
@@ -47,7 +47,7 @@ parsedPaths <- parse_annotations(
 
 gpar <- init_genespace(
   wd = wd,
-  nCores = 10,
+  nCores = 32,
   dotplots = 'never',
   path2mcscanx = path2mcscanx)
 
@@ -79,7 +79,7 @@ full.plot <- plot_riparian(
 ```{r echo=FALSE}
 full.plot <- plot_riparian(
   gsParam = out,
-  genomeIDs = c(genomes2run[3:1],asm2run[3:1]),
+  genomeIDs = c(genomes2run,asm2run, "Phytophthora_agathidicida"),
   refGenome = genomes2run[1],
   #chrLabFontSize = 2,
   chrLabFun = function(x) "",
@@ -91,35 +91,83 @@ full.plot <- plot_riparian(
 
 
 ```{r}
-library(ggtree)
+# library(ggtree)
+# library(ggplot2)
+# library(patchwork)
+# 
+# tree.path <- file.path(wd, 'results/SpeciesTree_rooted.txt')
+# tree <- ggtree(read.tree(tree.path))
+# tree_data <- tree$data
+# tip_data <- tree_data[tree_data$isTip, ]
+# species_order <- tip_data$label[order(tip_data$y)]
+# num_species <- length(species_order)
+# 
+# # make sure both figure using same limits
+# y_limits <- c(0.5, num_species + 0.5)
+# aligned_tree <- tree +
+#   scale_y_continuous(limits = y_limits, expand = c(0, 0)) +
+#   theme(plot.margin = margin(t = 10, r = 0, b = 10, l = 10))
+# 
+# aligned_synteny <- full.plot$plotData$ggplotObj +
+#   scale_y_continuous(
+#     limits = y_limits, 
+#     expand = c(0, 0),
+#     breaks = 1:num_species,
+#     labels = species_order) +
+#   ylab(NULL) +
+#   theme(
+#     plot.margin = margin(t = 10, r = 10, b = 10, l = 0),
+#     axis.text.y = element_text(color = "black") 
+#   )
+# 
+# aligned_tree + aligned_synteny + plot_layout(widths = c(1, 4))
+```
+
+```{r}
+library(ape)
+library(tidytree)
 library(ggplot2)
 library(patchwork)
 
+# Read the tree
 tree.path <- file.path(wd, 'results/SpeciesTree_rooted.txt')
-tree <- ggtree(read.tree(tree.path))
-tree_data <- tree$data
-tip_data <- tree_data[tree_data$isTip, ]
-species_order <- tip_data$label[order(tip_data$y)]
-num_species <- length(species_order)
+phylo_tree <- read.tree(tree.path)
 
-# make sure both figure using same limits
+# Get species order from tree (tip order from bottom to top)
+species_order <- phylo_tree$tip.label[order.dendrogram(as.dendrogram(phylo_tree))]
+num_species <- length(species_order)
 y_limits <- c(0.5, num_species + 0.5)
-aligned_tree <- tree +
+
+# Alternative: Create a simple tree representation for ggplot
+tree_df <- data.frame(
+  species = factor(species_order, levels = species_order),
+  x = 0,
+  y = 1:num_species
+)
+
+# Simple tree-like plot in ggplot
+tree_plot <- ggplot(tree_df, aes(x = x, y = y)) +
+  geom_text(aes(label = species), hjust = 1, size = 3) +
+  xlim(-0.5, 0.5) +
   scale_y_continuous(limits = y_limits, expand = c(0, 0)) +
+  theme_void() +
   theme(plot.margin = margin(t = 10, r = 0, b = 10, l = 10))
 
+# Your synteny plot (this should work as-is)
 aligned_synteny <- full.plot$plotData$ggplotObj +
   scale_y_continuous(
     limits = y_limits, 
     expand = c(0, 0),
     breaks = 1:num_species,
-    labels = species_order) +
+    labels = species_order
+  ) +
   ylab(NULL) +
   theme(
     plot.margin = margin(t = 10, r = 10, b = 10, l = 0),
     axis.text.y = element_text(color = "black") 
   )
 
-aligned_tree + aligned_synteny + plot_layout(widths = c(1, 4))
+# Combine plots
+tree_plot + aligned_synteny + plot_layout(widths = c(1, 4))
 ```
 

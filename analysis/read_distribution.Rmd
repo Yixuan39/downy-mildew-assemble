@@ -11,7 +11,7 @@ library(here)
 library(pavian)
 theme_set(theme_bw())
 # child ids under oomycota: 4762
-child.id <- c(taxizedb::downstream(4762)$`4762`$childtaxa_id, '4762')
+oomycete.ids <- read_lines(here('data', 'oomycete_taxids.txt'))
 ```
 
 # Read distribution of the PacBio HIFI reads
@@ -23,12 +23,23 @@ df <- map_dfr(files, function(file) {
   data <- fread(file, drop = 5, showProgress = FALSE)
   colnames(data) <- c('status', 'id', 'tax', 'length')
   data <- data %>% mutate(file = str_remove(basename(file), '.kraken'))
-}) %>% mutate(is.oomycota = (tax %in% child.id))
+}) %>% mutate(is.oomycota = (tax %in% oomycete.ids))
 
-ggplot(df) +
+# rename samples
+df$Isolate <- df$file |> 
+  str_replace('p_effusa', 'P. effusa (UA202013)') |> 
+  str_replace("Quesada_SQIIe_MSU1", "P. cubensis (MSU1)") |> 
+  str_replace("Quesada_SQIIe_Phumuli", "P. humuli (Phumuli)") |> 
+  str_replace("Quesada_SQIIe_SC1982", "P. cubensis (SC1982)")
+df$Isolate <- factor(df$Isolate, levels = c("P. cubensis (MSU1)",
+                                            "P. cubensis (SC1982)",
+                                            "P. humuli (Phumuli)",
+                                            'P. effusa (UA202013)'))
+read.dist <- ggplot(df) +
   geom_histogram(aes(x = length, fill = is.oomycota), binwidth = 1000) +
   scale_y_continuous(labels = scales::label_comma()) +
-  facet_wrap(~file, ncol = 1, scales = 'free_y')
+  facet_wrap(~Isolate, ncol = 1, scales = 'free_y')
+read.dist
 ```
 
 ```{r echo=FALSE}
@@ -36,64 +47,68 @@ files <- list.files('~/project_data/downy/k2_pfp',
                     full.names = TRUE, recursive = TRUE, pattern = '.kreport$')
 df.rpt <- map_dfr(files, function(file) {
   read_report2(file, add_taxRank_columns = TRUE) %>%
-    mutate(file = str_remove(basename(file), '.fastq.gz.kreport'))})
+    mutate(file = str_remove(basename(file), '.kreport'))})
 
-df.rpt %>% 
-  filter(taxRank %in% c('U', 'S')) %>% 
-  select(percentage, P, S, file) %>% 
-  group_by(file) %>% 
-  slice_max(order_by = percentage, n = 10) %>% 
-  gt(row_group_as_column = T) %>% 
-  fmt_number()
+# rename samples
+df.rpt$Isolate <- df.rpt$file |> 
+  str_replace('p_effusa', 'P. effusa (UA202013)') |> 
+  str_replace("Quesada_SQIIe_MSU1", "P. cubensis (MSU1)") |> 
+  str_replace("Quesada_SQIIe_Phumuli", "P. humuli (Phumuli)") |> 
+  str_replace("Quesada_SQIIe_SC1982", "P. cubensis (SC1982)")
+df.rpt$Isolate <- factor(df.rpt$Isolate, levels = c("P. cubensis (MSU1)",
+                                                    "P. cubensis (SC1982)",
+                                                    "P. humuli (Phumuli)",
+                                                    'P. effusa (UA202013)'))
 ```
 
-# Read distribution of the PacBio HIFI reads
 
 ```{r echo=FALSE}
-files <- list.files('~/project_data/downy/k2',
-                    full.names = TRUE, recursive = TRUE, pattern = '.kraken$')
-df <- map_dfr(files, function(file) {
-  data <- fread(file, drop = 5, showProgress = FALSE)
-  colnames(data) <- c('status', 'id', 'tax', 'length')
-  data <- data %>% mutate(file = str_remove(basename(file), '.kraken'))
-}) %>% mutate(is.oomycota = (tax %in% child.id))
+df.rpt |> 
+  group_by(Isolate) |> 
+  filter(name == "p_Oomycota") |> 
+  select(percentage, cladeReads, name, Isolate)
+```
 
-ggplot(df) +
-  geom_histogram(aes(x = length, fill = is.oomycota), binwidth = 1000) +
-  scale_y_continuous(labels = scales::label_comma()) +
-  facet_wrap(~file, ncol = 1, scales = 'free_y')
+
+```{r}
+df.rpt |> 
+  group_by(Isolate) |> 
+  filter(name == "g_Homo") |> 
+  select(percentage, cladeReads, name, Isolate)
 ```
 
 ```{r echo=FALSE}
-files <- list.files('~/project_data/downy/k2',
-                    full.names = TRUE, recursive = TRUE, pattern = '.kreport$')
-df.rpt <- map_dfr(files, function(file) {
-  read_report2(file, add_taxRank_columns = TRUE) %>%
-    mutate(file = str_remove(basename(file), '.fastq.gz.kreport'))})
-
-df.rpt %>% 
-  filter(taxRank %in% c('U', 'S')) %>% 
-  select(percentage, P, S, file) %>% 
-  group_by(file) %>% 
-  slice_max(order_by = percentage, n = 10) %>% 
-  gt(row_group_as_column = T) %>% 
-  fmt_number()
+df.rpt |> 
+  group_by(Isolate) |> 
+  filter(name %in% c("f_Cannabaceae", "f_Cucurbitaceae", "f_Amaranthaceae")) |> 
+  select(percentage, cladeReads, name, Isolate) |> 
+  gt()
 ```
 
-The humuli genome.Total number of contigs: 5534
 
 ```{r}
-humuli.contam <- fread('~/project_data/downy/oomycota-genome/fcs-gx/Pseudoperonospora-humuli.fna.gz.fcs_gx_report.txt')
-head(humuli.contam)
-nrow(humuli.contam)
+tax.bar <- df.rpt |> 
+  group_by(Isolate) |> 
+  filter(taxRank %in% c('U', 'P')) |> 
+  mutate(taxon = if_else(percentage <= 5, 'other', name)) |> 
+  ggplot() +
+  geom_col(aes(x = Isolate, y = percentage, fill = taxon), position = 'fill', stat = 'identity')+
+  scale_y_continuous(labels = scales::percent) +
+  theme(axis.text.x = element_text(angle = 25, hjust = 1))
+tax.bar
 ```
-
-The cubensis genome.Total number of contigs: 35539, and number of cantamination contigs are 21691
 
 ```{r}
-cubensis.contam <- fread('~/project_data/downy/oomycota-genome/fcs-gx/Pseudoperonospora-cubensis.fna.gz.fcs_gx_report.txt')
-head(cubensis.contam)
-nrow(cubensis.contam)
+df.rpt |> 
+  filter(!(taxID %in% oomycete.ids), P == 'p_Pseudomonadota', taxRank == 'G') |> 
+  group_by(Isolate) |> 
+  arrange(desc(percentage)) |> 
+  slice_head(n = 10) |> 
+  gt()
 ```
+
+
+
+
 
 
