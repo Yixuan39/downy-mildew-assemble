@@ -11,21 +11,12 @@ library(GENESPACE)
 genomeRepo <- "~/project_data/downy/genespace-contigs/genomes"
 wd <- "~/project_data/downy/genespace-contigs"
 path2mcscanx <- "/home5/yyang55/miniforge3/bin"
-folders <- list.dirs(genomeRepo, recursive = FALSE, full.names = FALSE)
-# all folder except c("Quesada_SQIIe_SC1982", "Quesada_SQIIe_MSU1", "Quesada_SQIIe_Phumuli")
-genomes2run <- folders[!folders %in% c("Quesada_SQIIe_SC1982", "Quesada_SQIIe_MSU1", "Quesada_SQIIe_Phumuli", "Peronospora_effusa_reassemble", "Phytophthora_agathidicida")]
+asm2run <- list.dirs(genomeRepo, recursive = FALSE, full.names = FALSE)
+
 parsedPaths <- parse_annotations(
   rawGenomeRepo = genomeRepo,
-  genomeDirs = genomes2run,
-  genomeIDs = genomes2run,
-  headerSep = NA,
-  headerEntryIndex = 1,
-  genespaceWd = wd)
-asm2run <- c("Quesada_SQIIe_SC1982", "Quesada_SQIIe_MSU1", "Quesada_SQIIe_Phumuli", "Peronospora_effusa_reassemble")
-parsedPaths <- parse_annotations(
-  rawGenomeRepo = genomeRepo,
-  genomeDirs = c(asm2run, "Phytophthora_agathidicida"),
-  genomeIDs = c(asm2run, "Phytophthora_agathidicida"),
+  genomeDirs = asm2run,
+  genomeIDs = asm2run |> str_replace('-','_'),
   headerSep = NA,
   headerEntryIndex = 1,
   gffIdColumn = "ID",
@@ -41,32 +32,37 @@ out <- run_genespace(gpar)
 ```
 
 ```{r echo=FALSE}
-genome.order <- c("Peronospora_effusa", "Peronospora_effusa_reassemble",
-                  "Quesada_SQIIe_MSU1", "Quesada_SQIIe_SC1982", "Quesada_SQIIe_Phumuli")
-full.plot <- plot_riparian(
-  gsParam = out,
-  genomeIDs = rev(genome.order),
-  chrLabFun = function(x) "",
-  refGenome = "Peronospora_effusa",
-  useRegions = FALSE)
+# genome.order <- c("Peronospora_effusa", "Peronospora_effusa_reassemble",
+#                   "Quesada_SQIIe_MSU1", "Quesada_SQIIe_SC1982", "Quesada_SQIIe_Phumuli")
+# full.plot <- plot_riparian(
+#   gsParam = out,
+#   genomeIDs = rev(genome.order),
+#   chrLabFun = function(x) "",
+#   refGenome = "Peronospora_effusa",
+#   useRegions = FALSE)
 ```
 
 ```{r echo=FALSE}
-genome.order <- c("Peronospora_effusa", 
+genome.order <- c("Phytophthora_infestans_1306", 
+                  "Plasmopara_halstedii_710",
+                  "Bremia_lactucae_SF5",
+                  "Phytophthora_capsici_BYA5",
+                  "Phytophthora_plurivora_TJ71",
+                  "Peronospora_effusa_UA202013",
                   "Peronospora_effusa_reassemble",
                   "Quesada_SQIIe_MSU1", 
                   "Quesada_SQIIe_SC1982", 
                   "Quesada_SQIIe_Phumuli",
-                  "Phytophthora_agathidicida",
-                  "Phytophthora_infestans",
-                  "Plasmopara_halstedii",
-                  "Bremia_lactucae",
-                  "Phytophthora_sojae"
+                  "Pythium_oligandrum_PO_1",
+                  "Phytophthora_ramorum_Pr_102",
+                  "Phytophthora_sojae_JS2",
+                  "Phytophthora_agathidicida_3770",
+                  "Peronospora_destructor_Pd_K2019"
                   )
 full.plot <- plot_riparian(
   gsParam = out,
   genomeIDs = rev(genome.order),
-  refGenome = "Peronospora_effusa",
+  refGenome = "Peronospora_effusa_UA202013",
   #chrLabFontSize = 2,
   chrLabFun = function(x) "",
   useRegions = FALSE)
