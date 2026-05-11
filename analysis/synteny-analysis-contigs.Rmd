@@ -10,13 +10,13 @@ library(GENESPACE)
 ```{r  message=FALSE, echo=FALSE, results=FALSE}
 genomeRepo <- "~/project_data/downy/genespace-contigs/genomes"
 wd <- "~/project_data/downy/genespace-contigs"
-path2mcscanx <- "/home5/yyang55/miniforge3/bin"
+path2mcscanx <- "~/miniforge3/bin"
 asm2run <- list.dirs(genomeRepo, recursive = FALSE, full.names = FALSE)
 
 parsedPaths <- parse_annotations(
   rawGenomeRepo = genomeRepo,
   genomeDirs = asm2run,
-  genomeIDs = asm2run |> str_replace('-','_'),
+  genomeIDs = asm2run |> stringr::str_replace('-','_'),
   headerSep = NA,
   headerEntryIndex = 1,
   gffIdColumn = "ID",
@@ -24,23 +24,13 @@ parsedPaths <- parse_annotations(
 
 gpar <- init_genespace(
   wd = wd,
-  nCores = 32,
+  nCores = 10,
   dotplots = 'never',
   path2mcscanx = path2mcscanx)
 
 out <- run_genespace(gpar)
 ```
 
-```{r echo=FALSE}
-# genome.order <- c("Peronospora_effusa", "Peronospora_effusa_reassemble",
-#                   "Quesada_SQIIe_MSU1", "Quesada_SQIIe_SC1982", "Quesada_SQIIe_Phumuli")
-# full.plot <- plot_riparian(
-#   gsParam = out,
-#   genomeIDs = rev(genome.order),
-#   chrLabFun = function(x) "",
-#   refGenome = "Peronospora_effusa",
-#   useRegions = FALSE)
-```
 
 ```{r echo=FALSE}
 genome.order <- c("Phytophthora_infestans_1306", 
@@ -50,9 +40,9 @@ genome.order <- c("Phytophthora_infestans_1306",
                   "Phytophthora_plurivora_TJ71",
                   "Peronospora_effusa_UA202013",
                   "Peronospora_effusa_reassemble",
-                  "Quesada_SQIIe_MSU1", 
-                  "Quesada_SQIIe_SC1982", 
-                  "Quesada_SQIIe_Phumuli",
+                  "Pseudoperonospora_cubensis_MSU1", 
+                  "Pseudoperonospora_cubensis_SC1982", 
+                  "Pseudoperonospora_humuli_OR502AA",
                   "Pythium_oligandrum_PO_1",
                   "Phytophthora_ramorum_Pr_102",
                   "Phytophthora_sojae_JS2",
@@ -70,84 +60,96 @@ full.plot <- plot_riparian(
 
 
 
-```{r echo=FALSE}
-# library(ggtree)
-# library(ggplot2)
-# library(patchwork)
-# 
-# tree.path <- file.path(wd, 'results/SpeciesTree_rooted.txt')
-# tree <- ggtree(read.tree(tree.path))
-# tree_data <- tree$data
-# tip_data <- tree_data[tree_data$isTip, ]
-# species_order <- tip_data$label[order(tip_data$y)]
-# num_species <- length(species_order)
-# 
-# # make sure both figure using same limits
-# y_limits <- c(0.5, num_species + 0.5)
-# aligned_tree <- tree +
-#   scale_y_continuous(limits = y_limits, expand = c(0, 0)) +
-#   theme(plot.margin = margin(t = 10, r = 0, b = 10, l = 10))
-# 
-# aligned_synteny <- full.plot$plotData$ggplotObj +
-#   scale_y_continuous(
-#     limits = y_limits, 
-#     expand = c(0, 0),
-#     breaks = 1:num_species,
-#     labels = species_order) +
-#   ylab(NULL) +
-#   theme(
-#     plot.margin = margin(t = 10, r = 10, b = 10, l = 0),
-#     axis.text.y = element_text(color = "black") 
-#   )
-# 
-# aligned_tree + aligned_synteny + plot_layout(widths = c(1, 4))
+
+
+```{r}
+library(ggtree)
+library(ape)
+library(ggplot2)
+library(patchwork)
+
+tree.path <- file.path(wd, 'results/SpeciesTree_rooted.txt')
+
+tr <- read.tree(tree.path)
+
+tree <- ggtree(tr)
+
+# rotate Peronospora clade so that destructor is on top
+peronospora_node <- getMRCA(
+  tr,
+  c("Peronospora_effusa_reassemble",
+    "Peronospora_effusa_UA202013",
+    "Peronospora_destructor_Pd_K2019")
+)
+
+tree <- ggtree::rotate(tree, peronospora_node)
+
+tree_data <- tree$data
+tip_data <- tree_data[tree_data$isTip, ]
+
+# important: order tips by actual plotting y position, from top to bottom
+tip_data <- tip_data[order(tip_data$y, decreasing = TRUE), ]
+
+# make sure both figures use same limits
+y_limits <- c(0.5, length(tip_data$label) + 0.5)
+
+aligned_tree <- tree + 
+  scale_y_continuous(limits = y_limits, expand = c(0, 0)) +
+  theme(plot.margin = margin(t = 10, r = 0, b = 10, l = 10))
+
+full.plot <- plot_riparian(
+  gsParam = out,
+  genomeIDs = rev(tip_data$label),
+  refGenome = "Peronospora_effusa_UA202013",
+  chrLabFun = function(x) "",
+  useRegions = FALSE
+)
+
+aligned_synteny <- full.plot$plotData$ggplotObj +
+  scale_y_continuous(
+    limits = y_limits,
+    expand = c(0, 0),
+    breaks = 1:length(tip_data$label),
+    labels = rev(tip_data$label)
+  ) +
+  ylab(NULL) +
+  theme(
+    plot.margin = margin(t = 10, r = 10, b = 10, l = 0),
+    axis.text.y = element_text(color = "black")
+  )
+
+aligned_tree + aligned_synteny + plot_layout(widths = c(1, 4))
 ```
 
-```{r echo=FALSE}
-# library(ape)
-# library(tidytree)
-# library(ggplot2)
-# library(patchwork)
+```{r}
+library(tidyverse)
+ortho.groups <- read.table(list.files(wd, pattern = 'Orthogroups.GeneCount.tsv', full.names = TRUE, recursive = TRUE),
+                           header = TRUE, sep = '\t', stringsAsFactors = FALSE) 
+
+ortho.groups.sub <- ortho.groups |> 
+  select("Orthogroup", "Pseudoperonospora_cubensis_MSU1", "Pseudoperonospora_cubensis_SC1982", "Pseudoperonospora_humuli_OR502AA") |> 
+  # filter(
+  #   Pseudoperonospora_cubensis_SC1982 >= 2 |
+  #   Pseudoperonospora_cubensis_MSU1 >= 2 |
+  #   Pseudoperonospora_humuli_OR502AA >= 2
+  # ) |> 
+  pivot_longer(cols = -Orthogroup, names_to = "sample", values_to = "count")
 # 
-# # Read the tree
-# tree.path <- file.path(wd, 'results/SpeciesTree_rooted.txt')
-# phylo_tree <- read.tree(tree.path)
-# 
-# # Get species order from tree (tip order from bottom to top)
-# species_order <- phylo_tree$tip.label[order.dendrogram(as.dendrogram(phylo_tree))]
-# num_species <- length(species_order)
-# y_limits <- c(0.5, num_species + 0.5)
-# 
-# # Alternative: Create a simple tree representation for ggplot
-# tree_df <- data.frame(
-#   species = factor(species_order, levels = species_order),
-#   x = 0,
-#   y = 1:num_species
-# )
-# 
-# # Simple tree-like plot in ggplot
-# tree_plot <- ggplot(tree_df, aes(x = x, y = y)) +
-#   geom_text(aes(label = species), hjust = 1, size = 3) +
-#   xlim(-0.5, 0.5) +
-#   scale_y_continuous(limits = y_limits, expand = c(0, 0)) +
-#   theme_void() +
-#   theme(plot.margin = margin(t = 10, r = 0, b = 10, l = 10))
-# 
-# # Your synteny plot (this should work as-is)
-# aligned_synteny <- full.plot$plotData$ggplotObj +
-#   scale_y_continuous(
-#     limits = y_limits, 
-#     expand = c(0, 0),
-#     breaks = 1:num_species,
-#     labels = species_order
-#   ) +
-#   ylab(NULL) +
-#   theme(
-#     plot.margin = margin(t = 10, r = 10, b = 10, l = 0),
-#     axis.text.y = element_text(color = "black") 
-#   )
-# 
-# # Combine plots
-# tree_plot + aligned_synteny + plot_layout(widths = c(1, 4))
+# ggplot(ortho.groups.sub) +
+#   geom_col(aes(x = Orthogroup, y = count, group = sample, color = sample, fill = sample), position = "dodge") +
+#   theme(axis.text.x = element_blank(), axis.ticks.x = element_blank())  
+
 ```
+
+```{r}
+ortho.groups.sub |>
+  group_by(sample) |>
+  summarise(
+    mean_copy = mean(count),
+    median_copy = median(count),
+    `prop_copy>2` = mean(count >= 2),
+    max_copy = max(count)
+  ) |> gt::gt()
+```
+
 
