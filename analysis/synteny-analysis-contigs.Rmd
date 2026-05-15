@@ -5,9 +5,11 @@ output: html_document
 
 ```{r echo=FALSE, message=FALSE}
 library(GENESPACE)
+library(ape)
+library(here)
 ```
 
-```{r  message=FALSE, echo=FALSE, results=FALSE}
+```{r  message=FALSE, echo=FALSE, results=FALSE, eval=FALSE}
 genomeRepo <- "~/project_data/downy/genespace-contigs/genomes"
 wd <- "~/project_data/downy/genespace-contigs"
 path2mcscanx <- "~/miniforge3/bin"
@@ -24,15 +26,21 @@ parsedPaths <- parse_annotations(
 
 gpar <- init_genespace(
   wd = wd,
-  nCores = 10,
+  nCores = 32,
   dotplots = 'never',
   path2mcscanx = path2mcscanx)
 
 out <- run_genespace(gpar)
+saveRDS(out, here('data', 'genespace.rds'))
+
+tree.path <- file.path(wd, 'results/SpeciesTree_rooted.txt')
+tr <- read.tree(tree.path)
+saveRDS(tr, here('data', 'tree.rds'))
 ```
 
 
 ```{r echo=FALSE}
+out <- readRDS(here('data', 'genespace.rds'))
 genome.order <- c("Phytophthora_infestans_1306", 
                   "Plasmopara_halstedii_710",
                   "Bremia_lactucae_SF5",
@@ -64,14 +72,10 @@ full.plot <- plot_riparian(
 
 ```{r}
 library(ggtree)
-library(ape)
 library(ggplot2)
 library(patchwork)
 
-tree.path <- file.path(wd, 'results/SpeciesTree_rooted.txt')
-
-tr <- read.tree(tree.path)
-
+tr <- readRDS(here('data','tree.rds'))
 tree <- ggtree(tr)
 
 # rotate Peronospora clade so that destructor is on top
