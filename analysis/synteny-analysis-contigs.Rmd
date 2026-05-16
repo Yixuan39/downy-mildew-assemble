@@ -7,6 +7,8 @@ output: html_document
 library(GENESPACE)
 library(ape)
 library(here)
+library(ggplot2)
+library(patchwork)
 ```
 
 ```{r  message=FALSE, echo=FALSE, results=FALSE, eval=FALSE}
@@ -70,10 +72,8 @@ full.plot <- plot_riparian(
 
 
 
-```{r}
+```{r eval=FALSE}
 library(ggtree)
-library(ggplot2)
-library(patchwork)
 
 tr <- readRDS(here('data','tree.rds'))
 tree <- ggtree(tr)
@@ -100,7 +100,11 @@ y_limits <- c(0.5, length(tip_data$label) + 0.5)
 aligned_tree <- tree + 
   scale_y_continuous(limits = y_limits, expand = c(0, 0)) +
   theme(plot.margin = margin(t = 10, r = 0, b = 10, l = 10))
+saveRDS(aligned_tree, here('data', 'aligned_tree.rds'))
+```
 
+
+```{r}
 full.plot <- plot_riparian(
   gsParam = out,
   genomeIDs = rev(tip_data$label),
@@ -121,6 +125,8 @@ aligned_synteny <- full.plot$plotData$ggplotObj +
     plot.margin = margin(t = 10, r = 10, b = 10, l = 0),
     axis.text.y = element_text(color = "black")
   )
+
+aligned_tree <- readRDS(here('data', 'aligned_tree.rds'))
 
 aligned_tree + aligned_synteny + plot_layout(widths = c(1, 4))
 ```
