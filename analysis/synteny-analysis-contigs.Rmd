@@ -101,10 +101,12 @@ aligned_tree <- tree +
   scale_y_continuous(limits = y_limits, expand = c(0, 0)) +
   theme(plot.margin = margin(t = 10, r = 0, b = 10, l = 10))
 saveRDS(aligned_tree, here('data', 'aligned_tree.rds'))
+saveRDS(tip_data, here('data', 'tip_data.rds'))
 ```
 
 
 ```{r}
+tip_data <- readRDS(here('data', 'tip_data.rds'))
 full.plot <- plot_riparian(
   gsParam = out,
   genomeIDs = rev(tip_data$label),
