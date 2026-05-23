@@ -11,30 +11,33 @@ library(tidyverse)
 library(Biostrings)
 library(data.table)
 library(gt)
+knitr::opts_knit$set(root.dir = here())
 theme_set(theme_bw())
 ```
 
 ```{r echo=FALSE, message=FALSE}
 read.tb <- function(path, method) {
-  files <- list.files(path, full.names = TRUE, pattern = 'quality.csv', recursive = TRUE)
+  files <- list.files(path, full.names = TRUE, pattern = 'quality_final.csv', recursive = TRUE)
   tb <- map_dfr(files, function(x) {data.frame(fread(x))})
   return(tb)
 }
 ```
 
-After synteny with P.effusa, we have new assembly files where some of the contigs are glued. Let's check their qualities.
-
 ```{r echo=FALSE}
-read.tb('~/project_data/downy/Scaffold/', 'final assembly') |> 
+read.tb('~/project_data/downy/Assembly/', 'final assembly') |> 
   cbind(sample = c('p_effusa', 'Quessda_MSU1','Quessda_Phumuli','Quessda_SC1982'))|>
   relocate(sample) |> 
   gt() |> fmt_number()
 ```
 
+
 # Read Length
 
 ```{r echo=FALSE}
-read.length <- list.files('~/project_data/downy/Scaffold/', pattern = '.fasta.gz', full.names = TRUE, recursive = TRUE) |> 
+read.length <- list.files('~/project_data/downy/Assembly/',
+                          pattern = '.fasta.gz', 
+                          full.names = TRUE, recursive = TRUE) |> 
+  (\(x) x[!str_detect(x, "fcs")])() |> 
   map_dfr(function(file) {
     seq <- readDNAStringSet(file)
     data.frame(sample = str_remove(basename(file), '.fasta.gz'),
@@ -44,12 +47,11 @@ read.length <- list.files('~/project_data/downy/Scaffold/', pattern = '.fasta.gz
   arrange(desc(length)) |>
   top_n(30) |> 
   mutate(rank = 1:n()) |> 
-  mutate(ragtag = if_else(str_detect(contig, '_RagTag'), 'scaffold' ,'unplaced contigs')) |> 
   ungroup()
 
 read.length$sample <- factor(read.length$sample, levels = c("p_effusa", "Quesada_SQIIe_SC1982", "Quesada_SQIIe_MSU1", "Quesada_SQIIe_Phumuli"))
 
-ggplot(read.length, aes(x = factor(rank), y = length, fill = ragtag)) +
+ggplot(read.length, aes(x = factor(rank), y = length)) +
   geom_col() +
   scale_y_continuous(labels = scales::label_number(big.mark = ",")) +
   facet_wrap(~sample, scales = 'free_y', ncol = 1) +
@@ -62,3 +64,169 @@ ggplot(read.length, aes(x = factor(rank), y = length, fill = ragtag)) +
 ```
 
 
+# Rename the contigs
+
+We are going to rename the contigs in a consistent naming logic: species_sizeRank.
+
+The corresponding names are shown below:
+
+| Sample | Sequence name |
+|---|---|
+| p_effusa | Peff-26 |
+| Quesada_SQIIe_MSU1 | Pcub-MSU1 |
+| Quesada_SQIIe_SC1982 | Pcub-SC1982 |
+| Quesada_SQIIe_Phumuli | Phum-OR502AA |
+
+```{r echo=FALSE, message=FALSE}
+rename_key <- tribble(
+  ~old_file, ~seq_name, ~file_name,
+  "p_effusa", "Peff-26", "Peronospora_effusa_reassemble",
+  "Quesada_SQIIe_MSU1", "Pcub-MSU1", "Pseudoperonospora_cubensis_MSU1",
+  "Quesada_SQIIe_SC1982", "Pcub-SC1982", "Pseudoperonospora_cubensis_SC1982",
+  "Quesada_SQIIe_Phumuli", "Phum-OR502AA", "Pseudoperonospora_humuli_OR502AA"
+)
+
+rename_dir <- path.expand("~/project_data/downy/contigs-renamed")
+dir.create(rename_dir, recursive = TRUE, showWarnings = FALSE)
+
+assembly_files <- list.files(
+  "~/project_data/downy/Assembly/",
+  pattern = "\\.fasta\\.gz$",
+  full.names = TRUE,
+  recursive = TRUE
+) |>
+  (\(x) x[!str_detect(x, "fcs_gx")])()
+
+rename_contigs_by_length <- function(file) {
+  input_name <- str_remove(basename(file), "\\.fasta\\.gz$")
+  row_id <- match(input_name, rename_key$old_file)
+  stopifnot(!is.na(row_id))
+
+  seqs <- readDNAStringSet(file)
+  seqs <- seqs[order(width(seqs), decreasing = TRUE)]
+  names(seqs) <- paste0(rename_key$seq_name[row_id], "_", str_pad(seq_along(seqs), width = 3, pad = "0"))
+
+  writeXStringSet(
+    seqs,
+    file.path(rename_dir, paste0(rename_key$file_name[row_id], ".fasta.gz")),
+    compress = TRUE
+  )
+}
+
+walk(assembly_files, rename_contigs_by_length)
+```
+
+
+# Remove mitochondrial contigs
+
+After assembly, some mitochondrial contigs were still retained in the assembly files. After renaming the contigs, we identified these mitochondrial contigs by aligning each assembly against the mitochondrial genome, then separated them from the rest of the assembly.
+
+```{bash echo=TRUE}
+set -euo pipefail
+
+INPUT_DIR="${HOME}/project_data/downy/contigs-renamed"
+RESULT_DIR="${HOME}/project_data/downy/contigs-renamed/mitochondiral"
+MITO_REF="${HOME}/project_data/downy/mitochondrial-genome/KT072718.1.fna"
+
+mkdir -p "$RESULT_DIR"
+
+find "$INPUT_DIR" -maxdepth 1 -type f -name "*.fasta.gz" | while read -r FILE; do
+  BASENAME="$(basename "$FILE" .fasta.gz)"
+  OUT="$RESULT_DIR/${BASENAME}.mito.tsv"
+
+  if [ -s "$OUT" ]; then
+    echo "Skipping existing: $OUT"
+    continue
+  fi
+
+  TMP="$RESULT_DIR/${BASENAME}.fasta"
+  gzip -dc "$FILE" > "$TMP"
+
+  blastn \
+    -query "$TMP" \
+    -subject "$MITO_REF" \
+    -outfmt "6 qseqid sseqid pident length qlen slen evalue" \
+    -max_target_seqs 1 \
+    -max_hsps 1 \
+    -out "$OUT"
+
+  rm "$TMP"
+done
+```
+
+```{r echo=FALSE, message=FALSE}
+blast_files <- list.files(
+  "~/project_data/downy/contigs-renamed/mitochondiral",
+  pattern = "\\.mito\\.tsv$",
+  full.names = TRUE
+)
+
+read_mito_blast <- function(file) {
+  if (file.info(file)$size == 0) {
+    return(tibble())
+  }
+
+  fread(
+    file,
+    col.names = c("seqid", "subject", "pident", "align.length",
+                  "query.length", "subject.length", "e.value")
+  ) |>
+    as_tibble() |>
+    mutate(sample = str_remove(basename(file), "\\.mito\\.tsv$"))
+}
+
+blast.mito <- map_dfr(blast_files, read_mito_blast) |>
+  relocate(sample) |>
+  mutate(`align/query` = round(align.length / query.length, 3))
+
+blast.mito |>
+  group_by(sample) |>
+  arrange(desc(`align/query`), desc(align.length), .by_group = TRUE) |>
+  gt()
+```
+
+
+We treated contigs as mitochondrial when at least 10% of the contig aligned to the mitochondrial genome.
+
+```{r echo=FALSE, message=FALSE}
+mito_contigs <- blast.mito |>
+  filter(`align/query` >= 0.1)
+
+mito_contigs |>
+  group_by(sample) |>
+  arrange(desc(`align/query`), desc(align.length), .by_group = TRUE) |>
+  slice_head(n = 10) |>
+  gt()
+```
+
+```{r echo=FALSE, message=FALSE}
+renamed_files <- list.files(
+  "~/project_data/downy/contigs-renamed",
+  pattern = "\\.fasta\\.gz$",
+  full.names = TRUE
+)
+
+clean_contigs <- function(file) {
+  sample_name <- str_remove(basename(file), "\\.fasta\\.gz$")
+  seqs <- readDNAStringSet(file)
+  mito_ids <- mito_contigs |> filter(sample == sample_name) |> pull(seqid)
+
+  clean_dir <- file.path("~/project_data/downy/contigs-renamed/cleaned")
+  mito_dir <- file.path("~/project_data/downy/contigs-renamed/mitochondiral")
+  dir.create(clean_dir, recursive = TRUE, showWarnings = FALSE)
+  dir.create(mito_dir, recursive = TRUE, showWarnings = FALSE)
+
+  writeXStringSet(
+    seqs[!(names(seqs) %in% mito_ids)],
+    file.path(clean_dir, basename(file)),
+    compress = TRUE
+  )
+  writeXStringSet(
+    seqs[names(seqs) %in% mito_ids],
+    file.path(mito_dir, basename(file)),
+    compress = TRUE
+  )
+}
+
+walk(renamed_files, clean_contigs)
+```
