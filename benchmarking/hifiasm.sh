@@ -1,29 +1,19 @@
 #!/bin/bash
-#SBATCH -c 32
+#SBATCH --job-name=benchmark_hifiasm
+#SBATCH -c 24
 #SBATCH --mem=0
-#SBATCH --output=hifiasm_%j.out
+#SBATCH --output=benchmark_hifiasm_%j.out
 
-total_start=$EPOCHREALTIME
-echo "HIFIASM pipeline started: $(date)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "${SCRIPT_DIR}/common.sh"
 
-mkdir -p $HOME/project_data/downy/benchmarking/hifiasm
+init_method "hifiasm"
+start_pipeline "HIFIASM"
 
-# Assemble with hifiasm
-start=$EPOCHREALTIME
-hifiasm \
-    -t 32 \
-    -l 2 \
-    --primary \
-    -o $HOME/project_data/downy/benchmarking/hifiasm/p_effusa \
-    $HOME/project_data/downy/p_effusa/filtered/p_effusa.fastq.gz
-runtime=$(echo "$EPOCHREALTIME - $start" | bc -l)
-echo "Assembly: $runtime seconds"
+run_timed "Assembly" \
+    run_hifiasm "${READS}" "${OUTDIR}/${SAMPLE}"
 
-# Convert to fasta
-gfatools gfa2fa \
-    $HOME/project_data/downy/benchmarking/hifiasm/p_effusa.p_ctg.gfa \
-    | gzip > $HOME/project_data/downy/benchmarking/hifiasm/p_effusa.fasta.gz
+run_timed "GFA to FASTA" \
+    gfa_to_fasta_gz "${OUTDIR}/${SAMPLE}.p_ctg.gfa" "${OUTDIR}/${SAMPLE}.fasta.gz"
 
-total_runtime=$(echo "$EPOCHREALTIME - $total_start" | bc -l)
-echo "Pipeline completed: $(date)"
-echo "Total runtime: $total_runtime seconds"
+finish_pipeline

@@ -1,58 +1,32 @@
 #!/bin/bash
-#SBATCH -c 32
+#SBATCH --job-name=benchmark_hifiasm_blastn
+#SBATCH -c 24
 #SBATCH --mem=0
-#SBATCH --output=hifiasm_blast_%j.out
+#SBATCH --output=benchmark_hifiasm_blastn_%j.out
 
-total_start=$EPOCHREALTIME
-echo "HIFIASM-BLAST pipeline started: $(date)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "${SCRIPT_DIR}/common.sh"
 
-mkdir -p $HOME/project_data/downy/benchmarking/hifiasm_blast
+init_method "hifiasm_blastn"
+start_pipeline "HIFIASM-BLASTN"
 
-# Assemble with hifiasm
-start=$EPOCHREALTIME
-hifiasm \
-    -t 32 \
-    -l 2 \
-    --primary \
-    -o $HOME/project_data/downy/benchmarking/hifiasm_blast/p_effusa \
-    $HOME/project_data/downy/p_effusa/filtered/p_effusa.fastq.gz
-runtime=$(echo "$EPOCHREALTIME - $start" | bc -l)
-echo "Assembly: $runtime seconds"
+run_timed "Assembly" \
+    run_hifiasm "${READS}" "${OUTDIR}/${SAMPLE}"
 
-# Convert to fasta and filter ≥5kb
-# gfatools gfa2fa \
-#     $HOME/project_data/downy/benchmarking/hifiasm_blast/p_effusa.p_ctg.gfa \
-# | seqkit seq -m 5000 --threads 32 \
-# > $HOME/project_data/downy/benchmarking/hifiasm_blast/p_effusa_contigs.fasta
+run_timed "GFA to FASTA" \
+    gfa_to_fasta "${OUTDIR}/${SAMPLE}.p_ctg.gfa" "${OUTDIR}/${SAMPLE}_contigs.fasta"
 
-gfatools gfa2fa \
-    $HOME/project_data/downy/benchmarking/hifiasm_blast/p_effusa.p_ctg.gfa \
-> $HOME/project_data/downy/benchmarking/hifiasm_blast/p_effusa_contigs.fasta
+run_timed "Contig BLASTN" \
+    run_blastn "${OUTDIR}/${SAMPLE}_contigs.fasta" "${OUTDIR}/contigs_blast.tsv"
 
-# BLAST contigs
-start=$EPOCHREALTIME
-blastn -query $HOME/project_data/downy/benchmarking/hifiasm_blast/p_effusa_contigs.fasta \
-  -db nt \
-  -outfmt "6 qseqid sseqid pident length qlen slen evalue staxids" \
-  -max_target_seqs 1 \
-  -max_hsps 1 \
-  -evalue 1e-10 \
-  -perc_identity 95 \
-  -num_threads 32 \
-  -out $HOME/project_data/downy/benchmarking/hifiasm_blast/contigs_blast.tsv
-runtime=$(echo "$EPOCHREALTIME - $start" | bc -l)
-echo "Contig BLAST: $runtime seconds"
+run_timed "Filter oomycete contig ids" \
+    filter_blast_taxids "${OUTDIR}/contigs_blast.tsv" "${OUTDIR}/oomycete_contigs.txt"
+log "Oomycete contig ids: $(wc -l < "${OUTDIR}/oomycete_contigs.txt")"
 
-pattern=$(paste -sd'|' ../data/oomycete_taxids.txt)
-awk -F'\t' -v pat="$pattern" '$8 ~ pat {print $1}' \
-    $HOME/project_data/downy/benchmarking/hifiasm_blast/contigs_blast.tsv \
-    > $HOME/project_data/downy/benchmarking/hifiasm_blast/oomycete_contigs.txt
+run_timed "Write filtered assembly" \
+    grep_fasta_ids_gz \
+        "${OUTDIR}/oomycete_contigs.txt" \
+        "${OUTDIR}/${SAMPLE}_contigs.fasta" \
+        "${OUTDIR}/${SAMPLE}.fasta.gz"
 
-seqkit grep -f $HOME/project_data/downy/benchmarking/hifiasm_blast/oomycete_contigs.txt \
-  $HOME/project_data/downy/benchmarking/hifiasm_blast/p_effusa_contigs.fasta \
-  --threads 32 \
-| gzip > $HOME/project_data/downy/benchmarking/hifiasm_blast/p_effusa.fasta.gz
-
-total_runtime=$(echo "$EPOCHREALTIME - $total_start" | bc -l)
-echo "Pipeline completed: $(date)"
-echo "Total runtime: $total_runtime seconds"
+finish_pipeline

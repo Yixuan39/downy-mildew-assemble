@@ -1,70 +1,40 @@
 #!/bin/bash
-#SBATCH -c 32
+#SBATCH --job-name=benchmark_blastn_hifiasm
+#SBATCH -c 24
 #SBATCH --mem=0
-#SBATCH --output=blast_hifiasm_%j.out
+#SBATCH --output=benchmark_blastn_hifiasm_%j.out
 
-total_start=$EPOCHREALTIME
-echo "BLAST-HIFIASM pipeline started: $(date)"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "${SCRIPT_DIR}/common.sh"
 
-mkdir -p $HOME/project_data/downy/benchmarking/blast_hifiasm
+init_method "blastn_hifiasm"
+require_long_read_blast_approval
+start_pipeline "BLASTN-HIFIASM"
 
-# Convert fastq to fasta
-start=$EPOCHREALTIME
-seqkit fq2fa \
-  --threads 32 \
-  --out-file $HOME/project_data/downy/benchmarking/blast_hifiasm/p_effusa_reads.fasta \
-  $HOME/project_data/downy/p_effusa/filtered/p_effusa.fastq.gz 
-runtime=$(echo "$EPOCHREALTIME - $start" | bc -l)
-echo "FASTQ conversion: $runtime seconds"
+run_timed "FASTQ to FASTA" \
+    seqkit fq2fa \
+        --threads "${THREADS}" \
+        --out-file "${OUTDIR}/${SAMPLE}_reads.fasta" \
+        "${READS}"
 
-# BLAST reads
-start=$EPOCHREALTIME
-blastn -query $HOME/project_data/downy/benchmarking/blast_hifiasm/p_effusa_reads.fasta \
-  -db nt \
-  -outfmt "6 qseqid sseqid pident length qlen slen evalue staxids" \
-  -max_target_seqs 1 \
-  -max_hsps 1 \
-  -evalue 1e-10 \
-  -perc_identity 95 \
-  -num_threads 32 \
-  -out $HOME/project_data/downy/benchmarking/blast_hifiasm/p_effusa.tsv
-runtime=$(echo "$EPOCHREALTIME - $start" | bc -l)
-echo "Read BLAST: $runtime seconds"
+run_timed "Read BLASTN" \
+    run_blastn "${OUTDIR}/${SAMPLE}_reads.fasta" "${OUTDIR}/reads_blast.tsv"
 
-# Filter oomycete reads
-start=$EPOCHREALTIME
-awk -F'\t' -v pat="$pattern" '$8 ~ pat {print $1}' \
-    $HOME/project_data/downy/benchmarking/blast_hifiasm/p_effusa.tsv \
-    > $HOME/project_data/downy/benchmarking/blast_hifiasm/oomycetes_reads.txt
+run_timed "Filter oomycete read ids" \
+    filter_blast_taxids "${OUTDIR}/reads_blast.tsv" "${OUTDIR}/oomycete_reads.txt"
+log "Oomycete read ids: $(wc -l < "${OUTDIR}/oomycete_reads.txt")"
 
-seqkit grep -f $HOME/project_data/downy/benchmarking/blast_hifiasm/oomycetes_reads.txt \
-  $HOME/project_data/downy/p_effusa/filtered/p_effusa.fastq.gz \
-  --threads 32 \
-  -o $HOME/project_data/downy/benchmarking/blast_hifiasm/p_effusa_oomycetes.fastq.gz
-runtime=$(echo "$EPOCHREALTIME - $start" | bc -l)
-echo "Read filtering: $runtime seconds"
+run_timed "Write filtered reads" \
+    seqkit grep \
+        -f "${OUTDIR}/oomycete_reads.txt" \
+        "${READS}" \
+        --threads "${THREADS}" \
+        -o "${OUTDIR}/${SAMPLE}_oomycete_reads.fastq.gz"
 
-# Assemble with hifiasm
-start=$EPOCHREALTIME
-hifiasm \
-    -t 32 \
-    -l 2 \
-    --primary \
-    -o $HOME/project_data/downy/benchmarking/blast_hifiasm/p_effusa \
-    $HOME/project_data/downy/benchmarking/blast_hifiasm/p_effusa_oomycetes.fastq.gz
-runtime=$(echo "$EPOCHREALTIME - $start" | bc -l)
-echo "Assembly: $runtime seconds"
+run_timed "Assembly" \
+    run_hifiasm "${OUTDIR}/${SAMPLE}_oomycete_reads.fastq.gz" "${OUTDIR}/${SAMPLE}"
 
-# Convert to fasta with 5kb filter
-# gfatools gfa2fa \
-#     $HOME/project_data/downy/benchmarking/blast_hifiasm/p_effusa.p_ctg.gfa \
-# | seqkit seq -m 5000 --threads 32 \
-# | gzip > $HOME/project_data/downy/benchmarking/blast_hifiasm/p_effusa.fasta.gz
+run_timed "GFA to FASTA" \
+    gfa_to_fasta_gz "${OUTDIR}/${SAMPLE}.p_ctg.gfa" "${OUTDIR}/${SAMPLE}.fasta.gz"
 
-gfatools gfa2fa \
-    $HOME/project_data/downy/benchmarking/blast_hifiasm/p_effusa.p_ctg.gfa \
-| gzip > $HOME/project_data/downy/benchmarking/blast_hifiasm/p_effusa.fasta.gz
-
-total_runtime=$(echo "$EPOCHREALTIME - $total_start" | bc -l)
-echo "Pipeline completed: $(date)"
-echo "Total runtime: $total_runtime seconds"
+finish_pipeline
