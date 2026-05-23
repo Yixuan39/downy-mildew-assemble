@@ -37,7 +37,7 @@ read.tb('~/project_data/downy/Assembly/', 'final assembly') |>
 read.length <- list.files('~/project_data/downy/Assembly/',
                           pattern = '.fasta.gz', 
                           full.names = TRUE, recursive = TRUE) |> 
-  (\(x) x[!str_detect(x, "fcs")])() |> 
+  (\(x) x[!str_detect(x, "fcs_gx|hifiasm|metaMDBG")])() |> 
   map_dfr(function(file) {
     seq <- readDNAStringSet(file)
     data.frame(sample = str_remove(basename(file), '.fasta.gz'),
@@ -95,7 +95,7 @@ assembly_files <- list.files(
   full.names = TRUE,
   recursive = TRUE
 ) |>
-  (\(x) x[!str_detect(x, "fcs_gx")])()
+  (\(x) x[!str_detect(x, "fcs_gx|hifiasm|metaMDBG")])()
 
 rename_contigs_by_length <- function(file) {
   input_name <- str_remove(basename(file), "\\.fasta\\.gz$")
