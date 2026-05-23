@@ -5,7 +5,25 @@
 #SBATCH --output=benchmark_summary_%j.out
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-source "${SCRIPT_DIR}/common.sh"
+COMMON_SH="${COMMON_SH:-}"
+if [[ -z "${COMMON_SH}" ]]; then
+    for candidate in \
+        "${SCRIPT_DIR}/common.sh" \
+        "${SLURM_SUBMIT_DIR:-}/benchmarking/common.sh" \
+        "${SLURM_SUBMIT_DIR:-}/common.sh" \
+        "$(pwd)/benchmarking/common.sh" \
+        "$(pwd)/common.sh"; do
+        if [[ -f "${candidate}" ]]; then
+            COMMON_SH="${candidate}"
+            break
+        fi
+    done
+fi
+if [[ -z "${COMMON_SH}" || ! -f "${COMMON_SH}" ]]; then
+    echo "Could not find common.sh. Submit from the repo root or set COMMON_SH=/path/to/benchmarking/common.sh." >&2
+    exit 1
+fi
+source "${COMMON_SH}"
 
 if [[ -z "${METHODS:-}" ]]; then
     case "${SAMPLE}" in
