@@ -1,11 +1,11 @@
 #!/bin/bash
 #SBATCH --array=0-3
-#SBATCH -c 24
+#SBATCH -c 32
 #SBATCH --mem=0
 
-THREADS=24
-INPUT_DIR=$HOME/project_data/downy/cleaned_contigs
-RESULT_DIR=$HOME/project_data/downy/HardMask-contigs
+THREADS=32
+INPUT_DIR=$HOME/project_data/downy/contigs-renamed/cleaned
+RESULT_DIR=$HOME/project_data/downy/contigs-renamed/hardmasked
 FILES=($(find "$INPUT_DIR" -type f -name "*.fasta.gz"))
 FILE=${FILES[$SLURM_ARRAY_TASK_ID]}
 echo "Processing: $FILE"
@@ -30,25 +30,3 @@ bedtools maskfasta \
   -fo $RESULT_DIR/${BASENAME}.fasta
 
 gzip $RESULT_DIR/${BASENAME}.fasta
-
-
-
-# BuildDatabase \
-#   -name ${RESULT_DIR}/${BASENAME}_tmp/db \
-#   ${RESULT_DIR}/${BASENAME}_tmp/${BASENAME}.fasta
-#   
-# RepeatModeler \
-#   -threads 32 \
-#   -database ${RESULT_DIR}/${BASENAME}_tmp/db > ${RESULT_DIR}/${BASENAME}_tmp/${BASENAME}.out
-#   
-# RepeatMasker \
-#   -engine ncbi \
-#   -parallel 8 \
-#   -gff \
-#   -lib ${RESULT_DIR}/${BASENAME}_tmp/db-families.fa \
-#   -dir ${RESULT_DIR}/${BASENAME}_masked \
-#   ${RESULT_DIR}/${BASENAME}_tmp/${BASENAME}.fasta
-#   
-# cp ${RESULT_DIR}/${BASENAME}_masked/${BASENAME}.fasta.masked ${RESULT_DIR}/${BASENAME}.fasta
-# gzip ${RESULT_DIR}/${BASENAME}.fasta
-
