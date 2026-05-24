@@ -4,34 +4,65 @@
 #SBATCH --mem=0
 #SBATCH --output=benchmark_hifiasm_%j.out
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-COMMON_SH="${COMMON_SH:-}"
-if [[ -z "${COMMON_SH}" ]]; then
-    for candidate in \
-        "${SCRIPT_DIR}/common.sh" \
-        "${SLURM_SUBMIT_DIR:-}/benchmarking/common.sh" \
-        "${SLURM_SUBMIT_DIR:-}/common.sh" \
-        "$(pwd)/benchmarking/common.sh" \
-        "$(pwd)/common.sh"; do
-        if [[ -f "${candidate}" ]]; then
-            COMMON_SH="${candidate}"
-            break
-        fi
-    done
-fi
-if [[ -z "${COMMON_SH}" || ! -f "${COMMON_SH}" ]]; then
-    echo "Could not find common.sh. Submit from the repo root or set COMMON_SH=/path/to/benchmarking/common.sh." >&2
-    exit 1
-fi
-source "${COMMON_SH}"
+set -euo pipefail
 
-init_method "hifiasm"
-start_pipeline "HIFIASM"
+SAMPLE="${SAMPLE:-p_effusa}"
+THREADS="${SLURM_CPUS_PER_TASK:-24}"
+PROJECT_DATA="${PROJECT_DATA:-${HOME}/project_data/downy}"
 
-run_timed "Assembly" \
-    run_hifiasm "${READS}" "${OUTDIR}/${SAMPLE}"
+case "${SAMPLE}" in
+    p_effusa)
+        READS="${PROJECT_DATA}/p_effusa/filtered/p_effusa.fastq.gz"
+        ;;
+    MSU1|Quesada_SQIIe_MSU1)
+        SAMPLE="MSU1"
+        READS="${PROJECT_DATA}/GSL_Data/fastq/filtered/Quesada_SQIIe_MSU1.fastq.gz"
+        ;;
+    *)
+        echo "Unknown SAMPLE=${SAMPLE}. Use SAMPLE=p_effusa or SAMPLE=MSU1." >&2
+        exit 1
+        ;;
+esac
 
-run_timed "GFA to FASTA" \
-    gfa_to_fasta_gz "${OUTDIR}/${SAMPLE}.p_ctg.gfa" "${OUTDIR}/${SAMPLE}.fasta.gz"
+OUTDIR="${PROJECT_DATA}/benchmarking/${SAMPLE}/hifiasm"
+TIMING="${OUTDIR}/timing.tsv"
 
-finish_pipeline
+mkdir -p "${OUTDIR}"
+printf "step\tseconds\n" > "${TIMING}"
+
+run_step() {
+    local step="$1"
+    shift
+    local start end seconds
+
+    echo "[$(date '+%F %T')] ${step}"
+    start=$(date +%s)
+    "$@"
+    end=$(date +%s)
+    seconds=$((end - start))
+    printf "%s\t%s\n" "${step}" "${seconds}" >> "${TIMING}"
+}
+
+total_start=$(date +%s)
+
+echo "Sample: ${SAMPLE}"
+echo "Reads: ${READS}"
+echo "Output: ${OUTDIR}"
+echo "Threads: ${THREADS}"
+
+run_step "assembly" \
+    hifiasm \
+        -t "${THREADS}" \
+        -l 2 \
+        --primary \
+        -o "${OUTDIR}/${SAMPLE}" \
+        "${READS}"
+
+run_step "gfa_to_fasta" \
+    bash -c 'gfatools gfa2fa "$1" | gzip > "$2"' \
+        _ \
+        "${OUTDIR}/${SAMPLE}.p_ctg.gfa" \
+        "${OUTDIR}/${SAMPLE}.fasta.gz"
+
+printf "Total\t%s\n" "$(( $(date +%s) - total_start ))" >> "${TIMING}"
+echo "Done: ${OUTDIR}/${SAMPLE}.fasta.gz"

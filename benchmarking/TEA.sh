@@ -4,79 +4,76 @@
 #SBATCH --mem=500G
 #SBATCH --output=benchmark_tea_%j.out
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+set -euo pipefail
+
 SAMPLE="${SAMPLE:-p_effusa}"
-COMMON_SH="${COMMON_SH:-}"
-if [[ -z "${COMMON_SH}" ]]; then
-    for candidate in \
-        "${SCRIPT_DIR}/common.sh" \
-        "${SLURM_SUBMIT_DIR:-}/benchmarking/common.sh" \
-        "${SLURM_SUBMIT_DIR:-}/common.sh" \
-        "$(pwd)/benchmarking/common.sh" \
-        "$(pwd)/common.sh"; do
-        if [[ -f "${candidate}" ]]; then
-            COMMON_SH="${candidate}"
-            break
-        fi
-    done
-fi
-if [[ -z "${COMMON_SH}" || ! -f "${COMMON_SH}" ]]; then
-    echo "Could not find common.sh. Submit from the repo root or set COMMON_SH=/path/to/benchmarking/common.sh." >&2
-    exit 1
-fi
-source "${COMMON_SH}"
+THREADS="${SLURM_CPUS_PER_TASK:-24}"
+PROJECT_DATA="${PROJECT_DATA:-${HOME}/project_data/downy}"
+TEA_MAIN="${TEA_MAIN:-${HOME}/software/TEA/main.nf}"
+GX_DB="${GX_DB:-${PROJECT_DATA}/fcs-db}"
+RASUSA_SEED="${RASUSA_SEED:-2025}"
+MSU1_TARGET_BASES="${MSU1_TARGET_BASES:-5400000000}"
 
-MSU1_TARGET_BASES_DEFAULT="${MSU1_TARGET_BASES_DEFAULT:-5400000000}"
-
-if [[ -z "${METHOD:-}" ]]; then
-    if [[ "${SAMPLE}" == "MSU1" || "${SAMPLE}" == "Quesada_SQIIe_MSU1" ]]; then
-        if [[ -n "${TARGET_BASES}" ]]; then
-            METHOD="tea_downsample"
-        else
-            METHOD="tea_no_downsample"
-        fi
-    elif [[ -n "${TARGET_BASES}" ]]; then
-        METHOD="tea_downsample"
-    else
-        METHOD="tea"
-    fi
-fi
-
-case "${METHOD}" in
-    tea)
-        if [[ "${SAMPLE}" == "MSU1" || "${SAMPLE}" == "Quesada_SQIIe_MSU1" ]]; then
-            echo "METHOD=tea is for non-MSU1 TEA benchmarks. Use METHOD=tea_no_downsample for ${SAMPLE}." >&2
-            exit 1
-        fi
-        if [[ -n "${TARGET_BASES}" ]]; then
-            echo "METHOD=tea should not set TARGET_BASES." >&2
-            exit 1
-        fi
+case "${SAMPLE}" in
+    p_effusa)
+        READS="${PROJECT_DATA}/p_effusa/filtered/p_effusa.fastq.gz"
+        METHOD="${METHOD:-tea}"
+        FINAL_NAME="p_effusa.fasta.gz"
         ;;
-    tea_downsample)
-        if [[ "${SAMPLE}" != "MSU1" && "${SAMPLE}" != "Quesada_SQIIe_MSU1" ]]; then
-            echo "METHOD=tea_downsample is only for MSU1. Got SAMPLE=${SAMPLE}." >&2
-            exit 1
-        fi
-        TARGET_BASES="${TARGET_BASES:-${MSU1_TARGET_BASES_DEFAULT}}"
-        ;;
-    tea_no_downsample)
-        if [[ "${SAMPLE}" != "MSU1" && "${SAMPLE}" != "Quesada_SQIIe_MSU1" ]]; then
-            echo "METHOD=tea_no_downsample is only for MSU1. Use METHOD=tea for ${SAMPLE}." >&2
-            exit 1
-        fi
-        if [[ -n "${TARGET_BASES}" ]]; then
-            echo "METHOD=tea_no_downsample should not set TARGET_BASES." >&2
-            exit 1
-        fi
+    MSU1|Quesada_SQIIe_MSU1)
+        SAMPLE="MSU1"
+        READS="${PROJECT_DATA}/GSL_Data/fastq/filtered/Quesada_SQIIe_MSU1.fastq.gz"
+        METHOD="${METHOD:-tea_no_downsample}"
+        FINAL_NAME="Quesada_SQIIe_MSU1.fasta.gz"
         ;;
     *)
-        echo "TEA benchmark METHOD must be tea, tea_downsample, or tea_no_downsample. Got METHOD=${METHOD}." >&2
+        echo "Unknown SAMPLE=${SAMPLE}. Use SAMPLE=p_effusa or SAMPLE=MSU1." >&2
         exit 1
         ;;
 esac
 
-init_method "${METHOD}"
+case "${METHOD}" in
+    tea)
+        if [[ "${SAMPLE}" == "MSU1" ]]; then
+            echo "Use METHOD=tea_no_downsample or METHOD=tea_downsample for MSU1." >&2
+            exit 1
+        fi
+        TARGET_BASES=""
+        ;;
+    tea_no_downsample)
+        if [[ "${SAMPLE}" != "MSU1" ]]; then
+            echo "METHOD=tea_no_downsample is only for MSU1." >&2
+            exit 1
+        fi
+        TARGET_BASES=""
+        ;;
+    tea_downsample)
+        if [[ "${SAMPLE}" != "MSU1" ]]; then
+            echo "METHOD=tea_downsample is only for MSU1." >&2
+            exit 1
+        fi
+        TARGET_BASES="${TARGET_BASES:-${MSU1_TARGET_BASES}}"
+        ;;
+    *)
+        echo "Unknown METHOD=${METHOD}. Use tea, tea_no_downsample, or tea_downsample." >&2
+        exit 1
+        ;;
+esac
+
+OUTDIR="${PROJECT_DATA}/benchmarking/${SAMPLE}/${METHOD}"
+TIMING="${OUTDIR}/timing.tsv"
+
+mkdir -p "${OUTDIR}"
+printf "step\tseconds\n" > "${TIMING}"
+
+start=$(date +%s)
+
+echo "Sample: ${SAMPLE}"
+echo "Method: ${METHOD}"
+echo "Reads: ${READS}"
+echo "Output: ${OUTDIR}"
+echo "Threads: ${THREADS}"
+echo "Target bases: ${TARGET_BASES:-none}"
 
 tea_args=(
     nextflow run "${TEA_MAIN}"
@@ -95,16 +92,14 @@ if [[ -n "${TARGET_BASES}" ]]; then
     tea_args+=(--target_bases "${TARGET_BASES}")
 fi
 
-start_pipeline "TEA"
+"${tea_args[@]}"
 
-if [[ -n "${TARGET_BASES}" ]]; then
-    log "Target bases: ${TARGET_BASES}"
-else
-    log "Target bases: none"
+seconds=$(( $(date +%s) - start ))
+printf "TEA\t%s\n" "${seconds}" >> "${TIMING}"
+printf "Total\t%s\n" "${seconds}" >> "${TIMING}"
+
+if [[ "${FINAL_NAME}" != "${SAMPLE}.fasta.gz" ]]; then
+    ln -sfn "${OUTDIR}/${FINAL_NAME}" "${OUTDIR}/${SAMPLE}.fasta.gz"
 fi
 
-run_timed "TEA pipeline" "${tea_args[@]}"
-
-link_final_fasta "${OUTDIR}/${READS_STEM}.fasta.gz"
-
-finish_pipeline
+echo "Done: ${OUTDIR}/${SAMPLE}.fasta.gz"
