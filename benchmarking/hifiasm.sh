@@ -1,7 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=benchmark_hifiasm
 #SBATCH -c 32
-#SBATCH --mem=256G
 #SBATCH --output=benchmark_hifiasm_%j.out
 
 set -euo pipefail
