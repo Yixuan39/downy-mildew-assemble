@@ -15,7 +15,7 @@ BASENAME=${BASENAME%.faa}
 
 start=$EPOCHREALTIME
 
-diamond blastp \
+mamba run -n diamond diamond blastp \
 --threads $THREADS \
 --evalue 1e-3 \
 --max-target-seqs 1 \

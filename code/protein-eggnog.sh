@@ -19,7 +19,7 @@ mkdir -p $TMPDIR
 
 start=$EPOCHREALTIME
 
-emapper.py \
+mamba run -n eggnog-mapper emapper.py \
 -i ${FILE} \
 --itype proteins \
 -m diamond \

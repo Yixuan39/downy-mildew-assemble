@@ -16,7 +16,7 @@ mkdir -p ${RESULT_DIR}
 
 start=$EPOCHREALTIME
 
-python3 ${HOME}/software/proteinfer/proteinfer.py \
+mamba run -n proteinfer python3 ${HOME}/software/proteinfer/proteinfer.py \
 --i ${FILE} \
 --o ${RESULT_DIR}/${BASENAME}.proteinfer_thr09.tsv \
 --model_cache_path ${HOME}/software/proteinfer/cached_models \
