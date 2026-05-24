@@ -1,13 +1,13 @@
 #!/bin/bash
 #SBATCH --job-name=benchmark_hifiasm
-#SBATCH -c 24
-#SBATCH --mem=0
+#SBATCH -c 32
+#SBATCH --mem=256G
 #SBATCH --output=benchmark_hifiasm_%j.out
 
 set -euo pipefail
 
 SAMPLE="${SAMPLE:-p_effusa}"
-THREADS="${SLURM_CPUS_PER_TASK:-24}"
+THREADS="${SLURM_CPUS_PER_TASK:-32}"
 PROJECT_DATA="${PROJECT_DATA:-${HOME}/project_data/downy}"
 
 case "${SAMPLE}" in

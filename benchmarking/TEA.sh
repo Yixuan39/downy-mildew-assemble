@@ -1,13 +1,13 @@
 #!/bin/bash
 #SBATCH --job-name=benchmark_tea
-#SBATCH -c 24
+#SBATCH -c 32
 #SBATCH --mem=500G
 #SBATCH --output=benchmark_tea_%j.out
 
 set -euo pipefail
 
 SAMPLE="${SAMPLE:-p_effusa}"
-THREADS="${SLURM_CPUS_PER_TASK:-24}"
+THREADS="${SLURM_CPUS_PER_TASK:-32}"
 PROJECT_DATA="${PROJECT_DATA:-${HOME}/project_data/downy}"
 TEA_MAIN="${TEA_MAIN:-${HOME}/software/TEA/main.nf}"
 GX_DB="${GX_DB:-${PROJECT_DATA}/fcs-db}"
