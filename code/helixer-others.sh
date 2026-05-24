@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --array=0-10
 #SBATCH -p gpu
-#SBATCH -c 16
+#SBATCH -c 24
 
 INPUT_DIR=$HOME/project_data/downy/downy-mildew-genomes/hardmasked
 RESULT_DIR=$HOME/project_data/downy/downy-mildew-genomes/helixer
