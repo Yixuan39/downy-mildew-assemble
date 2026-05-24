@@ -9,8 +9,9 @@ set -euo pipefail
 SAMPLE="${SAMPLE:-p_effusa}"
 THREADS="${SLURM_CPUS_PER_TASK:-24}"
 PROJECT_DATA="${PROJECT_DATA:-${HOME}/project_data/downy}"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SUBMIT_DIR="${SLURM_SUBMIT_DIR:-$PWD}"
-TAXIDS_FILE="${TAXIDS_FILE:-${SUBMIT_DIR}/data/oomycete_taxids.txt}"
+TAXIDS_FILE="${TAXIDS_FILE:-}"
 
 case "${SAMPLE}" in
     p_effusa)
@@ -28,6 +29,19 @@ esac
 
 OUTDIR="${PROJECT_DATA}/benchmarking/${SAMPLE}/hifiasm_blastn"
 TIMING="${OUTDIR}/timing.tsv"
+
+if [[ -z "${TAXIDS_FILE}" ]]; then
+    for candidate in \
+        "${SUBMIT_DIR}/data/oomycete_taxids.txt" \
+        "${SUBMIT_DIR}/../data/oomycete_taxids.txt" \
+        "${SCRIPT_DIR}/../data/oomycete_taxids.txt" \
+        "${PWD}/data/oomycete_taxids.txt"; do
+        if [[ -s "${candidate}" ]]; then
+            TAXIDS_FILE="${candidate}"
+            break
+        fi
+    done
+fi
 
 if [[ ! -s "${TAXIDS_FILE}" ]]; then
     echo "Missing oomycete taxid file: ${TAXIDS_FILE}" >&2
