@@ -15,7 +15,7 @@ mkdir -p ${RESULT_DIR}/${BASENAME}_tmp
 gzip -dc "$FILE" > "${RESULT_DIR}/${BASENAME}_tmp/${BASENAME}.fna"
 
 
-earlGrey \
+mamba run -n earlGrey earlGrey \
   -g "${RESULT_DIR}/${BASENAME}_tmp/${BASENAME}.fna" \
   -s $BASENAME \
   -o $RESULT_DIR \
