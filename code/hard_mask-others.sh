@@ -1,6 +1,7 @@
 #!/bin/bash
 #SBATCH --array=0-10
 #SBATCH -c 32
+#SBATCH --mem=0
 
 THREADS=32
 INPUT_DIR=$HOME/project_data/downy/downy-mildew-genomes
