@@ -11,25 +11,28 @@ FILE=${FILES[$SLURM_ARRAY_TASK_ID]}
 echo "Processing: $FILE"
 BASENAME=$(basename ${FILE})  
 BASENAME=${BASENAME%.fasta.gz}
-EG_NAME=${BASENAME##*_}
-TMP_DIR=${RESULT_DIR}/${EG_NAME}_tmp
+TMP_DIR=${RESULT_DIR}/${BASENAME}_tmp
 # decompress the original file to result directory
 mkdir -p ${TMP_DIR}
-gzip -dc "$FILE" > "${TMP_DIR}/${EG_NAME}.fasta"
+gzip -dc "$FILE" > "${TMP_DIR}/${BASENAME}.fasta"
 
 
-mamba run -n earlGrey earlGrey \
-  -g "${TMP_DIR}/${EG_NAME}.fasta" \
-  -s $EG_NAME \
-  -o $RESULT_DIR \
-  -t $THREADS \
-  -r eukaryota \
-  -d yes \
-  -q yes
+BuildDatabase \
+  -name ${TMP_DIR}/db \
+  ${TMP_DIR}/${BASENAME}.fasta
 
-mamba run -n earlGrey bedtools maskfasta \
-  -fi "${TMP_DIR}/${EG_NAME}.fasta" \
-  -bed $RESULT_DIR/${EG_NAME}_EarlGrey/${EG_NAME}_summaryFiles/${EG_NAME}.filteredRepeats.bed \
-  -fo $RESULT_DIR/${BASENAME}.fasta
+RepeatModeler \
+  -threads 32 \
+  -database ${TMP_DIR}/db > ${TMP_DIR}/${BASENAME}.out
 
-mamba run -n earlGrey gzip $RESULT_DIR/${BASENAME}.fasta
+RepeatMasker \
+  -engine ncbi \
+  -parallel 8 \
+  -gff \
+  -lib ${TMP_DIR}/db-families.fa \
+  -dir ${RESULT_DIR}/${BASENAME}_masked \
+  ${TMP_DIR}/${BASENAME}.fasta
+
+cp ${RESULT_DIR}/${BASENAME}_masked/${BASENAME}.fasta.masked ${RESULT_DIR}/${BASENAME}.fasta
+gzip ${RESULT_DIR}/${BASENAME}.fasta
+
