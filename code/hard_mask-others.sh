@@ -14,7 +14,7 @@ BASENAME=${BASENAME%.fna.gz}
 TMP_DIR=${RESULT_DIR}/${BASENAME}_tmp
 # decompress the original file to result directory
 mkdir -p ${TMP_DIR}
-gzip -dc "$FILE" > "${TMP_DIR}/${BASENAME}.fasta"
+gzip -dc "$FILE" > "${TMP_DIR}/${BASENAME}.fna"
 
 
 BuildDatabase \
