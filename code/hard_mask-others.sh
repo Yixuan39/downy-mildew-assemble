@@ -6,28 +6,30 @@
 THREADS=32
 INPUT_DIR=$HOME/project_data/downy/downy-mildew-genomes
 RESULT_DIR=$HOME/project_data/downy/downy-mildew-genomes/hardmasked
-FILES=($(find "$INPUT_DIR" -type f -name "*.fna.gz"))
+FILES=($(find "$INPUT_DIR" -type f -name "*.fasta.gz"))
 FILE=${FILES[$SLURM_ARRAY_TASK_ID]}
 echo "Processing: $FILE"
 BASENAME=$(basename ${FILE})  
-BASENAME=${BASENAME%.fna.gz}
-# # decompress the original file to result directory
-mkdir -p ${RESULT_DIR}/${BASENAME}_tmp
-gzip -dc "$FILE" > "${RESULT_DIR}/${BASENAME}_tmp/${BASENAME}.fna"
+BASENAME=${BASENAME%.fasta.gz}
+EG_NAME=${BASENAME##*_}
+TMP_DIR=${RESULT_DIR}/${EG_NAME}_tmp
+# decompress the original file to result directory
+mkdir -p ${TMP_DIR}
+gzip -dc "$FILE" > "${TMP_DIR}/${EG_NAME}.fasta"
 
 
 mamba run -n earlGrey earlGrey \
-  -g "${RESULT_DIR}/${BASENAME}_tmp/${BASENAME}.fna" \
-  -s $BASENAME \
+  -g "${TMP_DIR}/${EG_NAME}.fasta" \
+  -s $EG_NAME \
   -o $RESULT_DIR \
   -t $THREADS \
   -r eukaryota \
-  -d yes
+  -d yes \
+  -q yes
 
-bedtools maskfasta \
-  -fi "${RESULT_DIR}/${BASENAME}_tmp/${BASENAME}.fna" \
-  -bed $RESULT_DIR/${BASENAME}_EarlGrey/${BASENAME}_summaryFiles/${BASENAME}.filteredRepeats.bed \
-  -fo $RESULT_DIR/${BASENAME}.fna
+mamba run -n earlGrey bedtools maskfasta \
+  -fi "${TMP_DIR}/${EG_NAME}.fasta" \
+  -bed $RESULT_DIR/${EG_NAME}_EarlGrey/${EG_NAME}_summaryFiles/${EG_NAME}.filteredRepeats.bed \
+  -fo $RESULT_DIR/${BASENAME}.fasta
 
-gzip $RESULT_DIR/${BASENAME}.fna
-
+mamba run -n earlGrey gzip $RESULT_DIR/${BASENAME}.fasta
