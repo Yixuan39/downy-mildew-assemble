@@ -1,6 +1,5 @@
 #!/bin/bash
 #SBATCH --array=0-3
-#SBATCH -p gpu
 #SBATCH -c 24
 #SBATCH --mem=0
 
