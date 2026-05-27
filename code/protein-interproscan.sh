@@ -3,8 +3,8 @@
 #SBATCH -c 24
 #SBATCH --mem=0
 
-INPUT_DIR=$HOME/project_data/downy/Helixer-contigs
-RESULT_DIR=$HOME/project_data/downy/Helixer-contigs/interproscan
+INPUT_DIR=$HOME/project_data/downy/contigs-renamed/helixer
+RESULT_DIR=$HOME/project_data/downy/contigs-renamed/interproscan
 FILES=($(find "$INPUT_DIR" -type f -name "*.faa"))
 FILE=${FILES[$SLURM_ARRAY_TASK_ID]}
 THREADS=24
