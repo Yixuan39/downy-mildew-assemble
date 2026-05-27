@@ -3,10 +3,10 @@
 #SBATCH -c 32
 #SBATCH --mem=0
 
-THREADS=32
+THREADS=$SLURM_CPUS_PER_TASK
 INPUT_DIR=$HOME/project_data/downy/contigs-renamed/cleaned
 RESULT_DIR=$HOME/project_data/downy/contigs-renamed/hardmasked
-FILES=($(find "$INPUT_DIR" -type f -name "*.fasta.gz"))
+FILES=($(find "$INPUT_DIR" -path "$RESULT_DIR" -prune -o -type f -name "*.fasta.gz" -print | sort))
 FILE=${FILES[$SLURM_ARRAY_TASK_ID]}
 echo "Processing: $FILE"
 BASENAME=$(basename ${FILE})  
@@ -22,17 +22,17 @@ BuildDatabase \
   ${TMP_DIR}/${BASENAME}.fasta
 
 RepeatModeler \
-  -threads 32 \
+  -threads $THREADS \
   -database ${TMP_DIR}/db > ${TMP_DIR}/${BASENAME}.out
 
 RepeatMasker \
   -engine ncbi \
-  -parallel 8 \
+  -parallel $((THREADS / 4)) \
   -gff \
   -lib ${TMP_DIR}/db-families.fa \
   -dir ${RESULT_DIR}/${BASENAME}_masked \
   ${TMP_DIR}/${BASENAME}.fasta
 
 cp ${RESULT_DIR}/${BASENAME}_masked/${BASENAME}.fasta.masked ${RESULT_DIR}/${BASENAME}.fasta
-gzip ${RESULT_DIR}/${BASENAME}.fasta
+gzip -f ${RESULT_DIR}/${BASENAME}.fasta
 
