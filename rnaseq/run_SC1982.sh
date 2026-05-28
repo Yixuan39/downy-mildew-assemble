@@ -1,9 +1,11 @@
 #!/bin/bash
 
-nextflow run nf-core/rnaseq \
+nextflow run nf-core/rnaseq -r 3.26.0 \
     --input samplesheet_SC1982.csv \
-    --outdir $HOME/project_data/downy/RNA-seq_result/SC1982 \
-    --gtf $HOME/project_data/downy/contigs-renamed/helixer/Pseudoperonospora_cubensis_SC1982.gtf \
+    --outdir $HOME/project_data/downy/RNA-seq_result/Pcub_SC1982 \
+    --gff $HOME/project_data/downy/contigs-renamed/helixer/Pseudoperonospora_cubensis_SC1982.gff \
     --fasta $HOME/project_data/downy/contigs-renamed/cleaned/Pseudoperonospora_cubensis_SC1982.fasta.gz \
+    --contaminant_screening 'kraken2_bracken' --kraken_db $HOME/db/kraken2/PlusPFP \
+    --save_align_intermeds \
     -profile apptainer \
     -c custom.config
