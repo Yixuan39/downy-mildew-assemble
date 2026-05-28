@@ -1,0 +1,5 @@
+sample,fastq_1,fastq_2,strandedness,seq_platform
+Phum_OR502AA,~/project_data/downy/RNA-seq/FastqFiles_Raw_Quesada_RNAseq_Phum_Rsto/Phum_hop_2dpi_S2_R1_001.fastq-021.gz,~/project_data/downy/RNA-seq/FastqFiles_Raw_Quesada_RNAseq_Phum_Rsto/Phum_hop_2dpi_S2_R2_001.fastq-022.gz,auto,ILLUMINA
+Phum_OR502AA,~/project_data/downy/RNA-seq/FastqFiles_Raw_Quesada_RNAseq_Phum_Rsto/Phum_hop_3dpi_S3_R1_001.fastq-024.gz,~/project_data/downy/RNA-seq/FastqFiles_Raw_Quesada_RNAseq_Phum_Rsto/Phum_hop_3dpi_S3_R2_001.fastq-025.gz,auto,ILLUMINA
+Phum_OR502AA,~/project_data/downy/RNA-seq/FastqFiles_Raw_Quesada_RNAseq_Phum_Rsto/Phum_hop_4dpi_S4_R1_001.fastq-023.gz,~/project_data/downy/RNA-seq/FastqFiles_Raw_Quesada_RNAseq_Phum_Rsto/Phum_hop_4dpi_S4_R2_001.fastq-002.gz,auto,ILLUMINA
+

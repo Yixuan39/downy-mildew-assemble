@@ -1,0 +1,5 @@
+sample,fastq_1,fastq_2,strandedness,seq_platform
+Pcub_MSU1,~/project_data/downy/RNA-seq/FastqFiles_Raw_Quesada_RNAseq_1982_MSU1_Cfim/MSU1_3dpi_S6_R1_001.fastq-009.gz,~/project_data/downy/RNA-seq/FastqFiles_Raw_Quesada_RNAseq_1982_MSU1_Cfim/MSU1_3dpi_S6_R2_001.fastq-011.gz,auto,ILLUMINA
+Pcub_MSU1,~/project_data/downy/RNA-seq/FastqFiles_Raw_Quesada_RNAseq_1982_MSU1_Cfim/MSU1_4dpi_S7_R1_001.fastq-008.gz,~/project_data/downy/RNA-seq/FastqFiles_Raw_Quesada_RNAseq_1982_MSU1_Cfim/MSU1_4dpi_S7_R2_001.fastq-010.gz,auto,ILLUMINA
+Pcub_MSU1,~/project_data/downy/RNA-seq/FastqFiles_Raw_Quesada_RNAseq_1982_MSU1_Cfim/MSU1_5dpi_S8_R1_001.fastq-012.gz,~/project_data/downy/RNA-seq/FastqFiles_Raw_Quesada_RNAseq_1982_MSU1_Cfim/MSU1_5dpi_S8_R2_001.fastq-013.gz,auto,ILLUMINA
+Pcub_MSU1,~/project_data/downy/RNA-seq/FastqFiles_Raw_Quesada_RNAseq_1982_MSU1_Cfim/MSU1_6dpi_S9_R1_001.fastq-014.gz,~/project_data/downy/RNA-seq/FastqFiles_Raw_Quesada_RNAseq_1982_MSU1_Cfim/MSU1_6dpi_S9_R2_001.fastq-015.gz,auto,ILLUMINA
