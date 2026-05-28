@@ -3,7 +3,7 @@
 nextflow run nf-core/rnaseq \
     --input samplesheet_MSU1.csv \
     --outdir $HOME/project_data/downy/RNA-seq_result/MSU1 \
-    --gtf $HOME/project_data/downy/contigs-renamed/helixer/Pseudoperonospora_cubensis_MSU1.gff \
+    --gtf $HOME/project_data/downy/contigs-renamed/helixer/Pseudoperonospora_cubensis_MSU1.gtf \
     --fasta $HOME/project_data/downy/contigs-renamed/cleaned/Pseudoperonospora_cubensis_MSU1.fasta.gz \
     -profile apptainer \
     -c custom.config
