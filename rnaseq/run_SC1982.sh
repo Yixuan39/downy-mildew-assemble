@@ -8,5 +8,7 @@ nextflow run nf-core/rnaseq -r 3.26.0 \
     --contaminant_screening 'kraken2_bracken' --kraken_db $HOME/db/kraken2/PlusPFP \
     --featurecounts_group_type gene_id \
     --save_align_intermeds \
+    --skip_biotype_qc \
     -profile apptainer \
-    -c custom.config
+    -c custom.config \
+    -resume
