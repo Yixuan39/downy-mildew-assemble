@@ -10,5 +10,4 @@ nextflow run nf-core/rnaseq -r 3.26.0 \
     --save_align_intermeds \
     --skip_biotype_qc \
     -profile apptainer \
-    -c custom.config \
-    -resume
+    -c custom.config
