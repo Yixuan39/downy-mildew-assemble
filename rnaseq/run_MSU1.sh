@@ -9,5 +9,6 @@ nextflow run nf-core/rnaseq -r 3.26.0 \
     --featurecounts_group_type gene_id \
     --save_align_intermeds \
     --skip_biotype_qc \
+    --min_mapped_reads 0 \
     -profile apptainer \
     -c custom.config
