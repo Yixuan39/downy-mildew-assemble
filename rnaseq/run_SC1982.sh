@@ -6,9 +6,8 @@ nextflow run nf-core/rnaseq -r 3.26.0 \
     --gff $HOME/project_data/downy/contigs-renamed/helixer/Pseudoperonospora_cubensis_SC1982.gff \
     --fasta $HOME/project_data/downy/contigs-renamed/cleaned/Pseudoperonospora_cubensis_SC1982.fasta.gz \
     --contaminant_screening 'kraken2_bracken' --kraken_db $HOME/db/kraken2/PlusPFP \
-    --featurecounts_group_type gene_id \
+    --featurecounts_group_type Parent \
     --save_align_intermeds \
-    --skip_biotype_qc \
     --min_mapped_reads 0 \
     -profile apptainer \
     -c custom.config
