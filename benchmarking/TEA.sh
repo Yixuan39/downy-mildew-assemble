@@ -9,7 +9,12 @@ set -euo pipefail
 SAMPLE="${SAMPLE:-p_effusa}"
 THREADS="${SLURM_CPUS_PER_TASK:-32}"
 PROJECT_DATA="${PROJECT_DATA:-${HOME}/project_data/downy}"
-TEA_MAIN="${TEA_MAIN:-${HOME}/software/TEA/main.nf}"
+DEFAULT_TEA_MAIN="${HOME}/software/TEA/main.nf"
+if [[ ! -f "${DEFAULT_TEA_MAIN}" && -f "${HOME}/Documents/Projects/TEA/main.nf" ]]; then
+    DEFAULT_TEA_MAIN="${HOME}/Documents/Projects/TEA/main.nf"
+fi
+TEA_MAIN="${TEA_MAIN:-${DEFAULT_TEA_MAIN}}"
+NEXTFLOW_PROFILE="${NEXTFLOW_PROFILE:-slurm}"
 GX_DB="${GX_DB:-${PROJECT_DATA}/fcs-db}"
 RASUSA_SEED="${RASUSA_SEED:-2025}"
 MSU1_TARGET_BASES="${MSU1_TARGET_BASES:-5400000000}"
@@ -73,11 +78,12 @@ echo "Method: ${METHOD}"
 echo "Reads: ${READS}"
 echo "Output: ${OUTDIR}"
 echo "Threads: ${THREADS}"
+echo "Nextflow profile: ${NEXTFLOW_PROFILE}"
 echo "Target bases: ${TARGET_BASES:-none}"
 
 tea_args=(
     nextflow run "${TEA_MAIN}"
-    -profile apptainer
+    -profile "${NEXTFLOW_PROFILE}"
     --reads "${READS}"
     --outdir "${OUTDIR}"
     --gx_db "${GX_DB}"
@@ -85,7 +91,6 @@ tea_args=(
     --hifiasm_option "-l 2"
     --threads "${THREADS}"
     --rasusa_seed "${RASUSA_SEED}"
-    --keep_intermediates
 )
 
 if [[ -n "${TARGET_BASES}" ]]; then
@@ -94,12 +99,18 @@ fi
 
 "${tea_args[@]}"
 
+FINAL_FASTA="${OUTDIR}/${FINAL_NAME}"
+if [[ ! -s "${FINAL_FASTA}" ]]; then
+    echo "Expected final TEA assembly was not created: ${FINAL_FASTA}" >&2
+    exit 1
+fi
+
 seconds=$(( $(date +%s) - start ))
 printf "TEA\t%s\n" "${seconds}" >> "${TIMING}"
 printf "Total\t%s\n" "${seconds}" >> "${TIMING}"
 
 if [[ "${FINAL_NAME}" != "${SAMPLE}.fasta.gz" ]]; then
-    ln -sfn "${OUTDIR}/${FINAL_NAME}" "${OUTDIR}/${SAMPLE}.fasta.gz"
+    ln -sfn "${FINAL_FASTA}" "${OUTDIR}/${SAMPLE}.fasta.gz"
 fi
 
 echo "Done: ${OUTDIR}/${SAMPLE}.fasta.gz"
