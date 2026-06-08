@@ -15,7 +15,7 @@ if [[ ! -f "${DEFAULT_TEA_MAIN}" && -f "${HOME}/Documents/Projects/TEA/main.nf" 
 fi
 TEA_MAIN="${TEA_MAIN:-${DEFAULT_TEA_MAIN}}"
 NEXTFLOW_PROFILE="${NEXTFLOW_PROFILE:-apptainer}"
-GX_DB="${GX_DB:-${PROJECT_DATA}/fcs-db}"
+GX_DB="${GX_DB:-${HOME}/db/fcs-gx}"
 RASUSA_SEED="${RASUSA_SEED:-2025}"
 MSU1_TARGET_BASES="${MSU1_TARGET_BASES:-5400000000}"
 
