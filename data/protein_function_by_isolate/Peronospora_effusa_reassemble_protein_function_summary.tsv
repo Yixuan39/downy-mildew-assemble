@@ -7769,7 +7769,7 @@ Peff-26_012_000092.1	eggnog	PPR repeat
 Peff-26_012_000093.1	eggnog	CAP_GLY
 Peff-26_012_000143.1	eggnog	NADH-ubiquinone reductase complex 1 MLRQ subunit
 Peff-26_012_000094.1	eggnog	NADH-ubiquinone reductase complex 1 MLRQ subunit
-Peff-26_012_000142.1	interproscan	c(""""""""RXLR phytopathogen effector protein"""""""", """""""" Avirulence activity"""""""") (PF16810)
+Peff-26_012_000142.1	interproscan	c(""RXLR phytopathogen effector protein"", "" Avirulence activity"") (PF16810)
 Peff-26_012_000141.1	blastp	Homology to Peronospora effusa predicted protein RMX68466.1
 Peff-26_012_000140.1	blastp	Homology to Peronospora effusa predicted protein RMX68465.1
 Peff-26_012_000139.1	eggnog	Haloacid dehalogenase-like hydrolase
