@@ -31,7 +31,7 @@ parsedPaths <- parse_annotations(
 
 gpar <- init_genespace(
   wd = wd,
-  nCores = 10,
+  nCores = 32,
   dotplots = 'never',
   path2mcscanx = path2mcscanx)
 
@@ -141,6 +141,6 @@ aligned_synteny <- full.plot$plotData$ggplotObj +
   )
 
 synteny_contigs_plot <- aligned_tree + aligned_synteny + plot_layout(widths = c(1, 4))
-save_pub_r(synteny_contigs_plot, "synteny-contigs-tree-riparian", width_mm = 183, height_mm = 155)
+save_pub_r(synteny_contigs_plot, "synteny-contigs-tree-riparian", width_mm = 183, height_mm = 215)
 synteny_contigs_plot
 ```
