@@ -141,6 +141,6 @@ aligned_synteny <- full.plot$plotData$ggplotObj +
   )
 
 synteny_contigs_plot <- aligned_tree + aligned_synteny + plot_layout(widths = c(1, 4))
-save_pub_r(synteny_contigs_plot, "synteny-contigs-tree-riparian", width_mm = 183, height_mm = 215)
+save_pub_r(synteny_contigs_plot, "synteny-contigs-tree-riparian", width_mm = 180, height_mm = 170)
 synteny_contigs_plot
 ```
