@@ -18,8 +18,7 @@ FILES=(
 
 mkdir -p "$TMP_DIR" "$RESULT_DIR"
 
-gzip -dc "${FILES[@]}" > "${DB}.raw.fasta"
-seqkit rmdup -s "${DB}.raw.fasta" > "${DB}.fasta"
+gzip -dc "${FILES[@]}" > "${DB}.fasta"
 
 BuildDatabase \
   -name "$DB" \
@@ -28,6 +27,8 @@ BuildDatabase \
 RepeatModeler \
   -threads "$THREADS" \
   -database "$DB" > "$TMP_DIR/repeatmodeler.out"
+
+seqkit rmdup -s "${DB}-families.fa" > "${DB}-families-dedup.fa"
 
 for FILE in "${FILES[@]}"; do
   BASENAME=$(basename "$FILE")
@@ -43,7 +44,7 @@ for FILE in "${FILES[@]}"; do
     -engine ncbi \
     -parallel $((THREADS / 4)) \
     -gff \
-    -lib "${DB}-families.fa" \
+    -lib "${DB}-families-dedup.fa" \
     -dir "$MASKED_DIR" \
     "$WORK_DIR/${BASENAME}.fasta"
 
