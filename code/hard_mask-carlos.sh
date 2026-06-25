@@ -8,9 +8,7 @@ THREADS="${SLURM_CPUS_PER_TASK:-32}"
 INPUT_DIR="$HOME/project_data/downy/contigs-renamed/cleaned"
 RESULT_DIR="$HOME/project_data/downy/contigs-renamed/hardmasked-carlos"
 TMP_DIR="$RESULT_DIR/tmp"
-COMBINED_FASTA="$TMP_DIR/combined_genome.fasta"
-DB="$TMP_DIR/combined_db"
-LIBRARY="${DB}-families.fa"
+DB="$TMP_DIR/combined_genome"
 
 FILES=(
   "$INPUT_DIR/Pseudoperonospora_cubensis_MSU1.fasta.gz"
@@ -20,12 +18,12 @@ FILES=(
 
 mkdir -p "$TMP_DIR" "$RESULT_DIR"
 
-echo "Building combined library input: $COMBINED_FASTA"
-gzip -dc "${FILES[@]}" > "$COMBINED_FASTA"
+gzip -dc "${FILES[@]}" > "${DB}.raw.fasta"
+seqkit rmdup -s "${DB}.raw.fasta" > "${DB}.fasta"
 
 BuildDatabase \
   -name "$DB" \
-  "$COMBINED_FASTA"
+  "${DB}.fasta"
 
 RepeatModeler \
   -threads "$THREADS" \
@@ -45,7 +43,7 @@ for FILE in "${FILES[@]}"; do
     -engine ncbi \
     -parallel $((THREADS / 4)) \
     -gff \
-    -lib "$LIBRARY" \
+    -lib "${DB}-families.fa" \
     -dir "$MASKED_DIR" \
     "$WORK_DIR/${BASENAME}.fasta"
 
