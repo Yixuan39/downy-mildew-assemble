@@ -15,7 +15,7 @@ Notes for anyone adding to this repository - including future me.
 ## Naming
 
 - Lowercase with hyphens: `hard-mask-contigs.sh`, not `hard_mask_contigs.sh` or `hardMask.sh`.
-- Name the action, then the target: `helixer-contigs.sh`, `helixer-other-genomes.sh`.
+- Name the action, then the target: `helixer-contigs.sh`, `helixer-published-genomes.sh`.
 - Directories are `NN-topic`, two digits, hyphenated.
 
 ## Script header
