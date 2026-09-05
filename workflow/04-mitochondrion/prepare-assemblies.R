@@ -10,22 +10,23 @@ samples <- data.frame(
   assembly = c("Peronospora_effusa_UA202013_star", "Pseudoperonospora_cubensis_MSU1",
                "Pseudoperonospora_cubensis_SC1982", "Pseudoperonospora_humuli_OR502AA")
 )
-root <- project_path("results/assembly-preparation")
+root <- project_path("results/assembly-qc")
+renamed <- file.path(root, "renamed")
 mito <- file.path(root, "mitochondrial")
-clean <- file.path(root, "nuclear")
+clean <- file.path(root, "nuclear-presplit")
 reference <- project_path("inputs/reference-mitochondria", "KT072718.1.fna")
 inputs <- project_path("results/assembly", samples$run, paste0(samples$run, ".fasta.gz"))
 outputs <- file.path(clean, paste0(samples$assembly, ".fasta.gz"))
 stopifnot(file.exists(reference), all(file.exists(inputs)))
 if (any(file.exists(outputs))) stop("Cleaned assemblies already exist; use a fresh results tree to rebuild.")
-for (dir in c(root, mito, clean)) dir.create(dir, recursive = TRUE, showWarnings = FALSE)
+for (dir in c(root, renamed, mito, clean)) dir.create(dir, recursive = TRUE, showWarnings = FALSE)
 
 partition_assembly <- function(i) {
   seqs <- readDNAStringSet(inputs[i])
   seqs <- seqs[order(width(seqs), decreasing = TRUE)]
   names(seqs) <- sprintf("%s_%03d", samples$prefix[i], seq_along(seqs))
   filename <- paste0(samples$assembly[i], ".fasta.gz")
-  writeXStringSet(seqs, file.path(root, filename), compress = TRUE)
+  writeXStringSet(seqs, file.path(renamed, filename), compress = TRUE)
   query <- tempfile(fileext = ".fasta")
   on.exit(unlink(query))
   writeXStringSet(seqs, query)

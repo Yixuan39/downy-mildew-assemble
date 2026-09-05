@@ -5,7 +5,7 @@
 #           mitochondrial genome.
 # Inputs  : ${PROJECT_DATA}/inputs/reference-genomes/*.fna.gz
 #           ${PROJECT_DATA}/inputs/reference-mitochondria/KT072718.1.fna (NCBI KT072718.1, P. cubensis mt genome)
-# Outputs : ${PROJECT_DATA}/results/assembly-preparation/reference-mito-hits/<genome>.tsv
+# Outputs : ${PROJECT_DATA}/results/assembly-qc/reference-mito-hits/<genome>.tsv
 # Runs on : SLURM array 0-10 (one task per published genome)
 # Usage   : sbatch workflow/04-mitochondrion/blastn-find-mito.sh
 
@@ -13,7 +13,7 @@ set -euo pipefail
 source "${REPO_ROOT:-${SLURM_SUBMIT_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}}/workflow/paths.sh"
 
 INPUT_DIR=${PROJECT_DATA}/inputs/reference-genomes
-RESULT_DIR=${PROJECT_DATA}/results/assembly-preparation/reference-mito-hits
+RESULT_DIR=${PROJECT_DATA}/results/assembly-qc/reference-mito-hits
 FILES=($(find -L "$INPUT_DIR" -maxdepth 1 -type f -name "*.fna.gz" | sort))
 FILE=${FILES[$SLURM_ARRAY_TASK_ID]}
 mkdir -p ${RESULT_DIR}

@@ -20,9 +20,9 @@ Paths are under `$PROJECT_DATA` on the cluster unless marked *(in repo)*. The De
 
 | output | path | what it is | consumed by | deposition |
 |---|---|---|---|---|
-| Mitochondrial genomes | `results/assembly-preparation/mitochondrial/<assembly>.fasta.gz + .mito.tsv` | Mitochondrial contigs separated from each new assembly, with the contig table. (Source dir on the cluster is misspelled `contigs-renamed/mitochondiral/` — kept as-is in archive/, copied under the corrected name in results/.) | GenBank submission | NCBI GenBank (organelle genomes) |
-| Mito BLAST hits (published) | `results/assembly-preparation/reference-mito-hits/<genome>.mito.tsv` | BLASTN locations of mitochondrial contigs in each published genome, against the KT072718.1 reference. | mt-linkage-plot.sh | not deposited (intermediate) |
-| Mito linkage plot | `results/assembly-preparation/mt-linkage/mt_linkage.{svg,pdf,png}`, mirrored to `data/mt_linkage/ (in repo)` | Linear synteny/linkage plot of the 14 oomycete mitochondrial genomes. | manuscript figure | in the repo (committed) |
+| Mitochondrial genomes | `results/assembly-qc/mitochondrial/<assembly>.fasta.gz + .mito.tsv` | Mitochondrial contigs separated from each new assembly, with the contig table. (Source dir on the cluster is misspelled `contigs-renamed/mitochondiral/` — kept as-is in archive/, copied under the corrected name in results/.) | GenBank submission | NCBI GenBank (organelle genomes) |
+| Mito BLAST hits (published) | `results/assembly-qc/reference-mito-hits/<genome>.mito.tsv` | BLASTN locations of mitochondrial contigs in each published genome, against the KT072718.1 reference. | mt-linkage-plot.sh | not deposited (intermediate) |
+| Mito linkage plot | `results/assembly-qc/mt-linkage/mt_linkage.{svg,pdf,png}`, mirrored to `data/mt_linkage/ (in repo)` | Linear synteny/linkage plot of the 14 oomycete mitochondrial genomes. | manuscript figure | in the repo (committed) |
 
 ## Notes
 
