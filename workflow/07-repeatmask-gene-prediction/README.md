@@ -11,13 +11,13 @@ used, writing to `hardmasked-carlos/`.
 
 ## Scripts
 
-| file | what it does | where it runs |
+| file | what it does | resources |
 |---|---|---|
-| `hard-mask-combined-library.sh` | Alternative masking strategy: build ONE repeat library from all assemblies combined (deduplicated with seqkit rmdup) and mask every assembly with it. Kept because the combined-library masking is what the annotation comparison used. | NCSU BRC, SLURM, 32 cores |
-| `hard-mask-contigs.sh` | Build a per-assembly repeat library with RepeatModeler and hard-mask the three new assemblies with RepeatMasker. | NCSU BRC, SLURM array 0-3, 32 cores |
-| `hard-mask-published-genomes.sh` | Same per-genome RepeatModeler/RepeatMasker treatment for the published genomes, so gene prediction sees comparably masked input. | NCSU BRC, SLURM array 0-10, 32 cores |
-| `helixer-contigs.sh` | Predict genes in the three new assemblies with Helixer (land_plant/fungi model in the v0.3.6 CUDA container) and convert the GFF3 to proteins with gffread. | NCSU BRC GPU partition, SLURM array 0-3, 24 cores, apptainer --nv |
-| `helixer-published-genomes.sh` | Same Helixer prediction for the published genomes, giving a like-for-like gene set for the annotation comparison. | NCSU BRC GPU partition, SLURM array 0-10, 24 cores, apptainer --nv |
+| `hard-mask-combined-library.sh` | Alternative masking strategy: build ONE repeat library from all assemblies combined (deduplicated with seqkit rmdup) and mask every assembly with it. Kept because the combined-library masking is what the annotation comparison used. | SLURM, 32 cores |
+| `hard-mask-contigs.sh` | Build a per-assembly repeat library with RepeatModeler and hard-mask the three new assemblies with RepeatMasker. | SLURM array 0-3, 32 cores |
+| `hard-mask-published-genomes.sh` | Same per-genome RepeatModeler/RepeatMasker treatment for the published genomes, so gene prediction sees comparably masked input. | SLURM array 0-10, 32 cores |
+| `helixer-contigs.sh` | Predict genes in the three new assemblies with Helixer (land_plant/fungi model in the v0.3.6 CUDA container) and convert the GFF3 to proteins with gffread. | GPU partition, SLURM array 0-3, 24 cores, apptainer --nv |
+| `helixer-published-genomes.sh` | Same Helixer prediction for the published genomes, giving a like-for-like gene set for the annotation comparison. | GPU partition, SLURM array 0-10, 24 cores, apptainer --nv |
 
 ## Notes
 

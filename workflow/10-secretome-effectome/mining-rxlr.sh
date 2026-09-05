@@ -6,7 +6,7 @@
 # Inputs  : <isolate>_final_soluble_secretome.faa; find_*.pl under
 #           /rs1/.../07_effector_annotation/mining_RLXR
 # Outputs : motif_results/<sample>_<motif>.output
-# Runs on : collaborator system, interactive shell (not a batch job); edit $input and $script_dir before
+# Runs on : external system - see stage README, interactive shell (not a batch job); edit $input and $script_dir before
 #           running
 # Usage   : bash workflow/10-secretome-effectome/mining-rxlr.sh
 # ----------------------------------------------------------------------------------------

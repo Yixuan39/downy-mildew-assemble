@@ -8,7 +8,7 @@
 #           CUDA container) and convert the GFF3 to proteins with gffread.
 # Inputs  : $HOME/project_data/downy/contigs-renamed/hardmasked/*.fasta.gz
 # Outputs : $HOME/project_data/downy/contigs-renamed/helixer/ (GFF3 + .faa)
-# Runs on : NCSU BRC GPU partition, SLURM array 0-3, 24 cores, apptainer --nv
+# Runs on : GPU partition, SLURM array 0-3, 24 cores, apptainer --nv
 # Usage   : sbatch workflow/07-repeatmask-gene-prediction/helixer-contigs.sh
 # ----------------------------------------------------------------------------------------
 

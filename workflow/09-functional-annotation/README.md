@@ -6,12 +6,12 @@ combines them into the per-gene support summary reported in the paper.
 
 ## Scripts
 
-| file | what it does | where it runs |
+| file | what it does | resources |
 |---|---|---|
-| `protein-diamond-blastp.sh` | DIAMOND blastp of the Helixer proteins against NCBI nr, for the homology-based half of the annotation support table. | NCSU BRC, SLURM array 0-3, 32 cores |
-| `protein-eggnog.sh` | Functionally annotate the Helixer proteins with eggNOG-mapper (DIAMOND search mode). | NCSU BRC, SLURM array 0-3, 24 cores |
-| `protein-interproscan.sh` | Assign InterPro domains and GO terms to the Helixer proteins with InterProScan 5.77-108.0 in a container. | NCSU BRC, SLURM array 0-3, 24 cores, apptainer |
-| `protein-proteinfer.sh` | Predict protein function with ProteInfer, the fourth independent annotation source in the gene-support comparison. | NCSU BRC, SLURM array 0-3, 24 cores |
+| `protein-diamond-blastp.sh` | DIAMOND blastp of the Helixer proteins against NCBI nr, for the homology-based half of the annotation support table. | SLURM array 0-3, 32 cores |
+| `protein-eggnog.sh` | Functionally annotate the Helixer proteins with eggNOG-mapper (DIAMOND search mode). | SLURM array 0-3, 24 cores |
+| `protein-interproscan.sh` | Assign InterPro domains and GO terms to the Helixer proteins with InterProScan 5.77-108.0 in a container. | SLURM array 0-3, 24 cores, apptainer |
+| `protein-proteinfer.sh` | Predict protein function with ProteInfer, the fourth independent annotation source in the gene-support comparison. | SLURM array 0-3, 24 cores |
 
 ## Notes
 

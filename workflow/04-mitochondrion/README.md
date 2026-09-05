@@ -7,9 +7,9 @@ order that mirrors the nuclear synteny figure.
 
 ## Scripts
 
-| file | what it does | where it runs |
+| file | what it does | resources |
 |---|---|---|
-| `blastn-find-mito.sh` | Locate mitochondrial contigs in each published downy mildew genome by BLASTN against a reference mitochondrial genome. | NCSU BRC, SLURM array 0-10 (one task per published genome) |
+| `blastn-find-mito.sh` | Locate mitochondrial contigs in each published downy mildew genome by BLASTN against a reference mitochondrial genome. | SLURM array 0-10 (one task per published genome) |
 | `gbdraw-wide.py` | Thin wrapper around gbdraw 0.13 that makes the hardcoded 2000 px canvas width settable via GBDRAW_WIDTH, and the label stroke via GBDRAW_LABEL_STROKE. Called by mt-linkage-plot.sh, not run directly. | conda env 'gbdraw' |
 | `mt-label-orf-only.tsv` | Label overrides for the mitochondrial plot: features to render as ORF-only. | data file |
 | `mt-linkage-plot.sh` | Draw the linear synteny/linkage plot of the 14 oomycete mitochondrial genomes with gbdraw; row order mirrors the nuclear synteny figure. | local, conda env `gbdraw` |

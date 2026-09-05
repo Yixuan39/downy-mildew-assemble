@@ -8,7 +8,7 @@
 #           prediction sees comparably masked input.
 # Inputs  : $HOME/project_data/downy/downy-mildew-genomes/*.fna.gz
 # Outputs : $HOME/project_data/downy/downy-mildew-genomes/hardmasked/
-# Runs on : NCSU BRC, SLURM array 0-10, 32 cores
+# Runs on : SLURM array 0-10, 32 cores
 # Usage   : sbatch workflow/07-repeatmask-gene-prediction/hard-mask-other-genomes.sh
 # ----------------------------------------------------------------------------------------
 

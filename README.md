@@ -39,7 +39,7 @@ covering what the stage does and its gotchas.
 
 ## Reproducing the analysis
 
-The pipeline was run on the NCSU BRC cluster (SLURM). Large intermediate and final output lives
+The pipeline runs on a SLURM cluster. Large intermediate and final output lives
 outside the repository, under `$HOME/project_data/downy`; reference databases live under `$HOME/db`
 (see [Data and database locations](#data-and-database-locations) below for the full list).
 
@@ -69,10 +69,10 @@ Three things to know before running anything:
 1. **Nextflow launchers are not `sbatch` jobs.** Stages 02, 03 (`fasta-quality-table.sh`), 05 and 08
    call Nextflow, which submits its own SLURM jobs. Run those from a login node inside
    `tmux`/`screen`. Scripts with `#SBATCH` headers are the ones to submit with `sbatch`.
-2. **Not everything runs on the cluster.** Stage 06 (telomeres) and stage 12 (coverage checks) run
-   on a local macOS workstation and read from local paths, one of them an external drive. Stage 10
-   (secretome/effectome) came from a collaborator and runs on their LSF system with their paths.
-   Each script's `Runs on` header says which.
+2. **Not everything runs on the cluster.** Stage 06 (telomeres) and the SC1982 coverage checks
+   under stage 05 run on a local workstation and read from local paths, one of them an external
+   drive. Stage 10 (secretome/effectome) is a collaborator's LSF pipeline, recorded for provenance.
+   Each script's `Runs on` header says which environment it expects.
 3. **The notebooks need the result tree.** Notebooks read large output from `~/project_data/downy`,
    so knit them on the cluster or on a machine where that tree is mirrored at the same path. Small
    tables under `data/` are committed, so most figures can be regenerated without it.

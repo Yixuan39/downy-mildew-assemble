@@ -6,7 +6,7 @@
 #           synteny figures.
 # Inputs  : $HOME/project_data/downy/genespace-contigs/tmp/*.faa
 # Outputs : $HOME/project_data/downy/genespace-contigs/orthofinder/
-# Runs on : NCSU BRC, SLURM, 32 cores requested (OrthoFinder is called with -t 10)
+# Runs on : SLURM, 32 cores requested (OrthoFinder is called with -t 10)
 # Usage   : sbatch workflow/11-synteny-orthology/orthofinder-contigs.sh
 # ----------------------------------------------------------------------------------------
 

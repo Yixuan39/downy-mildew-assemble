@@ -5,7 +5,7 @@
 # Inputs  : $HOME/project_data/downy/GSL_Data/fastq/filtered/Quesada_SQIIe_SC1982.fastq.gz; FCS-GX at
 #           $HOME/db/fcs-gx; compleasm lineages at $HOME/db/compleasm
 # Outputs : $HOME/project_data/downy/Assembly/SC1982/
-# Runs on : NCSU BRC login node - the pipeline submits its own SLURM jobs
+# Runs on : login node - the pipeline submits its own SLURM jobs
 # Usage   : bash workflow/02-assembly/assemble-SC1982.sh
 # ----------------------------------------------------------------------------------------
 set -euo pipefail

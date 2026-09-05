@@ -8,7 +8,7 @@
 #           support comparison.
 # Inputs  : $HOME/project_data/downy/contigs-renamed/helixer/*.faa
 # Outputs : $HOME/project_data/downy/contigs-renamed/proteinfer/
-# Runs on : NCSU BRC, SLURM array 0-3, 24 cores
+# Runs on : SLURM array 0-3, 24 cores
 # Usage   : sbatch workflow/09-functional-annotation/protein-proteinfer.sh
 # ----------------------------------------------------------------------------------------
 

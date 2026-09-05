@@ -5,10 +5,10 @@ density along those contigs that supports the chromosome-scale claim.
 
 ## Scripts
 
-| file | what it does | where it runs |
+| file | what it does | resources |
 |---|---|---|
 | `plot-tidk-telomeres.R` | Plot the tidk telomere-repeat density along each long contig. Called at the end of tidk-telomere-long-contigs.sh. | local, R |
-| `tidk-telomere-long-contigs.sh` | Search contigs >=1 Mb for the plant/oomycete telomere repeat TTTAGGG with tidk, then call the plotting script. Reads assemblies from a LOCAL path - edit the fasta glob before running elsewhere. | local macOS workstation |
+| `tidk-telomere-long-contigs.sh` | Search contigs >=1 Mb for the plant/oomycete telomere repeat TTTAGGG with tidk, then call the plotting script. Reads assemblies from a LOCAL path - edit the fasta glob before running elsewhere. | local workstation |
 
 ## Notes
 

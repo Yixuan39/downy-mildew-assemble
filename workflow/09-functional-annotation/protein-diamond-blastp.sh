@@ -8,7 +8,7 @@
 #           annotation support table.
 # Inputs  : $HOME/project_data/downy/contigs-renamed/helixer/*.faa; nr.dmnd at $HOME/db/nr.dmnd
 # Outputs : $HOME/project_data/downy/contigs-renamed/blastp/<genome>.tsv
-# Runs on : NCSU BRC, SLURM array 0-3, 32 cores
+# Runs on : SLURM array 0-3, 32 cores
 # Usage   : sbatch workflow/09-functional-annotation/protein-diamond-blastp.sh
 # ----------------------------------------------------------------------------------------
 

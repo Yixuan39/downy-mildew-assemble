@@ -6,7 +6,7 @@
 # Inputs  : workflow/08-rnaseq-support/config/samplesheet_MSU1.csv, workflow/08-rnaseq-support/config/custom.config, the MSU1 assembly + Helixer
 #           GFF3
 # Outputs : the nf-core/rnaseq outdir set inside the script
-# Runs on : NCSU BRC login node - Nextflow submits its own SLURM jobs; apptainer profile
+# Runs on : login node - Nextflow submits its own SLURM jobs; apptainer profile
 # Usage   : bash workflow/08-rnaseq-support/run-nfcore-rnaseq-MSU1.sh
 # ----------------------------------------------------------------------------------------
 

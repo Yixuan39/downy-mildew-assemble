@@ -6,7 +6,7 @@
 #           level context for the assembly quality figure.
 # Inputs  : $HOME/project_data/downy/oomycota-genome/*.fna.gz; compleasm lineages at $HOME/db/compleasm
 # Outputs : $HOME/project_data/downy/oomycota-genome/compleasm/<genome>/quality.csv
-# Runs on : NCSU BRC, SLURM, 24 cores
+# Runs on : SLURM, 24 cores
 # Usage   : sbatch workflow/05-assembly-qc/ref-genome-quality.sh
 # ----------------------------------------------------------------------------------------
 

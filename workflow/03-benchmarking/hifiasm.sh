@@ -8,7 +8,7 @@
 #           time to timing.tsv.
 # Inputs  : $SAMPLE reads under $PROJECT_DATA (MSU1 or UA202013)
 # Outputs : $PROJECT_DATA/benchmarking/$SAMPLE/hifiasm/ incl. timing.tsv
-# Runs on : NCSU BRC, SLURM, 32 cores, submitted to -p bigmem -w node95 so all three arms share one node
+# Runs on : SLURM, 32 cores, all three arms on one large-memory node
 # Usage   : sbatch --export=ALL,SAMPLE=MSU1 workflow/03-benchmarking/hifiasm.sh
 # ----------------------------------------------------------------------------------------
 

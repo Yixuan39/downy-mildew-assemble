@@ -10,7 +10,7 @@
 # Inputs  : $HOME/project_data/downy/GSL_Data/fastq/filtered/*.fastq.gz; Kraken2 PlusPFP at
 #           $HOME/db/kraken2/PlusPFP
 # Outputs : $HOME/project_data/downy/k2_pfp/<sample>.{kraken,report}
-# Runs on : NCSU BRC, SLURM array 0-2, 24 cores / 220 GB (the PlusPFP index is loaded into RAM)
+# Runs on : SLURM array 0-2, 24 cores / 220 GB (the PlusPFP index is loaded into RAM)
 # Usage   : sbatch workflow/01-read-filtering/kraken2-pluspfp.sh
 # ----------------------------------------------------------------------------------------
 

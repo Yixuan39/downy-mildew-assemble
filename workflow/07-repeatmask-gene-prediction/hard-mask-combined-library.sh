@@ -8,7 +8,7 @@
 #           library masking is what the annotation comparison used.
 # Inputs  : $HOME/project_data/downy/contigs-renamed/cleaned/ (explicit FILES list inside the script)
 # Outputs : $HOME/project_data/downy/contigs-renamed/hardmasked-carlos/
-# Runs on : NCSU BRC, SLURM, 32 cores
+# Runs on : SLURM, 32 cores
 # Usage   : sbatch workflow/07-repeatmask-gene-prediction/hard-mask-combined-library.sh
 # ----------------------------------------------------------------------------------------
 

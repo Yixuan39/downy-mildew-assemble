@@ -7,7 +7,7 @@
 #           one job; $SLURM_ARRAY_TASK_ID is left unset and resolves to index 0.
 # Inputs  : $HOME/project_data/downy/UA202013/*.fastq.gz
 # Outputs : $HOME/project_data/downy/UA202013/filtered/*.filt.fastq.gz
-# Runs on : NCSU BRC (SLURM), single job, 32 cores
+# Runs on : SLURM, single job, 32 cores
 # Usage   : sbatch workflow/01-read-filtering/UA202013/run-hifiadapterfilt.sh
 # ----------------------------------------------------------------------------------------
 

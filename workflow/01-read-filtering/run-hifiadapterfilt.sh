@@ -8,7 +8,7 @@
 #           array task per library.
 # Inputs  : $HOME/project_data/downy/GSL_Data/fastq/*.fastq.gz
 # Outputs : $HOME/project_data/downy/GSL_Data/fastq/filtered/*.filt.fastq.gz
-# Runs on : NCSU BRC (SLURM), array 0-2, 32 cores per task
+# Runs on : SLURM, array 0-2, 32 cores per task
 # Usage   : sbatch workflow/01-read-filtering/run-hifiadapterfilt.sh
 # ----------------------------------------------------------------------------------------
 

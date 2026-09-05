@@ -9,7 +9,7 @@
 # Inputs  : $HOME/project_data/downy/contigs-renamed/helixer/*.faa; InterProScan data at
 #           $HOME/db/interproscan-5.77-108.0
 # Outputs : $HOME/project_data/downy/contigs-renamed/interproscan/<genome>/
-# Runs on : NCSU BRC, SLURM array 0-3, 24 cores, apptainer
+# Runs on : SLURM array 0-3, 24 cores, apptainer
 # Usage   : sbatch workflow/09-functional-annotation/protein-interproscan.sh
 # ----------------------------------------------------------------------------------------
 

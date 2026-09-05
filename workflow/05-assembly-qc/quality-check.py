@@ -5,7 +5,7 @@
 #           quality.csv. Helper for ref-genome-quality.sh; not run directly.
 # Inputs  : one genome FASTA, a compleasm library path, a thread count
 # Outputs : <output_dir>/quality.csv
-# Runs on : NCSU BRC, inside the same job as ref-genome-quality.sh
+# Runs on : inside the same job as ref-genome-quality.sh
 # Usage   : python workflow/05-assembly-qc/quality-check.py --help
 # ----------------------------------------------------------------------------------------
 

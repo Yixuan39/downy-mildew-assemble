@@ -3,7 +3,7 @@
 # Purpose : hmmsearch the soluble secretome with the WY-motif HMM to identify WY-domain effector candidates.
 # Inputs  : the soluble secretome FASTA and WY_motif.hmm
 # Outputs : hmmsearch table and alignment output
-# Runs on : collaborator system
+# Runs on : external system - see stage README
 # Usage   : bash workflow/10-secretome-effectome/wy-motif-hmmsearch.sh
 # ----------------------------------------------------------------------------------------
 hmmsearch \

@@ -5,7 +5,7 @@
 #           chunks; proteins with TM helices are dropped from the soluble secretome.
 # Inputs  : SignalP6 output chunked to *.faa
 # Outputs : one DeepTMHMM result directory per chunk
-# Runs on : collaborator system, LSF (bsub); all paths under /rs1/researchers/t/tbadhika/cjmantil
+# Runs on : LSF (bsub); paths hardcoded - see stage README
 # Usage   : bsub < workflow/10-secretome-effectome/deeptmhmm.sh
 # ----------------------------------------------------------------------------------------
 source /usr/local/apps/conda/miniconda3/26.3.2/etc/profile.d/conda.sh

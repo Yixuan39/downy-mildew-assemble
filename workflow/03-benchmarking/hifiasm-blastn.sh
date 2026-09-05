@@ -8,7 +8,7 @@
 #           post-hoc approach targetasm is compared against).
 # Inputs  : $SAMPLE reads under $PROJECT_DATA; NCBI nt and the oomycete taxid list
 # Outputs : $PROJECT_DATA/benchmarking/$SAMPLE/hifiasm_blastn/ incl. timing.tsv
-# Runs on : NCSU BRC, SLURM, 32 cores, -p bigmem -w node95
+# Runs on : SLURM, 32 cores, one large-memory node
 # Usage   : sbatch --export=ALL,SAMPLE=MSU1 workflow/03-benchmarking/hifiasm-blastn.sh
 # ----------------------------------------------------------------------------------------
 

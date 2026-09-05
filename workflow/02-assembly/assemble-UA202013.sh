@@ -6,7 +6,7 @@
 # Inputs  : $HOME/project_data/downy/UA202013/filtered/UA202013.fastq.gz; FCS-GX at $HOME/db/fcs-gx;
 #           compleasm lineages at $HOME/db/compleasm
 # Outputs : $HOME/project_data/downy/Assembly/UA202013/
-# Runs on : NCSU BRC login node - the pipeline submits its own SLURM jobs
+# Runs on : login node - the pipeline submits its own SLURM jobs
 # Usage   : bash workflow/02-assembly/assemble-UA202013.sh
 # ----------------------------------------------------------------------------------------
 set -euo pipefail

@@ -5,7 +5,7 @@
 #           to the same node so the wall-time comparison is fair.
 # Inputs  : the three arm scripts in this directory
 # Outputs : seven queued SLURM jobs
-# Runs on : NCSU BRC login node
+# Runs on : login node
 # Usage   : bash workflow/03-benchmarking/submit-all.sh
 # ----------------------------------------------------------------------------------------
 

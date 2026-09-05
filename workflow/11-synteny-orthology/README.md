@@ -5,9 +5,9 @@ notebooks (`analysis/synteny-*.Rmd`) build on.
 
 ## Scripts
 
-| file | what it does | where it runs |
+| file | what it does | resources |
 |---|---|---|
-| `orthofinder-contigs.sh` | Run OrthoFinder over the proteomes staged for GENESPACE, producing the orthogroups behind the synteny figures. | NCSU BRC, SLURM, 32 cores requested (OrthoFinder is called with -t 10) |
+| `orthofinder-contigs.sh` | Run OrthoFinder over the proteomes staged for GENESPACE, producing the orthogroups behind the synteny figures. | SLURM, 32 cores requested (OrthoFinder is called with -t 10) |
 
 ## Notes
 

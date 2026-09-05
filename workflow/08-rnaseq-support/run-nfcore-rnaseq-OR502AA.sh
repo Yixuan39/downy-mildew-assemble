@@ -5,7 +5,7 @@
 # Inputs  : workflow/08-rnaseq-support/config/samplesheet_OR502AA.csv, workflow/08-rnaseq-support/config/custom.config, the OR502AA assembly +
 #           Helixer GFF3
 # Outputs : the nf-core/rnaseq outdir set inside the script
-# Runs on : NCSU BRC login node - Nextflow submits its own SLURM jobs; apptainer profile
+# Runs on : login node - Nextflow submits its own SLURM jobs; apptainer profile
 # Usage   : bash workflow/08-rnaseq-support/run-nfcore-rnaseq-OR502AA.sh
 # ----------------------------------------------------------------------------------------
 

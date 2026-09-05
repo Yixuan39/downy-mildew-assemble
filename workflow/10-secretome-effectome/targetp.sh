@@ -12,7 +12,7 @@
 #           mitochondrial transit peptides.
 # Inputs  : /rs1/.../02_helixer/<Species>_<isolate>.faa; local targetp-2.0 install under the stage workdir
 # Outputs : TargetP 2.0 summary per isolate
-# Runs on : collaborator system, LSF (bsub), 1 core / 8 GB / 40 h
+# Runs on : LSF (bsub), 1 core / 8 GB / 40 h
 # Usage   : bsub < workflow/10-secretome-effectome/targetp.sh
 # ----------------------------------------------------------------------------------------
 

@@ -8,7 +8,7 @@
 #           with RepeatMasker.
 # Inputs  : $HOME/project_data/downy/contigs-renamed/cleaned/*.fasta.gz
 # Outputs : $HOME/project_data/downy/contigs-renamed/hardmasked/
-# Runs on : NCSU BRC, SLURM array 0-3, 32 cores
+# Runs on : SLURM array 0-3, 32 cores
 # Usage   : sbatch workflow/07-repeatmask-gene-prediction/hard-mask-contigs.sh
 # ----------------------------------------------------------------------------------------
 

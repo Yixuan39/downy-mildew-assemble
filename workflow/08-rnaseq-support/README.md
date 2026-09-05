@@ -6,11 +6,11 @@ Helixer gene models. One launcher per isolate; samplesheets and the cluster reso
 
 ## Scripts
 
-| file | what it does | where it runs |
+| file | what it does | resources |
 |---|---|---|
-| `run-nfcore-rnaseq-MSU1.sh` | Run nf-core/rnaseq 3.26.0 against the MSU1 assembly to get transcript-level evidence for the predicted genes. | NCSU BRC login node - Nextflow submits its own SLURM jobs; apptainer profile |
-| `run-nfcore-rnaseq-OR502AA.sh` | Run nf-core/rnaseq 3.26.0 against the OR502AA assembly. | NCSU BRC login node - Nextflow submits its own SLURM jobs; apptainer profile |
-| `run-nfcore-rnaseq-SC1982.sh` | Run nf-core/rnaseq 3.26.0 against the SC1982 assembly. | NCSU BRC login node - Nextflow submits its own SLURM jobs; apptainer profile |
+| `run-nfcore-rnaseq-MSU1.sh` | Run nf-core/rnaseq 3.26.0 against the MSU1 assembly to get transcript-level evidence for the predicted genes. | login node - Nextflow submits its own SLURM jobs; apptainer profile |
+| `run-nfcore-rnaseq-OR502AA.sh` | Run nf-core/rnaseq 3.26.0 against the OR502AA assembly. | login node - Nextflow submits its own SLURM jobs; apptainer profile |
+| `run-nfcore-rnaseq-SC1982.sh` | Run nf-core/rnaseq 3.26.0 against the SC1982 assembly. | login node - Nextflow submits its own SLURM jobs; apptainer profile |
 
 ## Notes
 

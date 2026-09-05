@@ -11,12 +11,12 @@ tuned to our own libraries.
 
 ## Scripts
 
-| file | what it does | where it runs |
+| file | what it does | resources |
 |---|---|---|
-| `assemble-MSU1.sh` | Run the targetasm pipeline on P. cubensis MSU1: HiFi reads in, decontaminated primary assembly out. | NCSU BRC login node - the pipeline submits its own SLURM jobs, so do not sbatch this script |
-| `assemble-OR502AA.sh` | Run the targetasm pipeline on P. humuli OR502AA. | NCSU BRC login node - the pipeline submits its own SLURM jobs |
-| `assemble-SC1982.sh` | Run the targetasm pipeline on P. cubensis SC1982. | NCSU BRC login node - the pipeline submits its own SLURM jobs |
-| `assemble-UA202013.sh` | Run the targetasm pipeline on the public P. effusa reads, the external dataset used to show the method generalises. | NCSU BRC login node - the pipeline submits its own SLURM jobs |
+| `assemble-MSU1.sh` | Run the targetasm pipeline on P. cubensis MSU1: HiFi reads in, decontaminated primary assembly out. | login node - the pipeline submits its own SLURM jobs, so do not sbatch this script |
+| `assemble-OR502AA.sh` | Run the targetasm pipeline on P. humuli OR502AA. | login node - the pipeline submits its own SLURM jobs |
+| `assemble-SC1982.sh` | Run the targetasm pipeline on P. cubensis SC1982. | login node - the pipeline submits its own SLURM jobs |
+| `assemble-UA202013.sh` | Run the targetasm pipeline on the public P. effusa reads, the external dataset used to show the method generalises. | login node - the pipeline submits its own SLURM jobs |
 
 ## Notes
 

@@ -5,7 +5,7 @@
 # Inputs  : $HOME/project_data/downy/GSL_Data/fastq/filtered/Quesada_SQIIe_Phumuli.fastq.gz; FCS-GX at
 #           $HOME/db/fcs-gx; compleasm lineages at $HOME/db/compleasm
 # Outputs : $HOME/project_data/downy/Assembly/OR502AA/
-# Runs on : NCSU BRC login node - the pipeline submits its own SLURM jobs
+# Runs on : login node - the pipeline submits its own SLURM jobs
 # Usage   : bash workflow/02-assembly/assemble-OR502AA.sh
 # ----------------------------------------------------------------------------------------
 set -euo pipefail

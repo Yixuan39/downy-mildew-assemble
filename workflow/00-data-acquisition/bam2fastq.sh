@@ -8,7 +8,7 @@
 #           per BAM.
 # Inputs  : $HOME/project_data/downy/GSL_Data/5Feb24/*/*.bam
 # Outputs : $HOME/project_data/downy/GSL_Data/fastq/<run>.fastq.gz
-# Runs on : NCSU BRC, SLURM array 0-2 (one task per isolate BAM)
+# Runs on : SLURM array 0-2 (one task per isolate BAM)
 # Usage   : sbatch workflow/00-data-acquisition/bam2fastq.sh
 # ----------------------------------------------------------------------------------------
 

@@ -7,7 +7,7 @@
 # Purpose : Functionally annotate the Helixer proteins with eggNOG-mapper (DIAMOND search mode).
 # Inputs  : $HOME/project_data/downy/contigs-renamed/helixer/*.faa; eggNOG DB at $HOME/db/eggnog
 # Outputs : $HOME/project_data/downy/contigs-renamed/eggnog-mapper/<genome>/
-# Runs on : NCSU BRC, SLURM array 0-3, 24 cores
+# Runs on : SLURM array 0-3, 24 cores
 # Usage   : sbatch workflow/09-functional-annotation/protein-eggnog.sh
 # ----------------------------------------------------------------------------------------
 

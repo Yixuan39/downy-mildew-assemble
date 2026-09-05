@@ -5,7 +5,7 @@
 # Inputs  : workflow/08-rnaseq-support/config/samplesheet_SC1982.csv, workflow/08-rnaseq-support/config/custom.config, the SC1982 assembly + Helixer
 #           GFF3
 # Outputs : the nf-core/rnaseq outdir set inside the script
-# Runs on : NCSU BRC login node - Nextflow submits its own SLURM jobs; apptainer profile
+# Runs on : login node - Nextflow submits its own SLURM jobs; apptainer profile
 # Usage   : bash workflow/08-rnaseq-support/run-nfcore-rnaseq-SC1982.sh
 # ----------------------------------------------------------------------------------------
 

@@ -8,7 +8,7 @@
 #           annotation comparison.
 # Inputs  : $HOME/project_data/downy/downy-mildew-genomes/hardmasked/*.fna.gz
 # Outputs : $HOME/project_data/downy/downy-mildew-genomes/helixer/
-# Runs on : NCSU BRC GPU partition, SLURM array 0-10, 24 cores, apptainer --nv
+# Runs on : GPU partition, SLURM array 0-10, 24 cores, apptainer --nv
 # Usage   : sbatch workflow/07-repeatmask-gene-prediction/helixer-other-genomes.sh
 # ----------------------------------------------------------------------------------------
 

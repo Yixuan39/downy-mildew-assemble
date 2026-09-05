@@ -12,7 +12,7 @@
 # Inputs  : $SAMPLE reads under $PROJECT_DATA; targetasm at $HOME/software/targetasm; FCS-GX at
 #           $HOME/db/fcs-gx
 # Outputs : $PROJECT_DATA/benchmarking/$SAMPLE/$METHOD/ incl. timing.tsv
-# Runs on : NCSU BRC, SLURM, 32 cores / 500 GB, -p bigmem -w node95
+# Runs on : SLURM, 32 cores / 500 GB, one large-memory node
 # Usage   : sbatch --export=ALL,SAMPLE=MSU1,METHOD=tea_downsample workflow/03-benchmarking/targetasm.sh
 # ----------------------------------------------------------------------------------------
 
