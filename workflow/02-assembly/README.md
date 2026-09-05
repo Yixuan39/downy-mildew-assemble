@@ -18,6 +18,14 @@ tuned to our own libraries.
 | `assemble-SC1982.sh` | Run the targetasm pipeline on P. cubensis SC1982. | login node - the pipeline submits its own SLURM jobs |
 | `assemble-UA202013.sh` | Run the targetasm pipeline on the public P. effusa reads, the external dataset used to show the method generalises. | login node - the pipeline submits its own SLURM jobs |
 
+## Outputs
+
+Paths are under `$HOME/project_data/downy` on the cluster unless marked *(in repo)*. The Deposition column feeds the data-availability plan (see repo root `DATA_DEPOSITION.md`).
+
+| output | path | what it is | consumed by | deposition |
+|---|---|---|---|---|
+| targetasm working dir | `~/project_data/downy/Assembly/<isolate>/` | Full targetasm run per isolate (decontaminated primary assembly plus all intermediates). The final assembly is copied to contigs-renamed/ in stage 04. | 04-mitochondrion, 05-assembly-qc | not deposited (42 GB working dirs; final assemblies deposited from contigs-renamed/cleaned/) |
+
 ## Notes
 
 These scripts are **not** submitted with `sbatch`. Nextflow submits its own SLURM jobs, so run

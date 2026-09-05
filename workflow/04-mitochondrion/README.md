@@ -14,6 +14,16 @@ order that mirrors the nuclear synteny figure.
 | `mt-label-orf-only.tsv` | Label overrides for the mitochondrial plot: features to render as ORF-only. | data file |
 | `mt-linkage-plot.sh` | Draw the linear synteny/linkage plot of the 14 oomycete mitochondrial genomes with gbdraw; row order mirrors the nuclear synteny figure. | local, conda env `gbdraw` |
 
+## Outputs
+
+Paths are under `$HOME/project_data/downy` on the cluster unless marked *(in repo)*. The Deposition column feeds the data-availability plan (see repo root `DATA_DEPOSITION.md`).
+
+| output | path | what it is | consumed by | deposition |
+|---|---|---|---|---|
+| Mitochondrial genomes | `~/project_data/downy/contigs-renamed/mitochondiral/<assembly>.fasta.gz + .mito.tsv` | Mitochondrial contigs separated from each new assembly, with the contig table. NOTE: directory is misspelled 'mitochondiral' on the cluster (cleanup: rename to mitochondrial). | GenBank submission | NCBI GenBank (organelle genomes) |
+| Mito BLAST hits (published) | `~/project_data/downy/downy-mildew-genomes/blast-mito/<genome>.tsv` | BLASTN locations of mitochondrial contigs in each published genome, against the KT072718.1 reference. | mt-linkage-plot.sh | not deposited (intermediate) |
+| Mito linkage plot | `data/mt_linkage/mt_linkage.{svg,pdf,png} (in repo)` | Linear synteny/linkage plot of the 14 oomycete mitochondrial genomes. | manuscript figure | in the repo (committed) |
+
 ## Notes
 
 `mt-linkage-plot.sh` needs the `gbdraw` conda environment and calls `gbdraw-wide.py`, a local patch

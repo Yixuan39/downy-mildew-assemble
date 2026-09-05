@@ -15,6 +15,16 @@ for effector classification.
 | `targetp.sh` | TargetP 2.0 subcellular-targeting prediction, used alongside SignalP to define the secretome. | LSF |
 | `wy-motif-hmmsearch.sh` | hmmsearch the soluble secretome with the WY-motif HMM to identify WY-domain effector candidates. | external system - see notes |
 
+## Outputs
+
+Paths are under `$HOME/project_data/downy` on the cluster unless marked *(in repo)*. The Deposition column feeds the data-availability plan (see repo root `DATA_DEPOSITION.md`).
+
+| output | path | what it is | consumed by | deposition |
+|---|---|---|---|---|
+| SignalP6 / TargetP | `per-isolate output directories` | Secretion signal-peptide predictions that define the secretome. | deeploc.sh, deeptmhmm.sh, mining-rxlr.sh, wy-motif-hmmsearch.sh | Zenodo (secretome tables) |
+| DeepLoc / DeepTMHMM | `prediction tables / one result dir per 100-seq chunk` | Subcellular localization and transmembrane-helix filters applied to the SignalP-positive set. | final soluble secretome | Zenodo (secretome tables) |
+| RxLR / WY effector calls | `motif_results/<sample>_<motif>.output; hmmsearch output` | RxLR and WY-motif effector candidates from the soluble secretome. | manuscript Table 3 | Zenodo (effectome tables) |
+
 ## Notes
 
 **These scripts came from a collaborator and are recorded here for provenance, not for reuse

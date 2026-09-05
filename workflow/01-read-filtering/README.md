@@ -16,6 +16,17 @@ tools and databases, different input directory and no SLURM array (one file inst
 | `UA202013/run-hifiadapterfilt.sh` | Same filtlong + HiFiAdapterFilt step for the public P. effusa reads (single file, no array). | SLURM, 32 cores |
 | `run-hifiadapterfilt.sh` | Subset reads with filtlong and remove PacBio adapter sequence with HiFiAdapterFilt. | SLURM array 0-2, 32 cores |
 
+## Outputs
+
+Paths are under `$HOME/project_data/downy` on the cluster unless marked *(in repo)*. The Deposition column feeds the data-availability plan (see repo root `DATA_DEPOSITION.md`).
+
+| output | path | what it is | consumed by | deposition |
+|---|---|---|---|---|
+| Adapter-filtered reads | `~/project_data/downy/GSL_Data/fastq/filtered/*.filt.fastq.gz` | HiFiAdapterFilt output on the three new isolates; the reads that go into assembly. | 02-assembly | not deposited (derived from SRA reads) |
+| Adapter-filtered reads (public) | `~/project_data/downy/UA202013/filtered/*.filt.fastq.gz` | Same filtering for the public P. effusa UA202013 reads. | 02-assembly | not deposited (derived from public reads) |
+| Kraken2 report | `~/project_data/downy/k2_pfp/<sample>.kreport` | PlusPFP classification summary quantifying host/microbial composition per library. | read-distribution.Rmd (Figure 1) | Zenodo (Kraken2 reports) |
+| Kraken2 per-read output | `~/project_data/downy/k2_pfp/<sample>.kraken` | Per-read classification calls; large, only the .kreport summary is needed downstream. | - | not deposited (intermediate, ~9 GB) |
+
 ## Notes
 
 Kraken2 loads the whole PlusPFP index into memory - the 220 GB request is not padding. Run it on

@@ -19,6 +19,17 @@ used, writing to `hardmasked-carlos/`.
 | `helixer-contigs.sh` | Predict genes in the three new assemblies with Helixer (land_plant/fungi model in the v0.3.6 CUDA container) and convert the GFF3 to proteins with gffread. | GPU partition, SLURM array 0-3, 24 cores, apptainer --nv |
 | `helixer-published-genomes.sh` | Same Helixer prediction for the published genomes, giving a like-for-like gene set for the annotation comparison. | GPU partition, SLURM array 0-10, 24 cores, apptainer --nv |
 
+## Outputs
+
+Paths are under `$HOME/project_data/downy` on the cluster unless marked *(in repo)*. The Deposition column feeds the data-availability plan (see repo root `DATA_DEPOSITION.md`).
+
+| output | path | what it is | consumed by | deposition |
+|---|---|---|---|---|
+| Hard-masked assemblies | `~/project_data/downy/contigs-renamed/hardmasked/` | Per-assembly RepeatModeler/RepeatMasker output for the three new assemblies. | helixer-contigs.sh | not deposited (regenerable intermediate) |
+| Helixer gene models | `~/project_data/downy/contigs-renamed/helixer/<assembly>.gff + .faa` | Predicted gene structures (GFF3) and protein sequences (FASTA) for each new assembly. | 08-rnaseq-support, 09-functional-annotation, 10-secretome-effectome, 11-synteny-orthology | Zenodo (annotations + predicted proteomes) |
+| Published-genome masking + Helixer | `~/project_data/downy/downy-mildew-genomes/hardmasked/ and /helixer/` | Like-for-like masking and gene prediction for the published genomes. | 11-synteny-orthology | Zenodo (predicted proteomes); masking not deposited |
+| Combined-library masking (abandoned) | `~/project_data/downy/contigs-renamed/hardmasked-carlos/ + .tar.gz` | Alternative single-combined-library masking strategy; not used in the manuscript. | - | delete (cleanup: 1.2 GB dir + redundant 383 MB tarball) |
+
 ## Notes
 
 Helixer needs the GPU partition and `apptainer --nv`; the container tag is pinned in the script
