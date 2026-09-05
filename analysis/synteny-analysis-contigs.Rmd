@@ -4,49 +4,137 @@ output: html_document
 ---
 
 ```{r echo=FALSE, message=FALSE}
+library(here)
+```
+
+```{r  message=FALSE, echo=FALSE, results=FALSE}
+wd <- path.expand("~/project_data/downy/genespace-contigs")
+orthofinder_dir <- tail(grep(
+  "Results_",
+  sort(list.dirs(file.path(wd, "orthofinder"), recursive = FALSE)),
+  value = TRUE
+), 1)
+if (!length(orthofinder_dir)) stop("No cached OrthoFinder results found in ", file.path(wd, "orthofinder"))
+stats_dir <- file.path(orthofinder_dir, "Comparative_Genomics_Statistics")
+```
+
+```{r rebuild-genespace, eval=FALSE}
 library(GENESPACE)
 library(ape)
-library(here)
 library(ggplot2)
 library(ggtree)
 library(patchwork)
 source(here("analysis", "figure-utils.R"))
 theme_set(theme_bw())
-```
 
-```{r  message=FALSE, echo=FALSE, results=FALSE}
-genomeRepo <- "~/project_data/downy/genespace-contigs/genomes"
-wd <- "~/project_data/downy/genespace-contigs"
-path2mcscanx <- "~/miniforge3/bin"
-asm2run <- list.dirs(genomeRepo, recursive = FALSE, full.names = FALSE)
+genomeRepo <- file.path(wd, "genomes")
+path2mcscanx <- path.expand("~/miniforge3/bin")
+Sys.setenv(PATH = paste(path.expand("~/miniforge3/bin"), Sys.getenv("PATH"), sep = .Platform$path.sep))
 
-parsedPaths <- parse_annotations(
+asm2run <- c(
+  "Bremia_lactucae_SF5",
+  "Peronospora_destructor_Pd_K2019",
+  "Peronospora_effusa_UA202013",
+  "Peronospora_effusa_reassemble",
+  "Phytophthora_agathidicida_3770",
+  "Phytophthora_capsici_BYA5",
+  "Phytophthora_infestans_1306",
+  "Phytophthora_plurivora_TJ71",
+  "Phytophthora_ramorum_Pr_102",
+  "Phytophthora_sojae_JS2",
+  "Plasmopara_halstedii_710",
+  "Pseudoperonospora_cubensis_MSU1",
+  "Pseudoperonospora_cubensis_SC1982",
+  "Pseudoperonospora_humuli_OR502AA",
+  "Pythium_oligandrum_PO_1"
+)
+
+parse_annotations(
   rawGenomeRepo = genomeRepo,
   genomeDirs = asm2run,
   genomeIDs = asm2run,
   headerSep = NA,
   headerEntryIndex = 1,
   gffIdColumn = "ID",
-  genespaceWd = wd)
+  genespaceWd = wd
+)
 
-gpar <- init_genespace(
-  wd = wd,
-  nCores = 32,
-  dotplots = 'never',
-  path2mcscanx = path2mcscanx)
-
+gpar <- init_genespace(wd = wd, nCores = 10, dotplots = "never", path2mcscanx = path2mcscanx)
 out <- run_genespace(gpar)
+
+tr <- read.tree(file.path(wd, "results", "SpeciesTree_rooted.txt"))
+tree <- ggtree(tr)
+peronospora_node <- getMRCA(
+  tr,
+  c("Peronospora_effusa_reassemble",
+    "Peronospora_effusa_UA202013",
+    "Peronospora_destructor_Pd_K2019")
+)
+tree <- ggtree::rotate(tree, peronospora_node)
+phytophthora_node <- getMRCA(
+  tr,
+  c("Phytophthora_sojae_JS2", "Phytophthora_infestans_1306")
+)
+phytophthora_group1_node <- getMRCA(
+  tr,
+  c("Phytophthora_sojae_JS2", "Phytophthora_agathidicida_3770")
+)
+phytophthora_group2_node <- getMRCA(
+  tr,
+  c("Phytophthora_plurivora_TJ71", "Phytophthora_infestans_1306")
+)
+tree <- ggtree::rotate(tree, phytophthora_node)
+tree <- ggtree::rotate(tree, phytophthora_group1_node)
+tree <- ggtree::rotate(tree, phytophthora_group2_node)
+tip_data <- tree$data[tree$data$isTip, ]
+tip_data <- tip_data[order(tip_data$y, decreasing = TRUE), ]
+y_limits <- c(0.5, length(tip_data$label) + 0.5)
+focal_assemblies <- c(
+  "Peronospora_effusa_reassemble",
+  "Pseudoperonospora_cubensis_MSU1",
+  "Pseudoperonospora_cubensis_SC1982",
+  "Pseudoperonospora_humuli_OR502AA"
+)
+tip_ids <- rev(tip_data$label)
+display_labels <- tip_ids
+display_labels[tip_ids == "Peronospora_effusa_reassemble"] <-
+  "Peronospora_effusa_UA202013*"
+tip_labels <- as.expression(Map(function(id, label) {
+  if (id %in% focal_assemblies) bquote(bold(.(label))) else label
+}, tip_ids, display_labels))
+
+aligned_tree <- tree +
+  scale_y_continuous(limits = y_limits, expand = c(0, 0)) +
+  theme(plot.margin = margin(t = 10, r = 0, b = 10, l = 10))
+
+full.plot <- plot_riparian(
+  gsParam = out,
+  genomeIDs = rev(tip_data$label),
+  refGenome = "Peronospora_effusa_UA202013",
+  chrLabFun = function(x) "",
+  useRegions = TRUE,
+  xlabel = "Contigs scaled by gene rank order"
+)
+
+aligned_synteny <- full.plot$plotData$ggplotObj +
+  scale_y_continuous(
+    limits = y_limits,
+    expand = c(0, 0),
+    breaks = 1:length(tip_data$label),
+    labels = tip_labels
+  ) +
+  ylab(NULL) +
+  theme(
+    plot.margin = margin(t = 10, r = 10, b = 10, l = 0),
+    axis.text.y = element_text(color = "black")
+  )
+
+synteny_contigs_plot <- aligned_tree + aligned_synteny + plot_layout(widths = c(1, 4))
+save_pub_r(synteny_contigs_plot, "synteny-contigs-tree-riparian", width_mm = 180, height_mm = 170)
 ```
 
 
 ```{r orthogroup-summary, echo=FALSE}
-orthofinder_dir <- tail(grep(
-  "Results_",
-  sort(list.dirs(file.path(wd, "orthofinder"), recursive = FALSE)),
-  value = TRUE
-), 1)
-stats_dir <- file.path(orthofinder_dir, "Comparative_Genomics_Statistics")
-
 overall_lines <- readLines(file.path(stats_dir, "Statistics_Overall.tsv"))
 overall_lines <- overall_lines[seq_len(match("", overall_lines) - 1)]
 overall_stats <- read.delim(
@@ -99,48 +187,5 @@ knitr::kable(
 
 
 ```{r synteny-contigs-tree-riparian, fig.width=7.2, fig.height=6.1}
-tr <- read.tree(file.path(wd, "results", "SpeciesTree_rooted.txt"))
-tree <- ggtree(tr)
-peronospora_node <- getMRCA(
-  tr,
-  c("Peronospora_effusa_reassemble",
-    "Peronospora_effusa_UA202013",
-    "Peronospora_destructor_Pd_K2019")
-)
-
-tree <- ggtree::rotate(tree, peronospora_node)
-
-tree_data <- tree$data
-tip_data <- tree_data[tree_data$isTip, ]
-tip_data <- tip_data[order(tip_data$y, decreasing = TRUE), ]
-y_limits <- c(0.5, length(tip_data$label) + 0.5)
-
-aligned_tree <- tree + 
-  scale_y_continuous(limits = y_limits, expand = c(0, 0)) +
-  theme(plot.margin = margin(t = 10, r = 0, b = 10, l = 10))
-
-full.plot <- plot_riparian(
-  gsParam = out,
-  genomeIDs = rev(tip_data$label),
-  refGenome = "Peronospora_effusa_UA202013",
-  chrLabFun = function(x) "",
-  useRegions = FALSE
-)
-
-aligned_synteny <- full.plot$plotData$ggplotObj +
-  scale_y_continuous(
-    limits = y_limits,
-    expand = c(0, 0),
-    breaks = 1:length(tip_data$label),
-    labels = rev(tip_data$label)
-  ) +
-  ylab(NULL) +
-  theme(
-    plot.margin = margin(t = 10, r = 10, b = 10, l = 0),
-    axis.text.y = element_text(color = "black")
-  )
-
-synteny_contigs_plot <- aligned_tree + aligned_synteny + plot_layout(widths = c(1, 4))
-save_pub_r(synteny_contigs_plot, "synteny-contigs-tree-riparian", width_mm = 180, height_mm = 170)
-synteny_contigs_plot
+knitr::include_graphics(here("figures", "synteny-contigs-tree-riparian.svg"))
 ```

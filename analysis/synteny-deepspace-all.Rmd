@@ -5,6 +5,10 @@ output: html_document
 
 ```{r echo=FALSE, message=FALSE}
 library(DEEPSPACE)
+library(ggplot2)
+library(here)
+source(here("analysis", "figure-utils.R"))
+theme_set(theme_bw())
 ```
 
 
@@ -42,8 +46,8 @@ test <- clean_windows(
   minimap2call = "/opt/homebrew/bin/minimap2")
 ```
 
-```{r}
-riparian_paf(
+```{r deepspace-all-plot, fig.width=7.2, fig.height=5.9}
+deepspace_all_plot <- riparian_paf(
     pafFiles = test$mapFilePaths$synFile,
     refGenome = test$refGenome,
     genomeIDs = test$genomeIDs,
@@ -51,14 +55,17 @@ riparian_paf(
     gapProp = 0.15,      
     braidAlpha = 0.3,    
     orderyBySynteny = TRUE)
+save_pub_r(deepspace_all_plot, "synteny-deepspace-all", width_mm = 180, height_mm = 150)
+deepspace_all_plot
 ```
 
-```{r}
-riparian_paf(
+```{r deepspace-subset-plot, fig.width=7.2, fig.height=3.5}
+deepspace_subset_plot <- riparian_paf(
     pafFiles = test$mapFilePaths$synFile,
     refGenome = test$refGenome,
     labelTheseGenomes = test$refGenome,
     genomeIDs = test$genomeIDs[1:5],
     orderyBySynteny = TRUE)
+save_pub_r(deepspace_subset_plot, "synteny-deepspace-subset", width_mm = 180, height_mm = 90)
+deepspace_subset_plot
 ```
-

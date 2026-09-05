@@ -20,7 +20,13 @@ library(data.table)
 ```{r echo=FALSE}
 path <- '~/project_data/downy/oomycota-genome/compleasm/'
 read.tb <- function(path, method) {
+  if (!dir.exists(path)) {
+    return(tibble())
+  }
   files <- list.files(path, full.names = TRUE, pattern = 'stram.csv')
+  if (length(files) == 0) {
+    return(tibble())
+  }
   tb <- map_dfr(files, function(x) {data.frame(method = method,
                                                sample = str_remove(basename(x), '_stram.csv'),
                                                fread(x))})
@@ -31,6 +37,10 @@ read.tb <- function(path, method) {
 ## stramenopiles_odb10
 
 ```{r echo=FALSE}
-read.tb(path, '') %>% select(-method) %>% gt() %>% fmt_number()
+tb <- read.tb(path, '') %>% select(-any_of("method"))
+if (nrow(tb) == 0) {
+  "No Compleasm stramenopiles_odb10 result files found."
+} else {
+  tb %>% gt() %>% fmt_number()
+}
 ```
-

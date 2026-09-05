@@ -12,46 +12,65 @@ library(Biostrings)
 library(data.table)
 library(gt)
 knitr::opts_knit$set(root.dir = here())
+source(here("analysis", "figure-utils.R"))
 theme_set(theme_bw())
-```
 
-```{r echo=FALSE, message=FALSE}
-read.tb <- function(path, method) {
-  files <- list.files(path, full.names = TRUE, pattern = 'quality_final.csv', recursive = TRUE)
-  tb <- map_dfr(files, function(x) {data.frame(fread(x))})
-  return(tb)
+assembly_dir <- path.expand("~/project_data/downy/backup/cleaned_contigs")
+quality_dir <- path.expand("~/project_data/downy/Assembly")
+rename_dir <- path.expand("~/project_data/downy/contigs-renamed")
+mito_dir <- file.path(rename_dir, "mitochondiral")
+clean_dir <- file.path(rename_dir, "cleaned")
+
+rename_key <- tribble(
+  ~old_file, ~seq_name, ~file_name,
+  "p_effusa", "Peff-26", "Peronospora_effusa_reassemble",
+  "Quesada_SQIIe_MSU1", "Pcub-MSU1", "Pseudoperonospora_cubensis_MSU1",
+  "Quesada_SQIIe_SC1982", "Pcub-SC1982", "Pseudoperonospora_cubensis_SC1982",
+  "Quesada_SQIIe_Phumuli", "Phum-OR502AA", "Pseudoperonospora_humuli_OR502AA"
+)
+
+assembly_files <- list.files(
+  assembly_dir,
+  pattern = "\\.fasta\\.gz$",
+  full.names = TRUE,
+  recursive = TRUE
+)
+assembly_files <- setNames(assembly_files, str_remove(basename(assembly_files), "\\.fasta\\.gz$"))
+stopifnot(all(rename_key$old_file %in% names(assembly_files)))
+assembly_files <- assembly_files[rename_key$old_file]
+
+read.tb <- function(path) {
+  list.files(path, full.names = TRUE, pattern = "quality_final\\.csv$", recursive = TRUE) |>
+    map_dfr(\(x) as_tibble(fread(x)))
 }
 ```
 
 ```{r echo=FALSE}
-read.tb('~/project_data/downy/Assembly/', 'final assembly') |> 
-  cbind(sample = c('p_effusa', 'Quessda_MSU1','Quessda_Phumuli','Quessda_SC1982'))|>
-  relocate(sample) |> 
+read.tb(quality_dir) |>
+  dplyr::rename(sample = file) |>
   gt() |> fmt_number()
 ```
 
 
 # Read Length
 
-```{r echo=FALSE}
-read.length <- list.files('~/project_data/downy/Assembly/',
-                          pattern = '.fasta.gz', 
-                          full.names = TRUE, recursive = TRUE) |> 
-  (\(x) x[!str_detect(x, "fcs_gx|hifiasm|metaMDBG")])() |> 
+```{r}
+read.length <- assembly_files |>
   map_dfr(function(file) {
     seq <- readDNAStringSet(file)
-    data.frame(sample = str_remove(basename(file), '.fasta.gz'),
+    data.frame(sample = str_remove(basename(file), "\\.fasta\\.gz$"),
                contig = names(seq),
                length = width(seq))
-    }) |> group_by(sample) |> 
-  arrange(desc(length)) |>
-  top_n(30) |> 
-  mutate(rank = 1:n()) |> 
+    }) |>
+  group_by(sample) |>
+  slice_max(length, n = 30, with_ties = FALSE) |>
+  arrange(dplyr::desc(length), .by_group = TRUE) |>
+  mutate(rank = dplyr::row_number()) |>
   ungroup()
 
-read.length$sample <- factor(read.length$sample, levels = c("p_effusa", "Quesada_SQIIe_SC1982", "Quesada_SQIIe_MSU1", "Quesada_SQIIe_Phumuli"))
+read.length$sample <- factor(read.length$sample, levels = rename_key$old_file)
 
-ggplot(read.length, aes(x = factor(rank), y = length)) +
+read_length_plot <- ggplot(read.length, aes(x = factor(rank), y = length)) +
   geom_col() +
   scale_y_continuous(labels = scales::label_number(big.mark = ",")) +
   facet_wrap(~sample, scales = 'free_y', ncol = 1) +
@@ -61,6 +80,8 @@ ggplot(read.length, aes(x = factor(rank), y = length)) +
     x = "Rank",
     y = "Length (bp)"
   )
+save_pub_r(read_length_plot, "final-assembly-top-contigs", width_mm = 90, height_mm = 150)
+read_length_plot
 ```
 
 
@@ -78,29 +99,16 @@ The corresponding names are shown below:
 | Quesada_SQIIe_Phumuli | Phum-OR502AA |
 
 ```{r echo=FALSE, message=FALSE}
-rename_key <- tribble(
-  ~old_file, ~seq_name, ~file_name,
-  "p_effusa", "Peff-26", "Peronospora_effusa_reassemble",
-  "Quesada_SQIIe_MSU1", "Pcub-MSU1", "Pseudoperonospora_cubensis_MSU1",
-  "Quesada_SQIIe_SC1982", "Pcub-SC1982", "Pseudoperonospora_cubensis_SC1982",
-  "Quesada_SQIIe_Phumuli", "Phum-OR502AA", "Pseudoperonospora_humuli_OR502AA"
-)
-
-rename_dir <- path.expand("~/project_data/downy/contigs-renamed")
 dir.create(rename_dir, recursive = TRUE, showWarnings = FALSE)
-
-assembly_files <- list.files(
-  "~/project_data/downy/Assembly/",
-  pattern = "\\.fasta\\.gz$",
-  full.names = TRUE,
-  recursive = TRUE
-) |>
-  (\(x) x[!str_detect(x, "fcs_gx|hifiasm|metaMDBG")])()
 
 rename_contigs_by_length <- function(file) {
   input_name <- str_remove(basename(file), "\\.fasta\\.gz$")
   row_id <- match(input_name, rename_key$old_file)
   stopifnot(!is.na(row_id))
+  out <- file.path(rename_dir, paste0(rename_key$file_name[row_id], ".fasta.gz"))
+  if (file.exists(out)) {
+    return(invisible(out)) # ponytail: delete output to force regenerating large FASTAs.
+  }
 
   seqs <- readDNAStringSet(file)
   seqs <- seqs[order(width(seqs), decreasing = TRUE)]
@@ -108,7 +116,7 @@ rename_contigs_by_length <- function(file) {
 
   writeXStringSet(
     seqs,
-    file.path(rename_dir, paste0(rename_key$file_name[row_id], ".fasta.gz")),
+    out,
     compress = TRUE
   )
 }
@@ -156,7 +164,7 @@ done
 
 ```{r echo=FALSE, message=FALSE}
 blast_files <- list.files(
-  "~/project_data/downy/contigs-renamed/mitochondiral",
+  mito_dir,
   pattern = "\\.mito\\.tsv$",
   full.names = TRUE
 )
@@ -201,7 +209,7 @@ mito_contigs |>
 
 ```{r echo=FALSE, message=FALSE}
 renamed_files <- list.files(
-  "~/project_data/downy/contigs-renamed",
+  rename_dir,
   pattern = "\\.fasta\\.gz$",
   full.names = TRUE
 )
@@ -210,20 +218,23 @@ clean_contigs <- function(file) {
   sample_name <- str_remove(basename(file), "\\.fasta\\.gz$")
   seqs <- readDNAStringSet(file)
   mito_ids <- mito_contigs |> filter(sample == sample_name) |> pull(seqid)
+  clean_out <- file.path(clean_dir, basename(file))
+  mito_out <- file.path(mito_dir, basename(file))
 
-  clean_dir <- file.path("~/project_data/downy/contigs-renamed/cleaned")
-  mito_dir <- file.path("~/project_data/downy/contigs-renamed/mitochondiral")
   dir.create(clean_dir, recursive = TRUE, showWarnings = FALSE)
   dir.create(mito_dir, recursive = TRUE, showWarnings = FALSE)
+  if (file.exists(clean_out) && file.exists(mito_out)) {
+    return(invisible(NULL)) # ponytail: delete outputs to force regenerating large FASTAs.
+  }
 
   writeXStringSet(
     seqs[!(names(seqs) %in% mito_ids)],
-    file.path(clean_dir, basename(file)),
+    clean_out,
     compress = TRUE
   )
   writeXStringSet(
     seqs[names(seqs) %in% mito_ids],
-    file.path(mito_dir, basename(file)),
+    mito_out,
     compress = TRUE
   )
 }

@@ -1,0 +1,24 @@
+parameter	value
+date	2026-09-02T15:32:24-04:00
+reference	/Volumes/YY3/downy/contigs-renamed/cleaned/Pseudoperonospora_cubensis_SC1982.fasta.gz
+mapping_reference	/Users/yixuanyang/Documents/Projects/downy-mildew-assemble/data/sc1982_gap_tail_coverage/Pcub-SC1982_002.fasta
+mapping_scope	single_contig
+reads	/Volumes/YY3/downy/GSL_Data/fastq/filtered/Quesada_SQIIe_SC1982.fastq.gz
+gff	/Volumes/YY3/downy/contigs-renamed/helixer/Pseudoperonospora_cubensis_SC1982.gff
+proteins	/Users/yixuanyang/Documents/Projects/downy-mildew-assemble/Pcub-SC1982_002_14_fungal_hit_proteins.faa
+bam	/Users/yixuanyang/Documents/Projects/downy-mildew-assemble/data/sc1982_gap_tail_coverage/SC1982_hifi_to_Pcub-SC1982_002.primary.bam
+contig	Pcub-SC1982_002
+contig_length	4835754
+gap_start	4523547
+gap_end	4531927
+analysis_start	2523547
+window_bp	10000
+mapq_threshold	20
+read_span_flank_each_side_bp	1000
+upstream_window_median_mq20	91.0947
+post_gap_window_median_mq20	98.576200
+minimap2_version	2.31-r1302
+samtools_version	samtools 1.23.1
+mapping_preset	map-hifi --secondary=no
+bam_filter	-F 2308 (exclude unmapped, secondary, supplementary)
+coverage_flags	-j -G SUPPLEMENTARY

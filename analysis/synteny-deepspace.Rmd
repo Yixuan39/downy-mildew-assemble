@@ -5,29 +5,33 @@ output: html_document
 
 ```{r echo=FALSE, message=FALSE}
 library(DEEPSPACE)
+library(ggplot2)
+library(here)
+source(here("analysis", "figure-utils.R"))
+theme_set(theme_bw())
 ```
 
 
 
 ```{r}
-wd <- "~/project_data/downy/deepspace"
+wd <- "~/project_data/downy/deepspace-contigs"
 setwd(wd)
 
 genomes <- c("Peronospora_effusa_UA202013" = "./genome/GCA_021491655.1_ASM2149165v1_genomic.fna.gz",
              "Peronospora_effusa_reassemble" = "./genome/p_effusa_reassemble.fasta.gz",
              "Pseudoperonospora_Cubensis_MSU1" = "./genome/Quesada_SQIIe_MSU1.fasta.gz",
              "Pseudoperonospora_Cubensis_SC1982" = "./genome/Quesada_SQIIe_SC1982.fasta.gz",
-             "Pseudoperonospora_Humuli_OR502AA" = "./genome/Quesada_SQIIe_Phumuli.fasta.gz",
-             "Phytophthora_agathidicida_3770" = "./genome/GCA_025722995.1_ASM2572299v1_genomic.fna.gz",
-             "Phytophthora_plurivora_TJ71" = "./genome/GCA_030027945.1_ASM3002794v1_genomic.fna.gz",
-             "Phytophthora_capsici_BYA5" = "./genome/GCA_053541045.1_ASM5354104v1_genomic.fna.gz",
-             "Phytophthora_infestans_1306" = "./genome/GCA_026225685.1_Pinf1306_UCR_1_genomic.fna.gz",
-             "Plasmopara_halstedii_710" = "./genome/GCA_051820915.1_ASM5182091v1_genomic.fna.gz",
-             "Bremia_lactucae_SF5" = "./genome/GCF_004359215.1_BlacSF5v2_genomic.fna.gz",
-             "Peronospora_destructor_Pd_K2019" = "./genome/GCA_011800735.1_RDA_Pdes_1.0_genomic.fna.gz",
-             "Phytophthora_sojae_JS2" = "./genome/GCA_039619315.1_Psojae2023.1_genomic.fna.gz",
-             "Phytophthora_ramorum_Pr-102" = "./genome/GCF_020800215.1_PR-102_v3_p_genomic.fna.gz"
-               # "Pythium_oligandrum_PO-1" = "./genome/GCA_020085045.1_PO-1_genomic.fna.gz",
+             "Pseudoperonospora_Humuli_OR502AA" = "./genome/Quesada_SQIIe_Phumuli.fasta.gz"
+             # "Phytophthora_agathidicida_3770" = "./genome/GCA_025722995.1_ASM2572299v1_genomic.fna.gz",
+             # "Phytophthora_plurivora_TJ71" = "./genome/GCA_030027945.1_ASM3002794v1_genomic.fna.gz",
+             # "Phytophthora_capsici_BYA5" = "./genome/GCA_053541045.1_ASM5354104v1_genomic.fna.gz",
+             # "Phytophthora_infestans_1306" = "./genome/GCA_026225685.1_Pinf1306_UCR_1_genomic.fna.gz",
+             # "Plasmopara_halstedii_710" = "./genome/GCA_051820915.1_ASM5182091v1_genomic.fna.gz",
+             # "Bremia_lactucae_SF5" = "./genome/GCF_004359215.1_BlacSF5v2_genomic.fna.gz",
+             # "Peronospora_destructor_Pd_K2019" = "./genome/GCA_011800735.1_RDA_Pdes_1.0_genomic.fna.gz",
+             # "Phytophthora_sojae_JS2" = "./genome/GCA_039619315.1_Psojae2023.1_genomic.fna.gz",
+             # "Phytophthora_ramorum_Pr-102" = "./genome/GCF_020800215.1_PR-102_v3_p_genomic.fna.gz"
+             #   # "Pythium_oligandrum_PO-1" = "./genome/GCA_020085045.1_PO-1_genomic.fna.gz",
                )
 genomes  
 
@@ -37,29 +41,20 @@ test <- clean_windows(
   wd = wd,
   refGenome = "Peronospora_effusa_UA202013",
   preset = "dist fast",
-  minChrLen = 1e5,
+  minChrLen = 1e6,
   nCores = 10, overwrite = TRUE,
   MCScanX_hCall = "/Users/yixuanyang/miniforge3/bin/MCScanX_h",
   minimap2call = "/opt/homebrew/bin/minimap2")
 ```
 
-```{r}
-riparian_paf(
-    pafFiles = test$mapFilePaths$synFile,
-    refGenome = test$refGenome,
-    genomeIDs = test$genomeIDs,
-    braidOffset = 0.15,  # 增加间距
-    gapProp = 0.15,      # 增加基因组间隙
-    braidAlpha = 0.3,    # 降低透明度减少视觉重叠
-    orderyBySynteny = TRUE)
-```
 
-```{r}
-riparian_paf(
+```{r deepspace-contigs-plot, fig.width=7.2, fig.height=3.5}
+deepspace_contigs_plot <- riparian_paf(
     pafFiles = test$mapFilePaths$synFile,
     refGenome = test$refGenome,
     labelTheseGenomes = test$refGenome,
-    genomeIDs = test$genomeIDs[1:5],
+    genomeIDs = test$genomeIDs,
     orderyBySynteny = TRUE)
+save_pub_r(deepspace_contigs_plot, "synteny-deepspace-contigs", width_mm = 180, height_mm = 90)
+deepspace_contigs_plot
 ```
-

@@ -1,0 +1,1759 @@
+LOCUS       seq09                  38561 bp    DNA     circular UNA 16-FEB-2026
+DEFINITION  Pseudoperonospora_cubensis_MSU1.
+ACCESSION   Pseudoperonospora_cubensis_MSU1
+VERSION     Pseudoperonospora_cubensis_MSU1
+KEYWORDS    .
+SOURCE      
+  ORGANISM  .
+            .
+FEATURES             Location/Qualifiers
+     rRNA            13..2658
+                     /gene="rnl"
+                     /locus_tag="AOB67_gr02"
+                     /product="rnl"
+                     /db_xref="GeneID:25769211"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="rnl rRNA"
+     gene            13..2658
+                     /gene="rnl"
+                     /locus_tag="AOB67_gr02"
+                     /db_xref="GeneID:25769211"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="rnl gene"
+     tRNA            2664..2737
+                     /gene="trnN"
+                     /locus_tag="AOB67_gt01"
+                     /product="tRNA-Asn"
+                     /db_xref="GeneID:25769181"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnN tRNA"
+     gene            2664..2737
+                     /gene="trnN"
+                     /locus_tag="AOB67_gt01"
+                     /db_xref="GeneID:25769181"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnN gene"
+     tRNA            2748..2838
+                     /gene="trnS"
+                     /locus_tag="AOB67_gt02"
+                     /product="tRNA-Ser"
+                     /db_xref="GeneID:25769182"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnS tRNA"
+     gene            2748..2838
+                     /gene="trnS"
+                     /locus_tag="AOB67_gt02"
+                     /db_xref="GeneID:25769182"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnS gene"
+     tRNA            2865..2936
+                     /gene="trnM"
+                     /locus_tag="AOB67_gt03"
+                     /product="tRNA-Met"
+                     /db_xref="GeneID:25769183"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnM tRNA"
+     gene            2865..2936
+                     /gene="trnM"
+                     /locus_tag="AOB67_gt03"
+                     /db_xref="GeneID:25769183"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnM gene"
+     tRNA            2970..3046
+                     /gene="trnP"
+                     /locus_tag="AOB67_gt04"
+                     /product="tRNA-Pro"
+                     /db_xref="GeneID:25769184"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnP tRNA"
+     gene            2970..3046
+                     /gene="trnP"
+                     /locus_tag="AOB67_gt04"
+                     /db_xref="GeneID:25769184"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnP gene"
+     tRNA            3059..3131
+                     /gene="trnM"
+                     /locus_tag="AOB67_gt05"
+                     /product="tRNA-Met"
+                     /db_xref="GeneID:25769185"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnM tRNA"
+     gene            3059..3131
+                     /gene="trnM"
+                     /locus_tag="AOB67_gt05"
+                     /db_xref="GeneID:25769185"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnM gene"
+     CDS             3161..3532
+                     /gene="rpl14"
+                     /locus_tag="AOB67_gp39"
+                     /codon_start=1
+                     /transl_table=4
+                     /product="rpl14"
+                     /protein_id="YP_009164872.1"
+                     /db_xref="GeneID:25769186"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="rpl14 CDS"
+     gene            3161..3532
+                     /gene="rpl14"
+                     /locus_tag="AOB67_gp39"
+                     /db_xref="GeneID:25769186"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="rpl14 gene"
+     CDS             3539..4075
+                     /gene="rpl5"
+                     /locus_tag="AOB67_gp38"
+                     /codon_start=1
+                     /transl_table=4
+                     /product="rpl5"
+                     /protein_id="YP_009164873.1"
+                     /db_xref="GeneID:25769209"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="rpl5 CDS"
+     gene            3539..4075
+                     /gene="rpl5"
+                     /locus_tag="AOB67_gp38"
+                     /db_xref="GeneID:25769209"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="rpl5 gene"
+     tRNA            4081..4154
+                     /gene="trnG"
+                     /locus_tag="AOB67_gt06"
+                     /product="tRNA-Gly"
+                     /db_xref="GeneID:25769210"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnG tRNA"
+     gene            4081..4154
+                     /gene="trnG"
+                     /locus_tag="AOB67_gt06"
+                     /db_xref="GeneID:25769210"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnG gene"
+     tRNA            4226..4299
+                     /gene="trnG"
+                     /locus_tag="AOB67_gt07"
+                     /product="tRNA-Gly"
+                     /db_xref="GeneID:25769187"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnG tRNA"
+     gene            4226..4299
+                     /gene="trnG"
+                     /locus_tag="AOB67_gt07"
+                     /db_xref="GeneID:25769187"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnG gene"
+     tRNA            4309..4394
+                     /gene="trnY"
+                     /locus_tag="AOB67_gt08"
+                     /product="tRNA-Tyr"
+                     /db_xref="GeneID:25769188"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnY tRNA"
+     gene            4309..4394
+                     /gene="trnY"
+                     /locus_tag="AOB67_gt08"
+                     /db_xref="GeneID:25769188"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnY gene"
+     tRNA            4566..4639
+                     /gene="trnW"
+                     /locus_tag="AOB67_gt09"
+                     /product="tRNA-Trp"
+                     /db_xref="GeneID:25769189"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnW tRNA"
+     gene            4566..4639
+                     /gene="trnW"
+                     /locus_tag="AOB67_gt09"
+                     /db_xref="GeneID:25769189"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnW gene"
+     rRNA            complement(4672..6175)
+                     /gene="rns"
+                     /locus_tag="AOB67_gr01"
+                     /product="rns"
+                     /db_xref="GeneID:25769190"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="rns rRNA"
+     gene            complement(4672..6175)
+                     /gene="rns"
+                     /locus_tag="AOB67_gr01"
+                     /db_xref="GeneID:25769190"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="rns gene"
+     CDS             complement(6441..6947)
+                     /gene="orf168"
+                     /locus_tag="AOB67_gp37"
+                     /codon_start=1
+                     /transl_table=4
+                     /product="orf168"
+                     /protein_id="YP_009164874.1"
+                     /db_xref="GeneID:25769180"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="orf168 CDS"
+     gene            complement(6441..6947)
+                     /gene="orf168"
+                     /locus_tag="AOB67_gp37"
+                     /db_xref="GeneID:25769180"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="orf168 gene"
+     CDS             complement(7085..8005)
+                     /gene="orf306"
+                     /locus_tag="AOB67_gp36"
+                     /codon_start=1
+                     /transl_table=4
+                     /product="orf306"
+                     /protein_id="YP_009164875.1"
+                     /db_xref="GeneID:25769149"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="orf306 CDS"
+     gene            complement(7085..8005)
+                     /gene="orf306"
+                     /locus_tag="AOB67_gp36"
+                     /db_xref="GeneID:25769149"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="orf306 gene"
+     CDS             8433..9209
+                     /gene="cox2"
+                     /locus_tag="AOB67_gp35"
+                     /codon_start=1
+                     /transl_table=4
+                     /product="cox2"
+                     /protein_id="YP_009164876.1"
+                     /db_xref="GeneID:25769150"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="cox2 CDS"
+     gene            8433..9209
+                     /gene="cox2"
+                     /locus_tag="AOB67_gp35"
+                     /db_xref="GeneID:25769150"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="cox2 gene"
+     CDS             9411..10889
+                     /gene="cox1"
+                     /locus_tag="AOB67_gp34"
+                     /codon_start=1
+                     /transl_table=4
+                     /product="cox1"
+                     /protein_id="YP_009164877.1"
+                     /db_xref="GeneID:25769151"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="cox1 CDS"
+     gene            9411..10889
+                     /gene="cox1"
+                     /locus_tag="AOB67_gp34"
+                     /db_xref="GeneID:25769151"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="cox1 gene"
+     CDS             complement(11006..12154)
+                     /gene="cob"
+                     /locus_tag="AOB67_gp33"
+                     /codon_start=1
+                     /transl_table=4
+                     /product="cob"
+                     /protein_id="YP_009164878.1"
+                     /db_xref="GeneID:25769152"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="cob CDS"
+     gene            complement(11006..12154)
+                     /gene="cob"
+                     /locus_tag="AOB67_gp33"
+                     /db_xref="GeneID:25769152"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="cob gene"
+     CDS             complement(12204..12767)
+                     /gene="nad9"
+                     /locus_tag="AOB67_gp32"
+                     /codon_start=1
+                     /transl_table=4
+                     /product="nad9"
+                     /protein_id="YP_009164879.1"
+                     /db_xref="GeneID:25769153"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="nad9 CDS"
+     gene            complement(12204..12767)
+                     /gene="nad9"
+                     /locus_tag="AOB67_gp32"
+                     /db_xref="GeneID:25769153"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="nad9 gene"
+     CDS             complement(12898..13125)
+                     /gene="atp9"
+                     /locus_tag="AOB67_gp31"
+                     /codon_start=1
+                     /transl_table=4
+                     /product="atp9"
+                     /protein_id="YP_009164880.1"
+                     /db_xref="GeneID:25769154"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="atp9 CDS"
+     gene            complement(12898..13125)
+                     /gene="atp9"
+                     /locus_tag="AOB67_gp31"
+                     /db_xref="GeneID:25769154"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="atp9 gene"
+     CDS             complement(13369..13722)
+                     /gene="nad3"
+                     /locus_tag="AOB67_gp30"
+                     /codon_start=1
+                     /transl_table=4
+                     /product="nad3"
+                     /protein_id="YP_009164881.1"
+                     /db_xref="GeneID:25769155"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="nad3 CDS"
+     gene            complement(13369..13722)
+                     /gene="nad3"
+                     /locus_tag="AOB67_gp30"
+                     /db_xref="GeneID:25769155"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="nad3 gene"
+     tRNA            complement(13752..13825)
+                     /gene="trnD"
+                     /locus_tag="AOB67_gt10"
+                     /product="tRNA-Asp"
+                     /db_xref="GeneID:25769156"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnD tRNA"
+     gene            complement(13752..13825)
+                     /gene="trnD"
+                     /locus_tag="AOB67_gt10"
+                     /db_xref="GeneID:25769156"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnD gene"
+     CDS             complement(13840..14559)
+                     /gene="atp6"
+                     /locus_tag="AOB67_gp29"
+                     /codon_start=1
+                     /transl_table=4
+                     /product="atp6"
+                     /protein_id="YP_009164882.1"
+                     /db_xref="GeneID:25769191"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="atp6 CDS"
+     gene            complement(13840..14559)
+                     /gene="atp6"
+                     /locus_tag="AOB67_gp29"
+                     /db_xref="GeneID:25769191"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="atp6 gene"
+     CDS             complement(14568..15482)
+                     /gene="cox3"
+                     /locus_tag="AOB67_gp28"
+                     /codon_start=1
+                     /transl_table=4
+                     /product="cox3"
+                     /protein_id="YP_009164883.1"
+                     /db_xref="GeneID:25769157"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="cox3 CDS"
+     gene            complement(14568..15482)
+                     /gene="cox3"
+                     /locus_tag="AOB67_gp28"
+                     /db_xref="GeneID:25769157"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="cox3 gene"
+     CDS             complement(15544..15726)
+                     /gene="rps7"
+                     /locus_tag="AOB67_gp27"
+                     /codon_start=1
+                     /transl_table=4
+                     /product="rps7"
+                     /protein_id="YP_009164884.1"
+                     /db_xref="GeneID:25769158"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="rps7 CDS"
+     gene            complement(15544..15726)
+                     /gene="rps7"
+                     /locus_tag="AOB67_gp27"
+                     /db_xref="GeneID:25769158"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="rps7 gene"
+     CDS             complement(15950..16321)
+                     /gene="rps12"
+                     /locus_tag="AOB67_gp26"
+                     /codon_start=1
+                     /transl_table=4
+                     /product="rps12"
+                     /protein_id="YP_009164885.1"
+                     /db_xref="GeneID:25769159"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="rps12 CDS"
+     gene            complement(15950..16321)
+                     /gene="rps12"
+                     /locus_tag="AOB67_gp26"
+                     /db_xref="GeneID:25769159"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="rps12 gene"
+     tRNA            complement(16349..16421)
+                     /gene="trnV"
+                     /locus_tag="AOB67_gt11"
+                     /product="tRNA-Val"
+                     /db_xref="GeneID:25769160"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnV tRNA"
+     gene            complement(16349..16421)
+                     /gene="trnV"
+                     /locus_tag="AOB67_gt11"
+                     /db_xref="GeneID:25769160"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnV gene"
+     tRNA            complement(16424..16497)
+                     /gene="trnI"
+                     /locus_tag="AOB67_gt12"
+                     /product="tRNA-Ile"
+                     /db_xref="GeneID:25769192"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnI tRNA"
+     gene            complement(16424..16497)
+                     /gene="trnI"
+                     /locus_tag="AOB67_gt12"
+                     /db_xref="GeneID:25769192"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnI gene"
+     tRNA            complement(16499..16572)
+                     /gene="trnQ"
+                     /locus_tag="AOB67_gt13"
+                     /product="tRNA-Gln"
+                     /db_xref="GeneID:25769193"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnQ tRNA"
+     gene            complement(16499..16572)
+                     /gene="trnQ"
+                     /locus_tag="AOB67_gt13"
+                     /db_xref="GeneID:25769193"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnQ gene"
+     tRNA            complement(16576..16651)
+                     /gene="trnR"
+                     /locus_tag="AOB67_gt14"
+                     /product="tRNA-Arg"
+                     /db_xref="GeneID:25769194"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnR tRNA"
+     gene            complement(16576..16651)
+                     /gene="trnR"
+                     /locus_tag="AOB67_gt14"
+                     /db_xref="GeneID:25769194"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnR gene"
+     CDS             complement(16655..16981)
+                     /gene="rps10"
+                     /locus_tag="AOB67_gp25"
+                     /codon_start=1
+                     /transl_table=4
+                     /product="rps10"
+                     /protein_id="YP_009164886.1"
+                     /db_xref="GeneID:25769195"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="rps10 CDS"
+     gene            complement(16655..16981)
+                     /gene="rps10"
+                     /locus_tag="AOB67_gp25"
+                     /db_xref="GeneID:25769195"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="rps10 gene"
+     tRNA            complement(16993..17068)
+                     /gene="trnF"
+                     /locus_tag="AOB67_gt15"
+                     /product="tRNA-Phe"
+                     /db_xref="GeneID:25769161"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnF tRNA"
+     gene            complement(16993..17068)
+                     /gene="trnF"
+                     /locus_tag="AOB67_gt15"
+                     /db_xref="GeneID:25769161"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnF gene"
+     CDS             complement(17074..18567)
+                     /gene="nad2"
+                     /locus_tag="AOB67_gp24"
+                     /codon_start=1
+                     /transl_table=4
+                     /product="nad2"
+                     /protein_id="YP_009164887.1"
+                     /db_xref="GeneID:25769196"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="nad2 CDS"
+     gene            complement(17074..18567)
+                     /gene="nad2"
+                     /locus_tag="AOB67_gp24"
+                     /db_xref="GeneID:25769196"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="nad2 gene"
+     CDS             18676..19854
+                     /gene="nad7"
+                     /locus_tag="AOB67_gp23"
+                     /codon_start=1
+                     /transl_table=4
+                     /product="nad7"
+                     /protein_id="YP_009164888.1"
+                     /db_xref="GeneID:25769162"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="nad7 CDS"
+     gene            18676..19854
+                     /gene="nad7"
+                     /locus_tag="AOB67_gp23"
+                     /db_xref="GeneID:25769162"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="nad7 gene"
+     CDS             20068..20376
+                     /locus_tag="AOB67_gp22"
+                     /codon_start=1
+                     /transl_table=4
+                     /product="hypothetical protein"
+                     /protein_id="YP_009164889.1"
+                     /db_xref="GeneID:25769163"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="hypothetical protein CDS"
+     gene            20068..20376
+                     /locus_tag="AOB67_gp22"
+                     /db_xref="GeneID:25769163"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="gene"
+     tRNA            20379..20452
+                     /gene="trnH"
+                     /locus_tag="AOB67_gt16"
+                     /product="tRNA-His"
+                     /db_xref="GeneID:25769214"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnH tRNA"
+     gene            20379..20452
+                     /gene="trnH"
+                     /locus_tag="AOB67_gt16"
+                     /db_xref="GeneID:25769214"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnH gene"
+     CDS             20485..21960
+                     /gene="nad4"
+                     /locus_tag="AOB67_gp21"
+                     /codon_start=1
+                     /transl_table=4
+                     /product="nad4"
+                     /protein_id="YP_009164890.1"
+                     /db_xref="GeneID:25769197"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="nad4 CDS"
+     gene            20485..21960
+                     /gene="nad4"
+                     /locus_tag="AOB67_gp21"
+                     /db_xref="GeneID:25769197"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="nad4 gene"
+     tRNA            21984..22055
+                     /gene="trnE"
+                     /locus_tag="AOB67_gt17"
+                     /product="tRNA-Glu"
+                     /db_xref="GeneID:25769164"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnE tRNA"
+     CDS             21998..23659
+                     /gene="atp1"
+                     /locus_tag="AOB67_gp20"
+                     /codon_start=1
+                     /transl_table=4
+                     /product="atp1"
+                     /protein_id="YP_009164891.1"
+                     /db_xref="GeneID:25769198"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="atp1 CDS"
+     gene            21998..23659
+                     /gene="atp1"
+                     /locus_tag="AOB67_gp20"
+                     /db_xref="GeneID:25769198"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="atp1 gene"
+     CDS             23822..25816
+                     /gene="nad5"
+                     /locus_tag="AOB67_gp19"
+                     /codon_start=1
+                     /transl_table=4
+                     /product="nad5"
+                     /protein_id="YP_009164892.1"
+                     /db_xref="GeneID:25769165"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="nad5 CDS"
+     gene            23822..25816
+                     /gene="nad5"
+                     /locus_tag="AOB67_gp19"
+                     /db_xref="GeneID:25769165"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="nad5 gene"
+     CDS             25859..26426
+                     /gene="nad6"
+                     /locus_tag="AOB67_gp18"
+                     /codon_start=1
+                     /transl_table=4
+                     /product="nad6"
+                     /protein_id="YP_009164893.1"
+                     /db_xref="GeneID:25769166"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="nad6 CDS"
+     gene            25859..26426
+                     /gene="nad6"
+                     /locus_tag="AOB67_gp18"
+                     /db_xref="GeneID:25769166"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="nad6 gene"
+     tRNA            26578..26650
+                     /gene="trnR"
+                     /locus_tag="AOB67_gt18"
+                     /product="tRNA-Arg"
+                     /db_xref="GeneID:25769167"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnR tRNA"
+     gene            26578..26650
+                     /gene="trnR"
+                     /locus_tag="AOB67_gt18"
+                     /db_xref="GeneID:25769167"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnR gene"
+     CDS             complement(26682..26948)
+                     /gene="nad4L"
+                     /locus_tag="AOB67_gp17"
+                     /codon_start=1
+                     /transl_table=4
+                     /product="nad4L"
+                     /protein_id="YP_009164894.1"
+                     /db_xref="GeneID:25769199"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="nad4L CDS"
+     gene            complement(26682..26948)
+                     /gene="nad4L"
+                     /locus_tag="AOB67_gp17"
+                     /db_xref="GeneID:25769199"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="nad4L gene"
+     CDS             complement(26992..27972)
+                     /gene="nad1"
+                     /locus_tag="AOB67_gp16"
+                     /codon_start=1
+                     /transl_table=4
+                     /product="nad1"
+                     /protein_id="YP_009164895.1"
+                     /db_xref="GeneID:25769168"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="nad1 CDS"
+     gene            complement(26992..27972)
+                     /gene="nad1"
+                     /locus_tag="AOB67_gp16"
+                     /db_xref="GeneID:25769168"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="nad1 gene"
+     CDS             complement(28133..29975)
+                     /gene="nad11"
+                     /locus_tag="AOB67_gp15"
+                     /codon_start=1
+                     /transl_table=4
+                     /product="nad11"
+                     /protein_id="YP_009164896.1"
+                     /db_xref="GeneID:25769208"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="nad11 CDS"
+     gene            complement(28133..29975)
+                     /gene="nad11"
+                     /locus_tag="AOB67_gp15"
+                     /db_xref="GeneID:25769208"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="nad11 gene"
+     tRNA            complement(30062..30146)
+                     /gene="trnL"
+                     /locus_tag="AOB67_gt19"
+                     /product="tRNA-Leu"
+                     /db_xref="GeneID:25769169"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnL tRNA"
+     gene            complement(30062..30146)
+                     /gene="trnL"
+                     /locus_tag="AOB67_gt19"
+                     /db_xref="GeneID:25769169"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnL gene"
+     tRNA            complement(30158..30241)
+                     /gene="trnL"
+                     /locus_tag="AOB67_gt20"
+                     /product="tRNA-Leu"
+                     /db_xref="GeneID:25769200"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnL tRNA"
+     gene            complement(30158..30241)
+                     /gene="trnL"
+                     /locus_tag="AOB67_gt20"
+                     /db_xref="GeneID:25769200"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnL gene"
+     CDS             30255..30846
+                     /gene="secY"
+                     /locus_tag="AOB67_gp14"
+                     /codon_start=1
+                     /transl_table=4
+                     /product="secY"
+                     /protein_id="YP_009164897.1"
+                     /db_xref="GeneID:25769201"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="secY CDS"
+     gene            30255..30846
+                     /gene="secY"
+                     /locus_tag="AOB67_gp14"
+                     /db_xref="GeneID:25769201"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="secY gene"
+     CDS             complement(30992..31222)
+                     /gene="orf76"
+                     /locus_tag="AOB67_gp13"
+                     /codon_start=1
+                     /transl_table=4
+                     /product="orf76"
+                     /protein_id="YP_009164898.1"
+                     /db_xref="GeneID:25769171"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="orf76 CDS"
+     gene            complement(30992..31222)
+                     /gene="orf76"
+                     /locus_tag="AOB67_gp13"
+                     /db_xref="GeneID:25769171"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="orf76 gene"
+     tRNA            31210..31280
+                     /gene="trnC"
+                     /locus_tag="AOB67_gt21"
+                     /product="tRNA-Cys"
+                     /db_xref="GeneID:25769170"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnC tRNA"
+     gene            31210..31280
+                     /gene="trnC"
+                     /locus_tag="AOB67_gt21"
+                     /db_xref="GeneID:25769170"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnC gene"
+     tRNA            complement(31286..31370)
+                     /gene="trnS"
+                     /locus_tag="AOB67_gt22"
+                     /product="tRNA-Ser"
+                     /db_xref="GeneID:25769202"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnS tRNA"
+     gene            complement(31286..31370)
+                     /gene="trnS"
+                     /locus_tag="AOB67_gt22"
+                     /db_xref="GeneID:25769202"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnS gene"
+     CDS             complement(31578..31800)
+                     /gene="rps11"
+                     /locus_tag="AOB67_gp12"
+                     /codon_start=1
+                     /transl_table=4
+                     /product="rps11"
+                     /protein_id="YP_009164899.1"
+                     /db_xref="GeneID:25769203"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="rps11 CDS"
+     gene            complement(31578..31800)
+                     /gene="rps11"
+                     /locus_tag="AOB67_gp12"
+                     /db_xref="GeneID:25769203"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="rps11 gene"
+     CDS             complement(31746..32226)
+                     /gene="rps13"
+                     /locus_tag="AOB67_gp11"
+                     /codon_start=1
+                     /transl_table=4
+                     /product="rps13"
+                     /protein_id="YP_009164900.1"
+                     /db_xref="GeneID:25769172"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="rps13 CDS"
+     gene            complement(31746..32226)
+                     /gene="rps13"
+                     /locus_tag="AOB67_gp11"
+                     /db_xref="GeneID:25769172"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="rps13 gene"
+     CDS             32255..33061
+                     /gene="rpl2"
+                     /locus_tag="AOB67_gp10"
+                     /codon_start=1
+                     /transl_table=4
+                     /product="rpl2"
+                     /protein_id="YP_009164901.1"
+                     /db_xref="GeneID:25769173"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="rpl2 CDS"
+     gene            32255..33061
+                     /gene="rpl2"
+                     /locus_tag="AOB67_gp10"
+                     /db_xref="GeneID:25769173"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="rpl2 gene"
+     CDS             33305..34120
+                     /gene="rps3"
+                     /locus_tag="AOB67_gp09"
+                     /codon_start=1
+                     /transl_table=4
+                     /product="rps3"
+                     /protein_id="YP_009164902.1"
+                     /db_xref="GeneID:25769174"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="rps3 CDS"
+     gene            33305..34120
+                     /gene="rps3"
+                     /locus_tag="AOB67_gp09"
+                     /db_xref="GeneID:25769174"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="rps3 gene"
+     CDS             34107..34511
+                     /gene="rpl16"
+                     /locus_tag="AOB67_gp08"
+                     /codon_start=1
+                     /transl_table=4
+                     /product="rpl16"
+                     /protein_id="YP_009164903.1"
+                     /db_xref="GeneID:25769175"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="rpl16 CDS"
+     gene            34107..34511
+                     /gene="rpl16"
+                     /locus_tag="AOB67_gp08"
+                     /db_xref="GeneID:25769175"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="rpl16 gene"
+     tRNA            34513..34588
+                     /gene="trnM"
+                     /locus_tag="AOB67_gt23"
+                     /product="tRNA-Met"
+                     /db_xref="GeneID:25769212"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnM tRNA"
+     gene            34513..34588
+                     /gene="trnM"
+                     /locus_tag="AOB67_gt23"
+                     /db_xref="GeneID:25769212"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnM gene"
+     CDS             34599..35255
+                     /gene="orf215"
+                     /locus_tag="AOB67_gp07"
+                     /codon_start=1
+                     /transl_table=4
+                     /product="orf215"
+                     /protein_id="YP_009164904.1"
+                     /db_xref="GeneID:25769204"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="orf215 CDS"
+     gene            34599..35255
+                     /gene="orf215"
+                     /locus_tag="AOB67_gp07"
+                     /db_xref="GeneID:25769204"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="orf215 gene"
+     CDS             35315..35707
+                     /gene="atp8"
+                     /locus_tag="AOB67_gp06"
+                     /codon_start=1
+                     /transl_table=4
+                     /product="atp8"
+                     /protein_id="YP_009164905.1"
+                     /db_xref="GeneID:25769176"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="atp8 CDS"
+     gene            35315..35707
+                     /gene="atp8"
+                     /locus_tag="AOB67_gp06"
+                     /db_xref="GeneID:25769176"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="atp8 gene"
+     tRNA            35718..35792
+                     /gene="trnK"
+                     /locus_tag="AOB67_gt24"
+                     /product="tRNA-Lys"
+                     /db_xref="GeneID:25769213"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnK tRNA"
+     gene            35718..35792
+                     /gene="trnK"
+                     /locus_tag="AOB67_gt24"
+                     /db_xref="GeneID:25769213"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnK gene"
+     tRNA            35794..35867
+                     /gene="trnA"
+                     /locus_tag="AOB67_gt25"
+                     /product="tRNA-Ala"
+                     /db_xref="GeneID:25769205"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnA"
+     gene            35794..35867
+                     /gene="trnA"
+                     /locus_tag="AOB67_gt25"
+                     /db_xref="GeneID:25769205"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="trnA gene"
+     CDS             35892..36191
+                     /gene="rps14"
+                     /locus_tag="AOB67_gp05"
+                     /codon_start=1
+                     /transl_table=4
+                     /product="rps14"
+                     /protein_id="YP_009164906.1"
+                     /db_xref="GeneID:25769207"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="rps14 CDS"
+     gene            35892..36191
+                     /gene="rps14"
+                     /locus_tag="AOB67_gp05"
+                     /db_xref="GeneID:25769207"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="rps14 gene"
+     CDS             36198..36519
+                     /gene="rps8"
+                     /locus_tag="AOB67_gp04"
+                     /codon_start=1
+                     /transl_table=4
+                     /product="rps8"
+                     /protein_id="YP_009164907.1"
+                     /db_xref="GeneID:25769177"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="rps8 CDS"
+     gene            36198..36519
+                     /gene="rps8"
+                     /locus_tag="AOB67_gp04"
+                     /db_xref="GeneID:25769177"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="rps8 gene"
+     CDS             36622..37188
+                     /gene="rpl6"
+                     /locus_tag="AOB67_gp03"
+                     /codon_start=1
+                     /transl_table=4
+                     /product="rpl6"
+                     /protein_id="YP_009164908.1"
+                     /db_xref="GeneID:25769178"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="rpl6 CDS"
+     gene            36622..37188
+                     /gene="rpl6"
+                     /locus_tag="AOB67_gp03"
+                     /db_xref="GeneID:25769178"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="rpl6 gene"
+     CDS             37195..37785
+                     /gene="rps2"
+                     /locus_tag="AOB67_gp02"
+                     /codon_start=1
+                     /transl_table=4
+                     /product="rps2"
+                     /protein_id="YP_009164909.1"
+                     /db_xref="GeneID:25769179"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="rps2 CDS"
+     gene            37195..37785
+                     /gene="rps2"
+                     /locus_tag="AOB67_gp02"
+                     /db_xref="GeneID:25769179"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="rps2 gene"
+     source          37786..37806
+                     /organism="Pseudoperonospora cubensis"
+                     /organelle="mitochondrion"
+                     /mol_type="genomic DNA"
+                     /db_xref="taxon:143453"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+     CDS             37794..38255
+                     /gene="rps4"
+                     /locus_tag="AOB67_gp01"
+                     /codon_start=1
+                     /transl_table=4
+                     /product="rps4"
+                     /protein_id="YP_009164871.1"
+                     /db_xref="GeneID:25769206"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="rps4 CDS"
+     gene            37794..38255
+                     /gene="rps4"
+                     /locus_tag="AOB67_gp01"
+                     /db_xref="GeneID:25769206"
+                     /note="Derived using Geneious Prime 2024.0.5 'Annotate from
+                     Database' based on nucleotide similarity"
+                     /standard_name="rps4 gene"
+ORIGIN
+        1 agtataaaca ttaataatta cagcattaag tgaatgcctt ggcattaatt ttatttttag
+       61 gacgtaaaaa atgcgaaaag ctatattaaa tgatatttta ttttgcaata tagatttcct
+      121 aaagaaaact ttttttttgt gaaaatttaa aaaccagtga attgaaatat cttagtaact
+      181 gtttaaaaaa atcaaacgag attccgttag taatgacgaa tgaaaatgga aattaggttt
+      241 ataaaactgt aaaataatta tttgaaaaat tttgaaaaat ttacttaaaa aggtgaaagt
+      301 cctgtaaaat aattattatt tttataatag taaaaagaga tatgtgtaat cttttttgaa
+      361 tattggggaa ccaccctcaa aaccttttaa aaattaatga tcgatagtga acaagtactg
+      421 taaaggaaag gtgaaaaaga actttcgagt ttgaaataat tctgaaactt aatgttaata
+      481 atcaattgga acttaaaaag tgacagtgta ccttttgcat aatgggccag caagtttatt
+      541 tttatagcaa gcttaatttt ttaaagtagg cgtagataaa tcaagtttta aaaagcttta
+      601 gttatataaa taagacccga aactgagtga tctaaccatg aacagattga aaaataggta
+      661 aaactatttg gaggatcgaa ctcacatatg tggcaaaata tggagatgat ttgtggttag
+      721 gagtgaaagg ctaatcaaac tcagagatag ctggttttcc gcgaaatcta ttgaagtaga
+      781 gcatttaaaa tctttttttg gggtagagca ctcattgagc tagggggtgt aaaaacttac
+      841 taaattcttg gaaactccga atacaaaaaa acgtaattta aatagacaga cattaggcgc
+      901 taaggtcttt tgtcaagagg gaaacagccc agattgatcg ctaaggtctc taaataatat
+      961 tctaagtgaa aaaggaagtg aaaaaataat tacaatcaac aggtaggctt ggaagcagcc
+     1021 atcctttaaa gaaagcgtaa tagctcattg gtctagtttt tttgcgccta aaatgtatcg
+     1081 agacttaaga aatttaccga agcggcaagt tttatttttg ataaaataaa acggtagcgg
+     1141 aacattctgt atgttgataa agatatattg tgaaatatat tgaaaatatc agaaaagaaa
+     1201 atgctggcat tagtaacaaa aaataatgat ttagaatcat tatcaccgta aattcaaggg
+     1261 tttctatgtt aaaatgtatt acatagagtg aagcggcccc taagaaagat ttgacgaaag
+     1321 caaattttga tgggataatt tttaaattaa atttttttaa aaaagtgaca aaaattttaa
+     1381 atttttcagg aaataacttt tttaactaaa aaccgtaccc taaaccgaca caggtgaata
+     1441 ggtcgagtag actaaggtgg atgagagaat tatattgaag gaactcggca aaatgacttt
+     1501 gtaacttcgg gataaaaagt acctaatttt tttaaaatta ggtgtcacaa aatagggggt
+     1561 tgcgactgtt taataaaaac ttaggactct gctaaatggt aacatgatgt atagggtctg
+     1621 acacctgccc ggtgctggaa gattaaaagg aaatgtttac gcattaaata gaagtcccag
+     1681 taaacggcgg ccgtaactct gacggtccta aggtagcgaa attccttgtc gggtaagttc
+     1741 cgacctgcat gaatggtgta acgacatccc cgctgtctcc aatataaact cagtgaattt
+     1801 gaattatccg tgaagatgcg gattttctat agttagacgg aaagaccccg tgaaccttta
+     1861 ctacatcttt atattgttat tttatctaat atgtgtagca taagtggtaa tcattgagac
+     1921 ttttacgcta gtaaattgtt tagatatact tgaaatacca ctcttattaa cataaataac
+     1981 taatattttt gaaaaataga cagtgtatgg ttggtagttt gactggggcg gtcacctcct
+     2041 aaagagtaac ggaggtgcac aaaggtaagc tcaaattgga cattaaaatc aattgtagag
+     2101 tgtaatggta aaagcttgct tgactgtaag atagacatat caaacaggga cgaaagtcgg
+     2161 tcatagtgat ccgataattc tttgtggaaa gattatcgct caacggataa aaggtactcc
+     2221 ggggataaca ggctgatgac tcctaagagc tcctatcgac ggagtcgttt ggcacctcga
+     2281 tgtcgactca tcacatcctg gagctgaaga aggttccaag ggttcggctg ttcgccgatt
+     2341 aaagtggtac gtgagttggg tttagaacgt cgtgagacag tttggttcct atcttctata
+     2401 gatattttga aaaatgaaag attctaactc tagtacgaga ggaccgagaa gggtaaatct
+     2461 ctggtgtatc ggttgttgaa aagcatcgcc gagtagctaa atttattttg gataattact
+     2521 gaaagcatct aagtaagaaa ccattcttaa aattttttca tataaaaact gtaaaagact
+     2581 attacattga taggttttaa gtgtaagtat tgtaaaatat ttagcttaaa aatactaaac
+     2641 gtttaaaaat aaaaatataa ttatttcttt gtagctcaat ggtagagcaa atggctgtta
+     2701 accattaggt tgtaggttca aatcctatca aagaagtttt tatatttagg tcgaatagcc
+     2761 aagtcaggtt taaggcagta gtttgctaaa ctatcagtta attttttaac tcgtgggttc
+     2821 aaatcccact tcgacttatt tattaataaa gccttataaa ataagatgat gtagtttaat
+     2881 ggtagagcgt gggaatcata atcctaatgt tgtaggttca aatcctacca tcattattct
+     2941 gtttaaattg tttttaaaat aattttcaat cggaaggtag catagtctgg ctaatgcatc
+     3001 tgttttggga acagaagatc aaaggttcga atccttttct tccgaaaata gacaataaga
+     3061 tgagatagag taataggtta acttatcagg ctcataatct gaagatgtag gttcaaatcc
+     3121 tactctcatc attttattct aaaataaaaa ataaaaattt atgattcaaa ttcaaacaaa
+     3181 aataaaaata aatgataata gtggtataaa aataggacaa tgtattaaaa tttataaaaa
+     3241 gaaagttgga aaaattggag atacaatttt aatttctgca aaaaaattac gtttaaataa
+     3301 aaaaaaaaaa ataaaaatag ttaaaggtga tttatttaaa gcattaattg ttcatacaaa
+     3361 atatcaaaaa ataagtacaa ttggtaatat aattaaattt gataaaaatt gtgtaattat
+     3421 tttaaataat caaaataaac ctttaggaac acgtatattt ggtccaatca cttctgaatt
+     3481 tagaaaacaa aaaaatttta agatattatc tttagcgtca aatattttat aaaattatat
+     3541 gaaacaaaat ttacaaaatc attatcaaaa tattattatg caggatcttt taactaaatt
+     3601 aaattttaaa aatatatttg aaattcctaa aataactaaa atttgtttaa atttaggttt
+     3661 taaaaatgca aatattgaaa aaaaaaaatt aattaacata atcttacttt tgaaattaat
+     3721 aacaaatcaa aaaccaaaaa taactaaatc aaaaaaaaat aatatttttt taaaaataaa
+     3781 aaaaaattcg ataattggtt gcaaattaac attacgaaaa aaaaatattt ttattttttt
+     3841 agaaaaactt ctaatattta ttttaccaaa tataaatcaa ataaaattta atttaaaaaa
+     3901 taaaaatatt ttaaatttac agattaaaaa tattttatct ttttttgaat tgaaaactga
+     3961 atttttaaga tttcaaaata taccttcaat agatatatct attcatacaa atgcaaaaaa
+     4021 taataatgaa ttatttttat tattaaattc attttttatt atcaaaaata aataattatt
+     4081 agcaaaaata gctcaatggt agagtataac cttgccaagg ttaatgttga gggttcgaat
+     4141 cccttttttt gcttttatgg acccaaaggc agtatttggt atttccattt tcaattttta
+     4201 tgggaataat aacagaattg acatttgtga ttatagatta attggtaaat cttttatctt
+     4261 ccaagtaaat gttgtgggtt caagtcccac taatcacatt ttaattaatg gagaaatggc
+     4321 tgagtggtta aaagcggcag actgtaaatt tgttgaatta atttctacgt aggttcaaat
+     4381 cctactttct ccaataatat tttagtatag acataatttt ataaatatta taaatctaaa
+     4441 tttaaattcc cttagattaa aaagtatttt aaataaaatt ttatttttat aacttgaatt
+     4501 taattaattt cagattttat aaaatttttt tgatttataa tatttatatt ttcgaatttt
+     4561 ttaaaacagg aaaaatggga cttgaaccca taacaataat tttggagact atgattttac
+     4621 caattaaact attttcctaa aatttttaaa ttaatttaag aatgttttaa agatctcttc
+     4681 cagacacagg ttcccctacg actaccttgt tacgacttca tcaaagttac taattacttt
+     4741 ttagggattt taacgtattt aataaaattt ataaattatt ttattaatca aataattatt
+     4801 taaaaatatt aaataattaa aaatcatttt aaaaataact aacttccttg atgtgacggg
+     4861 cggtgtgtac aaagtccagt aacatattca ccgcaacatg ctgttttgcg attactagcg
+     4921 attccaactt cataagggcg agtttcagcc cttaattcga actgagataa tttttaaaga
+     4981 tttgctccaa ctttgaatca ttattgcctc tcattgtaat tatcattgta gcacgtgtgt
+     5041 agcccaactc ataagggcca tgaagacttg acgtcatccc caccttccat taacctatca
+     5101 ttaatttttt cattagagtg cttttatttt ttaaataaag tggcaactaa tgataagggt
+     5161 tgcgctcgtt aaaggattta accaaacatt tcacaacacg agctgacgac agccatgcaa
+     5221 cgcctgtttt ttataaaatt ttttttataa aaattagcaa gagttggtaa ggttctgcgc
+     5281 gtattatcga attaaaccac atgctccacc gcttgtgtag actcccgtca attcctttga
+     5341 atttcaatct tgcgattata cttttcaggc ggagtgctta acgcgttagc tgttatatct
+     5401 aaaaattcta aatattagca ctcatcgttt acagcatgga ctaccggggt ctctaatccc
+     5461 gttcgctacc caagctttcg tttctcagtg tcagtatata cccagataat tgccttcgcc
+     5521 tttggtcttc cttctattat caacgtattt tatcactcca atagaaattc cattatcctc
+     5581 tatttatact caagtttatc agttttgaaa aaatgtataa agttgagctt taatttgttt
+     5641 ttttcaactt aataaaccac ctacaaactc tttacgccta atcattccga ataatgctcg
+     5701 ctcctcccgt attaccgcgg ctgctggcac gggtattagc cggaacttct tttttaagta
+     5761 ctgtcatttt cctccttaat gaaagagctt tacaacctaa ttagccttca tcactcactc
+     5821 ggtattgctg gatcaagctt tcgctcattg tccaaaattc cccactgctg cctttaaaaa
+     5881 agtttgggcc gtgtctcagt cccaatgtgg ctgatcattc tttcaaacca gctaaagata
+     5941 ataggcttgg tagtctttta aacgaccaac taccctaatc ttgcgcaaac tcatctttta
+     6001 acgttaaaaa actttaattg atttattcag tatttttata tataattatt ctgaattaaa
+     6061 aggtagataa ttcacgtgtt actcacccgt tcgctatgtt ttataaaaac attcaacttg
+     6121 catgtgttaa gcataccgat agcatttatt ctgagccagg atcaaactct atttatattc
+     6181 tatattaatt aattaataat aatttttaaa ataacaaaaa ttttaaaatt tatataacat
+     6241 aacattctta tattgatttt aattttatct taaaggatcg aattttttca tttttttgaa
+     6301 tatataaact taaaatgata aatttagtat tgattgaagt aatttctaaa aaaactgttt
+     6361 tatcttataa attaaaatta ttttaaattt ttttgtttta ttttgttata ttattttttt
+     6421 gtgattttgt ccataggtat ttaatcgtct ttaaaatcgc cccaaacaag accaccattt
+     6481 ttatgtcgca atattgttga aagaggacga tttaaggatt gattttcatt aattcctttt
+     6541 tgtaatagaa aatttttaat ttccaataat aatttaattt cttctttaga taaattaaca
+     6601 gaattttcat ttaatttctg taaagctgat aaaacaccat tttgatctat tttatgtaaa
+     6661 tcctttgata attcacctaa cgatttaatt gattctaata ttgaattatt aaaaaaatct
+     6721 gtgttatata accaaaaacc acctcctatg aagcttaaaa agattaaaaa atatattaaa
+     6781 ttttttaatg ttaaataatc agataaattt aattgttgat tttcaacttc taaattttct
+     6841 aagttttcca atgattgaag tattttttct tgatttaata ataatgattc ataatcattt
+     6901 tcaagaccga taaactctct tatcgttaat tttatatatt ttatcataat tttttaataa
+     6961 tttgctcagt ttttaaaact gtattttctg gataacataa aaaatttttt tataaaacga
+     7021 ttttatccca ttacaaataa aaatttttat taaattaaat taaaaaataa aacatagata
+     7081 ataactattc atcaaagaat aagttattat ctattttttg ttttttagct atctgaatat
+     7141 caaaatcaaa cttttgattc tcttttaact cttcttcaaa agaactccgt cttcgtttta
+     7201 acaagttttg ttcttctttt aattctgaaa ttactcctga aaaatctact ttattccaaa
+     7261 aatgacgtgt atccatatct agttgtaatt tatggatttt gtcatttaaa actccaatct
+     7321 tttcatctgt aagacttata tcctttttac tttctgcgat tttttttgta aataaatttt
+     7381 ttctccattt aataaaatct gctttatctt tttctttttg atattcaaat tgagtttgtt
+     7441 gaagtttata ttgcttattc tgtgttgtta cgctataata attcaagtat cctgtaaaca
+     7501 aactacccgc agttgcactt gtcatcaccg ttataccatg tttttttatt atatttttaa
+     7561 gttcattaaa atgaatatat cttttttgaa tataaaataa agattgattt ttcttaaatt
+     7621 gttgattatt tatttttaat aaaattttta tagaattata atctaaatct tctctatttt
+     7681 gttccatatt tttaggagta aatatcaatt ttttttcgat taaattaaat atattaaata
+     7741 ttaataataa aaaaaaaaag aaaattgaga tattataaga ataatttaat atataaaaga
+     7801 aaatatttaa accccaacta gaaagtacaa atcctgttaa aaaaataagt aatttttgat
+     7861 atttttcatg ttcgacataa ttaaaatact caaaaacaat gccatataaa ttatttttaa
+     7921 ttattaaaaa agaatataaa aaccaattga atatatatgt attttttatt tttattgtta
+     7981 ataaagacca ttgactaata aacataattg atatgaaaat aatggttggg tataaataaa
+     8041 tagaagaaat ttgaaataat atttgattta atttgaatat tattaaattt aaaaaagtta
+     8101 tacatagtat ataatctaca tataatatat taaagttatt taattttgtt gaaaagtttt
+     8161 gtattttttt ttttatgttt tgtaacatat ttttattttt gtataatgtt taacattttt
+     8221 tatttaagta aaatatctta aacaataaac tattttaaat aatataatat atattatatt
+     8281 ttattttctt cttaaaggct taaaaaaaat aaaaattaat ttttttaaag cctttaagaa
+     8341 gaaaataaaa tataattaat tttataattt atttttaaat aaattaattt tatatatatt
+     8401 aaaaaataat ataataaatt ttaacaaata ttatgataat caaaaattat ataaataaac
+     8461 aatttacttt tttagatatg gcagaacctt ggcaattagg ttttcaagat cctgcaactc
+     8521 ccgttatgga aggtattatt aactttcatc atgatttaat ttttttttta attgtagtta
+     8581 cagtattcgt ttgttggatg ttatttagag ttattactct ttttgatgaa aaaaaaaata
+     8641 aaattccagc tactgttgta catggtgcta ctattgaaat tatttggact tcaattccag
+     8701 ctttaatttt attaattgta gcaattcctt cgtttgcatt attatattct atggatgaag
+     8761 taattgatcc tattattaca ttaaaagtta ttggaagtca atggtattgg agttatgaat
+     8821 attctgataa tttagaattt tccgatgaac ctttagtttt tgatagttat atggtacaag
+     8881 aagatgattt agcgataggt caatttagaa ttttagaagt agataatcgt gtagtagttc
+     8941 caactaatag tcatattcga gtattaatta cagcttctga tgttttacat tcatgggcta
+     9001 ttccttcatt gggtataaaa ttagatgcat gccctggacg tttaaatcaa acatcaatgt
+     9061 ttataaaaag agaaggtgtt ttttatggtc aatgtagtga aatttgtgga gtaaatcacg
+     9121 gatttatgcc aattgttgtt gaagcagttt cattagaaga ttatttaatt tggttaaaga
+     9181 ataaaatcaa ttttgatttt aatatttaat aaaaaatttt atgctattta aaattataag
+     9241 tatatttttt ttaatattat tattatttac tgatattaaa caattattaa ataaaattca
+     9301 acaatttttt aataaataaa acttaattaa aaaaaccaac gcttttttta attaaaatct
+     9361 caaaaataat tttgcattta attaaaataa attttttaca tattcaaaaa atgaattttc
+     9421 aaaatattaa aaattggtca acaagatggc ttttttcaac aaatcataaa gatattggta
+     9481 ctttatattt aatttttagt gcttttgcag gtattgtggg aacaacactt tctattttaa
+     9541 ttagaataga attagcacaa ccaggtaatc aaatttttat gggaaatcat caattatata
+     9601 atgttgttgt tactgcacac gcttttgtaa tggttttctt tttagttatg cctgctttaa
+     9661 ttggtggatt tggtaactgg tttgttccat taatgattgg agctcctgat atggcatttc
+     9721 cacgaatgaa taatataagt ttttggttat tacctccagc tttattatta ttaatttctt
+     9781 cagctattgt tgaatcagga gcgggtacag gttggactgt gtacccccct ttatcaagtg
+     9841 tacaagcaca ttctgggcct tcagtagatt tagctatttt tagtttacat ttaacaggta
+     9901 tttcttcttt attaggtgcg ataaatttta tatcaactat ttataatatg cgtgctccag
+     9961 gtttaagttt tcatagatta cctttatttg tttggtcaat tttaattaca gcttttcttt
+    10021 tattattaac tttacctgta ttagccgggg ctattaccat gttattaaca gatcgaaatt
+    10081 taaatacttc attttatgat ccatctggtg gaggtgatcc tgtattatat caacatttat
+    10141 tttggttttt tggacatcct gaagtttatg ttttaatttt accagctttt ggtattataa
+    10201 gtcaagtttc tgcttatttt gctaaaaaaa atgtatttgg ttatttagga atggtttatg
+    10261 caatgttatc cataggttta ttaggttcaa ttgtttgggc acatcatatg tttactgtgg
+    10321 gtttagacgt ggatactcgt gcttattttt cagcggctac aatgattata gctgttccta
+    10381 cagggattaa aatttttagt tggttagcaa ctttatgggg aggttcatta aaatttgaaa
+    10441 cacctttgtt atttacttta ggttttattt tattatttgt tatgggtgga gtaactggtg
+    10501 ttgttatgtc taattcaggt ttagatattg ctttacatga tacatattat attgtaggac
+    10561 attttcatta tgtattatcg atgggagcaa tttttggaat ttttactggt ttttattttt
+    10621 ggattggaaa aatttcgggc cgcagatatc ctgaagtttt aggtcaaata catttttggt
+    10681 tattttttat tggtgtaaat attacctttt ttcctatgca ttttttaggt ttagctggaa
+    10741 tgcctagacg aattcctgat tttcctgatg ctatgagtgg ttggaatgct gtgagtagtt
+    10801 ttggttctta tatatcattt ttttctgctt tatttttttt ttatattgta tatacaactt
+    10861 taatacatgg aaaaaaaatt gataattaaa tataaattaa ttatatagaa gtagagtagt
+    10921 attattctat ttcaatataa ttttaaaagt ataagtataa tttttattaa taaaataaat
+    10981 taattaatat aattaattta ttttattaat tgtttttata acgaactaaa taagtttcaa
+    11041 ttttacctaa aaatggtata attattataa aaaatgcaaa ataataaatc atacttataa
+    11101 cacctatttc agtatacgga tattcaactg gacattgacc aacccaacct aataataaaa
+    11161 atgatacaac taataaccaa taacatactt taaatattgg tctaaaagct gtacttctaa
+    11221 tttcagatga attcgtaaaa gggattgtta atagaataat taaagaacca aacatagcga
+    11281 taacaccacc aattttattt ggtattgatc gtaaaattgc ataaaaaggt aaaaaatacc
+    11341 attctggaac aatatgtaaa ggcgttttca ttggatttgc ttcaatataa ttatctggat
+    11401 gacctaaagc atttggataa taaaaaataa aaataaaaaa aactaaaaat aatatcatta
+    11461 atccaaataa atcttttgta taaaaatatg gataaaaagg tatattttct gtttttaatg
+    11521 taatacctaa tggattattt gaaccaactt catgtaataa aattaaatgt attaatacaa
+    11581 cacctacgat taaaaaagga aaagtaaaat gtaaactaaa aaatcgattt aatgttggat
+    11641 tatctacagc aaaaccgccc cacaaccaat caacaatatc ttttcctatt aatggtatcg
+    11701 cagaaaataa attagtaata acagttgcag cccaaaaact catttgtccc caaggtaaaa
+    11761 cataacccat aaaagctgtt gccatcatta aaataaaaat aataacacct gaacaccata
+    11821 aagcttctct tggtgtaata taagaaccat aatataaacc tctaaaaata tgtacatata
+    11881 ccacaataaa aaaaaaagaa gcaccattcg catgagtata tctaattaac caaccattat
+    11941 ttacatctct cataatatgt tcaacactat taaaagctaa atcaatatgt ggagtataat
+    12001 gcattgctaa aaaaatacca gttaaaattt gtattactaa cataataccg gctaacgaac
+    12061 caaatccata aaaataattt aaattaatag gtgttggata atctattaaa tgattattta
+    12121 aaactgcaaa taaggatttt ttattccatc tcataatatg aaatgaaaat ttacctaaaa
+    12181 acaaaaataa ttaaaaaata ttactaattt atttttttat cccaaggatt attaaattca
+    12241 aataatctat attgttgtga taaattaata ggttcgtaaa ctactctttt ttttgattca
+    12301 ttataaaaaa cttctaaaaa accacttaat ggaaaatctt tccgtaaagg atgcccttca
+    12361 aaaccataat cagttaaaat tcttcttaaa tctggatgat ttaaaaaaaa aattccaaac
+    12421 atatcccaaa cttctcgttc acaccaatta gcagctttat aaattttaat aatagattct
+    12481 acaggtttta attcatcaat ttgaatttta acttttaaac gactattaaa acgaatactt
+    12541 agtaaattat aaagaatttc aaaacgtttt tctttagata tataatctac tgcacaaatt
+    12601 tctgataata ttttaaattg actatttgta tggtttttca aaaaaaataa aattggaatt
+    12661 agtttatttg tagaaatatt aatacataat tcgtttttat atattgtata atttattata
+    12721 ggtaaaattt gtaataaata ttgactaaat ttttttaata ctttcataaa gaataattat
+    12781 aaatatttat ataaaaataa ataatttata tactattaaa aatatttatc tttataaata
+    12841 tttttagtag tatataataa atattaattt attatatatt acaggattta attttaatta
+    12901 aaaagcaaat aaaattaaaa aagccatcat taaacaaaat aaagcaattg cttcagttaa
+    12961 tgcgaaacct aagattgcag ttctcattaa ttcttgttgt aaagatggat ttcttgaaat
+    13021 accaataatt aaagaaccga aaacattacc aatacctata ccagcaccga ttaatcctaa
+    13081 agtagctaat cctgcaccta aaaatttaga agcttgtaat aacataaata tattatgaat
+    13141 ttttttatta tttatttaaa atatcttaaa gaatagattt tttttaatat ttaattatca
+    13201 acttttttgt ataaatatta ttttatataa aatttaaaaa ttatttttaa attgtgttta
+    13261 taaaaactat ttttaaaaaa aaataggatt aatttatttt aataaattaa ttattaaaga
+    13321 cttaaaaaca ataagtttta ttttattcta ttttttgtaa tattaatatt accattctaa
+    13381 agcatcactg caccaaatat aaataaaacc tataactaat tcaactaaaa attcaatcat
+    13441 ggtccaaaat ccccatgaaa agtttgaact taaagttaaa acccaaggaa aaacaaaaac
+    13501 agcttctaaa tcaaaaataa tgaaaagaat agctactaaa taaaatttta catcaaaaac
+    13561 ttttctagca tcatcataag gattaaatcc acattcataa gctgttaact tttctaaatc
+    13621 atctttttgt ttaattaaac taaaagataa tgtgaaaatt aaaattgata aaaataaact
+    13681 taatattaaa aaaataaaaa tattggaata atttaataac atatttataa aactttttaa
+    13741 aatataataa acggaaaaaa cgggacttga acccgcgacc tatagcgtga caagctatca
+    13801 ctctaaccaa ctgagttact tttcctttat attatactat taatgcagat ttaaagcatc
+    13861 atttatatac atacaagtta aaattgtaaa gacatatgct tgtattaaag ctacggcaat
+    13921 ttctaatcca acaagtaata caataataat taaaggtata aaatgcgcaa taaaaataaa
+    13981 actgtttaca tttaacatag tccaagcaaa acctgcaata acttttaata atgtatgacc
+    14041 cgccatcata tttgcaaata atcggactgg taaactaatt actcgaaaaa tatatgaaac
+    14101 taattcaata ggaactaaga taggaactag tgctatactt gcaccacttg gtaataataa
+    14161 atttaaaaaa tttagtttat gtttttttat tccaattaaa ttaaaaccta aataaatagt
+    14221 caatgctaaa gtaaaagtaa tgattaaatg gctagtaact gtaaagctat aaggaaccat
+    14281 tccaattaaa ttacataata aaataaaaaa aaaaactaca aaaattaaag aaataaaata
+    14341 tttaccagct tttccgatac ttgaataagt taattcaaca gtaacgttaa aaatcatttc
+    14401 aaacaattgt tgaaaacgtg ttggaataaa ttttgttttt atacaagtaa aaatatataa
+    14461 ataaacaaaa cctattaata aaattaaaga agcgttggta aatacaaaag atatttgaaa
+    14521 aataggtaaa atttcaaatt gttctaacgg actaaacata aaatttatta attaccaccc
+    14581 caccaataaa cagttacaaa taaaaataac caaacaacat caacaaaatg ccaataccat
+    14641 gctgcagctt caaatccaaa atggtgttgt tttgtaaaat ggtgattaat taatctaata
+    14701 gtacttacta ttatgaaaat agttcctaca ataacatgta taccatgaaa accagttagt
+    14761 aaaaaaaagg ttgtaccata aatactatca gatattgaaa aagaactttc aacatactca
+    14821 taagcttgta ttaatgtaaa aaaaaaagct aataaaacag taataattaa actgataata
+    14881 gcattttttc tatcaccgaa aacaattgaa tgatgtgccc atgtaattgt tgcccctgaa
+    14941 gataataata tgatagtatt taataatgga attccccagg cgtttactgt ttcaatacct
+    15001 aatggtggcc ataaagaacc tatttcaggt gttggggcta atgccgaatg gaaaaatgcc
+    15061 caaaaaaaac taataaaaaa taataattcg ctaaaaataa ataaaagcat accatttctt
+    15121 aaacctaatt gtacttgttt cgtatgttga ccttcatata ccgcttctct aacaatatca
+    15181 cgaaaccaag tgtacattgt taaaataacc ataataaatc cagttaaagt taaaagatta
+    15241 ctacctaaat aaccatgaaa atacatagca ctaccaaaag ttaaaaaaaa aagtccaaat
+    15301 gaaataacaa atggccatgg actaggatct actaaatgat atggatgttt ttgtgtattt
+    15361 tgaatatttt gtgtaatttt tttaaaaaaa attaaatcat ttttaatttt attaatagct
+    15421 gaattatcag ttgtagtttc aatttttaaa ttttttttat ttatataata ataatttttc
+    15481 ataataattg aatagtttgt aataattaat tatttaatga taaataattt tttttaaatt
+    15541 taattaatca aaaataatat taaattttaa ttttttaata tttttataat attgtttttt
+    15601 tgtattaatt gttttacttt tattttttga agtttgtata atttcatttg tgatattttt
+    15661 taaattcgaa tttaaaagta accaagctac agatttttta atttgttttt tttcatttaa
+    15721 aagcattaaa aaataacgat cttttttttt gcttttttta tttcgttttt tattaggaat
+    15781 acttattgct tttaatttag gtaataaatt atcaatagct ttaaataaaa taaaattagg
+    15841 tttttgtttt gttattgttt ttaaattaat taaaattttt ttaaatatat tttcagaaca
+    15901 ggttttttta ccttttttta ataacatatt tataaataat ttttttatat tagactcttc
+    15961 gtattttagt tccatattta gatcttgaag tttttcgaga ataaattcct agtaaatcat
+    16021 atttacctcg aattacatga tattttacac caggtaaatc ttttactcga cctccgcgta
+    16081 ttaatacaat tgaatgttct tgcaatgtat gaccaatacc tggtatatat gttattatag
+    16141 tatatccact agataaatgt acttttgcta ctttacgcat agcagaatta ggttttttag
+    16201 gtgttgtatt ataaactctt aaacaaattc cttttctttg tggacattgc tttaaagctg
+    16261 gacttttatt tctttttttt ttttctaaac gtttttgttt ttttaaaaat aattggttaa
+    16321 ttgttgacat attattttat attatttttg aataataacg gatttgaacc gctaacattt
+    16381 tcggtgtaaa cgaaatactc taccaattga gctaattatt ctttgggcct aagtagattt
+    16441 gaactactga ctttacactt atcaggcgta tactctaacc aactgagtta taggcccttt
+    16501 tgaagtaaaa ggattcgaac ctttgatttt ccgtaccaaa aacggaggcc ttaccacttg
+    16561 gctatacttc aaaatatatg cttagaaaga ctcgaacttt cattttatag atccgcaatc
+    16621 taaggcttta tccaattaag ctataagcat aattctattt attttttata attttaattt
+    16681 taattaagga attttcagag aaaaattttt tgataaaaat taaaaagttt aataactgaa
+    16741 aaatattttt aaattttata tctagtttag gtaaatagtg tttataaata aaatgctcac
+    16801 gtgatttttt atttacatga ggtgatttta ataaagtaaa tattttattt ttatttttcg
+    16861 tttgaaatat acctttaatg tgaatatttt tgaatttatt gaagtgttgt aaatttttaa
+    16921 aattttgttt aagttgattt attttttgaa atgatttgaa agtaattctt aaaagataca
+    16981 taaataatac aattgtctgg aggtggattt gaaccaccga cacaaagatt ttcagtcttt
+    17041 tactctaacc aactgagcta tccagacaaa atattatatt aataaatata aataaatttt
+    17101 atttaaattt actaatataa tatttggaaa aatgaataaa aataaaatga attgggtatt
+    17161 aataattaaa ataatacttt gtaatttatt tatttgtgaa atatataatt ttcttgatat
+    17221 tttttcaaaa taaataattt ttataatttt taaataataa aaagaactta caatacttac
+    17281 gaaaatacca aaaaaaacta aactaaaata attattttta atagctgaaa aaaatataaa
+    17341 taatttagaa aaaaaccctg ctaatggagg tatacctgcc aatgaaaaaa tatttaatat
+    17401 taaaatcacc gctattaatt tattaatatt atggatattt gctaaatctg ttaaatattt
+    17461 aattggttta tgatttatat ttaaagataa ataagaagtc cataaattta tacttgttat
+    17521 aatataaata atcatatata acaaaataaa aggtatatta tttaacatat ttgatgtaaa
+    17581 tcctattaaa ataaaaccaa catgacttat tgaactataa gctaataatc ttttaatttt
+    17641 tttctgttgt aatgctgata atgaaccaat taacattgat aaaaatgaaa taatataaaa
+    17701 aaatatttca aaaaaatacg aaatattgaa aaagatatca aaaaataaac gtattaaaat
+    17761 accaataaaa gctattttag gtacaattgc gaaaaaacta gtaatgttat taggagcacc
+    17821 ttcataaaca tcaggtaacc aaaaatgaaa aggtgctgca cctattttaa ataaaatacc
+    17881 aattaaaata aaaattaacc cataagataa acttattaat atattaatat tctctaaaaa
+    17941 attaatattg gataatatta aaaaaatatt attaaagttt aatgaacctg taattgcata
+    18001 aattatagaa gaaccaaata aaataaaact agaagcaatt gatcctaaaa taaaatattt
+    18061 caaaccagct tcaattgaca atatcgattt tttttgtgtt gaagttaata tataaaaact
+    18121 taaactttgt aattctatag ctaaatagaa tgtaataaaa tgatttgaag agattaataa
+    18181 cattaaacct aataatgata ttaacattaa tatattaatt tcataggagt ttattttttg
+    18241 ttgaattaaa tatttttgtt gaattgaaaa acaaacaatt gttgataata tcaaaattat
+    18301 cttaataaat tgtgtaaaat tgttaataat taatacacca tttaatacat tatttgaaat
+    18361 atttgttata tttaatgtta atattaaaag aattaataat aaatatatta ttatagtagt
+    18421 aatattttta ataatcaaaa ttttttcagt attttgattt tttctgtaaa aaactccaaa
+    18481 taataataaa attaataaaa tagttgttaa aaaaaattcg gggataataa tttcaaaatt
+    18541 attattaaaa atttcttgaa aaatcataat gtaaagtaat aaatatttta aaaataattg
+    18601 cttactatat atgctatata tttataaaaa aattaattta taaatattta ttttaattaa
+    18661 aaaagtactt aaaacatgcc gttaaaaaaa ataaaaaatt tttctataaa ctttggtccg
+    18721 caacatccgg cagctcacgg tgttttacga ttaattttag aattgaatgg agaagttgtt
+    18781 caaaaagcag attctcatat aggattatta cataggggaa ccgaaaaatt aatagaatat
+    18841 aaaaattatt tgcaagcttt accttatttt gatagattag attacgtttc aatgatgtgt
+    18901 caagaacacg cttatgtttt agctgttgaa aaattgttaa attgtaatgt tcctttaaga
+    18961 gctcaatata tacgagtttt attctcagaa ataactcgta tattaaatca tttattggct
+    19021 atttgttgtc atgctttaga tgttggagct atgacaccat atttttgggg atttgaagaa
+    19081 cgggaaaaat tgatggaatt ttatgaaaga gtttctggtg cccgtatgca tgctgcttat
+    19141 tttagacctg gaggtgttaa tcaagattta ccaaaaggtt tattaaatga tatttttatt
+    19201 ttttgtgaac aatttaatac aagattggat gaaattgaag aaatgttaac aaataataga
+    19261 atttggaaac aaagattagt tgatataggt gtagttactg cagatgatgc cttaaactac
+    19321 ggttttagtg gtgtaatgtt acgaggctca ggtatttcat gggatttacg taagacacaa
+    19381 ccttatgaaa tttatgataa attagatttt gatattccgg ttggaaccaa tggtgattgt
+    19441 tatgatcgtt atttaattcg aattgaagaa atgagacaat ctattaaaat tattttacaa
+    19501 gtattaaata aaatacctac agggccaata aaattagacg acaaaaaaat tacaaatcct
+    19561 gatcgaatac aaatgaaaaa ttcaatggaa tctttaattc atcattttaa atattattca
+    19621 gaaaatatta gcgttagtag tggtgaaacc tatactgtta ttgaagctcc taaaggtgaa
+    19681 tatggtgttt atttaatttc agatggaacc aataaacctt atagatgtaa aataaaatca
+    19741 cccggatttc tacatttaca agctttagat tttattgcta aaaatcatat gattgctgat
+    19801 gttgttacta ttataggtac tttagatgtt gtttttggtg aaattgatcg ttaattaatt
+    19861 ataaatttaa ttaattaata atatttttta ctcaaaacta actaaaaata agaaaaatta
+    19921 tttacaaatc ttttacaata aataaactac aatatgttca aaaaaaaatt ttttaaaaaa
+    19981 tttaaattaa ataaattaca aaaaattaaa caaatttata aatatattta tttttttcgt
+    20041 tataatgacg taaatatgaa tgaaatcata tatttaaaaa aaaagcttaa aaaattaaat
+    20101 tataaatcat taatattaaa tcaaaatata actattcaaa tttttacaaa attaagtgga
+    20161 caaggttcta ttttaataat ttatggaaat aatgatttaa atttaataaa aaatttaaat
+    20221 aattttaaaa aatttaaatt aatttattta attaatcaaa ataatattta ttcttcttat
+    20281 aaactaaaga aaatattata tcaaaattat ttacctttaa ataatttaat tattcaacct
+    20341 tttttaaatt ttatatatta tttaagaaag atttaaaggc gattataact taaaggtaga
+    20401 gtgttagatt gtgggtctaa gtgttatggg ttcaagtccc atttttcgcc cctttttttt
+    20461 attttttaat ttaattaaat ttttatgttt aataagttta tcttaatttt tttacttatt
+    20521 ttacctttaa cttcggttat catattatct tttttgaaaa atgaaaaatt tattaaaaat
+    20581 tttagtattt ttatgtcatt ttttattttt ttaatgtcat tacctttatg gattttattt
+    20641 gacaaatcta catctaattt tcaatattta tttaaaatag aatggattag tcaatttaat
+    20701 attaattttt ttttaggtct tgacgggatt tcattatttt ttataatttt aacaaccttt
+    20761 ttaattccaa tctgtatgct aattagttat gaaacaatta ctaaaaatat aaaagaatat
+    20821 tttattttat attttatttt agaattttgt ttaattattt catttagtgt attagactta
+    20881 cttatatttt acattttttt tgaaagtgta ttaattccta tgtttttaat tataggtatt
+    20941 tggggttcaa gagaacgtaa aattaaagct tcatatttat tttttatgta tactttagca
+    21001 ggttcattat ttatgtttat agccattatt catttatttt taactgtggg tactactgat
+    21061 tatcaaatat tatactatag taattttaat ttttcatatg aaaaattata ttttttagct
+    21121 ttttttttat catttgctgt taaagttcct atgttaccgt ttcatgtttg gttacctgaa
+    21181 gctcatgttg aagcacctac agcaggttca gtactattag caggtatttt actaaaatta
+    21241 ggatcatatg gtatgattcg atttttagtg ccattatttc ctaaagctac tttatatttt
+    21301 acaccttata ttttattatt gtgtttaata tcggttattt atgcttcatt gacagctata
+    21361 aggcaaacag atttaaaacg tattattgca tatgcttctg tagctcacat gaattttatt
+    21421 attttaggta ttttttcttt aactattcag ggtttagaag gtagtattat tcaaatgatt
+    21481 agtcatggat tagtttctag tggtttattt ttttctattg gttgtttata tgatagatat
+    21541 catacacgct ttataaatta ttatggtggt ttagcacata ctatgccttt attttgtatt
+    21601 gcattattta tttatatatt agcaaatatg gctattccag gttcgagtag tttcgttgga
+    21661 gaaattttaa ttttaacggg ggtttttgaa gataatacta caacagctgt ttttgcaaca
+    21721 attggtatgt ttttgggtgg tatttattct ttattgtttt acaacagaat ttgttatggt
+    21781 aatattcaaa atgtttattt aaaaatttat tacgatttaa cttatagaga atttttaatt
+    21841 catttaattt taattgctaa tattttttta ttaggtttat atcctaaaat ttttgaaagt
+    21901 tgtatgcatg aaagtgtatc taaaatttta attcatattg attttttata tttttgttaa
+    21961 acataatttt tgtttaataa aaagcccttt tagtctaatg gttaggacat tgccttttca
+    22021 cggcaaaaat acgagttcaa ttctcgtaaa gggtaaaaaa tatatatttt atatatttta
+    22081 taattataaa ttaattataa ttaaaaaata tgataattta ataaccaaaa tggctattga
+    22141 attatcatat atattggaat caaatattaa aaagtataaa gatgaaaaaa gtttacaaga
+    22201 aacaggtatt gttctttcaa tgagtgatgg tatcgcaaga tgttacggtt taactaaaat
+    22261 tcaagctggt gaaatggtag aatttaataa tggtaatatt aaaggaatgg ctttaaattt
+    22321 agaaccagac gttgttggtg ttgttgtttt tagtaatgat agagaaattc aagaaggtaa
+    22381 ttttgttaaa agaaccggtt caattgttag tgtacctgta ggacctgaag ttttaggtag
+    22441 agtggttgat gctttaggac aacccattga tggaaaaggt caaattaata gtaaattaga
+    22501 aagtagagtt gaagtaaaag ctccaggtat tatgccaaga gaaagtgtta aagaaccagt
+    22561 tcaaactggt ttaaaagctg tagatagttt aattcctatt ggtcgtggtc aaagagaatt
+    22621 aattattggt gatagacaaa caggtaaaac atctattgca attgatacaa ttattaatca
+    22681 aagagaacct catttaaaaa aagatattaa taatcaatta tattgtattt atgtgggtgt
+    22741 tggtcaaaaa agatctacaa ttgccgaatt aactaaaact ttagaagaaa aaaatgcaat
+    22801 gtttttttct attattgtag cagctactgc atctgattca gctccattac aatatttagc
+    22861 tccttatact ggttgtgctt taggtgaata ttttagagat aatggtaaac atgctgttat
+    22921 tttttatgat gatttatcaa aacaagctgt agcttataga caaatgtcat tattattaag
+    22981 acgacctcct ggtagagaag cttatcctgg tgatgtattt tatttacatt cacgtttatt
+    23041 agaaagagct gctaaaatga atagaaaaat tggtggtggt tctttaacag ctttacctat
+    23101 tattgaaaca caagctggtg atgtttctgc atatatacca actaatgtaa tttcaattac
+    23161 tgatggacaa atttttttag aaaccgaatt atttaatgaa ggtcaaagac ctgctataag
+    23221 tgtaggttta tctgtaagtc gtgtaggttc tgctgcacaa attaaagcaa tgaaacaaat
+    23281 tgcaggtaca atgaaattag aattagctca atttagagaa gttcaagctt tcgctcaatt
+    23341 cggttcagac ttagatgcaa ctactcaaca acaattaaat agaggagttc gtttaactga
+    23401 aatgttaaaa caaggcttaa atgtaccgtt atcagttgaa gatcaaattg taatcattta
+    23461 tttaggtgtt cgtggatttt tagataaaat tgctgtaaat aaaattaata cttttgaaat
+    23521 taattggtta aattttatta aaaataatca ttctaatatt ttagaagaaa ttttaactaa
+    23581 aaaagaaatt tcaaaagaat tagataaaaa attaaatact ttagcaacgg attttactaa
+    23641 taattttatt tcaaaataaa tgtttttcaa aattaaataa tatatattat ttaattttaa
+    23701 taatttattt taaagtataa gtataattaa atataaagtg taaaattaaa tttttcaaaa
+    23761 ttatttatta tttaagtaga gaactattat atataatagt tcttcattat tttattttat
+    23821 tatgttatta ctaactttaa tttttttacc ttttttaggt tcagtagcag ctggattgtt
+    23881 tggattttat attggacgag aaggttcagt atttattacc acattaacaa cttttttaag
+    23941 ttgtattttt tcattaatta tactttataa ttcaataaca aatgaatatg aatattttat
+    24001 ttacatttca aattggatta atagtggttt atttaattgt aattggtgtt tcttatttga
+    24061 tagtttaact atgataatgc ttgttgttgt aacaagtatt tctactttag ttcatctata
+    24121 ctcttcaaaa tatatggcaa atgatccaca tttatcaaga tttatgtcat atttatcttt
+    24181 atttactttt tttatgatta tattagtaac tggagataat tttattcaaa tgttcgttgg
+    24241 atgggaaggt gttggatttt gttcttattt attaattaat ttttggttta cacgtttaca
+    24301 agcaaataaa gctgctatta aagctatgtt agtaaataga attagtgatt taattttatt
+    24361 attaggaatt ttaacaattt tttctcatat taaaactata gaatatttta gcacatttgc
+    24421 agctatttct attgttcaaa attttaaatt tattttttgt aattatattt taagtattat
+    24481 tgatgttgct tgtatattaa tttttattgg agcaatgggt aaatcagctc aaattttttt
+    24541 acatttatgg ttacctgatg ccatggaagg tccaactccc gtttctgctt taattcatgc
+    24601 agctacaatg gtaacagctg gtgtttattt agtttcacgt tgttctccaa tatttgaata
+    24661 ttctatattt tctttaaaag taattactgt tattggatcc tctacagctt tttttgctag
+    24721 tactgtaggt ttagtacaaa atgattttaa aaaaatcgtt gcttattcaa cttgtagtca
+    24781 gttgggttat atgttttttg cttgtggatt atcaaattat cctttagcaa tttttcattt
+    24841 atcaaatcat gcatatttta aagctttatt atttttatgt tctggtgctg taattcatgc
+    24901 aatgggtgat gaacaagata ttcgaaaaat gggtggttta agacgtattt taccttttac
+    24961 ttatataatg ttcttaatag gatccttatc attaatgggt tttccgtttt taacaggatt
+    25021 ttattcaaaa gatttaattt tagaagtagc ctttgcaagt tttagtgaaa caggtcattt
+    25081 ttcttattgg ttaggaacaa ttggtgcctt ttttacggct ttttattcaa ctcgtttatt
+    25141 attttttgca tttttaagtg aaactaatgc ttataaaaat attattaaaa atgcacatga
+    25201 tgttccatta gagatgggta ttcctttagg tttattagct tttggtagta tttttatagg
+    25261 ttatctttct aaagatatgt ttgtaggttt aggttcaaat ttttggaata attcaattta
+    25321 tataaatcca tttaacaacc aaatgattga tgctgaattt ttaccaactt tttttaaaat
+    25381 attaccagtt attttaagtt tttgtggatt attcggtgct ttttatttat attttttcaa
+    25441 atttaaattt ttatataatt taaaaatttc agaatatggt ctttattttt ataatttttt
+    25501 aaatagaaaa tggtattttg ataaaattta ttatgaattt atcaatcaat atattttaaa
+    25561 aattggttat aatgttacat ataaaatgat tgataaaggt ttaattgaaa tgtgtggacc
+    25621 ttatggttta acaactattt ttgctttttt aagtcaaaga ataattcaat tacaaacagg
+    25681 ttatattttt cattattcat tattaatgtt aattagtaca atttttttaa tcaatattat
+    25741 ttttttttct attatgtatt attttaatat tatcacaatt ttattatttt tatttatttt
+    25801 tttattaatg aaataaaaat aataatatat cttttaagat ataattaatt ttttagttat
+    25861 ggattttgaa acaatttttt tttacacttt ttcaactata gctttaactt cagctatttt
+    25921 tgtaatatat tctacaaata caatttattc cgcttttttt ttaatattag tttttataaa
+    25981 ttcaacagga ttattattaa tttcagaagt tgaattttta tcaataatgt taataattat
+    26041 ttatgtagga gcaattaccg tattattttt atttgtaatt atgatgttag atgttaatat
+    26101 tttaattgat aaaaataaaa ttaataataa ttttggttat ttacctgtta tttttttaat
+    26161 tagttttatt ttttttttag aaacatttat aatgtttagt aaaatattta caacatatta
+    26221 tcatttaata agtaattctt tttataatca aaaagtaaca gttttattag ataaaatata
+    26281 tgatcctaaa gtatatcgaa tatatatgga tgtaaaacct ttttttaaaa cagttattaa
+    26341 tcaattagat ataattacaa atattgaaac aatcggtcaa attttatata gttattattc
+    26401 tttttttttt ttatcagctg gtataatttt attaatagct ttaataggag cagtaacttt
+    26461 aacaaaaaaa gaaaaaaaaa gaaattttaa acaaaatatt tataaacaac tttcaagaaa
+    26521 ttcattaaaa gctattttta atgtaaattc tagaaaaaat ttttaactaa aaataaaaca
+    26581 accttaactt aattggtaga gtattagcct tctaagcttt aaaatcttgg ttcaaatcca
+    26641 agaggttgta ataaatatag atatacttta aaatctattt attataatga taataaattg
+    26701 attttataaa ttgaaatatt tccagataat ttaaaaaaaa caatcataat agctaatcca
+    26761 atggccgatt cagctgctgc tacagttaaa attaataatg aaaaaacttg tcctatcata
+    26821 tcatcaatta aaattgaaaa ataaataaaa tttaaattaa ttgataataa taataattca
+    26881 atagacatta atataataat aatattttgt ctatttaaaa ttatcccaaa taatcctaga
+    26941 caaaataaaa aaaaagtaaa aataaactga tttaaaatac tcataatttg attaaattaa
+    27001 ccaattaaaa cttattaaaa tacttgatgt atataaaaac caacttaata caaaaggtaa
+    27061 aaatactttc caacctaaac gcattaattg atcatagcga tatctaggca aaatagctct
+    27121 agctacaaca aataaaataa caaaaaaaca tatttttata ctaaaccaaa aagatccagg
+    27181 taaatagtta ataaatttta tactaaaagg aaatggtgct aaccatccac ctaaaaataa
+    27241 aacaacagtt aaactactca ttagtagcat attggcgtat tctcctaaaa aaaataatgc
+    27301 aaaacccatt gcagaatatt ctacattgta acctgaaact aattcagctt cagcttcagg
+    27361 taaatcaaaa gggtgtcgat ttgtttctgc taaacaagat ataaaaaaaa ttaaaaaaat
+    27421 aggaaaaaga ggaaaacaat accaaattgt tttttgagct aaaacgattg aaattaaatt
+    27481 taatgattta gaacatacaa ttacagaaag aattgtaaat cctatagtta attcataaga
+    27541 aatcatttgt gcagtagatc gtaaagcacc tagaaatgaa tatttagaat tactagacca
+    27601 accaccaata ataataccat aaacgcctaa tgatgaaatt gctaataaat ataaaatacc
+    27661 aatatttaat tcagtaaaaa acatacctaa tcctaaaggg attaccgtcc aacttaataa
+    27721 acttaaaaaa aaagctaaaa taggggcaaa tataaataaa attacatccg cattactagg
+    27781 taaaattgtt tcttttacaa ataattttag accatcagct agtggttgta ataaaccaaa
+    27841 aatacctaca acatttggtc ctcttcttct ttgaatagaa gctaatattt tacgttcaac
+    27901 taaagtaaaa taagctacag ctattaataa aggtaaaact aaaattaaaa attttaaaac
+    27961 tgtgtatatc ataaagattt tgattgattt tgaataattt tattagaatt aattaatatt
+    28021 ttagaatatt gttctaatat atttgtataa tatttatttt ttattaatga atctaaaaaa
+    28081 ttaatattaa tcttgaaatg cttaatatta aaattaaaac tatttataat ttttaatttt
+    28141 ttttttaata aataaggtaa aacttcttga attttaaaaa atgaatttaa ttttgattga
+    28201 ttttttttta gaaaaaattt ataaatattt ctataaataa ttgaatcttt tctttgttct
+    28261 gtatttaaat ttaaaatttt ttcatttttt tggataattc cttctaaatt aatatatatt
+    28321 ccattttttt ctaaaaaagt taatccaggt aaaattaaat ttgaattttg tgcatcttga
+    28381 gtaaaatgat gtccttgata aatactaaaa ctatttttag atctatttaa tttattttgt
+    28441 aaatttgtat taaataaata atataattta gaatctttta atgaattttg tttttttgaa
+    28501 aaagtaattt ctaaaaaatt aattaaagaa gtttgtgtac tgaaaaaatt cacattattt
+    28561 ttaaaaattg ataaattttt taattttgct agaaaaaaaa aaccattttt ctgatttaaa
+    28621 atattttcac caataaaaat taaaggtttt ttagcttttt ttaaatcttt acaaaaagca
+    28681 tgtttaccag aaataatatt tatcaatgtt tttaaggtta atcctaaatg tgtaacggga
+    28741 taaataaatt gtgttttatt acctacataa gctattttaa aattcccttt ttttaaacga
+    28801 ttaattaaat gaatatttaa aatagcacct tcattacgaa aatcactacc tattattaaa
+    28861 caaagatctg attcgtcaat agattttaac gtattattaa ataaaaaatt tgatgttaaa
+    28921 tcggaattta ttttaaaatt ttgattattt attaaatctt cgtattcaat atttctaatt
+    28981 cctaatttat ttaaattttt ttttaataga aaaattgatt ctaaatcagt taaatttcct
+    29041 ataatacttc gaatattaga actatccgtt gttaaaaatt tttcatttat tatttctaaa
+    29101 gcttctaacc atgaaatttt attaaaatcc ccgttttcat cttttaataa tggatatttt
+    29161 aatctttgat attttaaact atcaaaaaaa tatcgtgttt tatttgatat ccactcttta
+    29221 ttaatattaa aattagtttt aggtaaaata cgaacaattt cattattaaa aatatcaatc
+    29281 ttaatatttg aacctatact atctaaaata tcaatacctt cttttttttt taattcccat
+    29341 gaacgtgctt taaacgtata tggctttgaa gttaaagcac ctacagggca taaatcaact
+    29401 aaattaccag aaaattcaga attaaaaatt ttaggataat aaaaattaat ttcggtttta
+    29461 ttaccacgac ctgttgtacc taaatcatca accccacaaa tttcatttgc aaagcgaaca
+    29521 caacgtgtac agtgaataca gcgcgtcata attgttttaa taaaaggtcc acaatattta
+    29581 tcttcaacac ctcgtttatt aaaaaaaaaa cgacttctat ctgaaccaaa aatcattgtc
+    29641 tgatcttgta aatcacattc agatgcttga tcacaaattg ggcaatctaa tggatgattt
+    29701 attaaaagaa attctaatac gctttctcta gctttttgaa ctaatggtgt atctgtaaat
+    29761 attttcatat taggcattaa tggcatagca catgaagcaa ttggtttagg tgaattttca
+    29821 atttcaacta aacacattct acaatttcct gcaatttgta aattttcttg aaaacaaaat
+    29881 ttaggaattt caattttaaa attattacaa gcttgtaata ctgttaaatt tttattaaca
+    29941 tttaatttta tattattaat atatatttca atcatttaat ttttttattt tatctaataa
+    30001 aatatgaatt tattttcact gaaagaatat attttttttt gtaaaatata ttcttttaga
+    30061 actatcaaag aagggatttg aacccttaat gcttaaaagc tttacattct aagtgtaatg
+    30121 tgtttaccaa tttcaccact ttgataatgt ataagaatac ctactattgg acttgaacca
+    30181 ataactcttt tatgagaaca gattttaaat ctatcgtgtt taccaatttc accaagtagg
+    30241 ctttattaaa atatatgact aaaaataaaa taaaaactta tttacattta catttattag
+    30301 aattaaaata taattttttt attattttat ttgctttttt ttatcttttt tgcatttcat
+    30361 attatttttc tgatcaatta atttatttat tagtaaataa tttacttact aaaaatatgt
+    30421 taaaatattt tatatttaca aatattacag aaattttcat tactaatata tttatatctt
+    30481 tatgtacagc cttgtttata acaattcaat taaaaatttt attgatttgg ttttttttag
+    30541 ctaaaggttt atataaattt gaaaatttta tttttataaa attttatttt ttgtttataa
+    30601 tttttaatta tttaattatt aatttaattt ttactttaat tattcctaat atttggaatt
+    30661 tttttttaaa tttaaatttt gtaaattctt atattttaac tatttatttt gaacctaaaa
+    30721 ttaatacata ttttaatttt attttgtcat catttatttc tctatttatt atactttttg
+    30781 tgttttttat tttatttttt ttattattta atgatttttt taaaattaca atatttatta
+    30841 atttaagaaa attgttttat ttaaaaataa tattattaag tgcattaatt actccgccgg
+    30901 atatggtaaa tcttttattt attttatttt tatttatatc attttttgaa atatttattt
+    30961 atattgttat ttatttaaat aaatataaat gttaatttat ttttttaata aaattaattt
+    31021 tatttttatt aaaatctgaa gataaaattt gattaatttt tgtttcttta aaaatttttg
+    31081 aatttagttg ataattttta atatatttaa tagatgttat ttttaaagaa gatccatttg
+    31141 ttaaaataat tttattttta tagataaaat tttttttatt tttattcata tattgataat
+    31201 ttaaattttg gctagataac ataatggtaa tgtaaaggac tgcaaatcct ttaatgacgg
+    31261 ttcgaatccg tctctagctt tttaaaggat agagtgggat ttgaacccac ggtattataa
+    31321 tatacttcag ttttcaagac tgacacctta aaccactcga tcacctatcc aaaattaaaa
+    31381 aaactaacgt cgtttttgtt tttttaatct acaaccatta aaaggttttg tagttttatc
+    31441 tattaaatat tttactttaa aatttttttt ttttaaattt tttaaaacat tatatctacc
+    31501 taaacctgtt ccatgtaaat aaacttttaa tttttttatt ttttttaatt taagatattt
+    31561 attaatttta tagacaatta attgaacatt ataaggagta ttttttttaa atcgtgtttt
+    31621 ttttaatgat tttgtagacc attgttttaa aagatttccg ttatattttg ttaaactaat
+    31681 aatggtattt tttaaacttg cagtaatatg taaatttact agaattaaag gatttttttg
+    31741 tttttttaaa ttttttttaa atttattttt aaaattatat ttaaatttat ttcgattcat
+    31801 agaagaataa ttttattttt ttgttttttt ttgtatttta aaaggacgtt tattacgtaa
+    31861 aacacgtttt tgaataaata ttttttttaa tttttttgac gtttttgcgt ttgtatgggt
+    31921 acgttgtcct cttacaggca atccttgatt ttgtctaatt ccacgattac ttttaatctc
+    31981 tattaattca tttaattttt cagtttttaa tctttttaag atttgttcaa cttttaaatt
+    32041 tttattaata taagtaataa ttcgatttac gtggttgttt ttaagtttat taagagtgat
+    32101 ttgaggatta attccaatat ttttacaaat ttttttagat tgaaattcat taataccgta
+    32161 taatacagtt aatgaatata aaatactttt tgaatctgaa attgttttat taaaaatata
+    32221 taacataata gattttatct atataccata taaaatgata gaaaaaaaaa taaatcccat
+    32281 aacaccttca caacgtcaaa catttttatt aaacaaaaaa aatttaacga aagtttttaa
+    32341 aattaaatct ttaactaaag gttttcaacg tgctaatggt agaaataatc aaggtaaaat
+    32401 aactgtaaga caccgtggtg gtggacataa gcgtttatat agattaattg attttaatag
+    32461 atcaaaaaat attgaaggtt ctgtaattaa aatcttatac gatccaaatc gttctgcaaa
+    32521 tattgcttat attaaaaata attcgcaatc tcatttaatt ttagcacccg aaggtttaaa
+    32581 aattgatcaa tacattaaaa gttcatctga agcttctttg aaaattggta atgctttacc
+    32641 tttagctaat attcctattg gaagtttaat acataatatt agtttatatc cacaagcacg
+    32701 cggaaaacta attagaagtg caggtacttc tgctcaatta atacaaaaaa ttaataataa
+    32761 atatgcgaaa atacgtttaa attctggtga attaaaatta attttattaa cttgttatgc
+    32821 cacattagga acggtatcaa atattaatca taaaaaaata aaattaggaa aagcaggtcg
+    32881 ttcacgttgg ttaaataaac gaccttccgt acgtggtgta gctaaaaatc ctgtggatca
+    32941 tcctcatgga ggtggtgaag gtaaaacaag cggtggtaga ccttctgtaa ctcctcaagg
+    33001 taaaataact aaaggaaaac caacacgtaa taaaaaaaaa aaaaaattga taattcaata
+    33061 aattatgtct cgaagtaaat ataaaggtcc tttttttaaa gttaattttt taaaaaaaaa
+    33121 aaattggatt aaaataacta ataaaaattt aacaatatta ccagaatata ataatcattc
+    33181 cgtaagtgtt tataatggta aaatatttat taatttatta ataaataata aaatgattgg
+    33241 ttttaaattt ggtgaattta ttaatacacg taaaaaacat atatataaaa aaaaaaaata
+    33301 atttatgggt caaaaaatta taccaattag tttacgatta aaaaaaaaaa aaaattggaa
+    33361 ttcaaaatgg attatagata ataatgaata tgctaattta ttacattttg atttagaaat
+    33421 aaaaaaatat tttgaaaata tttttaatta taaaaattta aaattaatct atataaatat
+    33481 tgtaaaaaca tcgaataata taaatattta tatttatata caaaaaaatg caaaaaaata
+    33541 ttataaatta tcttataata aaattattaa tcatttaaat ctatattttc caaatcataa
+    33601 tataaaatta tttattaaaa acattaattt ttttgaattt attaatttac gaaaaaactt
+    33661 aaaaaaaatt tttaataaaa taaaaaaaaa caatcgaatt aataaaaatg ttaaaaaaat
+    33721 gatttataat tttagttatg cattttatac taaaaatatt aatataataa cattttatat
+    33781 taaacaaact ttagaacgaa aaaaaactca taaaaaattc ataaataata tagataatat
+    33841 gcttcaagaa ttttttaaaa tgttttccaa ttttattggc tatagattac aatttaaagg
+    33901 tcgtttaaat aaatcaaaac gtaaaaaaaa aatggtattt caaaaaggta aaattccatt
+    33961 aaatacttta gaatatgata taaaatatca ttttaatgaa tttaaaacac cttctggtat
+    34021 ctgtagtatt aaattatggg ttttttttaa accttcaaaa attttattta attcgaaaac
+    34081 taaaaacaat tttaaaaata ttgattatgt tatttcctaa aaaaactaaa tataaaaaac
+    34141 aatttaaagg taaacttgtg ggtaaaacaa taaaaggtag taagattatt tatggcaaat
+    34201 atggaataaa agtactagaa gaaacacgtt taacttcaag acaaatcgaa gcaactcgtc
+    34261 gaataattat tcgaaaaatg aaaagattag gatttctttg gatccgtgtt tttccagata
+    34321 cgcctgtaac agcaaaacca actgaaaaca gaatgggtaa ggggaaaggt tcggttgcat
+    34381 tttgggtatc aaaagtaaaa aaaggtcaaa ttttatatga gattagtggt atttctttag
+    34441 aaaacgcgaa aaaagtttta aaagcaggtt caaataaatt accaattaaa acaaaattta
+    34501 tttataaata attaggctta tagtttaatt ggttagagca taccgctcat aacggtagag
+    34561 ttgtaggttc aaatcctact aggcctaatt aaaaattttt aatgaacaaa ttaaaaaaca
+    34621 aaaaaataaa aaaaataata agttatcaac aatttttaaa aaataattat ttaaaaacta
+    34681 ataaatataa attaaaaaat attttatttg aaaatcaaat tttatataaa aatttaaatt
+    34741 tagaatcaca tgtaattgaa tttaataatt atgaaaatat ttatttacct tttacattaa
+    34801 ttaaacttga tgaaatttcg acaattagtt taaaatatga aaatatttta ttatttaatt
+    34861 atgatttaac atataatata ttatatcaat ttaataaaat aatgtttaaa aatattttaa
+    34921 aacaacaaaa aaataaaata aaaggtagat tattaggtgg aaattggaat aataaaaaaa
+    34981 tttttatttc aattttaggt tttattttta gtatgaaacc tataaatttg aataattctt
+    35041 taaattttaa aaaaaaattt aattttaatc aatataataa aaaaggtttt tataaaaaaa
+    35101 aatttagccc tattagatta attaattgtt ataaattaaa atatttaaat tttcaaatta
+    35161 ataatataaa tagttcaaaa aaaaaagaac tttcaagaat ttcttatatt caaactatca
+    35221 tacaaaatca aaaactaaaa aattataaat tttaaaaaaa tagaaaaagt gttctttcaa
+    35281 gaaaaataca tgttgaaaaa aatttttaca tttaattatg ccacaattcg atcaattttc
+    35341 tttttttaat caagtttcat ggtttttatt tttttttttt aatttttatt tttttattac
+    35401 ttatttttta ttacctaaaa tttgttataa tttaaaattt agaaaaaaaa aaataaattt
+    35461 tgatataaaa aaaaaaaatc aaattaattt tgaaaaaaat aatattattt ttttttttaa
+    35521 taattcatat aaaatttttt gttcaaattt tgaattattt attacgaaaa aactatctat
+    35581 atataaaaca aatgaaaaat ttaaaattca aaaaactcca atttttaatg tttttttaaa
+    35641 tcaaaaaata aatttttttt taaatcaaaa atttttatta tttaaaaaaa tttttgtttt
+    35701 taattaattt tttaaaataa gtgtatagct cagttggtag agcaccggac ttttaatccg
+    35761 atggtcttgg gttcaaatcc caatacactt attggggata tatttcaact ggtagaaagt
+    35821 atgttttgca aatataaggt tatcggttcg aatccgatta tctccacatt tattttctta
+    35881 ttaaataaat tatgcaaaaa aaaataaaaa aaaatattaa acaaagatat ttatttaaaa
+    35941 attttgaaaa aaatagatta atattaaaaa ttatttcaaa aaatttaaat ataaaaaaaa
+    36001 atttaagatg gaaattacaa caaaaatggt tttttttcca tcaaaattca tcaattacta
+    36061 gaattaaaaa tttatgtgtt ttaactggac gatcaaaaag tatttatcgt ttatttaaaa
+    36121 tttctcgaat tcaattaaga aaattagcat caaatggttt tttaccgggt gtttctaaat
+    36181 atagttggta atattatatg attataacag atactctttc aaatttattt tcaaaaataa
+    36241 aaaacggttc tttagtaaaa aaatcaaaaa tagtacatca aaaatcaaaa caaagtatca
+    36301 atattttaaa tcttttaatt aaagaaggtt ttataaaaag ttataaaata aattcaaaaa
+    36361 atcaattgga tatttattta aaatatagaa aaaataaagc agttattaat gatattaaac
+    36421 gtttatcaaa acccggtaaa cgtttatata taactaataa tgatttatat aaaaaaaaaa
+    36481 caggatttta tattatttca acaccaatgg gtattttaac ggatttacac gcaaaacaat
+    36541 taaatgttgg tggtgaatta atttgtaaaa ttttttaaaa ttatgattaa aatattaaaa
+    36601 aaaaacatta aacaaaaaaa tataattttt ttaaaaagtt cgttaggtaa tgtacatttt
+    36661 ttctttattg ataaaatgtt tataatacct aaagaaataa aaatttcatc aataaaaaat
+    36721 attctttttt ttgaaacatc tttaggttca ttatctttaa aatttataga taatacatat
+    36781 ttttttattc aaaataatca attatcaata agtttaaatt taaataaaaa taaaaaaaat
+    36841 attttaaatt tatataataa attaattaaa ataaaaataa aaggtgttat acaaggtttc
+    36901 aaaatgatat tatttttaaa agggataggt tttaaatctt ttattgacga aaataacttg
+    36961 attttaaaat taggatttag tcataatatt gttataaaga tcccatcaaa tattaaaatc
+    37021 attaatcatt caaatagttt aatttttaat agtattgatt atatttcatt aagtcaattt
+    37081 gtgaattata ttaaaaatca taaaaaacct gaaccattta aaggaaaagg tttagtattc
+    37141 aaaaatgaaa aaatattaca aaaagagggg aaaaaaagta aaaaataatt aaatatgata
+    37201 caaaaaaaaa aaaatattca agataatacc ttaaatttat tatttaaatc aaaaaatatg
+    37261 tatggagaat ctttaatttc gacaaacaaa gaaatattac catttattta cggtagtcga
+    37321 cataatcata ctataattaa tctaaaaaat gtttcatttt ttttaaaacg tatttttaaa
+    37381 ttaatcaaat atattgttca aaaaaatgaa aaaatattaa taatagggaa tgctgatgaa
+    37441 attaaatttt tatttacttc agcatttaaa aaaaaaaatt cgaatgtaat tttttttaat
+    37501 aaagaatgga taaatggttt acttactaat caaatcatga atacaacatt taataaagta
+    37561 attaattatt tgattaaaga acaacaaata aaattaattt taattattaa gagttccgta
+    37621 aaagatactt ttttaaatca agaaatttct actttaaaaa ttccaattat ttccttaata
+    37681 aatacaaatc aaacaattaa aaatataaat tatcctataa ttacaaattc taaaaatatt
+    37741 caatcaatat atacaataat gtatttatta cgtaaaattt tttaataaat aatatgaata
+    37801 aattaaaacc tagaaataaa atatgttttc aaaataatag aaacatacat aaaaatttaa
+    37861 atttattaaa attaaaatca aaaaaatgga atttatttaa aaaaagatta agatataaaa
+    37921 aagaaataaa acctgaaaaa cgtaaaaaat tttttcaaaa aagattattt gaaaaacaac
+    37981 aatttcaaaa tttttatgga tgtattcata attatcaatt aaaaaatata tttcaaaaat
+    38041 tatctcaaaa aaaaaataaa ataaatatat ttaaaaaatt tgttatttta ttagaaagtc
+    38101 gtttagacat taatcttgtt agattaaaat tagtaaaaac tgtttttcaa gcaaaacaat
+    38161 taattaacca taaaaaaata aaagttaata ataaaatcat aaacaaacct aattttttat
+    38221 taaaaaaagg agacattatt tatattatta aataaaaatg tataaaaaga aaaaaaattt
+    38281 agcaaaacaa tttgataaaa aattttataa acaaaaattt aaacaaaaaa ataataaata
+    38341 tttttataaa caaaaaaata atatttatta tattttaggt gaaaaaaaac cagaaaaacc
+    38401 tttaacaaca tcctatttac atagaaataa aaaacttaaa ataggtattt tttttaaaac
+    38461 accttcttta aaaacaattt tatatccttt tcatttaaat ttaaaattaa ttaatgaata
+    38521 tttaaaaaaa aaataaaaat ttaaactatt taaatggttt a
+//

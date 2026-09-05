@@ -1,0 +1,17 @@
+# Supplementary Table S1
+
+Supplementary Table S1. Assembly-quality metrics for the additional oomycete genomes included in the comparative synteny analysis. Metrics match those reported for the focal assemblies in Table 1.
+
+|Genome                            | Assembly length (Mb)| Largest contig (Mb)| Number of contigs| N50 (Mb)| L50| N90 (Mb)| L90| GC content (%)|               Complete BUSCOs|
+|:---------------------------------|--------------------:|-------------------:|-----------------:|--------:|---:|--------:|---:|--------------:|-----------------------------:|
+|*Bremia lactucae* SF5             |               115.94|               16.03|               220|     5.32|   7|     1.23|  23|          45.85|  98.86% (S: 95.70%; D: 3.16%)|
+|*Peronospora destructor* Pd K2019 |                29.33|                2.28|                73|     0.73|  12|     0.20|  42|          48.48|  99.43% (S: 97.85%; D: 1.58%)|
+|*Peronospora effusa* UA202013     |                58.58|                8.42|                17|     3.73|   6|     2.20|  15|          48.58| 100.00% (S: 99.28%; D: 0.72%)|
+|*Phytophthora agathidicida* 3770  |                57.00|               10.53|                11|     7.45|   4|     3.23|   8|          53.12|  99.86% (S: 99.00%; D: 0.86%)|
+|*Phytophthora capsici* BYA5       |                80.46|                8.59|                63|     3.88|   8|     2.74|  17|          51.16|  99.43% (S: 96.13%; D: 3.30%)|
+|*Phytophthora infestans* 1306     |               246.90|               22.92|               632|    13.45|   8|     0.43|  22|          51.58| 98.86% (S: 76.33%; D: 22.53%)|
+|*Phytophthora plurivora* TJ71     |                46.88|                6.64|                18|     2.99|   6|     1.29|  15|          51.90|  99.85% (S: 98.42%; D: 1.43%)|
+|*Phytophthora ramorum* Pr 102     |                57.45|                6.14|                28|     3.61|   6|     1.16|  18|          54.37| 100.00% (S: 97.42%; D: 2.58%)|
+|*Phytophthora sojae* JS2          |                85.13|               12.37|                12|     8.11|   5|     4.82|  10|          54.81| 100.00% (S: 98.57%; D: 1.43%)|
+|*Plasmopara halstedii* 710        |                74.80|                4.22|                86|     1.33|  20|     0.56|  52|          45.75|  98.85% (S: 98.13%; D: 0.72%)|
+|*Pythium oligandrum* P O1         |                39.10|                3.49|                71|     1.45|   9|     0.38|  27|          53.32| 100.00% (S: 99.86%; D: 0.14%)|

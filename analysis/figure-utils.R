@@ -14,13 +14,13 @@ save_pub_r <- function(
   width_mm,
   height_mm,
   dpi = 600,
-  allowed_width_mm = c(89, 183),
-  max_height_mm = 247,
+  allowed_width_mm = c(90, 180),
+  max_height_mm = 170,
   allow_nonstandard = FALSE
 ) {
   if (!allow_nonstandard && !any(abs(width_mm - allowed_width_mm) < 0.01)) {
     stop(
-      "Nature export width must be 89 mm or 183 mm. ",
+      "Nature export width must be 90 mm or 180 mm. ",
       "Got ", width_mm, " mm for ", filename, ".",
       call. = FALSE
     )
@@ -66,5 +66,15 @@ save_pub_r <- function(
     units = "in",
     dpi = dpi,
     compression = "lzw"
+  )
+
+  ggplot2::ggsave(
+    filename = paste0(base, ".png"),
+    plot = plot,
+    device = ragg::agg_png,
+    width = width_in,
+    height = height_in,
+    units = "in",
+    dpi = dpi
   )
 }

@@ -1,0 +1,397 @@
+---
+title: "Gene Annotation and RNA-seq Support"
+author: "Yixuan Yang"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(data.table)
+library(gt)
+library(here)
+
+source(here("analysis", "figure-utils.R"))
+theme_set(theme_bw())
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+
+annotation_dir <- here("data", "protein_function_by_isolate")
+hardmask_dir <- path.expand("~/project_data/downy/contigs-renamed/hardmasked")
+
+isolate_key <- tribble(
+  ~file_name, ~isolate, ~label,
+  "Pseudoperonospora_cubensis_MSU1", "Pcub_MSU1", "*P. cubensis* MSU1",
+  "Pseudoperonospora_cubensis_SC1982", "Pcub_SC1982", "*P. cubensis* SC1982",
+  "Pseudoperonospora_humuli_OR502AA", "Phum_OR502AA", "*P. humuli* OR502AA"
+)
+
+rna_tpm_files <- tribble(
+  ~isolate, ~tpm_file,
+  "Pcub_MSU1", path.expand("~/project_data/downy/RNA-seq_result/Pcub_MSU1/star_salmon/salmon.merged.gene_tpm.tsv"),
+  "Pcub_SC1982", path.expand("~/project_data/downy/RNA-seq_result/Pcub_SC1982/star_salmon/salmon.merged.gene_tpm.tsv"),
+  "Phum_OR502AA", path.expand("~/project_data/downy/RNA-seq_result/Phum_OR502AA/star_salmon/salmon.merged.gene_tpm.tsv")
+)
+
+rna_support_threshold <- 2
+rna_support_thresholds_tested <- c(rna_support_threshold, 5, 10)
+
+read_annotation <- function(file_name, isolate) {
+  fread(file.path(annotation_dir, paste0(file_name, "_protein_function_summary.tsv"))) |>
+    as_tibble() |>
+    mutate(
+      file_name = file_name,
+      isolate = isolate,
+      gene_id = str_remove(id, "\\.1$")
+    )
+}
+
+read_tpm <- function(isolate, tpm_file) {
+  if (!file.exists(tpm_file)) {
+    return(tibble(isolate = isolate, gene_id = character(), max_tpm = numeric()))
+  }
+
+  tpm <- fread(tpm_file) |> as_tibble()
+  expr_cols <- setdiff(names(tpm), c("gene_id", "gene_name"))
+
+  tpm |>
+    mutate(across(all_of(expr_cols), as.numeric)) |>
+    rowwise() |>
+    mutate(max_tpm = max(c_across(all_of(expr_cols)), na.rm = TRUE)) |>
+    ungroup() |>
+    transmute(
+      isolate = isolate,
+      gene_id,
+      max_tpm,
+      expressed_tpm_gt0 = max_tpm > 0,
+      expressed_tpm_ge2 = max_tpm >= rna_support_threshold
+    )
+}
+
+read_repeatmasker_tbl <- function(file_name, isolate) {
+  tbl_file <- file.path(
+    hardmask_dir,
+    paste0(file_name, "_masked"),
+    paste0(file_name, ".fasta.tbl")
+  )
+  lines <- readLines(tbl_file)
+
+  get_bp_pct <- function(pattern) {
+    line <- str_subset(lines, pattern)[1]
+    pct_match <- str_match(line, "\\(\\s*([0-9.]+) %\\)|\\s([0-9.]+) %$")
+    tibble(
+      bp = as.numeric(str_match(line, "([0-9]+) bp")[, 2]),
+      pct = as.numeric(coalesce(pct_match[, 2], pct_match[, 3]))
+    )
+  }
+
+  total_length <- as.numeric(str_match(str_subset(lines, "^total length:")[1], "([0-9]+) bp")[, 2])
+  masked <- get_bp_pct("^bases masked:")
+  ltr <- get_bp_pct("^   LTR elements:")
+  unclassified <- get_bp_pct("^Unclassified:")
+
+  tibble(
+    file_name = file_name,
+    isolate = isolate,
+    `Assembly length (Mb)` = total_length / 1e6,
+    `Masked bases (Mb)` = masked$bp / 1e6,
+    `Masked (%)` = masked$pct,
+    `LTR elements (%)` = ltr$pct,
+    `Unclassified repeats (%)` = unclassified$pct
+  )
+}
+
+annotations <- pmap_dfr(
+  isolate_key |> select(file_name, isolate),
+  read_annotation
+)
+
+gene_level <- annotations |>
+  group_by(file_name, isolate, gene_id) |>
+  summarise(
+    has_function = any(source != "unannotated"),
+    source = first(source),
+    description = first(Description),
+    .groups = "drop"
+  ) |>
+  left_join(isolate_key, by = c("file_name", "isolate"))
+
+rna_support <- pmap_dfr(rna_tpm_files, read_tpm)
+repeat_summary <- pmap_dfr(isolate_key |> select(file_name, isolate), read_repeatmasker_tbl) |>
+  left_join(isolate_key, by = c("file_name", "isolate")) |>
+  select(label, everything(), -file_name, -isolate)
+
+gene_level <- gene_level |>
+  left_join(rna_support, by = c("isolate", "gene_id"))
+
+annotation_summary <- gene_level |>
+  group_by(label) |>
+  summarise(
+    `Predicted genes` = n(),
+    `Functionally annotated` = sum(has_function),
+    `Annotated (%)` = 100 * mean(has_function),
+    `Hypothetical proteins` = sum(!has_function),
+    .groups = "drop"
+  )
+
+expression_summary <- gene_level |>
+  filter(!is.na(max_tpm)) |>
+  group_by(label) |>
+  summarise(
+    `Predicted genes` = n(),
+    `RNA-seq supported, TPM > 0` = sum(expressed_tpm_gt0),
+    `RNA-seq supported, TPM > 0 (%)` = 100 * mean(expressed_tpm_gt0),
+    `RNA-seq supported, TPM >= 2` = sum(expressed_tpm_ge2),
+    `RNA-seq supported, TPM >= 2 (%)` = 100 * mean(expressed_tpm_ge2),
+    .groups = "drop"
+  )
+
+unannotated_expression <- gene_level |>
+  filter(!has_function, !is.na(max_tpm)) |>
+  group_by(label) |>
+  summarise(
+    `Hypothetical proteins` = n(),
+    `TPM >= 2` = sum(expressed_tpm_ge2),
+    `TPM < 2` = sum(!expressed_tpm_ge2),
+    `TPM < 2 (%)` = 100 * mean(!expressed_tpm_ge2),
+    .groups = "drop"
+  )
+
+support_summary <- gene_level |>
+  filter(!is.na(expressed_tpm_ge2)) |>
+  mutate(
+    support_class = case_when(
+      has_function & expressed_tpm_ge2 ~ "Both",
+      has_function ~ "Functional only",
+      expressed_tpm_ge2 ~ "RNA-seq only",
+      TRUE ~ "Neither"
+    ),
+    support_class = factor(
+      support_class,
+      levels = c("Both", "Functional only", "RNA-seq only", "Neither")
+    )
+  ) |>
+  count(label, support_class, name = "genes") |>
+  group_by(label) |>
+  mutate(percent = 100 * genes / sum(genes)) |>
+  ungroup()
+
+main_summary <- gene_level |>
+  filter(!is.na(expressed_tpm_ge2)) |>
+  group_by(label) |>
+  summarise(
+    `Predicted genes` = n(),
+    `Functionally annotated` = sum(has_function),
+    `RNA-seq supported, TPM >= 2` = sum(expressed_tpm_ge2),
+    `Functional + RNA-seq support` = sum(has_function & expressed_tpm_ge2),
+    `Hypothetical, TPM < 2` = sum(!has_function & !expressed_tpm_ge2),
+    .groups = "drop"
+  )
+
+threshold_sensitivity <- map_dfr(
+  rna_support_thresholds_tested,
+  \(threshold) {
+    gene_level |>
+      filter(!is.na(max_tpm)) |>
+      group_by(label) |>
+      summarise(
+        threshold = threshold,
+        `Predicted genes` = n(),
+        `RNA-seq supported` = sum(max_tpm >= threshold),
+        `RNA-seq supported (%)` = 100 * mean(max_tpm >= threshold),
+        `Functional + RNA-seq support` = sum(has_function & max_tpm >= threshold),
+        `Hypothetical below threshold` = sum(!has_function & max_tpm < threshold),
+        .groups = "drop"
+      )
+  }
+) |>
+  group_by(label) |>
+  mutate(
+    `Supported change from TPM >= 2` = `RNA-seq supported` - `RNA-seq supported`[threshold == rna_support_threshold],
+    `Supported pp change from TPM >= 2` = `RNA-seq supported (%)` - `RNA-seq supported (%)`[threshold == rna_support_threshold]
+  ) |>
+  ungroup()
+
+threshold_support_sensitivity <- map_dfr(
+  rna_support_thresholds_tested,
+  \(threshold) {
+    gene_level |>
+      filter(!is.na(max_tpm)) |>
+      mutate(
+        supported = max_tpm >= threshold,
+        support_class = case_when(
+          has_function & supported ~ "Both",
+          has_function ~ "Functional only",
+          supported ~ "RNA-seq only",
+          TRUE ~ "Neither"
+        )
+      ) |>
+      count(label, support_class, name = "genes") |>
+      mutate(threshold = threshold) |>
+      group_by(threshold, label) |>
+      mutate(percent = 100 * genes / sum(genes)) |>
+      ungroup()
+  }
+)
+
+neither_sensitivity <- threshold_support_sensitivity |>
+  filter(support_class == "Neither") |>
+  group_by(label) |>
+  mutate(`Neither pp change from TPM >= 2` = percent - percent[threshold == rna_support_threshold]) |>
+  ungroup()
+```
+
+# Overview
+
+This report summarizes protein-coding gene predictions from hard-masked assemblies of the three focal isolates, functional descriptions assigned from eggNOG-mapper, InterProScan, and DIAMOND BLASTP, and RNA-seq support from Salmon TPM estimates. RNA-seq evidence is treated as transcript support for predicted gene models, not direct protein validation.
+
+Functional annotation follows the rule implemented in `analysis/check-annotation.R`: informative eggNOG-mapper descriptions are used first, followed by the best InterProScan hit, then the best DIAMOND BLASTP hit. Proteins without any supported annotation are retained as hypothetical proteins. Only 0.9-26.1% of input read pairs mapped to the corresponding pathogen assembly across the infection-stage RNA-seq libraries. The RNA-seq summary therefore uses the relatively permissive threshold of TPM >= 2 in at least one sampled time point to retain low-abundance transcript evidence under limited pathogen-mapped read depth.
+
+# Repeat Masking
+
+```{r repeat-summary}
+repeat_summary |>
+  gt() |>
+  fmt_number(
+    columns = c(`Assembly length (Mb)`, `Masked bases (Mb)`, `Masked (%)`, `LTR elements (%)`, `Unclassified repeats (%)`),
+    decimals = 1
+  )
+```
+
+RepeatMasker identified a large repeat fraction in all three assemblies, with 48.4-52.5% of bases masked before gene prediction. LTR retroelements and unclassified repeats made up the largest named categories. In the manuscript, this is worth reporting briefly because it explains why hardmasked assemblies were used for Helixer gene prediction, but it does not need a separate main figure.
+
+# Gene Prediction and Functional Annotation
+
+```{r annotation-summary}
+annotation_summary |>
+  gt() |>
+  fmt_integer(columns = c(`Predicted genes`, `Functionally annotated`, `Hypothetical proteins`)) |>
+  fmt_number(columns = `Annotated (%)`, decimals = 1)
+```
+
+Most predicted genes received functional support from at least one annotation source. The largest gene set was predicted for *P. cubensis* SC1982, which also had the highest number and proportion of hypothetical proteins.
+
+# RNA-seq Support
+
+```{r expression-summary}
+expression_summary |>
+  gt() |>
+  fmt_integer(columns = c(`Predicted genes`, `RNA-seq supported, TPM > 0`, `RNA-seq supported, TPM >= 2`)) |>
+  fmt_number(columns = c(`RNA-seq supported, TPM > 0 (%)`, `RNA-seq supported, TPM >= 2 (%)`), decimals = 1)
+```
+
+Using TPM >= 2 in at least one sampled time point as the expression-support threshold, RNA-seq supported 75.5% of *P. cubensis* MSU1 genes, 57.2% of *P. cubensis* SC1982 genes, and 81.5% of *P. humuli* OR502AA genes.
+
+# RNA-seq Threshold Sensitivity
+
+```{r rnaseq-threshold-sensitivity}
+threshold_sensitivity |>
+  gt() |>
+  fmt_integer(
+    columns = c(
+      `Predicted genes`,
+      `RNA-seq supported`,
+      `Functional + RNA-seq support`,
+      `Hypothetical below threshold`,
+      `Supported change from TPM >= 2`
+    )
+  ) |>
+  fmt_number(
+    columns = c(`RNA-seq supported (%)`, `Supported pp change from TPM >= 2`),
+    decimals = 1
+  )
+```
+
+Raising the RNA-seq support threshold from TPM >= 2 to TPM >= 10 changes the supported gene fraction substantially: 75.5% to 58.9% in *P. cubensis* MSU1, 57.2% to 47.4% in *P. cubensis* SC1982, and 81.5% to 63.6% in *P. humuli* OR502AA. The qualitative isolate ranking is stable, but the absolute support percentages are threshold-sensitive. Because only 0.9-26.1% of input read pairs mapped to the corresponding pathogen assemblies, TPM >= 2 is the better primary threshold for transcript support, while TPM >= 10 is better interpreted as a stricter high-expression sensitivity check.
+
+```{r rnaseq-threshold-neither-sensitivity}
+neither_sensitivity |>
+  select(threshold, label, genes, percent, `Neither pp change from TPM >= 2`) |>
+  gt() |>
+  fmt_integer(columns = genes) |>
+  fmt_number(columns = c(percent, `Neither pp change from TPM >= 2`), decimals = 1)
+```
+
+The "Neither" category is much less sensitive to this threshold choice, increasing by only 0.9-1.4 percentage points at TPM >= 10. Thus the cautionary conclusion about least-supported gene models is robust, even though the headline RNA-seq-supported fraction is not.
+
+# Recommended Manuscript Figure
+
+```{r main-summary}
+main_summary |>
+  gt() |>
+  fmt_integer(columns = -label)
+```
+
+For the manuscript, the most useful plot is a single proportional stacked bar chart showing whether each predicted gene has functional annotation, RNA-seq support, both, or neither. This plot directly connects the two main questions in this section: how much of the Helixer gene set is functionally interpretable, and how much is supported by infection-stage transcript evidence.
+
+```{r support-plot, fig.width=7, fig.height=3.8}
+support_plot <- support_summary |>
+  mutate(
+    plot_label = recode(
+      label,
+      "*P. cubensis* MSU1" = "P. cubensis MSU1",
+      "*P. cubensis* SC1982" = "P. cubensis SC1982",
+      "*P. humuli* OR502AA" = "P. humuli OR502AA"
+    ),
+    plot_label = factor(
+      plot_label,
+      levels = c("P. humuli OR502AA", "P. cubensis SC1982", "P. cubensis MSU1")
+    )
+  ) |>
+  ggplot(aes(x = plot_label, y = percent, fill = support_class)) +
+  geom_col(width = 0.75, position = position_stack(reverse = TRUE)) +
+  coord_flip() +
+  scale_y_continuous(
+    breaks = seq(0, 100, 25),
+    labels = \(x) paste0(x, "%"),
+    limits = c(0, 102),
+    expand = expansion(mult = c(0, 0))
+  ) +
+  labs(
+    x = NULL,
+    y = "Predicted genes (%)",
+    fill = NULL
+  ) +
+  scale_fill_manual(
+    values = c(
+      "Both" = "#0072B2",
+      "Functional only" = "#56B4E9",
+      "RNA-seq only" = "#E69F00",
+      "Neither" = "#B3B3B3"
+    )
+  ) +
+  guides(fill = guide_legend(ncol = 1, byrow = TRUE)) +
+  theme_bw(base_size = 8) +
+  theme(
+    legend.position = "right",
+    legend.key.size = unit(3.5, "mm"),
+    legend.text = element_text(size = 8),
+    axis.title = element_text(size = 9),
+    axis.text = element_text(size = 8),
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor = element_blank(),
+    plot.margin = margin(3, 8, 3, 3)
+  )
+
+save_pub_r(support_plot, "gene-annotation-rnaseq-support", width_mm = 180, height_mm = 75)
+support_plot
+```
+
+This figure should be reported as transcript support for predicted genes, not protein validation. The "Neither" category is the key cautionary group: genes with neither functional annotation nor RNA-seq support in the sampled infection stages.
+
+# Hypothetical Proteins and RNA-seq Support
+
+```{r unannotated-expression}
+unannotated_expression |>
+  gt() |>
+  fmt_integer(columns = c(`Hypothetical proteins`, `TPM >= 2`, `TPM < 2`)) |>
+  fmt_number(columns = `TPM < 2 (%)`, decimals = 1)
+```
+
+Many proteins without functional annotations also lacked RNA-seq support in the sampled infection time points. This pattern is most pronounced in *P. cubensis* SC1982, where most hypothetical proteins had TPM < 2. These genes should not be discarded automatically: they may include stage-specific genes, lowly expressed genes, rapidly evolving proteins, or annotation artifacts. In the manuscript, this is safest to report as limited transcript support for a subset of hypothetical proteins rather than as evidence that they are false predictions.
+
+# Manuscript Takeaway
+
+After repeat hardmasking, Helixer predicted 12,764-18,113 protein-coding genes across the three focal assemblies. Functional evidence was assigned to 80.3-89.8% of predicted genes, while 1,296-3,568 genes per isolate remained hypothetical. RNA-seq data provided transcript support for most predicted genes in MSU1 and OR502AA and for a smaller fraction of SC1982 genes. A substantial fraction of hypothetical proteins lacked expression support at TPM >= 2 in the sampled infection time points, suggesting that the least-supported gene models should be interpreted cautiously in downstream comparative analyses.

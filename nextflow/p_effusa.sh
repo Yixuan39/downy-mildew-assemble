@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-nextflow run ${HOME}/software/TEA/main.nf \
+nextflow run ${HOME}/software/target-asm/main.nf \
     -profile slurm \
     --reads "${HOME}/project_data/downy/p_effusa/filtered/p_effusa.fastq.gz" \
     --outdir "${HOME}/project_data/downy/Assembly/p_effusa" \

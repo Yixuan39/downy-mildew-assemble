@@ -1,19 +1,19 @@
 #!/bin/bash
-#SBATCH --job-name=benchmark_tea
+#SBATCH --job-name=benchmark_target_asm
 #SBATCH -c 32
 #SBATCH --mem=500G
-#SBATCH --output=benchmark_tea_%j.out
+#SBATCH --output=benchmark_target_asm_%j.out
 
 set -euo pipefail
 
 SAMPLE="${SAMPLE:-p_effusa}"
 THREADS="${SLURM_CPUS_PER_TASK:-32}"
 PROJECT_DATA="${PROJECT_DATA:-${HOME}/project_data/downy}"
-DEFAULT_TEA_MAIN="${HOME}/software/TEA/main.nf"
-if [[ ! -f "${DEFAULT_TEA_MAIN}" && -f "${HOME}/Documents/Projects/TEA/main.nf" ]]; then
-    DEFAULT_TEA_MAIN="${HOME}/Documents/Projects/TEA/main.nf"
+DEFAULT_TARGET_ASM_MAIN="${HOME}/software/target-asm/main.nf"
+if [[ ! -f "${DEFAULT_TARGET_ASM_MAIN}" && -f "${HOME}/Documents/Projects/target-asm/main.nf" ]]; then
+    DEFAULT_TARGET_ASM_MAIN="${HOME}/Documents/Projects/target-asm/main.nf"
 fi
-TEA_MAIN="${TEA_MAIN:-${DEFAULT_TEA_MAIN}}"
+TARGET_ASM_MAIN="${TARGET_ASM_MAIN:-${DEFAULT_TARGET_ASM_MAIN}}"
 NEXTFLOW_PROFILE="${NEXTFLOW_PROFILE:-apptainer}"
 GX_DB="${GX_DB:-${HOME}/db/fcs-gx}"
 RASUSA_SEED="${RASUSA_SEED:-2025}"
@@ -81,8 +81,8 @@ echo "Threads: ${THREADS}"
 echo "Nextflow profile: ${NEXTFLOW_PROFILE}"
 echo "Target bases: ${TARGET_BASES:-none}"
 
-tea_args=(
-    nextflow run "${TEA_MAIN}"
+target_asm_args=(
+    nextflow run "${TARGET_ASM_MAIN}"
     -profile "${NEXTFLOW_PROFILE}"
     --reads "${READS}"
     --outdir "${OUTDIR}"
@@ -94,19 +94,19 @@ tea_args=(
 )
 
 if [[ -n "${TARGET_BASES}" ]]; then
-    tea_args+=(--target_bases "${TARGET_BASES}")
+    target_asm_args+=(--target_bases "${TARGET_BASES}")
 fi
 
-"${tea_args[@]}"
+"${target_asm_args[@]}"
 
 FINAL_FASTA="${OUTDIR}/${FINAL_NAME}"
 if [[ ! -s "${FINAL_FASTA}" ]]; then
-    echo "Expected final TEA assembly was not created: ${FINAL_FASTA}" >&2
+    echo "Expected final target-asm assembly was not created: ${FINAL_FASTA}" >&2
     exit 1
 fi
 
 seconds=$(( $(date +%s) - start ))
-printf "TEA\t%s\n" "${seconds}" >> "${TIMING}"
+printf "target-asm\t%s\n" "${seconds}" >> "${TIMING}"
 printf "Total\t%s\n" "${seconds}" >> "${TIMING}"
 
 if [[ "${FINAL_NAME}" != "${SAMPLE}.fasta.gz" ]]; then

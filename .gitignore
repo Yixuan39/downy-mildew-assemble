@@ -70,5 +70,14 @@ rsconnect/
 # for this new repo
 
 *log
+.positai
+*manuscript/*
+*sources/*
 
-
+# large regenerable intermediates (raw alignments / whole-genome copies used only
+# to produce the small result tables and figures that ARE tracked under data/)
+*.bam
+*.bam.bai
+data/sc1982_gap_tail_coverage/*.fasta
+data/tidk_telomeres/*/*.fa
+data/proteinfer_by_isolate/
