@@ -14,7 +14,7 @@ source "${REPO_ROOT:-${SLURM_SUBMIT_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/..
 
 INPUT_DIR=${PROJECT_DATA}/inputs/reference-genomes
 RESULT_DIR=${PROJECT_DATA}/results/assembly-preparation/reference-mito-hits
-FILES=($(find "$INPUT_DIR" -maxdepth 1 -type f -name "*.fna.gz"))
+FILES=($(find -L "$INPUT_DIR" -maxdepth 1 -type f -name "*.fna.gz" | sort))
 FILE=${FILES[$SLURM_ARRAY_TASK_ID]}
 mkdir -p ${RESULT_DIR}
 echo "Processing: $FILE"

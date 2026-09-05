@@ -23,7 +23,7 @@ MEMORY="${MEMORY:-32 GB}"
 mkdir -p "${INPUT_DIR}"
 find "${INPUT_DIR}" -type l -name '*.fasta.gz' -delete
 
-find "${GENOME_DIR}" -maxdepth 1 -type f -name '*.fna.gz' | sort |
+find -L "${GENOME_DIR}" -maxdepth 1 -type f -name '*.fna.gz' | sort |
 while IFS= read -r fasta; do
     sample="$(basename "${fasta}" .fna.gz)"
     ln -sfn "${fasta}" "${INPUT_DIR}/${sample}.fasta.gz"
