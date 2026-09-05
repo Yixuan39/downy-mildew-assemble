@@ -58,6 +58,12 @@ done
 for stage in assembly-qc telomeres repeatmask-gene-prediction rnaseq-support functional-annotation secretome-effectome synteny-orthology; do
     mkdir -p "$results/$stage"
 done
+# Per-stage README so each results/<stage> folder documents itself without the repo alongside it.
+for stage in read-filtering-screening assembly benchmarking assembly-preparation assembly-qc \
+             telomeres repeatmask-gene-prediction rnaseq-support functional-annotation \
+             secretome-effectome synteny-orthology; do
+    cp "$REPO_ROOT/workflow/results-readmes/$stage.md" "$results/$stage/README.md"
+done
 cp "$REPO_ROOT/workflow/RESULTS.md" "$PROJECT_DATA/README.md"
 printf '# Original results\n\nOriginal files before the SC1982 gap split. Preserved on %s.\nresults/ holds independent copies of stages 0-3 (safe to edit/delete this archive once those copies\nare verified); inputs/ still symlinks here for the untouched raw reads and reference genomes.\nDo not edit archived files or include raw reads/assemblies in the Zenodo package.\n' "$(date -Iseconds)" > "$archive/README.md"
 printf '# Inputs\n\nRaw HiFi and RNA-seq reads, published nuclear genomes and mitochondrial references.\nLinks resolve to the preserved original files in archive/previous-results/.\nThese files are excluded from the Zenodo package.\n' > "$PROJECT_DATA/inputs/README.md"
