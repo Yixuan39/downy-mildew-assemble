@@ -20,7 +20,7 @@ mkdir -p ${RESULT_DIR}
 echo "Processing: $FILE"
 BASENAME=$(basename ${FILE})  
 BASENAME=${BASENAME%.fna.gz}
-gzip -d -k ${FILE} 
+gzip -d -k -f ${FILE} 
 
 blastn -query ${FILE%.gz} \
   -subject "${PROJECT_DATA}/inputs/reference-mitochondria/KT072718.1.fna" \
