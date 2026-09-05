@@ -4,6 +4,7 @@ output: html_document
 ---
 
 ```{r echo=FALSE, message=FALSE}
+source(here::here("analysis", "lib", "paths.R"))
 library(tidyverse)
 library(data.table)
 library(gt)
@@ -28,7 +29,7 @@ clean_taxon <- function(x) str_remove(x, "^[a-z]_")
 # Read distribution of the PacBio HIFI reads
 
 ```{r read-length-distribution, echo=FALSE, fig.width=7.2, fig.height=5.9}
-files <- list.files('~/project_data/downy/k2_pfp', full.names = TRUE, recursive = TRUE, pattern = '\\.kraken$')
+files <- list.files(project_path("results/read-filtering-screening/taxonomy"), full.names = TRUE, recursive = TRUE, pattern = '\\.kraken$')
 df <- map_dfr(files, \(file) {
   fread(file, drop = 5, showProgress = FALSE, col.names = c('status', 'id', 'tax', 'length')) |>
     mutate(file = tools::file_path_sans_ext(basename(file)))
@@ -62,7 +63,7 @@ read.dist
 ```
 
 ```{r echo=FALSE}
-files <- list.files('~/project_data/downy/k2_pfp',
+files <- list.files(project_path("results/read-filtering-screening/taxonomy"),
                     full.names = TRUE, recursive = TRUE, pattern = '.kreport$')
 df.rpt <- map_dfr(files, function(file) {
   read_report2(file, add_taxRank_columns = TRUE) %>%
@@ -99,7 +100,7 @@ df.rpt |>
 tax.bar <- df.rpt |> 
   group_by(Isolate) |> 
   filter(taxRank %in% c('U', 'P')) |> 
-  mutate(taxon = if_else(percentage <= 5, 'Other', clean_taxon(name))) |>
+  mutate(taxon = if_else(percentage < 5, 'Other', clean_taxon(name))) |>
   ggplot() +
   geom_col(aes(x = percentage, y = Isolate, fill = taxon), position = 'fill') +
   scale_x_continuous(labels = scales::percent) +

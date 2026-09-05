@@ -4,7 +4,6 @@ channels:
   - bioconda
   - defaults
 dependencies:
-  - gffread
-  - emboss
+  - gffread=0.12.7
+  - emboss=6.6.0
   - orthofinder=2.5.5
-prefix: /home5/yyang55/miniforge3/envs/orthofinder

@@ -4,5 +4,4 @@ channels:
   - bioconda
   - defaults
 dependencies:
-  - diamond
-prefix: /home5/yyang55/miniforge3/envs/diamond
+  - diamond=2.2.4

@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-# ----------------------------------------------------------------------------------------
 # Purpose : Draw the linear synteny/linkage plot of the 14 oomycete mitochondrial genomes with gbdraw. Row
 #           order mirrors the nuclear synteny figure (analysis/synteny-analysis.Rmd), whose rows
 #           come from the GENESPACE SpeciesTree_rooted.txt tip order.
@@ -8,16 +7,13 @@
 # Outputs : data/mt_linkage/mt_linkage.{svg,pdf,png} plus per-record split/ and blast/ intermediates
 # Runs on : local workstation; needs `conda activate gbdraw` and the gbdraw-wide.py width patch alongside it
 # Usage   : bash workflow/04-mitochondrion/mt-linkage-plot.sh 'data/mt_linkage/14_mitochondrial_genomes.gb'
-# ----------------------------------------------------------------------------------------
 set -euo pipefail
+source "${REPO_ROOT:-${SLURM_SUBMIT_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}}/workflow/paths.sh"
 
-HERE="$(cd "$(dirname "$0")" && pwd)"
+HERE="$REPO_ROOT/workflow/04-mitochondrion"
 GB="${1:?usage: mt-linkage-plot.sh <multi-record.gb> [outdir]}"
-OUT="${2:-$HERE/../data/mt_linkage}"
+OUT="${2:-$REPO_ROOT/data/mt_linkage}"
 mkdir -p "$OUT/split" "$OUT/blast"
-
-source ~/miniforge3/etc/profile.d/conda.sh
-conda activate gbdraw
 
 # 1. split into per-record .gb/.fna, renamed + reordered (order = chain order in the plot)
 python - "$GB" "$OUT/split" <<'PY'

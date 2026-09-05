@@ -1,30 +1,29 @@
 #!/bin/bash
 #SBATCH --job-name=benchmark_hifiasm
 #SBATCH -c 32
+#SBATCH --mem=512G
 #SBATCH --output=benchmark_hifiasm_%j.out
 
-# ----------------------------------------------------------------------------------------
 # Purpose : Benchmark arm 1: hifiasm on the raw filtered reads, with no contamination handling. Records wall
 #           time to timing.tsv.
 # Inputs  : $SAMPLE reads under $PROJECT_DATA (MSU1 or UA202013)
-# Outputs : $PROJECT_DATA/benchmarking/$SAMPLE/hifiasm/ incl. timing.tsv
+# Outputs : $PROJECT_DATA/results/benchmarking/$SAMPLE/hifiasm/ incl. timing.tsv
 # Runs on : SLURM, 32 cores, all three arms on one large-memory node
 # Usage   : sbatch --export=ALL,SAMPLE=MSU1 workflow/03-benchmarking/hifiasm.sh
-# ----------------------------------------------------------------------------------------
 
 set -euo pipefail
+source "${REPO_ROOT:-${SLURM_SUBMIT_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}}/workflow/paths.sh"
 
 SAMPLE="${SAMPLE:-UA202013}"
 THREADS="${SLURM_CPUS_PER_TASK:-32}"
-PROJECT_DATA="${PROJECT_DATA:-${HOME}/project_data/downy}"
 
 case "${SAMPLE}" in
     UA202013)
-        READS="${PROJECT_DATA}/UA202013/filtered/UA202013.fastq.gz"
+        READS="${PROJECT_DATA}/results/read-filtering-screening/reads/UA202013/UA202013.fastq.gz"
         ;;
     MSU1|Quesada_SQIIe_MSU1)
         SAMPLE="MSU1"
-        READS="${PROJECT_DATA}/GSL_Data/fastq/filtered/Quesada_SQIIe_MSU1.fastq.gz"
+        READS="${PROJECT_DATA}/results/read-filtering-screening/reads/focal/Quesada_SQIIe_MSU1.fastq.gz"
         ;;
     *)
         echo "Unknown SAMPLE=${SAMPLE}. Use SAMPLE=UA202013 or SAMPLE=MSU1." >&2
@@ -32,7 +31,7 @@ case "${SAMPLE}" in
         ;;
 esac
 
-OUTDIR="${PROJECT_DATA}/benchmarking/${SAMPLE}/hifiasm"
+OUTDIR="${PROJECT_DATA}/results/benchmarking/${SAMPLE}/hifiasm"
 TIMING="${OUTDIR}/timing.tsv"
 
 mkdir -p "${OUTDIR}"
@@ -67,7 +66,7 @@ run_step "assembly" \
         "${READS}"
 
 run_step "gfa_to_fasta" \
-    bash -c 'gfatools gfa2fa "$1" | gzip > "$2"' \
+    bash -o pipefail -c 'gfatools gfa2fa "$1" | gzip > "$2"' \
         _ \
         "${OUTDIR}/${SAMPLE}.p_ctg.gfa" \
         "${OUTDIR}/${SAMPLE}.fasta.gz"

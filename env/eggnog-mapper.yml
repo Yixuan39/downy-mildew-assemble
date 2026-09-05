@@ -4,5 +4,4 @@ channels:
   - bioconda
   - defaults
 dependencies:
-  - eggnog-mapper
-prefix: /home5/yyang55/miniforge3/envs/eggnog-mapper
+  - eggnog-mapper=2.1.13

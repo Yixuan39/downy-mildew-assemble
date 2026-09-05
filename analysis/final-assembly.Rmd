@@ -1,243 +1,37 @@
 ---
-title: "Final Assembly"
-author: "Yixuan Yang"
-date: "`r Sys.Date()`"
+title: "Final nuclear assembly quality"
 output: html_document
 ---
 
-```{r echo=FALSE, message=FALSE}
+Table 1 uses the mitochondrial-filtered nuclear assemblies after the SC1982 gap split.
+Run stages 04 and 05 first. Rendering this report does not modify assemblies.
+
+```{r setup, include=FALSE}
 library(here)
-library(tidyverse)
-library(Biostrings)
-library(data.table)
-library(gt)
-knitr::opts_knit$set(root.dir = here())
-source(here("analysis", "lib", "figure-utils.R"))
-theme_set(theme_bw())
-
-assembly_dir <- path.expand("~/project_data/downy/backup/cleaned_contigs")
-quality_dir <- path.expand("~/project_data/downy/Assembly")
-rename_dir <- path.expand("~/project_data/downy/contigs-renamed")
-mito_dir <- file.path(rename_dir, "mitochondiral")
-clean_dir <- file.path(rename_dir, "cleaned")
-
-rename_key <- tribble(
-  ~old_file, ~seq_name, ~file_name,
-  "UA202013", "Peff-26", "Peronospora_effusa_UA202013_star",
-  "Quesada_SQIIe_MSU1", "Pcub-MSU1", "Pseudoperonospora_cubensis_MSU1",
-  "Quesada_SQIIe_SC1982", "Pcub-SC1982", "Pseudoperonospora_cubensis_SC1982",
-  "Quesada_SQIIe_Phumuli", "Phum-OR502AA", "Pseudoperonospora_humuli_OR502AA"
-)
-
-assembly_files <- list.files(
-  assembly_dir,
-  pattern = "\\.fasta\\.gz$",
-  full.names = TRUE,
-  recursive = TRUE
-)
-assembly_files <- setNames(assembly_files, str_remove(basename(assembly_files), "\\.fasta\\.gz$"))
-stopifnot(all(rename_key$old_file %in% names(assembly_files)))
-assembly_files <- assembly_files[rename_key$old_file]
-
-read.tb <- function(path) {
-  list.files(path, full.names = TRUE, pattern = "quality_final\\.csv$", recursive = TRUE) |>
-    map_dfr(\(x) as_tibble(fread(x)))
-}
+library(readr)
+library(dplyr)
+quality_file <- here("data", "qc_final_assemblies", "quality_final_assemblies.tsv")
+if (!file.exists(quality_file)) stop("Run workflow/05-assembly-qc/qc-final-assemblies.sh first")
+quality <- read_tsv(quality_file, show_col_types = FALSE)
+reference <- read_tsv(here("data", "qc_published_genomes", "quality_published_genomes.tsv"), show_col_types = FALSE) |>
+  filter(file == "Peronospora_effusa_UA202013")
+stopifnot(nrow(quality) == 4, nrow(reference) == 1, !anyDuplicated(quality$file))
+# The current manuscript revision uses the 475-contig SC1982 assembly.
+sc1982 <- filter(quality, file == "Pseudoperonospora_cubensis_SC1982")
+stopifnot(nrow(sc1982) == 1, sc1982[["# contigs (>= 0 bp)"]] == 475,
+          sc1982[["Total length (>= 0 bp)"]] == 103498600)
+table1 <- bind_rows(quality, reference) |>
+  transmute(Assembly = file, `Size (Mb)` = `Total length` / 1e6,
+    Contigs = `# contigs`, `N50 (Mb)` = N50 / 1e6, L50,
+    `N90 (Mb)` = N90 / 1e6, L90, `GC (%)`,
+    `Complete BUSCO (%)` = parse_number(S) + parse_number(D),
+    `Single BUSCO (%)` = parse_number(S), `Duplicated BUSCO (%)` = parse_number(D))
+write_tsv(table1, here("data", "qc_final_assemblies", "table1.tsv"))
 ```
 
-```{r echo=FALSE}
-read.tb(quality_dir) |>
-  dplyr::rename(sample = file) |>
-  gt() |> fmt_number()
+```{r table1, echo=FALSE}
+knitr::kable(table1, digits = 2)
 ```
 
-
-# Read Length
-
-```{r}
-read.length <- assembly_files |>
-  map_dfr(function(file) {
-    seq <- readDNAStringSet(file)
-    data.frame(sample = str_remove(basename(file), "\\.fasta\\.gz$"),
-               contig = names(seq),
-               length = width(seq))
-    }) |>
-  group_by(sample) |>
-  slice_max(length, n = 30, with_ties = FALSE) |>
-  arrange(dplyr::desc(length), .by_group = TRUE) |>
-  mutate(rank = dplyr::row_number()) |>
-  ungroup()
-
-read.length$sample <- factor(read.length$sample, levels = rename_key$old_file)
-
-read_length_plot <- ggplot(read.length, aes(x = factor(rank), y = length)) +
-  geom_col() +
-  scale_y_continuous(labels = scales::label_number(big.mark = ",")) +
-  facet_wrap(~sample, scales = 'free_y', ncol = 1) +
-  labs(
-    title = "Top 30 Longest Contigs",
-    subtitle = "Ordered by length",
-    x = "Rank",
-    y = "Length (bp)"
-  )
-save_pub_r(read_length_plot, "final-assembly-top-contigs", width_mm = 90, height_mm = 150)
-read_length_plot
-```
-
-
-# Rename the contigs
-
-We are going to rename the contigs in a consistent naming logic: species_sizeRank.
-
-The corresponding names are shown below:
-
-| Sample | Sequence name |
-|---|---|
-| UA202013 | Peff-26 |
-| Quesada_SQIIe_MSU1 | Pcub-MSU1 |
-| Quesada_SQIIe_SC1982 | Pcub-SC1982 |
-| Quesada_SQIIe_Phumuli | Phum-OR502AA |
-
-```{r echo=FALSE, message=FALSE}
-dir.create(rename_dir, recursive = TRUE, showWarnings = FALSE)
-
-rename_contigs_by_length <- function(file) {
-  input_name <- str_remove(basename(file), "\\.fasta\\.gz$")
-  row_id <- match(input_name, rename_key$old_file)
-  stopifnot(!is.na(row_id))
-  out <- file.path(rename_dir, paste0(rename_key$file_name[row_id], ".fasta.gz"))
-  if (file.exists(out)) {
-    return(invisible(out)) # ponytail: delete output to force regenerating large FASTAs.
-  }
-
-  seqs <- readDNAStringSet(file)
-  seqs <- seqs[order(width(seqs), decreasing = TRUE)]
-  names(seqs) <- paste0(rename_key$seq_name[row_id], "_", str_pad(seq_along(seqs), width = 3, pad = "0"))
-
-  writeXStringSet(
-    seqs,
-    out,
-    compress = TRUE
-  )
-}
-
-walk(assembly_files, rename_contigs_by_length)
-```
-
-
-# Remove mitochondrial contigs
-
-After assembly, some mitochondrial contigs were still retained in the assembly files. After renaming the contigs, we identified these mitochondrial contigs by aligning each assembly against the mitochondrial genome, then separated them from the rest of the assembly.
-
-```{bash echo=TRUE}
-set -euo pipefail
-
-INPUT_DIR="${HOME}/project_data/downy/contigs-renamed"
-RESULT_DIR="${HOME}/project_data/downy/contigs-renamed/mitochondiral"
-MITO_REF="${HOME}/project_data/downy/mitochondrial-genome/KT072718.1.fna"
-
-mkdir -p "$RESULT_DIR"
-
-find "$INPUT_DIR" -maxdepth 1 -type f -name "*.fasta.gz" | while read -r FILE; do
-  BASENAME="$(basename "$FILE" .fasta.gz)"
-  OUT="$RESULT_DIR/${BASENAME}.mito.tsv"
-
-  if [ -s "$OUT" ]; then
-    echo "Skipping existing: $OUT"
-    continue
-  fi
-
-  TMP="$RESULT_DIR/${BASENAME}.fasta"
-  gzip -dc "$FILE" > "$TMP"
-
-  blastn \
-    -query "$TMP" \
-    -subject "$MITO_REF" \
-    -outfmt "6 qseqid sseqid pident length qlen slen evalue" \
-    -max_target_seqs 1 \
-    -max_hsps 1 \
-    -out "$OUT"
-
-  rm "$TMP"
-done
-```
-
-```{r echo=FALSE, message=FALSE}
-blast_files <- list.files(
-  mito_dir,
-  pattern = "\\.mito\\.tsv$",
-  full.names = TRUE
-)
-
-read_mito_blast <- function(file) {
-  if (file.info(file)$size == 0) {
-    return(tibble())
-  }
-
-  fread(
-    file,
-    col.names = c("seqid", "subject", "pident", "align.length",
-                  "query.length", "subject.length", "e.value")
-  ) |>
-    as_tibble() |>
-    mutate(sample = str_remove(basename(file), "\\.mito\\.tsv$"))
-}
-
-blast.mito <- map_dfr(blast_files, read_mito_blast) |>
-  relocate(sample) |>
-  mutate(`align/query` = round(align.length / query.length, 3))
-
-blast.mito |>
-  group_by(sample) |>
-  arrange(desc(`align/query`), desc(align.length), .by_group = TRUE) |>
-  gt()
-```
-
-
-We treated contigs as mitochondrial when at least 10% of the contig aligned to the mitochondrial genome.
-
-```{r echo=FALSE, message=FALSE}
-mito_contigs <- blast.mito |>
-  filter(`align/query` >= 0.1)
-
-mito_contigs |>
-  group_by(sample) |>
-  arrange(desc(`align/query`), desc(align.length), .by_group = TRUE) |>
-  slice_head(n = 10) |>
-  gt()
-```
-
-```{r echo=FALSE, message=FALSE}
-renamed_files <- list.files(
-  rename_dir,
-  pattern = "\\.fasta\\.gz$",
-  full.names = TRUE
-)
-
-clean_contigs <- function(file) {
-  sample_name <- str_remove(basename(file), "\\.fasta\\.gz$")
-  seqs <- readDNAStringSet(file)
-  mito_ids <- mito_contigs |> filter(sample == sample_name) |> pull(seqid)
-  clean_out <- file.path(clean_dir, basename(file))
-  mito_out <- file.path(mito_dir, basename(file))
-
-  dir.create(clean_dir, recursive = TRUE, showWarnings = FALSE)
-  dir.create(mito_dir, recursive = TRUE, showWarnings = FALSE)
-  if (file.exists(clean_out) && file.exists(mito_out)) {
-    return(invisible(NULL)) # ponytail: delete outputs to force regenerating large FASTAs.
-  }
-
-  writeXStringSet(
-    seqs[!(names(seqs) %in% mito_ids)],
-    clean_out,
-    compress = TRUE
-  )
-  writeXStringSet(
-    seqs[names(seqs) %in% mito_ids],
-    mito_out,
-    compress = TRUE
-  )
-}
-
-walk(renamed_files, clean_contigs)
-```
+QUAST's `# contigs` and `Total length` use its minimum-length threshold; the split
+validation above uses the all-contig columns. Compleasm uses the stramenopiles lineage.

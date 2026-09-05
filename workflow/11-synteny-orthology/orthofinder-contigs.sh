@@ -1,13 +1,14 @@
 #!/bin/bash
 #SBATCH -c 32
 
-# ----------------------------------------------------------------------------------------
 # Purpose : Run OrthoFinder over the proteomes staged for GENESPACE, producing the orthogroups behind the
 #           synteny figures.
-# Inputs  : $HOME/project_data/downy/genespace-contigs/tmp/*.faa
-# Outputs : $HOME/project_data/downy/genespace-contigs/orthofinder/
+# Inputs  : ${PROJECT_DATA}/results/synteny-orthology/tmp/*.faa
+# Outputs : ${PROJECT_DATA}/results/synteny-orthology/orthofinder/
 # Runs on : SLURM, 32 cores requested (OrthoFinder is called with -t 10)
 # Usage   : sbatch workflow/11-synteny-orthology/orthofinder-contigs.sh
-# ----------------------------------------------------------------------------------------
 
-orthofinder -f "$HOME/project_data/downy/genespace-contigs/tmp" -t 10 -X -o "$HOME/project_data/downy/genespace-contigs/orthofinder"
+set -euo pipefail
+source "${REPO_ROOT:-${SLURM_SUBMIT_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}}/workflow/paths.sh"
+
+orthofinder -f "${PROJECT_DATA}/results/synteny-orthology/tmp" -t 10 -X -o "${PROJECT_DATA}/results/synteny-orthology/orthofinder"

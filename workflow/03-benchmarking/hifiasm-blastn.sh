@@ -1,33 +1,31 @@
 #!/bin/bash
 #SBATCH --job-name=benchmark_hifiasm_blastn
 #SBATCH -c 32
+#SBATCH --mem=512G
 #SBATCH --output=benchmark_hifiasm_blastn_%j.out
 
-# ----------------------------------------------------------------------------------------
 # Purpose : Benchmark arm 2: hifiasm followed by a BLASTN-based contaminant removal pass (the conventional
 #           post-hoc approach targetasm is compared against).
 # Inputs  : $SAMPLE reads under $PROJECT_DATA; NCBI nt and the oomycete taxid list
-# Outputs : $PROJECT_DATA/benchmarking/$SAMPLE/hifiasm_blastn/ incl. timing.tsv
+# Outputs : $PROJECT_DATA/results/benchmarking/$SAMPLE/hifiasm_blastn/ incl. timing.tsv
 # Runs on : SLURM, 32 cores, one large-memory node
 # Usage   : sbatch --export=ALL,SAMPLE=MSU1 workflow/03-benchmarking/hifiasm-blastn.sh
-# ----------------------------------------------------------------------------------------
 
 set -euo pipefail
+source "${REPO_ROOT:-${SLURM_SUBMIT_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}}/workflow/paths.sh"
 
 SAMPLE="${SAMPLE:-UA202013}"
 THREADS="${SLURM_CPUS_PER_TASK:-32}"
-PROJECT_DATA="${PROJECT_DATA:-${HOME}/project_data/downy}"
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SUBMIT_DIR="${SLURM_SUBMIT_DIR:-$PWD}"
-TAXIDS_FILE="${TAXIDS_FILE:-}"
+SCRIPT_DIR="$REPO_ROOT/workflow/03-benchmarking"
+TAXIDS_FILE="${TAXIDS_FILE:-$REPO_ROOT/data/oomycete_taxids.txt}"
 
 case "${SAMPLE}" in
     UA202013)
-        READS="${PROJECT_DATA}/UA202013/filtered/UA202013.fastq.gz"
+        READS="${PROJECT_DATA}/results/read-filtering-screening/reads/UA202013/UA202013.fastq.gz"
         ;;
     MSU1|Quesada_SQIIe_MSU1)
         SAMPLE="MSU1"
-        READS="${PROJECT_DATA}/GSL_Data/fastq/filtered/Quesada_SQIIe_MSU1.fastq.gz"
+        READS="${PROJECT_DATA}/results/read-filtering-screening/reads/focal/Quesada_SQIIe_MSU1.fastq.gz"
         ;;
     *)
         echo "Unknown SAMPLE=${SAMPLE}. Use SAMPLE=UA202013 or SAMPLE=MSU1." >&2
@@ -35,21 +33,9 @@ case "${SAMPLE}" in
         ;;
 esac
 
-OUTDIR="${PROJECT_DATA}/benchmarking/${SAMPLE}/hifiasm_blastn"
+OUTDIR="${PROJECT_DATA}/results/benchmarking/${SAMPLE}/hifiasm_blastn"
 TIMING="${OUTDIR}/timing.tsv"
 
-if [[ -z "${TAXIDS_FILE}" ]]; then
-    for candidate in \
-        "${SUBMIT_DIR}/data/oomycete_taxids.txt" \
-        "${SUBMIT_DIR}/../data/oomycete_taxids.txt" \
-        "${SCRIPT_DIR}/../data/oomycete_taxids.txt" \
-        "${PWD}/data/oomycete_taxids.txt"; do
-        if [[ -s "${candidate}" ]]; then
-            TAXIDS_FILE="${candidate}"
-            break
-        fi
-    done
-fi
 
 if [[ ! -s "${TAXIDS_FILE}" ]]; then
     echo "Missing oomycete taxid file: ${TAXIDS_FILE}" >&2
@@ -89,7 +75,7 @@ run_step "assembly" \
         "${READS}"
 
 run_step "gfa_to_fasta" \
-    bash -c 'gfatools gfa2fa "$1" > "$2"' \
+    bash -o pipefail -c 'gfatools gfa2fa "$1" > "$2"' \
         _ \
         "${OUTDIR}/${SAMPLE}.p_ctg.gfa" \
         "${OUTDIR}/${SAMPLE}_contigs.fasta"
@@ -97,7 +83,7 @@ run_step "gfa_to_fasta" \
 run_step "blastn_contigs" \
     blastn \
         -query "${OUTDIR}/${SAMPLE}_contigs.fasta" \
-        -db nt \
+        -db "${NT_DB:-$DB_ROOT/nt/nt}" \
         -outfmt "6 qseqid sseqid pident length qlen slen evalue staxids" \
         -max_target_seqs 1 \
         -max_hsps 1 \
@@ -107,7 +93,7 @@ run_step "blastn_contigs" \
         -out "${OUTDIR}/contigs_blast.tsv"
 
 run_step "filter_oomycete_contigs" \
-    bash -c '
+    bash -o pipefail -c '
         awk -F"\t" '\''
             NR == FNR {
                 wanted[$1] = 1
@@ -133,7 +119,7 @@ run_step "filter_oomycete_contigs" \
 echo "Oomycete contigs: $(wc -l < "${OUTDIR}/oomycete_contigs.txt")"
 
 run_step "write_filtered_fasta" \
-    bash -c 'seqkit grep -f "$1" "$2" --threads "$3" | gzip > "$4"' \
+    bash -o pipefail -c 'seqkit grep -f "$1" "$2" --threads "$3" | gzip > "$4"' \
         _ \
         "${OUTDIR}/oomycete_contigs.txt" \
         "${OUTDIR}/${SAMPLE}_contigs.fasta" \

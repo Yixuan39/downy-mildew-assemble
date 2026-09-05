@@ -16,14 +16,13 @@ sizes below are the live `du` figures at the time of writing.
 |---|---|---|---|
 | `GSL_Data/` (raw PacBio HiFi) | 160 GB | **NCBI SRA** | Raw reads for the three new isolates; INSDC-mandated. One BioSample per isolate under one BioProject. |
 | `RNA-seq/` (raw Illumina RNA-seq) | 130 GB | **NCBI SRA** | Raw transcriptome reads supporting the annotation; INSDC-mandated. |
-| `contigs-renamed/cleaned/` (4 assemblies) | 70 MB | **NCBI GenBank / WGS** | Novel genome assemblies (MSU1, SC1982, OR502AA, and the UA202013 reassembly); INSDC-mandated. |
+| `contigs-renamed/cleaned/` (4 assemblies) | 70 MB | **NCBI GenBank / WGS** | Novel genome assemblies (MSU1, SC1982, OR502AA, and the UA202013 reassembly); INSDC-mandated. SC1982 here is the **split** assembly (475 contigs, 103,498,600 bp) written in place by stage 05 - it carries no internal N-runs and is submission-ready as it stands. |
 | `contigs-renamed/mitochondiral/` (mito genomes) | 4 MB | **NCBI GenBank** | Novel organelle genomes, one per assembly (dir is misspelled — see cleanup). |
 | `contigs-renamed/helixer/` (GFF3 + proteomes) | 88 MB | **Zenodo** | Helixer gene models and predicted proteomes; no INSDC home as unsubmitted annotation. |
 | `downy-mildew-genomes/helixer/` | 272 MB | **Zenodo** | Like-for-like Helixer proteomes for the published genomes (used in synteny/orthology). |
 | `contigs-renamed/blastp/` | 6 MB | **Zenodo** | DIAMOND-blastp-vs-nr functional-annotation tables. |
 | `contigs-renamed/eggnog-mapper/` | 29 MB | **Zenodo** | eggNOG functional annotation. |
 | `contigs-renamed/interproscan/` | ~5.5 GB | **Zenodo** | InterPro domains + GO. Consider depositing the summarized per-protein TSV rather than the full raw output to cut size. |
-| `contigs-renamed/proteinfer/` | 33 MB | **Zenodo** | ProteInfer function predictions. |
 | secretome / effectome tables (stage 10) | small | **Zenodo** | SignalP6/TargetP/DeepLoc/DeepTMHMM/RxLR/WY effector tables behind Table 3. |
 | `k2_pfp/*.kreport` | 3 MB | **Zenodo** | Kraken2 PlusPFP classification reports (composition per library). |
 | `genespace-contigs/` (orthofinder, results, syntenicHits, pangenes, bed, peptide, genomes) | ~3.3 GB | **Zenodo** | GENESPACE synteny + OrthoFinder orthology outputs behind Figure 6. |
@@ -33,6 +32,7 @@ sizes below are the live `du` figures at the time of writing.
 | `downy-mildew-genomes/*.fna.gz` | 2.1 GB | **not deposited** | Published comparison genomes, already in NCBI; cite their accessions. |
 | `downy-mildew-genomes/hardmasked/` | 1.6 GB | **not deposited** | Regenerable RepeatMasker intermediate. |
 | `mitochondrial-genome/KT072718.1.fna` | 44 KB | **not deposited** | Public reference mitochondrion; cite accession KT072718.1. |
+| `contigs-renamed/pre-split/` (SC1982 only) | small | **not deposited** | The SC1982 assembly as FCS-GX left it (474 contigs, with the 8,381-bp N interval on `Pcub-SC1982_002` intact), superseded by the split assembly in `cleaned/`. Keep on the cluster: it is the reference the stage-05 gap coverage check needs. |
 | `Assembly/` | 42 GB | **not deposited** | targetasm working directories; the final assemblies are deposited from `cleaned/`. |
 | `benchmarking/` | 114 GB | **not deposited** | Benchmark assemblies + timings; the summary table `data/benchmark_qc/` is in the repo. |
 | `k2_pfp/*.kraken` | 9.6 GB | **not deposited** | Per-read Kraken2 calls; only the `.kreport` summaries are needed. |
@@ -70,7 +70,7 @@ All paths under `$HOME/project_data/downy`. **Gated on your sign-off — none ap
 | `downy-mildew-genomes/` | `published-genomes/` | Matches the repo's `published-genomes` vocabulary. Repoint script input paths in the same change (stages 04, 05, 07 read this dir). |
 | `p_effusa/` | `UA202013/` | Matches the isolate label; stages 01–02 already read a mix of `p_effusa` and `UA202013` paths — unify on `UA202013`. |
 | `contigs-renamed/mitochondiral/` | `contigs-renamed/mitochondrial/` | Fix the misspelling; stage 04 output path. |
-| `Peronospora_effusa_reassemble.*` (in cleaned/, mitochondiral/, helixer/, blastp/, eggnog-mapper/, interproscan/, proteinfer/) | decide at sign-off | Our reassembly of the public UA202013 reads. Renaming to `Peronospora_effusa_UA202013` would collide with the published genome of the same isolate in `downy-mildew-genomes/`; a suffix such as `_UA202013_reassembly` keeps them distinct. **Needs your call.** |
+| `Peronospora_effusa_reassemble.*` (in cleaned/, mitochondiral/, helixer/, blastp/, eggnog-mapper/, interproscan/) | decide at sign-off | Our reassembly of the public UA202013 reads. Renaming to `Peronospora_effusa_UA202013` would collide with the published genome of the same isolate in `downy-mildew-genomes/`; a suffix such as `_UA202013_reassembly` keeps them distinct. **Needs your call.** |
 
 ### Deletions
 

@@ -1,24 +1,22 @@
 #!/bin/bash
 
-# ----------------------------------------------------------------------------------------
 # Purpose : Same quality workflow over the published downy mildew genomes, so the new assemblies can be
 #           compared on identical metrics.
-# Inputs  : $HOME/project_data/downy/downy-mildew-genomes/*.fna.gz; compleasm lineages at $HOME/db/compleasm
+# Inputs  : ${PROJECT_DATA}/inputs/reference-genomes/*.fna.gz; compleasm lineages at ${DB_ROOT}/compleasm
 # Outputs : data/qc_published_genomes/quality_published_genomes.tsv
-# Runs on : local or cluster; needs Nextflow with the docker profile
-# Usage   : bash workflow/05-assembly-qc/qc-other-genomes.sh
-# ----------------------------------------------------------------------------------------
+# Runs on : local or cluster; Nextflow submits SLURM jobs with Apptainer
+# Usage   : bash workflow/05-assembly-qc/qc-published-genomes.sh
 set -euo pipefail
+source "${REPO_ROOT:-${SLURM_SUBMIT_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}}/workflow/paths.sh"
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
-GENOME_DIR="${HOME}/project_data/downy/downy-mildew-genomes"
+SCRIPT_DIR="$REPO_ROOT/workflow/05-assembly-qc"
+REPO_DIR="$REPO_ROOT"
+GENOME_DIR="${PROJECT_DATA}/inputs/reference-genomes"
 QC_DIR="${REPO_DIR}/data/qc_published_genomes"
 INPUT_DIR="${QC_DIR}/fasta_inputs"
 OUTPUT_TABLE="${QC_DIR}/quality_published_genomes.tsv"
-TARGET_ASM_DIR="${HOME}/Documents/Projects/targetasm"
-QUALITY_LIBRARY="${HOME}/db/compleasm"
-NEXTFLOW_PROFILE="${NEXTFLOW_PROFILE:-docker}"
+QUALITY_LIBRARY="${DB_ROOT}/compleasm"
+NEXTFLOW_PROFILE="${NEXTFLOW_PROFILE:-slurm,$CONTAINER_RUNTIME}"
 THREADS="${THREADS:-$(getconf _NPROCESSORS_ONLN)}"
 MEMORY="${MEMORY:-32 GB}"
 

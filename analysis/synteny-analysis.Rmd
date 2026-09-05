@@ -1,24 +1,20 @@
 ---
 title: "Synteny Analysis"
 output: html_document
+params:
+  rebuild: false
 ---
 
 ```{r echo=FALSE, message=FALSE}
+source(here::here("analysis", "lib", "paths.R"))
 library(here)
 ```
 
 ```{r  message=FALSE, echo=FALSE, results=FALSE}
-wd <- path.expand("~/project_data/downy/genespace-contigs")
-orthofinder_dir <- tail(grep(
-  "Results_",
-  sort(list.dirs(file.path(wd, "orthofinder"), recursive = FALSE)),
-  value = TRUE
-), 1)
-if (!length(orthofinder_dir)) stop("No cached OrthoFinder results found in ", file.path(wd, "orthofinder"))
-stats_dir <- file.path(orthofinder_dir, "Comparative_Genomics_Statistics")
+wd <- project_path("results/synteny-orthology")
 ```
 
-```{r rebuild-genespace, eval=FALSE}
+```{r rebuild-genespace, eval=params$rebuild}
 library(GENESPACE)
 library(ape)
 library(ggplot2)
@@ -28,8 +24,8 @@ source(here("analysis", "lib", "figure-utils.R"))
 theme_set(theme_bw())
 
 genomeRepo <- file.path(wd, "genomes")
-path2mcscanx <- path.expand("~/miniforge3/bin")
-Sys.setenv(PATH = paste(path.expand("~/miniforge3/bin"), Sys.getenv("PATH"), sep = .Platform$path.sep))
+path2mcscanx <- Sys.getenv("MCSCANX_DIR", dirname(Sys.which("MCScanX")))
+stopifnot(file.exists(file.path(path2mcscanx, "MCScanX")))
 
 asm2run <- c(
   "Bremia_lactucae_SF5",
@@ -135,8 +131,16 @@ save_pub_r(synteny_contigs_plot, "synteny-contigs-tree-riparian", width_mm = 180
 
 
 ```{r orthogroup-summary, echo=FALSE}
+orthofinder_dir <- tail(grep(
+  "Results_",
+  sort(list.dirs(file.path(wd, "orthofinder"), recursive = FALSE)),
+  value = TRUE
+), 1)
+if (!length(orthofinder_dir)) stop("No cached OrthoFinder results found in ", file.path(wd, "orthofinder"))
+stats_dir <- file.path(orthofinder_dir, "Comparative_Genomics_Statistics")
+
 overall_lines <- readLines(file.path(stats_dir, "Statistics_Overall.tsv"))
-overall_lines <- overall_lines[seq_len(match("", overall_lines) - 1)]
+overall_lines <- head(overall_lines, match("", overall_lines, nomatch = length(overall_lines) + 1) - 1)
 overall_stats <- read.delim(
   text = paste(overall_lines, collapse = "\n"),
   header = FALSE,
@@ -161,7 +165,7 @@ knitr::kable(
 
 ```{r orthogroups-by-species, echo=FALSE}
 per_species_lines <- readLines(file.path(stats_dir, "Statistics_PerSpecies.tsv"))
-per_species_lines <- per_species_lines[seq_len(match("", per_species_lines) - 1)]
+per_species_lines <- head(per_species_lines, match("", per_species_lines, nomatch = length(per_species_lines) + 1) - 1)
 per_species <- read.delim(
   text = paste(per_species_lines, collapse = "\n"),
   check.names = FALSE

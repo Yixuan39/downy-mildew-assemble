@@ -7,7 +7,6 @@
 #SBATCH --output=logs/signalp6.%A_%a.out
 #SBATCH --error=logs/signalp6.%A_%a.err
 
-# ----------------------------------------------------------------------------------------
 # Purpose : Primary secretome filter. SignalP 6 (Fast mode) flags proteins with an N-terminal
 #           signal peptide; the positive set seeds every downstream step.
 # Inputs  : $HELIXER/<ASM>.faa
@@ -15,22 +14,21 @@
 #           $SECR/01-signalp6/<ASM>.signalp_positive.{ids,faa}
 # Tool    : SignalP 6 (conda env `signalp6`) - LICENSE-GATED, see README "Required tools"
 # Usage   : sbatch workflow/10-secretome-effectome/01-signalp6.sh
-# ----------------------------------------------------------------------------------------
 set -euo pipefail
+source "${REPO_ROOT:-${SLURM_SUBMIT_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}}/workflow/paths.sh"
 # Assemblies processed as a SLURM array (one task per proteome).
 ASSEMBLIES=(
   Pseudoperonospora_cubensis_MSU1
   Pseudoperonospora_cubensis_SC1982
   Pseudoperonospora_humuli_OR502AA
-  Peronospora_effusa_reassemble
+  Peronospora_effusa_UA202013_star
 )
 ASM="${ASSEMBLIES[$SLURM_ARRAY_TASK_ID]}"
 
-HELIXER="$HOME/project_data/downy/contigs-renamed/helixer"      # stage 07 proteomes (<ASM>.faa)
-SECR="$HOME/project_data/downy/contigs-renamed/secretome"        # stage 10 output root
+HELIXER="${PROJECT_DATA}/results/repeatmask-gene-prediction/focal/helixer"      # stage 07 proteomes (<ASM>.faa)
+SECR="${PROJECT_DATA}/results/secretome-effectome"        # stage 10 output root
 SP="$SECR/01-signalp6/$ASM.signalp_positive"                     # SignalP-positive set (.ids/.faa)
 
-source "$HOME/miniforge3/etc/profile.d/conda.sh"; conda activate signalp6
 mkdir -p "$SECR/01-signalp6/$ASM" logs
 signalp6 --fastafile "$HELIXER/$ASM.faa" --organism eukarya \
   --output_dir "$SECR/01-signalp6/$ASM" --format none --mode fast \

@@ -5,4 +5,3 @@ channels:
   - defaults
 dependencies:
   - kraken2=2.17
-prefix: /home5/yyang55/miniforge3/envs/kraken2

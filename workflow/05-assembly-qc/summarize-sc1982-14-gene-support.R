@@ -1,3 +1,4 @@
+source(here::here("analysis", "lib", "paths.R"))
 #!/usr/bin/env Rscript
 
 # ----------------------------------------------------------------------------------------
@@ -15,7 +16,8 @@ suppressPackageStartupMessages({
 })
 
 bam <- "data/sc1982_gap_tail_coverage/SC1982_hifi_to_Pcub-SC1982_002.primary.bam"
-gff <- "$HOME/project_data/downy/contigs-renamed/helixer/Pseudoperonospora_cubensis_SC1982.gff"
+gff <- Sys.getenv("PRE_SPLIT_GFF")
+if (!nzchar(gff)) stop("Set PRE_SPLIT_GFF to the GFF used for the original unsplit assembly")
 proteins <- "data/sc1982_gap_tail_coverage/Pcub-SC1982_002_14_fungal_hit_proteins.faa"
 output <- "data/sc1982_gap_tail_coverage/Pcub-SC1982_002_14_genes_coverage_and_read_support.tsv"
 contig <- "Pcub-SC1982_002"

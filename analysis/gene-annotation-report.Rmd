@@ -9,6 +9,7 @@ output:
 ---
 
 ```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+source(here::here("analysis", "lib", "paths.R"))
 library(tidyverse)
 library(data.table)
 library(gt)
@@ -19,7 +20,7 @@ theme_set(theme_bw())
 knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 
 annotation_dir <- here("data", "protein_function_by_isolate")
-hardmask_dir <- path.expand("~/project_data/downy/contigs-renamed/hardmasked")
+hardmask_dir <- project_path("results/repeatmask-gene-prediction/focal/hardmasked")
 
 isolate_key <- tribble(
   ~file_name, ~isolate, ~label,
@@ -30,9 +31,9 @@ isolate_key <- tribble(
 
 rna_tpm_files <- tribble(
   ~isolate, ~tpm_file,
-  "Pcub_MSU1", path.expand("~/project_data/downy/RNA-seq_result/Pcub_MSU1/star_salmon/salmon.merged.gene_tpm.tsv"),
-  "Pcub_SC1982", path.expand("~/project_data/downy/RNA-seq_result/Pcub_SC1982/star_salmon/salmon.merged.gene_tpm.tsv"),
-  "Phum_OR502AA", path.expand("~/project_data/downy/RNA-seq_result/Phum_OR502AA/star_salmon/salmon.merged.gene_tpm.tsv")
+  "Pcub_MSU1", project_path("results/rnaseq-support/Pcub_MSU1/star_salmon/salmon.merged.gene_tpm.tsv"),
+  "Pcub_SC1982", project_path("results/rnaseq-support/Pcub_SC1982/star_salmon/salmon.merged.gene_tpm.tsv"),
+  "Phum_OR502AA", project_path("results/rnaseq-support/Phum_OR502AA/star_salmon/salmon.merged.gene_tpm.tsv")
 )
 
 rna_support_threshold <- 2
@@ -44,17 +45,18 @@ read_annotation <- function(file_name, isolate) {
     mutate(
       file_name = file_name,
       isolate = isolate,
-      gene_id = str_remove(id, "\\.1$")
+      gene_id = str_remove(id, "\\.[0-9]+$")
     )
 }
 
 read_tpm <- function(isolate, tpm_file) {
   if (!file.exists(tpm_file)) {
-    return(tibble(isolate = isolate, gene_id = character(), max_tpm = numeric()))
+    stop("Missing RNA-seq TPM table: ", tpm_file)
   }
 
   tpm <- fread(tpm_file) |> as_tibble()
   expr_cols <- setdiff(names(tpm), c("gene_id", "gene_name"))
+  stopifnot(length(expr_cols) > 0, !anyDuplicated(tpm$gene_id))
 
   tpm |>
     mutate(across(all_of(expr_cols), as.numeric)) |>
@@ -125,6 +127,7 @@ repeat_summary <- pmap_dfr(isolate_key |> select(file_name, isolate), read_repea
 
 gene_level <- gene_level |>
   left_join(rna_support, by = c("isolate", "gene_id"))
+stopifnot(!anyNA(gene_level$max_tpm), all(is.finite(gene_level$max_tpm)))
 
 annotation_summary <- gene_level |>
   group_by(label) |>
@@ -247,7 +250,7 @@ neither_sensitivity <- threshold_support_sensitivity |>
 
 This report summarizes protein-coding gene predictions from hard-masked assemblies of the three focal isolates, functional descriptions assigned from eggNOG-mapper, InterProScan, and DIAMOND BLASTP, and RNA-seq support from Salmon TPM estimates. RNA-seq evidence is treated as transcript support for predicted gene models, not direct protein validation.
 
-Functional annotation follows the rule implemented in `analysis/lib/check-annotation.R`: informative eggNOG-mapper descriptions are used first, followed by the best InterProScan hit, then the best DIAMOND BLASTP hit. Proteins without any supported annotation are retained as hypothetical proteins. Only 0.9-26.1% of input read pairs mapped to the corresponding pathogen assembly across the infection-stage RNA-seq libraries. The RNA-seq summary therefore uses the relatively permissive threshold of TPM >= 2 in at least one sampled time point to retain low-abundance transcript evidence under limited pathogen-mapped read depth.
+Functional annotation follows the rule implemented in `workflow/09-functional-annotation/summarize-functions.R`: informative eggNOG-mapper descriptions are used first, followed by the best InterProScan hit, then the best DIAMOND BLASTP hit. Proteins without any supported annotation are retained as hypothetical proteins. Only 0.9-26.1% of input read pairs mapped to the corresponding pathogen assembly across the infection-stage RNA-seq libraries. The RNA-seq summary therefore uses the relatively permissive threshold of TPM >= 2 in at least one sampled time point to retain low-abundance transcript evidence under limited pathogen-mapped read depth.
 
 # Repeat Masking
 
@@ -260,7 +263,6 @@ repeat_summary |>
   )
 ```
 
-RepeatMasker identified a large repeat fraction in all three assemblies, with 48.4-52.5% of bases masked before gene prediction. LTR retroelements and unclassified repeats made up the largest named categories. In the manuscript, this is worth reporting briefly because it explains why hardmasked assemblies were used for Helixer gene prediction, but it does not need a separate main figure.
 
 # Gene Prediction and Functional Annotation
 
@@ -271,7 +273,6 @@ annotation_summary |>
   fmt_number(columns = `Annotated (%)`, decimals = 1)
 ```
 
-Most predicted genes received functional support from at least one annotation source. The largest gene set was predicted for *P. cubensis* SC1982, which also had the highest number and proportion of hypothetical proteins.
 
 # RNA-seq Support
 
@@ -282,7 +283,6 @@ expression_summary |>
   fmt_number(columns = c(`RNA-seq supported, TPM > 0 (%)`, `RNA-seq supported, TPM >= 2 (%)`), decimals = 1)
 ```
 
-Using TPM >= 2 in at least one sampled time point as the expression-support threshold, RNA-seq supported 75.5% of *P. cubensis* MSU1 genes, 57.2% of *P. cubensis* SC1982 genes, and 81.5% of *P. humuli* OR502AA genes.
 
 # RNA-seq Threshold Sensitivity
 
@@ -304,7 +304,6 @@ threshold_sensitivity |>
   )
 ```
 
-Raising the RNA-seq support threshold from TPM >= 2 to TPM >= 10 changes the supported gene fraction substantially: 75.5% to 58.9% in *P. cubensis* MSU1, 57.2% to 47.4% in *P. cubensis* SC1982, and 81.5% to 63.6% in *P. humuli* OR502AA. The qualitative isolate ranking is stable, but the absolute support percentages are threshold-sensitive. Because only 0.9-26.1% of input read pairs mapped to the corresponding pathogen assemblies, TPM >= 2 is the better primary threshold for transcript support, while TPM >= 10 is better interpreted as a stricter high-expression sensitivity check.
 
 ```{r rnaseq-threshold-neither-sensitivity}
 neither_sensitivity |>
@@ -314,9 +313,8 @@ neither_sensitivity |>
   fmt_number(columns = c(percent, `Neither pp change from TPM >= 2`), decimals = 1)
 ```
 
-The "Neither" category is much less sensitive to this threshold choice, increasing by only 0.9-1.4 percentage points at TPM >= 10. Thus the cautionary conclusion about least-supported gene models is robust, even though the headline RNA-seq-supported fraction is not.
 
-# Recommended Manuscript Figure
+# Functional annotation and transcript support
 
 ```{r main-summary}
 main_summary |>
@@ -324,7 +322,6 @@ main_summary |>
   fmt_integer(columns = -label)
 ```
 
-For the manuscript, the most useful plot is a single proportional stacked bar chart showing whether each predicted gene has functional annotation, RNA-seq support, both, or neither. This plot directly connects the two main questions in this section: how much of the Helixer gene set is functionally interpretable, and how much is supported by infection-stage transcript evidence.
 
 ```{r support-plot, fig.width=7, fig.height=3.8}
 support_plot <- support_summary |>
@@ -379,7 +376,6 @@ save_pub_r(support_plot, "gene-annotation-rnaseq-support", width_mm = 180, heigh
 support_plot
 ```
 
-This figure should be reported as transcript support for predicted genes, not protein validation. The "Neither" category is the key cautionary group: genes with neither functional annotation nor RNA-seq support in the sampled infection stages.
 
 # Hypothetical Proteins and RNA-seq Support
 
@@ -390,8 +386,5 @@ unannotated_expression |>
   fmt_number(columns = `TPM < 2 (%)`, decimals = 1)
 ```
 
-Many proteins without functional annotations also lacked RNA-seq support in the sampled infection time points. This pattern is most pronounced in *P. cubensis* SC1982, where most hypothetical proteins had TPM < 2. These genes should not be discarded automatically: they may include stage-specific genes, lowly expressed genes, rapidly evolving proteins, or annotation artifacts. In the manuscript, this is safest to report as limited transcript support for a subset of hypothetical proteins rather than as evidence that they are false predictions.
 
-# Manuscript Takeaway
 
-After repeat hardmasking, Helixer predicted 12,764-18,113 protein-coding genes across the three focal assemblies. Functional evidence was assigned to 80.3-89.8% of predicted genes, while 1,296-3,568 genes per isolate remained hypothetical. RNA-seq data provided transcript support for most predicted genes in MSU1 and OR502AA and for a smaller fraction of SC1982 genes. A substantial fraction of hypothetical proteins lacked expression support at TPM >= 2 in the sampled infection time points, suggesting that the least-supported gene models should be interpreted cautiously in downstream comparative analyses.

@@ -24,7 +24,7 @@ figures.
 
 | path | contents |
 |---|---|
-| [`workflow/`](workflow/) | every batch script that produced a result, in 13 numbered stages |
+| [`workflow/`](workflow/) | every batch script that produced a result, in 12 numbered stages |
 | [`analysis/`](analysis/) | R Markdown notebooks that make the manuscript figures and tables |
 | [`env/`](env/) | how each stage gets its software (containers, conda, Nextflow profiles) |
 | `data/` | small derived tables the notebooks read or write; committed so figures can be regenerated |
@@ -55,7 +55,10 @@ outside the repository, under `$HOME/project_data/downy`; reference databases li
     bash workflow/03-benchmarking/submit-all.sh
     bash workflow/03-benchmarking/fasta-quality-table.sh
 
-    # 4. downstream: QC, mitochondria, telomeres, annotation, synteny (stages 04-12, independent)
+    # 4. downstream: QC, mitochondria, telomeres, annotation, synteny (stages 04-11, independent)
+    #    stage 05 first: split the SC1982 N-gap contig in place (paths in its README),
+    #    then QC - stages 06-11 read the split assembly
+    bash workflow/05-assembly-qc/split-contigs.sh <pre-split.fasta.gz> <cleaned/SC1982.fasta.gz>
     bash workflow/05-assembly-qc/qc-final-assemblies.sh
     sbatch workflow/07-repeatmask-gene-prediction/hard-mask-contigs.sh
     sbatch workflow/07-repeatmask-gene-prediction/helixer-contigs.sh

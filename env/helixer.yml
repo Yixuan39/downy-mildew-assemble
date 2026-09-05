@@ -5,9 +5,8 @@ channels:
   - defaults
 dependencies:
   - python=3.10
-  - orthofinder
-  - gffread
+  - orthofinder=3.0.1b1
+  - gffread=0.12.7
   - numpy=1.26.4
-  - agat
-  - seqkit
-prefix: /home5/yyang55/miniforge3/envs/helixer
+  - agat=1.5.0
+  - seqkit=2.10.0

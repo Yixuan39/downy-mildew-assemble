@@ -3,46 +3,43 @@
 #SBATCH -c 24
 #SBATCH --mem=0
 
-# ----------------------------------------------------------------------------------------
 # Purpose : Assign InterPro domains and GO terms to the Helixer proteins with InterProScan 5.77-108.0 in a
 #           container.
-# Inputs  : $HOME/project_data/downy/contigs-renamed/helixer/*.faa; InterProScan data at
-#           $HOME/db/interproscan-5.77-108.0
-# Outputs : $HOME/project_data/downy/contigs-renamed/interproscan/<genome>/
+# Inputs  : ${PROJECT_DATA}/results/repeatmask-gene-prediction/focal/helixer/*.faa; InterProScan data at
+#           ${DB_ROOT}/interproscan-5.77-108.0
+# Outputs : ${PROJECT_DATA}/results/functional-annotation/interproscan/<genome>/
 # Runs on : SLURM array 0-3, 24 cores, apptainer
 # Usage   : sbatch workflow/09-functional-annotation/protein-interproscan.sh
-# ----------------------------------------------------------------------------------------
 
-INPUT_DIR=$HOME/project_data/downy/contigs-renamed/helixer
-RESULT_DIR=$HOME/project_data/downy/contigs-renamed/interproscan
-FILES=($(find "$INPUT_DIR" -type f -name "*.faa"))
-FILE=${FILES[$SLURM_ARRAY_TASK_ID]}
+set -euo pipefail
+source "${REPO_ROOT:-${SLURM_SUBMIT_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}}/workflow/paths.sh"
+
+INPUT_DIR=${PROJECT_DATA}/results/repeatmask-gene-prediction/focal/helixer
+RESULT_DIR=${PROJECT_DATA}/results/functional-annotation/interproscan
+FILES=("$INPUT_DIR"/*.faa)
+FILE="${FILES[${SLURM_ARRAY_TASK_ID:?Submit with sbatch --array}]}"
+[[ -s "$FILE" ]] || { echo "Missing input: $FILE" >&2; exit 1; }
 THREADS=24
 
 echo "Processing: $FILE"
-BASENAME=$(basename ${FILE})  
+BASENAME=$(basename "$FILE")  
 BASENAME=${BASENAME%.faa}
-mkdir -p ${RESULT_DIR}/${BASENAME}
+mkdir -p "${RESULT_DIR}/${BASENAME}"
 
-TMPDIR=${RESULT_DIR}/${BASENAME}_tmp
-mkdir -p $TMPDIR
+ANNOTATION_TMP=${RESULT_DIR}/${BASENAME}_tmp
+mkdir -p "$ANNOTATION_TMP"
 
-start=$EPOCHREALTIME
-
-apptainer exec \
---bind "$HOME:$HOME" \
---bind "$HOME/db/interproscan-5.77-108.0/data:/opt/interproscan/data" \
-$HOME/software/interproscan_5.77-108.0.sif \
+"$CONTAINER_RUNTIME" exec \
+--bind "$PROJECT_DATA:$PROJECT_DATA" \
+--bind "${DB_ROOT}/interproscan-5.77-108.0/data:/opt/interproscan/data" \
+"${SOFTWARE_ROOT}/interproscan_5.77-108.0.sif" \
 /opt/interproscan/interproscan.sh \
---cpu $THREADS \
---output-dir ${RESULT_DIR}/${BASENAME} \
+--cpu "$THREADS" \
+--output-dir "${RESULT_DIR}/${BASENAME}" \
 --formats TSV,GFF3 \
 --disable-precalc \
 --goterms \
 --iprlookup \
 --pathways \
---input $FILE \
---tempdir $TMPDIR
-
-end=$EPOCHREALTIME
-runtime=$(echo "$end - $start" | bc)
+--input "$FILE" \
+--tempdir "$ANNOTATION_TMP"

@@ -1,3 +1,4 @@
+source(here::here("analysis", "lib", "paths.R"))
 library(tidyverse)
 library(Biostrings)
 library(rtracklayer)
@@ -10,53 +11,15 @@ samples <- c(
   "Pseudoperonospora_humuli_OR502AA",
   "Pseudoperonospora_cubensis_SC1982"
 )
-
-base_dir <- "~/project_data/downy/contigs-renamed"
-rnaseq_result_dir <- "~/project_data/downy/RNA-seq_result"
-out_dir <- file.path(base_dir, "unannotated_protein")
-dir.create(out_dir, showWarnings = FALSE)
-summary_table <- data.frame()
-
-for (sample in samples) {
-  
-  message("Processing: ", sample)
-  # file paths
-  eggnog_file       <- file.path(base_dir,"eggnog-mapper",sample,paste0(sample, ".emapper.annotations"))
-  interproscan_file <- file.path(base_dir,"interproscan",sample,paste0(sample, ".faa.gff3"))
-  blastp_file       <- file.path(base_dir,"blastp",paste0(sample, ".tsv"))
-  faa_file          <- file.path(base_dir,"helixer",paste0(sample, ".faa"))
-  
-  # load all the files
-  proteome <- readAAStringSet(faa_file)
-  protein_ids <- names(proteome)
-  eggnog_ids <- read_tsv(eggnog_file,show_col_types = FALSE,comment = "##")$`#query` |> as.character()
-  interpro_ids <- readGFF(interproscan_file)$seqid |> as.character() |> unique()
-  blastp_ids <- read_tsv(blastp_file,show_col_types = FALSE)$qseqid |> as.character()
-  # find unannotated proteins
-  annotated_ids <- c(eggnog_ids,interpro_ids,blastp_ids) |> unique() |> na.omit()
-  unannotated_ids <- setdiff(protein_ids,annotated_ids)
-  
-  # save protein ID
-  write_lines(unannotated_ids,file.path(out_dir, paste0(sample, "_unannotated.txt")))
-  unannotated_faa <- proteome[protein_ids %in% unannotated_ids]
-  writeXStringSet(unannotated_faa,filepath = file.path(out_dir, paste0(sample, "_unannotated.faa")))
-  # summary table
-  summary_table <- rbind(
-    summary_table,
-    data.frame(
-      sample = sample,
-      n_proteins = length(proteome),
-      n_eggnog = length(eggnog_ids),
-      n_interproscan = length(interpro_ids),
-      n_blastp = length(blastp_ids),
-      n_annotated = length(annotated_ids),
-      n_unannotated = length(unannotated_ids)
-    ))
+requested <- Sys.getenv("SAMPLE", "")
+if (nzchar(requested)) {
+  stopifnot(requested %in% samples)
+  samples <- requested
 }
 
-# summarize functional description into description
-# make sure hit tables are filtered by e-value < 1e-10
-
+base_dir <- project_path("results/functional-annotation")
+proteome_dir <- project_path("results/repeatmask-gene-prediction/focal/helixer")
+rnaseq_result_dir <- project_path("results/rnaseq-support")
 remove_final_period <- function(description) {
   str_replace(str_trim(description), "\\.+$", "")
 }
@@ -160,7 +123,7 @@ write_isolate_annotation_tables <- function(annotation_table, output_dir) {
     Pseudoperonospora_cubensis_SC1982 = "Pcub_SC1982"
   )
   
-  for (isolate in names(isolate_patterns)) {
+  for (isolate in samples) {
     isolate_table <- annotation_table |>
       filter(str_detect(id, isolate_patterns[isolate]))
     
@@ -190,9 +153,9 @@ for (sample in samples) {
   eggnog_file       <- file.path(base_dir,"eggnog-mapper",sample,paste0(sample, ".emapper.annotations"))
   interproscan_file <- file.path(base_dir,"interproscan",sample,paste0(sample, ".faa.gff3"))
   blastp_file       <- file.path(base_dir,"blastp",paste0(sample, ".tsv"))
-  faa_file          <- file.path(base_dir,"helixer",paste0(sample, ".faa"))
+  faa_file          <- file.path(proteome_dir,paste0(sample, ".faa"))
   
-  protein_ids <- names(readAAStringSet(faa_file))
+  protein_ids <- sub(" .*", "", names(readAAStringSet(faa_file)))
   blastp.table <- read_tsv(blastp_file,show_col_types = FALSE) |> 
     filter(evalue < 1e-10) |>
     filter(length/slen >= 0.5) # for blstp, we also require at least 50% coverage of the subject sequence
@@ -212,12 +175,15 @@ for (sample in samples) {
   
   sample_protein_function.tb <- data.frame()
   
+  # ponytail: per-protein scan is adequate for ~20k proteins; use ranked joins for larger proteomes.
   for (id in protein_ids) {
     has_eggnog <- id %in% eggnog.table$`#query`
     eggnog_descriptions <- eggnog.table$Description[eggnog.table$`#query` == id]
     if (has_eggnog && any(eggnog_descriptions != "-", na.rm = TRUE)) {
       row <- eggnog.table |> 
-        filter(`#query` == id, Description != "-") |> 
+        filter(`#query` == id, Description != "-") |>
+        arrange(evalue) |>
+        dplyr::slice(1) |> 
         transmute(
           id = id,
           source = "eggnog",
@@ -255,6 +221,7 @@ for (sample in samples) {
       row <- blastp.table |>
         filter(qseqid == id) |>
         arrange(evalue) |>
+        dplyr::slice(1) |>
         transmute(
           id = id,
           source = "blastp",

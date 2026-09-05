@@ -11,14 +11,14 @@ runs; every script carries a `Purpose / Inputs / Outputs / Runs on / Usage` head
 | [`02-assembly/`](workflow/02-assembly/) | Assembly with targetasm |
 | [`03-benchmarking/`](workflow/03-benchmarking/) | Assembly benchmarking |
 | [`04-mitochondrion/`](workflow/04-mitochondrion/) | Mitochondrial genomes |
-| [`05-assembly-qc/`](workflow/05-assembly-qc/) | Assembly quality assessment |
+| [`05-assembly-qc/`](workflow/05-assembly-qc/) | Assembly finalization (N-gap contig split) and quality assessment |
 | [`06-telomeres/`](workflow/06-telomeres/) | Telomere repeats |
 | [`07-repeatmask-gene-prediction/`](workflow/07-repeatmask-gene-prediction/) | Repeat masking and gene prediction |
 | [`08-rnaseq-support/`](workflow/08-rnaseq-support/) | RNA-seq support for gene models |
 | [`09-functional-annotation/`](workflow/09-functional-annotation/) | Functional annotation |
 | [`10-secretome-effectome/`](workflow/10-secretome-effectome/) | Secretome and effector prediction |
 | [`11-synteny-orthology/`](workflow/11-synteny-orthology/) | Orthology and synteny |
-| [`12-coverage-checks/`](workflow/12-coverage-checks/) | Targeted coverage checks |
 
-The numbering is the order of execution, not a dependency graph. Stages 04-12 all start from the
-finished assemblies and are independent of each other.
+The numbering is the order of execution, not a dependency graph. Stages 04-11 all start from the
+finished assemblies and are independent of each other, with one ordering constraint: stage 05 splits
+the SC1982 N-gap contig in place, and stages 06-11 read the split assembly.

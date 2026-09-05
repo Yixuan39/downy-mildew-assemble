@@ -7,26 +7,25 @@
 #SBATCH --output=logs/combine.%A_%a.out
 #SBATCH --error=logs/combine.%A_%a.err
 
-# ----------------------------------------------------------------------------------------
 # Purpose : Build the soluble secretome per Methods: SignalP-positive proteins MINUS TargetP-mTP
 #           MINUS DeepTMHMM transmembrane MINUS NetGPI GPI-anchored. (DeepLoc is NOT a filter here;
 #           it is run separately in 06 as a supplementary localization assessment.)
 # Inputs  : $SP.ids, 02-targetp/<ASM>.mtp.ids, 03-deeptmhmm/<ASM>.tm.ids, 04-netgpi/<ASM>.gpi.ids
 # Outputs : $SECR/05-soluble-secretome/<ASM>_soluble_secretome.{ids,faa}
 # Usage   : sbatch workflow/10-secretome-effectome/05-combine-soluble-secretome.sh
-# ----------------------------------------------------------------------------------------
 set -euo pipefail
+source "${REPO_ROOT:-${SLURM_SUBMIT_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}}/workflow/paths.sh"
 # Assemblies processed as a SLURM array (one task per proteome).
 ASSEMBLIES=(
   Pseudoperonospora_cubensis_MSU1
   Pseudoperonospora_cubensis_SC1982
   Pseudoperonospora_humuli_OR502AA
-  Peronospora_effusa_reassemble
+  Peronospora_effusa_UA202013_star
 )
 ASM="${ASSEMBLIES[$SLURM_ARRAY_TASK_ID]}"
 
-HELIXER="$HOME/project_data/downy/contigs-renamed/helixer"      # stage 07 proteomes (<ASM>.faa)
-SECR="$HOME/project_data/downy/contigs-renamed/secretome"        # stage 10 output root
+HELIXER="${PROJECT_DATA}/results/repeatmask-gene-prediction/focal/helixer"      # stage 07 proteomes (<ASM>.faa)
+SECR="${PROJECT_DATA}/results/secretome-effectome"        # stage 10 output root
 SP="$SECR/01-signalp6/$ASM.signalp_positive"                     # SignalP-positive set (.ids/.faa)
 
 OUT="$SECR/05-soluble-secretome"; mkdir -p "$OUT" logs

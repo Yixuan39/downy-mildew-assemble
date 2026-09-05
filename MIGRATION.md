@@ -124,3 +124,18 @@ reclaim once you are sure no run needs resuming.
 | `code/orthofinder-contigs.sh` | `workflow/11-synteny-orthology/orthofinder-contigs.sh` |
 | `code/check-sc1982-gap-tail-coverage.sh` | `workflow/12-coverage-checks/check-sc1982-gap-tail-coverage.sh` |
 | `code/summarize-sc1982-14-gene-support.R` | `workflow/12-coverage-checks/summarize-sc1982-14-gene-support.R` |
+
+## Changes since the reorganization
+
+The table above records the November 2025 move as it was made. Two things moved again afterwards, so
+the stage-12 destinations in it no longer resolve:
+
+- The two SC1982 coverage scripts were folded into **stage 05** and now live at
+  `workflow/05-assembly-qc/{check-sc1982-gap-tail-coverage.sh,summarize-sc1982-14-gene-support.R}`.
+- Stage 12 (`12-submission-prep`, the SC1982 N-gap contig split) was merged into **stage 05** as
+  well: the split is applied before the assembly QC and before every downstream stage rather than at
+  deposition time. Its `split-n-gaps.py` was replaced at the same time by
+  `workflow/05-assembly-qc/split-contigs.sh`, a one-line `seqkit` pipeline doing the same job. The
+  `workflow/` tree is 12 stages, `00`-`11`.
+
+`git log --follow <new path>` still shows the full history across both moves.
