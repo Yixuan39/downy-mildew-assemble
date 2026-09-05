@@ -2,14 +2,12 @@
 
 # ----------------------------------------------------------------------------------------
 # Purpose : Draw the linear synteny/linkage plot of the 14 oomycete mitochondrial genomes with gbdraw. Row
-#           order mirrors the nuclear synteny figure (analysis/synteny-analysis-contigs.Rmd), whose rows
+#           order mirrors the nuclear synteny figure (analysis/synteny-analysis.Rmd), whose rows
 #           come from the GENESPACE SpeciesTree_rooted.txt tip order.
-# Inputs  : a multi-record GenBank file of the 14 mitochondrial genomes (data/14 documents from Mt genome
-#           comparison-1.gb); mt-label-orf-only.tsv for the ORF-only labels
+# Inputs  : a multi-record GenBank file of the 14 mitochondrial genomes (data/mt_linkage/14_mitochondrial_genomes.gb); mt-label-orf-only.tsv for the ORF-only labels
 # Outputs : data/mt_linkage/mt_linkage.{svg,pdf,png} plus per-record split/ and blast/ intermediates
 # Runs on : local workstation; needs `conda activate gbdraw` and the gbdraw-wide.py width patch alongside it
-# Usage   : bash workflow/04-mitochondrion/mt-linkage-plot.sh 'data/14 documents from Mt genome
-#           comparison-1.gb'
+# Usage   : bash workflow/04-mitochondrion/mt-linkage-plot.sh 'data/mt_linkage/14_mitochondrial_genomes.gb'
 # ----------------------------------------------------------------------------------------
 set -euo pipefail
 

@@ -1,7 +1,7 @@
 # Stage 04 - Mitochondrial genomes
 
 Identification and comparison of the mitochondrial genomes. BLASTN locates mitochondrial contigs in
-each published assembly; `mt-linkage-plot.sh` then splits a curated multi-record GenBank file,
+each published assembly; `mt-linkage-plot.sh` then splits a curated multi-record GenBank file (`data/mt_linkage/14_mitochondrial_genomes.gb`),
 runs the pairwise BLASTN comparisons and renders the linear linkage figure with gbdraw, in a row
 order that mirrors the nuclear synteny figure.
 

@@ -71,7 +71,7 @@ reclaim once you are sure no run needs resuming.
 | `analysis/figure-utils.R` | `analysis/lib/figure-utils.R` |
 | `analysis/read_distribution.Rmd` | `analysis/read_distribution.Rmd` |
 | `analysis/ref-genome-quality.Rmd` | `analysis/ref-genome-quality.Rmd` |
-| `analysis/synteny-analysis-contigs.Rmd` | `analysis/synteny-analysis-contigs.Rmd` |
+| `analysis/synteny-analysis-contigs.Rmd` | `analysis/synteny-analysis.Rmd` |
 | `analysis/synteny-deepspace-all.Rmd` | `analysis/synteny-deepspace-all.Rmd` |
 | `analysis/synteny-deepspace.Rmd` | `analysis/synteny-deepspace.Rmd` |
 | `rnaseq/custom.config` | `config/rnaseq/custom.config` |

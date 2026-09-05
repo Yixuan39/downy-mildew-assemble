@@ -12,7 +12,7 @@ into `data/`.
 | `final_result.Rmd` | Table 1 (assembly statistics), `final-assembly-top-contigs` |
 | `gene_annotation_report.Rmd` | Table 2, Figure 5 (functional annotation and RNA-seq support) |
 | `ref-genome-quality.Rmd` | Supplementary Table S1 (quality metrics for the comparison genomes) |
-| `synteny-analysis-contigs.Rmd` | Figure 6 (GENESPACE riparian plot + OrthoFinder species tree) |
+| `synteny-analysis.Rmd` | Figure 6 (GENESPACE riparian plot + OrthoFinder species tree) |
 | `synteny-deepspace.Rmd`, `synteny-deepspace-all.Rmd` | alternative DeepSpace synteny views; not used in the manuscript |
 
 `lib/` holds the shared helpers: `figure-utils.R` (the figure theme, palette and save helper every

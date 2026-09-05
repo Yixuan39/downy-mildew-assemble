@@ -84,3 +84,5 @@ data/proteinfer_by_isolate/
 
 # python venv for gbdraw (recreate: see env/README.md)
 .venv-gbdraw/
+data/benchmark_qc/fasta_inputs_all/
+data/qc_published_genomes/fasta_inputs/
