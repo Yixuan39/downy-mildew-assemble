@@ -63,21 +63,21 @@ reclaim once you are sure no run needs resuming.
 
 | old | new |
 |---|---|
-| `analysis/benchmark-downsample.Rmd` | `analysis/benchmark-downsample.Rmd` |
+| `analysis/benchmark-downsample.Rmd` | _removed (exploratory precursor, superseded by `benchmark.Rmd`)_ |
 | `analysis/benchmark.Rmd` | `analysis/benchmark.Rmd` |
-| `analysis/final_result.Rmd` | `analysis/final_result.Rmd` |
-| `analysis/gene_annotation_report.Rmd` | `analysis/gene_annotation_report.Rmd` |
+| `analysis/final_result.Rmd` | `analysis/final-assembly.Rmd` |
+| `analysis/gene_annotation_report.Rmd` | `analysis/gene-annotation-report.Rmd` |
 | `analysis/check-annotation.R` | `analysis/lib/check-annotation.R` |
 | `analysis/figure-utils.R` | `analysis/lib/figure-utils.R` |
-| `analysis/read_distribution.Rmd` | `analysis/read_distribution.Rmd` |
+| `analysis/read_distribution.Rmd` | `analysis/read-distribution.Rmd` |
 | `analysis/ref-genome-quality.Rmd` | `analysis/ref-genome-quality.Rmd` |
 | `analysis/synteny-analysis-contigs.Rmd` | `analysis/synteny-analysis.Rmd` |
-| `analysis/synteny-deepspace-all.Rmd` | `analysis/synteny-deepspace-all.Rmd` |
-| `analysis/synteny-deepspace.Rmd` | `analysis/synteny-deepspace.Rmd` |
-| `rnaseq/custom.config` | `config/rnaseq/custom.config` |
-| `rnaseq/samplesheet_MSU1.csv` | `config/rnaseq/samplesheet_MSU1.csv` |
-| `rnaseq/samplesheet_OR502AA.csv` | `config/rnaseq/samplesheet_OR502AA.csv` |
-| `rnaseq/samplesheet_SC1982.csv` | `config/rnaseq/samplesheet_SC1982.csv` |
+| `analysis/synteny-deepspace-all.Rmd` | _removed (not used in the manuscript)_ |
+| `analysis/synteny-deepspace.Rmd` | _removed (not used in the manuscript)_ |
+| `rnaseq/custom.config` | `workflow/08-rnaseq-support/config/custom.config` |
+| `rnaseq/samplesheet_MSU1.csv` | `workflow/08-rnaseq-support/config/samplesheet_MSU1.csv` |
+| `rnaseq/samplesheet_OR502AA.csv` | `workflow/08-rnaseq-support/config/samplesheet_OR502AA.csv` |
+| `rnaseq/samplesheet_SC1982.csv` | `workflow/08-rnaseq-support/config/samplesheet_SC1982.csv` |
 | `code/bam2fastq.sh` | `workflow/00-data-acquisition/bam2fastq.sh` |
 | `data/get_oomycete_ids.sh` | `workflow/00-data-acquisition/get-oomycete-taxids.sh` |
 | `code/kraken2-PlusPFP.sh` | `workflow/01-read-filtering/kraken2-pluspfp.sh` |

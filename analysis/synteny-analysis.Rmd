@@ -1,5 +1,5 @@
 ---
-title: "synteny-analysis"
+title: "Synteny Analysis"
 output: html_document
 ---
 

@@ -1,7 +1,7 @@
 # Stage 09 - Functional annotation
 
 Four independent functional-annotation sources over the Helixer proteomes: eggNOG-mapper,
-InterProScan, DIAMOND blastp against nr, and ProteInfer. `analysis/gene_annotation_report.Rmd`
+InterProScan, DIAMOND blastp against nr, and ProteInfer. `analysis/gene-annotation-report.Rmd`
 combines them into the per-gene support summary reported in the paper.
 
 ## Scripts

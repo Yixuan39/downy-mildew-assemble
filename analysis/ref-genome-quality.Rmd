@@ -1,5 +1,5 @@
 ---
-title: "busco-analysis-refseq"
+title: "Comparison Genome Quality"
 author: "Yixuan Yang"
 date: "`r Sys.Date()`"
 output: html_document
