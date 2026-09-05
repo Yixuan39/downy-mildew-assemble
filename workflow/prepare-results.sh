@@ -41,19 +41,19 @@ for dir in "$archive/Assembly"/*; do
     cp -a "$dir" "$results/assembly/$name"
 done
 for dir in "$archive/benchmarking"/*; do cp -a "$dir" "$results/benchmarking/$(basename "$dir")"; done
-mkdir -p "$results/assembly-preparation/renamed" "$results/assembly-preparation/nuclear" "$results/assembly-preparation/mitochondrial" "$results/assembly-qc/nuclear"
+mkdir -p "$results/assembly-qc/renamed" "$results/assembly-qc/nuclear-presplit" "$results/assembly-qc/mitochondrial" "$results/assembly-qc/nuclear"
 for fasta in "$archive/contigs-renamed/cleaned"/*.fasta.gz; do
     name=$(basename "$fasta"); name=${name/Peronospora_effusa_reassemble/Peronospora_effusa_UA202013_star}
-    cp "$fasta" "$results/assembly-preparation/nuclear/$name"
+    cp "$fasta" "$results/assembly-qc/nuclear-presplit/$name"
     cp "$fasta" "$results/assembly-qc/nuclear/$name"
 done
 for fasta in "$archive/contigs-renamed"/*.fasta.gz; do
     name=$(basename "$fasta"); name=${name/Peronospora_effusa_reassemble/Peronospora_effusa_UA202013_star}
-    cp "$fasta" "$results/assembly-preparation/renamed/$name"
+    cp "$fasta" "$results/assembly-qc/renamed/$name"
 done
 for file in "$archive/contigs-renamed/mitochondiral"/*; do
     name=$(basename "$file"); name=${name/Peronospora_effusa_reassemble/Peronospora_effusa_UA202013_star}
-    cp -a "$file" "$results/assembly-preparation/mitochondrial/$name"
+    cp -a "$file" "$results/assembly-qc/mitochondrial/$name"
 done
 for stage in assembly-qc telomeres repeatmask-gene-prediction rnaseq-support functional-annotation secretome-effectome synteny-orthology; do
     mkdir -p "$results/$stage"
@@ -92,7 +92,7 @@ targetasm working directories, one per isolate (MSU1, OR502AA, SC1982, UA202013)
 
 | path | what it is | consumed by | deposition |
 |---|---|---|---|
-| `<isolate>/` | Full targetasm run per isolate (decontaminated primary assembly plus all intermediates). | `results/assembly-preparation/` (final assembly renamed/staged there) | not deposited (large working dirs; final assemblies deposited from `assembly-preparation/`) |
+| `<isolate>/` | Full targetasm run per isolate (decontaminated primary assembly plus all intermediates). | `results/assembly-qc/` (final assembly renamed/staged there) | not deposited (large working dirs; final assemblies deposited from `assembly-qc/`) |
 
 ## Notes
 
@@ -123,53 +123,41 @@ repo at `data/benchmark_qc/quality_all_benchmarking.tsv`, not duplicated here.
 targetasm's former name (`TEA`). They are also the labels `analysis/benchmark.Rmd` matches on -
 do not rename them without also renaming these directories and updating the notebook.
 EOF
-cat > "$results/assembly-preparation/README.md" <<'EOF'
-# results/assembly-preparation/
+cat > "$results/assembly-qc/README.md" <<'EOF'
+# results/assembly-qc/
 
-Renamed contigs, nuclear/mitochondrial split, and the reference-genome mitochondrial BLASTN
-hits / linkage figure. Produced by `workflow/04-mitochondrion/` and `workflow/05-assembly-qc/`
-(renaming/splitting steps only - QC lives under `results/assembly-qc/`) in the
-`downy-mildew-assemble` repo.
+Renamed contigs, nuclear/mitochondrial split, the reference-genome mitochondrial BLASTN hits /
+linkage figure, and the final assemblies used by every downstream stage. Produced by
+`workflow/04-mitochondrion/` (renaming, mito split, linkage figure) and `workflow/05-assembly-qc/`
+(N-gap split, compleasm/QUAST) in the `downy-mildew-assemble` repo.
 
 ## Contents
 
 | path | what it is | consumed by | deposition |
 |---|---|---|---|
-| `renamed/*.fasta.gz` | Full renamed assemblies straight out of `contigs-renamed/` (nuclear + mitochondrial contigs together), before the nuclear/mitochondrial split. | `nuclear/`, `mitochondrial/` | not deposited (intermediate) |
-| `nuclear/*.fasta.gz` | Nuclear-only assemblies (mitochondrial contigs removed); identical to the copy in `results/assembly-qc/nuclear/`, which is the one downstream stages (06-11) actually read. | `results/assembly-qc/` | NCBI GenBank / WGS (post N-gap split, see `assembly-qc/`) |
-| `mitochondrial/` | Split-out mitochondrial contigs/records per assembly. | mitochondrial genome reporting | Zenodo/GenBank as applicable |
-| `mt-linkage/mt_linkage.{svg,pdf,png}` | BLASTN-based linkage figure between the assembled mitochondrial contigs and the reference mitochondrial genome (KT072718.1), plus per-record BLASTN hit tables. | manuscript figure | in the repo (also mirrored to `figures/`) |
+| `renamed/*.fasta.gz` | Full renamed assemblies straight out of `contigs-renamed/` (nuclear + mitochondrial contigs together), before the nuclear/mitochondrial split. | `nuclear-presplit/`, `mitochondrial/` | not deposited (intermediate) |
+| `nuclear-presplit/*.fasta.gz` | Nuclear-only assemblies (mitochondrial contigs removed), before the SC1982 N-gap split. | `nuclear/` (via `split-contigs.sh`) | not deposited (intermediate; superseded by `nuclear/` for SC1982) |
+| `nuclear/*.fasta.gz` | The finalized nuclear assemblies. For SC1982, the internal N-gap contig (`Pcub-SC1982_002`) is split into two contigs, dropping the gap (475 contigs, 103,498,600 bp total); the other three assemblies are identical to `nuclear-presplit/`. This is the assembly used from here on - telomeres, repeat masking/gene prediction, functional annotation, secretome/effectome, synteny/orthology. | `results/telomeres/`, `results/repeatmask-gene-prediction/`, and all later stages | NCBI GenBank / WGS (this is the file to submit) |
+| `mitochondrial/` | Split-out mitochondrial contigs/records per assembly, plus the `.mito.tsv` BLASTN partition table. | mitochondrial genome reporting | Zenodo/GenBank as applicable |
+| `reference-mito-hits/<genome>.mito.tsv` | BLASTN locations of mitochondrial contigs in each published reference genome, against the KT072718.1 reference. | `mt-linkage/` figure | not deposited (intermediate) |
+| `mt-linkage/mt_linkage.{svg,pdf,png}` | BLASTN-based linkage figure between the assembled mitochondrial contigs and the reference mitochondrial genome (KT072718.1), plus per-record BLASTN hit tables (`blast/`, `split/`). | manuscript figure | in the repo (also mirrored to `figures/`) |
+
+Quality metrics (compleasm + QUAST) for the `nuclear/` assemblies, the published downy mildew
+genomes, and the wider oomycete reference set are committed directly in the repo, not duplicated
+on the cluster: `data/qc_final_assemblies/`, `data/qc_published_genomes/`, and the SC1982
+gap/tail coverage evidence under `data/sc1982_gap_tail_coverage/` and
+`data/sc1982_submission_split/`.
 
 ## Notes
 
 The `Peronospora_effusa_reassemble` file name is remapped to
 `Peronospora_effusa_UA202013_star` when copied into this tree (the public-dataset assembly,
 renamed for consistency with the other three isolates' naming convention).
-EOF
-cat > "$results/assembly-qc/README.md" <<'EOF'
-# results/assembly-qc/
-
-Final nuclear assemblies (post N-gap split) that every downstream stage (06-11) reads, plus the
-compleasm/QUAST quality metrics tables. Produced by `workflow/05-assembly-qc/` in the
-`downy-mildew-assemble` repo.
-
-## Contents
-
-| path | what it is | consumed by | deposition |
-|---|---|---|---|
-| `nuclear/*.fasta.gz` | The finalized nuclear assemblies, with the SC1982 internal N-gap contig (`Pcub-SC1982_002`) split into `Pcub-SC1982_002a`/`Pcub-SC1982_002b` (475 contigs, 103,498,600 bp total). This is the assembly used from here on - telomeres, repeat masking/gene prediction, functional annotation, secretome/effectome, synteny/orthology. | `results/telomeres/`, `results/repeatmask-gene-prediction/`, and all later stages | NCBI GenBank / WGS (this is the file to submit) |
-
-Quality metrics (compleasm + QUAST) for these assemblies, the published downy mildew genomes, and
-the wider oomycete reference set are committed directly in the repo, not duplicated on the
-cluster: `data/qc_final_assemblies/`, `data/qc_published_genomes/`, and the SC1982 gap/tail
-coverage evidence under `data/sc1982_gap_tail_coverage/` and `data/sc1982_submission_split/`.
-
-## Notes
 
 Splitting `Pcub-SC1982_002` changes SC1982's contig count, total length, and every
 coordinate-bearing downstream output (Helixer GFF3, tidk telomere profiles, GENESPACE/OrthoFinder
-BED) relative to anything generated from the pre-split assembly. All results under stages 06-11
-in this tree are expected to be (re)generated against this split assembly.
+BED) relative to `nuclear-presplit/`. All results under stages 06-11 in this tree are expected to
+be (re)generated against the split `nuclear/` assembly, never `nuclear-presplit/`.
 EOF
 cat > "$results/telomeres/README.md" <<'EOF'
 # results/telomeres/

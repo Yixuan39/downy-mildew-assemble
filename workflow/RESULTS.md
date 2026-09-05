@@ -9,8 +9,7 @@ mirrors the repo's `workflow/` stages, without the numeric prefixes:
 | `results/read-filtering-screening/` | `workflow/01-read-filtering-screening/` | Filtered reads and Kraken2 taxonomic-screening reports. |
 | `results/assembly/` | `workflow/02-assembly/` | targetasm working directories for the four assemblies. |
 | `results/benchmarking/` | `workflow/03-benchmarking/` | Benchmark assemblies and timings across assemblers. |
-| `results/assembly-preparation/` | `workflow/04-mitochondrion/` + `workflow/05-assembly-qc/` (renaming/splitting) | Renamed contigs, nuclear/mitochondrial split, and the reference-genome mitochondrial BLASTN hits / linkage figure. |
-| `results/assembly-qc/` | `workflow/05-assembly-qc/` | Final nuclear assemblies (post N-gap split) plus compleasm/QUAST quality metrics. |
+| `results/assembly-qc/` | `workflow/04-mitochondrion/` + `workflow/05-assembly-qc/` | Renamed contigs, nuclear/mitochondrial split, the reference-genome mitochondrial BLASTN hits / linkage figure, and the final nuclear assemblies (post N-gap split) that every downstream stage reads. |
 | `results/telomeres/` | `workflow/06-telomeres/` | tidk telomere-repeat search output and the summary plot. |
 | `results/repeatmask-gene-prediction/` | `workflow/07-repeatmask-gene-prediction/` | RepeatModeler/RepeatMasker hardmasked genomes and Helixer gene models + predicted proteomes, for both the focal assemblies and the published reference genomes. |
 | `results/rnaseq-support/` | `workflow/08-rnaseq-support/` | nf-core/rnaseq output per isolate, supporting the gene models. |
