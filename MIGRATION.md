@@ -34,6 +34,31 @@ pipeline's old short name. They are the names of result directories that already
 would mean renaming those directories and re-running nothing useful, so the old name survives as a
 label only. Same for the `hifiasm_blastn` method label.
 
+## The cluster working copy
+
+`~/Projects/downy-mildew-assemble` on NCSU BRC has been fast-forwarded to the reorganized layout
+(`7b793a3`) and has no uncommitted tracked changes. Four uncommitted resource tweaks that existed
+there (`-c 24` -> `-c 8` in the two Helixer scripts, 24 -> 32 threads in ProteInfer, and two
+benchmark arms commented out in the submit driver) and a local deletion of
+`analysis/synteny-deepspace.Rmd` were discarded; the committed values are the record.
+
+Two untracked paths that the incoming commits would have overwritten were moved to
+`~/dm-preexisting-20260904-214832/` rather than deleted: `figures/` and
+`code/blastn-find-mito-others.sh` (identical to `workflow/04-mitochondrion/blastn-find-mito.sh`).
+
+The old script directories still exist there as untracked leftovers, because they hold things the
+local repository never had:
+
+| path | size | what it is |
+|---|---|---|
+| `benchmarking/work/`, `rnaseq/work/`, `work/` | 229 GB + 341 GB + 4.4 GB | Nextflow work caches; only needed to `-resume` a run |
+| `code/` | 1.5 GB, 85 scripts | cluster-only scripts from abandoned assembly attempts, plus RepeatModeler run directories |
+| `junk/` | 29 MB, 30 scripts | the cluster's copy of the retired exploration scripts |
+| `nextflow/` | 36 KB | one leftover log |
+
+Nothing in the paper depends on them. The 570 GB of Nextflow caches are the obvious thing to
+reclaim once you are sure no run needs resuming.
+
 ## Old path to new path
 
 | old | new |
