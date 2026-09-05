@@ -1,0 +1,12 @@
+# Solving all four pins together needs flexible channel priority, e.g.:
+#   mamba env create -f env/gbdraw.yml --channel-priority flexible
+name: gbdraw
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - gbdraw=0.13.0
+  - biopython=1.88
+  - blast=2.17.0
+  - cairosvg=2.9.0

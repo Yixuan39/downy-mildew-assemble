@@ -1,0 +1,8 @@
+name: tidk
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - tidk=0.2.65
+  - seqkit=2.13.0
