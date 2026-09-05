@@ -5,6 +5,7 @@
 # Purpose : Locate mitochondrial contigs in each published downy mildew genome by BLASTN against a reference
 #           mitochondrial genome.
 # Inputs  : $HOME/project_data/downy/downy-mildew-genomes/*.fna.gz
+#           $HOME/project_data/downy/mitochondrial-genome/KT072718.1.fna (NCBI KT072718.1, P. cubensis mt genome)
 # Outputs : $HOME/project_data/downy/downy-mildew-genomes/blast-mito/<genome>.tsv
 # Runs on : NCSU BRC, SLURM array 0-10 (one task per published genome)
 # Usage   : sbatch workflow/04-mitochondrion/blastn-find-mito.sh
@@ -21,7 +22,7 @@ BASENAME=${BASENAME%.fna.gz}
 gzip -d -k ${FILE} 
 
 blastn -query ${FILE%.gz} \
-  -subject "../data/KT072718.1.fna" \
+  -subject "$HOME/project_data/downy/mitochondrial-genome/KT072718.1.fna" \
   -outfmt "6 qseqid sseqid pident length qlen qstart qend slen sstart send evalue" \
   -max_target_seqs 1 \
   -max_hsps 1 \

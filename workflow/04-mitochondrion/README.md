@@ -19,3 +19,6 @@ order that mirrors the nuclear synteny figure.
 `mt-linkage-plot.sh` needs the `gbdraw` conda environment and calls `gbdraw-wide.py`, a local patch
 that makes gbdraw's hardcoded 2000 px canvas width settable. Its long comment block documents the
 gbdraw quirks it works around - read it before changing the figure.
+
+The BLASTN subject is the published *P. cubensis* mitochondrial genome, NCBI accession KT072718.1,
+kept on the cluster at `$HOME/project_data/downy/mitochondrial-genome/KT072718.1.fna`.
