@@ -26,7 +26,6 @@ figures.
 |---|---|
 | [`workflow/`](workflow/) | every batch script that produced a result, in 13 numbered stages |
 | [`analysis/`](analysis/) | R Markdown notebooks that make the manuscript figures and tables |
-| [`config/`](config/) | nf-core samplesheets, cluster configs, and the canonical data/database paths |
 | [`env/`](env/) | how each stage gets its software (containers, conda, Nextflow profiles) |
 | `data/` | small derived tables the notebooks read or write; committed so figures can be regenerated |
 | `figures/` | manuscript figures as PDF/PNG/SVG/TIFF |
@@ -42,7 +41,7 @@ covering what the stage does and its gotchas.
 
 The pipeline was run on the NCSU BRC cluster (SLURM). Large intermediate and final output lives
 outside the repository, under `$HOME/project_data/downy`; reference databases live under `$HOME/db`
-(see [`config/README.md`](config/README.md) for the full list).
+(see [Data and database locations](#data-and-database-locations) below for the full list).
 
     # 1. reads: BAM to FASTQ, adapter removal, read profiling
     sbatch workflow/00-data-acquisition/bam2fastq.sh
@@ -77,6 +76,23 @@ Three things to know before running anything:
 3. **The notebooks need the result tree.** Notebooks read large output from `~/project_data/downy`,
    so knit them on the cluster or on a machine where that tree is mirrored at the same path. Small
    tables under `data/` are committed, so most figures can be regenerated without it.
+
+## Data and database locations
+
+Scripts hardcode these paths rather than sourcing a config file, deliberately: each script stays
+runnable on its own. This is the list they assume, and the list to update if anything moves.
+
+| what | path |
+|---|---|
+| project results tree | `$HOME/project_data/downy` |
+| reference databases | `$HOME/db` |
+| Kraken2 PlusPFP | `$HOME/db/kraken2/PlusPFP` |
+| compleasm lineages | `$HOME/db/compleasm` |
+| FCS-GX (NCBI screen) | `$HOME/db/fcs-gx` |
+| eggNOG | `$HOME/db/eggnog` |
+| InterProScan data | `$HOME/db/interproscan-5.77-108.0` |
+| DIAMOND nr | `$HOME/db/nr.dmnd` |
+| targetasm checkout | `$HOME/software/targetasm` |
 
 ## Data availability
 

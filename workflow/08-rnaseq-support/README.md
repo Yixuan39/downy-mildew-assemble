@@ -2,7 +2,7 @@
 
 nf-core/rnaseq 3.26.0 run against each new assembly, giving transcript-level evidence for the
 Helixer gene models. One launcher per isolate; samplesheets and the cluster resource config live in
-`config/rnaseq/`.
+`workflow/08-rnaseq-support/config/`.
 
 ## Scripts
 
