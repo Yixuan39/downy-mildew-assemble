@@ -4,15 +4,18 @@
 #           order mirrors the nuclear synteny figure (analysis/synteny-analysis.Rmd), whose rows
 #           come from the GENESPACE SpeciesTree_rooted.txt tip order.
 # Inputs  : a multi-record GenBank file of the 14 mitochondrial genomes (data/mt_linkage/14_mitochondrial_genomes.gb); mt-label-orf-only.tsv for the ORF-only labels
-# Outputs : data/mt_linkage/mt_linkage.{svg,pdf,png} plus per-record split/ and blast/ intermediates
-# Runs on : local workstation; needs `conda activate gbdraw` and the gbdraw-wide.py width patch alongside it
+# Outputs : ${PROJECT_DATA}/results/assembly-preparation/mt-linkage/mt_linkage.{svg,pdf,png} plus per-record
+#           split/ and blast/ intermediates; final svg/pdf/png + split/ + blast/ are also mirrored into
+#           data/mt_linkage/ in the repo, which is what's committed for the manuscript figure.
+# Runs on : ncsu-brc login node or the short partition; seconds. Needs the `gbdraw` conda env
+#           (gbdraw, biopython, cairosvg, blast) and the gbdraw-wide.py width patch alongside it.
 # Usage   : bash workflow/04-mitochondrion/mt-linkage-plot.sh 'data/mt_linkage/14_mitochondrial_genomes.gb'
 set -euo pipefail
 source "${REPO_ROOT:-${SLURM_SUBMIT_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}}/workflow/paths.sh"
 
 HERE="$REPO_ROOT/workflow/04-mitochondrion"
 GB="${1:?usage: mt-linkage-plot.sh <multi-record.gb> [outdir]}"
-OUT="${2:-$REPO_ROOT/data/mt_linkage}"
+OUT="${2:-$PROJECT_DATA/results/assembly-preparation/mt-linkage}"
 mkdir -p "$OUT/split" "$OUT/blast"
 
 # 1. split into per-record .gb/.fna, renamed + reordered (order = chain order in the plot)
@@ -141,3 +144,9 @@ PY2
 python -c "import cairosvg; cairosvg.svg2png(url='mt_linkage.svg', write_to='mt_linkage.png', background_color='white', scale=1.2); cairosvg.svg2pdf(url='mt_linkage.svg', write_to='mt_linkage.pdf')"
 
 echo "-> $OUT/mt_linkage.svg (+ .png)"
+
+# 5. mirror the final figure + intermediates into the repo, which is what's actually committed
+mkdir -p "$REPO_ROOT/data/mt_linkage"
+cp mt_linkage.svg mt_linkage.pdf mt_linkage.png "$REPO_ROOT/data/mt_linkage/"
+cp -a split blast "$REPO_ROOT/data/mt_linkage/"
+echo "-> mirrored into $REPO_ROOT/data/mt_linkage/ (git add + commit there to update the manuscript figure)"

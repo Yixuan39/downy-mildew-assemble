@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-# One-time migration of the original ~/project_data/downy tree; preserves originals by moving them.
+# One-time migration of the original ~/project_data/downy tree. Preserves originals by moving them
+# into archive/previous-results, then builds a self-contained results/<stage> tree (real copies, not
+# links) plus an inputs/ tree (symlinks back to archive/, since raw reads/references are never modified).
 set -euo pipefail
 source "$(dirname "${BASH_SOURCE[0]}")/paths.sh"
 archive="$PROJECT_DATA/archive/previous-results"
@@ -29,32 +31,34 @@ for fasta in "$public"/*.fastq.gz; do
 done
 results="$PROJECT_DATA/results"
 mkdir -p "$results/read-filtering-screening/reads" "$results/assembly" "$results/benchmarking"
-ln -s "$archive/GSL_Data/fastq/filtered" "$results/read-filtering-screening/reads/focal"
-ln -s "$public/filtered" "$results/read-filtering-screening/reads/UA202013"
-ln -s "$archive/k2_pfp" "$results/read-filtering-screening/taxonomy"
+# results/ is a self-contained tree: real copies, not links back into archive/. archive/ stays as the
+# separately-preserved original in case anything here needs to be re-derived.
+cp -a "$archive/GSL_Data/fastq/filtered" "$results/read-filtering-screening/reads/focal"
+cp -a "$public/filtered" "$results/read-filtering-screening/reads/UA202013"
+cp -a "$archive/k2_pfp" "$results/read-filtering-screening/taxonomy"
 for dir in "$archive/Assembly"/*; do
     name=$(basename "$dir"); [[ "$name" != p_effusa ]] || name=UA202013
-    ln -s "$dir" "$results/assembly/$name"
+    cp -a "$dir" "$results/assembly/$name"
 done
-for dir in "$archive/benchmarking"/*; do ln -s "$dir" "$results/benchmarking/$(basename "$dir")"; done
+for dir in "$archive/benchmarking"/*; do cp -a "$dir" "$results/benchmarking/$(basename "$dir")"; done
 mkdir -p "$results/assembly-preparation/renamed" "$results/assembly-preparation/nuclear" "$results/assembly-preparation/mitochondrial" "$results/assembly-qc/nuclear"
 for fasta in "$archive/contigs-renamed/cleaned"/*.fasta.gz; do
     name=$(basename "$fasta"); name=${name/Peronospora_effusa_reassemble/Peronospora_effusa_UA202013_star}
-    ln -s "$fasta" "$results/assembly-preparation/nuclear/$name"
+    cp "$fasta" "$results/assembly-preparation/nuclear/$name"
     cp "$fasta" "$results/assembly-qc/nuclear/$name"
 done
 for fasta in "$archive/contigs-renamed"/*.fasta.gz; do
     name=$(basename "$fasta"); name=${name/Peronospora_effusa_reassemble/Peronospora_effusa_UA202013_star}
-    ln -s "$fasta" "$results/assembly-preparation/renamed/$name"
+    cp "$fasta" "$results/assembly-preparation/renamed/$name"
 done
 for file in "$archive/contigs-renamed/mitochondiral"/*; do
     name=$(basename "$file"); name=${name/Peronospora_effusa_reassemble/Peronospora_effusa_UA202013_star}
-    ln -s "$file" "$results/assembly-preparation/mitochondrial/$name"
+    cp -a "$file" "$results/assembly-preparation/mitochondrial/$name"
 done
 for stage in assembly-qc telomeres repeatmask-gene-prediction rnaseq-support functional-annotation secretome-effectome synteny-orthology; do
     mkdir -p "$results/$stage"
 done
 cp "$REPO_ROOT/workflow/RESULTS.md" "$PROJECT_DATA/README.md"
-printf '# Original results\n\nOriginal files before the SC1982 gap split. Preserved on %s.\nInputs and reused stages 01–04 link here; keep this archive while those links exist.\nDo not edit archived files or include raw reads/assemblies in the Zenodo package.\n' "$(date -Iseconds)" > "$archive/README.md"
+printf '# Original results\n\nOriginal files before the SC1982 gap split. Preserved on %s.\nresults/ holds independent copies of stages 0-3 (safe to edit/delete this archive once those copies\nare verified); inputs/ still symlinks here for the untouched raw reads and reference genomes.\nDo not edit archived files or include raw reads/assemblies in the Zenodo package.\n' "$(date -Iseconds)" > "$archive/README.md"
 printf '# Inputs\n\nRaw HiFi and RNA-seq reads, published nuclear genomes and mitochondrial references.\nLinks resolve to the preserved original files in archive/previous-results/.\nThese files are excluded from the Zenodo package.\n' > "$PROJECT_DATA/inputs/README.md"
 bash "$REPO_ROOT/workflow/05-assembly-qc/split-contigs.sh"

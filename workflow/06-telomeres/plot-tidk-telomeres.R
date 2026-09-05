@@ -2,15 +2,17 @@
 # ----------------------------------------------------------------------------------------
 # Purpose : Plot the tidk telomere-repeat density along each long contig. Called at the end of tidk-
 #           telomere-long-contigs.sh.
-# Inputs  : data/tidk_telomeres/*/
-# Outputs : figures/tidk_telomeres/
-# Runs on : local, R
-# Usage   : Rscript workflow/06-telomeres/plot-tidk-telomeres.R
+# Inputs  : ${PROJECT_DATA}/results/telomeres/*/
+# Outputs : ${PROJECT_DATA}/results/telomeres/figures/
+# Runs on : ncsu-brc login node or the short partition; R with ggplot2.
+# Usage   : Rscript workflow/06-telomeres/plot-tidk-telomeres.R (needs PROJECT_DATA set - source workflow/paths.sh first)
 # ----------------------------------------------------------------------------------------
 library(ggplot2)
 
-out <- "data/tidk_telomeres"
-fig_out <- "figures/tidk_telomeres"
+project_data <- Sys.getenv("PROJECT_DATA", unset = NA)
+if (is.na(project_data)) stop("PROJECT_DATA not set - source workflow/paths.sh first")
+out <- file.path(project_data, "results", "telomeres")
+fig_out <- file.path(out, "figures")
 dir.create(fig_out, recursive = TRUE, showWarnings = FALSE)
 
 focal <- c("Pseudoperonospora_cubensis_MSU1",
