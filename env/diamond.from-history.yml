@@ -1,0 +1,8 @@
+name: diamond
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - diamond
+prefix: /home5/yyang55/miniforge3/envs/diamond

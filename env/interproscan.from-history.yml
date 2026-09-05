@@ -1,0 +1,8 @@
+name: interproscan
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - interproscan
+prefix: /home5/yyang55/miniforge3/envs/interproscan

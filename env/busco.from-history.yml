@@ -1,0 +1,8 @@
+name: busco
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - busco=6.0.0
+prefix: /home5/yyang55/miniforge3/envs/busco

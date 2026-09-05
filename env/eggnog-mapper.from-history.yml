@@ -1,0 +1,8 @@
+name: eggnog-mapper
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - eggnog-mapper
+prefix: /home5/yyang55/miniforge3/envs/eggnog-mapper

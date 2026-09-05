@@ -1,0 +1,49 @@
+name: downy
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - seqkit
+  - krakentools
+  - pigz
+  - compleasm
+  - quast
+  - python=3.9
+  - ncbi-fcs-gx
+  - pbccs
+  - pbtk
+  - vmtouch
+  - gfatools
+  - agat
+  - purge_dups
+  - csvlens
+  - pandera
+  - ragtag
+  - pip
+  - mummer
+  - hifiasm
+  - flye
+  - ncbi-datasets-cli
+  - gapless
+  - minimap2
+  - racon
+  - seqtk
+  - pandas=1.5.3
+  - longstitch
+  - filtlong
+  - rasusa
+  - orthofinder=2.5.5
+  - mcscanx
+  - hifiasm_meta
+  - metamdbg
+  - gffread
+  - diamond
+  - taxonkit
+  - repeatmodeler
+  - cyrus-sasl
+  - ntlink
+  - tigmint
+  - arcs
+  - earlgrey=7.2.1
+prefix: /home5/yyang55/miniforge3/envs/downy

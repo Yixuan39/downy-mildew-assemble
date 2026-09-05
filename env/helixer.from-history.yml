@@ -1,0 +1,13 @@
+name: helixer
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - python=3.10
+  - orthofinder
+  - gffread
+  - numpy=1.26.4
+  - agat
+  - seqkit
+prefix: /home5/yyang55/miniforge3/envs/helixer

@@ -1,0 +1,23 @@
+# TEA_quality — historical snapshot only (env absent from cluster at export time)
+
+captured: earlier in this documentation session, via `conda list -n TEA_quality`, on ssh:ncsu-brc
+status at export time: `conda env list` no longer showed this environment — removed from
+  the shared account between the stage-mapping pass and the YAML-export pass of this
+  session (see env/README.md, "Infrastructure notes"). No `conda env export` was possible;
+  this file preserves the keyword-filtered `conda list` snapshot taken while the env still existed.
+
+Key packages (full list not captured before removal — only the bioinformatics-relevant
+lines were retained from the earlier grep pass):
+
+blast                         2.16.0           h66d330f_5            bioconda
+compleasm                     0.2.7            pyh7e72e81_1          bioconda
+minimap2                      2.30             h577a1d6_0            bioconda
+quast                         5.3.0            py39pl5321h746d604_1  bioconda
+
+Interpretation: this is the legacy (pre-Nextflow/biocontainers) quality-check toolchain —
+blast + compleasm + minimap2 + quast, standing in for what modules/quality_check.nf now
+runs via pinned biocontainers (compleasm:0.2.7--pyh7e72e81_1, quast:5.3.0--py313pl5321h5ca1c30_2,
+minimap2:2.28--h577a1d6_4). Versions are close but not identical to the current container pins
+(minimap2 2.30 vs 2.28; quast py39 build vs py313 build) — consistent with this being an
+earlier, superseded install, not the one now driving 03/05-assembly-qc's Nextflow-based
+QC runs.

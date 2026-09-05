@@ -1,0 +1,10 @@
+name: orthofinder
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - gffread
+  - emboss
+  - orthofinder=2.5.5
+prefix: /home5/yyang55/miniforge3/envs/orthofinder
