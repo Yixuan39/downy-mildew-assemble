@@ -17,12 +17,18 @@ source "${REPO_ROOT:-${SLURM_SUBMIT_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/..
 assembly_in="${1:-$PROJECT_DATA/results/assembly-qc/nuclear-presplit/Pseudoperonospora_cubensis_SC1982.fasta.gz}"
 assembly_out="${2:-$PROJECT_DATA/results/assembly-qc/nuclear/Pseudoperonospora_cubensis_SC1982.fasta.gz}"
 
+# Position of Pcub-SC1982_002 in the input, so its (shortened) replacement stays in place -
+# everything else keeps its original order, and only the new fragment goes at the end.
+idx=$(seqkit fx2tab -n -i "$assembly_in" | grep -nx "Pcub-SC1982_002" | cut -d: -f1)
+
 {
-  seqkit grep -v -p "Pcub-SC1982_002" "$assembly_in"
+  seqkit range -r "1:$((idx - 1))" "$assembly_in"
 
   seqkit grep -p "Pcub-SC1982_002" "$assembly_in" |
     seqkit subseq -r 1:4523546 |
     seqkit replace -p '^.*$' -r "Pcub-SC1982_002"
+
+  seqkit range -r "$((idx + 1)):-1" "$assembly_in"
 
   seqkit grep -p "Pcub-SC1982_002" "$assembly_in" |
     seqkit subseq -r 4531928:4835754 |
