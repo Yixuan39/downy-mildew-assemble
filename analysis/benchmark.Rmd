@@ -18,7 +18,7 @@ theme_set(theme_bw())
 
 benchmark_root <- path.expand("~/project_data/downy/benchmarking")
 isolate_labels <- c(
-  "p_effusa" = "P. Effusa (Reassemble)",
+  "UA202013" = "P. effusa (UA202013)",
   "MSU1" = "P. Cubensis (MSU1)"
 )
 qc_table <- here("data", "benchmark_qc", "quality_all_benchmarking.tsv")
@@ -32,9 +32,9 @@ assemblies <- tribble(
   "MSU1", "tea_no_downsample", "target-asm no downsample", "tea_no_downsample", "Quesada_SQIIe_MSU1.fasta.gz", "MSU1_tea_no_downsample_Quesada_SQIIe_MSU1",
   "MSU1", "hifiasm", "hifiasm", "hifiasm", "MSU1.fasta.gz", "MSU1_hifiasm_MSU1",
   "MSU1", "hifiasm_blastn", "hifiasm + blastn", "hifiasm_blastn", "MSU1.fasta.gz", "MSU1_hifiasm_blastn_MSU1",
-  "p_effusa", "tea", "target-asm no downsample", "tea", "p_effusa.fasta.gz", "p_effusa_tea_p_effusa",
-  "p_effusa", "hifiasm", "hifiasm", "hifiasm", "p_effusa.fasta.gz", "p_effusa_hifiasm_p_effusa",
-  "p_effusa", "hifiasm_blastn", "hifiasm + blastn", "hifiasm_blastn", "p_effusa.fasta.gz", "p_effusa_hifiasm_blastn_p_effusa"
+  "UA202013", "tea", "target-asm no downsample", "tea", "UA202013.fasta.gz", "UA202013_tea_UA202013",
+  "UA202013", "hifiasm", "hifiasm", "hifiasm", "UA202013.fasta.gz", "UA202013_hifiasm_UA202013",
+  "UA202013", "hifiasm_blastn", "hifiasm + blastn", "hifiasm_blastn", "UA202013.fasta.gz", "UA202013_hifiasm_blastn_UA202013"
 ) |>
   mutate(
     fasta_path = file.path(benchmark_root, isolate, method_dir, fasta_rel),

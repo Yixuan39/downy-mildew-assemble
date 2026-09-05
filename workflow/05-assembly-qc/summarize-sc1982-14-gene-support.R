@@ -6,7 +6,7 @@
 # Inputs  : data/sc1982_gap_tail_coverage/ and the annotation tables under data/
 # Outputs : the summary table used in the manuscript text
 # Runs on : local, R
-# Usage   : Rscript workflow/12-coverage-checks/summarize-sc1982-14-gene-support.R
+# Usage   : Rscript workflow/05-assembly-qc/summarize-sc1982-14-gene-support.R
 # ----------------------------------------------------------------------------------------
 
 suppressPackageStartupMessages({
@@ -15,8 +15,8 @@ suppressPackageStartupMessages({
 })
 
 bam <- "data/sc1982_gap_tail_coverage/SC1982_hifi_to_Pcub-SC1982_002.primary.bam"
-gff <- "/Volumes/YY3/downy/contigs-renamed/helixer/Pseudoperonospora_cubensis_SC1982.gff"
-proteins <- "Pcub-SC1982_002_14_fungal_hit_proteins.faa"
+gff <- "$HOME/project_data/downy/contigs-renamed/helixer/Pseudoperonospora_cubensis_SC1982.gff"
+proteins <- "data/sc1982_gap_tail_coverage/Pcub-SC1982_002_14_fungal_hit_proteins.faa"
 output <- "data/sc1982_gap_tail_coverage/Pcub-SC1982_002_14_genes_coverage_and_read_support.tsv"
 contig <- "Pcub-SC1982_002"
 mapq <- 20L

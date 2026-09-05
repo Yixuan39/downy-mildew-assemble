@@ -18,7 +18,7 @@
 
 set -euo pipefail
 
-SAMPLE="${SAMPLE:-p_effusa}"
+SAMPLE="${SAMPLE:-UA202013}"
 THREADS="${SLURM_CPUS_PER_TASK:-32}"
 PROJECT_DATA="${PROJECT_DATA:-${HOME}/project_data/downy}"
 DEFAULT_TARGET_ASM_MAIN="${HOME}/software/targetasm/main.nf"
@@ -32,10 +32,10 @@ RASUSA_SEED="${RASUSA_SEED:-2025}"
 MSU1_TARGET_BASES="${MSU1_TARGET_BASES:-5400000000}"
 
 case "${SAMPLE}" in
-    p_effusa)
-        READS="${PROJECT_DATA}/p_effusa/filtered/p_effusa.fastq.gz"
+    UA202013)
+        READS="${PROJECT_DATA}/UA202013/filtered/UA202013.fastq.gz"
         METHOD="${METHOD:-tea}"
-        FINAL_NAME="p_effusa.fasta.gz"
+        FINAL_NAME="UA202013.fasta.gz"
         ;;
     MSU1|Quesada_SQIIe_MSU1)
         SAMPLE="MSU1"
@@ -44,7 +44,7 @@ case "${SAMPLE}" in
         FINAL_NAME="Quesada_SQIIe_MSU1.fasta.gz"
         ;;
     *)
-        echo "Unknown SAMPLE=${SAMPLE}. Use SAMPLE=p_effusa or SAMPLE=MSU1." >&2
+        echo "Unknown SAMPLE=${SAMPLE}. Use SAMPLE=UA202013 or SAMPLE=MSU1." >&2
         exit 1
         ;;
 esac

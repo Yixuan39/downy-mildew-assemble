@@ -6,17 +6,17 @@
 # ----------------------------------------------------------------------------------------
 # Purpose : Same Kraken2 PlusPFP classification for the public P. effusa reads, which live in their own
 #           directory and are a single file (no array).
-# Inputs  : $HOME/project_data/downy/p_effusa/filtered/*.fastq.gz; Kraken2 PlusPFP at
+# Inputs  : $HOME/project_data/downy/UA202013/filtered/*.fastq.gz; Kraken2 PlusPFP at
 #           $HOME/db/kraken2/PlusPFP
 # Outputs : $HOME/project_data/downy/k2_pfp/<sample>.{kraken,report}
 # Runs on : NCSU BRC, SLURM, 24 cores / 220 GB
-# Usage   : sbatch workflow/01-read-filtering/p_effusa/kraken2-pluspfp.sh
+# Usage   : sbatch workflow/01-read-filtering/UA202013/kraken2-pluspfp.sh
 # ----------------------------------------------------------------------------------------
 
 set -euo pipefail
 
 # run Kraken2 on raw HIFI reads
-INPUT_DIR=$HOME/project_data/downy/p_effusa/filtered
+INPUT_DIR=$HOME/project_data/downy/UA202013/filtered
 Kraken_DB=$HOME/db/kraken2/PlusPFP
 BUSCO_DB=$HOME/db/compleasm
 THREADS=24

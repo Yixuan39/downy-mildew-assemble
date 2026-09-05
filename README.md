@@ -13,7 +13,7 @@ contamination-aware assembly pipeline, and benchmarks it against conventional ap
 | MSU1 | *Pseudoperonospora cubensis* MSU-1 |
 | SC1982 | *Pseudoperonospora cubensis* SC1982 |
 | OR502AA | *Pseudoperonospora humuli* OR502AA |
-| p_effusa | *Peronospora effusa* UA202013 (public data, reassembled) |
+| UA202013 | *Peronospora effusa* UA202013 (public reads; our reassembly is UA202013\*) |
 
 The assembly pipeline itself lives in a separate repository:
 **<https://github.com/Yixuan39/targetasm>**. This repository holds everything around it - read
@@ -50,7 +50,7 @@ outside the repository, under `$HOME/project_data/downy`; reference databases li
     sbatch workflow/01-read-filtering/kraken2-pluspfp.sh
 
     # 2. assembly - Nextflow submits its own jobs, so run from a login node, not sbatch
-    bash workflow/02-assembly/assemble-MSU1.sh          # and SC1982, OR502AA, p_effusa
+    bash workflow/02-assembly/assemble-MSU1.sh          # and SC1982, OR502AA, UA202013
 
     # 3. benchmark: three arms x two isolates, all on one node for a fair timing comparison
     bash workflow/03-benchmarking/submit-all.sh

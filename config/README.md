@@ -36,4 +36,4 @@ repointed at `$HOME/db`.
 | MSU1 | *Pseudoperonospora cubensis* MSU-1 | `GSL_Data/fastq/filtered/Quesada_SQIIe_MSU1.fastq.gz` |
 | SC1982 | *Pseudoperonospora cubensis* SC1982 | `GSL_Data/fastq/filtered/Quesada_SQIIe_SC1982.fastq.gz` |
 | OR502AA | *Pseudoperonospora humuli* OR502AA | `GSL_Data/fastq/filtered/` (Phumuli library) |
-| p_effusa | *Peronospora effusa* UA202013 (public) | `p_effusa/filtered/p_effusa.fastq.gz` |
+| UA202013 | *Peronospora effusa* UA202013 (public) | `UA202013/filtered/UA202013.fastq.gz` |

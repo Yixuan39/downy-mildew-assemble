@@ -23,7 +23,7 @@ clean_dir <- file.path(rename_dir, "cleaned")
 
 rename_key <- tribble(
   ~old_file, ~seq_name, ~file_name,
-  "p_effusa", "Peff-26", "Peronospora_effusa_reassemble",
+  "UA202013", "Peff-26", "Peronospora_effusa_UA202013_star",
   "Quesada_SQIIe_MSU1", "Pcub-MSU1", "Pseudoperonospora_cubensis_MSU1",
   "Quesada_SQIIe_SC1982", "Pcub-SC1982", "Pseudoperonospora_cubensis_SC1982",
   "Quesada_SQIIe_Phumuli", "Phum-OR502AA", "Pseudoperonospora_humuli_OR502AA"
@@ -93,7 +93,7 @@ The corresponding names are shown below:
 
 | Sample | Sequence name |
 |---|---|
-| p_effusa | Peff-26 |
+| UA202013 | Peff-26 |
 | Quesada_SQIIe_MSU1 | Pcub-MSU1 |
 | Quesada_SQIIe_SC1982 | Pcub-SC1982 |
 | Quesada_SQIIe_Phumuli | Phum-OR502AA |

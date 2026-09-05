@@ -6,7 +6,7 @@ cluster at `$HOME/software/targetasm`). The launchers only supply the reads, the
 isolate-specific parameters; the assembly logic, versions and containers are all defined in that
 repository.
 
-`assemble-p_effusa.sh` runs the public *P. effusa* dataset, which is what shows the method is not
+`assemble-UA202013.sh` runs the public *P. effusa* dataset, which is what shows the method is not
 tuned to our own libraries.
 
 ## Scripts
@@ -16,7 +16,7 @@ tuned to our own libraries.
 | `assemble-MSU1.sh` | Run the targetasm pipeline on P. cubensis MSU1: HiFi reads in, decontaminated primary assembly out. | NCSU BRC login node - the pipeline submits its own SLURM jobs, so do not sbatch this script |
 | `assemble-OR502AA.sh` | Run the targetasm pipeline on P. humuli OR502AA. | NCSU BRC login node - the pipeline submits its own SLURM jobs |
 | `assemble-SC1982.sh` | Run the targetasm pipeline on P. cubensis SC1982. | NCSU BRC login node - the pipeline submits its own SLURM jobs |
-| `assemble-p_effusa.sh` | Run the targetasm pipeline on the public P. effusa reads, the external dataset used to show the method generalises. | NCSU BRC login node - the pipeline submits its own SLURM jobs |
+| `assemble-UA202013.sh` | Run the targetasm pipeline on the public P. effusa reads, the external dataset used to show the method generalises. | NCSU BRC login node - the pipeline submits its own SLURM jobs |
 
 ## Notes
 

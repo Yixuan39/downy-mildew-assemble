@@ -5,7 +5,7 @@ library(here)
 
 # samples
 samples <- c(
-  "Peronospora_effusa_reassemble",
+  "Peronospora_effusa_UA202013_star",
   "Pseudoperonospora_cubensis_MSU1",
   "Pseudoperonospora_humuli_OR502AA",
   "Pseudoperonospora_cubensis_SC1982"
@@ -147,14 +147,14 @@ write_isolate_annotation_tables <- function(annotation_table, output_dir) {
   dir.create(output_dir, showWarnings = FALSE, recursive = TRUE)
   
   isolate_patterns <- c(
-    Peronospora_effusa_reassemble = "^Peff-",
+    Peronospora_effusa_UA202013_star = "^Peff-",
     Pseudoperonospora_cubensis_MSU1 = "^Pcub-MSU1_",
     Pseudoperonospora_humuli_OR502AA = "^Phum-OR502AA_",
     Pseudoperonospora_cubensis_SC1982 = "^Pcub-SC1982_"
   )
   
   rnaseq_prefixes <- c(
-    Peronospora_effusa_reassemble = NA_character_,
+    Peronospora_effusa_UA202013_star = NA_character_,
     Pseudoperonospora_cubensis_MSU1 = "Pcub_MSU1",
     Pseudoperonospora_humuli_OR502AA = "Phum_OR502AA",
     Pseudoperonospora_cubensis_SC1982 = "Pcub_SC1982"

@@ -14,7 +14,7 @@ theme_set(theme_bw())
 # child ids under oomycota: 4762
 oomycete.ids <- read_lines(here('data', 'oomycete_taxids.txt'))
 sample.labels <- c(
-  "p_effusa" = "P. effusa (UA202013)",
+  "UA202013" = "P. effusa (UA202013)",
   "Quesada_SQIIe_MSU1" = "P. cubensis (MSU1)",
   "Quesada_SQIIe_SC1982" = "P. cubensis (SC1982)",
   "Quesada_SQIIe_Phumuli" = "P. humuli (OR502AA)"

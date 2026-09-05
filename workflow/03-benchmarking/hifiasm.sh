@@ -6,7 +6,7 @@
 # ----------------------------------------------------------------------------------------
 # Purpose : Benchmark arm 1: hifiasm on the raw filtered reads, with no contamination handling. Records wall
 #           time to timing.tsv.
-# Inputs  : $SAMPLE reads under $PROJECT_DATA (MSU1 or p_effusa)
+# Inputs  : $SAMPLE reads under $PROJECT_DATA (MSU1 or UA202013)
 # Outputs : $PROJECT_DATA/benchmarking/$SAMPLE/hifiasm/ incl. timing.tsv
 # Runs on : NCSU BRC, SLURM, 32 cores, submitted to -p bigmem -w node95 so all three arms share one node
 # Usage   : sbatch --export=ALL,SAMPLE=MSU1 workflow/03-benchmarking/hifiasm.sh
@@ -14,20 +14,20 @@
 
 set -euo pipefail
 
-SAMPLE="${SAMPLE:-p_effusa}"
+SAMPLE="${SAMPLE:-UA202013}"
 THREADS="${SLURM_CPUS_PER_TASK:-32}"
 PROJECT_DATA="${PROJECT_DATA:-${HOME}/project_data/downy}"
 
 case "${SAMPLE}" in
-    p_effusa)
-        READS="${PROJECT_DATA}/p_effusa/filtered/p_effusa.fastq.gz"
+    UA202013)
+        READS="${PROJECT_DATA}/UA202013/filtered/UA202013.fastq.gz"
         ;;
     MSU1|Quesada_SQIIe_MSU1)
         SAMPLE="MSU1"
         READS="${PROJECT_DATA}/GSL_Data/fastq/filtered/Quesada_SQIIe_MSU1.fastq.gz"
         ;;
     *)
-        echo "Unknown SAMPLE=${SAMPLE}. Use SAMPLE=p_effusa or SAMPLE=MSU1." >&2
+        echo "Unknown SAMPLE=${SAMPLE}. Use SAMPLE=UA202013 or SAMPLE=MSU1." >&2
         exit 1
         ;;
 esac

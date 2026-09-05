@@ -11,9 +11,9 @@
 
 set -euo pipefail
 
-sbatch -p bigmem -w node95 --export=ALL,SAMPLE=p_effusa hifiasm.sh
-sbatch -p bigmem -w node95 --export=ALL,SAMPLE=p_effusa hifiasm-blastn.sh
-sbatch -p bigmem -w node95 --export=ALL,SAMPLE=p_effusa targetasm.sh
+sbatch -p bigmem -w node95 --export=ALL,SAMPLE=UA202013 hifiasm.sh
+sbatch -p bigmem -w node95 --export=ALL,SAMPLE=UA202013 hifiasm-blastn.sh
+sbatch -p bigmem -w node95 --export=ALL,SAMPLE=UA202013 targetasm.sh
 
 sbatch -p bigmem -w node95 --export=ALL,SAMPLE=MSU1 hifiasm.sh
 sbatch -p bigmem -w node95 --export=ALL,SAMPLE=MSU1 hifiasm-blastn.sh

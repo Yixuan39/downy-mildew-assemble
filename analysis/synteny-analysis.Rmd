@@ -35,7 +35,7 @@ asm2run <- c(
   "Bremia_lactucae_SF5",
   "Peronospora_destructor_Pd_K2019",
   "Peronospora_effusa_UA202013",
-  "Peronospora_effusa_reassemble",
+  "Peronospora_effusa_UA202013_star",
   "Phytophthora_agathidicida_3770",
   "Phytophthora_capsici_BYA5",
   "Phytophthora_infestans_1306",
@@ -66,7 +66,7 @@ tr <- read.tree(file.path(wd, "results", "SpeciesTree_rooted.txt"))
 tree <- ggtree(tr)
 peronospora_node <- getMRCA(
   tr,
-  c("Peronospora_effusa_reassemble",
+  c("Peronospora_effusa_UA202013_star",
     "Peronospora_effusa_UA202013",
     "Peronospora_destructor_Pd_K2019")
 )
@@ -90,14 +90,14 @@ tip_data <- tree$data[tree$data$isTip, ]
 tip_data <- tip_data[order(tip_data$y, decreasing = TRUE), ]
 y_limits <- c(0.5, length(tip_data$label) + 0.5)
 focal_assemblies <- c(
-  "Peronospora_effusa_reassemble",
+  "Peronospora_effusa_UA202013_star",
   "Pseudoperonospora_cubensis_MSU1",
   "Pseudoperonospora_cubensis_SC1982",
   "Pseudoperonospora_humuli_OR502AA"
 )
 tip_ids <- rev(tip_data$label)
 display_labels <- tip_ids
-display_labels[tip_ids == "Peronospora_effusa_reassemble"] <-
+display_labels[tip_ids == "Peronospora_effusa_UA202013_star"] <-
   "Peronospora_effusa_UA202013*"
 tip_labels <- as.expression(Map(function(id, label) {
   if (id %in% focal_assemblies) bquote(bold(.(label))) else label

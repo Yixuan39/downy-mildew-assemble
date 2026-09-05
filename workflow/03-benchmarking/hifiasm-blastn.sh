@@ -14,7 +14,7 @@
 
 set -euo pipefail
 
-SAMPLE="${SAMPLE:-p_effusa}"
+SAMPLE="${SAMPLE:-UA202013}"
 THREADS="${SLURM_CPUS_PER_TASK:-32}"
 PROJECT_DATA="${PROJECT_DATA:-${HOME}/project_data/downy}"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -22,15 +22,15 @@ SUBMIT_DIR="${SLURM_SUBMIT_DIR:-$PWD}"
 TAXIDS_FILE="${TAXIDS_FILE:-}"
 
 case "${SAMPLE}" in
-    p_effusa)
-        READS="${PROJECT_DATA}/p_effusa/filtered/p_effusa.fastq.gz"
+    UA202013)
+        READS="${PROJECT_DATA}/UA202013/filtered/UA202013.fastq.gz"
         ;;
     MSU1|Quesada_SQIIe_MSU1)
         SAMPLE="MSU1"
         READS="${PROJECT_DATA}/GSL_Data/fastq/filtered/Quesada_SQIIe_MSU1.fastq.gz"
         ;;
     *)
-        echo "Unknown SAMPLE=${SAMPLE}. Use SAMPLE=p_effusa or SAMPLE=MSU1." >&2
+        echo "Unknown SAMPLE=${SAMPLE}. Use SAMPLE=UA202013 or SAMPLE=MSU1." >&2
         exit 1
         ;;
 esac
