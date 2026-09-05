@@ -81,3 +81,6 @@ rsconnect/
 data/sc1982_gap_tail_coverage/*.fasta
 data/tidk_telomeres/*/*.fa
 data/proteinfer_by_isolate/
+
+# python venv for gbdraw (recreate: see env/README.md)
+.venv-gbdraw/

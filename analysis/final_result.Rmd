@@ -12,7 +12,7 @@ library(Biostrings)
 library(data.table)
 library(gt)
 knitr::opts_knit$set(root.dir = here())
-source(here("analysis", "figure-utils.R"))
+source(here("analysis", "lib", "figure-utils.R"))
 theme_set(theme_bw())
 
 assembly_dir <- path.expand("~/project_data/downy/backup/cleaned_contigs")

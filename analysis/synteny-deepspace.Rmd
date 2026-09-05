@@ -7,7 +7,7 @@ output: html_document
 library(DEEPSPACE)
 library(ggplot2)
 library(here)
-source(here("analysis", "figure-utils.R"))
+source(here("analysis", "lib", "figure-utils.R"))
 theme_set(theme_bw())
 ```
 

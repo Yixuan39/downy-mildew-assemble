@@ -9,7 +9,7 @@ library(data.table)
 library(gt)
 library(here)
 library(pavian)
-source(here('analysis', 'figure-utils.R'))
+source(here('analysis', 'lib', 'figure-utils.R'))
 theme_set(theme_bw())
 # child ids under oomycota: 4762
 oomycete.ids <- read_lines(here('data', 'oomycete_taxids.txt'))

@@ -24,7 +24,7 @@ library(ape)
 library(ggplot2)
 library(ggtree)
 library(patchwork)
-source(here("analysis", "figure-utils.R"))
+source(here("analysis", "lib", "figure-utils.R"))
 theme_set(theme_bw())
 
 genomeRepo <- file.path(wd, "genomes")

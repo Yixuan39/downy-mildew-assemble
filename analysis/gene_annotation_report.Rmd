@@ -14,7 +14,7 @@ library(data.table)
 library(gt)
 library(here)
 
-source(here("analysis", "figure-utils.R"))
+source(here("analysis", "lib", "figure-utils.R"))
 theme_set(theme_bw())
 knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 
@@ -247,7 +247,7 @@ neither_sensitivity <- threshold_support_sensitivity |>
 
 This report summarizes protein-coding gene predictions from hard-masked assemblies of the three focal isolates, functional descriptions assigned from eggNOG-mapper, InterProScan, and DIAMOND BLASTP, and RNA-seq support from Salmon TPM estimates. RNA-seq evidence is treated as transcript support for predicted gene models, not direct protein validation.
 
-Functional annotation follows the rule implemented in `analysis/check-annotation.R`: informative eggNOG-mapper descriptions are used first, followed by the best InterProScan hit, then the best DIAMOND BLASTP hit. Proteins without any supported annotation are retained as hypothetical proteins. Only 0.9-26.1% of input read pairs mapped to the corresponding pathogen assembly across the infection-stage RNA-seq libraries. The RNA-seq summary therefore uses the relatively permissive threshold of TPM >= 2 in at least one sampled time point to retain low-abundance transcript evidence under limited pathogen-mapped read depth.
+Functional annotation follows the rule implemented in `analysis/lib/check-annotation.R`: informative eggNOG-mapper descriptions are used first, followed by the best InterProScan hit, then the best DIAMOND BLASTP hit. Proteins without any supported annotation are retained as hypothetical proteins. Only 0.9-26.1% of input read pairs mapped to the corresponding pathogen assembly across the infection-stage RNA-seq libraries. The RNA-seq summary therefore uses the relatively permissive threshold of TPM >= 2 in at least one sampled time point to retain low-abundance transcript evidence under limited pathogen-mapped read depth.
 
 # Repeat Masking
 
