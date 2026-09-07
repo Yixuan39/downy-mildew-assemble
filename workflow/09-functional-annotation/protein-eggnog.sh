@@ -27,7 +27,7 @@ mkdir -p "${RESULT_DIR}/${BASENAME}"
 ANNOTATION_TMP=${RESULT_DIR}/${BASENAME}_tmp
 mkdir -p "$ANNOTATION_TMP"
 
-mamba run -n eggnog-mapper emapper.py \
+"$HOME/miniforge3/bin/mamba" run -n eggnog-mapper emapper.py \
 -i "${FILE}" \
 --itype proteins \
 -m diamond \

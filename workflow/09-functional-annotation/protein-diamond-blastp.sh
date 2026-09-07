@@ -24,7 +24,7 @@ echo "Processing: $FILE"
 BASENAME=$(basename "$FILE")  
 BASENAME=${BASENAME%.faa}
 
-mamba run -n diamond diamond blastp \
+"$HOME/miniforge3/bin/mamba" run -n diamond diamond blastp \
 --threads "$THREADS" \
 --evalue 1e-3 \
 --max-target-seqs 1 \
