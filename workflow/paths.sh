@@ -10,6 +10,9 @@ export TARGET_ASM_DIR="${TARGET_ASM_DIR:-$SOFTWARE_ROOT/targetasm}"
 # into the container at run time (see helixer-contigs.sh / helixer-published-genomes.sh).
 export HELIXER_POST_BIN_DIR="${HELIXER_POST_BIN_DIR:-$SOFTWARE_ROOT/HelixerPost/target/release}"
 export HELIXER_POST_LIB_DIR="${HELIXER_POST_LIB_DIR:-$HOME/miniforge3/envs/helixerpost-build/lib}"
+# Called by full path (not "gffread") since non-interactive sbatch submissions don't
+# source the shell rc that would otherwise put the downy conda env on PATH.
+export GFFREAD_BIN="${GFFREAD_BIN:-$HOME/miniforge3/envs/downy/bin/gffread}"
 for path in "$REPO_ROOT" "$PROJECT_DATA" "$DB_ROOT" "$SOFTWARE_ROOT" "$TARGET_ASM_DIR"; do
     [[ "$path" = /* ]] || { echo "Expected an absolute path: $path" >&2; return 1; }
 done

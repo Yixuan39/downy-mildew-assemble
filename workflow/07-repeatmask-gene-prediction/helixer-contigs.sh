@@ -45,7 +45,7 @@ export SINGULARITYENV_LD_LIBRARY_PATH="$HELIXER_POST_LIB_DIR"
   
 sed -i 's/ID=_/ID=/g; s/Parent=_/Parent=/g' "${RESULT_DIR}/${BASENAME}.gff"
 
-gffread \
+"$GFFREAD_BIN" \
   "${RESULT_DIR}/${BASENAME}.gff" \
   -g "${FASTA_TMP}/input.fasta" \
   -y "${RESULT_DIR}/${BASENAME}.faa"
