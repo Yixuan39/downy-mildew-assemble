@@ -17,7 +17,10 @@ theme_set(theme_pub())
 # child ids under oomycota: 4762
 oomycete.ids <- read_lines(here('data', 'oomycete_taxids.txt'))
 sample.labels <- c(
-  "UA202013" = "P. effusa (UA202013)",
+  # Kraken2 taxonomy files for the public P. effusa reads are named after the isolate
+  # accession (p_effusa.kraken/.kreport), not "UA202013" - matching the recode key to the
+  # actual file basename is what makes this facet resolve instead of showing up as NA.
+  "p_effusa" = "P. effusa (UA202013)",
   "Quesada_SQIIe_MSU1" = "P. cubensis (MSU1)",
   "Quesada_SQIIe_SC1982" = "P. cubensis (SC1982)",
   "Quesada_SQIIe_Phumuli" = "P. humuli (OR502AA)"
@@ -126,23 +129,25 @@ df.rpt |>
 # Can GC content and coverage separate target Oomycota reads from contamination?
 
 ```{r echo=FALSE}
-# Isolate keys/labels for the three new isolates only (no public UA202013 read-level
-# coverage-gc data), same order/coloring as the rest of this notebook so facets and any
-# cross-figure comparison line up.
+# Isolate keys/labels for all four isolates, same order/coloring as the rest of this notebook
+# so facets and any cross-figure comparison line up. UA202013's raw HiFi reads are the public
+# P. effusa deposit re-run through this pipeline (see workflow/01-read-filtering-screening/
+# UA202013/), not a new isolate sequenced for this study.
 isolate.labels <- c(
   "MSU1" = "P. cubensis (MSU1)",
   "SC1982" = "P. cubensis (SC1982)",
-  "Phumuli" = "P. humuli (OR502AA)"
+  "Phumuli" = "P. humuli (OR502AA)",
+  "UA202013" = "P. effusa (UA202013)"
 )
 ```
 
 Per-read GC content (seqkit `fx2tab`) and per-read 21-mer self-coverage (KAT `sect`) for the
-adapter-filtered HiFi reads of all three new isolates (MSU1, SC1982, Phumuli), colored by the
-same Kraken2 phylum-level taxon call used for the read-composition panel above
-(`taxRank %in% c('U','P')`, phyla below 5% of a library's reads collapsed to "Other"). This is
-the read-level analogue of a blobtools blob plot: assembly-level GC/coverage is not informative
-here because most of these libraries are pre-assembly and dominated by non-target DNA (see the
-taxonomic composition above), so the question is asked directly of the reads.
+adapter-filtered HiFi reads of all four isolates, colored by the same Kraken2 phylum-level taxon
+call used for the read-composition panel above (`taxRank %in% c('U','P')`, phyla below 5% of a
+library's reads collapsed to "Other"). This is the read-level analogue of a blobtools blob plot:
+assembly-level GC/coverage is not informative here because most of these libraries are
+pre-assembly and dominated by non-target DNA (see the taxonomic composition above), so the
+question is asked directly of the reads.
 
 Coverage is per-read median 21-mer depth from KAT `sect` in self-comparison mode (each read's
 own k-mers scored against the k-mer spectrum of the full read set) - a proxy for how many times
@@ -189,10 +194,10 @@ read_tsv(here("data", "blobplot-category-summary-by-isolate.tsv"), show_col_type
 Coverage separates some categories better than GC content does - e.g. `Pseudomonadota` and
 `Bacteroidota` sit at consistently low coverage relative to the rest of each library - but
 **neither axis, nor the combination, cleanly separates target Oomycota reads from
-contamination**. `Oomycota` does not form a single distinct cluster in any of the three panels:
+contamination**. `Oomycota` does not form a single distinct cluster in any of the four panels:
 it spans essentially the whole coverage range visible in each isolate, overlapping heavily with
 `Streptophyta` (host), `Other` and `unclassified`. Conversely, every visually distinct
 cloud/band in the plot is a mixture of taxa rather than a pure category. GC content alone is
 close to uninformative for this separation (categories overlap almost completely on the x-axis
-in all three isolates). A blob-plot-style GC/coverage view, at either the assembly or the read
+in all four isolates). A blob-plot-style GC/coverage view, at either the assembly or the read
 level, is not sufficient here to distinguish target genome reads from contaminant or host reads.

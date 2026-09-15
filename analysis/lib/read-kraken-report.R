@@ -179,8 +179,17 @@ read_report2 <- function(myfile,collapse=TRUE,keep_taxRanks=c("D","K","P","C","O
 
   ## Only stop at certain taxRanks
   ## filter taxon and further up the tree if 'filter_taxon' is defined
-  kraken.tree <- build_kraken_tree(report)
-  report <- collapse.taxRanks(kraken.tree,keep_taxRanks=keep_taxRanks,filter_taxon=filter_taxon)
+  ##
+  ## NOTE (local fix, not in upstream pavian): the original function declared `collapse` in
+  ## its signature but never branched on it - collapse.taxRanks() ran unconditionally, so
+  ## collapse=FALSE silently produced the same collapsed-to-keep_taxRanks report as the
+  ## default. Gating the call here is what actually makes collapse=FALSE retain one row per
+  ## original report taxID (needed to build a full taxID -> phylum ancestor lookup covering
+  ## read-level taxIDs at ranks below/between keep_taxRanks, e.g. species or strain).
+  if (collapse) {
+    kraken.tree <- build_kraken_tree(report)
+    report <- collapse.taxRanks(kraken.tree,keep_taxRanks=keep_taxRanks,filter_taxon=filter_taxon)
+  }
 
   ## Add a metaphlan-style taxon string
   if (add_taxRank_columns) {

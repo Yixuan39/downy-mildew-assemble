@@ -19,6 +19,8 @@ the read-composition panel.
 | `UA202013/run-hifiadapterfilt.sh` | Same filtlong + HiFiAdapterFilt step for the public P. effusa reads (single file, no array). | SLURM, 32 cores |
 | `run-hifiadapterfilt.sh` | Subset reads with filtlong and remove PacBio adapter sequence with HiFiAdapterFilt. | SLURM array 0-2, 32 cores |
 | `coverage-gc/kat-seqkit-coverage-gc.sh` | Per-read 21-mer self-coverage (KAT sect) and per-read GC content (seqkit fx2tab) on the adapter-filtered HiFi reads - the coverage/GC axes behind the blob-style separability check (`analysis/read-distribution.Rmd`). | SLURM array 0-2, 32 cores / 100 GB |
+| `UA202013/kat-seqkit-coverage-gc.sh` | Same KAT/seqkit coverage-GC step for the public P. effusa reads (single file, no array). | SLURM, 32 cores / 100 GB |
+| `coverage-gc/summarize-coverage-gc.R` | Joins each isolate's per-read Kraken2 taxonomy (taxID resolved to its phylum via `taxonkit` against the PlusPFP taxonomy dump), per-read GC and per-read coverage into the two tables `analysis/read-distribution.Rmd` plots. | Local/cluster R; `taxonkit` on PATH |
 
 ## Outputs
 
@@ -28,10 +30,11 @@ Paths are under `$HOME/project_data/downy` on the cluster unless marked *(in rep
 |---|---|---|---|---|
 | Adapter-filtered reads | `~/project_data/downy/GSL_Data/fastq/filtered/*.filt.fastq.gz` | HiFiAdapterFilt output on the three new isolates; the reads that go into assembly. | 02-assembly | not deposited (derived from SRA reads) |
 | Adapter-filtered reads (public) | `~/project_data/downy/UA202013/filtered/*.filt.fastq.gz` | Same filtering for the public P. effusa UA202013 reads. | 02-assembly | not deposited (derived from public reads) |
-| Kraken2 report | `~/project_data/downy/k2_pfp/<sample>.kreport` | PlusPFP classification summary quantifying host/microbial composition per library. | read-distribution.Rmd (Figure 1) | Zenodo (Kraken2 reports) |
-| Kraken2 per-read output | `~/project_data/downy/k2_pfp/<sample>.kraken` | Per-read classification calls; large, only the .kreport summary is needed downstream. | - | not deposited (intermediate, ~9 GB) |
-| KAT sect per-read coverage | `~/project_data/downy/results/read-filtering-screening/coverage-gc/<sample>-sect-stats.tsv` | Per-read median/mean 21-mer self-coverage and KAT's own GC%. | analysis/read-distribution.Rmd | not deposited (regenerable intermediate) |
-| seqkit per-read GC | `~/project_data/downy/results/read-filtering-screening/coverage-gc/<sample>-gc.tsv` | Per-read GC% (name + GC only), used as the plotted GC axis. | analysis/read-distribution.Rmd | not deposited (regenerable intermediate) |
+| Kraken2 report | `~/project_data/downy/results/read-filtering-screening/taxonomy/<sample>.kreport` | PlusPFP classification summary quantifying host/microbial composition per library. | read-distribution.Rmd (Figure 1, blob plot) | Zenodo (Kraken2 reports) |
+| Kraken2 per-read output | `~/project_data/downy/results/read-filtering-screening/taxonomy/<sample>.kraken` | Per-read classification calls; large (~9 GB for the biggest library). Read by `coverage-gc/summarize-coverage-gc.R` to assign each read's phylum category for the blob plot. | coverage-gc/summarize-coverage-gc.R | not deposited (intermediate, ~9 GB) |
+| KAT sect per-read coverage | `~/project_data/downy/results/read-filtering-screening/coverage-gc/<sample>-sect-stats.tsv` | Per-read median/mean 21-mer self-coverage and KAT's own GC%. | coverage-gc/summarize-coverage-gc.R | not deposited (regenerable intermediate) |
+| seqkit per-read GC | `~/project_data/downy/results/read-filtering-screening/coverage-gc/<sample>-gc.tsv` | Per-read GC% (name + GC only), used as the plotted GC axis. | coverage-gc/summarize-coverage-gc.R | not deposited (regenerable intermediate) |
+| Coverage-GC blob-plot tables | `data/blobplot-read-coverage-gc-subsample.tsv`, `data/blobplot-category-summary-by-isolate.tsv` *(in repo)* | Stratified per-read subsample and per-category summary stats produced by `coverage-gc/summarize-coverage-gc.R`, for all four isolates. | analysis/read-distribution.Rmd | Zenodo (small derived tables, committed to the repo) |
 
 ## Notes
 
