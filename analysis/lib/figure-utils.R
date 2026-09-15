@@ -1,3 +1,33 @@
+# Nature Plants figure text guidance: 5-7 pt sans-serif for standard labelling
+# (https://www.nature.com/nplants/submission-guidelines/aip-and-formatting).
+theme_pub <- function(base_size = 7, base_family = "Helvetica") {
+  ggplot2::theme_bw(base_size = base_size, base_family = base_family) %+replace%
+    ggplot2::theme(
+      axis.title = ggplot2::element_text(size = 7),
+      axis.text = ggplot2::element_text(size = 6, colour = "black"),
+      strip.text = ggplot2::element_text(size = 7),
+      legend.title = ggplot2::element_text(size = 7),
+      legend.text = ggplot2::element_text(size = 6),
+      legend.key.size = grid::unit(3, "mm"),
+      plot.title = ggplot2::element_text(size = 7)
+    )
+}
+
+# Shared colorblind-safe (Okabe-Ito-derived) palette for the Kraken2 phylum-level
+# taxon categories used across Figure 1 (analysis/read-distribution.Rmd) and the
+# read-level blob plot (analysis/blobplot-coverage-gc.Rmd), so both figures use
+# an identical taxon -> color mapping.
+taxon_palette <- c(
+  "Oomycota"       = "#000000", # target genus - bold black
+  "Streptophyta"   = "#0072B2", # host plant
+  "Pseudomonadota" = "#D55E00", # major bacterial contaminant
+  "Bacteroidota"   = "#009E73",
+  "Ascomycota"     = "#CC79A7",
+  "Chordata"       = "#E69F00",
+  "unclassified"   = "#56B4E9",
+  "Other"          = "#999999"
+)
+
 figure_path <- function(filename) {
   if (requireNamespace("here", quietly = TRUE)) {
     path <- here::here("figures", filename)
