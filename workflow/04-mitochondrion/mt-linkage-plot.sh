@@ -3,7 +3,7 @@
 # Purpose : Draw the linear synteny/linkage plot of the 14 oomycete mitochondrial genomes with gbdraw. Row
 #           order mirrors the nuclear synteny figure (analysis/synteny-analysis.Rmd), whose rows
 #           come from the GENESPACE SpeciesTree_rooted.txt tip order.
-# Inputs  : a multi-record GenBank file of the 14 mitochondrial genomes (data/mt_linkage/14_mitochondrial_genomes.gb); mt-label-orf-only.tsv for the ORF-only labels
+# Inputs  : a multi-record GenBank file of the 14 mitochondrial genomes (data/mt_linkage/14_mitochondrial_genomes.gb); mt-label-orf-only.tsv for the ORF-only labels; mt-rps10-color.tsv to highlight rps10
 # Outputs : ${PROJECT_DATA}/results/assembly-qc/mt-linkage/mt_linkage.{svg,pdf,png} plus per-record
 #           split/ and blast/ intermediates; final svg/pdf/png + split/ + blast/ are also mirrored into
 #           data/mt_linkage/ in the repo, which is what's committed for the manuscript figure.
@@ -60,6 +60,10 @@ for rec in sorted(recs, key=lambda r: PLAN[r.name][0]):
     for ft in rec.features:
         if ft.type in ("CDS", "rRNA") and ft.qualifiers.get("gene"):
             ft.qualifiers["product"] = ft.qualifiers["gene"]
+        # P. tabacina KT893455 annotates rps10 as free-text product with no /gene
+        # qualifier; the colour table and label whitelist both key on an exact "rps10".
+        if ft.type == "CDS" and ft.qualifiers.get("product", [""])[0].lower() == "ribosomal protein s10":
+            ft.qualifiers["product"] = ["rps10"]
         elif ft.type == "rRNA":  # records with no /gene: "large subunit ribosomal RNA" -> rnl
             prod = ft.qualifiers.get("product", [""])[0].lower()
             if "large" in prod or "23s" in prod:  ft.qualifiers["product"] = ["rnl"]
@@ -90,16 +94,18 @@ wc -l blast/*.tsv | tail -1
 # height at this font size, which no Nature page fits.
 #
 # Sized for Nature Plants: at the 180 mm double-column width this renders label
-# text at 5.2 pt (their range is 5-7 pt) in a 174 mm tall figure. Font size is in
+# text at 5.1 pt (their range is 5-7 pt) in a 177 mm tall figure. The rps10 legend
+# entry widens the legend column, so the canvas had to come back down to hold 5 pt. Font size is in
 # canvas units, so it only means anything relative to GBDRAW_WIDTH: printed pt =
 # font/svg_width*180/25.4*72. Raising the width or lowering the font drops below
 # their 5 pt floor -- 2800/41 is the limit, and this is already near it.
 # gbdraw 0.13 hardcodes that canvas width at 2000 px; gbdraw-wide.py makes it settable.
-GBDRAW_WIDTH="${GBDRAW_WIDTH:-2700}" GBDRAW_LABEL_STROKE=2.2 python "$HERE/gbdraw-wide.py" \
+GBDRAW_WIDTH="${GBDRAW_WIDTH:-2600}" GBDRAW_LABEL_STROKE=2.2 python "$HERE/gbdraw-wide.py" \
   --gbk "${GBS[@]}" -b "${BLASTS[@]}" \
   --align_center --separate_strands \
   --show_labels all --resolve_overlaps \
   --label_whitelist "$HERE/mt-label-orf-only.tsv" \
+  -t "$HERE/mt-rps10-color.tsv" \
   --identity 60 --alignment_length 300 \
   --comparison_height 10 --feature_height 20 \
   --block_stroke_width 0 --line_stroke_width 2 \

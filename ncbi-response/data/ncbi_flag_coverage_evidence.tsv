@@ -1,0 +1,9 @@
+label	contig	start	end	action	span_len	span_depth_med	span_depth_mq20_med	flank20kb_depth_med	contig_mean_depth	contig_mean_mapq	genome_median_depth	span_zero_cov_bp	span_frac_ge10x	span_frac_ge_half_contig	depth_ratio_span_vs_contig	depth_ratio_contig_vs_genome	left_junction_spanning_reads	left_junction_spanning_mq20	right_junction_spanning_reads	right_junction_spanning_mq20
+MSU1_004_s1	Pcub-MSU1_004	177773	184368	trim	6596	246.0	246.0	267.0	247.7	50.5	237.0	0	1.0	1.0	0.993	1.045	202.0	202.0	186.0	186.0
+MSU1_004_s2	Pcub-MSU1_004	239385	273394	trim	34010	240.0	240.0	274.0	247.7	50.5	237.0	0	1.0	1.0	0.969	1.045	193.0	193.0	191.0	191.0
+MSU1_013_s1	Pcub-MSU1_013	1104526	1156743	trim	52218	232.0	227.0	216.0	225.6	56.6	237.0	0	1.0	0.9997	1.028	0.952	160.0	160.0	192.0	192.0
+SC1982_008_s1	Pcub-SC1982_008	1092633	1100584	trim	7952	80.0	80.0	80.0	87.9	52.4	92.6	0	1.0	1.0	0.91	0.949	43.0	43.0	52.0	52.0
+SC1982_037_whole	Pcub-SC1982_037	1	517250	exclude	517250	15.0	15.0		14.6	60.0	92.6	0	0.9159	0.9746	1.025	0.158				
+SC1982_071_whole	Pcub-SC1982_071	1	118813	exclude	118813	16.0	16.0		16.1	60.0	92.6	0	0.9556	0.9925	0.996	0.173				
+OR502AA_015_s1	Phum-OR502AA_015	729948	761124	trim	31177	267.0	264.0	285.0	292.2	57.2	287.3	0	1.0	1.0	0.914	1.017	223.0	223.0	245.0	245.0
+OR502AA_022_s1	Phum-OR502AA_022	205298	215039	trim	9742	280.0	277.0	274.0	293.3	52.0	287.3	0	1.0	1.0	0.955	1.021	236.0	236.0	211.0	211.0

@@ -1,0 +1,385 @@
+---
+title: "Response to the contamination and genome-size reports"
+subtitle: "Submission SUB16446400 --- *Pseudoperonospora cubensis* MSU-1 and SC1982, *P. humuli* OR502AA"
+author: "Yixuan Yang, on behalf of the authors"
+date: "`r format(Sys.Date(), '%d %B %Y')`"
+output:
+  pdf_document:
+    latex_engine: pdflatex
+    number_sections: false
+    fig_caption: true
+geometry: margin=1in
+fontsize: 11pt
+urlcolor: blue
+header-includes:
+  - \usepackage{booktabs}
+  - \usepackage{longtable}
+  - \usepackage{textcomp}
+  - \usepackage{float}
+  - \usepackage{array}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+# Keep the PNG extension so LaTeX does not substitute the older same-name PDF.
+options(knitr.include_graphics.ext = TRUE)
+
+cov <- read.delim("data/ncbi_flag_coverage_evidence.tsv", check.names = FALSE)
+jun <- read.delim("data/ncbi_flag_junction_evidence.tsv", check.names = FALSE)
+fsp <- read.delim("data/ncbi_flag_fullspan_evidence.tsv", check.names = FALSE)
+cigar <- read.delim("data/ncbi_flag_cigar_audit.tsv", check.names = FALSE)
+hits <- read.delim("data/review_blastp_span_besthits.tsv", check.names = FALSE,
+                   quote = "", na.strings = "")
+# Verify the internal best-hit summary against the original searches at render time.
+span_genes <- read.delim("data/span_genes.tsv", check.names = FALSE)
+for (arm in c("nr", "oomycota")) {
+  path <- if (arm == "nr") "data/blastp_arm_unrestricted.tsv.gz" else
+    "data/blastp_arm_oomycota.tsv"
+  raw <- read.delim(path, check.names = FALSE, quote = "")
+  raw <- raw[order(-raw$bitscore, raw$evalue, raw$sseqid), ]
+  raw <- raw[!duplicated(raw$qseqid), ]
+  expected <- raw[match(hits$query_protein, raw$qseqid), ]
+  for (field in c("sseqid", "pident", "qcovhsp", "evalue", "bitscore"))
+    stopifnot(isTRUE(all.equal(hits[[paste0(arm, "_", field)]],
+                              expected[[field]], check.attributes = FALSE)))
+}
+
+contested <- c("MSU1_004_s1", "MSU1_004_s2", "MSU1_013_s1",
+               "SC1982_008_s1", "OR502AA_015_s1", "OR502AA_022_s1")
+bacterial <- c("SC1982_037_whole", "SC1982_071_whole")
+
+cv <- cov[match(contested, cov$label), ]
+bc <- cov[match(bacterial, cov$label), ]
+expected_genes <- subset(span_genes, region == "span" & label %in% contested)
+stopifnot(nrow(hits) == 59L, !anyDuplicated(hits$query_protein),
+          setequal(hits$query_protein, expected_genes$protein_id),
+          all(hits$label == expected_genes$label[match(hits$query_protein,
+                                                     expected_genes$protein_id)]))
+rep_hits <- hits[match(contested, hits$label), ]
+for (i in seq_along(contested)) {
+  rows <- hits[hits$label == contested[i] & !is.na(hits$nr_bitscore), ]
+  rep_hits[i, ] <- rows[order(-rows$nr_bitscore, rows$nr_evalue,
+                            rows$query_protein)[1], ]
+}
+
+# the junction counts quoted in the text are the 1 kb-overhang counts; confirm the
+# two evidence tables agree before either is rendered
+jl <- jun[jun$junction == "left",  ][match(contested, jun$label[jun$junction == "left"]),  ]
+jr <- jun[jun$junction == "right", ][match(contested, jun$label[jun$junction == "right"]), ]
+stopifnot(identical(as.integer(jl$span_1kb), as.integer(cv$left_junction_spanning_reads)),
+          identical(as.integer(jr$span_1kb), as.integer(cv$right_junction_spanning_reads)),
+          all(jl$span_1kb == jl$span_1kb_mq20),
+          all(jr$span_1kb == jr$span_1kb_mq20))
+cl <- subset(cigar, test == "left")
+cr <- subset(cigar, test == "right")
+cf <- subset(cigar, test == "full")
+cl <- cl[match(contested, cl$label), ]
+cr <- cr[match(contested, cr$label), ]
+cf <- cf[match(contested, cf$label), ]
+stopifnot(all(cl$coordinate_mq20 == jl$span_1kb_mq20),
+          all(cr$coordinate_mq20 == jr$span_1kb_mq20),
+          all(cf$coordinate_mq20 == fsp$full_1000_mq20[match(contested, fsp$label)]),
+          all(cigar$aligned_flanks_no_DN_ge50_mq20 <= cigar$coordinate_mq20),
+          all(cl$aligned_flanks_no_DN_ge50_mq20 > 0),
+          all(cr$aligned_flanks_no_DN_ge50_mq20 > 0))
+
+tt   <- function(x) sprintf("\\texttt{%s}", gsub("_", "\\\\_", x))
+comma <- function(x) formatC(as.numeric(x), format = "d", big.mark = ",")
+kb   <- function(x) sprintf("%.1f kb", as.numeric(x) / 1000)
+dx   <- function(x) sprintf("%s$\\times$", format(round(as.numeric(x), 1), trim = TRUE))
+
+small_table <- function(df, col.names, align) {
+  cat("\\begingroup\\small\n")
+  print(knitr::kable(df, format = "latex", booktabs = TRUE, escape = FALSE,
+                     col.names = col.names, align = align, linesep = "",
+                     row.names = FALSE))
+  cat("\\endgroup\n")
+}
+```
+
+To: genomes@ncbi.nlm.nih.gov
+
+\vspace{1em}
+
+Dear Colleagues,
+
+Thank you for the contamination and genome-size reports. We have acted on part of the
+contamination report and would like to ask you to reconsider the remainder. We also ask
+that the genome-size alert be reassessed in light of the comparative evidence in Section
+4: the synteny analysis across 15 oomycete genomes shows 1:1 correspondence rather than
+duplicated blocks, and BUSCO duplication is low (3.16--5.45%), so we see no evidence
+that these assemblies are haplotype-resolved --- the usual explanation for an assembly
+exceeding its expected genome size.
+
+**Accepted.** We agree with the two whole-contig bacterial calls in SC1982
+(`Pcub-SC1982_037`, `r comma(517250)` bp; `Pcub-SC1982_071`, `r comma(118813)` bp; CFB
+group bacteria). We accept their automatic removal by NCBI, as documented in the
+FixedForeignContaminations report. Our read data support
+these calls: the two contigs align at `r dx(bc$contig_mean_depth[1])` and
+`r dx(bc$contig_mean_depth[2])` mean HiFi depth against a long-contig depth benchmark of
+`r dx(bc$genome_median_depth[1])` --- about one sixth of that benchmark, consistent with
+a lower-abundance co-isolated organism.
+
+**Contested.** We ask that the six internal spans flagged as `fung:ascomycetes` (three in
+MSU-1, one in SC1982, two in OR502AA) be retained. Each lies internal to a large host
+contig. We request reconsideration based on read-alignment support, local coverage,
+and the protein-homology results summarized below.
+
+# 1. HiFi reads support every flagged boundary
+
+We aligned the raw HiFi reads to the nuclear assemblies using minimap2 with the
+`map-hifi` preset and `--secondary=no`, and retained primary alignments. Mapping was
+performed against the full assembly before alignments on flagged contigs were extracted.
+We then independently rechecked the existing BAM alignments, requiring mapping quality
+$\ge$ 20 and at least 1 kb of aligned query bases on each side of a flagged boundary.
+Only CIGAR operations M, =, and X contribute to the flanking-base counts. As a
+conservative additional filter, we excluded any alignment containing a deletion or
+reference skip of $\ge$ 50 bp anywhere in its CIGAR string. Counts below are distinct
+read identifiers passing all these requirements.
+
+```{r junction-table, results='asis'}
+t1 <- data.frame(
+  span   = paste0(tt(cv$label), " (", comma(cv$start), "--", comma(cv$end), ")"),
+  len    = kb(cv$span_len),
+  reads  = sprintf("%d / %d", cl$aligned_flanks_no_DN_ge50_mq20,
+                              cr$aligned_flanks_no_DN_ge50_mq20),
+  stringsAsFactors = FALSE)
+small_table(t1,
+  col.names = c("Span (coordinates)", "Length", "Left / right reads"),
+  align = c("l", "r", "c"))
+```
+
+All 12 boundaries retain
+`r min(c(cl$aligned_flanks_no_DN_ge50_mq20, cr$aligned_flanks_no_DN_ge50_mq20))`--`r max(c(cl$aligned_flanks_no_DN_ge50_mq20, cr$aligned_flanks_no_DN_ge50_mq20))`
+supporting reads after this CIGAR-aware check. The original coordinate-only counts were
+43--245; the stricter check removes a small number of alignments but leaves substantial
+support at every boundary. Thus, the boundary support is not explained solely by
+reference intervals spanning large alignment gaps. Mapping quality and these filters
+cannot exclude every possible ambiguity, but together they strengthen the evidence for
+physical continuity at the reported boundaries.
+
+```{r fullspan-setup, include=FALSE}
+fs <- fsp[match(contested, fsp$label), ]
+a <- fs[fs$label == "MSU1_004_s1", ]
+b <- fs[fs$label == "OR502AA_022_s1", ]
+s <- fs[fs$label == "SC1982_008_s1", ]
+stopifnot(all(fs$full_1000 == fs$full_1000_mq20))
+```
+
+The same CIGAR-aware criteria were applied to reads encompassing an entire flagged
+region with at least 1 kb of aligned query sequence on each side. This retained
+`r cf$aligned_flanks_no_DN_ge50_mq20[1]` reads for `r tt("MSU1_004_s1")`
+(`r kb(a$span_len)`), `r cf$aligned_flanks_no_DN_ge50_mq20[6]` for
+`r tt("OR502AA_022_s1")` (`r kb(b$span_len)`), and
+`r cf$aligned_flanks_no_DN_ge50_mq20[4]` for `r tt("SC1982_008_s1")`
+(`r kb(s$span_len)`). No full-region read met these criteria for the remaining three
+spans, so their support rests on the individual-boundary alignments. Only the 52.2 kb
+MSU-1 span exceeds the maximum read length recorded on its contig (45.2 kb); lack of a
+full-region alignment for the other spans is an observation, not a read-length impossibility.
+
+The assemblies were not scaffolded and the submitted sequences contain no N's. This
+excludes scaffolding as the source of a join, but does not by itself exclude an
+assembler misjoin; the read-alignment and coverage evidence are the basis of our request.
+
+# 2. Coverage of the spans is consistent with the surrounding genome
+
+We compared the median depth of each flagged span with its contig mean depth and the
+median alignment-span depth among contigs at least 100 kb long. This long-contig
+benchmark is not the median over all contigs. Similar coverage is consistent with host-genome
+membership, although a co-isolated organism could coincidentally have a similar abundance.
+
+```{r depth-table, results='asis'}
+mk <- function(d, italic = FALSE) {
+  v <- data.frame(
+    span   = tt(d$label),
+    sdep   = dx(d$span_depth_med),
+    cdep   = dx(d$contig_mean_depth),
+    gdep   = dx(d$genome_median_depth),
+    ratio  = sprintf("%.2f", d$span_depth_med / d$genome_median_depth),
+    zero   = ifelse(d$action == "exclude", "---", comma(d$span_zero_cov_bp)),
+    stringsAsFactors = FALSE)
+  if (italic) v[] <- lapply(v, function(x) sprintf("\\textit{%s}", x))
+  v
+}
+t2 <- rbind(mk(cv), mk(bc, italic = TRUE))
+small_table(t2,
+  col.names = c("Span",
+                "\\shortstack[r]{Span\\\\depth}",
+                "\\shortstack[r]{Contig\\\\mean}",
+                "\\shortstack[r]{Long-contig\\\\benchmark}",
+                "\\shortstack[r]{Span /\\\\benchmark}",
+                "\\shortstack[r]{Uncovered\\\\bp}"),
+  align = c("l", rep("r", 5)))
+cat("\n\n\\begingroup\\footnotesize\\noindent",
+    "Depth columns are median (span) or mean (contig) HiFi depth;",
+    "The benchmark is the median primary-alignment reference span per contig base",
+    "among contigs at least 100 kb long (35 MSU-1, 77 SC1982, and 48 OR502AA contigs);",
+    "reference spans include CIGAR deletions and skips, whereas base-depth columns do not.",
+    "The last two rows, in italics, are the whole-contig bacterial calls",
+    "whose automatic removal we accept.\\endgroup\n")
+```
+
+Every contested span falls between
+`r sprintf("%.2f", min(cv$span_depth_med / cv$genome_median_depth))` and
+`r sprintf("%.2f", max(cv$span_depth_med / cv$genome_median_depth))`
+of the long-contig benchmark, with no uncovered base. The two bacterial contigs removed by NCBI
+provide an internal contrast at
+`r sprintf("%.2f", min(bc$span_depth_med / bc$genome_median_depth))`--`r sprintf("%.2f", max(bc$span_depth_med / bc$genome_median_depth))`$\times$.
+Thus, the contested spans have coverage more consistent with the surrounding genome
+than with these two bacterial contigs. Coverage supports retention when considered
+together with the alignment evidence, rather than serving as a taxonomic test on its own.
+
+# 3. Protein homology and gene content of the flagged spans
+
+We searched all `r nrow(hits)` predicted proteins overlapping the six contested spans
+using DIAMOND blastp against nr, with an unrestricted search and a separate search
+restricted to Oomycota (taxid 4762). Both used sensitive mode and an E-value threshold of
+$10^{-3}$, retaining up to 250 and 25 target sequences per query, respectively. For each
+protein, we selected the best reported hit by bit score, then E-value and accession.
+Representative results are included below; full per-protein results are available on
+request. A missing hit means no result was reported under these settings, not demonstrated
+absence of a homolog.
+
+```{r homology-summary, results='asis'}
+nh <- vapply(contested, function(x) sum(hits$label == x & !is.na(hits$oomycota_sseqid)), 0L)
+ng <- vapply(contested, function(x) sum(hits$label == x), 0L)
+t3 <- data.frame(tt(contested),
+  c("Hypothetical proteins", "Hypothetical proteins", "ERG3-like array",
+    "ERG3-like protein", "ERG3-like protein", "Hypothetical / permease-like"),
+  sprintf("%d / %d", nh, ng))
+small_table(t3, c("Span", "Main sequence annotations", "Oomycota hits / genes"),
+            c("l", "l", "c"))
+```
+
+The tables below show one representative query per span: the protein with the highest
+unrestricted bit score in that span. The Oomycota table uses the **same queries**, so
+its rows can be compared directly with the unrestricted results. Identity is the
+percentage identity of the reported alignment, and coverage is the percentage of the
+query covered by that HSP. Detection of a hit at the search threshold does not by itself
+establish protein function or taxonomic origin.
+
+```{r representative-hits, results='asis'}
+esci <- function(x) ifelse(is.na(x), "---", formatC(x, format = "e", digits = 1))
+for (arm in c("nr", "oomycota")) {
+  cat("\n\n\\begin{minipage}{\\linewidth}\n")
+  cat(if (arm == "nr") "\n\n\\noindent\\textbf{Unrestricted nr search}\\par\\smallskip\n" else
+      "\n\n\\noindent\\textbf{Best Oomycota hits for the same representative proteins}\\par\\smallskip\n")
+  get <- function(field) rep_hits[[paste0(arm, "_", field)]]
+  species <- gsub(";", "; ", get("sspecies"), fixed = TRUE)
+  tab <- data.frame(tt(rep_hits$label),
+    ifelse(is.na(get("sseqid")), "---", tt(get("sseqid"))),
+    ifelse(is.na(species), "---", species),
+    ifelse(is.na(get("pident")), "---", sprintf("%.1f / %.1f", get("pident"), get("qcovhsp"))),
+    esci(get("evalue")))
+  cat("\\begingroup\\scriptsize\n")
+  print(knitr::kable(tab, format = "latex", booktabs = TRUE, escape = FALSE,
+    col.names = c("Span", "Accession", "Species", "Identity / cov. (\\%)", "E-value"),
+    align = c("l", "l", "p{3cm}", "r", "r"), row.names = FALSE, linesep = ""))
+  cat("\\endgroup\n\\end{minipage}\\par\\medskip\n")
+}
+```
+
+A dash denotes no hit meeting the search threshold. In `OR502AA_022_s1`, the
+representative query has no reported Oomycota hit, but the other predicted protein in
+that span does; hence the summary above reports 1/2 genes with Oomycota hits.
+
+The representative ERG3-like proteins from MSU-1, SC1982, and OR502AA have high identity
+to fungal proteins (`r paste(sprintf("%.1f", rep_hits$nr_pident[3:5]), collapse = ", ")`%,
+respectively). Oomycota hits are also recovered, but they do not outweigh the stronger
+fungal similarities or establish that the sequences are vertically inherited oomycete
+genes. The MSU-1 contig 004 spans predominantly match a hypothetical protein from
+*Plectosphaerella cucumerina*, whereas the representative protein from OR502AA contig
+022 matches a permease-domain-containing protein from *Plectosphaerella plurivora*.
+These affinities explain why the regions warrant scrutiny; the argument for their
+retention rests principally on their read-supported genomic context.
+
+Three spans, one per isolate, contain ERG3-like gene models together with a predicted
+protein showing partial similarity to glutaminyl-tRNA synthetase. MSU-1 contains 38
+ERG3-like models in the flagged region, compared with one in each of the corresponding
+SC1982 and OR502AA spans. These are annotation-based counts, not experimentally verified
+functional copies. The synthetase matches cover only 24.7--33.7% of the predicted query
+proteins, so we do not assign a complete enzyme function on that evidence alone. This
+recurring gene-content pattern is worth documenting, but we have not established
+orthologous insertion sites by local flank-synteny analysis, and copy number alone
+cannot exclude a fungal origin.
+
+Wang et al. (2022) experimentally characterized an active ERG3 in the sterol-auxotrophic
+*Phytophthora capsici*. This establishes that ERG3 can occur in a sterol-auxotrophic
+oomycete, but does not establish its expected presence in *Pseudoperonospora*. Herzog et
+al. (2020) reported repeated horizontal transfer of sterol C-5 desaturase genes among
+Dikarya fungi. That study provides evolutionary context, not evidence of horizontal
+transfer in our isolates. We have not reconstructed these gene phylogenies and do not
+assign an evolutionary origin to the flagged regions here.
+
+# 4. Genome size and comparative structure
+
+We request that the assembly-size alerts be assessed together with the comparative
+structure and gene-completeness evidence. The analysis across 15 oomycete genomes shows
+that the three focal assemblies retain broad syntenic correspondence with related downy
+mildew genomes and occupy the expected positions in the species tree (Figure 1).
+The targetasm reassembly of the published *P. effusa* UA202013 reads also groups with the
+published reference. These observations support taxonomic identity and conservation of
+gene order in the assemblies.
+
+Because the riparian plot is scaled by gene rank rather than physical sequence length,
+we interpret it as supporting evidence for conserved genome structure, rather than as
+an independent estimate of genome size. The assemblies used in this comparison recover
+99.85--100% complete BUSCOs for the three focal isolates, with 3.16--5.45% duplicated
+BUSCOs. An unmerged, haplotype-resolved assembly retaining both haplotypes of a diploid
+genome would be expected to show substantially higher BUSCO duplication and duplicated
+syntenic blocks in the riparian plot; we observe neither, so we find no evidence that
+these assemblies are haplotype-resolved. This supports near-complete conserved gene space with limited duplication of
+these markers, but does not exclude redundancy elsewhere in the assemblies. Differences
+in repeat-rich and intergenic sequence can contribute to differences in assembly length;
+we do not attribute all additional sequence to improved long-read resolution on the
+basis of synteny alone.
+
+# Request
+
+We ask that the six internal `fung:ascomycetes` spans be retained on the combined evidence
+of CIGAR-checked HiFi reads supporting every flagged boundary and span coverage
+consistent with the surrounding genome. We acknowledge the fungal protein similarities
+and distinguish these from the physical evidence supporting genomic membership. The
+representative protein-homology results are presented above; full per-protein results,
+underlying alignments, and per-base depth profiles are available on request. We also request reconsideration of the
+assembly-size alerts in light of the comparative evidence and its stated limitations.
+
+We accept only the two whole-contig removals listed above and request retention of all
+remaining submitted sequences, including the six contested internal spans. We checked
+the NCBI-modified SC1982 FASTA against the assembly used for read mapping: the two
+bacterial contigs are absent, and all 473 retained sequences are unchanged in nucleotide
+content. The supplied reports list no additional terminal contamination intervals.
+
+Please do not automatically trim, mask, split, or exclude any additional sequence,
+including sequence at contig ends, without first contacting us and obtaining our
+confirmation. If further screening identifies additional putative contamination, please
+provide the affected sequence identifiers, exact coordinates, and supporting screening
+results for our review before making changes. Please confirm that no further automatic
+sequence removal or trimming will be applied while this review is pending.
+
+With thanks for your time and for the screen, which prompted a useful analysis.
+
+\vspace{1em}
+
+Sincerely,
+
+Yixuan Yang, on behalf of the authors
+
+
+# References
+
+Wang, W., Cui, T., Zhang, F., Xue, Z., Zhang, B., and Liu, X. (2022).
+Functional Analysis of the C-5 Sterol Desaturase PcErg3 in the Sterol Auxotrophic
+Oomycete Pathogen *Phytophthora capsici*. *Frontiers in Microbiology*, **13**, 811132.
+[doi:10.3389/fmicb.2022.811132](https://doi.org/10.3389/fmicb.2022.811132).
+
+Herzog, S., Brinkmann, H., Vences, M., and Fleißner, A. (2020).
+Evidence of repeated horizontal transfer of sterol C-5 desaturase encoding genes among
+dikarya fungi. *Molecular Phylogenetics and Evolution*, **150**, 106850.
+[doi:10.1016/j.ympev.2020.106850](https://doi.org/10.1016/j.ympev.2020.106850).
+
+\clearpage
+
+```{r synteny, out.width='100%', fig.pos='p', fig.cap="Comparative synteny and species relationships across 15 oomycete genomes. The left panel shows the OrthoFinder species tree generated from predicted proteins, and the right panel shows the GENESPACE riparian plot of clustered syntenic regions using the published \\textit{P. effusa} UA202013 genome as the reference. Contigs are scaled by gene rank order, with the scale bar representing 2,000 gene positions. The three newly sequenced and assembled \\textit{Pseudoperonospora} isolates and \\textit{P. effusa} UA202013\\textsuperscript{*} are shown in bold. The asterisk denotes our targetasm-derived genome reassembled from the published UA202013 read set for workflow comparison. \\textit{P. effusa} UA202013\\textsuperscript{*} grouped with the published reference, and the three focal assemblies retained broad syntenic correspondence with related downy mildew genomes."}
+knitr::include_graphics("../figures/synteny-contigs-tree-riparian.png", auto_pdf = FALSE)
+```

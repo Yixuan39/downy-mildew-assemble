@@ -1,0 +1,9 @@
+label	action	n_genes	top_product	best_hit_species	best_hit_pident	pct_genes_with_oomycete_homolog	best_oomycete_pident_med	median_family_pident	n_phyla_top_hits	n_species_top_hits	n_subjects_ge90pct	n_genera_ge90pct
+MSU1_004_s1	trim	4	hypothetical protein B0T11DRAFT_333733	Plectosphaerella cucumerina	72.3	50	36.2	57.4	2	214	0	0
+MSU1_004_s2	trim	7	hypothetical protein B0T11DRAFT_333733	Plectosphaerella cucumerina	74.4	14	25.9	55.4	2	219	0	0
+MSU1_013_s1	trim	40	c-5 sterol desaturase	Colletotrichum musicola;Colletotri	94.2	95	53.7	60.5	1	404	2	1
+SC1982_008_s1	trim	3	c-5 sterol desaturase	Colletotrichum musicola;Colletotri	93.0	33	54.4	71.6	1	342	2	1
+OR502AA_015_s1	trim	3	c-5 sterol desaturase	Colletotrichum musicola;Colletotri	92.5	33	50.3	72.6	1	337	4	1
+OR502AA_022_s1	trim	2	amino acid permease-domain-containing protein	Plectosphaerella plurivora	67.7	50	68.6	39.4	19	306	0	0
+SC1982_037_whole	exclude	287	hypothetical protein Lal_00009754	Lupinus albus	71.4	41	33.7	48.0	91	5390	39	0
+SC1982_071_whole	exclude	78	T9SS type A sorting domain-containing protein	nan	61.3	47	32.2	50.8	34	2791	186	21

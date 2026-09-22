@@ -20,16 +20,6 @@ tuned to our own libraries.
 
 ## Outputs
 
-Paths are under `$HOME/project_data/downy` on the cluster unless marked *(in repo)*. The Deposition column feeds the data-availability plan (see repo root `DATA_DEPOSITION.md`).
-
-| output | path | what it is | consumed by | deposition |
-|---|---|---|---|---|
-| targetasm working dir | `~/project_data/downy/Assembly/<isolate>/` | Full targetasm run per isolate (decontaminated primary assembly plus all intermediates). The final assembly is copied to contigs-renamed/ in stage 04. | 04-mitochondrion, 05-assembly-qc | not deposited (42 GB working dirs; final assemblies deposited from contigs-renamed/cleaned/) |
-
-## Notes
-
-These scripts are **not** submitted with `sbatch`. Nextflow submits its own SLURM jobs, so run
-them from a login node (inside `tmux`/`screen`) and let the pipeline schedule the work.
-
-The pipeline was previously called `TEA`, and before that `target-asm`. Both older names are gone
-from the scripts, but `tea*` still appears as a benchmark method label - see stage 03.
+| output | path | what it is | consumed by |
+|---|---|---|---|
+| targetasm working dir | `~/project_data/downy/results/assembly/<isolate>/` | Full targetasm run per isolate. The final assembly is copied to the downstream assembly-QC inputs. | 04-mitochondrion, 05-assembly-qc |

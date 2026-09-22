@@ -1,1 +1,1 @@
-CDS	product	^(orf|ymf|hypothetical)
+CDS	product	^(orf|ymf|hypothetical|rps10$)

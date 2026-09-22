@@ -30,16 +30,7 @@ mkdir -p "${RESULT_DIR}/${BASENAME}"
 
 nvidia-smi
 
-# helixer_post_bin ships empty in this image; supply the locally-built binary and its
-# HDF5 runtime library via bind mount + LD_LIBRARY_PATH (both env var prefixes covered
-# since CONTAINER_RUNTIME may be apptainer or singularity).
-export APPTAINERENV_LD_LIBRARY_PATH="$HELIXER_POST_LIB_DIR"
-export SINGULARITYENV_LD_LIBRARY_PATH="$HELIXER_POST_LIB_DIR"
-
-"$CONTAINER_RUNTIME" run --nv --bind "$PROJECT_DATA:$PROJECT_DATA" \
-  --bind "$HELIXER_POST_BIN_DIR:/home/helixer_user/bin" \
-  --bind "$HELIXER_POST_LIB_DIR:$HELIXER_POST_LIB_DIR" \
-  "${HELIXER_IMAGE:-docker://gglyptodon/helixer-docker:helixer_v0.3.6_cuda_12.2.2-cudnn8}" Helixer.py \
+"$CONTAINER_RUNTIME" run --nv --bind "$PROJECT_DATA:$PROJECT_DATA" "${HELIXER_IMAGE:-docker://gglyptodon/helixer-docker:helixer_v0.3.6_cuda_12.2.2-cudnn8}" Helixer.py \
   --fasta-path "${FASTA_TMP}/input.fasta" --lineage fungi \
   --min-coding-length 150 \
   --gff-output-path "${RESULT_DIR}/${BASENAME}/${BASENAME}.gff"
@@ -51,4 +42,3 @@ sed -i 's/ID=_/ID=/g; s/Parent=_/Parent=/g' "${RESULT_DIR}/${BASENAME}/${BASENAM
   -g "${FASTA_TMP}/input.fasta" \
   -y "${RESULT_DIR}/${BASENAME}/${BASENAME}.faa"
   
-

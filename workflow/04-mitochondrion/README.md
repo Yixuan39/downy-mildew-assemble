@@ -16,21 +16,8 @@ order that mirrors the nuclear synteny figure.
 
 ## Outputs
 
-Paths are under `$PROJECT_DATA` on the cluster unless marked *(in repo)*. The Deposition column feeds the data-availability plan (see repo root `DATA_DEPOSITION.md`).
-
-| output | path | what it is | consumed by | deposition |
-|---|---|---|---|---|
-| Mitochondrial genomes | `results/assembly-qc/mitochondrial/<assembly>.fasta.gz + .mito.tsv` | Mitochondrial contigs separated from each new assembly, with the contig table. (Source dir on the cluster is misspelled `contigs-renamed/mitochondiral/` — kept as-is in archive/, copied under the corrected name in results/.) | GenBank submission | NCBI GenBank (organelle genomes) |
-| Mito BLAST hits (published) | `results/assembly-qc/reference-mito-hits/<genome>.mito.tsv` | BLASTN locations of mitochondrial contigs in each published genome, against the KT072718.1 reference. | mt-linkage-plot.sh | not deposited (intermediate) |
-| Mito linkage plot | `results/assembly-qc/mt-linkage/mt_linkage.{svg,pdf,png}`, mirrored to `data/mt_linkage/ (in repo)` | Linear synteny/linkage plot of the 14 oomycete mitochondrial genomes. | manuscript figure | in the repo (committed) |
-
-## Notes
-
-`mt-linkage-plot.sh` runs on the cluster now, needs the `gbdraw` conda environment, and calls
-`gbdraw-wide.py`, a local patch that makes gbdraw's hardcoded 2000 px canvas width settable. Its long
-comment block documents the gbdraw quirks it works around - read it before changing the figure. It
-mirrors its final figure + split/blast intermediates back into the repo's `data/mt_linkage/` at the
-end, which is what actually gets committed for the manuscript figure.
-
-The BLASTN subject is the published *P. cubensis* mitochondrial genome, NCBI accession KT072718.1,
-kept on the cluster at `$PROJECT_DATA/inputs/reference-mitochondria/KT072718.1.fna`.
+| output | path | what it is | consumed by |
+|---|---|---|---|
+| Mitochondrial genomes | `results/assembly-qc/mitochondrial/<assembly>.fasta.gz + .mito.tsv` | Mitochondrial contigs separated from each new assembly, with the contig table. | GenBank submission |
+| Mito BLAST hits (published) | `results/assembly-qc/reference-mito-hits/<genome>.mito.tsv` | BLASTN locations of mitochondrial contigs in each published genome. | mt-linkage-plot.sh |
+| Mito linkage plot | `results/assembly-qc/mt-linkage/mt_linkage.{svg,pdf,png}`, mirrored to `data/mt_linkage/` | Linear linkage plot of the 14 oomycete mitochondrial genomes. | manuscript figure |

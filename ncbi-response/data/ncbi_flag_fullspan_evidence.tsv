@@ -1,0 +1,7 @@
+label	span_len	max_read_len_on_contig	median_read_len	full_0	full_0_mq20	full_500	full_500_mq20	full_1000	full_1000_mq20	full_2000	full_2000_mq20	max_overhang_min_side	fully_spannable
+MSU1_004_s1	6596	39092	8081	99	99	86	86	64	64	42	42	9573	True
+MSU1_004_s2	34010	39092	8081	0	0	0	0	0	0	0	0	0	True
+MSU1_013_s1	52218	45226	8032	0	0	0	0	0	0	0	0	0	False
+SC1982_008_s1	7952	37836	4442	1	1	1	1	1	1	0	0	1025	True
+OR502AA_015_s1	31177	33274	10583	0	0	0	0	0	0	0	0	0	True
+OR502AA_022_s1	9742	41786	10596	65	65	55	55	42	42	22	22	5637	True

@@ -11,7 +11,6 @@ output:
 ```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
 source(here::here("analysis", "lib", "paths.R"))
 library(tidyverse)
-library(data.table)
 library(gt)
 library(here)
 
@@ -19,58 +18,18 @@ source(here("analysis", "lib", "figure-utils.R"))
 theme_set(theme_bw())
 knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 
-annotation_dir <- here("data", "protein_function_by_isolate")
+annotation_file <- here("data", "annotation_support.tsv")
 hardmask_dir <- project_path("results/repeatmask-gene-prediction/focal/hardmasked")
 
 isolate_key <- tribble(
-  ~file_name, ~isolate, ~label,
-  "Pseudoperonospora_cubensis_MSU1", "Pcub_MSU1", "*P. cubensis* MSU1",
-  "Pseudoperonospora_cubensis_SC1982", "Pcub_SC1982", "*P. cubensis* SC1982",
-  "Pseudoperonospora_humuli_OR502AA", "Phum_OR502AA", "*P. humuli* OR502AA"
-)
-
-rna_tpm_files <- tribble(
-  ~isolate, ~tpm_file,
-  "Pcub_MSU1", project_path("results/rnaseq-support/Pcub_MSU1/star_salmon/salmon.merged.gene_tpm.tsv"),
-  "Pcub_SC1982", project_path("results/rnaseq-support/Pcub_SC1982/star_salmon/salmon.merged.gene_tpm.tsv"),
-  "Phum_OR502AA", project_path("results/rnaseq-support/Phum_OR502AA/star_salmon/salmon.merged.gene_tpm.tsv")
+  ~sample_name, ~file_name, ~isolate, ~label,
+  "Pseudoperonospora_cubensis_MSU1", "Pseudoperonospora_cubensis_MSU1", "Pcub_MSU1", "*P. cubensis* MSU1",
+  "Pseudoperonospora_cubensis_SC1982", "Pseudoperonospora_cubensis_SC1982", "Pcub_SC1982", "*P. cubensis* SC1982",
+  "Pseudoperonospora_humuli_OR502AA", "Pseudoperonospora_humuli_OR502AA", "Phum_OR502AA", "*P. humuli* OR502AA"
 )
 
 rna_support_threshold <- 2
 rna_support_thresholds_tested <- c(rna_support_threshold, 5, 10)
-
-read_annotation <- function(file_name, isolate) {
-  fread(file.path(annotation_dir, paste0(file_name, "_protein_function_summary.tsv"))) |>
-    as_tibble() |>
-    mutate(
-      file_name = file_name,
-      isolate = isolate,
-      gene_id = str_remove(id, "\\.[0-9]+$")
-    )
-}
-
-read_tpm <- function(isolate, tpm_file) {
-  if (!file.exists(tpm_file)) {
-    stop("Missing RNA-seq TPM table: ", tpm_file)
-  }
-
-  tpm <- fread(tpm_file) |> as_tibble()
-  expr_cols <- setdiff(names(tpm), c("gene_id", "gene_name"))
-  stopifnot(length(expr_cols) > 0, !anyDuplicated(tpm$gene_id))
-
-  tpm |>
-    mutate(across(all_of(expr_cols), as.numeric)) |>
-    rowwise() |>
-    mutate(max_tpm = max(c_across(all_of(expr_cols)), na.rm = TRUE)) |>
-    ungroup() |>
-    transmute(
-      isolate = isolate,
-      gene_id,
-      max_tpm,
-      expressed_tpm_gt0 = max_tpm > 0,
-      expressed_tpm_ge2 = max_tpm >= rna_support_threshold
-    )
-}
 
 read_repeatmasker_tbl <- function(file_name, isolate) {
   tbl_file <- file.path(
@@ -105,28 +64,29 @@ read_repeatmasker_tbl <- function(file_name, isolate) {
   )
 }
 
-annotations <- pmap_dfr(
-  isolate_key |> select(file_name, isolate),
-  read_annotation
-)
+annotations <- read_tsv(annotation_file, show_col_types = FALSE) |>
+  rename(sample_name = isolate) |>
+  filter(sample_name %in% isolate_key$sample_name) |>
+  left_join(isolate_key, by = "sample_name") |>
+  mutate(has_function = source != "unannotated")
 
 gene_level <- annotations |>
   group_by(file_name, isolate, gene_id) |>
   summarise(
-    has_function = any(source != "unannotated"),
+    has_function = any(has_function),
     source = first(source),
     description = first(Description),
+    max_tpm = first(max_tpm),
+    expressed_tpm_gt0 = max_tpm > 0,
+    expressed_tpm_ge2 = first(rna_supported_tpm_ge_2),
+    label = first(label),
     .groups = "drop"
-  ) |>
-  left_join(isolate_key, by = c("file_name", "isolate"))
+  )
 
-rna_support <- pmap_dfr(rna_tpm_files, read_tpm)
 repeat_summary <- pmap_dfr(isolate_key |> select(file_name, isolate), read_repeatmasker_tbl) |>
   left_join(isolate_key, by = c("file_name", "isolate")) |>
   select(label, everything(), -file_name, -isolate)
 
-gene_level <- gene_level |>
-  left_join(rna_support, by = c("isolate", "gene_id"))
 stopifnot(!anyNA(gene_level$max_tpm), all(is.finite(gene_level$max_tpm)))
 
 annotation_summary <- gene_level |>
@@ -250,7 +210,7 @@ neither_sensitivity <- threshold_support_sensitivity |>
 
 This report summarizes protein-coding gene predictions from hard-masked assemblies of the three focal isolates, functional descriptions assigned from eggNOG-mapper, InterProScan, and DIAMOND BLASTP, and RNA-seq support from Salmon TPM estimates. RNA-seq evidence is treated as transcript support for predicted gene models, not direct protein validation.
 
-Functional annotation follows the rule implemented in `workflow/09-functional-annotation/summarize-functions.R`: informative eggNOG-mapper descriptions are used first, followed by the best InterProScan hit, then the best DIAMOND BLASTP hit. Proteins without any supported annotation are retained as hypothetical proteins. Only 0.9-26.1% of input read pairs mapped to the corresponding pathogen assembly across the infection-stage RNA-seq libraries. The RNA-seq summary therefore uses the relatively permissive threshold of TPM >= 2 in at least one sampled time point to retain low-abundance transcript evidence under limited pathogen-mapped read depth.
+Functional annotation follows the rule implemented in `workflow/08-annotation/summarize-functions.R`: informative eggNOG-mapper descriptions are used first, followed by the best InterProScan hit, then the best DIAMOND BLASTP hit. Proteins without any supported annotation are retained as hypothetical proteins. The same summary table records maximum RNA-seq TPM and soluble-secretome/effectome flags for each protein. Only 0.9-26.1% of input read pairs mapped to the corresponding pathogen assembly across the infection-stage RNA-seq libraries. The RNA-seq summary therefore uses the relatively permissive threshold of TPM >= 2 in at least one sampled time point to retain low-abundance transcript evidence under limited pathogen-mapped read depth.
 
 # Repeat Masking
 
@@ -385,6 +345,3 @@ unannotated_expression |>
   fmt_integer(columns = c(`Hypothetical proteins`, `TPM >= 2`, `TPM < 2`)) |>
   fmt_number(columns = `TPM < 2 (%)`, decimals = 1)
 ```
-
-
-

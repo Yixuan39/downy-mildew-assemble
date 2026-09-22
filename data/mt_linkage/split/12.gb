@@ -300,7 +300,7 @@ FEATURES             Location/Qualifiers
                      /anticodon=(pos:complement(21144..21146),aa:Arg,seq:gcg)
      CDS             complement(21166..21537)
                      /codon_start=1
-                     /product="ribosomal protein S10"
+                     /product="rps10"
                      /protein_id="ALJ78451.1"
                      /translation="MYLLRITFKSFQKINQLKQKLIKIVKLKKFNKLNKNKKLKKFNKL
                      NKIKIKGIFQIKNKNKIFTLLKSPHVNKKSREHFIYKNFLYKIDIEFNNIFQLFNFLIL

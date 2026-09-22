@@ -1,0 +1,1146 @@
+>Feature SC1982_mito
+35	2681	rRNA
+			gene	rnl
+			product	23S ribosomal RNA
+35	2681	gene
+			gene	rnl
+2687	2760	tRNA
+			gene	trnN
+			product	tRNA-Asn
+2687	2760	gene
+			gene	trnN
+2771	2861	tRNA
+			gene	trnS
+			product	tRNA-Ser
+2771	2861	gene
+			gene	trnS
+2888	2959	tRNA
+			gene	trnM
+			product	tRNA-Met
+2888	2959	gene
+			gene	trnM
+2993	3069	tRNA
+			gene	trnP
+			product	tRNA-Pro
+2993	3069	gene
+			gene	trnP
+3082	3154	tRNA
+			gene	trnM
+			product	tRNA-Met
+3082	3154	gene
+			gene	trnM
+3184	3555	CDS
+			gene	rpl14
+			codon_start	1
+			transl_table	4
+			product	ribosomal protein L14
+3184	3555	gene
+			gene	rpl14
+3562	4098	CDS
+			gene	rpl5
+			codon_start	1
+			transl_table	4
+			product	ribosomal protein L5
+3562	4098	gene
+			gene	rpl5
+4104	4177	tRNA
+			gene	trnG
+			product	tRNA-Gly
+4104	4177	gene
+			gene	trnG
+4249	4322	tRNA
+			gene	trnG
+			product	tRNA-Gly
+4249	4322	gene
+			gene	trnG
+4333	4418	tRNA
+			gene	trnY
+			product	tRNA-Tyr
+4333	4418	gene
+			gene	trnY
+4590	4663	tRNA
+			gene	trnW
+			product	tRNA-Trp
+4590	4663	gene
+			gene	trnW
+6199	4696	rRNA
+			gene	rns
+			product	16S ribosomal RNA
+6199	4696	gene
+			gene	rns
+7683	6742	CDS
+			gene	orf306
+			codon_start	1
+			transl_table	4
+			product	hypothetical protein
+7683	6742	gene
+			gene	orf306
+8116	8892	CDS
+			gene	cox2
+			codon_start	1
+			transl_table	4
+			product	cytochrome c oxidase subunit 2
+8116	8892	gene
+			gene	cox2
+9094	10572	CDS
+			gene	cox1
+			codon_start	1
+			transl_table	4
+			product	cytochrome c oxidase subunit 1
+9094	10572	gene
+			gene	cox1
+11823	10675	CDS
+			gene	cob
+			codon_start	1
+			transl_table	4
+			product	apocytochrome b
+11823	10675	gene
+			gene	cob
+12436	11873	CDS
+			gene	nad9
+			codon_start	1
+			transl_table	4
+			product	NADH dehydrogenase subunit 9
+12436	11873	gene
+			gene	nad9
+12794	12567	CDS
+			gene	atp9
+			codon_start	1
+			transl_table	4
+			product	ATP synthase F0 subunit 9
+12794	12567	gene
+			gene	atp9
+13391	13038	CDS
+			gene	nad3
+			codon_start	1
+			transl_table	4
+			product	NADH dehydrogenase subunit 3
+13391	13038	gene
+			gene	nad3
+13494	13421	tRNA
+			gene	trnD
+			product	tRNA-Asp
+13494	13421	gene
+			gene	trnD
+14228	13509	CDS
+			gene	atp6
+			codon_start	1
+			transl_table	4
+			product	ATP synthase F0 subunit 6
+14228	13509	gene
+			gene	atp6
+15151	14237	CDS
+			gene	cox3
+			codon_start	1
+			transl_table	4
+			product	cytochrome c oxidase subunit 3
+15151	14237	gene
+			gene	cox3
+15395	15213	CDS
+			gene	rps7
+			codon_start	1
+			transl_table	4
+			product	ribosomal protein S7
+15395	15213	gene
+			gene	rps7
+15990	15619	CDS
+			gene	rps12
+			codon_start	1
+			transl_table	4
+			product	ribosomal protein S12
+15990	15619	gene
+			gene	rps12
+16090	16018	tRNA
+			gene	trnV
+			product	tRNA-Val
+16090	16018	gene
+			gene	trnV
+16166	16093	tRNA
+			gene	trnI
+			product	tRNA-Ile
+16166	16093	gene
+			gene	trnI
+16241	16168	tRNA
+			gene	trnQ
+			product	tRNA-Gln
+16241	16168	gene
+			gene	trnQ
+16320	16245	tRNA
+			gene	trnR
+			product	tRNA-Arg
+16320	16245	gene
+			gene	trnR
+16650	16324	CDS
+			gene	rps10
+			codon_start	1
+			transl_table	4
+			product	ribosomal protein S10
+16650	16324	gene
+			gene	rps10
+16737	16662	tRNA
+			gene	trnF
+			product	tRNA-Phe
+16737	16662	gene
+			gene	trnF
+18236	16743	CDS
+			gene	nad2
+			codon_start	1
+			transl_table	4
+			product	NADH dehydrogenase subunit 2
+18236	16743	gene
+			gene	nad2
+18345	19523	CDS
+			gene	nad7
+			codon_start	1
+			transl_table	4
+			product	NADH dehydrogenase subunit 7
+18345	19523	gene
+			gene	nad7
+19737	20045	CDS
+			codon_start	1
+			transl_table	4
+			product	hypothetical protein
+20048	20121	tRNA
+			gene	trnH
+			product	tRNA-His
+20048	20121	gene
+			gene	trnH
+20154	21629	CDS
+			gene	nad4
+			codon_start	1
+			transl_table	4
+			product	NADH dehydrogenase subunit 4
+20154	21629	gene
+			gene	nad4
+21653	21724	tRNA
+			gene	trnE
+			product	tRNA-Glu
+21653	21724	gene
+			gene	trnE
+21667	23328	CDS
+			gene	atp1
+			codon_start	1
+			transl_table	4
+			product	ATP synthase F1 subunit alpha
+21667	23328	gene
+			gene	atp1
+23494	25488	CDS
+			gene	nad5
+			codon_start	1
+			transl_table	4
+			product	NADH dehydrogenase subunit 5
+23494	25488	gene
+			gene	nad5
+25531	26098	CDS
+			gene	nad6
+			codon_start	1
+			transl_table	4
+			product	NADH dehydrogenase subunit 6
+25531	26098	gene
+			gene	nad6
+26250	26322	tRNA
+			gene	trnR
+			product	tRNA-Arg
+26250	26322	gene
+			gene	trnR
+26620	26354	CDS
+			gene	nad4L
+			codon_start	1
+			transl_table	4
+			product	NADH dehydrogenase subunit 4L
+26620	26354	gene
+			gene	nad4L
+27644	26664	CDS
+			gene	nad1
+			codon_start	1
+			transl_table	4
+			product	NADH dehydrogenase subunit 1
+27644	26664	gene
+			gene	nad1
+29647	27805	CDS
+			gene	nad11
+			codon_start	1
+			transl_table	4
+			product	NADH dehydrogenase subunit 11
+29647	27805	gene
+			gene	nad11
+29818	29734	tRNA
+			gene	trnL
+			product	tRNA-Leu
+29818	29734	gene
+			gene	trnL
+29913	29830	tRNA
+			gene	trnL
+			product	tRNA-Leu
+29913	29830	gene
+			gene	trnL
+29927	30518	CDS
+			gene	secY
+			codon_start	1
+			transl_table	4
+			product	Sec-independent transporter protein
+29927	30518	gene
+			gene	secY
+30894	30664	CDS
+			gene	orf76
+			codon_start	1
+			transl_table	4
+			product	hypothetical protein
+30894	30664	gene
+			gene	orf76
+30882	30952	tRNA
+			gene	trnC
+			product	tRNA-Cys
+30882	30952	gene
+			gene	trnC
+31042	30958	tRNA
+			gene	trnS
+			product	tRNA-Ser
+31042	30958	gene
+			gene	trnS
+31472	31250	CDS
+			gene	rps11
+			codon_start	1
+			transl_table	4
+			product	ribosomal protein S11
+31472	31250	gene
+			gene	rps11
+31898	31418	gene
+			gene	rps13
+			pseudo
+			note	contains a frameshift
+31927	32733	CDS
+			gene	rpl2
+			codon_start	1
+			transl_table	4
+			product	ribosomal protein L2
+31927	32733	gene
+			gene	rpl2
+32977	33792	CDS
+			gene	rps3
+			codon_start	1
+			transl_table	4
+			product	ribosomal protein S3
+32977	33792	gene
+			gene	rps3
+33779	34183	CDS
+			gene	rpl16
+			codon_start	1
+			transl_table	4
+			product	ribosomal protein L16
+33779	34183	gene
+			gene	rpl16
+34185	34260	tRNA
+			gene	trnM
+			product	tRNA-Met
+34185	34260	gene
+			gene	trnM
+34271	34927	CDS
+			gene	orf215
+			codon_start	1
+			transl_table	4
+			product	hypothetical protein
+34271	34927	gene
+			gene	orf215
+34987	35379	CDS
+			gene	atp8
+			codon_start	1
+			transl_table	4
+			product	ATP synthase F0 subunit 8
+34987	35379	gene
+			gene	atp8
+35390	35464	tRNA
+			gene	trnK
+			product	tRNA-Lys
+35390	35464	gene
+			gene	trnK
+35466	35539	tRNA
+			gene	trnA
+			product	tRNA-Ala
+35466	35539	gene
+			gene	trnA
+35564	35863	CDS
+			gene	rps14
+			codon_start	1
+			transl_table	4
+			product	ribosomal protein S14
+35564	35863	gene
+			gene	rps14
+35870	36191	CDS
+			gene	rps8
+			codon_start	1
+			transl_table	4
+			product	ribosomal protein S8
+35870	36191	gene
+			gene	rps8
+36294	36860	CDS
+			gene	rpl6
+			codon_start	1
+			transl_table	4
+			product	ribosomal protein L6
+36294	36860	gene
+			gene	rpl6
+36867	37457	CDS
+			gene	rps2
+			codon_start	1
+			transl_table	4
+			product	ribosomal protein S2
+36867	37457	gene
+			gene	rps2
+37466	37927	CDS
+			gene	rps4
+			codon_start	1
+			transl_table	4
+			product	ribosomal protein S4
+37466	37927	gene
+			gene	rps4
+>Feature MSU1_mito
+13	2658	rRNA
+			gene	rnl
+			product	23S ribosomal RNA
+13	2658	gene
+			gene	rnl
+2664	2737	tRNA
+			gene	trnN
+			product	tRNA-Asn
+2664	2737	gene
+			gene	trnN
+2748	2838	tRNA
+			gene	trnS
+			product	tRNA-Ser
+2748	2838	gene
+			gene	trnS
+2865	2936	tRNA
+			gene	trnM
+			product	tRNA-Met
+2865	2936	gene
+			gene	trnM
+2970	3046	tRNA
+			gene	trnP
+			product	tRNA-Pro
+2970	3046	gene
+			gene	trnP
+3059	3131	tRNA
+			gene	trnM
+			product	tRNA-Met
+3059	3131	gene
+			gene	trnM
+3161	3532	CDS
+			gene	rpl14
+			codon_start	1
+			transl_table	4
+			product	ribosomal protein L14
+3161	3532	gene
+			gene	rpl14
+3539	4075	CDS
+			gene	rpl5
+			codon_start	1
+			transl_table	4
+			product	ribosomal protein L5
+3539	4075	gene
+			gene	rpl5
+4081	4154	tRNA
+			gene	trnG
+			product	tRNA-Gly
+4081	4154	gene
+			gene	trnG
+4226	4299	tRNA
+			gene	trnG
+			product	tRNA-Gly
+4226	4299	gene
+			gene	trnG
+4309	4394	tRNA
+			gene	trnY
+			product	tRNA-Tyr
+4309	4394	gene
+			gene	trnY
+4566	4639	tRNA
+			gene	trnW
+			product	tRNA-Trp
+4566	4639	gene
+			gene	trnW
+6175	4672	rRNA
+			gene	rns
+			product	16S ribosomal RNA
+6175	4672	gene
+			gene	rns
+6947	6441	CDS
+			gene	orf168
+			codon_start	1
+			transl_table	4
+			product	hypothetical protein
+6947	6441	gene
+			gene	orf168
+8005	7085	CDS
+			gene	orf306
+			codon_start	1
+			transl_table	4
+			product	hypothetical protein
+8005	7085	gene
+			gene	orf306
+8433	9209	CDS
+			gene	cox2
+			codon_start	1
+			transl_table	4
+			product	cytochrome c oxidase subunit 2
+8433	9209	gene
+			gene	cox2
+9411	10889	CDS
+			gene	cox1
+			codon_start	1
+			transl_table	4
+			product	cytochrome c oxidase subunit 1
+9411	10889	gene
+			gene	cox1
+12154	11006	CDS
+			gene	cob
+			codon_start	1
+			transl_table	4
+			product	apocytochrome b
+12154	11006	gene
+			gene	cob
+12767	12204	CDS
+			gene	nad9
+			codon_start	1
+			transl_table	4
+			product	NADH dehydrogenase subunit 9
+12767	12204	gene
+			gene	nad9
+13125	12898	CDS
+			gene	atp9
+			codon_start	1
+			transl_table	4
+			product	ATP synthase F0 subunit 9
+13125	12898	gene
+			gene	atp9
+13722	13369	CDS
+			gene	nad3
+			codon_start	1
+			transl_table	4
+			product	NADH dehydrogenase subunit 3
+13722	13369	gene
+			gene	nad3
+13825	13752	tRNA
+			gene	trnD
+			product	tRNA-Asp
+13825	13752	gene
+			gene	trnD
+14559	13840	CDS
+			gene	atp6
+			codon_start	1
+			transl_table	4
+			product	ATP synthase F0 subunit 6
+14559	13840	gene
+			gene	atp6
+15482	14568	CDS
+			gene	cox3
+			codon_start	1
+			transl_table	4
+			product	cytochrome c oxidase subunit 3
+15482	14568	gene
+			gene	cox3
+15726	15544	CDS
+			gene	rps7
+			codon_start	1
+			transl_table	4
+			product	ribosomal protein S7
+15726	15544	gene
+			gene	rps7
+16321	15950	CDS
+			gene	rps12
+			codon_start	1
+			transl_table	4
+			product	ribosomal protein S12
+16321	15950	gene
+			gene	rps12
+16421	16349	tRNA
+			gene	trnV
+			product	tRNA-Val
+16421	16349	gene
+			gene	trnV
+16497	16424	tRNA
+			gene	trnI
+			product	tRNA-Ile
+16497	16424	gene
+			gene	trnI
+16572	16499	tRNA
+			gene	trnQ
+			product	tRNA-Gln
+16572	16499	gene
+			gene	trnQ
+16651	16576	tRNA
+			gene	trnR
+			product	tRNA-Arg
+16651	16576	gene
+			gene	trnR
+16981	16655	CDS
+			gene	rps10
+			codon_start	1
+			transl_table	4
+			product	ribosomal protein S10
+16981	16655	gene
+			gene	rps10
+17068	16993	tRNA
+			gene	trnF
+			product	tRNA-Phe
+17068	16993	gene
+			gene	trnF
+18567	17074	CDS
+			gene	nad2
+			codon_start	1
+			transl_table	4
+			product	NADH dehydrogenase subunit 2
+18567	17074	gene
+			gene	nad2
+18676	19854	CDS
+			gene	nad7
+			codon_start	1
+			transl_table	4
+			product	NADH dehydrogenase subunit 7
+18676	19854	gene
+			gene	nad7
+20068	20376	CDS
+			codon_start	1
+			transl_table	4
+			product	hypothetical protein
+20379	20452	tRNA
+			gene	trnH
+			product	tRNA-His
+20379	20452	gene
+			gene	trnH
+20485	21960	CDS
+			gene	nad4
+			codon_start	1
+			transl_table	4
+			product	NADH dehydrogenase subunit 4
+20485	21960	gene
+			gene	nad4
+21984	22055	tRNA
+			gene	trnE
+			product	tRNA-Glu
+21998	23659	CDS
+			gene	atp1
+			codon_start	1
+			transl_table	4
+			product	ATP synthase F1 subunit alpha
+21998	23659	gene
+			gene	atp1
+23822	25816	CDS
+			gene	nad5
+			codon_start	1
+			transl_table	4
+			product	NADH dehydrogenase subunit 5
+23822	25816	gene
+			gene	nad5
+25859	26426	CDS
+			gene	nad6
+			codon_start	1
+			transl_table	4
+			product	NADH dehydrogenase subunit 6
+25859	26426	gene
+			gene	nad6
+26578	26650	tRNA
+			gene	trnR
+			product	tRNA-Arg
+26578	26650	gene
+			gene	trnR
+26948	26682	CDS
+			gene	nad4L
+			codon_start	1
+			transl_table	4
+			product	NADH dehydrogenase subunit 4L
+26948	26682	gene
+			gene	nad4L
+27972	26992	CDS
+			gene	nad1
+			codon_start	1
+			transl_table	4
+			product	NADH dehydrogenase subunit 1
+27972	26992	gene
+			gene	nad1
+29975	28133	CDS
+			gene	nad11
+			codon_start	1
+			transl_table	4
+			product	NADH dehydrogenase subunit 11
+29975	28133	gene
+			gene	nad11
+30146	30062	tRNA
+			gene	trnL
+			product	tRNA-Leu
+30146	30062	gene
+			gene	trnL
+30241	30158	tRNA
+			gene	trnL
+			product	tRNA-Leu
+30241	30158	gene
+			gene	trnL
+30255	30846	CDS
+			gene	secY
+			codon_start	1
+			transl_table	4
+			product	Sec-independent transporter protein
+30255	30846	gene
+			gene	secY
+31222	30992	CDS
+			gene	orf76
+			codon_start	1
+			transl_table	4
+			product	hypothetical protein
+31222	30992	gene
+			gene	orf76
+31210	31280	tRNA
+			gene	trnC
+			product	tRNA-Cys
+31210	31280	gene
+			gene	trnC
+31370	31286	tRNA
+			gene	trnS
+			product	tRNA-Ser
+31370	31286	gene
+			gene	trnS
+31800	31578	CDS
+			gene	rps11
+			codon_start	1
+			transl_table	4
+			product	ribosomal protein S11
+31800	31578	gene
+			gene	rps11
+32226	31746	gene
+			gene	rps13
+			pseudo
+			note	contains a frameshift
+32255	33061	CDS
+			gene	rpl2
+			codon_start	1
+			transl_table	4
+			product	ribosomal protein L2
+32255	33061	gene
+			gene	rpl2
+33305	34120	CDS
+			gene	rps3
+			codon_start	1
+			transl_table	4
+			product	ribosomal protein S3
+33305	34120	gene
+			gene	rps3
+34107	34511	CDS
+			gene	rpl16
+			codon_start	1
+			transl_table	4
+			product	ribosomal protein L16
+34107	34511	gene
+			gene	rpl16
+34513	34588	tRNA
+			gene	trnM
+			product	tRNA-Met
+34513	34588	gene
+			gene	trnM
+34599	35255	CDS
+			gene	orf215
+			codon_start	1
+			transl_table	4
+			product	hypothetical protein
+34599	35255	gene
+			gene	orf215
+35315	35707	CDS
+			gene	atp8
+			codon_start	1
+			transl_table	4
+			product	ATP synthase F0 subunit 8
+35315	35707	gene
+			gene	atp8
+35718	35792	tRNA
+			gene	trnK
+			product	tRNA-Lys
+35718	35792	gene
+			gene	trnK
+35794	35867	tRNA
+			gene	trnA
+			product	tRNA-Ala
+35794	35867	gene
+			gene	trnA
+35892	36191	CDS
+			gene	rps14
+			codon_start	1
+			transl_table	4
+			product	ribosomal protein S14
+35892	36191	gene
+			gene	rps14
+36198	36519	CDS
+			gene	rps8
+			codon_start	1
+			transl_table	4
+			product	ribosomal protein S8
+36198	36519	gene
+			gene	rps8
+36622	37188	CDS
+			gene	rpl6
+			codon_start	1
+			transl_table	4
+			product	ribosomal protein L6
+36622	37188	gene
+			gene	rpl6
+37195	37785	CDS
+			gene	rps2
+			codon_start	1
+			transl_table	4
+			product	ribosomal protein S2
+37195	37785	gene
+			gene	rps2
+37794	38255	CDS
+			gene	rps4
+			codon_start	1
+			transl_table	4
+			product	ribosomal protein S4
+37794	38255	gene
+			gene	rps4
+>Feature OR502AA_mito
+1	2659	rRNA
+			product	large subunit ribosomal RNA
+2660	2731	tRNA
+			product	tRNA-Asn
+			note	codon recognized: AAC
+			anticodon	(pos:2692..2694,aa:Asn,seq:gtt)
+2744	2832	tRNA
+			product	tRNA-Ser
+			note	codon recognized: AGC
+			anticodon	(pos:2780..2782,aa:Ser,seq:gct)
+2860	2931	tRNA
+			product	tRNA-Met
+			note	codon recognized: AUG
+			anticodon	(pos:2892..2894,aa:Met,seq:cat)
+2966	3040	tRNA
+			product	tRNA-Pro
+			note	codon recognized: CCA
+			anticodon	(pos:3001..3003,aa:Pro,seq:tgg)
+3054	3126	tRNA
+			product	tRNA-Met
+			note	codon recognized: AUG
+			anticodon	(pos:3088..3090,aa:Met,seq:cat)
+3156	3527	CDS
+			gene	rpl14
+			codon_start	1
+			product	ribosomal protein L14
+3156	3527	gene
+			gene	rpl14
+3534	4070	CDS
+			gene	rpl5
+			codon_start	1
+			product	ribosomal protein L5
+3534	4070	gene
+			gene	rpl5
+4077	4148	tRNA
+			product	tRNA-Gly
+			note	codon recognized: GGC
+			anticodon	(pos:4109..4111,aa:Gly,seq:gcc)
+4222	4293	tRNA
+			product	tRNA-Gly
+			note	codon recognized: GGA
+			anticodon	(pos:4255..4257,aa:Gly,seq:tcc)
+4305	4388	tRNA
+			product	tRNA-Tyr
+			note	codon recognized: UAC
+			anticodon	(pos:4339..4341,aa:Tyr,seq:gta)
+4633	4562	tRNA
+			product	tRNA-Trp
+			note	codon recognized: UGG
+			anticodon	(pos:complement(4598..4600),aa:Trp,seq:cca)
+6172	4667	rRNA
+			product	small subunit ribosomal RNA
+8964	9740	CDS
+			gene	cox2
+			codon_start	1
+			product	cytochrome c oxidase subunit 2
+8964	9740	gene
+			gene	cox2
+9752	9850	CDS
+			gene	orf32
+			codon_start	1
+			product	hypothetical protein
+9752	9850	gene
+			gene	orf32
+9942	11420	CDS
+			gene	cox1
+			codon_start	1
+			product	cytochrome c oxidase subunit 1
+9942	11420	gene
+			gene	cox1
+12671	11523	CDS
+			gene	cob
+			codon_start	1
+			product	apocytochrome b
+12671	11523	gene
+			gene	cob
+13284	12721	CDS
+			gene	nad9
+			codon_start	1
+			product	NADH dehydrogenase subunit 9
+13284	12721	gene
+			gene	nad9
+13642	13415	CDS
+			gene	atp9
+			codon_start	1
+			product	ATP synthase F0 subunit 9
+13642	13415	gene
+			gene	atp9
+14239	13886	CDS
+			gene	nad3
+			codon_start	1
+			product	NADH dehydrogenase subunit 3
+14239	13886	gene
+			gene	nad3
+14342	14269	tRNA
+			product	tRNA-Asp
+			note	codon recognized: GAC
+			anticodon	(pos:complement(14306..14308),aa:Asp,seq:gtc)
+15076	14357	CDS
+			gene	atp6
+			codon_start	1
+			product	ATP synthase F0 subunit 6
+15076	14357	gene
+			gene	atp6
+15999	15085	CDS
+			gene	cox3
+			codon_start	1
+			product	cytochrome c oxidase subunit 3
+15999	15085	gene
+			gene	cox3
+16492	16061	CDS
+			gene	rps7
+			codon_start	1
+			product	ribosomal protein S7
+16492	16061	gene
+			gene	rps7
+16847	16467	CDS
+			gene	rps12
+			codon_start	1
+			product	ribosomal protein S12
+16847	16467	gene
+			gene	rps12
+16938	16866	tRNA
+			product	tRNA-Val
+			note	codon recognized: GUA
+			anticodon	(pos:complement(16903..16905),aa:Val,seq:tac)
+17014	16941	tRNA
+			product	tRNA-Ile
+			note	codon recognized: AUC
+			anticodon	(pos:complement(16978..16980),aa:Ile,seq:gat)
+17088	17017	tRNA
+			product	tRNA-Gln
+			note	codon recognized: CAA
+			anticodon	(pos:complement(17054..17056),aa:Gln,seq:ttg)
+17167	17094	tRNA
+			product	tRNA-Arg
+			note	codon recognized: CGC
+			anticodon	(pos:complement(17131..17133),aa:Arg,seq:gcg)
+17498	17172	CDS
+			gene	rps10
+			codon_start	1
+			product	ribosomal protein S10
+17498	17172	gene
+			gene	rps10
+17584	17511	tRNA
+			product	tRNA-Phe
+			note	codon recognized: UUC
+			anticodon	(pos:complement(17548..17550),aa:Phe,seq:gaa)
+19084	17591	CDS
+			gene	nad2
+			codon_start	1
+			product	NADH dehydrogenase subunit 2
+19084	17591	gene
+			gene	nad2
+19193	20371	CDS
+			gene	nad7
+			codon_start	1
+			product	NADH dehydrogenase subunit 7
+19193	20371	gene
+			gene	nad7
+20471	20893	CDS
+			gene	ymf98
+			note	orf142; similar to Phytophthora infestans orf142
+			codon_start	1
+			product	hypothetical protein
+20471	20893	gene
+			gene	ymf98
+20896	20967	tRNA
+			product	tRNA-His
+			note	codon recognized: CAC
+			anticodon	(pos:20928..20930,aa:His,seq:gtg)
+21002	22477	CDS
+			gene	nad4
+			codon_start	1
+			product	NADH dehydrogenase subunit 4
+21002	22477	gene
+			gene	nad4
+22501	22572	tRNA
+			product	tRNA-Glu
+			note	codon recognized: GAA
+			anticodon	(pos:22534..22536,aa:Glu,seq:ttc)
+22647	24176	CDS
+			gene	atp1
+			codon_start	1
+			product	ATP synthase F1 subunit alpha
+22647	24176	gene
+			gene	atp1
+24342	26336	CDS
+			gene	nad5
+			codon_start	1
+			product	NADH dehydrogenase subunit 5
+24342	26336	gene
+			gene	nad5
+26379	27086	CDS
+			gene	nad6
+			codon_start	1
+			product	NADH dehydrogenase subunit 6
+26379	27086	gene
+			gene	nad6
+27098	27170	tRNA
+			product	tRNA-Arg
+			note	codon recognized: AGA
+			anticodon	(pos:27131..27133,aa:Arg,seq:tct)
+27504	27202	CDS
+			gene	nad4L
+			codon_start	1
+			product	NADH dehydrogenase subunit 4L
+27504	27202	gene
+			gene	nad4L
+28492	27512	CDS
+			gene	nad1
+			codon_start	1
+			product	NADH dehydrogenase subunit 1
+28492	27512	gene
+			gene	nad1
+30495	28489	CDS
+			gene	nad11
+			codon_start	1
+			product	NADH dehydrogenase subunit 11
+30495	28489	gene
+			gene	nad11
+30665	30583	tRNA
+			product	tRNA-Leu
+			note	codon recognized: CUA
+			anticodon	(pos:complement(30629..30631),aa:Leu,seq:tag)
+30761	30678	tRNA
+			product	tRNA-Leu
+			note	codon recognized: UUA
+			anticodon	(pos:complement(30725..30727),aa:Leu,seq:taa)
+30775	31515	CDS
+			gene	secY
+			codon_start	1
+			product	Sec-independent transporter protein
+30775	31515	gene
+			gene	secY
+31709	31512	CDS
+			gene	ymf101
+			note	orf64; similar to Saprolegnia ferax orf64
+			codon_start	1
+			product	hypothetical protein
+31709	31512	gene
+			gene	ymf101
+31730	31800	tRNA
+			product	tRNA-Cys
+			note	codon recognized: UGC
+			anticodon	(pos:31762..31764,aa:Cys,seq:gca)
+31890	31806	tRNA
+			product	tRNA-Ser
+			note	codon recognized: UCA
+			anticodon	(pos:complement(31854..31856),aa:Ser,seq:tga)
+32320	31904	CDS
+			gene	rps11
+			codon_start	1
+			product	ribosomal protein S11
+32320	31904	gene
+			gene	rps11
+32746	32333	CDS
+			gene	rps13
+			codon_start	1
+			product	ribosomal protein S13
+32746	32333	gene
+			gene	rps13
+32775	33581	CDS
+			gene	rpl2
+			codon_start	1
+			product	ribosomal protein L2
+32775	33581	gene
+			gene	rpl2
+33585	33821	CDS
+			gene	rps19
+			codon_start	1
+			product	ribosomal protein S19
+33585	33821	gene
+			gene	rps19
+33825	34640	CDS
+			gene	rps3
+			codon_start	1
+			product	ribosomal protein S3
+33825	34640	gene
+			gene	rps3
+34627	35031	CDS
+			gene	rpl16
+			codon_start	1
+			product	ribosomal protein L16
+34627	35031	gene
+			gene	rpl16
+35034	35107	tRNA
+			product	tRNA-Met
+			note	codon recognized: AUG
+			anticodon	(pos:35068..35070,aa:Met,seq:cat)
+35122	35775	CDS
+			gene	ymf99
+			note	orf217; similar to Phytophthora infestans orf217
+			codon_start	1
+			product	hypothetical protein
+35122	35775	gene
+			gene	ymf99
+35838	36227	CDS
+			gene	atp8
+			codon_start	1
+			product	ATP synthase F0 subunit 8
+35838	36227	gene
+			gene	atp8
+36239	36311	tRNA
+			product	tRNA-Lys
+			note	codon recognized: AAA
+			anticodon	(pos:36272..36274,aa:Lys,seq:ttt)
+36314	36386	tRNA
+			product	tRNA-Ala
+			note	codon recognized: GCA
+			anticodon	(pos:36347..36349,aa:Ala,seq:tgc)
+36412	36711	CDS
+			gene	rps14
+			codon_start	1
+			product	ribosomal protein S14
+36412	36711	gene
+			gene	rps14
+36718	37098	CDS
+			gene	rps8
+			codon_start	1
+			product	ribosomal protein S8
+36718	37098	gene
+			gene	rps8
+37103	37708	CDS
+			gene	rpl6
+			codon_start	1
+			product	ribosomal protein L6
+37103	37708	gene
+			gene	rpl6
+37715	38305	CDS
+			gene	rps2
+			codon_start	1
+			product	ribosomal protein S2
+37715	38305	gene
+			gene	rps2
+38314	38775	CDS
+			gene	rps4
+			codon_start	1
+			product	ribosomal protein S4
+38314	38775	gene
+			gene	rps4
+38778	39056	CDS
+			gene	ymf100
+			note	orf100; similar to Phytophthora infestans orf100
+			codon_start	1
+			product	hypothetical protein
+38778	39056	gene
+			gene	ymf100

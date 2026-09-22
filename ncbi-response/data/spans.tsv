@@ -1,0 +1,9 @@
+isolate	species	contig	start	end	label	action	apparent_source
+MSU1	Pseudoperonospora_cubensis_MSU1	Pcub-MSU1_004	177773	184368	MSU1_004_s1	trim	fung:ascomycetes
+MSU1	Pseudoperonospora_cubensis_MSU1	Pcub-MSU1_004	239385	273394	MSU1_004_s2	trim	fung:ascomycetes
+MSU1	Pseudoperonospora_cubensis_MSU1	Pcub-MSU1_013	1104526	1156743	MSU1_013_s1	trim	fung:ascomycetes
+SC1982	Pseudoperonospora_cubensis_SC1982	Pcub-SC1982_008	1092633	1100584	SC1982_008_s1	trim	fung:ascomycetes
+SC1982	Pseudoperonospora_cubensis_SC1982	Pcub-SC1982_037	1	517250	SC1982_037_whole	exclude	prok:CFB group bacteria
+SC1982	Pseudoperonospora_cubensis_SC1982	Pcub-SC1982_071	1	118813	SC1982_071_whole	exclude	prok:CFB group bacteria
+OR502AA	Pseudoperonospora_humuli_OR502AA	Phum-OR502AA_015	729948	761124	OR502AA_015_s1	trim	fung:ascomycetes
+OR502AA	Pseudoperonospora_humuli_OR502AA	Phum-OR502AA_022	205298	215039	OR502AA_022_s1	trim	fung:ascomycetes

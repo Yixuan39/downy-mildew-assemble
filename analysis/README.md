@@ -13,8 +13,7 @@ into `data/`.
 | `ref-genome-quality.Rmd` | Supplementary Table S1 (quality metrics for the comparison genomes) |
 | `synteny-analysis.Rmd` | Figure 6 (GENESPACE riparian plot + OrthoFinder species tree) |
 
-`lib/` holds the shared helpers: `figure-utils.R` (the figure theme, palette and save helper the
-figure-producing notebooks source) and `check-annotation.R`.
+`lib/` holds the shared R helpers used by the notebooks.
 
 ## Where the notebooks read from
 
@@ -23,6 +22,3 @@ project. Large pipeline output is **not** in the repository - the notebooks read
 `~/project_data/downy/...`, which means they must be knitted either on the cluster or on a machine
 where that tree is mirrored at the same path. Small derived tables that the notebooks depend on are
 committed under `data/`, so figures can be regenerated without the full result tree in most cases.
-
-`ref-genome-quality.Rmd` produces only tables, so it is the one notebook that does not source
-`lib/figure-utils.R`.

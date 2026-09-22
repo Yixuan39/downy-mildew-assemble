@@ -136,8 +136,8 @@ linkage figure, and the final assemblies used by every downstream stage. Produce
 | path | what it is | consumed by | deposition |
 |---|---|---|---|
 | `renamed/*.fasta.gz` | Full renamed assemblies straight out of `contigs-renamed/` (nuclear + mitochondrial contigs together), before the nuclear/mitochondrial split. | `nuclear-presplit/`, `mitochondrial/` | not deposited (intermediate) |
-| `nuclear-presplit/*.fasta.gz` | Nuclear-only assemblies (mitochondrial contigs removed), before the SC1982 N-gap split. | `nuclear/` (via `split-contigs.sh`) | not deposited (intermediate; superseded by `nuclear/` for SC1982) |
-| `nuclear/*.fasta.gz` | The finalized nuclear assemblies. For SC1982, the internal N-gap contig (`Pcub-SC1982_002`) is split into two contigs, dropping the gap (475 contigs, 103,498,600 bp total); the other three assemblies are identical to `nuclear-presplit/`. This is the assembly used from here on - telomeres, repeat masking/gene prediction, functional annotation, secretome/effectome, synteny/orthology. | `results/telomeres/`, `results/repeatmask-gene-prediction/`, and all later stages | NCBI GenBank / WGS (this is the file to submit) |
+| `nuclear-presplit/*.fasta.gz` | Nuclear-only assemblies (mitochondrial contigs removed), before the SC1982 N-gap split and NCBI-flagged bacterial contig removal. | `nuclear/` (via `ncbi-screen.sh`) | not deposited (intermediate; superseded by `nuclear/` for SC1982) |
+| `nuclear/*.fasta.gz` | The finalized nuclear assemblies. For SC1982, the internal N-gap contig (`Pcub-SC1982_002`) is split into two contigs, dropping the gap, and the two contigs NCBI's SUB16446400 contamination screen flagged (CFB group bacteria) are dropped (473 contigs, 102,862,537 bp total); the other three assemblies are identical to `nuclear-presplit/`. This is the assembly used from here on - telomeres, repeat masking/gene prediction, functional annotation, secretome/effectome, synteny/orthology. | `results/telomeres/`, `results/repeatmask-gene-prediction/`, and all later stages | NCBI GenBank / WGS (this is the file to submit) |
 | `mitochondrial/` | Split-out mitochondrial contigs/records per assembly, plus the `.mito.tsv` BLASTN partition table. | mitochondrial genome reporting | Zenodo/GenBank as applicable |
 | `reference-mito-hits/<genome>.mito.tsv` | BLASTN locations of mitochondrial contigs in each published reference genome, against the KT072718.1 reference. | `mt-linkage/` figure | not deposited (intermediate) |
 | `mt-linkage/mt_linkage.{svg,pdf,png}` | BLASTN-based linkage figure between the assembled mitochondrial contigs and the reference mitochondrial genome (KT072718.1), plus per-record BLASTN hit tables (`blast/`, `split/`). | manuscript figure | in the repo (also mirrored to `figures/`) |
@@ -156,7 +156,7 @@ renamed for consistency with the other three isolates' naming convention).
 
 Splitting `Pcub-SC1982_002` changes SC1982's contig count, total length, and every
 coordinate-bearing downstream output (Helixer GFF3, tidk telomere profiles, GENESPACE/OrthoFinder
-BED) relative to `nuclear-presplit/`. All results under stages 06-11 in this tree are expected to
+BED) relative to `nuclear-presplit/`. All results under stages 06-09 in this tree are expected to
 be (re)generated against the split `nuclear/` assembly, never `nuclear-presplit/`.
 EOF
 cat > "$results/telomeres/README.md" <<'EOF'
@@ -206,7 +206,7 @@ cat > "$results/rnaseq-support/README.md" <<'EOF'
 # results/rnaseq-support/
 
 nf-core/rnaseq 3.26.0 output per isolate, giving transcript-level evidence for the Helixer gene
-models. Produced by `workflow/08-rnaseq-support/` in the `downy-mildew-assemble` repo.
+models. Produced by `workflow/08-annotation/` in the `downy-mildew-assemble` repo.
 
 ## Contents
 
@@ -218,15 +218,15 @@ models. Produced by `workflow/08-rnaseq-support/` in the `downy-mildew-assemble`
 
 These are Nextflow launchers - run from a login node (Nextflow submits its own SLURM jobs), not
 via `sbatch`. Paths to the samplesheet and cluster resource config are repo-relative
-(`workflow/08-rnaseq-support/config/`), so launch from the repository root.
+(`workflow/08-annotation/config/`), so launch from the repository root.
 EOF
 cat > "$results/functional-annotation/README.md" <<'EOF'
 # results/functional-annotation/
 
 Three independent functional-annotation sources over the Helixer proteomes: eggNOG-mapper,
-InterProScan, and DIAMOND blastp against nr. Produced by `workflow/09-functional-annotation/` in
-the `downy-mildew-assemble` repo; combined into the per-gene support summary by
-`analysis/gene-annotation-report.Rmd`.
+InterProScan, and DIAMOND blastp against nr. Produced by `workflow/08-annotation/` in
+the `downy-mildew-assemble` repo; combined with RNA-seq TPM support and secretome/effectome
+calls by `workflow/08-annotation/summarize-functions.R`.
 
 ## Contents
 
@@ -245,39 +245,20 @@ EOF
 cat > "$results/secretome-effectome/README.md" <<'EOF'
 # results/secretome-effectome/
 
-Soluble secretome prediction and candidate effector catalogue for the four Helixer proteomes.
-Produced by `workflow/10-secretome-effectome/` in the `downy-mildew-assemble` repo, following the
-pipeline order in `manuscript/methods.md`: SignalP6 -> TargetP/DeepTMHMM/NetGPI exclusion ->
-soluble secretome -> DeepLoc (supplementary) -> WY-motif/RXLR effector mining -> summary.
+Soluble secretome and effectome results, grouped by isolate. Produced by
+`workflow/08-annotation/secretome-effectome.sh`.
 
 ## Contents
 
-| path | what it is | consumed by | deposition |
-|---|---|---|---|
-| `01-signalp6/<ASM>.signalp_positive.faa` | SignalP 6 signal-peptide-positive set. | 02, 03, 04 | Zenodo (secretome tables) |
-| `{02-targetp,03-deeptmhmm,04-netgpi}/<ASM>.*.ids` | Exclusion lists (mitochondrial-targeted, transmembrane, GPI-anchored) computed on the SignalP-positive set. | `05-soluble-secretome` | Zenodo (secretome tables) |
-| `05-soluble-secretome/<ASM>_soluble_secretome.faa` | SignalP+ minus mTP minus TM minus GPI. | 06, 07, 08 | Zenodo (secretome tables) |
-| `06-deeploc/<ASM>/results_*.csv` | DeepLoc 2.1 subcellular localization of the soluble secretome (supplementary, not a filter). | manuscript (supplementary) | Zenodo |
-| `07-effectors/<ASM>/` | WY-domain (hmmsearch) and RXLR/RXLR-like (`find_*.pl`) effector calls over the soluble secretome. | `09-summarize`, manuscript table | Zenodo (effectome tables) |
-| `secretome_summary.tsv` | Per-assembly effector/secretome counts for the manuscript table. | manuscript table | in the repo once copied to `data/` |
-
-## Notes
-
-**This stage is not run end-to-end yet.** The scripts require license-gated academic tools
-(SignalP 6.0, TargetP 2.0, DeepTMHMM, NetGPI 1.1, DeepLoc 2.1) installed under
-`$HOME/miniforge3/envs` before they can run - see `workflow/10-secretome-effectome/README.md` for
-sources - and three parsing assumptions (SignalP prediction-table column, TargetP/NetGPI label
-names, and DeepTMHMM's >40 aa post-cleavage TM filter) still need validating against a real run.
-The manuscript Methods also describes several effectome analyses (EffectorP/EffectorO, CRN,
-EffectR, NLPs, EPI/EPIC, SCRs, CAZymes/dbCAN3) with **no corresponding scripts** in this repo -
-see "Methods steps NOT scripted" in the stage README before claiming full reproduction of the
-effectome table.
+Each isolate directory contains the soluble-secretome and effectome ID/FASTA files, together with
+the intermediate predictions used to derive them. The final annotation-support table combines the
+functional annotation, maximum RNA-seq TPM and secretome/effectome flags for each protein.
 EOF
 cat > "$results/synteny-orthology/README.md" <<'EOF'
 # results/synteny-orthology/
 
 OrthoFinder orthogroups and GENESPACE synteny outputs over the staged Helixer proteomes. Produced
-by `workflow/11-synteny-orthology/` in the `downy-mildew-assemble` repo.
+by `workflow/09-synteny-orthology/` in the `downy-mildew-assemble` repo.
 
 ## Contents
 
@@ -291,7 +272,6 @@ by `workflow/11-synteny-orthology/` in the `downy-mildew-assemble` repo.
 The proteomes must already be staged into a `genespace-contigs/tmp/`-equivalent layout before
 running OrthoFinder. The launcher requests 32 cores but calls OrthoFinder with `-t 10`.
 EOF
-cp "$REPO_ROOT/workflow/RESULTS.md" "$PROJECT_DATA/README.md"
 printf '# Original results\n\nOriginal files before the SC1982 gap split. Preserved on %s.\nresults/ holds independent copies of stages 0-3 (safe to edit/delete this archive once those copies\nare verified); inputs/ still symlinks here for the untouched raw reads and reference genomes.\nDo not edit archived files or include raw reads/assemblies in the Zenodo package.\n' "$(date -Iseconds)" > "$archive/README.md"
 printf '# Inputs\n\nRaw HiFi and RNA-seq reads, published nuclear genomes and mitochondrial references.\nLinks resolve to the preserved original files in archive/previous-results/.\nThese files are excluded from the Zenodo package.\n' > "$PROJECT_DATA/inputs/README.md"
-bash "$REPO_ROOT/workflow/05-assembly-qc/split-contigs.sh"
+bash "$REPO_ROOT/workflow/05-assembly-qc/ncbi-screen.sh"
