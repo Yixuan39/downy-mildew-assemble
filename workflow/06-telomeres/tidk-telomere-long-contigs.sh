@@ -25,7 +25,7 @@ for fasta in "${PROJECT_DATA}/results/assembly-qc/nuclear"/*.fasta.gz; do
     mamba run -n tidk tidk search -s TTTAGGG -w 10000 -o "${sample}.TTTAGGG" -d "${dir}" "${dir}/${sample}.fa"
 done
 
-Rscript "$REPO_ROOT/workflow/06-telomeres/plot-tidk-telomeres.R"
+mamba run -n R Rscript "$REPO_ROOT/workflow/06-telomeres/plot-tidk-telomeres.R"
 
 # mirror the per-sample output + figure into the repo, which is what's actually committed
 mkdir -p "$REPO_ROOT/data/tidk_telomeres" "$REPO_ROOT/figures/tidk_telomeres"
