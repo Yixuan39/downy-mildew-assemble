@@ -186,9 +186,8 @@ question is asked directly of the reads.
 Coverage is per-read median 21-mer depth from KAT `sect` in self-comparison mode (each read's
 own k-mers scored against the k-mer spectrum of the full read set) - a proxy for how many times
 that piece of the underlying genome/molecule was sampled, not a per-base assembly coverage.
-Points are a stratified random subsample (up to 3,000 reads per isolate x category) for
-plotting; category summary statistics (`data/blobplot-category-summary-by-isolate.tsv`) are
-computed from the full read sets.
+All reads with matching Kraken2, GC and coverage records are plotted; category summary
+statistics are written to `data/blobplot-category-summary-by-isolate.tsv`.
 
 ```{r coverage-gc-data, echo=FALSE, message=FALSE, warning=FALSE}
 # Resolve every read's Kraken2 taxID to its phylum using the same PlusPFP taxonomy dump.
@@ -220,9 +219,7 @@ taxid.phylum <- fread(
 ) |>
   mutate(phylum = na_if(phylum, ""))
 
-set.seed(1)
-max.per.category <- 3000
-subsample.list <- list()
+plot.list <- list()
 summary.list <- list()
 
 for (i in seq_len(nrow(isolates))) {
@@ -288,17 +285,13 @@ for (i in seq_len(nrow(isolates))) {
       .groups = "drop"
     )
 
-  subsample.list[[isolate]] <- joined |>
-    group_by(category) |>
-    group_modify(~ slice_sample(.x, n = min(max.per.category, nrow(.x)))) |>
-    ungroup() |>
-    select(isolate, read_id, category, gc_pct, cov_median)
+  plot.list[[isolate]] <- joined |>
+    select(isolate, category, gc_pct, cov_median)
 }
 
-plot_data <- bind_rows(subsample.list) |>
+plot_data <- bind_rows(plot.list) |>
   mutate(Isolate = factor(recode(isolate, !!!isolate.labels), levels = isolate.labels))
 summary.tbl <- bind_rows(summary.list)
-write_tsv(plot_data |> select(-Isolate), here("data", "blobplot-read-coverage-gc-subsample.tsv"))
 write_tsv(summary.tbl, here("data", "blobplot-category-summary-by-isolate.tsv"))
 ```
 
@@ -306,7 +299,7 @@ write_tsv(summary.tbl, here("data", "blobplot-category-summary-by-isolate.tsv"))
 
 blob.plot <- plot_data |>
   ggplot(aes(x = gc_pct, y = cov_median, color = category)) +
-  geom_point(alpha = 0.5, size = 0.4) +
+  ggrastr::geom_point_rast(alpha = 0.1, size = 0.25, raster.dpi = 600, dev = "ragg") +
   scale_y_log10(labels = scales::label_comma()) +
   scale_color_manual(values = c(
     Oomycota = "#000000", Streptophyta = "#0072B2", Pseudomonadota = "#D55E00",
@@ -314,13 +307,18 @@ blob.plot <- plot_data |>
     unclassified = "#56B4E9", Other = "#999999"
   )) +
   facet_wrap(~Isolate, nrow = 1) +
-  guides(color = guide_legend(override.aes = list(alpha = 1, size = 1.2))) +
+  guides(color = guide_legend(nrow = 2, override.aes = list(alpha = 1, size = 2.5))) +
   labs(x = "GC content (%)", y = "Median 21-mer coverage", color = "Taxon")
 
 read.qc.profile <- tax.bar / blob.plot +
   plot_layout(ncol = 1, heights = c(1, 0.85)) +
   plot_annotation(tag_levels = "A") &
-  theme(legend.position = "bottom")
+  theme(
+    legend.position = "bottom",
+    legend.title = element_text(size = 9),
+    legend.text = element_text(size = 9),
+    legend.key.size = grid::unit(5, "mm")
+  )
 
 out <- here("figures", "read-qc-profile")
 ggsave(paste0(out, ".svg"), read.qc.profile, device = svglite::svglite, width = 180, height = 165, units = "mm")

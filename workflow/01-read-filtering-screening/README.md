@@ -29,4 +29,4 @@ outputs are joined with the Kraken2 profile directly in `analysis/read-distribut
 | Kraken2 report | `~/project_data/downy/results/read-filtering-screening/taxonomy/<sample>.kreport` | PlusPFP classification summary for each library. | read-distribution.Rmd |
 | Kraken2 per-read output | `~/project_data/downy/results/read-filtering-screening/taxonomy/<sample>.kraken` | Per-read classifications used by the coverage-GC summary. | `analysis/read-distribution.Rmd` |
 | Coverage-GC intermediates | `~/project_data/downy/results/read-filtering-screening/coverage-gc/` | KAT self-coverage and seqkit GC tables used by the blob plot. | `analysis/read-distribution.Rmd` |
-| Coverage-GC tables | `data/blobplot-read-coverage-gc-subsample.tsv`, `data/blobplot-category-summary-by-isolate.tsv` | Derived tables for all four isolates, written while knitting `analysis/read-distribution.Rmd`. | `analysis/read-distribution.Rmd` |
+| Coverage-GC summary | `data/blobplot-category-summary-by-isolate.tsv` | Full-read category statistics for all four isolates, written while knitting `analysis/read-distribution.Rmd`. | `analysis/read-distribution.Rmd` |
