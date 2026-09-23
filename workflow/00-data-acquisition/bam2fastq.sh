@@ -11,7 +11,7 @@
 # Usage   : sbatch workflow/00-data-acquisition/bam2fastq.sh
 
 set -euo pipefail
-source "${REPO_ROOT:-${SLURM_SUBMIT_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}}/workflow/paths.sh"
+export PROJECT_DATA="${PROJECT_DATA:-$HOME/project_data/downy}"
 
 INPUT_DIR="$PROJECT_DATA/inputs/hifi/focal/bam"
 OUTPUT_DIR="$PROJECT_DATA/inputs/hifi/focal/fastq"

@@ -11,7 +11,8 @@
 #           (gbdraw, biopython, cairosvg, blast) and the gbdraw-wide.py width patch alongside it.
 # Usage   : bash workflow/04-mitochondrion/mt-linkage-plot.sh 'data/mt_linkage/14_mitochondrial_genomes.gb'
 set -euo pipefail
-source "${REPO_ROOT:-${SLURM_SUBMIT_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}}/workflow/paths.sh"
+export REPO_ROOT="${REPO_ROOT:-$(cd ../.. && pwd)}"
+export PROJECT_DATA="${PROJECT_DATA:-$HOME/project_data/downy}"
 
 HERE="$REPO_ROOT/workflow/04-mitochondrion"
 GB="${1:?usage: mt-linkage-plot.sh <multi-record.gb> [outdir]}"

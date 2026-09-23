@@ -3,7 +3,8 @@
 # into archive/previous-results, then builds a self-contained results/<stage> tree (real copies, not
 # links) plus an inputs/ tree (symlinks back to archive/, since raw reads/references are never modified).
 set -euo pipefail
-source "$(dirname "${BASH_SOURCE[0]}")/paths.sh"
+export REPO_ROOT="${REPO_ROOT:-$(cd .. && pwd)}"
+export PROJECT_DATA="${PROJECT_DATA:-$HOME/project_data/downy}"
 archive="$PROJECT_DATA/archive/previous-results"
 [[ ! -e "$archive" && ! -e "$PROJECT_DATA/results" && ! -e "$PROJECT_DATA/inputs" ]] || {
     echo "An organized result tree already exists; refusing to archive it again." >&2; exit 1;

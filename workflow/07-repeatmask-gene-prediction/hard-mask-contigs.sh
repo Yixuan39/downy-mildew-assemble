@@ -11,7 +11,7 @@
 # Usage   : sbatch workflow/07-repeatmask-gene-prediction/hard-mask-contigs.sh
 
 set -euo pipefail
-source "${REPO_ROOT:-${SLURM_SUBMIT_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}}/workflow/paths.sh"
+export PROJECT_DATA="${PROJECT_DATA:-$HOME/project_data/downy}"
 
 THREADS=$SLURM_CPUS_PER_TASK
 INPUT_DIR=${PROJECT_DATA}/results/assembly-qc/nuclear

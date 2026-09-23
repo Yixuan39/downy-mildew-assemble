@@ -11,7 +11,7 @@
 
 # After subsetting data with filtlong, we remove adapter sequences using hifiadapterfilt.sh
 set -euo pipefail
-source "${REPO_ROOT:-${SLURM_SUBMIT_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)}}/workflow/paths.sh"
+export PROJECT_DATA="${PROJECT_DATA:-$HOME/project_data/downy}"
 
 INPUT_DIR="$PROJECT_DATA/inputs/hifi/UA202013"
 cd "$INPUT_DIR"

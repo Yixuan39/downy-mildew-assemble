@@ -12,7 +12,8 @@
 # Usage   : sbatch workflow/01-read-filtering-screening/UA202013/kraken2-pluspfp.sh
 
 set -euo pipefail
-source "${REPO_ROOT:-${SLURM_SUBMIT_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)}}/workflow/paths.sh"
+export PROJECT_DATA="${PROJECT_DATA:-$HOME/project_data/downy}"
+export DB_ROOT="${DB_ROOT:-$HOME/db}"
 
 INPUT_DIR="$PROJECT_DATA/results/read-filtering-screening/reads/UA202013"
 FILES=("$INPUT_DIR"/*.fastq.gz)

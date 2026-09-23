@@ -5,12 +5,12 @@
 # Inputs  : ${PROJECT_DATA}/results/telomeres/*/
 # Outputs : ${PROJECT_DATA}/results/telomeres/figures/
 # Runs on : ncsu-brc login node or the short partition; R with ggplot2.
-# Usage   : Rscript workflow/06-telomeres/plot-tidk-telomeres.R (needs PROJECT_DATA set - source workflow/paths.sh first)
+# Usage   : Rscript workflow/06-telomeres/plot-tidk-telomeres.R (needs PROJECT_DATA exported)
 # ----------------------------------------------------------------------------------------
 library(ggplot2)
 
 project_data <- Sys.getenv("PROJECT_DATA", unset = NA)
-if (is.na(project_data)) stop("PROJECT_DATA not set - source workflow/paths.sh first")
+if (is.na(project_data)) stop("PROJECT_DATA not set; export it before running this script")
 out <- file.path(project_data, "results", "telomeres")
 fig_out <- file.path(out, "figures")
 dir.create(fig_out, recursive = TRUE, showWarnings = FALSE)

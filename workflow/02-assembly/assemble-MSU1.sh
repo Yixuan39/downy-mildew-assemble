@@ -8,7 +8,10 @@
 # Runs on : login node - the pipeline submits its own SLURM jobs, so do not sbatch this script
 # Usage   : bash workflow/02-assembly/assemble-MSU1.sh
 set -euo pipefail
-source "${REPO_ROOT:-${SLURM_SUBMIT_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}}/workflow/paths.sh"
+export PROJECT_DATA="${PROJECT_DATA:-$HOME/project_data/downy}"
+export DB_ROOT="${DB_ROOT:-$HOME/db}"
+export TARGET_ASM_DIR="${TARGET_ASM_DIR:-$HOME/software/targetasm}"
+export CONTAINER_RUNTIME="${CONTAINER_RUNTIME:-$(command -v apptainer >/dev/null 2>&1 && echo apptainer || echo singularity)}"
 
 nextflow run ${TARGET_ASM_DIR}/main.nf \
     -profile "${NEXTFLOW_PROFILE:-slurm,$CONTAINER_RUNTIME}" \

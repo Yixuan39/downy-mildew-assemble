@@ -11,7 +11,7 @@
 # Usage   : sbatch workflow/01-read-filtering-screening/run-hifiadapterfilt.sh
 
 set -euo pipefail
-source "${REPO_ROOT:-${SLURM_SUBMIT_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}}/workflow/paths.sh"
+export PROJECT_DATA="${PROJECT_DATA:-$HOME/project_data/downy}"
 
 INPUT_DIR="$PROJECT_DATA/inputs/hifi/focal/fastq"
 cd "$INPUT_DIR"

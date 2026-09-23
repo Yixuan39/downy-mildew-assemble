@@ -11,7 +11,9 @@
 # Usage   : sbatch workflow/07-repeatmask-gene-prediction/helixer-contigs.sh
 
 set -euo pipefail
-source "${REPO_ROOT:-${SLURM_SUBMIT_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}}/workflow/paths.sh"
+export PROJECT_DATA="${PROJECT_DATA:-$HOME/project_data/downy}"
+export GFFREAD_BIN="${GFFREAD_BIN:-$HOME/miniforge3/envs/downy/bin/gffread}"
+export CONTAINER_RUNTIME="${CONTAINER_RUNTIME:-$(command -v apptainer >/dev/null 2>&1 && echo apptainer || echo singularity)}"
 
 INPUT_DIR=${PROJECT_DATA}/results/repeatmask-gene-prediction/focal/hardmasked
 RESULT_DIR=${PROJECT_DATA}/results/repeatmask-gene-prediction/focal/helixer

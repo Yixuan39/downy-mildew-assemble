@@ -6,7 +6,7 @@
 # Runs on : ncsu-brc login node, or the short partition; seconds. Needs seqkit.
 # Usage   : bash ncbi-screen.sh
 set -euo pipefail
-source "$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/paths.sh"
+export PROJECT_DATA="${PROJECT_DATA:-$HOME/project_data/downy}"
 
 assembly_in="${1:-$PROJECT_DATA/results/assembly-qc/nuclear-presplit/Pseudoperonospora_cubensis_SC1982.fasta.gz}"
 assembly_out="${2:-$PROJECT_DATA/results/assembly-qc/nuclear/Pseudoperonospora_cubensis_SC1982.fasta.gz}"

@@ -8,7 +8,7 @@
 # Usage   : bash workflow/03-benchmarking/submit-all.sh
 
 set -euo pipefail
-source "${REPO_ROOT:-${SLURM_SUBMIT_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}}/workflow/paths.sh"
+export REPO_ROOT="${REPO_ROOT:-$(cd ../.. && pwd)}"
 
 # Set BENCHMARK_NODE to the same high-memory node for all arms; jobs run serially.
 : "${BENCHMARK_NODE:?Set BENCHMARK_NODE to a high-memory SLURM node}"

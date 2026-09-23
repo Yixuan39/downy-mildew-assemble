@@ -9,7 +9,8 @@
 # Runs on : ncsu-brc login node or the short partition; needs the `tidk` conda env and R (ggplot2).
 # Usage   : bash workflow/06-telomeres/tidk-telomere-long-contigs.sh
 set -euo pipefail
-source "${REPO_ROOT:-${SLURM_SUBMIT_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}}/workflow/paths.sh"
+export REPO_ROOT="${REPO_ROOT:-$(cd ../.. && pwd)}"
+export PROJECT_DATA="${PROJECT_DATA:-$HOME/project_data/downy}"
 
 out="${PROJECT_DATA}/results/telomeres"
 mkdir -p "${out}"

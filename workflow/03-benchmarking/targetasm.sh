@@ -8,14 +8,17 @@
 #           downsampling, tea_no_downsample / tea_downsample for MSU1). NOTE: the METHOD values still read
 #           'tea', the pipeline's former name; they are also the output directory names under benchmarking/
 #           and the labels analysis/benchmark.Rmd matches on, so they are deliberately left unchanged.
-# Inputs  : $SAMPLE reads under $PROJECT_DATA; targetasm at ${SOFTWARE_ROOT}/targetasm; FCS-GX at
+# Inputs  : $SAMPLE reads under $PROJECT_DATA; targetasm at ${TARGET_ASM_DIR}; FCS-GX at
 #           ${DB_ROOT}/fcs-gx
 # Outputs : $PROJECT_DATA/results/benchmarking/$SAMPLE/$METHOD/ incl. timing.tsv
 # Runs on : SLURM, 32 cores / 512 GB, one large-memory node
 # Usage   : sbatch --export=ALL,SAMPLE=MSU1,METHOD=tea_downsample workflow/03-benchmarking/targetasm.sh
 
 set -euo pipefail
-source "${REPO_ROOT:-${SLURM_SUBMIT_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}}/workflow/paths.sh"
+export PROJECT_DATA="${PROJECT_DATA:-$HOME/project_data/downy}"
+export DB_ROOT="${DB_ROOT:-$HOME/db}"
+export TARGET_ASM_DIR="${TARGET_ASM_DIR:-$HOME/software/targetasm}"
+export CONTAINER_RUNTIME="${CONTAINER_RUNTIME:-$(command -v apptainer >/dev/null 2>&1 && echo apptainer || echo singularity)}"
 
 SAMPLE="${SAMPLE:-UA202013}"
 THREADS="${SLURM_CPUS_PER_TASK:-32}"

@@ -12,7 +12,9 @@
 # Usage   : sbatch --export=ALL,SAMPLE=MSU1 workflow/03-benchmarking/hifiasm-blastn.sh
 
 set -euo pipefail
-source "${REPO_ROOT:-${SLURM_SUBMIT_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}}/workflow/paths.sh"
+export REPO_ROOT="${REPO_ROOT:-$(cd ../.. && pwd)}"
+export PROJECT_DATA="${PROJECT_DATA:-$HOME/project_data/downy}"
+export DB_ROOT="${DB_ROOT:-$HOME/db}"
 
 SAMPLE="${SAMPLE:-UA202013}"
 THREADS="${SLURM_CPUS_PER_TASK:-32}"
