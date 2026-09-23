@@ -1,4 +1,3 @@
-source(here::here("analysis", "lib", "paths.R"))
 library(tidyverse)
 library(Biostrings)
 library(rtracklayer)
@@ -17,10 +16,11 @@ if (nzchar(requested)) {
   samples <- requested
 }
 
-base_dir <- project_path("results/functional-annotation")
-proteome_dir <- project_path("results/repeatmask-gene-prediction/focal/helixer")
-rnaseq_result_dir <- project_path("results/rnaseq-support")
-secretome_result_dir <- project_path("results/secretome-effectome")
+project_root <- path.expand(Sys.getenv("PROJECT_DATA", "~/project_data/downy"))
+base_dir <- file.path(project_root, "results/functional-annotation")
+proteome_dir <- file.path(project_root, "results/repeatmask-gene-prediction/focal/helixer")
+rnaseq_result_dir <- file.path(project_root, "results/rnaseq-support")
+secretome_result_dir <- file.path(project_root, "results/secretome-effectome")
 
 isolate_patterns <- c(
   Peronospora_effusa_UA202013_star = "^Peff-",

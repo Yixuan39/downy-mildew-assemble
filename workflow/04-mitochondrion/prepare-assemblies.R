@@ -2,7 +2,7 @@
 # Rename targetasm contigs by length and partition mitochondrial candidates before nuclear QC.
 # Run from the repository root: Rscript workflow/04-mitochondrion/prepare-assemblies.R
 library(Biostrings)
-source(here::here("analysis", "lib", "paths.R"))
+project_root <- path.expand(Sys.getenv("PROJECT_DATA", "~/project_data/downy"))
 
 samples <- data.frame(
   run = c("UA202013", "Quesada_SQIIe_MSU1", "Quesada_SQIIe_SC1982", "Quesada_SQIIe_Phumuli"),
@@ -10,12 +10,12 @@ samples <- data.frame(
   assembly = c("Peronospora_effusa_UA202013_star", "Pseudoperonospora_cubensis_MSU1",
                "Pseudoperonospora_cubensis_SC1982", "Pseudoperonospora_humuli_OR502AA")
 )
-root <- project_path("results/assembly-qc")
+root <- file.path(project_root, "results/assembly-qc")
 renamed <- file.path(root, "renamed")
 mito <- file.path(root, "mitochondrial")
 clean <- file.path(root, "nuclear-presplit")
-reference <- project_path("inputs/reference-mitochondria", "KT072718.1.fna")
-inputs <- project_path("results/assembly", samples$run, paste0(samples$run, ".fasta.gz"))
+reference <- file.path(project_root, "inputs/reference-mitochondria", "KT072718.1.fna")
+inputs <- file.path(project_root, "results/assembly", samples$run, paste0(samples$run, ".fasta.gz"))
 outputs <- file.path(clean, paste0(samples$assembly, ".fasta.gz"))
 stopifnot(file.exists(reference), all(file.exists(inputs)))
 if (any(file.exists(outputs))) stop("Cleaned assemblies already exist; use a fresh results tree to rebuild.")

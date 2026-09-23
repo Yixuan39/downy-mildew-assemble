@@ -7,17 +7,15 @@ output:
 ---
 
 ```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
-source(here::here("analysis", "lib", "paths.R"))
 library(tidyverse)
 library(data.table)
 library(gt)
 library(here)
 library(ggh4x)
 
-source(here("analysis", "lib", "figure-utils.R"))
 theme_set(theme_bw())
 
-benchmark_root <- project_path("results/benchmarking")
+benchmark_root <- file.path(path.expand(Sys.getenv("PROJECT_DATA", "~/project_data/downy")), "results/benchmarking")
 isolate_labels <- c(
   "UA202013" = "P. effusa (UA202013)",
   "MSU1" = "P. cubensis (MSU1)"
@@ -239,7 +237,11 @@ method_benchmark |>
 
 ```{r method-matrix-plot, echo=FALSE, fig.width=7.2, fig.height=4.7}
 method_matrix_plot <- make_metric_matrix_plot(method_benchmark)
-save_pub_r(method_matrix_plot, "benchmark-method-matrix", width_mm = 180, height_mm = 120)
+out <- here("figures", "benchmark-method-matrix")
+ggsave(paste0(out, ".svg"), method_matrix_plot, device = svglite::svglite, width = 180, height = 120, units = "mm")
+ggsave(paste0(out, ".pdf"), method_matrix_plot, device = grDevices::pdf, width = 180, height = 120, units = "mm", family = "Helvetica", useDingbats = FALSE)
+ggsave(paste0(out, ".tiff"), method_matrix_plot, device = ragg::agg_tiff, width = 180, height = 120, units = "mm", dpi = 600, compression = "lzw")
+ggsave(paste0(out, ".png"), method_matrix_plot, device = ragg::agg_png, width = 180, height = 120, units = "mm", dpi = 600)
 method_matrix_plot
 ```
 
@@ -280,6 +282,10 @@ target_asm_sensitivity |>
 
 ```{r tea-sensitivity-plot, echo=FALSE, fig.width=7.2, fig.height=3.0}
 target_asm_sensitivity_plot <- make_metric_matrix_plot(target_asm_sensitivity, rows = vars(), x_text_angle = 0)
-save_pub_r(target_asm_sensitivity_plot, "benchmark-target-asm-sensitivity", width_mm = 180, height_mm = 75)
+out <- here("figures", "benchmark-target-asm-sensitivity")
+ggsave(paste0(out, ".svg"), target_asm_sensitivity_plot, device = svglite::svglite, width = 180, height = 75, units = "mm")
+ggsave(paste0(out, ".pdf"), target_asm_sensitivity_plot, device = grDevices::pdf, width = 180, height = 75, units = "mm", family = "Helvetica", useDingbats = FALSE)
+ggsave(paste0(out, ".tiff"), target_asm_sensitivity_plot, device = ragg::agg_tiff, width = 180, height = 75, units = "mm", dpi = 600, compression = "lzw")
+ggsave(paste0(out, ".png"), target_asm_sensitivity_plot, device = ragg::agg_png, width = 180, height = 75, units = "mm", dpi = 600)
 target_asm_sensitivity_plot
 ```

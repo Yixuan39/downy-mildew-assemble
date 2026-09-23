@@ -13,8 +13,6 @@ into `data/`.
 | `ref-genome-quality.Rmd` | Supplementary Table S1 (quality metrics for the comparison genomes) |
 | `synteny-analysis.Rmd` | Figure 6 (GENESPACE riparian plot + OrthoFinder species tree) |
 
-`lib/` holds the shared R helpers used by the notebooks.
-
 ## Where the notebooks read from
 
 Notebooks locate repository files with `here()`, so they work from any working directory inside the

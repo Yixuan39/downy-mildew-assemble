@@ -4,17 +4,35 @@ output: html_document
 ---
 
 ```{r echo=FALSE, message=FALSE}
-source(here::here("analysis", "lib", "paths.R"))
 library(tidyverse)
 library(data.table)
 library(gt)
 library(here)
 library(patchwork)
-source(here('analysis', 'lib', 'figure-utils.R'))
-# read_report2() (Kraken report parser) vendored from pavian rather than depending on the
-# full package - see analysis/lib/read-kraken-report.R for why.
-source(here('analysis', 'lib', 'read-kraken-report.R'))
-theme_set(theme_pub())
+theme_set(theme_bw(base_size = 7, base_family = "Helvetica"))
+project_root <- path.expand(Sys.getenv("PROJECT_DATA", "~/project_data/downy"))
+read_kreport <- function(file) {
+  report <- read.delim(
+    file, header = FALSE, sep = "\t", quote = "", comment.char = "",
+    strip.white = FALSE,
+    col.names = c("percentage", "cladeReads", "taxonReads", "taxRank", "taxID", "name")
+  )
+  report$depth <- (nchar(report$name) - nchar(sub("^\\s+", "", report$name))) / 2
+  report$name <- paste0(tolower(report$taxRank), "_", trimws(report$name))
+  report$percentage <- round(report$cladeReads / sum(report$taxonReads), 6) * 100
+  report$P <- NA_character_
+  phylum <- NA_character_
+  phylum_depth <- -1
+  for (i in seq_len(nrow(report))) {
+    if (report$depth[i] <= phylum_depth) phylum <- NA_character_
+    if (report$taxRank[i] == "P") {
+      phylum <- report$name[i]
+      phylum_depth <- report$depth[i]
+    }
+    report$P[i] <- phylum
+  }
+  report
+}
 # child ids under oomycota: 4762
 oomycete.ids <- read_lines(here('data', 'oomycete_taxids.txt'))
 sample.labels <- c(
@@ -47,7 +65,7 @@ isolates <- tibble::tribble(
 
 ```{r load-kraken-data, echo=FALSE, message=FALSE}
 taxonomy.files <- list.files(
-  project_path("results/read-filtering-screening/taxonomy"),
+  file.path(project_root, "results/read-filtering-screening/taxonomy"),
   full.names = TRUE,
   recursive = TRUE,
   pattern = "\\.kraken$"
@@ -60,13 +78,13 @@ df <- map_dfr(taxonomy.files, \(file) {
   label_isolate()
 
 report.files <- list.files(
-  project_path("results/read-filtering-screening/taxonomy"),
+  file.path(project_root, "results/read-filtering-screening/taxonomy"),
   full.names = TRUE,
   recursive = TRUE,
   pattern = "\\.kreport$"
 )
 df.rpt <- map_dfr(report.files, \(file) {
-  read_report2(file, add_taxRank_columns = TRUE) |>
+  read_kreport(file) |>
     mutate(file = str_remove(basename(file), "\\.kreport$"))
 }) |>
   label_isolate()
@@ -94,10 +112,14 @@ read.dist <- df |>
   ggplot() +
   geom_histogram(aes(x = length, fill = is.oomycota), binwidth = 1000) +
   scale_y_continuous(labels = scales::label_comma()) +
-  scale_fill_manual(values = c("Oomycota-assigned" = unname(taxon_palette["Oomycota"]), "Non-Oomycota" = unname(taxon_palette["Other"]))) +
+  scale_fill_manual(values = c("Oomycota-assigned" = "#000000", "Non-Oomycota" = "#999999")) +
   labs(x = "Read length (bp)", y = "Read count", fill = NULL) +
   facet_wrap(~Isolate, ncol = 1, scales = 'free_y')
-save_pub_r(read.dist, 'supp-read-length-distribution', width_mm = 180, height_mm = 100)
+out <- here("figures", "supp-read-length-distribution")
+ggsave(paste0(out, ".svg"), read.dist, device = svglite::svglite, width = 180, height = 100, units = "mm")
+ggsave(paste0(out, ".pdf"), read.dist, device = grDevices::pdf, width = 180, height = 100, units = "mm", family = "Helvetica", useDingbats = FALSE)
+ggsave(paste0(out, ".tiff"), read.dist, device = ragg::agg_tiff, width = 180, height = 100, units = "mm", dpi = 600, compression = "lzw")
+ggsave(paste0(out, ".png"), read.dist, device = ragg::agg_png, width = 180, height = 100, units = "mm", dpi = 600)
 read.dist
 ```
 
@@ -134,7 +156,11 @@ tax.bar <- df.rpt |>
   geom_col(aes(x = percentage, y = Isolate, fill = taxon), position = 'fill') +
   scale_x_continuous(labels = scales::percent) +
   scale_y_discrete(labels = library.labels) +
-  scale_fill_manual(values = taxon_palette) +
+  scale_fill_manual(values = c(
+    Oomycota = "#000000", Streptophyta = "#0072B2", Pseudomonadota = "#D55E00",
+    Bacteroidota = "#009E73", Ascomycota = "#CC79A7", Chordata = "#E69F00",
+    unclassified = "#56B4E9", Other = "#999999"
+  ), guide = "none") +
   labs(x = "Reads (%)", y = NULL, fill = "Taxon")
 ```
 
@@ -171,7 +197,7 @@ TAXONKIT_BIN <- Sys.getenv(
   "TAXONKIT_BIN",
   file.path(Sys.getenv("HOME"), "miniforge3/envs/downy/bin/taxonkit")
 )
-TAXDUMP_DIR <- db_path("kraken2/PlusPFP")
+TAXDUMP_DIR <- file.path(path.expand(Sys.getenv("DB_ROOT", "~/db")), "kraken2/PlusPFP")
 all.taxids <- unique(as.character(df$tax))
 all.taxids <- all.taxids[!is.na(all.taxids) & all.taxids != "0"]
 
@@ -204,20 +230,20 @@ for (i in seq_len(nrow(isolates))) {
   taxonomy.sample <- isolates$taxonomy_sample[i]
   coverage.sample <- isolates$coverage_sample[i]
 
-  kreport.file <- project_path(
+  kreport.file <- file.path(project_root,
     "results/read-filtering-screening/taxonomy",
     paste0(taxonomy.sample, ".kreport")
   )
-  gc.file <- project_path(
+  gc.file <- file.path(project_root,
     "results/read-filtering-screening/coverage-gc",
     paste0(coverage.sample, "-gc.tsv")
   )
-  sect.file <- project_path(
+  sect.file <- file.path(project_root,
     "results/read-filtering-screening/coverage-gc",
     paste0(coverage.sample, "-sect-stats.tsv")
   )
 
-  phylum.category <- read_report2(kreport.file, add_taxRank_columns = TRUE) |>
+  phylum.category <- read_kreport(kreport.file) |>
     filter(taxRank == "P") |>
     transmute(
       phylum = clean_taxon(name),
@@ -280,19 +306,27 @@ write_tsv(summary.tbl, here("data", "blobplot-category-summary-by-isolate.tsv"))
 
 blob.plot <- plot_data |>
   ggplot(aes(x = gc_pct, y = cov_median, color = category)) +
-  geom_point(alpha = 0.25, size = 0.4) +
+  geom_point(alpha = 0.5, size = 0.4) +
   scale_y_log10(labels = scales::label_comma()) +
-  scale_color_manual(values = taxon_palette) +
+  scale_color_manual(values = c(
+    Oomycota = "#000000", Streptophyta = "#0072B2", Pseudomonadota = "#D55E00",
+    Bacteroidota = "#009E73", Ascomycota = "#CC79A7", Chordata = "#E69F00",
+    unclassified = "#56B4E9", Other = "#999999"
+  )) +
   facet_wrap(~Isolate, nrow = 1) +
   guides(color = guide_legend(override.aes = list(alpha = 1, size = 1.2))) +
   labs(x = "GC content (%)", y = "Median 21-mer coverage", color = "Taxon")
 
 read.qc.profile <- tax.bar / blob.plot +
-  plot_layout(ncol = 1, heights = c(1, 0.85), guides = "collect") +
+  plot_layout(ncol = 1, heights = c(1, 0.85)) +
   plot_annotation(tag_levels = "A") &
   theme(legend.position = "bottom")
 
-save_pub_r(read.qc.profile, "read-qc-profile", width_mm = 180, height_mm = 165)
+out <- here("figures", "read-qc-profile")
+ggsave(paste0(out, ".svg"), read.qc.profile, device = svglite::svglite, width = 180, height = 165, units = "mm")
+ggsave(paste0(out, ".pdf"), read.qc.profile, device = grDevices::pdf, width = 180, height = 165, units = "mm", family = "Helvetica", useDingbats = FALSE)
+ggsave(paste0(out, ".tiff"), read.qc.profile, device = ragg::agg_tiff, width = 180, height = 165, units = "mm", dpi = 600, compression = "lzw")
+ggsave(paste0(out, ".png"), read.qc.profile, device = ragg::agg_png, width = 180, height = 165, units = "mm", dpi = 600)
 read.qc.profile
 ```
 

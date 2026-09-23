@@ -9,17 +9,15 @@ output:
 ---
 
 ```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
-source(here::here("analysis", "lib", "paths.R"))
 library(tidyverse)
 library(gt)
 library(here)
 
-source(here("analysis", "lib", "figure-utils.R"))
 theme_set(theme_bw())
 knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 
 annotation_file <- here("data", "annotation_support.tsv")
-hardmask_dir <- project_path("results/repeatmask-gene-prediction/focal/hardmasked")
+hardmask_dir <- file.path(path.expand(Sys.getenv("PROJECT_DATA", "~/project_data/downy")), "results/repeatmask-gene-prediction/focal/hardmasked")
 
 isolate_key <- tribble(
   ~sample_name, ~file_name, ~isolate, ~label,
@@ -316,7 +314,7 @@ support_plot <- support_summary |>
       "Both" = "#0072B2",
       "Functional only" = "#56B4E9",
       "RNA-seq only" = "#E69F00",
-      "Neither" = "#B3B3B3"
+      "Neither" = "#999999"
     )
   ) +
   guides(fill = guide_legend(ncol = 1, byrow = TRUE)) +
@@ -332,7 +330,11 @@ support_plot <- support_summary |>
     plot.margin = margin(3, 8, 3, 3)
   )
 
-save_pub_r(support_plot, "gene-annotation-rnaseq-support", width_mm = 180, height_mm = 75)
+out <- here("figures", "gene-annotation-rnaseq-support")
+ggsave(paste0(out, ".svg"), support_plot, device = svglite::svglite, width = 180, height = 75, units = "mm")
+ggsave(paste0(out, ".pdf"), support_plot, device = grDevices::pdf, width = 180, height = 75, units = "mm", family = "Helvetica", useDingbats = FALSE)
+ggsave(paste0(out, ".tiff"), support_plot, device = ragg::agg_tiff, width = 180, height = 75, units = "mm", dpi = 600, compression = "lzw")
+ggsave(paste0(out, ".png"), support_plot, device = ragg::agg_png, width = 180, height = 75, units = "mm", dpi = 600)
 support_plot
 ```
 
