@@ -22,7 +22,7 @@ for fasta in "${PROJECT_DATA}/results/assembly-qc/nuclear"/*.fasta.gz; do
 
     seqkit seq -m 1000000 -w 0 "${fasta}" > "${dir}/${sample}.fa"
     seqkit fx2tab -n -l "${dir}/${sample}.fa" > "${dir}/lengths.tsv"
-    tidk search -s TTTAGGG -w 10000 -o "${sample}.TTTAGGG" -d "${dir}" "${dir}/${sample}.fa"
+    mamba run -n tidk tidk search -s TTTAGGG -w 10000 -o "${sample}.TTTAGGG" -d "${dir}" "${dir}/${sample}.fa"
 done
 
 Rscript "$REPO_ROOT/workflow/06-telomeres/plot-tidk-telomeres.R"
