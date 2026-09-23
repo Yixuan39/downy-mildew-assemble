@@ -9,6 +9,6 @@
 # Usage   : sbatch workflow/09-synteny-orthology/orthofinder-contigs.sh
 
 set -euo pipefail
-source workflow/paths.sh
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/paths.sh"
 
 orthofinder -f "${PROJECT_DATA}/results/synteny-orthology/tmp" -t 10 -X -o "${PROJECT_DATA}/results/synteny-orthology/orthofinder"
