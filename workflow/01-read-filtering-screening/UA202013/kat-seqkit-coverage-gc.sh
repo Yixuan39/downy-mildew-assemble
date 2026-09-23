@@ -11,12 +11,11 @@
 #           ${PROJECT_DATA}/results/read-filtering-screening/coverage-gc/<sample>-gc.tsv
 # Runs on : SLURM, single job, 32 cores / 100 GB
 # Usage   : sbatch workflow/01-read-filtering-screening/UA202013/kat-seqkit-coverage-gc.sh
-# Notes   : `seqkit` must be on PATH (conda/module load it before submitting) - unlike kraken2
-#           and kat, no container for it is provisioned under $DB_ROOT/containers.
+# Notes   : `seqkit` must be on PATH (conda/module load it before submitting). KAT runs from
+#           the dedicated mamba environment: `mamba run -n kat kat`.
 
 set -uo pipefail
 export PROJECT_DATA="${PROJECT_DATA:-$HOME/project_data/downy}"
-export DB_ROOT="${DB_ROOT:-$HOME/db}"
 
 INPUT_DIR="$PROJECT_DATA/results/read-filtering-screening/reads/UA202013"
 FILES=("$INPUT_DIR"/*.fastq.gz)
@@ -40,7 +39,7 @@ time seqkit fx2tab -n -g -j "${SLURM_CPUS_PER_TASK:-32}" "$READS" \
 
 echo "=== kat sect: per-read 21-mer self-coverage ==="
 cd "$WORK"
-time singularity exec "$DB_ROOT/containers/kat_2.4.2.sif" kat sect -n -t "${SLURM_CPUS_PER_TASK:-32}" -m 21 -H 2000000000 \
+time mamba run -n kat kat sect -n -t "${SLURM_CPUS_PER_TASK:-32}" -m 21 -H 2000000000 \
     -o "${sample}_sect" "$READS" "$READS"
 cp "${sample}_sect-stats.tsv" "$OUT/$sample-sect-stats.tsv"
 

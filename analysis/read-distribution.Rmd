@@ -9,6 +9,7 @@ library(tidyverse)
 library(data.table)
 library(gt)
 library(here)
+library(patchwork)
 source(here('analysis', 'lib', 'figure-utils.R'))
 # read_report2() (Kraken report parser) vendored from pavian rather than depending on the
 # full package - see analysis/lib/read-kraken-report.R for why.
@@ -20,28 +21,60 @@ sample.labels <- c(
   # Kraken2 taxonomy files for the public P. effusa reads are named after the isolate
   # accession (p_effusa.kraken/.kreport), not "UA202013" - matching the recode key to the
   # actual file basename is what makes this facet resolve instead of showing up as NA.
-  "p_effusa" = "P. effusa (UA202013)",
   "Quesada_SQIIe_MSU1" = "P. cubensis (MSU1)",
   "Quesada_SQIIe_SC1982" = "P. cubensis (SC1982)",
-  "Quesada_SQIIe_Phumuli" = "P. humuli (OR502AA)"
+  "Quesada_SQIIe_Phumuli" = "P. humuli (OR502AA)",
+  "p_effusa" = "P. effusa (UA202013)"
 )
 label_isolate <- function(data) {
   mutate(data, Isolate = factor(recode(file, !!!sample.labels), levels = sample.labels))
 }
 clean_taxon <- function(x) str_remove(x, "^[a-z]_")
+isolate.labels <- c(
+  "MSU1" = "P. cubensis (MSU1)",
+  "SC1982" = "P. cubensis (SC1982)",
+  "Phumuli" = "P. humuli (OR502AA)",
+  "UA202013" = "P. effusa (UA202013)"
+)
+isolates <- tibble::tribble(
+  ~isolate,   ~taxonomy_sample,        ~coverage_sample,
+  "MSU1",     "Quesada_SQIIe_MSU1",    "Quesada_SQIIe_MSU1",
+  "SC1982",   "Quesada_SQIIe_SC1982",  "Quesada_SQIIe_SC1982",
+  "Phumuli",  "Quesada_SQIIe_Phumuli", "Quesada_SQIIe_Phumuli",
+  "UA202013", "p_effusa",              "p_effusa"
+)
 ```
 
-# Read distribution of the PacBio HIFI reads
-
-```{r read-length-distribution, echo=FALSE, fig.width=7.2, fig.height=5.9}
-files <- list.files(project_path("results/read-filtering-screening/taxonomy"), full.names = TRUE, recursive = TRUE, pattern = '\\.kraken$')
-df <- map_dfr(files, \(file) {
-  fread(file, drop = 5, showProgress = FALSE, col.names = c('status', 'id', 'tax', 'length')) |>
+```{r load-kraken-data, echo=FALSE, message=FALSE}
+taxonomy.files <- list.files(
+  project_path("results/read-filtering-screening/taxonomy"),
+  full.names = TRUE,
+  recursive = TRUE,
+  pattern = "\\.kraken$"
+)
+df <- map_dfr(taxonomy.files, \(file) {
+  fread(file, drop = 5, showProgress = FALSE, col.names = c("status", "id", "tax", "length")) |>
     mutate(file = tools::file_path_sans_ext(basename(file)))
 }) |>
   mutate(is.oomycota = tax %in% oomycete.ids) |>
   label_isolate()
 
+report.files <- list.files(
+  project_path("results/read-filtering-screening/taxonomy"),
+  full.names = TRUE,
+  recursive = TRUE,
+  pattern = "\\.kreport$"
+)
+df.rpt <- map_dfr(report.files, \(file) {
+  read_report2(file, add_taxRank_columns = TRUE) |>
+    mutate(file = str_remove(basename(file), "\\.kreport$"))
+}) |>
+  label_isolate()
+```
+
+# Read distribution of the PacBio HIFI reads
+
+```{r read-length-distribution, echo=FALSE, fig.width=7.2, fig.height=5.9}
 library.labels <- df |>
   group_by(Isolate) |>
   summarise(reads = n(), bases = sum(length), .groups = "drop") |>
@@ -69,16 +102,6 @@ read.dist
 ```
 
 ```{r echo=FALSE}
-files <- list.files(project_path("results/read-filtering-screening/taxonomy"),
-                    full.names = TRUE, recursive = TRUE, pattern = '.kreport$')
-df.rpt <- map_dfr(files, function(file) {
-  read_report2(file, add_taxRank_columns = TRUE) %>%
-    mutate(file = str_remove(basename(file), '.kreport'))})
-df.rpt <- label_isolate(df.rpt)
-```
-
-
-```{r echo=FALSE}
 df.rpt |> 
   group_by(Isolate) |> 
   filter(name == "p_Oomycota") |> 
@@ -102,7 +125,7 @@ df.rpt |>
 ```
 
 
-```{r taxonomy-composition-bar, fig.width=7.2, fig.height=3.9}
+```{r read-qc-taxonomy-panel, echo=FALSE}
 tax.bar <- df.rpt |> 
   group_by(Isolate) |> 
   filter(taxRank %in% c('U', 'P')) |> 
@@ -113,8 +136,6 @@ tax.bar <- df.rpt |>
   scale_y_discrete(labels = library.labels) +
   scale_fill_manual(values = taxon_palette) +
   labs(x = "Reads (%)", y = NULL, fill = "Taxon")
-save_pub_r(tax.bar, 'taxonomy-composition-bar', width_mm = 180, height_mm = 100)
-tax.bar
 ```
 
 ```{r}
@@ -127,19 +148,6 @@ df.rpt |>
 ```
 
 # Can GC content and coverage separate target Oomycota reads from contamination?
-
-```{r echo=FALSE}
-# Isolate keys/labels for all four isolates, same order/coloring as the rest of this notebook
-# so facets and any cross-figure comparison line up. UA202013's raw HiFi reads are the public
-# P. effusa deposit re-run through this pipeline (see workflow/01-read-filtering-screening/
-# UA202013/), not a new isolate sequenced for this study.
-isolate.labels <- c(
-  "MSU1" = "P. cubensis (MSU1)",
-  "SC1982" = "P. cubensis (SC1982)",
-  "Phumuli" = "P. humuli (OR502AA)",
-  "UA202013" = "P. effusa (UA202013)"
-)
-```
 
 Per-read GC content (seqkit `fx2tab`) and per-read 21-mer self-coverage (KAT `sect`) for the
 adapter-filtered HiFi reads of all four isolates, colored by the same Kraken2 phylum-level taxon
@@ -156,18 +164,119 @@ Points are a stratified random subsample (up to 3,000 reads per isolate x catego
 plotting; category summary statistics (`data/blobplot-category-summary-by-isolate.tsv`) are
 computed from the full read sets.
 
-```{r blobplot-coverage-gc, fig.width=7.09, fig.height=2.8, message=FALSE}
-plot_data <- read_tsv(
-  here("data", "blobplot-read-coverage-gc-subsample.tsv"),
-  col_types = cols(
-    isolate = col_character(),
-    read_id = col_character(),
-    category = col_character(),
-    gc_pct = col_double(),
-    cov_median = col_double()
-  )
+```{r coverage-gc-data, echo=FALSE, message=FALSE, warning=FALSE}
+# Resolve every read's Kraken2 taxID to its phylum using the same PlusPFP taxonomy dump.
+# Keeping this beside the taxonomy profile makes both panels use one categorization rule.
+TAXONKIT_BIN <- Sys.getenv(
+  "TAXONKIT_BIN",
+  file.path(Sys.getenv("HOME"), "miniforge3/envs/downy/bin/taxonkit")
+)
+TAXDUMP_DIR <- db_path("kraken2/PlusPFP")
+all.taxids <- unique(as.character(df$tax))
+all.taxids <- all.taxids[!is.na(all.taxids) & all.taxids != "0"]
+
+taxid.file <- tempfile(fileext = ".txt")
+writeLines(all.taxids, taxid.file)
+phylum.lines <- system2(
+  TAXONKIT_BIN,
+  c("reformat", "-I", "1", "-f", shQuote("{p}"), "--data-dir", TAXDUMP_DIR, taxid.file),
+  stdout = TRUE,
+  stderr = FALSE
+)
+unlink(taxid.file)
+taxid.phylum <- fread(
+  text = phylum.lines,
+  header = FALSE,
+  sep = "\t",
+  col.names = c("taxID", "phylum"),
+  colClasses = "character",
+  showProgress = FALSE
 ) |>
+  mutate(phylum = na_if(phylum, ""))
+
+set.seed(1)
+max.per.category <- 3000
+subsample.list <- list()
+summary.list <- list()
+
+for (i in seq_len(nrow(isolates))) {
+  isolate <- isolates$isolate[i]
+  taxonomy.sample <- isolates$taxonomy_sample[i]
+  coverage.sample <- isolates$coverage_sample[i]
+
+  kreport.file <- project_path(
+    "results/read-filtering-screening/taxonomy",
+    paste0(taxonomy.sample, ".kreport")
+  )
+  gc.file <- project_path(
+    "results/read-filtering-screening/coverage-gc",
+    paste0(coverage.sample, "-gc.tsv")
+  )
+  sect.file <- project_path(
+    "results/read-filtering-screening/coverage-gc",
+    paste0(coverage.sample, "-sect-stats.tsv")
+  )
+
+  phylum.category <- read_report2(kreport.file, add_taxRank_columns = TRUE) |>
+    filter(taxRank == "P") |>
+    transmute(
+      phylum = clean_taxon(name),
+      category = if_else(percentage < 5, "Other", phylum)
+    )
+
+  reads <- df |>
+    filter(file == taxonomy.sample) |>
+    transmute(read_id = id, taxID = as.character(tax)) |>
+    left_join(taxid.phylum, by = "taxID") |>
+    left_join(phylum.category, by = "phylum") |>
+    mutate(category = case_when(
+      taxID == "0" ~ "unclassified",
+      is.na(category) ~ "Other",
+      TRUE ~ category
+    )) |>
+    select(read_id, category)
+
+  gc <- fread(
+    gc.file,
+    header = FALSE,
+    col.names = c("read_id", "gc_pct"),
+    showProgress = FALSE
+  ) |>
+    mutate(read_id = word(read_id, 1))
+
+  cov <- fread(sect.file, select = c("seq_name", "median"), showProgress = FALSE) |>
+    rename(read_id = seq_name, cov_median = median) |>
+    mutate(read_id = word(read_id, 1))
+
+  joined <- reads |>
+    inner_join(gc, by = "read_id") |>
+    inner_join(cov, by = "read_id") |>
+    mutate(isolate = isolate)
+
+  summary.list[[isolate]] <- joined |>
+    group_by(isolate, category) |>
+    summarise(
+      n_reads = n(),
+      gc_mean = mean(gc_pct),
+      cov_mean_of_medians = mean(cov_median),
+      .groups = "drop"
+    )
+
+  subsample.list[[isolate]] <- joined |>
+    group_by(category) |>
+    group_modify(~ slice_sample(.x, n = min(max.per.category, nrow(.x)))) |>
+    ungroup() |>
+    select(isolate, read_id, category, gc_pct, cov_median)
+}
+
+plot_data <- bind_rows(subsample.list) |>
   mutate(Isolate = factor(recode(isolate, !!!isolate.labels), levels = isolate.labels))
+summary.tbl <- bind_rows(summary.list)
+write_tsv(plot_data |> select(-Isolate), here("data", "blobplot-read-coverage-gc-subsample.tsv"))
+write_tsv(summary.tbl, here("data", "blobplot-category-summary-by-isolate.tsv"))
+```
+
+```{r read-qc-profile, fig.width=7.09, fig.height=6.5, message=FALSE}
 
 blob.plot <- plot_data |>
   ggplot(aes(x = gc_pct, y = cov_median, color = category)) +
@@ -178,12 +287,17 @@ blob.plot <- plot_data |>
   guides(color = guide_legend(override.aes = list(alpha = 1, size = 1.2))) +
   labs(x = "GC content (%)", y = "Median 21-mer coverage", color = "Taxon")
 
-save_pub_r(blob.plot, "blobplot-coverage-gc", width_mm = 180, height_mm = 71)
-blob.plot
+read.qc.profile <- tax.bar / blob.plot +
+  plot_layout(ncol = 1, heights = c(1, 0.85), guides = "collect") +
+  plot_annotation(tag_levels = "A") &
+  theme(legend.position = "bottom")
+
+save_pub_r(read.qc.profile, "read-qc-profile", width_mm = 180, height_mm = 165)
+read.qc.profile
 ```
 
 ```{r echo=FALSE}
-read_tsv(here("data", "blobplot-category-summary-by-isolate.tsv"), show_col_types = FALSE) |>
+summary.tbl |>
   mutate(Isolate = factor(recode(isolate, !!!isolate.labels), levels = isolate.labels)) |>
   arrange(Isolate, desc(n_reads)) |>
   select(Isolate, category, n_reads, gc_mean, cov_mean_of_medians)

@@ -15,7 +15,7 @@ theme_pub <- function(base_size = 7, base_family = "Helvetica") {
 
 # Shared colorblind-safe (Okabe-Ito-derived) palette for the Kraken2 phylum-level
 # taxon categories used across Figure 1 (analysis/read-distribution.Rmd) and the
-# read-level blob plot (analysis/blobplot-coverage-gc.Rmd), so both figures use
+# read-level GC/coverage panel (analysis/read-distribution.Rmd), so both panels use
 # an identical taxon -> color mapping.
 taxon_palette <- c(
   "Oomycota"       = "#000000", # target genus - bold black

@@ -6,7 +6,7 @@ into `data/`.
 
 | notebook | produces |
 |---|---|
-| `read-distribution.Rmd` | Figure 1 (taxonomic composition), Supplementary Figure S1 (read-length distributions) |
+| `read-distribution.Rmd` | Figure 1 (read QC: taxonomy profile panel A and GC/coverage panel B), Supplementary Figure S1 (read-length distributions) |
 | `benchmark.Rmd` | Figure 3 (benchmark matrix), Figure 4 (downsampling sensitivity) |
 | `final-assembly.Rmd` | Table 1 (assembly statistics), `final-assembly-top-contigs` figure |
 | `gene-annotation-report.Rmd` | Table 2, Figure 5 (functional annotation and RNA-seq support) |
