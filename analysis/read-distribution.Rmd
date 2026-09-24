@@ -305,7 +305,7 @@ blob.plot <- plot_data |>
     Oomycota = "#000000", Streptophyta = "#0072B2", Pseudomonadota = "#D55E00",
     Bacteroidota = "#009E73", Ascomycota = "#CC79A7", Chordata = "#E69F00",
     unclassified = "#56B4E9", Other = "#999999"
-  )) +
+  ), labels = \(x) ifelse(x == "unclassified", "Unclassified", x)) +
   facet_wrap(~Isolate, nrow = 1) +
   guides(color = guide_legend(nrow = 2, override.aes = list(alpha = 1, size = 2.5))) +
   labs(x = "GC content (%)", y = "Median 21-mer coverage", color = "Taxon")
@@ -337,13 +337,10 @@ summary.tbl |>
 
 ## Finding
 
-Coverage separates some categories better than GC content does - e.g. `Pseudomonadota` and
-`Bacteroidota` sit at consistently low coverage relative to the rest of each library - but
-**neither axis, nor the combination, cleanly separates target Oomycota reads from
-contamination**. `Oomycota` does not form a single distinct cluster in any of the four panels:
-it spans essentially the whole coverage range visible in each isolate, overlapping heavily with
-`Streptophyta` (host), `Other` and `unclassified`. Conversely, every visually distinct
-cloud/band in the plot is a mixture of taxa rather than a pure category. GC content alone is
-close to uninformative for this separation (categories overlap almost completely on the x-axis
-in all four isolates). A blob-plot-style GC/coverage view, at either the assembly or the read
-level, is not sufficient here to distinguish target genome reads from contaminant or host reads.
+The full-read profiles reveal taxon-associated GC and coverage patterns. `Pseudomonadota` is
+concentrated at relatively high GC content and low 21-mer coverage, while `Bacteroidota` tends
+toward lower GC content and low coverage. `Oomycota` often has higher coverage than these
+bacterial groups but overlaps substantially with `Streptophyta` and unclassified reads.
+GC content and coverage can therefore help identify some non-target populations, but a simple
+threshold on these axes would not cleanly isolate Oomycota-assigned reads. Reads unclassified
+by Kraken2 should not be assumed to be contaminants.
