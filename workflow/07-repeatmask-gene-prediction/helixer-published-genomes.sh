@@ -13,7 +13,6 @@
 set -euo pipefail
 export PROJECT_DATA="${PROJECT_DATA:-$HOME/project_data/downy}"
 export GFFREAD_BIN="${GFFREAD_BIN:-$HOME/miniforge3/envs/downy/bin/gffread}"
-export CONTAINER_RUNTIME="${CONTAINER_RUNTIME:-$(command -v apptainer >/dev/null 2>&1 && echo apptainer || echo singularity)}"
 
 INPUT_DIR=${PROJECT_DATA}/results/repeatmask-gene-prediction/references/hardmasked
 RESULT_DIR=${PROJECT_DATA}/results/repeatmask-gene-prediction/references/helixer
@@ -32,7 +31,7 @@ mkdir -p "${RESULT_DIR}/${BASENAME}"
 
 nvidia-smi
 
-"$CONTAINER_RUNTIME" run --nv --bind "$PROJECT_DATA:$PROJECT_DATA" "${HELIXER_IMAGE:-docker://gglyptodon/helixer-docker:helixer_v0.3.6_cuda_12.2.2-cudnn8}" Helixer.py \
+apptainer run --nv --bind "$PROJECT_DATA:$PROJECT_DATA" "$HOME/software/helixer-docker_helixer_v0.3.6_cuda_12.2.2-cudnn8.sif" Helixer.py \
   --fasta-path "${FASTA_TMP}/input.fasta" --lineage fungi \
   --min-coding-length 150 \
   --gff-output-path "${RESULT_DIR}/${BASENAME}/${BASENAME}.gff"
