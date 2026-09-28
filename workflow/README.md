@@ -13,7 +13,6 @@ Scripts use `$PROJECT_DATA` (default `$HOME/project_data/downy`) for cluster inp
 | [repeatmask-gene-prediction/](repeatmask-gene-prediction/) | finalized nuclear FASTA → masked FASTA and Helixer gene models |
 | [rnaseq-support/](rnaseq-support/) | RNA-seq reads and gene models → `results/rnaseq-support/` |
 | [functional-annotation/](functional-annotation/) | Helixer proteins → `results/functional-annotation/` and derived annotation table |
-| [secretome-effectome/](secretome-effectome/) | Helixer proteins → `results/secretome-effectome/` |
 | [synteny-orthology/](synteny-orthology/) | staged proteomes → `results/synteny-orthology/` |
 
-Run data acquisition and read filtering before assembly. Assembly QC finalizes the nuclear FASTA used by telomere searches, masking, gene prediction and later analyses. Benchmarking branches from filtered reads. RNA-seq support, functional annotation, secretome/effectome and orthology use the resulting gene models; `summarize-functions.R` also reads the RNA-seq and secretome/effectome outputs.
+Run data acquisition and read filtering before assembly. Assembly QC finalizes the nuclear FASTA used by telomere searches, masking, gene prediction and later analyses. Benchmarking branches from filtered reads. RNA-seq support, functional annotation and orthology use the resulting gene models. `summarize-functions.R` also reads existing RNA-seq and secretome/effectome result files.
