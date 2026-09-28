@@ -12,9 +12,6 @@
 
 set -euo pipefail
 export PROJECT_DATA="${PROJECT_DATA:-$HOME/project_data/downy}"
-SOFTWARE_ROOT="${SOFTWARE_ROOT:-$HOME/software}"
-HELIXER_POST_BIN_DIR="${HELIXER_POST_BIN_DIR:-$SOFTWARE_ROOT/HelixerPost/target/release}"
-HELIXER_POST_LIB_DIR="${HELIXER_POST_LIB_DIR:-$HOME/miniforge3/envs/helixerpost-build/lib}"
 export GFFREAD_BIN="${GFFREAD_BIN:-$HOME/miniforge3/envs/downy/bin/gffread}"
 
 INPUT_DIR=${PROJECT_DATA}/results/repeatmask-gene-prediction/focal/hardmasked
@@ -33,12 +30,7 @@ gzip -dc "$FILE" > "$FASTA_TMP/input.fasta"
 
 nvidia-smi
 
-# The v0.3.6 image lacks helixer_post_bin; bind the locally built binary and HDF5 library.
-export APPTAINERENV_LD_LIBRARY_PATH="$HELIXER_POST_LIB_DIR"
-apptainer run --nv --bind "$PROJECT_DATA:$PROJECT_DATA" \
-  --bind "$HELIXER_POST_BIN_DIR:/home/helixer_user/bin" \
-  --bind "$HELIXER_POST_LIB_DIR:$HELIXER_POST_LIB_DIR" \
-  "${HELIXER_IMAGE:-$SOFTWARE_ROOT/helixer-docker_helixer_v0.3.6_cuda_12.2.2-cudnn8.sif}" Helixer.py \
+apptainer run --nv --bind "$PROJECT_DATA:$PROJECT_DATA" "$HOME/software/helixer-docker_helixer_v0.3.6_cuda_12.2.2-cudnn8.sif" Helixer.py \
   --fasta-path "${FASTA_TMP}/input.fasta" --lineage fungi \
   --min-coding-length 150 \
   --gff-output-path "${RESULT_DIR}/${BASENAME}.gff"
