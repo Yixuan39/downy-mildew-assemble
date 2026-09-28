@@ -19,16 +19,16 @@ outputs; targetasm itself is maintained separately.
 
 | path | contents |
 |---|---|
-| [`workflow/`](workflow/) | Analysis scripts, grouped by workflow stage |
+| [`workflow/`](workflow/) | Analysis scripts, grouped by result |
 | [`analysis/`](analysis/) | R Markdown analyses for manuscript figures and tables |
 | [`data/`](data/) | Derived tables and supporting evidence |
 | [`figures/`](figures/) | Manuscript figures |
 | [`env/`](env/) | Environment specifications for the main tools |
 | [`ncbi-response/`](ncbi-response/) | Evidence and correspondence for the NCBI contamination review |
 
-Start with [`workflow/README.md`](workflow/README.md) for the stage index. Scripts were run on a
-SLURM cluster and list their main inputs, outputs and usage in their headers. Raw reads, large
-intermediates and external reference databases are not included here.
+Start with [`workflow/README.md`](workflow/README.md) for the workflow map. Scripts were run on a SLURM cluster. `$PROJECT_DATA` defaults to `$HOME/project_data/downy`;
+its `results/` tree holds large pipeline outputs. `data/` holds small derived manuscript evidence
+and `figures/` holds final figures. Raw reads, large intermediates and external databases are not included.
 
 ## Data availability
 

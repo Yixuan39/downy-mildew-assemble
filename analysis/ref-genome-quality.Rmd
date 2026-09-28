@@ -4,7 +4,7 @@ output: html_document
 ---
 
 Supplementary Table S1 uses the same QUAST/compleasm workflow as the focal assemblies.
-Generate its input with `workflow/05-assembly-qc/qc-published-genomes.sh`.
+Generate its input with `workflow/assembly-qc/qc-published-genomes.sh`.
 
 ```{r setup, include=FALSE}
 library(here)

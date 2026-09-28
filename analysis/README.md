@@ -17,6 +17,5 @@ into `data/`.
 
 Notebooks locate repository files with `here()`, so they work from any working directory inside the
 project. Large pipeline output is **not** in the repository - the notebooks read it from
-`~/project_data/downy/...`, which means they must be knitted either on the cluster or on a machine
-where that tree is mirrored at the same path. Small derived tables that the notebooks depend on are
+`$PROJECT_DATA` (default `~/project_data/downy`), so notebooks that read large outputs need that tree available. Small derived tables that the notebooks depend on are
 committed under `data/`, so figures can be regenerated without the full result tree in most cases.

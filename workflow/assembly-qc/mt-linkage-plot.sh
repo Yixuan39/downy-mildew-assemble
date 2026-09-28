@@ -9,14 +9,17 @@
 #           data/mt_linkage/ in the repo, which is what's committed for the manuscript figure.
 # Runs on : ncsu-brc login node or the short partition; seconds. Needs the `gbdraw` conda env
 #           (gbdraw, biopython, cairosvg, blast) and the gbdraw-wide.py width patch alongside it.
-# Usage   : bash workflow/04-mitochondrion/mt-linkage-plot.sh 'data/mt_linkage/14_mitochondrial_genomes.gb'
+# Usage   : bash workflow/assembly-qc/mt-linkage-plot.sh 'data/mt_linkage/14_mitochondrial_genomes.gb'
 set -euo pipefail
-export REPO_ROOT="${REPO_ROOT:-$(cd ../.. && pwd)}"
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd -- "$SCRIPT_DIR/../.." && pwd)"
 export PROJECT_DATA="${PROJECT_DATA:-$HOME/project_data/downy}"
 
-HERE="$REPO_ROOT/workflow/04-mitochondrion"
-GB="${1:?usage: mt-linkage-plot.sh <multi-record.gb> [outdir]}"
+HERE="$SCRIPT_DIR"
+GB="${1:-$REPO_ROOT/data/mt_linkage/14_mitochondrial_genomes.gb}"
+[[ "$GB" = /* ]] || GB="$REPO_ROOT/$GB"
 OUT="${2:-$PROJECT_DATA/results/assembly-qc/mt-linkage}"
+[[ "$OUT" = /* ]] || OUT="$REPO_ROOT/$OUT"
 mkdir -p "$OUT/split" "$OUT/blast"
 
 # 1. split into per-record .gb/.fna, renamed + reordered (order = chain order in the plot)
