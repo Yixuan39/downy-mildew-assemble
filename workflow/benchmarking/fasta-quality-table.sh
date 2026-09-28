@@ -1,12 +1,5 @@
 #!/bin/bash
 
-# Purpose : Collect every benchmark assembly into one directory and run the targetasm quality workflow over
-#           all of them, producing the single table analysis/benchmark.Rmd reads.
-# Inputs  : ${PROJECT_DATA}/results/benchmarking/*/*/ assemblies; compleasm lineages at ${DB_ROOT}/compleasm;
-#           targetasm at ${TARGET_ASM_DIR}
-# Outputs : data/benchmark_qc/quality_all_benchmarking.tsv
-# Runs on : local or cluster; Nextflow submits SLURM jobs with Apptainer
-# Usage   : bash workflow/benchmarking/fasta-quality-table.sh
 set -euo pipefail
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd -- "$SCRIPT_DIR/../.." && pwd)"

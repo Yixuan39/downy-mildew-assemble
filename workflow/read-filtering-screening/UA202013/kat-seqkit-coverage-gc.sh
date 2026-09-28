@@ -3,17 +3,6 @@
 #SBATCH --cpus-per-task=32
 #SBATCH --mem=100G
 
-# Purpose : Same per-read KAT sect self-coverage and seqkit fx2tab GC content as
-#           ../kat-seqkit-coverage-gc.sh, for the public P. effusa (UA202013) reads,
-#           which live in their own directory and are a single file (no array).
-# Inputs  : ${PROJECT_DATA}/results/read-filtering-screening/reads/UA202013/*.fastq.gz
-# Outputs : ${PROJECT_DATA}/results/read-filtering-screening/coverage-gc/<sample>-sect-stats.tsv
-#           ${PROJECT_DATA}/results/read-filtering-screening/coverage-gc/<sample>-gc.tsv
-# Runs on : SLURM, single job, 32 cores / 100 GB
-# Usage   : sbatch workflow/read-filtering-screening/UA202013/kat-seqkit-coverage-gc.sh
-# Notes   : `seqkit` must be on PATH (conda/module load it before submitting). KAT runs from
-#           the dedicated mamba environment: `mamba run -n kat kat`.
-
 set -euo pipefail
 export PROJECT_DATA="${PROJECT_DATA:-$HOME/project_data/downy}"
 
@@ -34,12 +23,12 @@ echo "=== decompressing reads ==="
 time zcat "$FILE" > "$READS"
 
 echo "=== seqkit fx2tab: per-read GC% ==="
-time seqkit fx2tab -n -g -j "${SLURM_CPUS_PER_TASK:-32}" "$READS" \
+time seqkit fx2tab -n -g -j "$SLURM_CPUS_PER_TASK" "$READS" \
     > "$OUT/$sample-gc.tsv"
 
 echo "=== kat sect: per-read 21-mer self-coverage ==="
 cd "$WORK"
-time mamba run -n kat kat sect -n -t "${SLURM_CPUS_PER_TASK:-32}" -m 21 -H 2000000000 \
+time mamba run -n kat kat sect -n -t "$SLURM_CPUS_PER_TASK" -m 21 -H 2000000000 \
     -o "${sample}_sect" "$READS" "$READS"
 cp "${sample}_sect-stats.tsv" "$OUT/$sample-sect-stats.tsv"
 

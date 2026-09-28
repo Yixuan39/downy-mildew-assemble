@@ -4,18 +4,11 @@
 #SBATCH --mem=512G
 #SBATCH --output=benchmark_hifiasm_%j.out
 
-# Purpose : Benchmark arm 1: hifiasm on the raw filtered reads, with no contamination handling. Records wall
-#           time to timing.tsv.
-# Inputs  : $SAMPLE reads under $PROJECT_DATA (MSU1 or UA202013)
-# Outputs : $PROJECT_DATA/results/benchmarking/$SAMPLE/hifiasm/ incl. timing.tsv
-# Runs on : SLURM, 32 cores, all three arms on one large-memory node
-# Usage   : sbatch --export=ALL,SAMPLE=MSU1 workflow/benchmarking/hifiasm.sh
-
 set -euo pipefail
 export PROJECT_DATA="${PROJECT_DATA:-$HOME/project_data/downy}"
 
 SAMPLE="${SAMPLE:-UA202013}"
-THREADS="${SLURM_CPUS_PER_TASK:-32}"
+THREADS="$SLURM_CPUS_PER_TASK"
 
 case "${SAMPLE}" in
     UA202013)

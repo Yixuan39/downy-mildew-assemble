@@ -1,12 +1,5 @@
 #!/bin/bash
 
-# Purpose : Run the targetasm quality workflow (compleasm + QUAST) over the three final assemblies of this
-#           paper.
-# Inputs  : ${PROJECT_DATA}/results/assembly-qc/nuclear/*.fasta.gz; compleasm lineages at
-#           ${DB_ROOT}/compleasm
-# Outputs : data/qc_final_assemblies/quality_final_assemblies.tsv
-# Runs on : local or cluster; Nextflow submits SLURM jobs with Apptainer
-# Usage   : bash workflow/assembly-qc/qc-final-assemblies.sh
 set -euo pipefail
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd -- "$SCRIPT_DIR/../.." && pwd)"

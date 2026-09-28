@@ -1,14 +1,6 @@
 #!/bin/bash
 #SBATCH --array=0-10
 
-# Purpose : Locate mitochondrial contigs in each published downy mildew genome by BLASTN against a reference
-#           mitochondrial genome.
-# Inputs  : ${PROJECT_DATA}/inputs/reference-genomes/*.fna.gz
-#           ${PROJECT_DATA}/inputs/reference-mitochondria/KT072718.1.fna (NCBI KT072718.1, P. cubensis mt genome)
-# Outputs : ${PROJECT_DATA}/results/assembly-qc/reference-mito-hits/<genome>.tsv
-# Runs on : SLURM array 0-10 (one task per published genome)
-# Usage   : sbatch workflow/assembly-qc/blastn-find-mito.sh
-
 set -euo pipefail
 export PROJECT_DATA="${PROJECT_DATA:-$HOME/project_data/downy}"
 

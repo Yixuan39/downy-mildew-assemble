@@ -3,13 +3,6 @@
 #SBATCH -c 32
 #SBATCH --mem=0
 
-# Purpose : Build a per-assembly repeat library with RepeatModeler and hard-mask the three new assemblies
-#           with RepeatMasker.
-# Inputs  : ${PROJECT_DATA}/results/assembly-qc/nuclear/*.fasta.gz
-# Outputs : ${PROJECT_DATA}/results/repeatmask-gene-prediction/focal/hardmasked/
-# Runs on : SLURM array 0-3, 32 cores
-# Usage   : sbatch workflow/repeatmask-gene-prediction/hard-mask-contigs.sh
-
 set -euo pipefail
 export PROJECT_DATA="${PROJECT_DATA:-$HOME/project_data/downy}"
 
@@ -17,7 +10,7 @@ THREADS=$SLURM_CPUS_PER_TASK
 INPUT_DIR=${PROJECT_DATA}/results/assembly-qc/nuclear
 RESULT_DIR=${PROJECT_DATA}/results/repeatmask-gene-prediction/focal/hardmasked
 FILES=("$INPUT_DIR"/*.fasta.gz)
-FILE="${FILES[${SLURM_ARRAY_TASK_ID:?Submit with sbatch --array}]}"
+FILE="${FILES[$SLURM_ARRAY_TASK_ID]}"
 [[ -s "$FILE" ]] || { echo "Missing input: $FILE" >&2; exit 1; }
 echo "Processing: $FILE"
 BASENAME=$(basename "$FILE")  

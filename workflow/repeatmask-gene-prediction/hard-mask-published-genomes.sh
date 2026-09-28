@@ -3,13 +3,6 @@
 #SBATCH -c 32
 #SBATCH --mem=0
 
-# Purpose : Same per-genome RepeatModeler/RepeatMasker treatment for the published genomes, so gene
-#           prediction sees comparably masked input.
-# Inputs  : ${PROJECT_DATA}/inputs/reference-genomes/*.fna.gz
-# Outputs : ${PROJECT_DATA}/results/repeatmask-gene-prediction/references/hardmasked/
-# Runs on : SLURM array 0-10, 32 cores
-# Usage   : sbatch workflow/repeatmask-gene-prediction/hard-mask-published-genomes.sh
-
 set -euo pipefail
 export PROJECT_DATA="${PROJECT_DATA:-$HOME/project_data/downy}"
 
@@ -17,7 +10,7 @@ THREADS=$SLURM_CPUS_PER_TASK
 INPUT_DIR=${PROJECT_DATA}/inputs/reference-genomes
 RESULT_DIR=${PROJECT_DATA}/results/repeatmask-gene-prediction/references/hardmasked
 FILES=("$INPUT_DIR"/*.fna.gz)
-FILE="${FILES[${SLURM_ARRAY_TASK_ID:?Submit with sbatch --array}]}"
+FILE="${FILES[$SLURM_ARRAY_TASK_ID]}"
 [[ -s "$FILE" ]] || { echo "Missing input: $FILE" >&2; exit 1; }
 echo "Processing: $FILE"
 BASENAME=$(basename "$FILE")  

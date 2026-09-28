@@ -1,11 +1,5 @@
 #!/bin/bash
 
-# Purpose : Same quality workflow over the published downy mildew genomes, so the new assemblies can be
-#           compared on identical metrics.
-# Inputs  : ${PROJECT_DATA}/inputs/reference-genomes/*.fna.gz; compleasm lineages at ${DB_ROOT}/compleasm
-# Outputs : data/qc_published_genomes/quality_published_genomes.tsv
-# Runs on : local or cluster; Nextflow submits SLURM jobs with Apptainer
-# Usage   : bash workflow/assembly-qc/qc-published-genomes.sh
 set -euo pipefail
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd -- "$SCRIPT_DIR/../.." && pwd)"

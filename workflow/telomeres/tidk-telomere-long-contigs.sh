@@ -1,13 +1,5 @@
 #!/usr/bin/env bash
 
-# Purpose : Search contigs >=1 Mb for the plant/oomycete telomere repeat TTTAGGG with tidk, then call the
-#           plotting script.
-# Inputs  : ${PROJECT_DATA}/results/assembly-qc/nuclear/*.fasta.gz
-# Outputs : ${PROJECT_DATA}/results/telomeres/<sample>/ (lengths.tsv, tidk search output) and
-#           ${PROJECT_DATA}/results/telomeres/figures/; the per-sample output and figure are also
-#           mirrored into data/tidk_telomeres/ and figures/tidk_telomeres/ in the repo (committed).
-# Runs on : ncsu-brc login node or the short partition; needs the `tidk` conda env and R (ggplot2).
-# Usage   : bash workflow/telomeres/tidk-telomere-long-contigs.sh
 set -euo pipefail
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd -- "$SCRIPT_DIR/../.." && pwd)"

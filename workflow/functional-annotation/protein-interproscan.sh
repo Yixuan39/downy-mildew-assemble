@@ -2,13 +2,6 @@
 #SBATCH --array=0-3
 #SBATCH -c 24
 
-# Purpose : Assign InterPro domains and GO terms to the Helixer proteins with InterProScan 5.77-108.0 in a
-#           container.
-# Inputs  : ${PROJECT_DATA}/results/repeatmask-gene-prediction/focal/helixer/*.faa; ${DB_ROOT}/interproscan-5.77-108.0
-# Outputs : ${PROJECT_DATA}/results/functional-annotation/interproscan/<genome>/
-# Runs on : SLURM array 0-3, 24 cores, apptainer
-# Usage   : sbatch workflow/functional-annotation/protein-interproscan.sh
-
 set -euo pipefail
 
 PROJECT_DATA="${PROJECT_DATA:-$HOME/project_data/downy}"
@@ -17,7 +10,7 @@ SOFTWARE_ROOT="${SOFTWARE_ROOT:-$HOME/software}"
 INPUT_DIR="$PROJECT_DATA/results/repeatmask-gene-prediction/focal/helixer"
 RESULT_DIR="$PROJECT_DATA/results/functional-annotation/interproscan"
 FILES=("$INPUT_DIR"/*.faa)
-FILE="${FILES[${SLURM_ARRAY_TASK_ID:?Submit with sbatch --array}]}"
+FILE="${FILES[$SLURM_ARRAY_TASK_ID]}"
 [[ -s "$FILE" ]] || { echo "Missing input: $FILE" >&2; exit 1; }
 THREADS=24
 

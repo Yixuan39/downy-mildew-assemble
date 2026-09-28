@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
-# Purpose: Run targetasm for one of the four HiFi libraries.
-# Input: $PROJECT_DATA/results/read-filtering-screening/reads/{focal,UA202013}/
-# Output: $PROJECT_DATA/results/assembly/<run>/
-# Run: bash workflow/assembly/run-targetasm.sh MSU1|SC1982|OR502AA|UA202013
+
 set -euo pipefail
 
 PROJECT_DATA="${PROJECT_DATA:-$HOME/project_data/downy}"

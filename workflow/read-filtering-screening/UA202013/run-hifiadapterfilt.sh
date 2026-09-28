@@ -2,13 +2,6 @@
 #SBATCH --job-name=adapterfilt
 #SBATCH --cpus-per-task=32
 
-# Purpose : HiFiAdapterFilt for the public P. effusa UA202013 reads. Single library, so it runs as
-#           one job; $SLURM_ARRAY_TASK_ID is left unset and resolves to index 0.
-# Inputs  : ${PROJECT_DATA}/UA202013/*.fastq.gz
-# Outputs : ${PROJECT_DATA}/results/read-filtering-screening/reads/UA202013/*.fastq.gz
-# Runs on : SLURM, single job, 32 cores
-# Usage   : sbatch workflow/read-filtering-screening/UA202013/run-hifiadapterfilt.sh
-
 set -euo pipefail
 export PROJECT_DATA="${PROJECT_DATA:-$HOME/project_data/downy}"
 
@@ -22,6 +15,6 @@ FILE="${FILES[0]}"
 sample="$(basename "$FILE" .fastq.gz)"
 FILTERED="$PROJECT_DATA/results/read-filtering-screening/reads/UA202013"
 mkdir -p "$FILTERED"
-hifiadapterfilt.sh -p "$sample" -o "$FILTERED" -t "${SLURM_CPUS_PER_TASK:-32}"
+hifiadapterfilt.sh -p "$sample" -o "$FILTERED" -t "$SLURM_CPUS_PER_TASK"
 [[ -s "$FILTERED/$sample.filt.fastq.gz" ]]
 mv "$FILTERED/$sample.filt.fastq.gz" "$FILTERED/$sample.fastq.gz"

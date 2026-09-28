@@ -1,15 +1,5 @@
 #!/usr/bin/env bash
 
-# Purpose : Draw the linear synteny/linkage plot of the 14 oomycete mitochondrial genomes with gbdraw. Row
-#           order mirrors the nuclear synteny figure (analysis/synteny-analysis.Rmd), whose rows
-#           come from the GENESPACE SpeciesTree_rooted.txt tip order.
-# Inputs  : a multi-record GenBank file of the 14 mitochondrial genomes (data/mt_linkage/14_mitochondrial_genomes.gb); mt-label-orf-only.tsv for the ORF-only labels; mt-rps10-color.tsv to highlight rps10
-# Outputs : ${PROJECT_DATA}/results/assembly-qc/mt-linkage/mt_linkage.{svg,pdf,png} plus per-record
-#           split/ and blast/ intermediates; final svg/pdf/png + split/ + blast/ are also mirrored into
-#           data/mt_linkage/ in the repo, which is what's committed for the manuscript figure.
-# Runs on : ncsu-brc login node or the short partition; seconds. Needs the `gbdraw` conda env
-#           (gbdraw, biopython, cairosvg, blast) and the gbdraw-wide.py width patch alongside it.
-# Usage   : bash workflow/assembly-qc/mt-linkage-plot.sh 'data/mt_linkage/14_mitochondrial_genomes.gb'
 set -euo pipefail
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd -- "$SCRIPT_DIR/../.." && pwd)"

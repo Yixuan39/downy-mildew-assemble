@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
-# Purpose: Run nf-core/rnaseq 3.26.0 for one focal isolate.
-# Input: config/samplesheet_<isolate>.csv, Helixer GFF, finalized assembly.
-# Output: $PROJECT_DATA/results/rnaseq-support/{Pcub_MSU1,Pcub_SC1982,Phum_OR502AA}/
-# Run: bash workflow/rnaseq-support/run-rnaseq.sh MSU1|SC1982|OR502AA
+
 set -euo pipefail
 
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"

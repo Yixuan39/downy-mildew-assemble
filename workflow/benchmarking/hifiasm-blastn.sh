@@ -4,13 +4,6 @@
 #SBATCH --mem=512G
 #SBATCH --output=benchmark_hifiasm_blastn_%j.out
 
-# Purpose : Benchmark arm 2: hifiasm followed by a BLASTN-based contaminant removal pass (the conventional
-#           post-hoc approach targetasm is compared against).
-# Inputs  : $SAMPLE reads under $PROJECT_DATA; NCBI nt and the oomycete taxid list
-# Outputs : $PROJECT_DATA/results/benchmarking/$SAMPLE/hifiasm_blastn/ incl. timing.tsv
-# Runs on : SLURM, 32 cores, one large-memory node
-# Usage   : sbatch --export=ALL,SAMPLE=MSU1 workflow/benchmarking/hifiasm-blastn.sh
-
 set -euo pipefail
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd -- "$SCRIPT_DIR/../.." && pwd)"
@@ -18,7 +11,7 @@ export PROJECT_DATA="${PROJECT_DATA:-$HOME/project_data/downy}"
 export DB_ROOT="${DB_ROOT:-$HOME/db}"
 
 SAMPLE="${SAMPLE:-UA202013}"
-THREADS="${SLURM_CPUS_PER_TASK:-32}"
+THREADS="$SLURM_CPUS_PER_TASK"
 TAXIDS_FILE="${TAXIDS_FILE:-$REPO_ROOT/data/oomycete_taxids.txt}"
 
 case "${SAMPLE}" in

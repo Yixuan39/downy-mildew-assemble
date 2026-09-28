@@ -3,14 +3,6 @@
 #SBATCH --cpus-per-task=24
 #SBATCH --mem=220G
 
-# Purpose : Same Kraken2 PlusPFP classification for the public P. effusa reads, which live in their own
-#           directory and are a single file (no array).
-# Inputs  : ${PROJECT_DATA}/results/read-filtering-screening/reads/UA202013/*.fastq.gz; Kraken2 PlusPFP at
-#           ${DB_ROOT}/kraken2/PlusPFP
-# Outputs : ${PROJECT_DATA}/results/read-filtering-screening/taxonomy/<sample>.{kraken,report}
-# Runs on : SLURM, 24 cores / 220 GB
-# Usage   : sbatch workflow/read-filtering-screening/UA202013/kraken2-pluspfp.sh
-
 set -euo pipefail
 export PROJECT_DATA="${PROJECT_DATA:-$HOME/project_data/downy}"
 export DB_ROOT="${DB_ROOT:-$HOME/db}"
@@ -24,6 +16,6 @@ sample="$(basename "$FILE" .fastq.gz)"
 RESULT_DIR="$PROJECT_DATA/results/read-filtering-screening/taxonomy"
 mkdir -p "$RESULT_DIR"
 kraken2 --db "$DB_ROOT/kraken2/PlusPFP" \
-    --threads "${SLURM_CPUS_PER_TASK:-24}" --confidence 0 \
+    --threads "$SLURM_CPUS_PER_TASK" --confidence 0 \
     --report "$RESULT_DIR/$sample.kreport" \
     --output "$RESULT_DIR/$sample.kraken" "$FILE"

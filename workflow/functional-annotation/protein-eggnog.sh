@@ -2,12 +2,6 @@
 #SBATCH --array=0-3
 #SBATCH -c 24
 
-# Purpose : Functionally annotate the Helixer proteins with eggNOG-mapper (DIAMOND search mode).
-# Inputs  : ${PROJECT_DATA}/results/repeatmask-gene-prediction/focal/helixer/*.faa; ${DB_ROOT}/eggnog
-# Outputs : ${PROJECT_DATA}/results/functional-annotation/eggnog-mapper/<genome>/
-# Runs on : SLURM array 0-3, 24 cores
-# Usage   : sbatch workflow/functional-annotation/protein-eggnog.sh
-
 set -euo pipefail
 
 PROJECT_DATA="${PROJECT_DATA:-$HOME/project_data/downy}"
@@ -15,7 +9,7 @@ DB_ROOT="${DB_ROOT:-$HOME/db}"
 INPUT_DIR="$PROJECT_DATA/results/repeatmask-gene-prediction/focal/helixer"
 RESULT_DIR="$PROJECT_DATA/results/functional-annotation/eggnog-mapper"
 FILES=("$INPUT_DIR"/*.faa)
-FILE="${FILES[${SLURM_ARRAY_TASK_ID:?Submit with sbatch --array}]}"
+FILE="${FILES[$SLURM_ARRAY_TASK_ID]}"
 [[ -s "$FILE" ]] || { echo "Missing input: $FILE" >&2; exit 1; }
 THREADS=24
 

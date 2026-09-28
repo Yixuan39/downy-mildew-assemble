@@ -3,13 +3,6 @@
 #SBATCH -p gpu
 #SBATCH -c 24
 
-# Purpose : Same Helixer prediction for the published genomes, giving a like-for-like gene set for the
-#           annotation comparison.
-# Inputs  : ${PROJECT_DATA}/results/repeatmask-gene-prediction/references/hardmasked/*.fna.gz
-# Outputs : ${PROJECT_DATA}/results/repeatmask-gene-prediction/references/helixer/
-# Runs on : GPU partition, SLURM array 0-10, 24 cores, apptainer --nv
-# Usage   : sbatch workflow/repeatmask-gene-prediction/helixer-published-genomes.sh
-
 set -euo pipefail
 export PROJECT_DATA="${PROJECT_DATA:-$HOME/project_data/downy}"
 export GFFREAD_BIN="${GFFREAD_BIN:-$HOME/miniforge3/envs/downy/bin/gffread}"
@@ -17,7 +10,7 @@ export GFFREAD_BIN="${GFFREAD_BIN:-$HOME/miniforge3/envs/downy/bin/gffread}"
 INPUT_DIR=${PROJECT_DATA}/results/repeatmask-gene-prediction/references/hardmasked
 RESULT_DIR=${PROJECT_DATA}/results/repeatmask-gene-prediction/references/helixer
 FILES=("$INPUT_DIR"/*.fna.gz)
-FILE="${FILES[${SLURM_ARRAY_TASK_ID:?Submit with sbatch --array}]}"
+FILE="${FILES[$SLURM_ARRAY_TASK_ID]}"
 [[ -s "$FILE" ]] || { echo "Missing input: $FILE" >&2; exit 1; }
 
 echo "Processing: $FILE"

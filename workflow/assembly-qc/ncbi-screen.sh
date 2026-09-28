@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
 
-# Purpose : Split the SC1982 N-gap contig and remove the two contigs flagged by NCBI.
-# Inputs  : ${PROJECT_DATA}/results/assembly-qc/nuclear-presplit/Pseudoperonospora_cubensis_SC1982.fasta.gz
-# Outputs : ${PROJECT_DATA}/results/assembly-qc/nuclear/Pseudoperonospora_cubensis_SC1982.fasta.gz
-# Runs on : ncsu-brc login node, or the short partition; seconds. Needs seqkit.
-# Usage   : bash ncbi-screen.sh
 set -euo pipefail
 export PROJECT_DATA="${PROJECT_DATA:-$HOME/project_data/downy}"
 

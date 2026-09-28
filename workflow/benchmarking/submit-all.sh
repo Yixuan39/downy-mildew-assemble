@@ -1,12 +1,5 @@
 #!/bin/bash
 
-# Purpose : Submit all seven benchmark runs (3 arms x 2 isolates, plus the two MSU1 downsampling variants)
-#           to the same node so the wall-time comparison is fair.
-# Inputs  : the three arm scripts in this directory
-# Outputs : seven queued SLURM jobs
-# Runs on : login node
-# Usage   : bash workflow/benchmarking/submit-all.sh
-
 set -euo pipefail
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 
