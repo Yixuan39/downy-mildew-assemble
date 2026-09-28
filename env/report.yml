@@ -1,0 +1,30 @@
+name: downy-report
+# R Markdown reports and GENESPACE. GENESPACE itself is installed from GitHub:
+#   Rscript -e 'remotes::install_github("jtlovell/GENESPACE@7561036be821e333c1dfb52461ccec7222e95582", upgrade = "never")  # v1.3.1'
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - r-base=4.4
+  - r-tidyverse
+  - r-rmarkdown
+  - r-knitr
+  - r-here
+  - r-gt
+  - r-ggh4x
+  - r-patchwork
+  - r-data.table
+  - r-scales
+  - r-svglite
+  - r-ragg
+  - r-ggrastr
+  - r-ape
+  - r-dbscan
+  - r-r.utils
+  - r-igraph
+  - r-remotes
+  - bioconductor-ggtree
+  - bioconductor-rtracklayer
+  - bioconductor-biostrings
+  - mcscanx=1.0.0
+  - pandoc
