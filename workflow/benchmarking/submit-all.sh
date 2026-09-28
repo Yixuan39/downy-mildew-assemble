@@ -7,11 +7,8 @@ SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 : "${BENCHMARK_NODE:?Set BENCHMARK_NODE to a high-memory SLURM node}"
 dependency=()
 for sample in UA202013 MSU1; do
-    for method in hifiasm hifiasm_blastn tea_no_downsample tea_downsample; do
-        if [[ "$sample" == UA202013 ]]; then
-            [[ "$method" != tea_downsample ]] || continue
-            [[ "$method" != tea_no_downsample ]] || method=tea
-        fi
+    for method in hifiasm hifiasm_blastn targetasm_no_downsample targetasm_downsample; do
+        [[ "$sample" == MSU1 || "$method" != targetasm_downsample ]] || continue
         case "$method" in
             hifiasm) script=hifiasm.sh ;;
             hifiasm_blastn) script=hifiasm-blastn.sh ;;

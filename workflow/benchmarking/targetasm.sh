@@ -20,14 +20,12 @@ MSU1_TARGET_BASES="${MSU1_TARGET_BASES:-5400000000}"
 
 case "${SAMPLE}" in
     UA202013)
-        READS="${PROJECT_DATA}/results/read-filtering-screening/reads/UA202013/p_effusa.fastq.gz"
-        METHOD="${METHOD:-tea}"
-        FINAL_NAME="p_effusa.fasta.gz"
+        READS="${PROJECT_DATA}/results/read-filtering-screening/reads/UA202013/UA202013.fastq.gz"
+        FINAL_NAME="UA202013.fasta.gz"
         ;;
     MSU1|Quesada_SQIIe_MSU1)
         SAMPLE="MSU1"
         READS="${PROJECT_DATA}/results/read-filtering-screening/reads/focal/Quesada_SQIIe_MSU1.fastq.gz"
-        METHOD="${METHOD:-tea_no_downsample}"
         FINAL_NAME="Quesada_SQIIe_MSU1.fasta.gz"
         ;;
     *)
@@ -36,30 +34,20 @@ case "${SAMPLE}" in
         ;;
 esac
 
+METHOD="${METHOD:-targetasm_no_downsample}"
 case "${METHOD}" in
-    tea)
-        if [[ "${SAMPLE}" == "MSU1" ]]; then
-            echo "Use METHOD=tea_no_downsample or METHOD=tea_downsample for MSU1." >&2
-            exit 1
-        fi
+    targetasm_no_downsample)
         TARGET_BASES=""
         ;;
-    tea_no_downsample)
+    targetasm_downsample)
         if [[ "${SAMPLE}" != "MSU1" ]]; then
-            echo "METHOD=tea_no_downsample is only for MSU1." >&2
-            exit 1
-        fi
-        TARGET_BASES=""
-        ;;
-    tea_downsample)
-        if [[ "${SAMPLE}" != "MSU1" ]]; then
-            echo "METHOD=tea_downsample is only for MSU1." >&2
+            echo "METHOD=targetasm_downsample is only for MSU1." >&2
             exit 1
         fi
         TARGET_BASES="${TARGET_BASES:-${MSU1_TARGET_BASES}}"
         ;;
     *)
-        echo "Unknown METHOD=${METHOD}. Use tea, tea_no_downsample, or tea_downsample." >&2
+        echo "Unknown METHOD=${METHOD}. Use targetasm_no_downsample or targetasm_downsample." >&2
         exit 1
         ;;
 esac
@@ -100,12 +88,12 @@ fi
 
 FINAL_FASTA="${OUTDIR}/${FINAL_NAME}"
 if [[ ! -s "${FINAL_FASTA}" ]]; then
-    echo "Expected final target-asm assembly was not created: ${FINAL_FASTA}" >&2
+    echo "Expected final targetasm assembly was not created: ${FINAL_FASTA}" >&2
     exit 1
 fi
 
 seconds=$(( $(date +%s) - start ))
-printf "target-asm\t%s\n" "${seconds}" >> "${TIMING}"
+printf "targetasm\t%s\n" "${seconds}" >> "${TIMING}"
 printf "Total\t%s\n" "${seconds}" >> "${TIMING}"
 
 if [[ "${FINAL_NAME}" != "${SAMPLE}.fasta.gz" ]]; then
