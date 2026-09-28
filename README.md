@@ -1,37 +1,19 @@
 # Contamination-aware genome assembly of downy mildew pathogens
 
-Code, derived data and figures for the manuscript *Contamination-aware genome assembly enables
-high-quality genomes of downy mildew pathogens*.
+Code, derived data and figures for the manuscript *Contamination-aware genome assembly enables high-quality genomes of downy mildew pathogens*. The assemblies were generated with [targetasm](https://github.com/Yixuan39/targetasm).
 
-The project assembles chromosome-scale genomes from host-contaminated PacBio HiFi libraries using
-[targetasm](https://github.com/Yixuan39/targetasm), then evaluates assembly quality, annotation and
-comparative genome structure. This repository contains the supporting workflow and manuscript
-outputs; targetasm itself is maintained separately.
-
-| isolate | species |
+| Isolate | Species |
 |---|---|
-| MSU1 | *Pseudoperonospora cubensis* MSU-1 |
-| SC1982 | *Pseudoperonospora cubensis* SC1982 |
-| OR502AA | *Pseudoperonospora humuli* OR502AA |
-| UA202013 | *Peronospora effusa* UA202013 reassembly |
+| MSU1 | *Pseudoperonospora cubensis* |
+| SC1982 | *Pseudoperonospora cubensis* |
+| OR502AA | *Pseudoperonospora humuli* |
+| UA202013 | *Peronospora effusa* |
 
-## Contents
+- [workflow/](workflow/README.md): scripts from read processing through assembly, annotation and comparison
+- [analysis/](analysis/README.md): manuscript analyses
+- [data/](data/): derived tables and evidence
+- [figures/](figures/): manuscript figures
+- [env/](env/): tool environments
+- [ncbi-response/](ncbi-response/README.md): SC1982 contamination review
 
-| path | contents |
-|---|---|
-| [`workflow/`](workflow/) | Analysis scripts, grouped by result |
-| [`analysis/`](analysis/) | R Markdown analyses for manuscript figures and tables |
-| [`data/`](data/) | Derived tables and supporting evidence |
-| [`figures/`](figures/) | Manuscript figures |
-| [`env/`](env/) | Environment specifications for the main tools |
-| [`ncbi-response/`](ncbi-response/) | Evidence and correspondence for the NCBI contamination review |
-
-Start with [`workflow/README.md`](workflow/README.md) for the workflow map. Scripts were run on a SLURM cluster. `$PROJECT_DATA` defaults to `$HOME/project_data/downy`;
-its `results/` tree holds large pipeline outputs. `data/` holds small derived manuscript evidence
-and `figures/` holds final figures. Raw reads, large intermediates and external databases are not included.
-
-## Data availability
-
-Raw reads and final assemblies are deposited under the accessions reported in the manuscript.
-This repository contains the analysis code, derived tables, figures and the evidence supporting the
-SC1982 contamination review.
+Cluster inputs and full results use `$PROJECT_DATA` (default `$HOME/project_data/downy`); manuscript tables and figures are under `data/` and `figures/`. Sequence accessions are listed in the manuscript.

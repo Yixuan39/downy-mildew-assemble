@@ -1,21 +1,12 @@
-# analysis/
+# Manuscript analyses
 
-R Markdown notebooks that turn the pipeline output into the figures and tables of the manuscript.
-Each notebook is self-contained: knit it and it writes its figures into `figures/` and its tables
-into `data/`.
+R Markdown files use `data/` and `$PROJECT_DATA/results/` to produce manuscript tables and figures.
 
-| notebook | produces |
+| File | Output |
 |---|---|
-| `read-distribution.Rmd` | Figure 1 (read QC: taxonomy profile panel A and GC/coverage panel B), Supplementary Figure S1 (read-length distributions) |
-| `benchmark.Rmd` | Figure 3 (benchmark matrix), Figure 4 (downsampling sensitivity) |
-| `final-assembly.Rmd` | Table 1 (assembly statistics), `final-assembly-top-contigs` figure |
-| `gene-annotation-report.Rmd` | Table 2, Figure 5 (functional annotation and RNA-seq support) |
-| `ref-genome-quality.Rmd` | Supplementary Table S1 (quality metrics for the comparison genomes) |
-| `synteny-analysis.Rmd` | Figure 6 (GENESPACE riparian plot + OrthoFinder species tree) |
-
-## Where the notebooks read from
-
-Notebooks locate repository files with `here()`, so they work from any working directory inside the
-project. Large pipeline output is **not** in the repository - the notebooks read it from
-`$PROJECT_DATA` (default `~/project_data/downy`), so notebooks that read large outputs need that tree available. Small derived tables that the notebooks depend on are
-committed under `data/`, so figures can be regenerated without the full result tree in most cases.
+| `read-distribution.Rmd` | Read composition and length figures |
+| `benchmark.Rmd` | Assembly benchmark figures |
+| `final-assembly.Rmd` | Final assembly quality table |
+| `gene-annotation-report.Rmd` | Gene annotation table and figure |
+| `ref-genome-quality.Rmd` | Reference genome quality table |
+| `synteny-analysis.Rmd` | Synteny and orthology figure |
