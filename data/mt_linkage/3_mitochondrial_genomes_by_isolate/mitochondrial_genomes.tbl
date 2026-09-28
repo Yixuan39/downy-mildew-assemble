@@ -231,12 +231,12 @@
 			product	NADH dehydrogenase subunit 5
 23494	25488	gene
 			gene	nad5
-25531	26098	CDS
+25531	26238	CDS
 			gene	nad6
 			codon_start	1
 			transl_table	4
 			product	NADH dehydrogenase subunit 6
-25531	26098	gene
+25531	26238	gene
 			gene	nad6
 26250	26322	tRNA
 			gene	trnR
@@ -257,12 +257,12 @@
 			product	NADH dehydrogenase subunit 1
 27644	26664	gene
 			gene	nad1
-29647	27805	CDS
+29647	27626	CDS
 			gene	nad11
 			codon_start	1
 			transl_table	4
 			product	NADH dehydrogenase subunit 11
-29647	27805	gene
+29647	27626	gene
 			gene	nad11
 29818	29734	tRNA
 			gene	trnL
@@ -274,12 +274,12 @@
 			product	tRNA-Leu
 29913	29830	gene
 			gene	trnL
-29927	30518	CDS
+29927	30667	CDS
 			gene	secY
 			codon_start	1
 			transl_table	4
 			product	Sec-independent transporter protein
-29927	30518	gene
+29927	30667	gene
 			gene	secY
 30894	30664	CDS
 			gene	orf76
@@ -298,17 +298,20 @@
 			product	tRNA-Ser
 31042	30958	gene
 			gene	trnS
-31472	31250	CDS
+31472	31056	CDS
 			gene	rps11
 			codon_start	1
 			transl_table	4
 			product	ribosomal protein S11
-31472	31250	gene
+31472	31056	gene
 			gene	rps11
-31898	31418	gene
+31898	31485	CDS
 			gene	rps13
-			pseudo
-			note	contains a frameshift
+			codon_start	1
+			transl_table	4
+			product	ribosomal protein S13
+31898	31485	gene
+			gene	rps13
 31927	32733	CDS
 			gene	rpl2
 			codon_start	1
@@ -366,12 +369,12 @@
 			product	ribosomal protein S14
 35564	35863	gene
 			gene	rps14
-35870	36191	CDS
+35870	36250	CDS
 			gene	rps8
 			codon_start	1
 			transl_table	4
 			product	ribosomal protein S8
-35870	36191	gene
+35870	36250	gene
 			gene	rps8
 36294	36860	CDS
 			gene	rpl6
@@ -632,12 +635,12 @@
 			product	NADH dehydrogenase subunit 5
 23822	25816	gene
 			gene	nad5
-25859	26426	CDS
+25859	26566	CDS
 			gene	nad6
 			codon_start	1
 			transl_table	4
 			product	NADH dehydrogenase subunit 6
-25859	26426	gene
+25859	26566	gene
 			gene	nad6
 26578	26650	tRNA
 			gene	trnR
@@ -658,12 +661,12 @@
 			product	NADH dehydrogenase subunit 1
 27972	26992	gene
 			gene	nad1
-29975	28133	CDS
+29975	27954	CDS
 			gene	nad11
 			codon_start	1
 			transl_table	4
 			product	NADH dehydrogenase subunit 11
-29975	28133	gene
+29975	27954	gene
 			gene	nad11
 30146	30062	tRNA
 			gene	trnL
@@ -675,12 +678,12 @@
 			product	tRNA-Leu
 30241	30158	gene
 			gene	trnL
-30255	30846	CDS
+30255	30995	CDS
 			gene	secY
 			codon_start	1
 			transl_table	4
 			product	Sec-independent transporter protein
-30255	30846	gene
+30255	30995	gene
 			gene	secY
 31222	30992	CDS
 			gene	orf76
@@ -699,17 +702,20 @@
 			product	tRNA-Ser
 31370	31286	gene
 			gene	trnS
-31800	31578	CDS
+31800	31384	CDS
 			gene	rps11
 			codon_start	1
 			transl_table	4
 			product	ribosomal protein S11
-31800	31578	gene
+31800	31384	gene
 			gene	rps11
-32226	31746	gene
+32226	31813	CDS
 			gene	rps13
-			pseudo
-			note	contains a frameshift
+			codon_start	1
+			transl_table	4
+			product	ribosomal protein S13
+32226	31813	gene
+			gene	rps13
 32255	33061	CDS
 			gene	rpl2
 			codon_start	1
@@ -767,12 +773,12 @@
 			product	ribosomal protein S14
 35892	36191	gene
 			gene	rps14
-36198	36519	CDS
+36198	36578	CDS
 			gene	rps8
 			codon_start	1
 			transl_table	4
 			product	ribosomal protein S8
-36198	36519	gene
+36198	36578	gene
 			gene	rps8
 36622	37188	CDS
 			gene	rpl6

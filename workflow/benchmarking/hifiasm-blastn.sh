@@ -16,7 +16,7 @@ TAXIDS_FILE="${TAXIDS_FILE:-$REPO_ROOT/data/oomycete_taxids.txt}"
 
 case "${SAMPLE}" in
     UA202013)
-        READS="${PROJECT_DATA}/results/read-filtering-screening/reads/UA202013/UA202013.fastq.gz"
+        READS="${PROJECT_DATA}/results/read-filtering-screening/reads/UA202013/p_effusa.fastq.gz"
         ;;
     MSU1|Quesada_SQIIe_MSU1)
         SAMPLE="MSU1"

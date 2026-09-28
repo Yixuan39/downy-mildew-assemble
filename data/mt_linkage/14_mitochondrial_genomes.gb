@@ -2415,7 +2415,7 @@ FEATURES             Location/Qualifiers
                      /note="Derived using Geneious Prime 2024.0.5 'Annotate
                      from Database' based on nucleotide similarity"
                      /standard_name="nad5 gene"
-     CDS             25859..26426
+     CDS             25859..26566
                      /gene="nad6"
                      /locus_tag="AOB67_gp18"
                      /codon_start=1
@@ -2426,7 +2426,7 @@ FEATURES             Location/Qualifiers
                      /note="Derived using Geneious Prime 2024.0.5 'Annotate
                      from Database' based on nucleotide similarity"
                      /standard_name="nad6 CDS"
-     gene            25859..26426
+     gene            25859..26566
                      /gene="nad6"
                      /locus_tag="AOB67_gp18"
                      /db_xref="GeneID:25769166"
@@ -2484,7 +2484,7 @@ FEATURES             Location/Qualifiers
                      /note="Derived using Geneious Prime 2024.0.5 'Annotate
                      from Database' based on nucleotide similarity"
                      /standard_name="nad1 gene"
-     CDS             complement(28133..29975)
+     CDS             complement(27954..29975)
                      /gene="nad11"
                      /locus_tag="AOB67_gp15"
                      /codon_start=1
@@ -2495,7 +2495,7 @@ FEATURES             Location/Qualifiers
                      /note="Derived using Geneious Prime 2024.0.5 'Annotate
                      from Database' based on nucleotide similarity"
                      /standard_name="nad11 CDS"
-     gene            complement(28133..29975)
+     gene            complement(27954..29975)
                      /gene="nad11"
                      /locus_tag="AOB67_gp15"
                      /db_xref="GeneID:25769208"
@@ -2532,7 +2532,7 @@ FEATURES             Location/Qualifiers
                      /note="Derived using Geneious Prime 2024.0.5 'Annotate
                      from Database' based on nucleotide similarity"
                      /standard_name="trnL gene"
-     CDS             30255..30846
+     CDS             30255..30995
                      /gene="secY"
                      /locus_tag="AOB67_gp14"
                      /codon_start=1
@@ -2543,7 +2543,7 @@ FEATURES             Location/Qualifiers
                      /note="Derived using Geneious Prime 2024.0.5 'Annotate
                      from Database' based on nucleotide similarity"
                      /standard_name="secY CDS"
-     gene            30255..30846
+     gene            30255..30995
                      /gene="secY"
                      /locus_tag="AOB67_gp14"
                      /db_xref="GeneID:25769201"
@@ -2598,7 +2598,7 @@ FEATURES             Location/Qualifiers
                      /note="Derived using Geneious Prime 2024.0.5 'Annotate
                      from Database' based on nucleotide similarity"
                      /standard_name="trnS gene"
-     CDS             complement(31578..31800)
+     CDS             complement(31384..31800)
                      /gene="rps11"
                      /locus_tag="AOB67_gp12"
                      /codon_start=1
@@ -2609,14 +2609,14 @@ FEATURES             Location/Qualifiers
                      /note="Derived using Geneious Prime 2024.0.5 'Annotate
                      from Database' based on nucleotide similarity"
                      /standard_name="rps11 CDS"
-     gene            complement(31578..31800)
+     gene            complement(31384..31800)
                      /gene="rps11"
                      /locus_tag="AOB67_gp12"
                      /db_xref="GeneID:25769203"
                      /note="Derived using Geneious Prime 2024.0.5 'Annotate
                      from Database' based on nucleotide similarity"
                      /standard_name="rps11 gene"
-     CDS             complement(31746..32226)
+     CDS             complement(31813..32226)
                      /gene="rps13"
                      /locus_tag="AOB67_gp11"
                      /codon_start=1
@@ -2627,7 +2627,7 @@ FEATURES             Location/Qualifiers
                      /note="Derived using Geneious Prime 2024.0.5 'Annotate
                      from Database' based on nucleotide similarity"
                      /standard_name="rps13 CDS"
-     gene            complement(31746..32226)
+     gene            complement(31813..32226)
                      /gene="rps13"
                      /locus_tag="AOB67_gp11"
                      /db_xref="GeneID:25769172"
@@ -2787,7 +2787,7 @@ FEATURES             Location/Qualifiers
                      /note="Derived using Geneious Prime 2024.0.5 'Annotate
                      from Database' based on nucleotide similarity"
                      /standard_name="rps14 gene"
-     CDS             36198..36519
+     CDS             36198..36578
                      /gene="rps8"
                      /locus_tag="AOB67_gp04"
                      /codon_start=1
@@ -2798,7 +2798,7 @@ FEATURES             Location/Qualifiers
                      /note="Derived using Geneious Prime 2024.0.5 'Annotate
                      from Database' based on nucleotide similarity"
                      /standard_name="rps8 CDS"
-     gene            36198..36519
+     gene            36198..36578
                      /gene="rps8"
                      /locus_tag="AOB67_gp04"
                      /db_xref="GeneID:25769177"
@@ -4162,7 +4162,7 @@ FEATURES             Location/Qualifiers
                      /note="Derived using Geneious Prime 2024.0.5 'Annotate
                      from Database' based on nucleotide similarity"
                      /standard_name="nad5 gene"
-     CDS             25531..26098
+     CDS             25531..26238
                      /gene="nad6"
                      /locus_tag="AOB67_gp18"
                      /codon_start=1
@@ -4173,7 +4173,7 @@ FEATURES             Location/Qualifiers
                      /note="Derived using Geneious Prime 2024.0.5 'Annotate
                      from Database' based on nucleotide similarity"
                      /standard_name="nad6 CDS"
-     gene            25531..26098
+     gene            25531..26238
                      /gene="nad6"
                      /locus_tag="AOB67_gp18"
                      /db_xref="GeneID:25769166"
@@ -4231,7 +4231,7 @@ FEATURES             Location/Qualifiers
                      /note="Derived using Geneious Prime 2024.0.5 'Annotate
                      from Database' based on nucleotide similarity"
                      /standard_name="nad1 gene"
-     CDS             complement(27805..29647)
+     CDS             complement(27626..29647)
                      /gene="nad11"
                      /locus_tag="AOB67_gp15"
                      /codon_start=1
@@ -4242,7 +4242,7 @@ FEATURES             Location/Qualifiers
                      /note="Derived using Geneious Prime 2024.0.5 'Annotate
                      from Database' based on nucleotide similarity"
                      /standard_name="nad11 CDS"
-     gene            complement(27805..29647)
+     gene            complement(27626..29647)
                      /gene="nad11"
                      /locus_tag="AOB67_gp15"
                      /db_xref="GeneID:25769208"
@@ -4279,7 +4279,7 @@ FEATURES             Location/Qualifiers
                      /note="Derived using Geneious Prime 2024.0.5 'Annotate
                      from Database' based on nucleotide similarity"
                      /standard_name="trnL gene"
-     CDS             29927..30518
+     CDS             29927..30667
                      /gene="secY"
                      /locus_tag="AOB67_gp14"
                      /codon_start=1
@@ -4290,7 +4290,7 @@ FEATURES             Location/Qualifiers
                      /note="Derived using Geneious Prime 2024.0.5 'Annotate
                      from Database' based on nucleotide similarity"
                      /standard_name="secY CDS"
-     gene            29927..30518
+     gene            29927..30667
                      /gene="secY"
                      /locus_tag="AOB67_gp14"
                      /db_xref="GeneID:25769201"
@@ -4345,7 +4345,7 @@ FEATURES             Location/Qualifiers
                      /note="Derived using Geneious Prime 2024.0.5 'Annotate
                      from Database' based on nucleotide similarity"
                      /standard_name="trnS gene"
-     CDS             complement(31250..31472)
+     CDS             complement(31056..31472)
                      /gene="rps11"
                      /locus_tag="AOB67_gp12"
                      /codon_start=1
@@ -4356,14 +4356,14 @@ FEATURES             Location/Qualifiers
                      /note="Derived using Geneious Prime 2024.0.5 'Annotate
                      from Database' based on nucleotide similarity"
                      /standard_name="rps11 CDS"
-     gene            complement(31250..31472)
+     gene            complement(31056..31472)
                      /gene="rps11"
                      /locus_tag="AOB67_gp12"
                      /db_xref="GeneID:25769203"
                      /note="Derived using Geneious Prime 2024.0.5 'Annotate
                      from Database' based on nucleotide similarity"
                      /standard_name="rps11 gene"
-     CDS             complement(31418..31898)
+     CDS             complement(31485..31898)
                      /gene="rps13"
                      /locus_tag="AOB67_gp11"
                      /codon_start=1
@@ -4374,7 +4374,7 @@ FEATURES             Location/Qualifiers
                      /note="Derived using Geneious Prime 2024.0.5 'Annotate
                      from Database' based on nucleotide similarity"
                      /standard_name="rps13 CDS"
-     gene            complement(31418..31898)
+     gene            complement(31485..31898)
                      /gene="rps13"
                      /locus_tag="AOB67_gp11"
                      /db_xref="GeneID:25769172"
@@ -4534,7 +4534,7 @@ FEATURES             Location/Qualifiers
                      /note="Derived using Geneious Prime 2024.0.5 'Annotate
                      from Database' based on nucleotide similarity"
                      /standard_name="rps14 gene"
-     CDS             35870..36191
+     CDS             35870..36250
                      /gene="rps8"
                      /locus_tag="AOB67_gp04"
                      /codon_start=1
@@ -4545,7 +4545,7 @@ FEATURES             Location/Qualifiers
                      /note="Derived using Geneious Prime 2024.0.5 'Annotate
                      from Database' based on nucleotide similarity"
                      /standard_name="rps8 CDS"
-     gene            35870..36191
+     gene            35870..36250
                      /gene="rps8"
                      /locus_tag="AOB67_gp04"
                      /db_xref="GeneID:25769177"

@@ -20,9 +20,9 @@ MSU1_TARGET_BASES="${MSU1_TARGET_BASES:-5400000000}"
 
 case "${SAMPLE}" in
     UA202013)
-        READS="${PROJECT_DATA}/results/read-filtering-screening/reads/UA202013/UA202013.fastq.gz"
+        READS="${PROJECT_DATA}/results/read-filtering-screening/reads/UA202013/p_effusa.fastq.gz"
         METHOD="${METHOD:-tea}"
-        FINAL_NAME="UA202013.fasta.gz"
+        FINAL_NAME="p_effusa.fasta.gz"
         ;;
     MSU1|Quesada_SQIIe_MSU1)
         SAMPLE="MSU1"

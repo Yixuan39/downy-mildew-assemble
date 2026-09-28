@@ -16,7 +16,7 @@ case "${1:-}" in
 esac
 
 if [[ "$run" == UA202013 ]]; then
-    reads="$PROJECT_DATA/results/read-filtering-screening/reads/UA202013/UA202013.fastq.gz"
+    reads="$PROJECT_DATA/results/read-filtering-screening/reads/UA202013/p_effusa.fastq.gz"
 else
     reads="$PROJECT_DATA/results/read-filtering-screening/reads/focal/$run.fastq.gz"
 fi

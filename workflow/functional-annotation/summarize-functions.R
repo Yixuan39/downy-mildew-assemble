@@ -20,7 +20,7 @@ project_root <- path.expand(Sys.getenv("PROJECT_DATA", "~/project_data/downy"))
 base_dir <- file.path(project_root, "results/functional-annotation")
 proteome_dir <- file.path(project_root, "results/repeatmask-gene-prediction/focal/helixer")
 rnaseq_result_dir <- file.path(project_root, "results/rnaseq-support")
-secretome_result_dir <- file.path(project_root, "results/secretome-effectome")
+# Secretome/effectome columns are omitted until the collaborator workflow is available.
 
 isolate_patterns <- c(
   Peronospora_effusa_UA202013_star = "^Peff-",
@@ -70,13 +70,6 @@ format_blastp_description <- function(sseqid, sspecies) {
   )
 }
 
-read_id_set <- function(file) {
-  read_lines(file, progress = FALSE) |>
-    str_trim() |>
-    discard(~ !nzchar(.x)) |>
-    unique()
-}
-
 read_rnaseq_max_tpm <- function(rnaseq_dir, prefix) {
   if (is.na(prefix)) {
     return(tibble(gene_id = character(), max_tpm = double()))
@@ -97,23 +90,9 @@ read_rnaseq_max_tpm <- function(rnaseq_dir, prefix) {
     mutate(max_tpm = if_else(is.infinite(max_tpm), NA_real_, max_tpm))
 }
 
-add_secretome_effectome_flags <- function(annotation_table, isolate) {
-  flag_files <- c(
-    soluble_secretome = file.path(secretome_result_dir, isolate, "soluble_secretome.ids"),
-    effectome = file.path(secretome_result_dir, isolate, "effectome.ids")
-  )
-
-  flag_sets <- map(flag_files, read_id_set)
-  annotation_table |>
-    mutate(
-      soluble_secretome = id %in% flag_sets$soluble_secretome,
-      effectome = id %in% flag_sets$effectome
-    )
-}
-
 build_annotation_support_table <- function(annotation_table) {
   map_dfr(samples, function(isolate) {
-    isolate_table <- annotation_table |>
+    annotation_table |>
       filter(str_detect(id, isolate_patterns[isolate])) |>
       mutate(
         isolate = isolate,
@@ -124,8 +103,6 @@ build_annotation_support_table <- function(annotation_table) {
         by = "gene_id"
       ) |>
       mutate(rna_supported_tpm_ge_2 = !is.na(max_tpm) & max_tpm >= 2)
-
-    add_secretome_effectome_flags(isolate_table, isolate)
   })
 }
 
@@ -240,9 +217,7 @@ annotation_support <- build_annotation_support_table(protein.function.tb) |>
     source,
     Description,
     max_tpm,
-    rna_supported_tpm_ge_2,
-    soluble_secretome,
-    effectome
+    rna_supported_tpm_ge_2
   )
 
 write_tsv(annotation_support, here("data", "annotation_support.tsv"))

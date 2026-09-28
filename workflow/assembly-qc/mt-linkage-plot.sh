@@ -137,6 +137,14 @@ for name in STUDY:
         svg,
     )
     assert n == 1, f"expected 1 label for {name}, patched {n}"
+
+# Highlight the rps10 labels and legend entry, the locus singled out in the manuscript.
+svg, n = re.subn(
+    r'(<text[^>]*)font-weight="normal"([^>]*>rps10(?: \(barcode locus\))?</text>)',
+    r'\1font-weight="bold"\2',
+    svg,
+)
+assert n == 16, f"expected 14 rps10 labels and 2 legend labels, patched {n}"
 open("mt_linkage.svg", "w").write(svg)
 PY2
 
