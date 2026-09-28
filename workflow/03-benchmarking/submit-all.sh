@@ -8,11 +8,11 @@
 # Usage   : bash workflow/03-benchmarking/submit-all.sh
 
 set -euo pipefail
-export REPO_ROOT="${REPO_ROOT:-$(cd ../.. && pwd)}"
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd -- "$SCRIPT_DIR/../.." && pwd)"
 
 # Set BENCHMARK_NODE to the same high-memory node for all arms; jobs run serially.
 : "${BENCHMARK_NODE:?Set BENCHMARK_NODE to a high-memory SLURM node}"
-SCRIPT_DIR="$REPO_ROOT/workflow/03-benchmarking"
 dependency=()
 for sample in UA202013 MSU1; do
     for method in hifiasm hifiasm_blastn tea_no_downsample tea_downsample; do

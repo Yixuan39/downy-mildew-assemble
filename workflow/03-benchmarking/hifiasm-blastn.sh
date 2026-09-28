@@ -12,13 +12,13 @@
 # Usage   : sbatch --export=ALL,SAMPLE=MSU1 workflow/03-benchmarking/hifiasm-blastn.sh
 
 set -euo pipefail
-export REPO_ROOT="${REPO_ROOT:-$(cd ../.. && pwd)}"
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd -- "$SCRIPT_DIR/../.." && pwd)"
 export PROJECT_DATA="${PROJECT_DATA:-$HOME/project_data/downy}"
 export DB_ROOT="${DB_ROOT:-$HOME/db}"
 
 SAMPLE="${SAMPLE:-UA202013}"
 THREADS="${SLURM_CPUS_PER_TASK:-32}"
-SCRIPT_DIR="$REPO_ROOT/workflow/03-benchmarking"
 TAXIDS_FILE="${TAXIDS_FILE:-$REPO_ROOT/data/oomycete_taxids.txt}"
 
 case "${SAMPLE}" in

@@ -4,22 +4,22 @@ output: html_document
 ---
 
 Table 1 uses the mitochondrial-filtered nuclear assemblies after the SC1982 gap split.
-Run stages 04 and 05 first. Rendering this report does not modify assemblies.
+Run assembly QC first. Rendering this report does not modify assemblies.
 
 ```{r setup, include=FALSE}
 library(here)
 library(readr)
 library(dplyr)
 quality_file <- here("data", "qc_final_assemblies", "quality_final_assemblies.tsv")
-if (!file.exists(quality_file)) stop("Run workflow/05-assembly-qc/qc-final-assemblies.sh first")
+if (!file.exists(quality_file)) stop("Run workflow/assembly-qc/qc-final-assemblies.sh first")
 quality <- read_tsv(quality_file, show_col_types = FALSE)
 reference <- read_tsv(here("data", "qc_published_genomes", "quality_published_genomes.tsv"), show_col_types = FALSE) |>
   filter(file == "Peronospora_effusa_UA202013")
 stopifnot(nrow(quality) == 4, nrow(reference) == 1, !anyDuplicated(quality$file))
-# The current manuscript revision uses the 475-contig SC1982 assembly.
+# The finalized SC1982 assembly excludes two NCBI-flagged contigs.
 sc1982 <- filter(quality, file == "Pseudoperonospora_cubensis_SC1982")
-stopifnot(nrow(sc1982) == 1, sc1982[["# contigs (>= 0 bp)"]] == 475,
-          sc1982[["Total length (>= 0 bp)"]] == 103498600)
+stopifnot(nrow(sc1982) == 1, sc1982[["# contigs (>= 0 bp)"]] == 473,
+          sc1982[["Total length (>= 0 bp)"]] == 102862537)
 table1 <- bind_rows(quality, reference) |>
   transmute(Assembly = file, `Size (Mb)` = `Total length` / 1e6,
     Contigs = `# contigs`, `N50 (Mb)` = N50 / 1e6, L50,

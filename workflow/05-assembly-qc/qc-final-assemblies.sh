@@ -8,13 +8,13 @@
 # Runs on : local or cluster; Nextflow submits SLURM jobs with Apptainer
 # Usage   : bash workflow/05-assembly-qc/qc-final-assemblies.sh
 set -euo pipefail
-export REPO_ROOT="${REPO_ROOT:-$(cd ../.. && pwd)}"
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd -- "$SCRIPT_DIR/../.." && pwd)"
 export PROJECT_DATA="${PROJECT_DATA:-$HOME/project_data/downy}"
 export DB_ROOT="${DB_ROOT:-$HOME/db}"
 export TARGET_ASM_DIR="${TARGET_ASM_DIR:-$HOME/software/targetasm}"
 export CONTAINER_RUNTIME="${CONTAINER_RUNTIME:-$(command -v apptainer >/dev/null 2>&1 && echo apptainer || echo singularity)}"
 
-SCRIPT_DIR="$REPO_ROOT/workflow/05-assembly-qc"
 REPO_DIR="$REPO_ROOT"
 GENOME_DIR="${PROJECT_DATA}/results/assembly-qc/nuclear"
 QC_DIR="${REPO_DIR}/data/qc_final_assemblies"
