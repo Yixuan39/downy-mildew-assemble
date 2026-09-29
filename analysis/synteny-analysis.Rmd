@@ -69,19 +69,26 @@ knitr::kable(
 ```
 
 ```{r synteny-contigs-tree-riparian, fig.width=7.2, fig.height=6.7}
+# Manuscript species order, top to bottom; the tree is rooted on the Pythium outgroup.
+species_order <- c(
+  "Phytophthora_plurivora_TJ71", "Phytophthora_capsici_BYA5", "Phytophthora_infestans_1306",
+  "Phytophthora_sojae_JS2", "Phytophthora_ramorum_Pr_102", "Phytophthora_agathidicida_3770",
+  "Peronospora_destructor_Pd_K2019", "Peronospora_effusa_UA202013_star", "Peronospora_effusa_UA202013",
+  "Pseudoperonospora_cubensis_MSU1", "Pseudoperonospora_cubensis_SC1982", "Pseudoperonospora_humuli_OR502AA",
+  "Bremia_lactucae_SF5", "Plasmopara_halstedii_710", "Pythium_oligandrum_P_O1"
+)
 tr <- read.tree(file.path(wd, "results", "SpeciesTree_rooted.txt"))
-stopifnot(setequal(tr$tip.label, gsParam$genomeIDs))
+stopifnot(setequal(tr$tip.label, gsParam$genomeIDs), setequal(species_order, gsParam$genomeIDs))
+tr <- rotateConstr(root(tr, outgroup = "Pythium_oligandrum_P_O1", resolve.root = TRUE), rev(species_order))
 tree <- ggtree(tr)
-# Rotate clades so related genomes sit beside each other in the riparian plot.
 for (tips in list(
-  c("Peronospora_effusa_UA202013_star", "Peronospora_effusa_UA202013", "Peronospora_destructor_Pd_K2019"),
-  c("Phytophthora_sojae_JS2", "Phytophthora_infestans_1306"),
-  c("Phytophthora_sojae_JS2", "Phytophthora_agathidicida_3770"),
-  c("Phytophthora_plurivora_TJ71", "Phytophthora_infestans_1306")
+  c("Peronospora_destructor_Pd_K2019", "Peronospora_effusa_UA202013"),
+  c("Peronospora_effusa_UA202013_star", "Peronospora_effusa_UA202013")
 )) tree <- ggtree::rotate(tree, getMRCA(tr, tips))
 
 tip_data <- tree$data[tree$data$isTip, ]
-tip_ids <- tip_data$label[order(tip_data$y)]
+tip_ids <- tip_data$label[order(tip_data$y)]  # bottom to top
+stopifnot(identical(tip_ids, rev(species_order)))
 y_limits <- c(0.5, length(tip_ids) + 0.5)
 display_labels <- sub("_star$", "*", tip_ids)
 tip_labels <- as.expression(Map(function(id, label) {
