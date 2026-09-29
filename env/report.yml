@@ -1,6 +1,6 @@
 name: downy-report
-# R Markdown reports and GENESPACE. GENESPACE itself is installed from GitHub:
-#   Rscript -e 'remotes::install_github("jtlovell/GENESPACE@7561036be821e333c1dfb52461ccec7222e95582", upgrade = "never")  # v1.3.1'
+# R Markdown reports and GENESPACE. GENESPACE v1.3.1 is installed from GitHub:
+#   Rscript -e 'remotes::install_github("jtlovell/GENESPACE@7561036be821e333c1dfb52461ccec7222e95582", upgrade = "never")'
 channels:
   - conda-forge
   - bioconda
@@ -13,7 +13,7 @@ dependencies:
   - r-gt
   - r-ggh4x
   - r-patchwork
-  - r-data.table
+  - r-data.table=1.16.4  # >=1.17 errors on empty fread(cmd=) output, which GENESPACE's MCScanX parser relies on
   - r-scales
   - r-svglite
   - r-ragg
