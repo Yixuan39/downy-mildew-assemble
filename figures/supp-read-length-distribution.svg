@@ -567,7 +567,7 @@
 </defs>
 <g clip-path='url(#cpMzguMDh8NDE2LjQzfDEzNS4xM3wxNDUuOTY=)'>
 <rect x='38.08' y='135.13' width='378.34' height='10.82' style='stroke-width: 0.68; stroke: #333333; fill: #D9D9D9;' />
-<text x='227.25' y='142.58' text-anchor='middle' style='font-size: 5.60px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='58.19px' lengthAdjust='spacingAndGlyphs'>P. humuli (OR502AA)</text>
+<text x='227.25' y='142.58' text-anchor='middle' style='font-size: 5.60px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='58.20px' lengthAdjust='spacingAndGlyphs'>P. humuli (OR502AA)</text>
 </g>
 <g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHwyODMuNDY=)'>
 </g>
@@ -640,14 +640,14 @@
 <polyline points='36.34,240.48 38.08,240.48 ' style='stroke-width: 0.68; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='36.34,230.25 38.08,230.25 ' style='stroke-width: 0.68; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='36.34,220.01 38.08,220.01 ' style='stroke-width: 0.68; stroke: #333333; stroke-linecap: butt;' />
-<text x='227.25' y='278.52' text-anchor='middle' style='font-size: 7.00px; font-family: "DejaVu Sans";' textLength='58.67px' lengthAdjust='spacingAndGlyphs'>Read length (bp)</text>
-<text transform='translate(8.59,138.80) rotate(-90)' text-anchor='middle' style='font-size: 7.00px; font-family: "DejaVu Sans";' textLength='39.55px' lengthAdjust='spacingAndGlyphs'>Read count</text>
+<text x='227.25' y='278.52' text-anchor='middle' style='font-size: 7.00px; font-family: "DejaVu Sans";' textLength='58.69px' lengthAdjust='spacingAndGlyphs'>Read length (bp)</text>
+<text transform='translate(8.59,138.80) rotate(-90)' text-anchor='middle' style='font-size: 7.00px; font-family: "DejaVu Sans";' textLength='39.56px' lengthAdjust='spacingAndGlyphs'>Read count</text>
 <rect x='423.40' y='118.03' width='83.35' height='41.53' style='stroke-width: 0.68; stroke: none; fill: #FFFFFF;' />
 <rect x='426.89' y='121.52' width='17.28' height='17.28' style='stroke-width: 0.68; stroke: none; fill: #FFFFFF;' />
 <rect x='427.34' y='121.97' width='16.38' height='16.38' style='stroke-width: 0.68; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #999999;' />
 <rect x='426.89' y='138.80' width='17.28' height='17.28' style='stroke-width: 0.68; stroke: none; fill: #FFFFFF;' />
 <rect x='427.34' y='139.25' width='16.38' height='16.38' style='stroke-width: 0.68; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #000000;' />
-<text x='447.65' y='132.20' style='font-size: 5.60px; font-family: "DejaVu Sans";' textLength='42.02px' lengthAdjust='spacingAndGlyphs'>Non-Oomycota</text>
+<text x='447.65' y='132.20' style='font-size: 5.60px; font-family: "DejaVu Sans";' textLength='42.03px' lengthAdjust='spacingAndGlyphs'>Non-Oomycota</text>
 <text x='447.65' y='149.48' style='font-size: 5.60px; font-family: "DejaVu Sans";' textLength='55.61px' lengthAdjust='spacingAndGlyphs'>Oomycota-assigned</text>
 </g>
 </g>
