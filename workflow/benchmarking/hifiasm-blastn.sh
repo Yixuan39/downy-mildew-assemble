@@ -8,7 +8,6 @@ set -euo pipefail
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd -- "$SCRIPT_DIR/../.." && pwd)"
 export PROJECT_DATA="${PROJECT_DATA:-$HOME/project_data/downy}"
-export DB_ROOT="${DB_ROOT:-$HOME/db}"
 
 SAMPLE="${SAMPLE:-UA202013}"
 THREADS="$SLURM_CPUS_PER_TASK"
@@ -78,7 +77,7 @@ run_step "gfa_to_fasta" \
 run_step "blastn_contigs" \
     blastn \
         -query "${OUTDIR}/${SAMPLE}_contigs.fasta" \
-        -db "${NT_DB:-$DB_ROOT/nt/nt}" \
+        -db "${NT_DB:-/home1/ncbi/July2023/nt/nt}" \
         -outfmt "6 qseqid sseqid pident length qlen slen evalue staxids" \
         -max_target_seqs 1 \
         -max_hsps 1 \
