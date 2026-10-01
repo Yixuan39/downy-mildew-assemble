@@ -6,7 +6,6 @@ project_root <- path.expand(Sys.getenv("PROJECT_DATA", "~/project_data/downy"))
 
 samples <- data.frame(
   run = c("UA202013", "Quesada_SQIIe_MSU1", "Quesada_SQIIe_SC1982", "Quesada_SQIIe_Phumuli"),
-  fasta = c("p_effusa", "Quesada_SQIIe_MSU1", "Quesada_SQIIe_SC1982", "Quesada_SQIIe_Phumuli"),
   prefix = c("Peff-26", "Pcub-MSU1", "Pcub-SC1982", "Phum-OR502AA"),
   assembly = c("Peronospora_effusa_UA202013_star", "Pseudoperonospora_cubensis_MSU1",
                "Pseudoperonospora_cubensis_SC1982", "Pseudoperonospora_humuli_OR502AA")
@@ -16,7 +15,7 @@ renamed <- file.path(root, "renamed")
 mito <- file.path(root, "mitochondrial")
 clean <- file.path(root, "nuclear-presplit")
 reference <- file.path(project_root, "inputs/reference-mitochondria", "KT072718.1.fna")
-inputs <- file.path(project_root, "results/assembly", samples$run, paste0(samples$fasta, ".fasta.gz"))
+inputs <- file.path(project_root, "results/assembly", samples$run, paste0(samples$run, ".fasta.gz"))
 outputs <- file.path(clean, paste0(samples$assembly, ".fasta.gz"))
 stopifnot(file.exists(reference), all(file.exists(inputs)))
 if (any(file.exists(outputs))) stop("Cleaned assemblies already exist; use a fresh results tree to rebuild.")

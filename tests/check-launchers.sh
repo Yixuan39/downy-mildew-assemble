@@ -20,6 +20,7 @@ for sample in MSU1 SC1982 OR502AA UA202013; do
     esac
     output="$(cd / && bash "$repo/workflow/assembly/run-targetasm.sh" "$sample")"
     [[ "$output" == *"$work/data/results/assembly/$run"* ]]
+    [[ "$sample" != UA202013 || "$output" == *"reads/UA202013/UA202013.fastq.gz"* ]]
     if [[ -n "$target" ]]; then [[ "$output" == *"$target"* ]]; else [[ "$output" != *"--target_bases"* ]]; fi
 done
 
