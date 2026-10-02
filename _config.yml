@@ -1,0 +1,2 @@
+exclude:
+  - data/qc_final_assemblies/fasta_inputs/
