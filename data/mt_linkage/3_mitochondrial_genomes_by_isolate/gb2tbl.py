@@ -3,7 +3,6 @@ from Bio import SeqIO
 files = {
     "Pseudoperonospora_cubensis_SC1982_mito.gb": "SC1982_mito",
     "Pseudoperonospora_cubensis_MSU1_mito.gb": "MSU1_mito",
-    "Pseudoperonospora_humuli_OR502AA_mito.gb": "OR502AA_mito",
 }
 
 drop = {"locus_tag", "protein_id", "db_xref", "gene_xref",
