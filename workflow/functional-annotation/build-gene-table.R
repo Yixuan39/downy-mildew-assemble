@@ -104,27 +104,8 @@ build_sheet <- function(assembly, rnaseq) {
   sheet
 }
 
-readme <- tribble(
-  ~column, ~description,
-  "gene_id / protein_id", "Helixer gene and protein (transcript) IDs; one protein per gene",
-  "contig, start, end, strand", "gene coordinates (1-based, inclusive) on the nuclear assembly",
-  "protein_length_aa", "protein length without the stop codon",
-  "annotation_source", "eggnog, interproscan, blastp or unannotated: first source with a hit, in that order (E < 1e-10; blastp also >= 50% subject coverage)",
-  "functional_description", "description from that source (workflow/functional-annotation/summarize-functions.R)",
-  "TPM_<sample>", "nf-core/rnaseq Salmon gene TPM for each sample (dpi = days post inoculation)",
-  "max_TPM, RNA_supported_TPM_ge_2", "highest TPM across samples; RNA-seq support = TPM >= 2 in at least one sample",
-  "SignalP6_*", "SignalP 6.0 (eukarya, fast) prediction, signal-peptide probability and cleavage site (last signal-peptide residue), all proteins",
-  "SignalP_cleavage_10_40", "signal peptide with cleavage site between residues 10 and 40; these proteins go to TargetP",
-  "TargetP2_*", "TargetP 2.0 (non-plant); proteins predicted mTP are removed",
-  "DeepTMHMM_*", "DeepTMHMM 1.0 topology class; proteins with a transmembrane helix after the cleavage site are removed",
-  "NetGPI_*", "NetGPI 1.1 GPI-anchor prediction; GPI-anchored proteins are removed",
-  "soluble_secretome", "passed all secretome filters (SignalP 10-40, not mTP, no TM after cleavage, not GPI-anchored)",
-  "EffectorP3_*", "EffectorP 3.0 prediction and class probabilities for the soluble secretome",
-  "not tested", "the protein did not pass the previous filter, so this tool was not run on it"
-)
-
 sheets <- setNames(map2(isolates$assembly, isolates$rnaseq, build_sheet), isolates$sheet)
-write_xlsx(c(list(README = readme), sheets), here("data", "gene_annotation_summary.xlsx"))
+write_xlsx(sheets, here("data", "gene_annotation_summary.xlsx"))
 walk2(names(sheets), sheets, ~ message(.x, ": ", nrow(.y), " genes, ", sum(.y$soluble_secretome == "yes"),
                                        " soluble secretome, ", sum(.y$EffectorP3_prediction %in% c("Cytoplasmic effector",
                                        "Apoplastic effector", "Apoplastic/cytoplasmic effector", "Cytoplasmic/apoplastic effector")),
