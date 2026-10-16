@@ -89,13 +89,22 @@ for (tips in list(
 tip_data <- tree$data[tree$data$isTip, ]
 tip_ids <- tip_data$label[order(tip_data$y)]  # bottom to top
 stopifnot(identical(tip_ids, rev(species_order)))
-y_limits <- c(0.5, length(tip_ids) + 0.5)
-display_labels <- sub("_star$", "*", tip_ids)
-tip_labels <- as.expression(Map(function(id, label) {
-  if (id %in% focal_assemblies) bquote(bold(.(label))) else label
-}, tip_ids, display_labels))
+y_limits <- c(-0.5, length(tip_ids) + 0.5)  # room below the bottom genome for the scale bars
+# "Genus species" in italics and the strain as published (underscores to hyphens); focal assemblies in bold
+tip_labels <- as.expression(lapply(tip_ids, function(id) {
+  parts <- strsplit(sub("_star$", "*", id), "_")[[1]]
+  species <- paste(parts[1:2], collapse = " ")
+  strain <- paste(parts[-(1:2)], collapse = "-")
+  if (id %in% focal_assemblies) bquote(bolditalic(.(species)) ~ bold(.(strain))) else bquote(italic(.(species)) ~ .(strain))
+}))
+
+# PNG/TIFF (ragg) need font files and the compute nodes have no italic sans, so map "Helvetica" to the
+# Helvetica-metric Liberation Sans bundled with fontquiver; PDF and SVG use Helvetica directly.
+liberation <- fontquiver::font_families("Liberation")$sans
+systemfonts::register_font("Helvetica", liberation$plain$ttf, liberation$bold$ttf, liberation$italic$ttf, liberation$bolditalic$ttf)
 
 aligned_tree <- tree +
+  geom_treescale(x = max(tree$data$x) / 2 - 0.05, y = 0, width = 0.1, offset = -0.25, fontsize = 2, family = "Helvetica") +
   scale_y_continuous(limits = y_limits, expand = c(0, 0)) +
   theme(plot.margin = margin(t = 10, r = 0, b = 10, l = 10))
 
@@ -107,12 +116,20 @@ riparian <- plot_riparian(
   useRegions = TRUE,
   xlabel = "Contigs scaled by gene rank order"
 )
-aligned_synteny <- riparian$plotData$ggplotObj +
+# GENESPACE centres its gene-count scale bar (the layers whose data has a `line` column) above the top genome;
+# move it below the bottom one as a plain bar with the tree scale's font
+rip <- riparian$plotData$ggplotObj
+for (l in rip$layers[vapply(rip$layers, function(l) "line" %in% names(l$data), logical(1))]) {
+  l$data <- transform(subset(l$data, line == "mid"), y = 0, yend = 0)
+  if (inherits(l$geom, "GeomText")) l$aes_params[c("size", "family")] <- list(2, "Helvetica") else l$aes_params$linewidth <- 0.5
+}
+aligned_synteny <- rip +
   scale_y_continuous(limits = y_limits, expand = c(0, 0), breaks = seq_along(tip_ids), labels = tip_labels) +
   ylab(NULL) +
   theme(plot.margin = margin(t = 10, r = 10, b = 10, l = 0), axis.text.y = element_text(color = "black"))
 
-synteny_contigs_plot <- aligned_tree + aligned_synteny + plot_layout(widths = c(1, 4))
+synteny_contigs_plot <- aligned_tree + aligned_synteny + plot_layout(widths = c(1, 4)) &
+  theme(text = element_text(family = "Helvetica"))
 out <- here("figures", "synteny-contigs-tree-riparian")
 ggsave(paste0(out, ".svg"), synteny_contigs_plot, device = svglite::svglite, width = 180, height = 170, units = "mm")
 ggsave(paste0(out, ".pdf"), synteny_contigs_plot, device = grDevices::pdf, width = 180, height = 170, units = "mm", family = "Helvetica", useDingbats = FALSE)

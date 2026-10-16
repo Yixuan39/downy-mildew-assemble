@@ -13,6 +13,7 @@
 | [repeatmask-gene-prediction/](repeatmask-gene-prediction/) | nuclear FASTA → masked FASTA and Helixer genes |
 | [rnaseq-support/](rnaseq-support/) | RNA-seq reads and gene models → transcript support |
 | [functional-annotation/](functional-annotation/) | Helixer proteins → functional annotation table |
+| [secretome-effectome/](secretome-effectome/) | Helixer proteins → soluble secretome and EffectorP candidate effectors |
 | [synteny-orthology/](synteny-orthology/) | Helixer annotations → OrthoFinder orthogroups and GENESPACE synteny |
 
 Read processing precedes assembly; assembly QC supplies the finalized FASTA used by downstream analyses. Benchmarking runs from the filtered reads.

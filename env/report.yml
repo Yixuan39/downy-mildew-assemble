@@ -23,6 +23,7 @@ dependencies:
   - r-r.utils
   - r-igraph
   - r-remotes
+  - r-fontquiver
   - bioconductor-ggtree
   - bioconductor-rtracklayer
   - bioconductor-biostrings
