@@ -11,7 +11,7 @@ RESULT_DIR="$PROJECT_DATA/results/functional-annotation/eggnog-mapper"
 FILES=("$INPUT_DIR"/*.faa)
 FILE="${FILES[$SLURM_ARRAY_TASK_ID]}"
 [[ -s "$FILE" ]] || { echo "Missing input: $FILE" >&2; exit 1; }
-THREADS=24
+THREADS="${SLURM_CPUS_PER_TASK:-24}"
 
 BASENAME=$(basename "$FILE")  
 BASENAME=${BASENAME%.faa}

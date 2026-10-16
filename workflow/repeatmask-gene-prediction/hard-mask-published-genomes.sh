@@ -7,6 +7,8 @@ set -euo pipefail
 export PROJECT_DATA="${PROJECT_DATA:-$HOME/project_data/downy}"
 
 THREADS=$SLURM_CPUS_PER_TASK
+# RepeatModeler samples the genome at random; one fixed seed for every genome makes the libraries reproducible.
+RM_SEED="${RM_SEED:-12345}"
 INPUT_DIR=${PROJECT_DATA}/inputs/reference-genomes
 RESULT_DIR=${PROJECT_DATA}/results/repeatmask-gene-prediction/references/hardmasked
 FILES=("$INPUT_DIR"/*.fna.gz)
@@ -27,6 +29,7 @@ BuildDatabase \
 
 RepeatModeler \
   -threads "$THREADS" \
+  -srand "$RM_SEED" \
   -database "${TMP_DIR}/db" > "${TMP_DIR}/${BASENAME}.out"
 
 RepeatMasker \

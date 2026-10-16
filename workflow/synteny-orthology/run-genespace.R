@@ -21,5 +21,5 @@ if (!dir.exists(file.path(wd, "peptide"))) {
     genespaceWd = wd
   )
 }
-gpar <- init_genespace(wd = wd, nCores = 10, dotplots = "never", path2mcscanx = path2mcscanx)
+gpar <- init_genespace(wd = wd, nCores = as.integer(Sys.getenv("SLURM_CPUS_PER_TASK", "10")), dotplots = "never", path2mcscanx = path2mcscanx)
 run_genespace(gpar)
