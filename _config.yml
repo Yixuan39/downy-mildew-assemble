@@ -1,2 +1,4 @@
 exclude:
   - data/qc_final_assemblies/fasta_inputs/
+  # R Markdown sources are rendered separately; Pages serves their HTML reports.
+  - "**/*.Rmd"
