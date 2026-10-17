@@ -86,3 +86,4 @@ __pycache__/
 *.pyc
 data/benchmark_qc/fasta_inputs_all/
 data/qc_published_genomes/fasta_inputs/
+data/qc_final_assemblies/fasta_inputs/
