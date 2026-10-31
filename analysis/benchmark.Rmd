@@ -203,10 +203,8 @@ method_benchmark |>
 
 ```{r method-matrix-plot, echo=FALSE, fig.width=7.2, fig.height=4.7}
 method_matrix_plot <- make_metric_matrix_plot(method_benchmark)
-out <- here("figures", "benchmark-method-matrix")
-ggsave(paste0(out, ".svg"), method_matrix_plot, device = svglite::svglite, width = 180, height = 120, units = "mm")
+out <- here("figures", "Figure_4")
 ggsave(paste0(out, ".pdf"), method_matrix_plot, device = grDevices::pdf, width = 180, height = 120, units = "mm", family = "Helvetica", useDingbats = FALSE)
-ggsave(paste0(out, ".tiff"), method_matrix_plot, device = ragg::agg_tiff, width = 180, height = 120, units = "mm", dpi = 600, compression = "lzw")
 ggsave(paste0(out, ".png"), method_matrix_plot, device = ragg::agg_png, width = 180, height = 120, units = "mm", dpi = 600)
 method_matrix_plot
 ```
@@ -237,10 +235,8 @@ targetasm_sensitivity |>
 
 ```{r targetasm-sensitivity-plot, echo=FALSE, fig.width=7.2, fig.height=3.0}
 targetasm_sensitivity_plot <- make_metric_matrix_plot(targetasm_sensitivity, rows = vars(), x_text_angle = 0)
-out <- here("figures", "benchmark-targetasm-sensitivity")
-ggsave(paste0(out, ".svg"), targetasm_sensitivity_plot, device = svglite::svglite, width = 180, height = 75, units = "mm")
+out <- here("figures", "Figure_5")
 ggsave(paste0(out, ".pdf"), targetasm_sensitivity_plot, device = grDevices::pdf, width = 180, height = 75, units = "mm", family = "Helvetica", useDingbats = FALSE)
-ggsave(paste0(out, ".tiff"), targetasm_sensitivity_plot, device = ragg::agg_tiff, width = 180, height = 75, units = "mm", dpi = 600, compression = "lzw")
 ggsave(paste0(out, ".png"), targetasm_sensitivity_plot, device = ragg::agg_png, width = 180, height = 75, units = "mm", dpi = 600)
 targetasm_sensitivity_plot
 ```

@@ -381,5 +381,5 @@ dikarya fungi. *Molecular Phylogenetics and Evolution*, **150**, 106850.
 \clearpage
 
 ```{r synteny, out.width='100%', fig.pos='p', fig.cap="Comparative synteny and species relationships across 15 oomycete genomes. The left panel shows the OrthoFinder species tree generated from predicted proteins, and the right panel shows the GENESPACE riparian plot of clustered syntenic regions using the published \\textit{P. effusa} UA202013 genome as the reference. Contigs are scaled by gene rank order, with the scale bar representing 2,000 gene positions. The three newly sequenced and assembled \\textit{Pseudoperonospora} isolates and \\textit{P. effusa} UA202013\\textsuperscript{*} are shown in bold. The asterisk denotes our targetasm-derived genome reassembled from the published UA202013 read set for workflow comparison. \\textit{P. effusa} UA202013\\textsuperscript{*} grouped with the published reference, and the three focal assemblies retained broad syntenic correspondence with related downy mildew genomes."}
-knitr::include_graphics("../figures/synteny-contigs-tree-riparian.png", auto_pdf = FALSE)
+knitr::include_graphics("../figures/Figure_7.png", auto_pdf = FALSE)
 ```

@@ -15,7 +15,6 @@ dependencies:
   - r-patchwork
   - r-data.table=1.16.4  # >=1.17 errors on empty fread(cmd=) output, which GENESPACE's MCScanX parser relies on
   - r-scales
-  - r-svglite
   - r-ragg
   - r-ggrastr
   - r-ape

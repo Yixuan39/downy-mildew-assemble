@@ -90,3 +90,10 @@ data/qc_final_assemblies/fasta_inputs/
 
 # Local gene-model investigation
 /.gene-model-evidence/
+/.local-figures/
+
+# Figure exports: retain PDF and PNG
+/figures/**/*.svg
+/figures/**/*.tif
+/figures/**/*.tiff
+/data/mt_linkage/mt_linkage.svg

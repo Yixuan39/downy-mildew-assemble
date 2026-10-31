@@ -153,8 +153,10 @@ python -c "import cairosvg; cairosvg.svg2png(url='mt_linkage.svg', write_to='mt_
 
 echo "-> $OUT/mt_linkage.svg (+ .png)"
 
-# 5. mirror the final figure + intermediates into the repo, which is what's actually committed
+# 5. mirror the PDF/PNG figure + intermediates into the repo
 mkdir -p "$REPO_ROOT/data/mt_linkage"
-cp mt_linkage.svg mt_linkage.pdf mt_linkage.png "$REPO_ROOT/data/mt_linkage/"
+mkdir -p "$REPO_ROOT/figures"
+cp mt_linkage.pdf "$REPO_ROOT/figures/Figure_6.pdf"
+cp mt_linkage.png "$REPO_ROOT/figures/Figure_6.png"
 cp -a split blast "$REPO_ROOT/data/mt_linkage/"
-echo "-> mirrored into $REPO_ROOT/data/mt_linkage/ (git add + commit there to update the manuscript figure)"
+echo "-> Figure_6.pdf and Figure_6.png in $REPO_ROOT/figures/; intermediate tables in data/mt_linkage/"

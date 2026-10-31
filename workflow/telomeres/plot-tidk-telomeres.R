@@ -36,4 +36,5 @@ p <- ggplot(plot_data, aes(position_Mb, count)) +
   theme_bw() +
   labs(x = "Position on contig (Mb)", y = "TTTAGGG / CCCTAAA count")
 
-ggsave(file.path(fig_out, "tidk_telomere_profiles_top20_contigs.pdf"), p, width = 7, height = 60, limitsize = FALSE)
+ggsave(file.path(fig_out, "Figure_S1.pdf"), p, width = 7, height = 60, limitsize = FALSE)
+ggsave(file.path(fig_out, "Figure_S1.png"), p, width = 7, height = 60, dpi = 150, limitsize = FALSE)

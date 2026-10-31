@@ -143,10 +143,8 @@ aligned_synteny <- rip +
 
 synteny_contigs_plot <- aligned_tree + aligned_synteny + plot_layout(widths = c(1, 4)) &
   theme(text = element_text(family = "Helvetica"))
-out <- here("figures", "synteny-contigs-tree-riparian")
-ggsave(paste0(out, ".svg"), synteny_contigs_plot, device = svglite::svglite, width = 180, height = 170, units = "mm")
+out <- here("figures", "Figure_7")
 ggsave(paste0(out, ".pdf"), synteny_contigs_plot, device = grDevices::pdf, width = 180, height = 170, units = "mm", family = "Helvetica", useDingbats = FALSE)
-ggsave(paste0(out, ".tiff"), synteny_contigs_plot, device = ragg::agg_tiff, width = 180, height = 170, units = "mm", dpi = 600, compression = "lzw")
 ggsave(paste0(out, ".png"), synteny_contigs_plot, device = ragg::agg_png, width = 180, height = 170, units = "mm", dpi = 600)
 synteny_contigs_plot
 ```

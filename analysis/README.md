@@ -2,6 +2,8 @@
 
 The R Markdown reports read `data/` and `$PROJECT_DATA/results/` and write the manuscript tables in `data/` and figures in `figures/`. Render them with the `downy-report` environment (`env/report.yml`).
 
+Only figures cited in the manuscript are exported to [figures/](../figures/README.md), using their manuscript numbers and PDF/PNG formats. Other plots remain in the HTML reports. Use the HTML links below to view the reports; GitHub Pages serves the committed HTML files without running the R Markdown analyses.
+
 | Analysis | Source | Rendered report |
 |---|---|---|
 | Read distribution and taxonomy | [Rmd](read-distribution.Rmd) | [HTML](https://yixuan39.github.io/downy-mildew-assemble/analysis/read-distribution.html) |

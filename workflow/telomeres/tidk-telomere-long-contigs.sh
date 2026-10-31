@@ -21,7 +21,7 @@ done
 mamba run -n R Rscript "$SCRIPT_DIR/plot-tidk-telomeres.R"
 
 # mirror the per-sample output + figure into the repo, which is what's actually committed
-mkdir -p "$REPO_ROOT/data/tidk_telomeres" "$REPO_ROOT/figures/tidk_telomeres"
+mkdir -p "$REPO_ROOT/data/tidk_telomeres" "$REPO_ROOT/figures"
 for dir in "${out}"/*/; do
     sample="$(basename "${dir}")"
     [[ "${sample}" == figures ]] && continue
@@ -32,5 +32,5 @@ for dir in "${out}"/*/; do
         cp "${dir}/${sample}.TTAGGG_telomeric_repeat_windows.tsv" "$REPO_ROOT/data/tidk_telomeres/${sample}/"
     fi
 done
-cp "${out}/figures/tidk_telomere_profiles_top20_contigs.pdf" "$REPO_ROOT/figures/tidk_telomeres/"
-echo "-> mirrored into $REPO_ROOT/data/tidk_telomeres/ and figures/tidk_telomeres/ (git add + commit there to update the manuscript figure)"
+cp "${out}/figures/Figure_S1.pdf" "${out}/figures/Figure_S1.png" "$REPO_ROOT/figures/"
+echo "-> mirrored into $REPO_ROOT/data/tidk_telomeres/ and figures/Figure_S1.{pdf,png}"

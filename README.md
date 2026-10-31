@@ -2,6 +2,8 @@
 
 Code, derived data and figures for the manuscript *Contamination-aware genome assembly enables high-quality genomes of downy mildew pathogens*. The assemblies were generated with [targetasm](https://github.com/Yixuan39/targetasm).
 
+Browse the [six analysis reports online](https://yixuan39.github.io/downy-mildew-assemble/).
+
 | Isolate | Species |
 |---|---|
 | MSU1 | *Pseudoperonospora cubensis* |
@@ -12,7 +14,7 @@ Code, derived data and figures for the manuscript *Contamination-aware genome as
 - [workflow/](workflow/README.md): scripts from read processing through assembly, annotation and comparison
 - [analysis/](analysis/README.md): manuscript analyses
 - [data/](data/): derived tables and evidence
-- [figures/](figures/): manuscript figures
+- [figures/](figures/README.md): manuscript figures by Figure number
 - [env/](env/): tool environments
 - [ncbi-response/](ncbi-response/README.md): SC1982 contamination review
 

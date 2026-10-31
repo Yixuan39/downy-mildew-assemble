@@ -177,10 +177,5 @@ support_plot <- support_summary |>
     plot.margin = margin(3, 8, 3, 3)
   )
 
-out <- here("figures", "gene-annotation-rnaseq-support")
-ggsave(paste0(out, ".svg"), support_plot, device = svglite::svglite, width = 180, height = 75, units = "mm")
-ggsave(paste0(out, ".pdf"), support_plot, device = grDevices::pdf, width = 180, height = 75, units = "mm", family = "Helvetica", useDingbats = FALSE)
-ggsave(paste0(out, ".tiff"), support_plot, device = ragg::agg_tiff, width = 180, height = 75, units = "mm", dpi = 600, compression = "lzw")
-ggsave(paste0(out, ".png"), support_plot, device = ragg::agg_png, width = 180, height = 75, units = "mm", dpi = 600)
 support_plot
 ```
