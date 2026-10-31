@@ -6,7 +6,8 @@ library(ragp)
 project_data <- Sys.getenv("PROJECT_DATA", file.path(Sys.getenv("HOME"), "project_data/downy"))
 assemblies <- c("Pseudoperonospora_cubensis_MSU1",
                 "Pseudoperonospora_cubensis_SC1982",
-                "Pseudoperonospora_humuli_OR502AA")
+                "Pseudoperonospora_humuli_OR502AA",
+                "Peronospora_effusa_UA202013_star")
 
 for (asm in assemblies) {
   out <- file.path(project_data, "results/secretome-effectome", asm)

@@ -25,10 +25,11 @@ isolates <- tribble(
 ) |>
   mutate(label = factor(label, levels = label))
 
+# Shared by both Figure 2 panels: Okabe-Ito colors with dark grey for unclassified reads.
 taxon_colors <- c(
-  Oomycota = "#000000", Streptophyta = "#0072B2", Pseudomonadota = "#D55E00",
-  Bacteroidota = "#009E73", Ascomycota = "#CC79A7", Chordata = "#E69F00",
-  unclassified = "#56B4E9", Other = "#999999"
+  Oomycota = "#D55E00", Streptophyta = "#0072B2", Pseudomonadota = "#E69F00",
+  Bacteroidota = "#009E73", Ascomycota = "#CC79A7", Chordata = "#F0E442",
+  unclassified = "#666666", Other = "#56B4E9"
 )
 
 read_kreport <- function(file) {
@@ -114,6 +115,9 @@ written to `data/blobplot-category-summary-by-isolate.tsv`.
 tax_bar <- kreports |>
   filter(taxRank %in% c("U", "P")) |>
   mutate(taxon = if_else(percentage < 5, "Other", clean_taxon(name))) |>
+  # Draw each category as one rectangle to avoid seams between collapsed phyla.
+  group_by(label, taxon) |>
+  summarise(percentage = sum(percentage), .groups = "drop") |>
   ggplot() +
   geom_col(aes(x = percentage, y = label, fill = taxon), position = "fill") +
   scale_x_continuous(labels = scales::percent) +

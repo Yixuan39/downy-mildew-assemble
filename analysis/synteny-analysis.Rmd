@@ -10,7 +10,6 @@ library(ggplot2)
 library(ggtree)
 library(patchwork)
 library(here)
-theme_set(theme_bw())
 knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 
 # Completed GENESPACE/OrthoFinder run from workflow/synteny-orthology/.
@@ -108,11 +107,25 @@ aligned_tree <- tree +
   scale_y_continuous(limits = y_limits, expand = c(0, 0)) +
   theme(plot.margin = margin(t = 10, r = 0, b = 10, l = 10))
 
+# Python glasbey 0.4.0 create_palette(17, lightness_bounds=(30, 65), chroma_bounds=(30, 80), grid_size=64),
+# saved so the figure does not depend on Python.
+glasbey_colors <- readLines(here("data", "synteny-glasbey-palette.txt"))
+
 riparian <- plot_riparian(
   gsParam = gsParam,
   genomeIDs = tip_ids,
   refGenome = "Peronospora_effusa_UA202013",
   chrLabFun = function(x) "",
+  chrBorderCol = "black",
+  braidAlpha = 0.8,
+  palette = function(n) {
+    stopifnot(n <= length(glasbey_colors))
+    glasbey_colors[seq_len(n)]
+  },
+  addThemes = theme(
+    panel.background = element_rect(fill = "white", colour = NA),
+    plot.background = element_rect(fill = "white", colour = NA)
+  ),
   useRegions = TRUE,
   xlabel = "Contigs scaled by gene rank order"
 )

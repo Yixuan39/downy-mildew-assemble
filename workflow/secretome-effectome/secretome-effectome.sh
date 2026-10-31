@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=secretome-effectome
-#SBATCH --array=0-2
+#SBATCH --array=0-3
 #SBATCH -c 24
 #SBATCH --mem=64G
 
@@ -12,6 +12,7 @@ ASSEMBLIES=(
   Pseudoperonospora_cubensis_MSU1
   Pseudoperonospora_cubensis_SC1982
   Pseudoperonospora_humuli_OR502AA
+  Peronospora_effusa_UA202013_star
 )
 ASM="${ASSEMBLIES[${SLURM_ARRAY_TASK_ID:?Submit with sbatch --array}]}"
 

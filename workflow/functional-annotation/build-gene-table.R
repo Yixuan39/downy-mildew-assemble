@@ -2,6 +2,9 @@
 # One Excel sheet per isolate, one row per gene: location, protein length, functional annotation
 # (data/annotation_support.tsv from summarize-functions.R), RNA-seq TPM per sample, and the
 # secretome/effectome steps (SignalP 6, TargetP 2, DeepTMHMM, NetGPI, EffectorP 3).
+# Also writes results/secretome-effectome/secretome_counts.tsv (proteins kept at each step) for the
+# three focal isolates and P. effusa UA202013*, which has no sheet because it has no RNA-seq.
+# Both outputs apply the manuscript curation below.
 # Run in the R environment (env/R.yml); writes data/gene_annotation_summary.xlsx.
 library(tidyverse)
 library(Biostrings)
@@ -19,11 +22,23 @@ isolates <- tribble(
   "SC1982",  "Pseudoperonospora_cubensis_SC1982", "Pcub_SC1982",
   "OR502AA", "Pseudoperonospora_humuli_OR502AA",  "Phum_OR502AA"
 )
+counted_assemblies <- c(isolates$assembly, "Peronospora_effusa_UA202013_star")
 not_tested <- "not tested"
+# Proteins excluded from the final soluble secretome, with the workbook's curation_note.
+# Their raw tool predictions stay in the sheet.
+curation_notes <- c(
+  "Pcub-MSU1_003_000782.1" = paste(
+    "Excluded from curated secretome: suspected gene-model artifact (25,712 aa; anomalous microexons and",
+    "splice boundaries; limited RNA splice support; best DIAMOND hit covers only 14.5% of query).",
+    "Raw secretion predictions passed. Maximum TPM 1.63221 is below the TPM >= 2 RNA-support threshold.",
+    "EffectorP: Non-effector."
+  )
+)
 annotation <- read_tsv(here("data", "annotation_support.tsv"), show_col_types = FALSE)
 
 read_ids <- function(file) readLines(file)
 first_number <- function(x) as.numeric(str_match(x, "([0-9.]+)")[, 2])
+fasta_ids <- function(file) sub(" .*", "", names(readAAStringSet(file)))
 
 build_sheet <- function(assembly, rnaseq) {
   out <- file.path(secretome_dir, assembly)
@@ -70,6 +85,7 @@ build_sheet <- function(assembly, rnaseq) {
   effectorp <- read_tsv(file.path(out, "effectorp3.tsv"), comment = "#", col_names = FALSE, col_types = "ccccc") |>
     transmute(protein_id = X1, EffectorP3_prediction = X5, EffectorP3_cytoplasmic = first_number(X2),
               EffectorP3_apoplastic = first_number(X3), EffectorP3_non_effector = first_number(X4))
+  effectors <- setdiff(fasta_ids(file.path(out, "effectorp3_effectors.faa")), names(curation_notes))
 
   sheet <- proteins |>
     left_join(genes, by = "gene_id") |>
@@ -85,14 +101,15 @@ build_sheet <- function(assembly, rnaseq) {
                                                    protein_id %in% no_tm ~ "no",
                                                    TRUE ~ not_tested)) |>
     left_join(netgpi, by = "protein_id") |>
-    mutate(soluble_secretome = if_else(protein_id %in% soluble, "yes", "no")) |>
+    mutate(soluble_secretome = if_else(protein_id %in% setdiff(soluble, names(curation_notes)), "yes", "no"),
+           curation_note = unname(curation_notes[protein_id])) |>
     left_join(effectorp, by = "protein_id") |>
     mutate(across(c(TargetP2_prediction, DeepTMHMM_topology, NetGPI_GPI_anchored, EffectorP3_prediction),
                   ~ replace_na(.x, not_tested))) |>
     select(gene_id, protein_id, contig, start, end, strand, protein_length_aa, annotation_source,
            functional_description, starts_with("TPM_"), max_TPM, RNA_supported_TPM_ge_2,
            starts_with("SignalP"), starts_with("TargetP"), starts_with("DeepTMHMM"), starts_with("NetGPI"),
-           soluble_secretome, starts_with("EffectorP")) |>
+           soluble_secretome, starts_with("EffectorP"), curation_note) |>
     arrange(contig, start)
 
   # every protein is in SignalP; each later tool saw exactly the proteins that passed the step before
@@ -100,13 +117,28 @@ build_sheet <- function(assembly, rnaseq) {
             sum(sheet$TargetP2_prediction != not_tested) == length(signalp_pass),
             sum(sheet$DeepTMHMM_topology != not_tested) == length(no_mtp),
             sum(sheet$NetGPI_GPI_anchored != not_tested) == length(no_tm),
-            sum(sheet$EffectorP3_prediction != not_tested) == length(soluble))
+            sum(sheet$EffectorP3_prediction != not_tested) == length(soluble),
+            setequal(sheet$protein_id[sheet$soluble_secretome == "yes" &
+                                        !sheet$EffectorP3_prediction %in% c("Non-effector", not_tested)], effectors))
   sheet
+}
+
+step_counts <- function(assembly) {
+  out <- file.path(secretome_dir, assembly)
+  n_ids <- function(file) length(readLines(file.path(out, file)))
+  soluble <- readLines(file.path(out, "soluble_secretome.ids"))
+  tibble(isolate = assembly, proteins = length(fasta_ids(file.path(helixer_dir, paste0(assembly, ".faa")))),
+         signalp_cs10_40 = n_ids("signalp_cs10-40.ids"), no_mtp = n_ids("signalp_no_mtp.ids"),
+         no_tm = n_ids("signalp_no_mtp_no_tm.ids"), gpi_anchored = n_ids("netgpi_gpi.ids"),
+         curated_out = sum(soluble %in% names(curation_notes)),
+         soluble_secretome = sum(!soluble %in% names(curation_notes)),
+         effectorp3_effectors = sum(!fasta_ids(file.path(out, "effectorp3_effectors.faa")) %in% names(curation_notes)))
 }
 
 sheets <- setNames(map2(isolates$assembly, isolates$rnaseq, build_sheet), isolates$sheet)
 write_xlsx(sheets, here("data", "gene_annotation_summary.xlsx"))
-walk2(names(sheets), sheets, ~ message(.x, ": ", nrow(.y), " genes, ", sum(.y$soluble_secretome == "yes"),
-                                       " soluble secretome, ", sum(.y$EffectorP3_prediction %in% c("Cytoplasmic effector",
-                                       "Apoplastic effector", "Apoplastic/cytoplasmic effector", "Cytoplasmic/apoplastic effector")),
-                                       " EffectorP effectors"))
+
+counts <- map_dfr(counted_assemblies, step_counts)
+stopifnot(with(counts, no_tm - gpi_anchored - curated_out == soluble_secretome))
+write_tsv(counts, file.path(secretome_dir, "secretome_counts.tsv"))
+print(counts)
